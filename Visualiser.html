@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8" />
+  <link href="/web/css/bootstrap3.min.css" type="text/css" rel="stylesheet" />
+  
+  <!-- document.querySelector('link[type="text/xml"]') -->  
+  
+  <script src="/web/js/vue.min.js"></script>
+  <script>
+  </script>
+  <TITLE></TITLE>
+</HEAD>
+
+<style>
+</style>
+
+<body>
+  <include hidden>
+    <iframe class="stardata" src="../map/stars.json"></iframe>
+
+    <iframe class=tech src="../tech/Biology.graphml"></iframe>
+    <iframe class=tech src="../tech/Industry.graphml"></iframe>
+    <iframe class=tech src="../tech/Military.graphml"></iframe>
+    <iframe class=tech src="../tech/Science.graphml"></iframe>
+    <iframe class=tech src="../tech/Sociology.graphml"></iframe>
+  </include>
+  
+  <!-- <canvas id=canvas style="position: absolute; left: 5; top: 5;"></canvas> -->
+  
+  <svg viewbox="-300 -100 2200 1450" id=svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  </svg>
+
+  <!--
+  <svg viewBox="0 0 500 500" id="svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <switch>
+      <g requiredFeatures="http://www.w3.org/Graphics/SVG/feature/1.2/#TextFlow">
+        <textArea width="200" height="auto">
+         Text goes here
+        </textArea>
+      </g>
+      <foreignObject width="200" height="200" 
+       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+        <p xmlns="http://www.w3.org/1999/xhtml">Text goes here</p>
+      </foreignObject>
+      <text x="20" y="20">No automatic linewrapping.</text>
+    </switch>
+  </svg> -->
+  <section id="doc_section" style="position: fixed; left: 8px; bottom: 8px;">
+    <textarea name="" id="inp_character_document" cols="15" rows="1" placeholder='Документ "Персонажи"'></textarea>
+    <button onclick="parseDocFile(inp_character_document.value)">Do it</button>
+  </section>
+  <section id="tech_tree_buttons" style="position: fixed; right: 8px; bottom: 8px;">
+    <button onclick='drawTree("Biology")'>Biology</button>
+    <button onclick='drawTree("Industry")'>Industry</button>
+    <button onclick='drawTree("Military")'>Military</button>
+    <button onclick='drawTree("Science")'>Science</button>
+    <button onclick='drawTree("Sociology")'>Sociology</button>
+  </section>
+</body>
+
+<script src="Visualiser.js">   
+  
+</script>
+<!-- 
+<node id="n27"> 
+      <data key="d5"><![CDATA["Возьмите сто человек, и среди них обязательно будет трое воров, двое убийц и один злостный неплательщик налогов" 
+ – Наставление молодого полицейского, стр. 2.]]></data>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="1679.2494845360825" y="329.3333333333335"/>
+          <y:Fill color="#CC99FF" transparent="false"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" 
+          hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" 
+          verticalTextPosition="bottom" visible="true" width="161.494140625" x="49.1279296875" y="-0.40234375">
+          Полицейское управление
+Сложность: 3
+Эффект: +1 куб при борьбе 
+с нелегальной активностью<y:LabelModel>
+              <y:SmartNodeLabelModel distance="4.0"/>
+            </y:LabelModel>
+            <y:ModelParameter>
+              <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+            </y:ModelParameter>
+          </y:NodeLabel>
+          <y:Shape type="parallelogram"/>
+        </y:ShapeNode>
+      </data>
+    </node> -->
+</HTML>

@@ -1,0 +1,856 @@
+/* global
+
+*/
+
+const log = console.log
+// eslint-disable-next-line no-unused-vars
+const warn = console.warn
+// eslint-disable-next-line no-unused-vars
+const error = console.error
+
+// eslint-disable-next-line no-unused-vars
+const time = console.time
+// eslint-disable-next-line no-unused-vars
+const timeEnd = console.timeEnd
+
+function getEl(id) {
+  return document.getElementById(id)
+}
+
+// const ctx = canvas.getContext("2d")
+
+const range = (cnt) => '0'.repeat(cnt)
+
+const TREELIST = [
+  "Military", 
+  "Sociology",
+  "Biology", 
+  "Industry", 
+  "Science", 
+]
+const TREELIST_NOMIL = ["Biology", "Industry", "Science", "Sociology"]
+
+const cache = {}
+
+NodeList.prototype.forEach = Array.prototype.forEach
+HTMLCollection.prototype.forEach = Array.prototype.forEach
+HTMLCollection.prototype.filter = Array.prototype.filter
+
+function newParam(aDice) {
+  return {
+    data: {
+      curr: aDice
+      , stress: aDice
+      , max: aDice
+      , 
+    }
+    , set curr(aNew) {
+      this.data.curr = aNew < 0 ? 0 : aNew
+    } 
+    , set stress(aNew) {
+      if(aNew < 0)
+        this.data.stress = 0
+      else if(aNew > this.data.max)
+        this.data.stress = this.data.max
+      else
+        this.data.stress = aNew
+    }
+    , set newMax(aNew) {
+      this.modifyMax = aNew - this.data.max
+    }
+    , set modifyMax(aNew) {
+      const oldMax = this.data.max 
+      this.data.max = this.data.max+aNew
+      if(this.data.curr == oldMax) 
+        this.data.curr = this.data.max
+      if(this.data.stress == oldMax) 
+        this.data.stress = this.data.max
+    } 
+    , repair() {
+      this.data.curr = this.data.max
+    }
+    , set damage(aNewDmg) {
+      if(aNewDmg<0) {
+        this.heal=aNewDmg
+        return
+      }
+      let delta = this.data.stress-aNewDmg
+      if(delta<0) {
+        this.data.stress = 0
+        this.data.curr = this.data.curr + delta
+      }
+      else 
+        this.data.stress = this.data.stress-aNewDmg
+    }
+    , set heal(aNew) {
+      let delta =this.data.curr + aNew
+      if(delta > this.data.max) {
+       this.data.curr = this.data.max
+        this.data.stress = this.data.stress+delta
+      }
+    }
+  }
+}
+
+function newColonyParams(science, production, society) {
+  return {
+      sci: newParam(science)
+      , prod: newParam(production)
+      , soc: newParam(society)
+      , set modSci(aNew) {
+        console.log(this.sci)
+        this.sci.modifyMax = aNew
+      }
+      , set modProd(aNew) {
+        this.prod.modifyMax = aNew
+      }
+      , set modSoc(aNew) {
+        this.soc.modifyMax = aNew
+      }
+    }
+}
+
+// eslint-disable-next-line no-unused-vars
+class Colony {
+
+}
+
+// eslint-disable-next-line no-unused-vars
+class Planet {
+//   1d7: (2) = 2 - малая планета
+// 1d100: (51) = 51 - вода 
+// 1d11: (10) = 10 - отдалённость от звезды
+// 1d4: (1) = 1 - гористость
+// 1d100: (60) = 60 и 1d11: (6) = 6 - полезные ископаемые
+// 1d100: (16) = 16 - плотность системы
+
+  constructor ({size, distance, water, mountains, resource_dice, anomalyType, anomalySize}) {
+    this.size = size
+    this.distance = distance
+    this.water = water
+    this.mountains = mountains
+    this.resource_dice = resource_dice
+    this.anomaly = {}
+    this.anomaly.type = anomalyType
+    this.anomaly.size = anomalySize
+  }
+}
+
+// eslint-disable-next-line no-unused-vars
+class StarSystem {
+
+  constructor(initialPlanet, science, production, society) {
+    this.star = 
+    this.owner = ''
+    this.planets = {}
+    this.planets[initialPlanet.distance] = initialPlanet
+    this.dices = newColonyParams(science, production, society)
+  }
+
+  // static createStar(x, y) {}
+
+}
+
+// eslint-disable-next-line no-unused-vars
+const stars = {}
+
+// eslint-disable-next-line no-unused-vars
+class Empire {
+
+  // static lastid = 0
+
+  constructor (name, leader, initialStar, initialTech=[]) {
+    this.id = Empire.lastid || 0
+    Empire.lastid += 1
+    this.name = name
+    this.leader = leader
+    this.greatPeople = []
+    this.systems = [initialStar]
+    initialStar.owner = this
+    this.doneTech = initialTech
+  }
+
+}
+
+const parser = new DOMParser()
+const graphmls = {}
+const tech = {}
+const stat = {}
+  const inversed = {
+    tech: {}
+  }
+
+const svg = document.getElementById('svg')
+const SVG_DEFAULT = `<style> text {
+  font-family: Helvetica;
+  // font-size: 12;
+} </style>`
+
+window.onload = Init
+function Init() {
+
+  for (let i of document.querySelectorAll('iframe.tech')) {
+    let tree_name = i.src.replace(/.*\/([^/]*).graphml$/,'$1')
+    try {
+      graphmls[tree_name] = parser.parseFromString(
+        i.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>')
+      , 'text/xml')
+    } catch (e) {
+      alert(`cannot read files, run
+      chrome with --allow-file-access-from-files
+      or
+      firefox with about:config - privacy.file_unique_origin : false`)
+      error(e)
+    }
+    parseTechIframe(tree_name)
+    inversed.tech[tree_name] = Object.fromEntries(
+      Object.values(tech[tree_name]).map( e => [e.name, e.id])
+    )
+  }
+  console.log(tech)
+  
+  console.log(listParam('cost', false))
+  console.log(listParam('costClear'))
+  console.log(listAllWithoutMilitary())
+
+  // for(let i of TREELIST) drawTree(i)
+    
+  drawTree(TREELIST_NOMIL[0])
+
+}
+
+function drawTree(tree_name) {
+  if(cache[tree_name]) {
+    svg.innerHTML = cache[tree_name].html
+    svg.setAttribute("viewBox", cache[tree_name].viewBox)
+  } else {
+    svg.innerHTML = SVG_DEFAULT
+    const values = Object.values(tech[tree_name])
+     for (let i of values)
+      draw.Node(tree_name, i)
+
+    const x = getMinMax(values, 'x')
+    , y = getMinMax(values, 'y')
+    , PAD_MIN = 20
+    const viewBox = (x[0]-PAD_MIN)
+            + ' ' + (y[0]-PAD_MIN)
+            + ' ' + (x[1]+300-x[0])
+            + ' ' + (y[1]+100-y[0])
+    svg.setAttribute("viewBox", viewBox)
+
+    cache[tree_name] = {}
+    cache[tree_name].html = svg.innerHTML
+    cache[tree_name].viewBox = viewBox
+  }
+}
+
+function getMinMax(arr, attr) {
+  const t = arr.map(e => e[attr])
+  return [Math.min.apply(null, t), Math.max.apply(null, t)]
+}
+
+function highlightStudiedTech(field, tech_list, proj_list) {
+  let res = []
+  const targets = Array.from(svg.getElementsByTagName('rect')   )
+         .concat( Array.from(svg.getElementsByTagName('polygon')) )
+
+  for (let i of targets) {
+    const pos_tech = tech_list.indexOf(tech[field][i.id].name)
+    const pos_proj = proj_list.indexOf(tech[field][i.id].name)
+    if( pos_tech != -1) {
+      res.push(i.id)
+      tech_list = tech_list.splice(pos_tech, 1)
+    } else if(pos_proj != -1) {
+      res.push(i.id)
+      proj_list = proj_list.splice(pos_proj, 1)
+    } else {
+      i.setAttribute('fill','#d9d9d9')
+    }
+  }
+ 
+ if(tech_list.length) log(`unrecognized tokens for ${field}: `+tech_list)
+  
+  return proj_list
+}
+
+function parseTechIframe(tree_name) {
+
+  graphmls[tree_name] = graphmls[tree_name].getElementsByTagName('graph')[0]
+  graphmls[tree_name].getElementsByTagName('data')[0].remove()
+  // graphmls[filename].getElementsByTagName('y:Fill').forEach(e => e.remove())
+  // graphmls[filename].getElementsByTagName('y:BorderStyle').forEach(e => e.remove())
+  graphmls[tree_name].getElementsByTagName('y:LabelModel').forEach(e => e.remove())
+  graphmls[tree_name].getElementsByTagName('y:ModelParameter').forEach(e => e.remove())
+  
+  tech[tree_name] = {}
+  stat[tree_name] = {}
+
+  const FILL_COLOR = graphmls[tree_name]
+    .getElementsByTagName('y:ShapeNode')[0]
+    .getElementsByTagName('y:Fill')[0].getAttribute('color') 
+
+  const BOUNDS = {}
+  // Object.values(tech.Biology).map(e => e.x)
+  // svg.setAttribute("viewBox", "-250 -250 500 750")
+
+  Object.defineProperty(tech[tree_name], "props", {
+    value: { 
+      BOUNDS, 
+      FILL_COLOR 
+    },
+    writable: true,
+    configurable: true,
+    enumerable: false  
+  })
+
+  for (let i of graphmls[tree_name].getElementsByTagName('y:ShapeNode')) {
+    try {
+      const t = parseShapeNode(tree_name, i)
+      if(!t)
+        continue
+      tech[tree_name][t.id] = t
+    } catch (e) {
+      console.warn(i, e)
+    }
+  }
+  //get arrow connections
+  for (let i of graphmls[tree_name].getElementsByTagName('edge')) {
+    if(i.getElementsByTagName('y:Arrows')[0].getAttribute('target') == 'none')
+      continue
+    
+    let source = i.getAttribute('source')
+    let target = i.getAttribute('target')
+    
+    try {
+      tech[tree_name][target].req.push(source)
+      tech[tree_name][source].next.push(target)
+    } catch(e) {
+      console.log(e, tree_name, target, tech[tree_name][target], source)
+    }
+  }
+}
+
+// eslint-disable-next-line no-unused-vars
+function parseDocFile(raw) {
+  let players = raw.split('Данные экспедиции')
+  players.shift()
+  players.shift()
+  for (let i of players) {
+    const player = {}
+    var t = i
+      .replace(/Изученные технологии/,'SPLITME')
+      .replace(/Общеимперские бонусы/,'SPLITME')
+      .replace(/Квента/,'SPLITME')
+      .replace(/Здания\s*\n\s*Наземные/,'SPLITME')
+      //4 - buildings
+      .replace(/Орбитальные\n/,'SPLITME')
+      //5 - local_projects
+      .replace(/Планетарные проекты\n/,'SPLITME')
+      .split('SPLITME')
+
+    player.name = t[0].split('Трип')[0].slice(5,-1)
+
+    // EXCLUDE_PLAYERS.includes(player.name)
+    if(player.name.indexOf('-')==0)
+      continue
+
+    var buildings = t[4]
+      .replace(/\([^)]+\)/g,'')
+      .split(',')
+      .map( e => e.trim() )
+      .filter ( e => e != '')
+      // .map(e => e.toLowerCase())
+      
+    var local_projects = t[5]
+      .split('\n')
+      .map( e => e.trim() )
+      
+    // if(!confirm(player+'?')) continue
+
+    // log(buildings, t[1].concat(buildings))
+    parseTechTable(player.name, t[1], buildings, local_projects)
+  }
+}
+
+function parseTechTable(player, raw, buildings, local_projects) {
+  //may be empty
+  var res = raw.split('\n')
+    .filter( e => e != '')
+    .filter ( (_, i) => i%2)
+    .map( e =>
+      e.split(',')
+       .map( e => e.replace(/(^\s+|\s+$)/g,'') )
+       .filter ( e => e != '')
+      //  .map(e => e.toLowerCase())
+    )
+
+  res = TREELIST.map((e,i) =>
+    [e, res[i]]
+  )
+  res = new Map(res)
+  res = Object.fromEntries(res)
+  // log(res)
+  
+  let built = buildings
+    .concat(local_projects)
+
+  for (let i of TREELIST) {
+    drawTree(i)
+    const studied = res[i]
+      
+    built = highlightStudiedTech(i, studied, built)
+
+    const withoutReqires = Object.values(tech[i])
+                            .filter(e => e.req.length==0) 
+                            .map( e => e.id)
+
+    // FIXME doesn't work
+    const next = studied
+      .map( e => inversed.tech[i][e] )
+      .filter( e => e)
+      .concat(withoutReqires)
+      .map(e => tech[i][e].name)
+      .filter((elem, pos, arr) => arr.indexOf(elem) == pos)
+      //TODO make array unique func
+      
+    // log(player, 'next:', next)
+
+    saveSvgAsPng(svg, `${player} ${i}.png`)
+  }
+  
+  if(built.length) 
+    log('unrecognized tokens for buildings: '+built)
+}
+
+// eslint-disable-next-line no-unused-vars
+function saveSVG(filename) {
+  saveFile(filename+'.svg', svg.outerHTML)
+}
+
+function parseShapeNode(filename, i) {
+
+  const sep1 = 'Сложность:'
+  const sep2 = 'Эффект:'
+
+  const nlabel = i.getElementsByTagName('y:NodeLabel')[0]
+  const fullText = nlabel.innerHTML
+    .split('<')[0]
+    // .replace(/<.+$/g,'')
+    .trimRight()
+  let nodeText = fullText
+    .replace(/\n/g,' ')
+    .trim()
+
+  if(nlabel.getAttribute('fontSize') != 12)
+    return null
+
+  if(nodeText.indexOf(sep1) == -1 || nodeText.indexOf(sep2) == -1 ) {
+    console.warn(nodeText)
+    return null
+  }
+
+  const split1 = nodeText.split(sep1)
+  const name = split1[0].trim()
+  const cost = split1[1].split(sep2)[0].trim().split(',').map(e => e.trim())
+
+  const effect_unparsed = split1[1].split(sep2)[1].trim()
+  let effect = effect_unparsed.replace(/^.*(Общество|Производство|Наука) \+(\d+).*/g, '$1:$2').split(':')
+
+  if(effect == effect_unparsed)
+    effect = effect_unparsed.replace(/^\s*\+(\d+) свободн(ый|ых) куба?\s*/gi, 'Свободный:$1').split(':')
+
+  if(effect == effect_unparsed)
+    effect = null
+
+  // console.log(name, cost, effect, effect_unparsed)
+
+  var t = {
+    id: i.parentElement.parentElement.id
+    , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
+    , borderColor: i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
+    , name
+    , cost
+    , effect
+    , effect_unparsed
+    , req: []
+    , next: []
+    , fullText
+
+    , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
+    , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(2)
+    , h: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('height')).toFixed(2)
+    , w: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('width')).toFixed(2)
+    
+    , fill: i.getElementsByTagName('y:Fill')[0].getAttribute('color') 
+
+  }
+
+  t.nodeCenter = {
+    x: ++t.x + ++t.w/2 
+    , y: ++t.y + ++t.h/2
+  }
+
+  t.textCoords = {
+    x: t.x
+    , y: ++t.y + ++t.h/2
+  }
+
+  doNodeStat(filename, t)
+
+  return t
+}
+
+function doNodeStat(filename, t) {
+  var effect = t.effect,
+  cost = t.cost
+
+  if(effect == null)
+    effect = ['Общество', 0]
+
+  if (!stat[filename][t.y]) {
+    /*
+      sum is sum of all param cubes avaliable,
+      cost is full cost of level, 
+      costClear is param-tech-only cost
+    */
+    stat[filename][t.y] = {Общество:0, Производство: 0, Наука:0, Свободный:0, cost:0, costClear:0, sum:0}
+    stat[filename][t.y][effect[0]] = +effect[1]
+    
+  }
+  else
+    stat[filename][t.y][effect[0]] += +effect[1]
+  
+  stat[filename][t.y].sum += +effect[1]
+
+  let cost_facto = +cost[0]
+  if(cost[1] == '2 этапа')
+    cost_facto *= 2
+  if(effect[1]!=0) { //its actually data
+    stat[filename][t.y].costClear += cost_facto
+  }
+  stat[filename][t.y].cost += cost_facto
+}
+
+function extractParam(param, fuckMilitary = true) {
+  // let t={} //cost of cubes stat
+  // for (i in tech) t[i]= tech[i].stat
+  let list = {}
+  const iter = fuckMilitary ? TREELIST_NOMIL : TREELIST
+  for (let i of iter) {
+    list[i] = []
+    let arr = Object.keys(stat[i]).sort((a, b) => a-b)
+    //shift every and create a table
+    for (let j in arr) {
+      list[i].push(stat[i][arr[j]][param])
+    }
+  }
+  return list
+}
+
+function listParam(param = 'costClear', fuckMilitary = true) {
+  //delete stat['Military']
+  const t = extractParam(param, fuckMilitary)
+  let res = param+'\n'
+  for (let i in t) {
+    res += i+'\t'
+  }
+  res = res.slice(0,-1)
+  res += '\n'
+  // eslint-disable-next-line no-unused-vars
+  for (let i in range(14)) {
+    for (let j in t) {
+      res += (t[j].shift() || 0) +'\t'
+    }
+    res = res.slice(0,-1)
+    res += '\n'
+  }
+  return res
+}
+
+/*
+function drawParam(param = 'costClear') {
+  //delete stat['Military']
+  const t = extractParam(param)
+  let res = param+'\n'
+  for (i in t) {
+    res += i+'\t'
+  }
+  res = res.slice(0,-1)
+  res += '\n'
+  for (i in range(14)) {
+    for (j in t) {
+      res += (t[j].shift() || 0) +'\t'
+    }
+    res = res.slice(0,-1)
+    res += '\n'
+  }
+  return res
+}
+*/
+
+const PARAMLIST_RU = [
+  'Общество'
+  , 'Производство'
+  , 'Наука'
+  , 'Свободный'
+]
+
+function listAllWithoutMilitary() {
+  //delete stat['Military']
+
+  let list = {}
+  let res = []
+
+  for(let i of PARAMLIST_RU) {
+    list[i] = listParam(i).split('\n')
+    for(let j in list[i]) {
+      if(typeof res[j] == "undefined")
+        res[j] = list[i][j] + '\t'
+      else
+        res[j] += list[i][j] + '\t'
+    }
+  }
+  return res.map(e=>e.slice(0,-1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
+}
+
+const SVG_NS = "http://www.w3.org/2000/svg"
+
+function connectNodes(n1, n2) {
+  draw.SVGLine(
+    n1.x + n1.w/2
+    , n1.y + n1.h/2
+    , n2.x + n2.w/2
+    , n2.y + n2.h/2
+  )
+}
+
+const draw = {
+  Node: function (treeName, t) {
+    //  for modules
+    //  for projects - rounded rect
+    let box
+    switch (t.type) {
+      case 'rectangle':
+        box = draw.SVGRect(t)
+        break
+      case 'parallelogram':
+        box = draw.SVGPrlg(t)
+        break
+      case 'trapezoid2':
+        box = draw.SVGTrapezioid(t)
+        break
+      case 'hexagon':
+        box = draw.SVGHexagon(t)
+        break    
+      default:
+        break
+    }
+
+    draw.SVGText(t.nodeCenter, t.name, t.fullText, t.id, box.getBBox())
+    // textCoords nodeCenter
+  
+    for(let i of t.next) {
+      connectNodes(t, tech[treeName][i])
+    }
+  },
+  
+  SVGPrlg: function ({id, x, y, h, w, borderColor, fill}) {
+    //delta
+    const d=20
+    var points = `
+      ${x+d},${y}
+      ${x+w},${y}
+      ${x+w-d},${y+h}
+      ${x},${y+h}
+    `
+    return draw.SVGPoly(points, {id, borderColor, fill})
+  },  
+
+  SVGHexagon: function ({id, x, y, h, w, borderColor, fill}) {
+    //delta
+    const d=20
+    var points = `
+      ${x+d},${y}
+      ${x},${y+h/2}
+      ${x+d},${y+h}
+      ${x+w-d},${y+h} 
+      ${x+w},${y+h/2}
+      ${x+w-d},${y}
+    `
+    return draw.SVGPoly(points, {id, borderColor, fill})
+  },
+
+  SVGTrapezioid: function ({id, x, y, h, w, borderColor, fill}) {
+    //delta
+    const d=30
+    var points = `
+      ${x},${y}
+      ${x+d},${y+h}
+      ${x+w-d},${y+h} 
+      ${x+w},${y}
+    `
+    return draw.SVGPoly(points, {id, borderColor, fill})
+  },
+
+  SVGPoly(points, {id, borderColor, fill}) {
+    var el = document.createElementNS(SVG_NS, 'polygon')
+    el.setAttributeNS(null, 'id', id)
+    el.setAttributeNS(null, 'points', points)
+    el.setAttributeNS(null, 'fill', fill)
+    el.setAttributeNS(null, 'stroke', borderColor)
+    el.setAttributeNS(null, 'stroke-width', 3)
+    
+    // if(title) el.innerHTML += '<title>'+title+'</title>'
+    document.getElementById('svg').appendChild(el)
+    return el
+  },
+  
+  SVGLine: function (x1, y1, x2, y2) {
+    var line = document.createElementNS(SVG_NS,'line')
+    line.setAttribute('x1', x1)
+    line.setAttribute('y1', y1)
+    line.setAttribute('x2', x2)
+    line.setAttribute('y2', y2)
+    line.setAttribute("stroke", "black") 
+    line.setAttributeNS(null, 'stroke-width', 2)
+  
+    getEl('svg').innerHTML = line.outerHTML + getEl('svg').innerHTML
+  },
+  
+  SVGText: function ({x, y}, text, fullText, id) {
+    // wrapToRect(fullText, obj, 8, 3)
+    // return
+
+    var el = document.createElementNS(SVG_NS, 'text')
+    el.setAttributeNS(null, 'x', x)
+    el.setAttributeNS(null, 'y', y)
+    el.setAttributeNS(null, 'id', id+'_t')
+    el.setAttributeNS(null, 'fill', 'black')
+    el.setAttributeNS(null, 'text-anchor', 'center')
+    // center right
+    el.setAttributeNS(null, 'font-size', '12')
+    getEl('svg').appendChild(el)
+
+    // text = 
+      // .map( (e, i, arr) => )
+      // .join('\n')
+
+    const arr = fullText.split('\n')
+    let curr = null,
+    curr_dx = 0,
+    curr_w = 0
+    // let acc = ''
+    for (let i in arr) {
+      if(i==0) {
+        el.innerHTML = `<tspan id="${id}_t0" dx='0' dy="-${arr.length==3?'0.6':'1.4'}em">${arr[i]}</tspan>`
+        curr = getEl(id+'_t0')
+        curr_dx = +curr.getAttribute('dx')
+        curr_w = +curr.getBBox().width
+        curr.setAttribute('dx', curr_dx - curr_w/2)
+      }
+      else {
+        el.innerHTML += `<tspan id="${id}_t${i}" dx='-${getEl(id+'_t'+(i-1)).getBBox().width/2}' dy="1.2em">${arr[i]}</tspan>`
+        curr = getEl(id+'_t'+i)
+        curr_dx = +curr.getAttribute('dx')
+        curr_w = +curr.getBBox().width
+        curr.setAttribute('dx', curr_dx - curr_w/2)
+        // ${arr[i].length/2+arr[i-1].length/2}ch
+      }
+    }
+  },
+  
+  SVGRect: function ({id, x, y, h, w, borderColor, fill}) {
+    var rect = document.createElementNS(SVG_NS, 'rect')
+    rect.setAttributeNS(null, 'id', id)
+    rect.setAttributeNS(null, 'x', x)
+    rect.setAttributeNS(null, 'y', y)
+    rect.setAttributeNS(null, 'height', h)
+    rect.setAttributeNS(null, 'width', w)
+    rect.setAttributeNS(null, 'fill', fill)
+    rect.setAttributeNS(null, 'stroke', borderColor)
+    rect.setAttributeNS(null, 'stroke-width', 3)
+    // if(title) rect.innerHTML += '<title>'+title+'</title>'
+    document.getElementById('svg').appendChild(rect)
+    return rect
+  }
+}
+
+
+
+// eslint-disable-next-line no-unused-vars
+function saveFile(filename, data) {
+  var file = new Blob([data], {type: 'text'})
+  var a = document.createElement("a"),
+      url = URL.createObjectURL(file)
+  a.href = url
+  a.download = filename
+  document.body.appendChild(a)
+  a.click()
+  setTimeout(function() {
+      document.body.removeChild(a)
+      window.URL.revokeObjectURL(url)
+  }, 0) 
+}
+
+//heya SO https://stackoverflow.com/questions/3975499/convert-svg-to-image-jpeg-png-etc-in-the-browser
+function copyStylesInline(destinationNode, sourceNode) {
+  var containerElements = ["svg","g"]
+  for (var cd = 0; cd < destinationNode.childNodes.length; cd++) {
+      var child = destinationNode.childNodes[cd]
+      if (containerElements.indexOf(child.tagName) != -1) {
+           copyStylesInline(child, sourceNode.childNodes[cd])
+           continue
+      }
+      var style = sourceNode.childNodes[cd].currentStyle || window.getComputedStyle(sourceNode.childNodes[cd])
+      if (style == "undefined" || style == null) continue
+      for (var st = 0; st < style.length; st++){
+           child.style.setProperty(style[st], style.getPropertyValue(style[st]))
+      }
+  }
+}
+
+function triggerDownload (imgURI, fileName) {
+ var evt = new MouseEvent("click", {
+   view: window,
+   bubbles: false,
+   cancelable: true
+ })
+ var a = document.createElement("a")
+ a.setAttribute("download", fileName)
+ a.setAttribute("href", imgURI)
+ a.setAttribute("target", '_blank')
+ a.dispatchEvent(evt)
+}
+
+function saveSvgAsPng(svg, fileName) {
+ var copy = svg.cloneNode(true)
+ copyStylesInline(copy, svg)
+ var canvas = document.createElement("canvas")
+ var bbox = svg.getBBox()
+ canvas.width = bbox.width
+ canvas.height = bbox.height
+ var ctx = canvas.getContext("2d")
+ ctx.clearRect(0, 0, bbox.width, bbox.height)
+ var data = (new XMLSerializer()).serializeToString(copy)
+ var DOMURL = window.URL || window.webkitURL || window
+ var img = new Image()
+ var svgBlob = new Blob([data], {type: "image/svg+xml;charset=utf-8"})
+ var url = DOMURL.createObjectURL(svgBlob)
+ img.onload = function () {
+   ctx.drawImage(img, 0, 0)
+   DOMURL.revokeObjectURL(url)
+   if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob)
+   {
+       var blob = canvas.msToBlob()         
+       navigator.msSaveOrOpenBlob(blob, fileName)
+   } 
+   else {
+       var imgURI = canvas
+           .toDataURL("image/png")
+           .replace("image/png", "image/octet-stream")
+       triggerDownload(imgURI, fileName)
+   }
+   document.removeChild(canvas)
+ }
+ img.src = url
+}
