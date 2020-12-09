@@ -176,9 +176,9 @@ const parser = new DOMParser()
 const graphmls = {}
 const tech = {}
 const stat = {}
-  const inversed = {
-    tech: {}
-  }
+const inverted = {
+  tech: {}
+}
 
 const svg = document.getElementById('svg')
 const SVG_DEFAULT = `<style> text {
@@ -203,7 +203,7 @@ function Init() {
       error(e)
     }
     parseTechIframe(tree_name)
-    inversed.tech[tree_name] = Object.fromEntries(
+    inverted.tech[tree_name] = Object.fromEntries(
       Object.values(tech[tree_name]).map( e => [e.name, e.id])
     )
   }
@@ -353,6 +353,10 @@ function parseDocFile(raw) {
     // EXCLUDE_PLAYERS.includes(player.name)
     if(player.name.indexOf('-')==0)
       continue
+    
+    //FIXME
+    if(player.name != 'Адмирал Майя Аракана')
+      continue
 
     var buildings = t[4]
       .replace(/\([^)]+\)/g,'')
@@ -398,7 +402,8 @@ function parseTechTable(player, raw, buildings, local_projects) {
     drawTree(i)
     const studied = res[i]
       
-    built = highlightStudiedTech(i, studied, built)
+    // built = 
+    highlightStudiedTech(i, studied, built)
 
     const withoutReqires = Object.values(tech[i])
                             .filter(e => e.req.length==0) 
@@ -406,12 +411,12 @@ function parseTechTable(player, raw, buildings, local_projects) {
 
     // FIXME doesn't work
     const next = studied
-      .map( e => inversed.tech[i][e] )
+      .map( e => inverted.tech[i][e] )
       .filter( e => e)
       .concat(withoutReqires)
       .map(e => tech[i][e].name)
       .filter((elem, pos, arr) => arr.indexOf(elem) == pos)
-      //TODO make array unique func
+      //TODO make_array_unique() func
       
     // log(player, 'next:', next)
 
@@ -636,8 +641,11 @@ const draw = {
       case 'parallelogram':
         box = draw.SVGPrlg(t)
         break
-      case 'trapezoid2':
+      case 'trapezoid':
         box = draw.SVGTrapezioid(t)
+        break
+      case 'trapezoid2':
+        box = draw.SVGTrapezioid2(t)
         break
       case 'hexagon':
         box = draw.SVGHexagon(t)
@@ -681,6 +689,18 @@ const draw = {
   },
 
   SVGTrapezioid: function ({id, x, y, h, w, borderColor, fill}) {
+    //delta
+    const d=30
+    var points = `
+      ${x+d},${y}
+      ${x},${y+h}
+      ${x+w},${y+h} 
+      ${x+w-d},${y}
+    `
+    return draw.SVGPoly(points, {id, borderColor, fill})
+  },
+
+  SVGTrapezioid2: function ({id, x, y, h, w, borderColor, fill}) {
     //delta
     const d=30
     var points = `
