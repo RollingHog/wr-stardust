@@ -259,10 +259,10 @@ function highlightStudiedTech(field, tech_list, proj_list) {
     const pos_proj = proj_list.indexOf(tech[field][i.id].name)
     if( pos_tech != -1) {
       res.push(i.id)
-      tech_list = tech_list.splice(pos_tech, 1)
+      tech_list.splice(pos_tech, 1)
     } else if(pos_proj != -1) {
       res.push(i.id)
-      proj_list = proj_list.splice(pos_proj, 1)
+      proj_list.splice(pos_proj, 1)
     } else {
       i.setAttribute('fill','#d9d9d9')
     }
@@ -354,8 +354,7 @@ function parseDocFile(raw) {
     if(player.name.indexOf('-')==0)
       continue
     
-    //FIXME
-    if(player.name != 'Адмирал Майя Аракана')
+    if(!getEl(player.name).checked)
       continue
 
     var buildings = t[4]
