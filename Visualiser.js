@@ -354,7 +354,7 @@ function parseDocFile(raw) {
     if(player.name.indexOf('-')==0)
       continue
     
-    if(!getEl(player.name).checked)
+    if(!getEl(player.name) || !getEl(player.name).checked)
       continue
 
     var buildings = t[4]
@@ -364,9 +364,10 @@ function parseDocFile(raw) {
       .filter ( e => e != '')
       // .map(e => e.toLowerCase())
       
-    var local_projects = t[5]
+    var local_projects = t[6]
       .split('\n')
       .map( e => e.trim() )
+      .filter ( e => e != '')
       
     // if(!confirm(player+'?')) continue
 
@@ -617,8 +618,6 @@ function listAllWithoutMilitary() {
   return res.map(e=>e.slice(0,-1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
 }
 
-const SVG_NS = "http://www.w3.org/2000/svg"
-
 function connectNodes(n1, n2) {
   draw.SVGLine(
     n1.x + n1.w/2
@@ -627,6 +626,9 @@ function connectNodes(n1, n2) {
     , n2.y + n2.h/2
   )
 }
+
+const SVG_NS = "http://www.w3.org/2000/svg"
+const POLYGON_DELTA = 20
 
 const draw = {
   Node: function (treeName, t) {
@@ -649,7 +651,14 @@ const draw = {
       case 'hexagon':
         box = draw.SVGHexagon(t)
         break    
+      case 'fatarrow':
+        box = draw.SVGFatArrow(t)
+        break  
+      case 'octagon':
+        box = draw.SVGOctagon(t)
+        break    
       default:
+        error('drawing not implemented for type '+t.type)
         break
     }
 
@@ -662,8 +671,7 @@ const draw = {
   },
   
   SVGPrlg: function ({id, x, y, h, w, borderColor, fill}) {
-    //delta
-    const d=20
+    const d=POLYGON_DELTA
     var points = `
       ${x+d},${y}
       ${x+w},${y}
@@ -674,8 +682,7 @@ const draw = {
   },  
 
   SVGHexagon: function ({id, x, y, h, w, borderColor, fill}) {
-    //delta
-    const d=20
+    const d=POLYGON_DELTA
     var points = `
       ${x+d},${y}
       ${x},${y+h/2}
@@ -688,7 +695,6 @@ const draw = {
   },
 
   SVGTrapezioid: function ({id, x, y, h, w, borderColor, fill}) {
-    //delta
     const d=30
     var points = `
       ${x+d},${y}
@@ -707,6 +713,35 @@ const draw = {
       ${x+d},${y+h}
       ${x+w-d},${y+h} 
       ${x+w},${y}
+    `
+    return draw.SVGPoly(points, {id, borderColor, fill})
+  },
+  
+    
+  SVGFatArrow: function ({id, x, y, h, w, borderColor, fill}) {
+    const d=POLYGON_DELTA
+    var points = `
+      ${x},${y}
+      ${x+d},${y+h/2}
+      ${x},${y+h}
+      ${x+w-d},${y+h} 
+      ${x+w},${y+h/2}
+      ${x+w-d},${y}
+    `
+    return draw.SVGPoly(points, {id, borderColor, fill})
+  },
+  
+  SVGOctagon: function ({id, x, y, h, w, borderColor, fill}) {
+    const d=POLYGON_DELTA
+    var points = `
+      ${x+d},${y}
+      ${x},${y+h/3}
+      ${x},${y+h*2/3}
+      ${x+d},${y+h}
+      ${x+w-d},${y+h} 
+      ${x+w},${y+h*2/3}
+      ${x+w},${y+h/3}
+      ${x+w-d},${y}
     `
     return draw.SVGPoly(points, {id, borderColor, fill})
   },
