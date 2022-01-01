@@ -483,7 +483,7 @@ function listAllWithoutMilitary() {
 }
 
 function connectNodes(n1, n2) {
-  draw.SVGLine(
+  draw.SVG.Line(
     n1.x + n1.w/2
     , n1.y + n1.h/2
     , n2.x + n2.w/2
@@ -501,197 +501,206 @@ const draw = {
     let box
     switch (t.type) {
       case 'rectangle':
-        box = draw.SVGRect(t)
+        box = draw.SVG.Rect(t)
         break
       case 'parallelogram':
-        box = draw.SVGPrlg(t)
+        box = draw.SVG.Prlg(t)
         break
       case 'trapezoid':
-        box = draw.SVGTrapezioid(t)
+        box = draw.SVG.Trapezioid(t)
         break
       case 'trapezoid2':
-        box = draw.SVGTrapezioid2(t)
+        box = draw.SVG.Trapezioid2(t)
         break
       case 'hexagon':
-        box = draw.SVGHexagon(t)
+        box = draw.SVG.Hexagon(t)
         break    
       case 'fatarrow':
-        box = draw.SVGFatArrow(t)
+        box = draw.SVG.FatArrow(t)
         break  
       case 'octagon':
-        box = draw.SVGOctagon(t)
+        box = draw.SVG.Octagon(t)
         break    
       default:
         error('drawing not implemented for type '+t.type)
         break
     }
 
-    draw.SVGText(t.nodeCenter, t.name, t.fullText, t.id, box.getBBox())
+    draw.SVG.Text(t.nodeCenter, t.name, t.fullText, t.id, box.getBBox())
   
     for(let i of t.next) {
       connectNodes(t, tech[treeName][i])
     }
   },
+
+  SVG: {
+    Prlg: function ({id, x, y, h, w, borderColor, fill}) {
+      const d=POLYGON_DELTA
+      var points = `
+        ${x+d},${y}
+        ${x+w},${y}
+        ${x+w-d},${y+h}
+        ${x},${y+h}
+      `
+      return draw.SVG.Poly(points, {id, borderColor, fill})
+    },  
   
-  SVGPrlg: function ({id, x, y, h, w, borderColor, fill}) {
-    const d=POLYGON_DELTA
-    var points = `
-      ${x+d},${y}
-      ${x+w},${y}
-      ${x+w-d},${y+h}
-      ${x},${y+h}
-    `
-    return draw.SVGPoly(points, {id, borderColor, fill})
-  },  
-
-  SVGHexagon: function ({id, x, y, h, w, borderColor, fill}) {
-    const d=POLYGON_DELTA
-    var points = `
-      ${x+d},${y}
-      ${x},${y+h/2}
-      ${x+d},${y+h}
-      ${x+w-d},${y+h} 
-      ${x+w},${y+h/2}
-      ${x+w-d},${y}
-    `
-    return draw.SVGPoly(points, {id, borderColor, fill})
-  },
-
-  SVGTrapezioid: function ({id, x, y, h, w, borderColor, fill}) {
-    const d=30
-    var points = `
-      ${x+d},${y}
-      ${x},${y+h}
-      ${x+w},${y+h} 
-      ${x+w-d},${y}
-    `
-    return draw.SVGPoly(points, {id, borderColor, fill})
-  },
-
-  SVGTrapezioid2: function ({id, x, y, h, w, borderColor, fill}) {
-    //delta
-    const d=30
-    var points = `
-      ${x},${y}
-      ${x+d},${y+h}
-      ${x+w-d},${y+h} 
-      ${x+w},${y}
-    `
-    return draw.SVGPoly(points, {id, borderColor, fill})
-  },
+    Hexagon: function ({id, x, y, h, w, borderColor, fill}) {
+      const d=POLYGON_DELTA
+      var points = `
+        ${x+d},${y}
+        ${x},${y+h/2}
+        ${x+d},${y+h}
+        ${x+w-d},${y+h} 
+        ${x+w},${y+h/2}
+        ${x+w-d},${y}
+      `
+      return draw.SVG.Poly(points, {id, borderColor, fill})
+    },
   
+    Trapezioid: function ({id, x, y, h, w, borderColor, fill}) {
+      const d=30
+      var points = `
+        ${x+d},${y}
+        ${x},${y+h}
+        ${x+w},${y+h} 
+        ${x+w-d},${y}
+      `
+      return draw.SVG.Poly(points, {id, borderColor, fill})
+    },
+  
+    Trapezioid2: function ({id, x, y, h, w, borderColor, fill}) {
+      //delta
+      const d=30
+      var points = `
+        ${x},${y}
+        ${x+d},${y+h}
+        ${x+w-d},${y+h} 
+        ${x+w},${y}
+      `
+      return draw.SVG.Poly(points, {id, borderColor, fill})
+    },
     
-  SVGFatArrow: function ({id, x, y, h, w, borderColor, fill}) {
-    const d=POLYGON_DELTA
-    var points = `
-      ${x},${y}
-      ${x+d},${y+h/2}
-      ${x},${y+h}
-      ${x+w-d},${y+h} 
-      ${x+w},${y+h/2}
-      ${x+w-d},${y}
-    `
-    return draw.SVGPoly(points, {id, borderColor, fill})
-  },
-  
-  SVGOctagon: function ({id, x, y, h, w, borderColor, fill}) {
-    const d=POLYGON_DELTA
-    var points = `
-      ${x+d},${y}
-      ${x},${y+h/3}
-      ${x},${y+h*2/3}
-      ${x+d},${y+h}
-      ${x+w-d},${y+h} 
-      ${x+w},${y+h*2/3}
-      ${x+w},${y+h/3}
-      ${x+w-d},${y}
-    `
-    return draw.SVGPoly(points, {id, borderColor, fill})
-  },
-
-  SVGPoly(points, {id, borderColor, fill}) {
-    var el = document.createElementNS(SVG_NS, 'polygon')
-    el.setAttributeNS(null, 'id', id)
-    el.setAttributeNS(null, 'points', points)
-    el.setAttributeNS(null, 'fill', fill)
-    el.setAttributeNS(null, 'stroke', borderColor)
-    el.setAttributeNS(null, 'stroke-width', 3)
+    FatArrow: function ({id, x, y, h, w, borderColor, fill}) {
+      const d=POLYGON_DELTA
+      var points = `
+        ${x},${y}
+        ${x+d},${y+h/2}
+        ${x},${y+h}
+        ${x+w-d},${y+h} 
+        ${x+w},${y+h/2}
+        ${x+w-d},${y}
+      `
+      return draw.SVG.Poly(points, {id, borderColor, fill})
+    },
     
-    // if(title) el.innerHTML += '<title>'+title+'</title>'
-    document.getElementById('svg').appendChild(el)
-    return el
-  },
+    Octagon: function ({id, x, y, h, w, borderColor, fill}) {
+      const d=POLYGON_DELTA
+      var points = `
+        ${x+d},${y}
+        ${x},${y+h/3}
+        ${x},${y+h*2/3}
+        ${x+d},${y+h}
+        ${x+w-d},${y+h} 
+        ${x+w},${y+h*2/3}
+        ${x+w},${y+h/3}
+        ${x+w-d},${y}
+      `
+      return draw.SVG.Poly(points, {id, borderColor, fill})
+    },
   
-  SVGLine: function (x1, y1, x2, y2) {
-    var line = document.createElementNS(SVG_NS,'line')
-    line.setAttribute('x1', x1)
-    line.setAttribute('y1', y1)
-    line.setAttribute('x2', x2)
-    line.setAttribute('y2', y2)
-    line.setAttribute("stroke", "black") 
-    line.setAttributeNS(null, 'stroke-width', 2)
+    Poly(points, {id, borderColor, fill}) {
+      var el = document.createElementNS(SVG_NS, 'polygon')
+      el.setAttributeNS(null, 'id', id)
+      el.setAttributeNS(null, 'points', points)
+      el.setAttributeNS(null, 'fill', fill)
+      el.setAttributeNS(null, 'stroke', borderColor)
+      el.setAttributeNS(null, 'stroke-width', 3)
+      
+      // if(title) el.innerHTML += '<title>'+title+'</title>'
+      document.getElementById('svg').appendChild(el)
+      return el
+    },
+    
+    Line: function (x1, y1, x2, y2) {
+      var line = document.createElementNS(SVG_NS,'line')
+      line.setAttribute('x1', x1)
+      line.setAttribute('y1', y1)
+      line.setAttribute('x2', x2)
+      line.setAttribute('y2', y2)
+      line.setAttribute("stroke", "black")
+      line.setAttributeNS(null, 'stroke-width', 2)
+    
+      getEl('svg').insertBefore(line, getEl('svg').firstChild)
+    },
+
+    Text: function ({x, y}, text, fullText, id) {
+      // wrapToRect(fullText, obj, 8, 3)
+      // return
   
-    getEl('svg').insertBefore(line, getEl('svg').firstChild)
-  },
+      var el = document.createElementNS(SVG_NS, 'text')
+      el.setAttributeNS(null, 'x', x)
+      el.setAttributeNS(null, 'y', y)
+      el.setAttributeNS(null, 'id', id+'_t')
+      el.setAttributeNS(null, 'fill', 'black')
+      el.setAttributeNS(null, 'text-anchor', 'center')
+      // center right
+      el.setAttributeNS(null, 'font-size', '12')
+      getEl('svg').appendChild(el)
   
-  SVGText: function ({x, y}, text, fullText, id) {
-    // wrapToRect(fullText, obj, 8, 3)
-    // return
-
-    var el = document.createElementNS(SVG_NS, 'text')
-    el.setAttributeNS(null, 'x', x)
-    el.setAttributeNS(null, 'y', y)
-    el.setAttributeNS(null, 'id', id+'_t')
-    el.setAttributeNS(null, 'fill', 'black')
-    el.setAttributeNS(null, 'text-anchor', 'center')
-    // center right
-    el.setAttributeNS(null, 'font-size', '12')
-    getEl('svg').appendChild(el)
-
-    // text = 
-      // .map( (e, i, arr) => )
-      // .join('\n')
-
-    const arr = fullText.split('\n')
-    let curr = null,
-    curr_dx = 0,
-    curr_w = 0
-    // let acc = ''
-    for (let i in arr) {
-      if(i==0) {
-        el.innerHTML = `<tspan id="${id}_t0" dx='0' dy="-${arr.length==3?'0.6':'1.4'}em">${arr[i]}</tspan>`
-        curr = getEl(id+'_t0')
-        curr_dx = +curr.getAttribute('dx')
-        curr_w = +curr.getBBox().width
-        curr.setAttribute('dx', curr_dx - curr_w/2)
+      // text = 
+        // .map( (e, i, arr) => )
+        // .join('\n')
+  
+      const arr = fullText.split('\n')
+      let curr = null,
+      curr_dx = 0,
+      curr_w = 0
+      // let acc = ''
+      for (let i in arr) {
+        if(i==0) {
+          el.innerHTML = `<tspan id="${id}_t0" dx='0' dy="-${arr.length==3?'0.6':'1.4'}em">${arr[i]}</tspan>`
+          curr = getEl(id+'_t0')
+          curr_dx = +curr.getAttribute('dx')
+          curr_w = +curr.getBBox().width
+          curr.setAttribute('dx', curr_dx - curr_w/2)
+        }
+        else {
+          el.innerHTML += `<tspan id="${id}_t${i}" dx='-${getEl(id+'_t'+(i-1)).getBBox().width/2}' dy="1.2em">${arr[i]}</tspan>`
+          curr = getEl(id+'_t'+i)
+          curr_dx = +curr.getAttribute('dx')
+          curr_w = +curr.getBBox().width
+          curr.setAttribute('dx', curr_dx - curr_w/2)
+          // ${arr[i].length/2+arr[i-1].length/2}ch
+        }
       }
-      else {
-        el.innerHTML += `<tspan id="${id}_t${i}" dx='-${getEl(id+'_t'+(i-1)).getBBox().width/2}' dy="1.2em">${arr[i]}</tspan>`
-        curr = getEl(id+'_t'+i)
-        curr_dx = +curr.getAttribute('dx')
-        curr_w = +curr.getBBox().width
-        curr.setAttribute('dx', curr_dx - curr_w/2)
-        // ${arr[i].length/2+arr[i-1].length/2}ch
-      }
+    },
+    Point: function (x, y) {
+      var el = document.createElementNS(SVG_NS, 'circle')
+      el.setAttributeNS(null, 'cx', x)
+      el.setAttributeNS(null, 'cy', y)
+      el.setAttributeNS(null, 'r', 3)
+      el.setAttributeNS(null, 'fill', 'black')
+      el.setAttributeNS(null, 'stroke', 'red')
+      el.setAttributeNS(null, 'stroke-width', 1)
+      getEl('svg').appendChild(el)
+    },
+    Rect: function ({id, x, y, h, w, borderColor, fill}) {
+      var rect = document.createElementNS(SVG_NS, 'rect')
+      rect.setAttributeNS(null, 'id', id)
+      rect.setAttributeNS(null, 'x', x)
+      rect.setAttributeNS(null, 'y', y)
+      rect.setAttributeNS(null, 'height', h)
+      rect.setAttributeNS(null, 'width', w)
+      rect.setAttributeNS(null, 'fill', fill)
+      rect.setAttributeNS(null, 'stroke', borderColor)
+      rect.setAttributeNS(null, 'stroke-width', 3)
+      // if(title) rect.innerHTML += '<title>'+title+'</title>'
+      document.getElementById('svg').appendChild(rect)
+      return rect
     }
-  },
-  
-  SVGRect: function ({id, x, y, h, w, borderColor, fill}) {
-    var rect = document.createElementNS(SVG_NS, 'rect')
-    rect.setAttributeNS(null, 'id', id)
-    rect.setAttributeNS(null, 'x', x)
-    rect.setAttributeNS(null, 'y', y)
-    rect.setAttributeNS(null, 'height', h)
-    rect.setAttributeNS(null, 'width', w)
-    rect.setAttributeNS(null, 'fill', fill)
-    rect.setAttributeNS(null, 'stroke', borderColor)
-    rect.setAttributeNS(null, 'stroke-width', 3)
-    // if(title) rect.innerHTML += '<title>'+title+'</title>'
-    document.getElementById('svg').appendChild(rect)
-    return rect
-  }
+  }  
 }
-
 
 
 // eslint-disable-next-line no-unused-vars
