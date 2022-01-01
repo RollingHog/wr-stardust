@@ -97,7 +97,7 @@ function drawTree(tree_name) {
   } 
 
   svg.innerHTML = SVG_DEFAULT
-  draw.init
+
   const values = Object.values(tech[tree_name])
     for (let i of values)
     draw.Node(tree_name, i)
@@ -110,7 +110,6 @@ function drawTree(tree_name) {
           + ' ' + (x[1]+300-x[0])
           + ' ' + (y[1]+100-y[0])
   svg.setAttribute("viewBox", viewBox)
-  svg.hidden = false
 
   cache[tree_name] = {}
   cache[tree_name].html = svg.innerHTML
