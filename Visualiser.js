@@ -93,25 +93,29 @@ function drawTree(tree_name) {
   if(cache[tree_name]) {
     svg.innerHTML = cache[tree_name].html
     svg.setAttribute("viewBox", cache[tree_name].viewBox)
-  } else {
-    svg.innerHTML = SVG_DEFAULT
-    const values = Object.values(tech[tree_name])
-     for (let i of values)
-      draw.Node(tree_name, i)
+    return
+  } 
 
-    const x = getMinMax(values, 'x')
-    , y = getMinMax(values, 'y')
-    , PAD_MIN = 20
-    const viewBox = (x[0]-PAD_MIN)
-            + ' ' + (y[0]-PAD_MIN)
-            + ' ' + (x[1]+300-x[0])
-            + ' ' + (y[1]+100-y[0])
-    svg.setAttribute("viewBox", viewBox)
+  svg.innerHTML = SVG_DEFAULT
+  draw.init
+  const values = Object.values(tech[tree_name])
+    for (let i of values)
+    draw.Node(tree_name, i)
 
-    cache[tree_name] = {}
-    cache[tree_name].html = svg.innerHTML
-    cache[tree_name].viewBox = viewBox
-  }
+  const x = getMinMax(values, 'x')
+  , y = getMinMax(values, 'y')
+  , PAD_MIN = 20
+  const viewBox = (x[0]-PAD_MIN)
+          + ' ' + (y[0]-PAD_MIN)
+          + ' ' + (x[1]+300-x[0])
+          + ' ' + (y[1]+100-y[0])
+  svg.setAttribute("viewBox", viewBox)
+  svg.hidden = false
+
+  cache[tree_name] = {}
+  cache[tree_name].html = svg.innerHTML
+  cache[tree_name].viewBox = viewBox
+  
 }
 
 function getMinMax(arr, attr) {
