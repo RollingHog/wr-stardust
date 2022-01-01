@@ -67,7 +67,6 @@ async function Init() {
     }
   }
 
-  // for(let i of TREELIST) drawTree(i)
   await parseTechIframe(TREELIST_NOMIL[0])
   drawTree(TREELIST_NOMIL[0])
 
@@ -81,6 +80,11 @@ async function Init() {
     console.log(listParam('cost', false))
     console.log(listParam('costClear'))
     console.log(listAllWithoutMilitary())
+
+    for(let i of TREELIST) {
+      drawTree(i)
+    }
+    drawTree(TREELIST_NOMIL[0])
   }),0)
 }
 
