@@ -676,12 +676,12 @@ const draw = {
         }
         else {
           el.innerHTML += `<tspan id="${id}_t${i}" dx='-${getEl(id+'_t'+(i-1)).getBBox().width/2}' dy="1.2em">${arr[i]}</tspan>`
-              // ${arr[i].length/2+arr[i-1].length/2}ch
         }
         curr = getEl(id+'_t'+i)
         curr_dx = +curr.getAttribute('dx')
         curr_w = +curr.getBBox().width
-        curr.setAttribute('dx', curr_dx - curr_w/2)
+        const dx = curr_dx - curr_w/2
+        curr.setAttribute('dx', dx)
       }
     },
     Point: function (x, y) {
