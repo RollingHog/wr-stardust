@@ -23,13 +23,12 @@ const range = (cnt) => '0'.repeat(cnt)
 
 const TREELIST = [
   "Military", 
-  "Sociology",
   "Biology", 
   "Industry", 
   "Science", 
+  "Sociology",
 ]
-const TREELIST_NOMIL = ["Biology", "Industry", "Science", "Sociology"]
-
+const TREELIST_NOMIL = TREELIST.filter( e => e != 'Military')
 const cache = {}
 
 NodeList.prototype.forEach = Array.prototype.forEach
@@ -287,7 +286,7 @@ function parseTechTable(player, raw, buildings, local_projects) {
                             .map( e => e.id)
 
     // FIXME doesn't work
-    const next = studied
+    const avaliableTech = studied
       .map( e => inverted.tech[i][e] )
       .filter( e => e)
       .concat(withoutReqires)
@@ -295,7 +294,7 @@ function parseTechTable(player, raw, buildings, local_projects) {
       .filter((elem, pos, arr) => arr.indexOf(elem) == pos)
       //TODO make_array_unique() func
       
-    // log(player, 'next:', next)
+    // log(player, {avaliableTech})
 
     saveSvgAsPng(svg, `${player} ${i}.png`)
   }
@@ -676,13 +675,16 @@ const draw = {
         }
         else {
           el.innerHTML += `<tspan id="${id}_t${i}" dx='-${getEl(id+'_t'+(i-1)).getBBox().width/2}' dy="1.2em">${arr[i]}</tspan>`
+          curr = getEl(id+'_t'+i)
+          curr_dx = +curr.getAttribute('dx')
+          curr_w = +curr.getBBox().width
+          const dx = curr_dx - curr_w/2
+          curr.setAttribute('dx', dx)
         }
-        curr = getEl(id+'_t'+i)
-        curr_dx = +curr.getAttribute('dx')
-        curr_w = +curr.getBBox().width
-        const dx = curr_dx - curr_w/2
-        curr.setAttribute('dx', dx)
       }
+
+      curr_w = getEl(id+'_t').getBBox().width
+      getEl(id+'_t0').setAttribute('dx', -curr_w/2)
     },
     Point: function (x, y) {
       var el = document.createElementNS(SVG_NS, 'circle')
