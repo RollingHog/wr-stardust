@@ -631,7 +631,7 @@ const draw = {
     line.setAttribute("stroke", "black") 
     line.setAttributeNS(null, 'stroke-width', 2)
   
-    getEl('svg').innerHTML = line.outerHTML + getEl('svg').innerHTML
+    getEl('svg').insertBefore(line, getEl('svg').firstChild)
   },
   
   SVGText: function ({x, y}, text, fullText, id) {
