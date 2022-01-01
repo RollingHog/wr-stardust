@@ -359,7 +359,7 @@ function parseShapeNode(filename, i) {
     , fullText
 
     , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
-    , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(2)
+    , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(0)
     , h: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('height')).toFixed(2)
     , w: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('width')).toFixed(2)
     
