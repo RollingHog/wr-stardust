@@ -51,7 +51,7 @@ const SVG_DEFAULT = `<style> text {
 } </style>`
 
 window.onload = Init
-function Init() {
+async function Init() {
 
   for (let i of document.querySelectorAll('iframe.tech')) {
     let tree_name = i.src.replace(/.*\/([^/]*).graphml$/,'$1')
@@ -66,21 +66,30 @@ function Init() {
       firefox with about:config - privacy.file_unique_origin : false`)
       error(e)
     }
-    parseTechIframe(tree_name)
   }
-  console.log(tech)
-  
-  console.log(listParam('cost', false))
-  console.log(listParam('costClear'))
-  console.log(listAllWithoutMilitary())
 
   // for(let i of TREELIST) drawTree(i)
-    
+  await parseTechIframe(TREELIST_NOMIL[0])
   drawTree(TREELIST_NOMIL[0])
 
+  setTimeout(_ => Promise.all(TREELIST
+    .filter( e=> e != TREELIST_NOMIL[0])
+    .map(e => parseTechIframe(e))
+  )
+  .then(_ => {
+    console.log(tech)
+  
+    console.log(listParam('cost', false))
+    console.log(listParam('costClear'))
+    console.log(listAllWithoutMilitary())
+  }),0)
 }
 
 function drawTree(tree_name) {
+  if(!tech[tree_name] || Object.keys(tech[tree_name]).length == 0 ) {
+    parseTechIframe(tree_name)
+  }
+
   if(cache[tree_name]) {
     svg.innerHTML = cache[tree_name].html
     svg.setAttribute("viewBox", cache[tree_name].viewBox)
@@ -134,7 +143,7 @@ function highlightStudiedTech(field, tech_list, proj_list) {
   return proj_list
 }
 
-function parseTechIframe(tree_name) {
+async function parseTechIframe(tree_name) {
 
   graphmls[tree_name] = graphmls[tree_name].getElementsByTagName('graph')[0]
   graphmls[tree_name].getElementsByTagName('data')[0].remove()
