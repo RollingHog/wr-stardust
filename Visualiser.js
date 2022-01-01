@@ -647,8 +647,6 @@ const draw = {
     },
 
     Text: function ({x, y}, text, fullText, id) {
-      // wrapToRect(fullText, obj, 8, 3)
-      // return
   
       var el = document.createElementNS(SVG_NS, 'text')
       el.setAttributeNS(null, 'x', x)
@@ -659,10 +657,6 @@ const draw = {
       // center right
       el.setAttributeNS(null, 'font-size', '12')
       getEl('svg').appendChild(el)
-      
-      // text = 
-        // .map( (e, i, arr) => )
-        // .join('\n')
       
       const arr = fullText.split('\n')
       let curr = null,
@@ -686,6 +680,7 @@ const draw = {
       curr_w = getEl(id+'_t').getBBox().width
       getEl(id+'_t0').setAttribute('dx', -curr_w/2)
     },
+
     Point: function (x, y) {
       var el = document.createElementNS(SVG_NS, 'circle')
       el.setAttributeNS(null, 'cx', x)
@@ -696,6 +691,7 @@ const draw = {
       el.setAttributeNS(null, 'stroke-width', 1)
       getEl('svg').appendChild(el)
     },
+
     Rect: function ({id, x, y, h, w, borderColor, fill}) {
       var rect = document.createElementNS(SVG_NS, 'rect')
       rect.setAttributeNS(null, 'id', id)
