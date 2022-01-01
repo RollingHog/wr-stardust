@@ -67,9 +67,6 @@ function Init() {
       error(e)
     }
     parseTechIframe(tree_name)
-    inverted.tech[tree_name] = Object.fromEntries(
-      Object.values(tech[tree_name]).map( e => [e.name, e.id])
-    )
   }
   console.log(tech)
   
@@ -192,6 +189,10 @@ function parseTechIframe(tree_name) {
       console.log(e, tree_name, target, tech[tree_name][target], source)
     }
   }
+
+  inverted.tech[tree_name] = Object.fromEntries(
+    Object.values(tech[tree_name]).map( e => [e.name, e.id])
+  )
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -647,11 +648,11 @@ const draw = {
       // center right
       el.setAttributeNS(null, 'font-size', '12')
       getEl('svg').appendChild(el)
-  
+      
       // text = 
         // .map( (e, i, arr) => )
         // .join('\n')
-  
+      
       const arr = fullText.split('\n')
       let curr = null,
       curr_dx = 0,
@@ -660,19 +661,15 @@ const draw = {
       for (let i in arr) {
         if(i==0) {
           el.innerHTML = `<tspan id="${id}_t0" dx='0' dy="-${arr.length==3?'0.6':'1.4'}em">${arr[i]}</tspan>`
-          curr = getEl(id+'_t0')
-          curr_dx = +curr.getAttribute('dx')
-          curr_w = +curr.getBBox().width
-          curr.setAttribute('dx', curr_dx - curr_w/2)
         }
         else {
           el.innerHTML += `<tspan id="${id}_t${i}" dx='-${getEl(id+'_t'+(i-1)).getBBox().width/2}' dy="1.2em">${arr[i]}</tspan>`
-          curr = getEl(id+'_t'+i)
-          curr_dx = +curr.getAttribute('dx')
-          curr_w = +curr.getBBox().width
-          curr.setAttribute('dx', curr_dx - curr_w/2)
-          // ${arr[i].length/2+arr[i-1].length/2}ch
+              // ${arr[i].length/2+arr[i-1].length/2}ch
         }
+        curr = getEl(id+'_t'+i)
+        curr_dx = +curr.getAttribute('dx')
+        curr_w = +curr.getBBox().width
+        curr.setAttribute('dx', curr_dx - curr_w/2)
       }
     },
     Point: function (x, y) {
