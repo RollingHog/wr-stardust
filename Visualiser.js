@@ -64,6 +64,7 @@ async function Init() {
       or
       firefox with about:config - privacy.file_unique_origin : false`)
       error(e)
+      break
     }
   }
 
