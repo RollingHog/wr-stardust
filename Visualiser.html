@@ -42,40 +42,43 @@
       <text x="20" y="20">No automatic linewrapping.</text>
     </switch>
   </svg> -->
-  <div id="" style="position: fixed; left: 8px; bottom: 8px;">
-    <section id=players_selection style="background-color: white;">
-      <label>
-        <input type="checkbox" id="Майлз Куоритч">
-        Майлз Куоритч
-      </label>
-      <br>
-      <label>
-        <input type="checkbox" id="Диана XVI">
-        Диана XVI
-      </label>
-      <br>
-      <label>
-        <input type="checkbox" id="Адмирал Майя Аракана">
-        Адмирал Майя Аракана
-      </label>
-      <br>
-      <label>
-        <input type="checkbox" id="Небоходец">
-        Небоходец
-      </label>
-    </section>
-    <section id=doc_section>
-      <textarea name="" id="inp_character_document" cols="16" rows="3" placeholder='Документ "Персонажи"'></textarea>
-      <button onclick="parseDocFile(inp_character_document.value)">Do it</button>
+  <div id=el_GUI>
+    <div id="" style="position: fixed; left: 8px; bottom: 8px;">
+      <section id=players_selection style="background-color: white;">
+        <label>
+          <input type="checkbox" id="Майлз Куоритч">
+          Майлз Куоритч
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" id="Диана XVI">
+          Диана XVI
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" id="Адмирал Майя Аракана">
+          Адмирал Майя Аракана
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" id="Небоходец">
+          Небоходец
+        </label>
+      </section>
+      <section id=doc_section>
+        <textarea name="" id="inp_character_document" cols="16" rows="3" placeholder='Документ "Персонажи"'></textarea>
+        <button onclick="parseDocFile(inp_character_document.value)">Do it</button>
+      </section>
+    </div>
+    <section id="tech_tree_buttons" style="position: fixed; right: 8px; bottom: 8px;">
+      <button onclick='drawTree("Biology")'  style="background-color: rgb(204, 255, 204);">Biology</button>
+      <button onclick='drawTree("Industry")' style="background-color: rgb(255, 204,   0);">Industry</button>
+      <button onclick='drawTree("Military")' style="background-color: rgb(255, 153, 102);">Military</button>
+      <button onclick='drawTree("Science")'  style="background-color: rgb(153, 204, 255);">Science</button>
+      <button onclick='drawTree("Sociology")'style="background-color: rgb(204, 153, 255);">Sociology</button>
     </section>
   </div>
-  <section id="tech_tree_buttons" style="position: fixed; right: 8px; bottom: 8px;">
-    <button onclick='drawTree("Biology")'  style="background-color: rgb(204, 255, 204);">Biology</button>
-    <button onclick='drawTree("Industry")' style="background-color: rgb(255, 204,   0);">Industry</button>
-    <button onclick='drawTree("Military")' style="background-color: rgb(255, 153, 102);">Military</button>
-    <button onclick='drawTree("Science")'  style="background-color: rgb(153, 204, 255);">Science</button>
-    <button onclick='drawTree("Sociology")'style="background-color: rgb(204, 153, 255);">Sociology</button>
-  </section>
+  <input type=button  style="position: fixed; right: 8px; top: 8px;" value="&ofcir;" onclick="el_GUI.hidden=!el_GUI.hidden" title="Toggle GUI">
 </body>
 
 <script src="Visualiser.js">   
