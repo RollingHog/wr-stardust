@@ -17,8 +17,6 @@ function getEl(id) {
   return document.getElementById(id)
 }
 
-// const ctx = canvas.getContext("2d")
-
 const range = (cnt) => '0'.repeat(cnt)
 
 const TREELIST = [
@@ -211,9 +209,21 @@ async function parseTechIframe(tree_name) {
   )
 }
 
+let html
 // eslint-disable-next-line no-unused-vars
-function parseDocFile(raw) {
-  let players = raw.split('Данные экспедиции')
+async function parseDocFile(event) {
+  const MIME_HTML = 'text/html'
+  const rawObj = (await navigator.clipboard.read())[0]
+  
+  let raw
+  if(rawObj.types.includes(MIME_HTML) && false) {
+    raw = await rawObj.getType(MIME_HTML).then(e => e.text())
+    html = (new DOMParser).parseFromString(raw, MIME_HTML)
+  } else {
+    html = await rawObj.getType('text/plain').then(e => e.text())
+  }
+
+  let players = html.split('Данные экспедиции')
   players.shift()
   players.shift()
   for (let i of players) {
