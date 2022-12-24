@@ -89,6 +89,21 @@ async function Init() {
   }),0)
 }
 
+// counting win possibility for debils
+// eslint-disable-next-line no-unused-vars
+function countSuccessPossibility(treshold, nOfCubes) {
+  const n = 100000
+  let wins = 0
+  for(let i=0; i<n;i++){
+    let goodCubes = 0
+    for(let j=0; j<nOfCubes; j++) {
+      goodCubes += +(Math.random()*10).toFixed(0)>4 ? 1 : 0
+    }
+    if(goodCubes>=treshold) wins += 1
+  }
+  return +(wins/n).toFixed(3)
+}
+
 function drawTree(tree_name) {
   if(!tech[tree_name] || Object.keys(tech[tree_name]).length == 0 ) {
     parseTechIframe(tree_name)
