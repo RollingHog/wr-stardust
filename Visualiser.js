@@ -82,6 +82,8 @@ async function Init() {
     console.log(listParam('costClear'))
     console.log(listAllWithoutMilitary())
 
+    console.log('unrecognized tech effects:', badEffectCount)
+
     for(let i of TREELIST) {
       drawTree(i)
     }
@@ -400,6 +402,8 @@ function saveSVG(filename) {
   saveFile(filename+'.svg', svg.outerHTML)
 }
 
+var badEffectCount = 0
+
 function parseShapeNode(filename, i) {
 
   const sep1 = 'Сложность:'
@@ -427,17 +431,36 @@ function parseShapeNode(filename, i) {
   const cost = split1[1].split(sep2)[0].trim().split(',').map(e => e.trim())
 
   const effect_unparsed = split1[1].split(sep2)[1].trim()
-  let effect = effect_unparsed.replace(/^.*(Общество|Производство|Наука) \+(\d+).*/g, '$1:$2').split(':')
+  let effect = effect_unparsed
+    .split(',')
+    .map( e => e
+      .trim()
+      .replace(/ {2,}/g,' ')
+      .replace(/(Общество|Производство|Наука) \+(\d+)/, '$1:$2')
+      .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный куб:$1')
+      // вещества
+      .replace(/(Добыча|Редкие металлы|Трансураны|Наноматериалы|Антиматерия|Метакрис|Экзотматерия|Нейтроний|Кварк-плазма) \+(\d+)/, '$1:$2')
+      // Эффекты и бонусы
+      .replace(/(Строительство|Пуски|Орбита|Астроинженерия|Дипломатия|Шпионаж|Контршпионаж|Автозаки|Конверсия|Регенерация|Ремонт) \+(\d+)/, '$1:$2')
+      // Плюсы к научным веткам
+      .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
+      // армии и корпуса кораблей
+      .replace(/(армия|корпус)/, 'Тип отряда:$1')
+      .replace(/(\d+) слота?/i, 'Слоты:$1')
+      // эффекты, дающие великих людей
+      .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
+      // особый эффект - победа
+      .replace(/(победа)/, '$1:')
+      .split(':')
+    )
 
-  if(effect == effect_unparsed)
-    effect = effect_unparsed.replace(/^\s*\+(\d+) свободн(ый|ых) куба?\s*/gi, 'Свободный куб:$1').split(':')
-
-  if(effect == effect_unparsed)
-    effect = null
-
-  if(!effect) 
+  if(effect[0].length == 1) {
+    // it is non-split => not recognized string
+    // effect = null
+    badEffectCount++
     console.log(name, cost, effect, effect_unparsed)
-
+  }
+  
   var t = {
     id: i.parentElement.parentElement.id
     , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
