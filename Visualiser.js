@@ -17,8 +17,6 @@ function getEl(id) {
   return document.getElementById(id)
 }
 
-// const ctx = canvas.getContext("2d")
-
 const range = (cnt) => '0'.repeat(cnt)
 
 const TREELIST = [
@@ -31,9 +29,11 @@ const TREELIST = [
 const TREELIST_NOMIL = TREELIST.filter( e => e != 'Military')
 const cache = {}
 
-NodeList.prototype.forEach = Array.prototype.forEach
-HTMLCollection.prototype.forEach = Array.prototype.forEach
-HTMLCollection.prototype.filter = Array.prototype.filter
+;(()=>{
+  NodeList.prototype.forEach = Array.prototype.forEach
+  HTMLCollection.prototype.forEach = Array.prototype.forEach
+  HTMLCollection.prototype.filter = Array.prototype.filter
+})()
 
 const parser = new DOMParser()
 const graphmls = {}
@@ -59,11 +59,11 @@ async function Init() {
         i.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>')
       , 'text/xml')
     } catch (e) {
-      alert(`cannot read files, run
+      warn(`cannot read files, run
       chrome with --allow-file-access-from-files
       or
       firefox with about:config - privacy.file_unique_origin : false`)
-      error(e)
+      warn(e)
       break
     }
   }
@@ -87,6 +87,21 @@ async function Init() {
     }
     drawTree(TREELIST_NOMIL[0])
   }),0)
+}
+
+// counting win possibility for debils
+// eslint-disable-next-line no-unused-vars
+function countSuccessPossibility(treshold, nOfCubes) {
+  const n = 250000
+  let wins = 0
+  for(let i=0; i<n;i++){
+    let goodCubes = 0
+    for(let j=0; j<nOfCubes; j++) {
+      goodCubes += +(Math.random()*10).toFixed(0)%10>3 ? 1 : 0
+    }
+    if(goodCubes>=treshold) wins += 1
+  }
+  return +(wins/n).toFixed(3)
 }
 
 function drawTree(tree_name) {
@@ -211,8 +226,62 @@ async function parseTechIframe(tree_name) {
   )
 }
 
-// eslint-disable-next-line no-unused-vars
-function parseDocFile(raw) {
+async function parseDocHTML(rawHTML) {
+  var l
+  const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
+  l = html
+    .filter(e => e.tagName !== 'BR')
+    .map(({tagName, innerText, innerHTML}) => ({tagName, innerText, innerHTML}))
+  // const CONTENT_TAGS = ['DIV', 'P', 'UL']
+  let hs = []
+  let content = []
+  let interm = {}
+  let res = {}
+  let t = {}
+  // doesnt work
+  for(let i of l) {
+    if(i.tagName.startsWith('H')) {
+      // header
+      if(!hs.length) {
+        hs.push(i)
+        continue
+      }
+      let last = hs[hs.length-1]
+      if(last.tagName > i.tagName) {
+        // new H is lower
+      } else if(last.tagName == i.tagName) {
+        // new H is same
+        interm[last.innerText] = content
+        content = []
+      } else if(last.tagName < i.tagName) {
+        // new H is higher order
+        interm[last.innerText] = content
+        content = []
+
+        let prelast
+        while(hs.length) {
+          prelast = hs.pop()
+          if(prelast.tagName < last.tagName) {
+            t = Object.assign({}, interm)
+            interm = {}
+            interm[prelast.innerText] = t
+            break
+          }
+        }
+        hs.push(prelast)
+      }
+      hs.push(i)
+    } else {
+      content.push(i)
+    }
+  }
+  log(interm)
+  return res
+}
+
+function parseDocText(raw) {
+  // old parser
+
   let players = raw.split('Данные экспедиции')
   players.shift()
   players.shift()
@@ -235,8 +304,10 @@ function parseDocFile(raw) {
     if(player.name.indexOf('-')==0)
       continue
     
-    if(!getEl(player.name) || !getEl(player.name).checked)
+    if(!getEl(player.name) || !getEl(player.name).checked) {
+      log(player.name, 'not marked to draw, skipping')
       continue
+    }
 
     var buildings = t[4]
       .replace(/\([^)]+\)/g,'')
@@ -252,9 +323,25 @@ function parseDocFile(raw) {
       
     // if(!confirm(player+'?')) continue
 
-    // log(buildings, t[1].concat(buildings))
+    log({t, buildings, local_projects})
     parseTechTable(player.name, t[1], buildings, local_projects)
   }
+}
+
+// eslint-disable-next-line no-unused-vars
+async function parseDocFile(event) {
+  let raw
+  const MIME_HTML = 'text/html'
+  const rawClipboardObj = (await navigator.clipboard.read())[0]
+  
+  // eslint-disable-next-line no-constant-condition
+  if(rawClipboardObj.types.includes(MIME_HTML) && false) {
+    raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
+    parseDocHTML(raw)
+  } else {
+    raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
+    parseDocText(raw)
+  }  
 }
 
 function parseTechTable(player, raw, buildings, local_projects) {
