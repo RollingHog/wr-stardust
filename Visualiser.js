@@ -381,7 +381,8 @@ function parseTechTable(player, raw, buildings, local_projects) {
                             .filter(e => e.req.length==0) 
                             .map( e => e.id)
 
-    // FIXME doesn't work
+    // TODO doesn't work
+    // eslint-disable-next-line no-unused-vars
     const avaliableTech = studied
       .map( e => inverted.tech[i][e] )
       .filter( e => e)
