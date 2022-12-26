@@ -86,7 +86,7 @@ async function Init() {
     console.log(listParam('costClear'))
     console.log(listAllWithoutMilitary())
     */
-    console.log('unrecognized tech effects:', badEffectCount)
+    console.log('unrecognized tech:', badTechCount)
 
     for(let i of TREELIST) {
       drawTree(i)
@@ -411,6 +411,7 @@ const MATERIALS_LIST = [
   // 1 ряд
   "Добыча",
   "Редкие металлы",
+  "Редк. металлы",
   "Трансураны",
   // 2 ряд
   "Наноматериалы",
@@ -428,7 +429,23 @@ const MATERIALS_LIST = [
   "Аномалия"
 ]
 
-var badEffectCount = 0
+const COLONY_PARAMETERS_LIST = [
+
+]
+
+const KEYWORDS = {
+  DAMAGE_TYPES: [],
+  UNIT_PROPS: [
+    "ДУ",
+    "роботы",
+  ],
+  MODULE_PROPS: [
+    "ЭМИ",
+    "щит",
+  ],
+}
+
+var badTechCount = 0
 
 function parseShapeNode(filename, i) {
 
@@ -454,9 +471,45 @@ function parseShapeNode(filename, i) {
 
   const split1 = nodeText.split(sepDifficulty)
   const name = split1[0].trim()
-  const cost = split1[1].split(sepEffect)[0].trim().split(',').map(e => e.trim())
+  const cost_raw = split1[1].split(sepEffect)[0].trim()
 
-  // parse effects
+  const colorToParameterType = {
+    '#FF0000': 'Производство',
+    '#00FF00': 'Общество',
+    '#0000FF': 'Наука',
+    '#000000': "Любой",
+  }
+  const borderColor = i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color') 
+
+  const ALL_RIGHT = ':$1'
+
+  //parse COST
+  const cost = cost_raw
+    .split(',')
+    .map(e => e
+      .trim()
+      .replace(/(базовое)/, ALL_RIGHT)
+      .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
+      .replace(/(электростанция)/, ALL_RIGHT)
+      .replace(/(повторяемый)/, ALL_RIGHT)
+      .replace(/^(\d+)$/i, colorToParameterType[borderColor]+':$1')
+      .replace(/^(\d+) этапа$/i, 'Этапы:$1')
+      .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
+      .replace(/^(\d+) слота$/i, 'Этапы:$1')
+      .replace(/^тех. (.+)$/i, 'Технология:$1')
+      .replace(/^(осуждение|волнения|непривычная среда) ?\((.+)\)$/i, '$1:+$2')
+      .replace(/^(затраты|специалисты|ресурсы) ?\((.+)\)$/i, '$1:$2')
+      .replace(new RegExp(`(${MATERIALS_LIST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+    )
+
+  if(cost.some(e=>!e.includes(':'))) {
+    log('bad cost', name, cost, cost_raw)
+    badTechCount++
+  }
+
+  // log(name, cost)
+    
+  // parse EFFECTS
   const effect_unparsed = split1[1].split(sepEffect)[1].trim()
   let effect = effect_unparsed
     .split(',')
@@ -465,6 +518,8 @@ function parseShapeNode(filename, i) {
       .replace(/ {2,}/g,' ')
       .replace(/(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
       .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный куб:$1')
+      // временный бонус
+      .replace(/^на (\d+) хода?/i, 'Свободный куб:$1')
       // вещества
       .replace(new RegExp(`(${MATERIALS_LIST.join('|')}) \\+(\\d+)`), '$1:$2')
       // Эффекты и бонусы:
@@ -476,7 +531,7 @@ function parseShapeNode(filename, i) {
       .replace(/(Дипломатия|Шпионаж|Контршпионаж|Пропаганда|Автозаки|Политика|Устранение последствий) [+-](\d+)/, '$1:$2')
       .replace(/(Осуждение) -(\d+)/, '$1:$2')
       // : военные
-      .replace(/(Конверсия|Регенерация|Ремонт (?:армий|флотов)) \+(\d+)/, '$1:$2')
+      .replace(/(Конверсия|Регенерация|Ремонт (?:армий|флотов)|Бомбардировка) \+(\d+)/, '$1:$2')
       // Плюсы к научным веткам
       .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
       // армии и корпуса кораблей
@@ -488,20 +543,25 @@ function parseShapeNode(filename, i) {
       .replace(/(Защита колонии) \+?(\d+)/, '$1:$2')
       .replace(/Создание (армий|флотов|баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
       .replace(/(планетарный щит|Двигатель) \+?(\d+)/, '$1:$2')
+      // типы урона, эффекты оружия
+      .replace(new RegExp(`(${KEYWORDS.DAMAGE_TYPES.join('|')}) \\+(\\d+)`), '$1:$2')
       // эффекты, дающие великих людей
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
       // базовые вещи
-      .replace(/(выдаётся при высадке)/, '$1:')
+      .replace(/(выдаётся при высадке)/, ALL_RIGHT)
+      .replace(/(немедленно)/, ALL_RIGHT)
+      .replace(/(электростанция)/, ALL_RIGHT)
+      .replace(/(пред-FTL)/, ALL_RIGHT)
       // особый эффект - победа
-      .replace(/(победа)/, '$1:')
+      .replace(/(победа)/, ALL_RIGHT)
       .split(':')
     )
 
-  if(effect[0].length == 1) {
+  if(effect.some(e => e.length < 2)) {
     // it is non-split => not recognized string
     // effect = null
-    badEffectCount++
-    console.log(name, cost, effect, effect_unparsed)
+    badTechCount++
+    log(name, effect, effect_unparsed)
   }
   
   var t = {
