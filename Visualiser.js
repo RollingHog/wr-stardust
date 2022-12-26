@@ -669,8 +669,10 @@ function doNodeStat(filename, t) {
       stat[filename][t.y][effect[0]] = +effect[1]
 
     }
-    else
+    else {
+      if(!PARAMLIST_RU.includes(effect[0])) return
       stat[filename][t.y][effect[0]] += +effect[1]
+    }
 
     stat[filename][t.y].sum += +effect[1]
   }
