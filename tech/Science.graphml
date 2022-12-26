@@ -943,8 +943,8 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="889.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="179.740234375" x="40.004882812499886" y="6.9482421875">Полное телеприсутствие
-Сложность: 3, 2 этапа, тех. FTL
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="219.12109375" x="20.314453124999886" y="6.9482421875">Полное телеприсутствие
+Сложность: 3, 2 этапа, любая тех. FTL
 Эффект: +1 свободный куб<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
