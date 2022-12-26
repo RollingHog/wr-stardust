@@ -407,12 +407,33 @@ function saveSVG(filename) {
   saveFile(filename+'.svg', svg.outerHTML)
 }
 
+const MATERIALS_LIST = [
+  // 1 ряд
+  "Добыча",
+  "Редкие металлы",
+  "Трансураны",
+  // 2 ряд
+  "Наноматериалы",
+  "Антиматерия",
+  // 3 ряд
+  "Метакрис",
+  "Экзотическая материя",
+  "Экзотматерия",
+  // 4 ряд
+  "Нейтроний",
+  "Кварк-плазма",
+  //особые
+  "Образцы",
+  "Экзоты",
+  "Аномалия"
+]
+
 var badEffectCount = 0
 
 function parseShapeNode(filename, i) {
 
-  const sep1 = 'Сложность:'
-  const sep2 = 'Эффект:'
+  const sepDifficulty = 'Сложность:'
+  const sepEffect = 'Эффект:'
 
   const nlabel = i.getElementsByTagName('y:NodeLabel')[0]
   const fullText = nlabel.innerHTML
@@ -426,16 +447,17 @@ function parseShapeNode(filename, i) {
   if(nlabel.getAttribute('fontSize') != 12)
     return null
 
-  if(nodeText.indexOf(sep1) == -1 || nodeText.indexOf(sep2) == -1 ) {
+  if(nodeText.indexOf(sepDifficulty) == -1 || nodeText.indexOf(sepEffect) == -1 ) {
     console.warn(nodeText)
     return null
   }
 
-  const split1 = nodeText.split(sep1)
+  const split1 = nodeText.split(sepDifficulty)
   const name = split1[0].trim()
-  const cost = split1[1].split(sep2)[0].trim().split(',').map(e => e.trim())
+  const cost = split1[1].split(sepEffect)[0].trim().split(',').map(e => e.trim())
 
-  const effect_unparsed = split1[1].split(sep2)[1].trim()
+  // parse effects
+  const effect_unparsed = split1[1].split(sepEffect)[1].trim()
   let effect = effect_unparsed
     .split(',')
     .map( e => e
@@ -444,8 +466,7 @@ function parseShapeNode(filename, i) {
       .replace(/(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
       .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный куб:$1')
       // вещества
-      .replace(/(Добыча|Редкие металлы|Трансураны|Наноматериалы|Антиматерия|Метакрис|Экзотическая материя|Экзотматерия|Нейтроний|Кварк-плазма) \+(\d+)/, '$1:$2')
-      .replace(/(Образцы|Экзоты|Аномалия) \+(\d+)/, '$1:$2')
+      .replace(new RegExp(`(${MATERIALS_LIST.join('|')}) \\+(\\d+)`), '$1:$2')
       // Эффекты и бонусы:
       // : индустрия
       .replace(/(Планетарная разведка|Георазведка|Строительство|Пуски|Орбита|Астроинженерия) \+(\d+)/, '$1:$2')
