@@ -664,24 +664,20 @@ function doNodeStat(filename, t) {
   var effects = t.effect,
     cost = t.cost
 
+  if (!stat[filename][t.y]) {
+    /*
+      sum is sum of all param cubes avaliable,
+      cost is full cost of level, 
+      costClear is param-tech-only cost
+    */
+    stat[filename][t.y] = { Общество: 0, Производство: 0, Наука: 0, Свободный: 0, cost: 0, costClear: 0, sum: 0 }
+  }
+
   for (let effect of effects) {
-    if (effect == null)
-      effect = ['Общество', 0]
 
-    if (!stat[filename][t.y]) {
-      /*
-        sum is sum of all param cubes avaliable,
-        cost is full cost of level, 
-        costClear is param-tech-only cost
-      */
-      stat[filename][t.y] = { Общество: 0, Производство: 0, Наука: 0, Свободный: 0, cost: 0, costClear: 0, sum: 0 }
-      stat[filename][t.y][effect[0]] = +effect[1]
+    if(!PARAMLIST_RU.includes(effect[0])) continue
 
-    }
-    else {
-      if(!PARAMLIST_RU.includes(effect[0])) return
-      stat[filename][t.y][effect[0]] += +effect[1]
-    }
+    stat[filename][t.y][effect[0]] += +effect[1]
 
     stat[filename][t.y].sum += +effect[1]
   }
