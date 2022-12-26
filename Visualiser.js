@@ -75,8 +75,6 @@ async function Init() {
       .map(e => parseTechIframe(e))
     )
     .then(_ => {
-      console.log(tech)
-    
       // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
       console.log(listAllWithoutMilitary())
