@@ -42,7 +42,8 @@ const graphmls = {}
 const tech = {}
 const stat = {}
 const inverted = {
-  tech: {}
+  tech: {},
+  alltech: {},
 }
 
 const svg = document.getElementById('svg')
@@ -92,6 +93,20 @@ async function Init() {
       drawTree(i)
     }
     drawTree(TREELIST_NOMIL[0])
+
+    inverted.alltech = Object.assign(...Object.values(inverted.tech))
+
+    for(let i of Object.keys(tech)) {
+      for(let j of Object.values(tech[i])) {
+        // log(j)
+        j.cost
+          .filter(e => e[0] == 'Технология')
+          .forEach(e => {
+            if (!(e[1] in inverted.alltech)) log('unknown tech name here:', j.name, [e[1]])
+          })
+      }
+    }
+
   }),0)
 }
 
@@ -585,7 +600,6 @@ function parseShapeNode(filename, i) {
     , name
     , cost
     , effect
-    , effect_unparsed
     , req: []
     , next: []
     , fullText
