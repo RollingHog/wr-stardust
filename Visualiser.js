@@ -75,6 +75,17 @@ async function Init() {
       .map(e => parseTechIframe(e))
     )
     .then(_ => {
+      // collapse stat bad Y's
+      for (let i of Object.keys(stat)) {
+        const keys =  Object.keys(stat[i])
+        for (let j in keys) {
+          if(!keys[j-1]) continue
+          const delta = keys[j] - keys[j-1]
+          if(delta>0 && delta<10) {
+            log('bad y:', i, keys[j-1], keys[j])
+          }
+        }
+      }
       // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
       console.log(listAllWithoutMilitary())
