@@ -787,7 +787,7 @@
     <node id="n40">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="549.5" x="1210.8332853228762" y="-62.74978303586249"/>
+          <y:Geometry height="62.00000000000006" width="549.5" x="1210.8332853228762" y="-48.00000000000006"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="260.3056640625" x="144.59716796875" y="13.073730468750028">ВОЙНА В КОСМОСЕ<y:LabelModel>
@@ -804,7 +804,7 @@
     <node id="n41">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="836.7315176504628" x="344.1017676724132" y="-62.74978303586249"/>
+          <y:Geometry height="62.00000000000006" width="836.7315176504628" x="344.1017676724132" y="-48.00000000000006"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="334.2685546875" x="251.2314814814814" y="13.073730468750028">ВООРУЖЕНИЕ И ЗАЩИТА<y:LabelModel>
@@ -821,7 +821,7 @@
     <node id="n42">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="549.5" x="-235.3982323275868" y="-62.74978303586249"/>
+          <y:Geometry height="62.00000000000006" width="549.5" x="-235.3982323275868" y="-48.00000000000006"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="218.5" x="165.5" y="13.073730468750028">НАЗЕМНЫЙ БОЙ<y:LabelModel>

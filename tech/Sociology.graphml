@@ -208,7 +208,7 @@
     <node id="n10">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="829.5323596792668" x="51.301329473149735" y="-112.45568711876578"/>
+          <y:Geometry height="62.0" width="829.5323596792668" x="51.301329473149735" y="-111.91137423753145"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.111328125" x="315.7105157771334" y="13.07373046875">ГОСУДАРСТВО<y:LabelModel>
@@ -225,7 +225,7 @@
     <node id="n11">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="839.25" x="904.5928645145539" y="-112.45568711876578"/>
+          <y:Geometry height="62.0" width="839.25" x="904.5928645145539" y="-111.91137423753145"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.9736328125" x="324.63818359375" y="13.07373046875">СОЦИОЛОГИЯ<y:LabelModel>

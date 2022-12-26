@@ -669,7 +669,7 @@
     <node id="n34">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="832.2963686342591" x="794.25" y="-23.66666666666677"/>
+          <y:Geometry height="62.00000000000006" width="832.2963686342591" x="794.25" y="-9.000000000000057"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="138.595703125" x="346.85033275462956" y="13.073730468750028">ГЕНЕТИКА<y:LabelModel>
@@ -686,7 +686,7 @@
     <node id="n35">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="836.7315176504628" x="-72.48151765046282" y="-23.66666666666677"/>
+          <y:Geometry height="62.00000000000006" width="836.7315176504628" x="-72.48151765046282" y="-9.000000000000057"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="218.5634765625" x="309.0840205439814" y="13.073730468750028">ЭКЗОБИОЛОГИЯ<y:LabelModel>
