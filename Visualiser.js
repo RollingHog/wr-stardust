@@ -810,7 +810,7 @@ const draw = {
         return
     }
 
-    draw.SVG.Text(t.nodeCenter, t.name, t.fullText, t.id, box.getBBox(), t.fontSize)
+    draw.SVG.Text(t.nodeCenter, t.name, t.fullText, t.id, t.fontSize)
 
     for (let i of t.next) {
       connectNodes(t, tech[treeName][i])
@@ -927,7 +927,7 @@ const draw = {
       el.setAttributeNS(null, 'fill', 'black')
       el.setAttributeNS(null, 'text-anchor', 'center')
       // center right
-      el.setAttributeNS(null, 'font-size', '12')
+      el.setAttributeNS(null, 'font-size', fontSize || '12')
       getEl('svg').appendChild(el)
 
       const arr = fullText.split('\n')
@@ -937,7 +937,9 @@ const draw = {
       // let acc = ''
       for (let i in arr) {
         if (i == 0) {
-          el.innerHTML = `<tspan id="${id}_t0" dx='0' dy="-${arr.length == 3 ? '0.6' : '1.4'}em">${arr[i]}</tspan>`
+          let dy = arr.length == 3 ? '-0.6' : '-1.4'
+          if(fontSize) dy = '+0.35'
+          el.innerHTML = `<tspan id="${id}_t0" dx='0' dy="${dy}em">${arr[i]}</tspan>`
         }
         else {
           el.innerHTML += `<tspan id="${id}_t${i}" dx='-${getEl(id + '_t' + (i - 1)).getBBox().width / 2}' dy="1.2em">${arr[i]}</tspan>`
