@@ -708,7 +708,7 @@
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="247.216796875" x="6.2666015625" y="-0.40234375">Теория мышления
 Сложность: 5
-Эффект: особое: +1 куб к взаимодействию 
+Эффект:  :+1 куб к взаимодействию 
 с нечеловеческим разумом<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -1216,7 +1216,7 @@
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="242.306640625" x="8.7216796875" y="-0.40234375">Трансцендентная дипломатия
 Сложность: 7
-Эффект: особое: договороспособность 
+Эффект:  :договороспособность 
 при общении с трансцендентным разумом<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>

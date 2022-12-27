@@ -87,7 +87,7 @@
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="165.44921875" x="47.150390625" xml:space="preserve" y="-0.4023437499999716">Оценка биосферы
 Сложность: 1, образцы (1)
-Эффект: особое: +1 куб 
+Эффект:  :+1 куб 
 для изучения местной жизни<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -127,7 +127,7 @@
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="211.2578125" x="24.24609375" xml:space="preserve" y="-0.40234375">Оценка свойств местных организмов
 Сложность: 2
-Эффект: особое: +1 куб 
+Эффект:  :+1 куб 
 для использования местной жизни<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -206,7 +206,7 @@
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="214.01171875" x="22.869140625" xml:space="preserve" y="-0.40234375">Адаптация земных растений
 Сложность: 3, непривычная среда (3)
-Эффект: особое: убирает 
+Эффект:  :убирает 
 условие неподходящей почвы<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="hexagon"/>
         </y:ShapeNode>
@@ -247,7 +247,7 @@
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="200.37109375" x="29.689453125" xml:space="preserve" y="-0.40234375">Ксенопитомник
 Сложность: 2, образцы (3)
-Эффект: особое: +2 для любых 
+Эффект:  :+2 для любых 
 взаимодействий с местной жизнью<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
@@ -347,7 +347,7 @@
     <node id="n25">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1095.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="251.048828125" x="4.3505859375" xml:space="preserve" y="6.9482421875">Строительство миров
@@ -412,7 +412,7 @@
     <node id="n30">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1187.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="174.935546875" x="42.4072265625" xml:space="preserve" y="-0.40234375">Бесконечная экспансия
@@ -698,12 +698,12 @@
 К сведению: энергоёмкость около 1е30, зарядка от сферы Дайсона - полчаса. Должна была бы тащить на себе несколько гигатонн антиматерии.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1187.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1279.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="156.677734375" x="51.5361328125" xml:space="preserve" y="-0.40234375">Станция геоглиптики
 Сложность: 8, 4 слота
-Эффект: особое: контроль 
+Эффект:  :контроль 
 над Гористостью<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="trapezoid2"/>
         </y:ShapeNode>
@@ -966,7 +966,7 @@
     <node id="n73">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1279.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="602.0371505376345" y="1287.0030070126227"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="106.73828125" x="76.505859375" xml:space="preserve" y="6.9482421875">Кузница миров
@@ -1083,7 +1083,7 @@
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.146484375" x="19.8017578125" xml:space="preserve" y="-0.40234375">Станция контроля погоды
 Сложность: 4, непривычная среда (1)
-Эффект: особое: убирает условие 
+Эффект:  :убирает условие 
 непривычной среды рядом с колонией<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
@@ -1199,7 +1199,7 @@
     <node id="n90">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1279.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="195.044921875" x="32.3525390625" xml:space="preserve" y="-0.40234375">Рудные бактерии
@@ -1620,7 +1620,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e41" source="n25" target="n30">
+    <edge id="e41" source="n54" target="n53">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1630,7 +1630,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e42" source="n54" target="n25">
+    <edge id="e42" source="n28" target="n41">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1640,7 +1640,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e43" source="n54" target="n53">
+    <edge id="e43" source="n2" target="n55">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1650,7 +1650,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e44" source="n28" target="n41">
+    <edge id="e44" source="n57" target="n56">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1660,7 +1660,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e45" source="n2" target="n55">
+    <edge id="e45" source="n14" target="n57">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1670,7 +1670,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e46" source="n57" target="n56">
+    <edge id="e46" source="n7" target="n74">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1680,7 +1680,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e47" source="n14" target="n57">
+    <edge id="e47" source="n32" target="n77">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1690,7 +1690,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e48" source="n7" target="n74">
+    <edge id="e48" source="n76" target="n54">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1700,7 +1700,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e49" source="n32" target="n77">
+    <edge id="e49" source="n29" target="n78">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1710,7 +1710,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e50" source="n76" target="n54">
+    <edge id="e50" source="n16" target="n75">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1720,7 +1720,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e51" source="n29" target="n78">
+    <edge id="e51" source="n75" target="n76">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1730,7 +1730,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e52" source="n16" target="n75">
+    <edge id="e52" source="n7" target="n10">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1740,7 +1740,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e53" source="n75" target="n76">
+    <edge id="e53" source="n10" target="n18">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1750,7 +1750,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e54" source="n7" target="n10">
+    <edge id="e54" source="n18" target="n11">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1760,7 +1760,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e55" source="n10" target="n18">
+    <edge id="e55" source="n18" target="n27">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1770,7 +1770,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e56" source="n18" target="n11">
+    <edge id="e56" source="n18" target="n19">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1780,7 +1780,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e57" source="n18" target="n27">
+    <edge id="e57" source="n44" target="n12">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1790,7 +1790,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e58" source="n18" target="n19">
+    <edge id="e58" source="n10" target="n79">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1800,7 +1800,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e59" source="n44" target="n12">
+    <edge id="e59" source="n2" target="n4">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1810,7 +1810,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e60" source="n10" target="n79">
+    <edge id="e60" source="n46" target="n16">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1820,7 +1820,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e61" source="n2" target="n4">
+    <edge id="e61" source="n10" target="n9">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1830,7 +1830,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e62" source="n46" target="n16">
+    <edge id="e62" source="n12" target="n80">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1840,7 +1840,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e63" source="n10" target="n9">
+    <edge id="e63" source="n80" target="n46">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1850,7 +1850,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e64" source="n12" target="n80">
+    <edge id="e64" source="n80" target="n81">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1860,7 +1860,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e65" source="n80" target="n46">
+    <edge id="e65" source="n75" target="n82">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1870,7 +1870,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e66" source="n80" target="n81">
+    <edge id="e66" source="n3" target="n84">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1880,7 +1880,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e67" source="n75" target="n82">
+    <edge id="e67" source="n22" target="n42">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1890,7 +1890,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e68" source="n3" target="n84">
+    <edge id="e68" source="n15" target="n85">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1900,7 +1900,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e69" source="n22" target="n42">
+    <edge id="e69" source="n17" target="n88">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1910,7 +1910,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e70" source="n15" target="n85">
+    <edge id="e70" source="n41" target="n31">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1920,7 +1920,8 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e71" source="n17" target="n88">
+    <edge id="e71" source="n30" target="n90">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1930,7 +1931,8 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e72" source="n41" target="n31">
+    <edge id="e72" source="n54" target="n30">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1940,7 +1942,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e73" source="n30" target="n90">
+    <edge id="e73" source="n30" target="n25">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
