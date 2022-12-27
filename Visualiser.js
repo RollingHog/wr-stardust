@@ -812,7 +812,8 @@ const draw = {
         draw.SVG.Octagon(t)
         break
       case 'ellipse':
-        return
+        draw.SVG.Rect(t)
+        break
       default:
         error('drawing not implemented for type ' + t.type)
         return
