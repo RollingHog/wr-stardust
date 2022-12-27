@@ -188,7 +188,7 @@
     <node id="n13">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="780.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="871.9999999999999"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="181.427734375" x="39.1611328125" xml:space="preserve" y="6.9482421875">Военный ИИ
@@ -651,7 +651,7 @@
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="207.431640625" x="26.1591796875" xml:space="preserve" y="-0.40234375">Десантные капсулы
 Сложность: 4
-Эффект:  :возможна высадка
+Эффект: особое: возможна высадка
 без подавления МО и ПКО<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="trapezoid"/>
         </y:ShapeNode>
@@ -741,7 +741,7 @@
     <node id="n55">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="348.53691668861705" y="596.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="348.53691668861705" y="871.9999999999999"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="145.92578125" x="56.912109375" xml:space="preserve" y="6.9482421875">Живой металл
@@ -1243,7 +1243,7 @@
     <node id="n95">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="504.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="779.9999999999999"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="184.19921875" x="37.775390625" xml:space="preserve" y="6.9482421875">Боевое применение наномашин
@@ -1310,7 +1310,7 @@
     <node id="n100">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="924.5601010057467" y="596.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="924.5601010057467" y="871.9999999999999"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="131.833984375" x="63.9580078125" xml:space="preserve" y="-0.40234375">Нанобоеголовки
@@ -1410,7 +1410,7 @@
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="135.54296875" x="62.103515625" xml:space="preserve" y="-0.40234375">Военный НИИ
 Сложность: 4
-Эффект: +2 к ветви 
+Эффект: +1 к ветви 
 "Вооружение и защита"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
@@ -1432,11 +1432,11 @@
     <node id="n109">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="348.5369166886171" y="136.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="348.53691668861705" y="136.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="215.705078125" x="22.0224609375" xml:space="preserve" y="-0.4023437499999716">Умное оружие
-Сложность: 1, тех. Нейроинтерфейсы
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="156.912109375" x="51.4189453125" xml:space="preserve" y="-0.4023437499999716">Умное оружие
+Сложность: 1
 Эффект: Атака +1, 
 против нескольких отрядов<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -2146,7 +2146,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e69" source="n90" target="n95">
+    <edge id="e69" source="n103" target="n105">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2156,7 +2156,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e70" source="n95" target="n103">
+    <edge id="e70" source="n46" target="n47">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2166,7 +2166,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e71" source="n103" target="n105">
+    <edge id="e71" source="n25" target="n106">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2176,7 +2176,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e72" source="n46" target="n47">
+    <edge id="e72" source="n103" target="n107">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2186,7 +2186,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e73" source="n105" target="n13">
+    <edge id="e73" source="n4" target="n108">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2196,7 +2196,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e74" source="n25" target="n106">
+    <edge id="e74" source="n2" target="n110">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2206,7 +2206,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e75" source="n103" target="n107">
+    <edge id="e75" source="n110" target="n8">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2216,7 +2216,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e76" source="n4" target="n108">
+    <edge id="e76" source="n109" target="n80">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2226,7 +2226,8 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e77" source="n2" target="n110">
+    <edge id="e77" source="n110" target="n109">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2236,7 +2237,8 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e78" source="n110" target="n8">
+    <edge id="e78" source="n95" target="n13">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2246,17 +2248,8 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e79" source="n2" target="n109">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e80" source="n109" target="n80">
+    <edge id="e79" source="n105" target="n95">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
