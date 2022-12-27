@@ -565,7 +565,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       // эффекты, дающие великих людей
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
       // базовые вещи
-      .replace(/(выдаётся при высадке)/, ALL_RIGHT)
+      .replace(/(выдаётся при высадке|выдаётся на старте)/, ALL_RIGHT)
       .replace(/(немедленно)/, ALL_RIGHT)
       .replace(/(электростанция|наземное)/, ALL_RIGHT)
       .replace(/(неуязвимость к обычным болезням|взлом систем связи невозможен)/, ALL_RIGHT)
