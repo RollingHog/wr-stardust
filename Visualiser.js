@@ -557,7 +557,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/\+?(\d+) очк(о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
       .replace(/(Защита колонии|планетарный щит|Мины) \+?(\d+)/, '$1:$2')
       .replace(/Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
-      .replace(/(Двигатель) \+?(\d+)/, '$1:$2')
+      .replace(/(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
       // типы урона, эффекты оружия
       .replace(new RegExp(`(${KEYWORDS.DAMAGE_TYPES.join('|')})`), '$1:$2')
       .replace(new RegExp(`(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
