@@ -217,9 +217,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269463" y="337.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="232.650390625" x="13.5498046875" xml:space="preserve" y="6.9482421875">Физика элементарных частиц
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="235.984375" x="11.8828125" xml:space="preserve" y="6.9482421875">Физика элементарных частиц
 Сложность: 3
-Эффект: +1 к изучению наноматериалов<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: :+1 к изучению наноматериалов<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -666,7 +666,7 @@
     <node id="n49">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-646.7882693486238" y="669.7855932678821"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="-249.65129541017558" y="796.9999999999999"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="226.826171875" x="16.4619140625" xml:space="preserve" y="6.9482421875">Самосдерживаемая ТЯЭС
@@ -954,7 +954,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
     <node id="n71">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269469" y="1165.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="45.63366106925011" y="1165.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="159.173828125" x="50.2880859375" xml:space="preserve" y="6.9482421875">Произвольное искривление
@@ -1421,9 +1421,10 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
           <y:Geometry height="62.00000000000006" width="259.75" x="333.3255202726947" y="1164.9999999999998"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="213.173828125" x="23.2880859375" xml:space="preserve" y="6.9482421875">Гиперволновой радар
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="173.751953125" x="42.9990234375" xml:space="preserve" y="-0.40234375">Гиперволновая связь
 Сложность: 6
-Эффект: Атака флотов +3, в системе<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: :неперехватываямая
+ FTL-связь<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
@@ -1497,6 +1498,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
       </data>
     </node>
     <node id="n114">
+      <data key="d5" xml:space="preserve"><![CDATA["На данный момент движение по ул. Козлова одностороннее. На проспекте Земли на движение к центру выделено две встречных полосы..."]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222315" y="613.0"/>
@@ -1525,30 +1527,17 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
     <node id="n116">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="333.3255202726947" y="1256.9999999999998"/>
-          <y:Fill color="#99CCFF" transparent="false"/>
-          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="129.90625" x="64.921875" xml:space="preserve" y="6.9482421875">Теория немыслимого
-Сложность: 8
-Эффект: Аномалия +4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="rectangle"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n117">
-      <data key="d6">
-        <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.1744797273053" y="705.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="257.294921875" x="1.2275390625" xml:space="preserve" y="6.9482421875">Реактор Казимира
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="257.294921875" x="1.2275390625" xml:space="preserve" y="6.9482421875">Реакторы Казимира
 Сложность: 4
 Эффект: +2 очка распределения для флотов<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n118">
+    <node id="n117">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-242.05819813419447" y="1073.0"/>
@@ -1557,6 +1546,32 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="226.826171875" x="16.4619140625" xml:space="preserve" y="6.9482421875">Стазис
 Сложность: 6, экзотическая материя (1)
 Эффект: +1 свободный куб<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n118">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="333.32552027269463" y="1256.9999999999998"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
+          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="137.728515625" x="61.0107421875" xml:space="preserve" y="6.9482421875">Телепортация
+Сложность: 8
+Эффект: :телепортация<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n119">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="-242.05819813419447" y="1165.0"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
+          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="129.90625" x="64.921875" xml:space="preserve" y="6.9482421875">Теория немыслимого
+Сложность: 8
+Эффект: Аномалия +4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -2514,7 +2529,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e95" source="n71" target="n116">
+    <edge id="e95" source="n48" target="n68">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2525,7 +2540,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e96" source="n48" target="n68">
+    <edge id="e96" source="n32" target="n79">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2536,7 +2551,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e97" source="n32" target="n79">
+    <edge id="e97" source="n46" target="n9">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2547,7 +2562,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e98" source="n46" target="n9">
+    <edge id="e98" source="n21" target="n116">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2558,7 +2573,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e99" source="n21" target="n117">
+    <edge id="e99" source="n35" target="n117">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2569,7 +2584,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e100" source="n35" target="n118">
+    <edge id="e100" source="n27" target="n106">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2580,7 +2595,29 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e101" source="n27" target="n106">
+    <edge id="e101" source="n71" target="n118">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e102" source="n107" target="n119">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e103" source="n103" target="n49">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
