@@ -156,6 +156,7 @@ function countSuccessPossibility(treshold, nOfCubes) {
 function countTechPrices() {
   let cnt = 0
   for (let i of Object.keys(tech)) {
+    if(i == 'Military') continue
     for(let j of Object.values(tech[i])) {
       const lvl = techLevels[i].indexOf(j.y.toString())+1
       const mult = difficultyMults[lvl+1]
