@@ -111,19 +111,7 @@ async function Init() {
       .map(e => parseTechIframe(e))
     )
     .then(_ => {
-      // collapse stat bad Y's
-      for (let i of Object.keys(stat)) {
-        const keys =  Object.keys(stat[i])
-        for (let j in keys) {
-          if(!techLevels[i].includes(keys[j])) techLevels[i].push(keys[j])
-          if(!keys[j-1]) continue
-          const delta = keys[j] - keys[j-1]
-          if(delta>0 && delta<10) {
-            console.warn('bad y:', i, keys[j-1], keys[j])
-          }
-        }
-      }
-      Object.keys( i => techLevels[i].sort())
+      Analysis.reportBadY()
 
       // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
@@ -137,22 +125,12 @@ async function Init() {
 
       inverted.alltech = Object.assign(...Object.values(inverted.tech))
 
-      for (let i of Object.keys(tech)) {
-        for (let j of Object.values(tech[i])) {
-          // log(j)
-          j.cost
-            .filter(e => e[0] == 'Технология')
-            .forEach(e => {
-              if (!(e[1] in inverted.alltech)) console.warn('unknown tech name here:', i, j.name, [e[1]])
-            })
-        }
-      }
+      Analysis.searchBadTechRefs()
 
-      countTechPrices()
+      Analysis.countTechPrices()
+      log(statAllEffects)
 
-      let sum=0
-      for(let i of Object.keys(tech)) sum+=(Object.keys(tech[i]).length)
-      log('Total tech count', sum)
+      Analysis.totalTechCount()
     })
   }, 0)
 }
@@ -172,34 +150,69 @@ function countSuccessPossibility(treshold, nOfCubes) {
   return +(wins / n).toFixed(3)
 }
 
-function countTechPrices() {
-  let cnt = 0
-  for (let i of Object.keys(tech)) {
-    if(i == 'Military') continue
-    for(let j of Object.values(tech[i])) {
-      const lvl = techLevels[i].indexOf(j.y.toString())+1
-      const mult = difficultyMults[lvl+1]
-      let d = +j.cost[0][1]/+j.effect[0][1]
-      if(!PARAMLIST_RU.includes(j.effect[0][0])) {
-        d *= 2
-      }
-      if(d && mult) {
-        let p = (d/mult).toFixed(2)
-        if(p>1.5 || p<0.6) {
-          cnt++
-          log(i, j.name, j.effect[0][0], j.effect[0][1], p, p>1?'ДОРОГО':"ДЕШЕВО")
+const Analysis = {
+  // statistics and various checks
+  countTechPrices() {
+    let cnt = 0
+    for (let i of Object.keys(tech)) {
+      if(i == 'Military') continue
+      for(let j of Object.values(tech[i])) {
+        const lvl = techLevels[i].indexOf(j.y.toString())+1
+        const mult = difficultyMults[lvl+1]
+        let d = +j.cost[0][1]/+j.effect[0][1]
+        if(!PARAMLIST_RU.includes(j.effect[0][0])) {
+          d *= 2
+        }
+        if(d && mult) {
+          let p = (d/mult).toFixed(2)
+          if(p>1.5 || p<0.6) {
+            cnt++
+            log(i, j.name, j.effect[0][0], j.effect[0][1], p, p>1?'ДОРОГО':"ДЕШЕВО")
+          }
         }
       }
     }
-  }
-  log('Bad prices:', cnt)
+    log('Bad prices:', cnt)
+  },
+  reportBadY() {
+    // collapse stat bad Y's
+    for (let i of Object.keys(stat)) {
+      const keys =  Object.keys(stat[i])
+      for (let j in keys) {
+        if(!techLevels[i].includes(keys[j])) techLevels[i].push(keys[j])
+        if(!keys[j-1]) continue
+        const delta = keys[j] - keys[j-1]
+        if(delta>0 && delta<10) {
+          console.warn('bad y:', i, keys[j-1], keys[j])
+        }
+      }
+    }
+    Object.keys( i => techLevels[i].sort())
+  },
+  searchBadTechRefs() {
+    for (let i of Object.keys(tech)) {
+      for (let j of Object.values(tech[i])) {
+        j.cost
+          .filter(e => e[0] == 'Технология')
+          .forEach(e => {
+            if (!(e[1] in inverted.alltech)) console.warn('unknown tech name here:', i, j.name, [e[1]])
+          })
+      }
+    }
+  },
+  totalTechCount() {
+    let sum=0
+    for(let i of Object.keys(tech)) sum+=(Object.keys(tech[i]).length)
+    log('Total tech count', sum)
+  },
 }
 
-function tspanHighlight() {
+
+
+function tspanHighlightOnClick() {
   for (const i of document.querySelectorAll('tspan')) {
     i.onclick = function(e) {
       getEl('highlight_css').innerHTML = `.${e.target.className.baseVal} { fill: orange }`
-      log()
     }        
   }
 }
@@ -213,10 +226,10 @@ function drawTree(tree_name) {
   if (cache[tree_name]) {
     svg.innerHTML = cache[tree_name].html
     svg.setAttribute("viewBox", cache[tree_name].viewBox)
-    setTimeout(tspanHighlight,1)
+    setTimeout(tspanHighlightOnClick,1)
     return
   }
-  tspanHighlight()
+  tspanHighlightOnClick()
 
   svg.innerHTML = SVG_DEFAULT
 
@@ -330,121 +343,125 @@ async function parseTechIframe(tree_name) {
   )
 }
 
-async function parseDocHTML(rawHTML) {
-  var l
-  const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
-  l = html
-    .filter(e => e.tagName !== 'BR')
-    .map(({ tagName, innerText, innerHTML }) => ({ tagName, innerText, innerHTML }))
-  // const CONTENT_TAGS = ['DIV', 'P', 'UL']
-  let hs = []
-  let content = []
-  let interm = {}
-  let res = {}
-  let t = {}
-  // doesnt work
-  for (let i of l) {
-    if (i.tagName.startsWith('H')) {
-      // header
-      if (!hs.length) {
+const parseDoc = {
+  async HTML(rawHTML) {
+    var l
+    const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
+    l = html
+      .filter(e => e.tagName !== 'BR')
+      .map(({ tagName, innerText, innerHTML }) => ({ tagName, innerText, innerHTML }))
+    // const CONTENT_TAGS = ['DIV', 'P', 'UL']
+    let hs = []
+    let content = []
+    let interm = {}
+    let res = {}
+    let t = {}
+    // doesnt work
+    for (let i of l) {
+      if (i.tagName.startsWith('H')) {
+        // header
+        if (!hs.length) {
+          hs.push(i)
+          continue
+        }
+        let last = hs[hs.length - 1]
+        if (last.tagName > i.tagName) {
+          // new H is lower
+        } else if (last.tagName == i.tagName) {
+          // new H is same
+          interm[last.innerText] = content
+          content = []
+        } else if (last.tagName < i.tagName) {
+          // new H is higher order
+          interm[last.innerText] = content
+          content = []
+  
+          let prelast
+          while (hs.length) {
+            prelast = hs.pop()
+            if (prelast.tagName < last.tagName) {
+              t = Object.assign({}, interm)
+              interm = {}
+              interm[prelast.innerText] = t
+              break
+            }
+          }
+          hs.push(prelast)
+        }
         hs.push(i)
+      } else {
+        content.push(i)
+      }
+    }
+    log(interm)
+    return res
+  },
+  
+  text(raw) {
+    // old parser
+  
+    let players = raw.split('Данные экспедиции')
+    players.shift()
+    players.shift()
+    for (let i of players) {
+      const player = {}
+      var t = i
+        .replace(/Изученные технологии/, 'SPLITME')
+        .replace(/Общеимперские бонусы/, 'SPLITME')
+        .replace(/Квента/, 'SPLITME')
+        .replace(/Здания\s*\n\s*Наземные/, 'SPLITME')
+        //4 - buildings
+        .replace(/Орбитальные\n/, 'SPLITME')
+        //5 - local_projects
+        .replace(/Планетарные проекты\n/, 'SPLITME')
+        .split('SPLITME')
+  
+      player.name = t[0].split('Трип')[0].slice(5, -1)
+  
+      // EXCLUDE_PLAYERS.includes(player.name)
+      if (player.name.indexOf('-') == 0) {
+        log('marked as excluded, skipping', player.name)
         continue
       }
-      let last = hs[hs.length - 1]
-      if (last.tagName > i.tagName) {
-        // new H is lower
-      } else if (last.tagName == i.tagName) {
-        // new H is same
-        interm[last.innerText] = content
-        content = []
-      } else if (last.tagName < i.tagName) {
-        // new H is higher order
-        interm[last.innerText] = content
-        content = []
-
-        let prelast
-        while (hs.length) {
-          prelast = hs.pop()
-          if (prelast.tagName < last.tagName) {
-            t = Object.assign({}, interm)
-            interm = {}
-            interm[prelast.innerText] = t
-            break
-          }
-        }
-        hs.push(prelast)
+  
+      if (!getEl(player.name) || !getEl(player.name).checked) {
+        log(player.name, 'not marked to draw, skipping')
+        continue
       }
-      hs.push(i)
+  
+      var buildings = t[4]
+        .replace(/\([^)]+\)/g, '')
+        .split(',')
+        .map(e => e.trim())
+        .filter(e => e != '')
+      // .map(e => e.toLowerCase())
+  
+      var local_projects = t[6]
+        .split('\n')
+        .map(e => e.trim())
+        .filter(e => e != '')
+  
+      // if(!confirm(player+'?')) continue
+  
+      log({ t, buildings, local_projects })
+      parseTechTable(player.name, t[1], buildings, local_projects)
+    }
+  },
+  
+  // eslint-disable-next-line no-unused-vars
+  async file(event) {
+    let raw
+    const MIME_HTML = 'text/html'
+    const rawClipboardObj = (await navigator.clipboard.read())[0]
+  
+    // eslint-disable-next-line no-constant-condition
+    if (rawClipboardObj.types.includes(MIME_HTML) && false) {
+      raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
+      parseDoc.HTML(raw)
     } else {
-      content.push(i)
+      raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
+      parseDoc.text(raw)
     }
-  }
-  log(interm)
-  return res
-}
-
-function parseDocText(raw) {
-  // old parser
-
-  let players = raw.split('Данные экспедиции')
-  players.shift()
-  players.shift()
-  for (let i of players) {
-    const player = {}
-    var t = i
-      .replace(/Изученные технологии/, 'SPLITME')
-      .replace(/Общеимперские бонусы/, 'SPLITME')
-      .replace(/Квента/, 'SPLITME')
-      .replace(/Здания\s*\n\s*Наземные/, 'SPLITME')
-      //4 - buildings
-      .replace(/Орбитальные\n/, 'SPLITME')
-      //5 - local_projects
-      .replace(/Планетарные проекты\n/, 'SPLITME')
-      .split('SPLITME')
-
-    player.name = t[0].split('Трип')[0].slice(5, -1)
-
-    // EXCLUDE_PLAYERS.includes(player.name)
-    if (player.name.indexOf('-') == 0)
-      continue
-
-    if (!getEl(player.name) || !getEl(player.name).checked) {
-      log(player.name, 'not marked to draw, skipping')
-      continue
-    }
-
-    var buildings = t[4]
-      .replace(/\([^)]+\)/g, '')
-      .split(',')
-      .map(e => e.trim())
-      .filter(e => e != '')
-    // .map(e => e.toLowerCase())
-
-    var local_projects = t[6]
-      .split('\n')
-      .map(e => e.trim())
-      .filter(e => e != '')
-
-    // if(!confirm(player+'?')) continue
-
-    log({ t, buildings, local_projects })
-    parseTechTable(player.name, t[1], buildings, local_projects)
-  }
-}
-
-// eslint-disable-next-line no-unused-vars
-async function parseDocFile(event) {
-  let raw
-  const MIME_HTML = 'text/html'
-  const rawClipboardObj = (await navigator.clipboard.read())[0]
-
-  // eslint-disable-next-line no-constant-condition
-  if (rawClipboardObj.types.includes(MIME_HTML) && false) {
-    raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
-    parseDocHTML(raw)
-  } else {
-    raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
-    parseDocText(raw)
   }
 }
 
