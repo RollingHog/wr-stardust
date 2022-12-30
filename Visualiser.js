@@ -127,7 +127,7 @@ async function Init() {
 
       Analysis.searchBadTechRefs()
 
-      Analysis.countTechPrices()
+      // Analysis.countTechPrices()
       log(statAllEffects)
 
       Analysis.totalTechCount()
