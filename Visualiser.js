@@ -382,7 +382,7 @@ const parseDoc = {
     }
     res[last.user] = interm.user
     for(let i in res)
-    parseDoc.techTableHTML(i, i['Изученные технологии'])
+    parseDoc.techTableHTML(i, res[i])
     return res
   },
   
@@ -505,10 +505,21 @@ const parseDoc = {
       log('unrecognized tokens for buildings: ' + built)
   },
 
-  techTableHTML(playerName, techTable, buildings, localProjs) {
-
+  techTableHTML(playerName, obj) {
+    const tech5TableToObj = el =>  
+      Object.fromEntries(Array.from(el.rows).map(e=>[e.children[0].innerText, e.children[1].innerText]))
+    const data = {
+      techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
+      buildings: obj.Здания.children[0].rows[0].children[1].innerText,
+      orbital: obj.Здания.children[0].rows[1].children[1].innerText,
+      localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
+    }
+    // foo = data
+    log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
   }
 }
+
+var foo
 
 // eslint-disable-next-line no-unused-vars
 function saveSVG(filename) {
