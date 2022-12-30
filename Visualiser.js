@@ -422,7 +422,7 @@ const parseDoc = {
       // if(!confirm(player+'?')) continue
   
       log({ t, buildings, local_projects })
-      parseTechTable(player.name, t[1], buildings, local_projects)
+      this.techTable(player.name, t[1], buildings, local_projects)
     }
   },
   
@@ -440,60 +440,62 @@ const parseDoc = {
       raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
       this.lastResult = parseDoc.text(raw)
     }
-  }
-}
+  },
 
-function parseTechTable(player, raw, buildings, local_projects) {
-  //may be empty
-  var res = raw.split('\n')
-    .filter(e => e != '')
-    .filter((_, i) => i % 2)
-    .map(e =>
-      e.split(',')
-        .map(e => e.replace(/(^\s+|\s+$)/g, ''))
-        .filter(e => e != '')
-      //  .map(e => e.toLowerCase())
+  techTable(player, raw, buildings, local_projects){
+    //may be empty
+    var res = raw.split('\n')
+      .filter(e => e != '')
+      .filter((_, i) => i % 2)
+      .map(e =>
+        e.split(',')
+          .map(e => e.replace(/(^\s+|\s+$)/g, ''))
+          .filter(e => e != '')
+        //  .map(e => e.toLowerCase())
+      )
+  
+    res = TREELIST.map((e, i) =>
+      [e, res[i]]
     )
-
-  res = TREELIST.map((e, i) =>
-    [e, res[i]]
-  )
-  res = new Map(res)
-  res = Object.fromEntries(res)
-  // log(res)
-
-  let built = buildings
-    .concat(local_projects)
-
-  for (let i of TREELIST) {
-    drawTree(i)
-    const studied = res[i]
-
-    // built = 
-    highlightStudiedTech(i, studied, built)
-
-    const withoutReqires = Object.values(tech[i])
-      .filter(e => e.req.length == 0)
-      .map(e => e.id)
-
-    // TODO doesn't work
-    // eslint-disable-next-line no-unused-vars
-    const avaliableTech = studied
-      .map(e => inverted.tech[i][e])
-      .filter(e => e)
-      .concat(withoutReqires)
-      .map(e => tech[i][e].name)
-      .filter((elem, pos, arr) => arr.indexOf(elem) == pos)
-    //TODO make_array_unique() func
-
-    // log(player, {avaliableTech})
-
-    saveSvgAsPng(svg, `${player} ${i}.png`)
-  }
-
-  if (built.length)
-    log('unrecognized tokens for buildings: ' + built)
+    res = new Map(res)
+    res = Object.fromEntries(res)
+    // log(res)
+  
+    let built = buildings
+      .concat(local_projects)
+  
+    for (let i of TREELIST) {
+      drawTree(i)
+      const studied = res[i]
+  
+      // built = 
+      highlightStudiedTech(i, studied, built)
+  
+      const withoutReqires = Object.values(tech[i])
+        .filter(e => e.req.length == 0)
+        .map(e => e.id)
+  
+      // TODO doesn't work
+      // eslint-disable-next-line no-unused-vars
+      const avaliableTech = studied
+        .map(e => inverted.tech[i][e])
+        .filter(e => e)
+        .concat(withoutReqires)
+        .map(e => tech[i][e].name)
+        .filter((elem, pos, arr) => arr.indexOf(elem) == pos)
+      //TODO make_array_unique() func
+  
+      // log(player, {avaliableTech})
+  
+      saveSvgAsPng(svg, `${player} ${i}.png`)
+    }
+  
+    if (built.length)
+      log('unrecognized tokens for buildings: ' + built)
+  },
 }
+
+// function techTable() 
 
 // eslint-disable-next-line no-unused-vars
 function saveSVG(filename) {
