@@ -355,23 +355,28 @@ const parseDoc = {
     // const CONTENT_TAGS = ['DIV', 'P', 'UL']
     let res = {}
     let interm = {}
-    let lastH1 = null
-    let lastH = null
+    let last = {
+      H: null,
+      H1: null,
+      H2: null,
+    }
     for(let i in arr) {
       let e = arr[i]
       if(e.tagName == 'H1') {
-        if(lastH1) res[lastH1] = interm
-        lastH1 = e.innerText
+        if(last.H1) res[last.H1] = interm
+        last.H1 = e.innerText
         interm = {}
         continue
       }
       if(e.tagName.match(/H\d/)) {
-        lastH = e.innerText
+        last.H = e.innerText
         continue
       }
-      interm[lastH] = e.el
+      interm[last.H] = e.el
     }
-    res[lastH1] = interm
+    res[last.H1] = interm
+    for(let i in res)
+    parseDoc.techTableHTML(i, i['Изученные технологии'])
     return res
   },
   
@@ -493,6 +498,10 @@ const parseDoc = {
     if (built.length)
       log('unrecognized tokens for buildings: ' + built)
   },
+
+  techTableHTML(playerName, techTable, buildings, localProjs) {
+
+  }
 }
 
 // eslint-disable-next-line no-unused-vars
