@@ -74,7 +74,7 @@ async function Init() {
       await Promise.all(iframes.map(i => 
         new Promise((resolve) => {
           i.onload = resolve
-          i.src = i.getAttribute('src').replace('_', '')
+          i.src = i.getAttribute('src2')
         })
       ))
   }
