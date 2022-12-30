@@ -98,7 +98,7 @@ async function Init() {
     } else {
       // non-local, try to fetch data
       const xmlText = await fetch(src).then(e=>e.text())
-      graphmls[i] = parser.parseFromString(xmlText, 'text/xml').querySelector('graph')
+      graphmls[i] = parser.parseFromString(xmlText, 'text/xml')
     }
   }
 
