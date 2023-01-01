@@ -892,15 +892,6 @@ function listAllWithoutMilitary() {
   return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
 }
 
-function connectNodes(n1, n2) {
-  draw.SVG.Line(
-    n1.x + n1.w / 2
-    , n1.y + n1.h / 2
-    , n2.x + n2.w / 2
-    , n2.y + n2.h / 2
-  )
-}
-
 const SVG_NS = "http://www.w3.org/2000/svg"
 const POLYGON_DELTA = 20
 
@@ -941,8 +932,17 @@ const draw = {
     draw.SVG.Text(t.nodeCenter, t.name, t.fullText, t.id, t.fontSize)
 
     for (let i of t.next) {
-      connectNodes(t, tech[treeName][i])
+      this.connectNodes(t, tech[treeName][i])
     }
+  },
+
+  connectNodes(n1, n2) {
+    draw.SVG.Line(
+      n1.x + n1.w / 2
+      , n1.y + n1.h / 2
+      , n2.x + n2.w / 2
+      , n2.y + n2.h / 2
+    )
   },
 
   SVG: {
