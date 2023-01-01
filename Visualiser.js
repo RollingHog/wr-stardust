@@ -205,9 +205,11 @@ const Analysis = {
     for(let i of Object.keys(tech)) sum+=(Object.keys(tech[i]).length)
     log('Total tech count', sum)
   },
+
+  filterObjectByDict(obj, dict) {
+    return Object.fromEntries(Object.entries(obj).filter(([key]) => dict.includes(key)))
+  }
 }
-
-
 
 function tspanHighlightOnClick() {
   for (const i of document.querySelectorAll('tspan')) {
@@ -600,6 +602,11 @@ const KEYWORDS = {
     "Политика",
     "Устранение последствий",
     "Осуждение",
+    // военные
+    "Конверсия",
+    "Регенерация",
+    "Ремонт (?:армий|флотов)",
+    "Бомбардировка",
   ],
 }
 
@@ -649,8 +656,6 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
       // Эффекты и бонусы:
       .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) [+-](\\d+)$`), '$1:$2')
-      // : военные
-      .replace(/(Конверсия|Регенерация|Ремонт (?:армий|флотов)|Бомбардировка) \+(\d+)/, '$1:$2')
       // Плюсы к научным веткам
       .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
       // армии и корпуса кораблей
@@ -658,7 +663,8 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
       .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
       // модули и оружие, глобальные военные эффекты
-      .replace(/^(Атака|Защита|Скорость|Уклонение) (армий|флотов)? ?\+?(\d+)/, '$1 $2:$3')
+      .replace(/^(Атака|Защита|Скорость|Уклонение) \+?(\d+)/, '$1:$2')
+      .replace(/^(Атака|Защита|Скорость|Уклонение) (армий|флотов) \+?(\d+)/, '$1 $2:$3')
       .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
       .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
       .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
