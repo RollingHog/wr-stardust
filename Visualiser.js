@@ -514,6 +514,11 @@ const parseDoc = {
   },
 
   techTableHTML(playerName, obj) {
+    /**
+     * 
+     * @param {HTMLTableElement} el 
+     * @returns 
+     */
     const tech5TableToObj = el =>  
       Object.fromEntries(Array.from(el.rows).map(e=>[e.children[0].innerText, e.children[1].innerText]))
     const data = {
