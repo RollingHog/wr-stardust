@@ -506,7 +506,7 @@ const parseDoc = {
   
       // log(player, {avaliableTech})
   
-      saveSvgAsPng(svg, `${player} ${i}.png`)
+      savingOps.saveSvgAsPng(svg, `${player} ${i}.png`)
     }
   
     if (built.length)
@@ -530,13 +530,6 @@ const parseDoc = {
     // foo = data
     log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
   }
-}
-
-var foo
-
-// eslint-disable-next-line no-unused-vars
-function saveSVG(filename) {
-  saveFile(filename + '.svg', svg.outerHTML)
 }
 
 const KEYWORDS = {
@@ -1113,92 +1106,94 @@ const draw = {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-function saveAllTechAsPng() {
-  for (const i of document.querySelectorAll('#tech_tree_buttons button')) {
-    i.click()
-    saveSvgAsPng(svg, `${i.innerText}.png`)
-  }
-}
-
-// eslint-disable-next-line no-unused-vars
-function openAsPng() {
-  // FIXME
-}
-
-// eslint-disable-next-line no-unused-vars
-function saveFile(filename, data) {
-  var file = new Blob([data], { type: 'text' })
-  var a = document.createElement("a"),
-    url = URL.createObjectURL(file)
-  a.href = url
-  a.download = filename
-  document.body.appendChild(a)
-  a.click()
-  setTimeout(function () {
-    document.body.removeChild(a)
-    window.URL.revokeObjectURL(url)
-  }, 0)
-}
-
-//heya SO https://stackoverflow.com/questions/3975499/convert-svg-to-image-jpeg-png-etc-in-the-browser
-function copyStylesInline(destinationNode, sourceNode) {
-  var containerElements = ["svg", "g"]
-  for (var cd = 0; cd < destinationNode.childNodes.length; cd++) {
-    var child = destinationNode.childNodes[cd]
-    if (containerElements.indexOf(child.tagName) != -1) {
-      copyStylesInline(child, sourceNode.childNodes[cd])
-      continue
+const savingOps = {
+  saveAllTechAsPng() {
+    for (const i of document.querySelectorAll('#tech_tree_buttons button')) {
+      i.click()
+      savingOps.saveSvgAsPng(svg, `${i.innerText}.png`)
     }
-    var style = sourceNode.childNodes[cd].currentStyle || window.getComputedStyle(sourceNode.childNodes[cd])
-    if (style == "undefined" || style == null) continue
-    for (var st = 0; st < style.length; st++) {
-      child.style.setProperty(style[st], style.getPropertyValue(style[st]))
+  },
+  openAsPng() {
+    // FIXME
+  },
+  // eslint-disable-next-line no-unused-vars
+  saveSVG(filename) {
+    savingOps.saveFile(filename + '.svg', svg.outerHTML)
+  },
+  saveFile(filename, data) {
+    var file = new Blob([data], { type: 'text' })
+    var a = document.createElement("a"),
+      url = URL.createObjectURL(file)
+    a.href = url
+    a.download = filename
+    document.body.appendChild(a)
+    a.click()
+    setTimeout(function () {
+      document.body.removeChild(a)
+      window.URL.revokeObjectURL(url)
+    }, 0)
+  },
+  //heya SO https://stackoverflow.com/questions/3975499/convert-svg-to-image-jpeg-png-etc-in-the-browser
+  copyStylesInline(destinationNode, sourceNode) {
+    var containerElements = ["svg", "g"]
+    for (var cd = 0; cd < destinationNode.childNodes.length; cd++) {
+      var child = destinationNode.childNodes[cd]
+      if (containerElements.indexOf(child.tagName) != -1) {
+        savingOps.copyStylesInline(child, sourceNode.childNodes[cd])
+        continue
+      }
+      var style = sourceNode.childNodes[cd].currentStyle || window.getComputedStyle(sourceNode.childNodes[cd])
+      if (style == "undefined" || style == null) continue
+      for (var st = 0; st < style.length; st++) {
+        child.style.setProperty(style[st], style.getPropertyValue(style[st]))
+      }
     }
-  }
+  },
+  
+  triggerDownload(imgURI, fileName) {
+    var evt = new MouseEvent("click", {
+      view: window,
+      bubbles: false,
+      cancelable: true
+    })
+    var a = document.createElement("a")
+    a.setAttribute("download", fileName)
+    a.setAttribute("href", imgURI)
+    a.setAttribute("target", '_blank')
+    a.dispatchEvent(evt)
+  },
+  
+  saveSvgAsPng(svg, fileName) {
+    var copy = svg.cloneNode(true)
+    savingOps.copyStylesInline(copy, svg)
+    var canvas = document.createElement("canvas")
+    var bbox = svg.getBBox()
+    canvas.width = bbox.width
+    canvas.height = bbox.height
+    var ctx = canvas.getContext("2d")
+    ctx.clearRect(0, 0, bbox.width, bbox.height)
+    var data = (new XMLSerializer()).serializeToString(copy)
+    var DOMURL = window.URL || window.webkitURL || window
+    var img = new Image()
+    var svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" })
+    var url = DOMURL.createObjectURL(svgBlob)
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0)
+      DOMURL.revokeObjectURL(url)
+      if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+        var blob = canvas.msToBlob()
+        navigator.msSaveOrOpenBlob(blob, fileName)
+      }
+      else {
+        var imgURI = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream")
+        savingOps.triggerDownload(imgURI, fileName)
+      }
+      document.removeChild(canvas)
+    }
+    img.src = url
+  },
 }
 
-function triggerDownload(imgURI, fileName) {
-  var evt = new MouseEvent("click", {
-    view: window,
-    bubbles: false,
-    cancelable: true
-  })
-  var a = document.createElement("a")
-  a.setAttribute("download", fileName)
-  a.setAttribute("href", imgURI)
-  a.setAttribute("target", '_blank')
-  a.dispatchEvent(evt)
-}
 
-function saveSvgAsPng(svg, fileName) {
-  var copy = svg.cloneNode(true)
-  copyStylesInline(copy, svg)
-  var canvas = document.createElement("canvas")
-  var bbox = svg.getBBox()
-  canvas.width = bbox.width
-  canvas.height = bbox.height
-  var ctx = canvas.getContext("2d")
-  ctx.clearRect(0, 0, bbox.width, bbox.height)
-  var data = (new XMLSerializer()).serializeToString(copy)
-  var DOMURL = window.URL || window.webkitURL || window
-  var img = new Image()
-  var svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" })
-  var url = DOMURL.createObjectURL(svgBlob)
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0)
-    DOMURL.revokeObjectURL(url)
-    if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
-      var blob = canvas.msToBlob()
-      navigator.msSaveOrOpenBlob(blob, fileName)
-    }
-    else {
-      var imgURI = canvas
-        .toDataURL("image/png")
-        .replace("image/png", "image/octet-stream")
-      triggerDownload(imgURI, fileName)
-    }
-    document.removeChild(canvas)
-  }
-  img.src = url
-}
