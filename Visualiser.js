@@ -278,6 +278,7 @@ const Analysis = {
       KEYWORDS.MODULE_PROPS,
       KEYWORDS.SPECIAL_TECH_COST,
       KEYWORDS.UNIT_PROPS,
+      KEYWORDS.MILITARY_PARAMS,
       ["особое"],
     )
     console.table(Analysis.excludeByDict(statAllEffects, filter))
@@ -704,6 +705,12 @@ var KEYWORDS = {
     "Ремонт (?:армий|флотов)",
     "Бомбардировка",
   ],
+  MILITARY_PARAMS: [
+    "Атака",
+    "Защита",
+    "Скорость",
+    "Уклонение",
+  ],
 }
 
 var badTechCount = 0
@@ -771,6 +778,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(new RegExp(`^(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
       .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+\\d+)?$`), '$1:$2')
       // эффекты, дающие великих людей
+      .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
       // базовые вещи
       .replace(/^(выдаётся при высадке|выдаётся на старте)/, ALL_RIGHT)
