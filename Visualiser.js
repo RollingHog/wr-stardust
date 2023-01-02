@@ -323,6 +323,19 @@ const Analysis = {
       console.table(Analysis.filterObjectByDict(statAllEffects, filter))
     }
   },
+
+  listHulls() {
+    console.table(Object.fromEntries(
+      Object.values(inverted.alltech)
+        .filter(e => e.type == 'octagon')
+        .map(e => [e.name, {
+          "Блок": e.effect[0][1], 
+          "Слоты": +e.effect[1][1],
+          "Подтип": e.effect[2] ? e.effect[2][0] : '',
+          "Свойства": e.effect.slice(3).map(e => e.join(':')).join(','),
+        }])
+    ))
+  },
 }
 
 function tspanHighlightOnClick() {
@@ -660,6 +673,7 @@ var KEYWORDS = {
     "роботы",
     "гигеры",
     "пехота",
+    "танки",
     "нет FTL",
     "ужас",
   ],
@@ -670,6 +684,8 @@ var KEYWORDS = {
     //!!!
     "осадное",
     "щит",
+    "экранирование",
+    "Полёт",
   ],
   MATERIALS: [
     // 1 ряд
@@ -808,7 +824,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       // типы урона, эффекты оружия
       .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})`), '$1:$2')
       .replace(new RegExp(`^(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
-      .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+\\d+)?$`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+?\\d+)?$`), '$1:$2')
       // эффекты, дающие великих людей
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
