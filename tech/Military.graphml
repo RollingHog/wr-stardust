@@ -309,7 +309,7 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="928.036916688617" y="1332.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="228.033203125" x="15.8583984375" xml:space="preserve" y="-0.40234375">Экстрамерные боеголовки
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="228.033203125" x="15.858398437500114" xml:space="preserve" y="-0.40234375">Экстрамерные боеголовки
 Сложность: 6
 Эффект: Атака 4, :разрушение модулей
 при критуспехе<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -1420,7 +1420,7 @@
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="213.16796875" x="23.291015625" xml:space="preserve" y="6.9482421875">Планетоидная инженерия
-Сложность: 7, тех. Звездная материя
+Сложность: 7, тех. Звёздная материя
 Эффект: Защита флотов +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -2531,7 +2531,6 @@
       </data>
     </edge>
     <edge id="e86" source="n74" target="n121">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2542,7 +2541,6 @@
       </data>
     </edge>
     <edge id="e87" source="n121" target="n89">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2553,7 +2551,6 @@
       </data>
     </edge>
     <edge id="e88" source="n121" target="n120">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2564,7 +2561,6 @@
       </data>
     </edge>
     <edge id="e89" source="n30" target="n107">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2575,7 +2571,6 @@
       </data>
     </edge>
     <edge id="e90" source="n116" target="n122">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2586,7 +2581,6 @@
       </data>
     </edge>
     <edge id="e91" source="n31" target="n123">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2597,7 +2591,6 @@
       </data>
     </edge>
     <edge id="e92" source="n104" target="n103">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2608,7 +2601,6 @@
       </data>
     </edge>
     <edge id="e93" source="n101" target="n124">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2619,7 +2611,6 @@
       </data>
     </edge>
     <edge id="e94" source="n124" target="n25">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2630,7 +2621,6 @@
       </data>
     </edge>
     <edge id="e95" source="n124" target="n118">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2641,7 +2631,6 @@
       </data>
     </edge>
     <edge id="e96" source="n124" target="n125">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2652,7 +2641,6 @@
       </data>
     </edge>
     <edge id="e97" source="n2" target="n66">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2663,7 +2651,6 @@
       </data>
     </edge>
     <edge id="e98" source="n5" target="n126">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2674,7 +2661,6 @@
       </data>
     </edge>
     <edge id="e99" source="n107" target="n108">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2685,7 +2671,6 @@
       </data>
     </edge>
     <edge id="e100" source="n108" target="n106">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2696,7 +2681,6 @@
       </data>
     </edge>
     <edge id="e101" source="n108" target="n109">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
