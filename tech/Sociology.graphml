@@ -203,7 +203,7 @@
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="151.908203125" x="53.9208984375" xml:space="preserve" y="6.9482421875">Колониальная социология
 Сложность: 1, затраты (1)
 Эффект: Политика +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -344,7 +344,7 @@
           <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="255.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="207.255859375" x="26.2470703125" xml:space="preserve" y="-0.40234375">Трудовой энтузиазм
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="162.373046875" x="48.6884765625" xml:space="preserve" y="-0.40234375">Трудовой энтузиазм
 Сложность: 2
 Эффект: :+1 куб к проектам 
 с участием великих людей<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -385,7 +385,7 @@
           <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="347.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="221.236328125" x="19.2568359375" xml:space="preserve" y="-0.40234375">Двоемыслие
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="211.94921875" x="23.900390625" xml:space="preserve" y="-0.40234375">Двоемыслие
 Сложность: 2, 2 этапа, осуждение (2)
 Эффект: :военное подавление
 Волнений не генерирует Осуждения<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -399,7 +399,7 @@
           <y:Geometry height="62.0" width="259.75" x="45.06050483528705" y="1083.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.80859375" x="47.970703125" xml:space="preserve" y="-0.4023437499998863">Террор-группы
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.80859375" x="47.970703125" xml:space="preserve" y="-0.40234375">Террор-группы
 Сложность: 5, осуждение (2)
 Эффект: Автозаки +3, 
 при подавлении армией<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -413,7 +413,7 @@
           <y:Geometry height="62.0" width="259.75" x="334.0" y="1083.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="148.59765625" x="55.576171875" xml:space="preserve" y="6.948242187500114">Трансчеловеческий закон
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="148.59765625" x="55.576171875" xml:space="preserve" y="6.9482421875">Трансчеловеческий закон
 Сложность: 6
 Эффект: Общество +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -518,7 +518,7 @@
           <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="347.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="213.9296875" x="22.91015625" xml:space="preserve" y="-0.40234375">Культ личности
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="169.046875" x="45.3515625" xml:space="preserve" y="-0.40234375">Культ личности
 Сложность: 2, 2 этапа
 Эффект: :+2 куба к проектам 
 с участием лидера колонии<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -616,7 +616,7 @@
           <y:Geometry height="62.0" width="259.75" x="907.0222745947374" y="436.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="192.033203125" x="33.8583984375" xml:space="preserve" y="-0.40234375">Поощрение разнообразия
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="150.279296875" x="54.7353515625" xml:space="preserve" y="-0.40234375">Поощрение разнообразия
 Сложность: 2, 2 этапа
 Эффект: :древо Генетики
 не приносит осуждения<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -705,7 +705,7 @@
           <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="1175.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="234.736328125" x="12.5068359375" xml:space="preserve" y="6.948242187500114">Индивидуализация законодательства
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="234.736328125" x="12.5068359375" xml:space="preserve" y="6.9482421875">Индивидуализация законодательства
 Сложность: 6
 Эффект: Общество +2, Контршпионаж -1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -1191,7 +1191,7 @@
           <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="1175.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="253.890625" x="2.9296875" xml:space="preserve" y="-0.40234375">Единая теория разума
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="210.98828125" x="24.380859375" xml:space="preserve" y="-0.40234375">Единая теория разума
 Сложность: 5
 Эффект: :+2 куба к взаимодействию 
 с нечеловеческим разумом<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -1914,7 +1914,6 @@
       </data>
     </edge>
     <edge id="e67" source="n3" target="n88">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1925,7 +1924,6 @@
       </data>
     </edge>
     <edge id="e68" source="n56" target="n89">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1936,7 +1934,6 @@
       </data>
     </edge>
     <edge id="e69" source="n57" target="n90">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1947,7 +1944,6 @@
       </data>
     </edge>
     <edge id="e70" source="n90" target="n81">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1958,7 +1954,6 @@
       </data>
     </edge>
     <edge id="e71" source="n90" target="n58">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1969,7 +1964,6 @@
       </data>
     </edge>
     <edge id="e72" source="n57" target="n91">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1980,7 +1974,6 @@
       </data>
     </edge>
     <edge id="e73" source="n30" target="n52">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1991,7 +1984,6 @@
       </data>
     </edge>
     <edge id="e74" source="n6" target="n92">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2002,7 +1994,6 @@
       </data>
     </edge>
     <edge id="e75" source="n92" target="n7">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2013,7 +2004,6 @@
       </data>
     </edge>
     <edge id="e76" source="n7" target="n93">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
