@@ -265,8 +265,25 @@ const Analysis = {
   filterObjectByDict(obj, dict) {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => dict.includes(key)))
   },
+  
+  excludeByDict(obj, dict) {
+    return Object.fromEntries(Object.entries(obj).filter(([key]) => !dict.includes(key)))
+  },
 
-  showEffectsStat(filter = null) {
+  showEffectsStatWithoutGarbage() {
+    let filter = [].concat(
+      KEYWORDS.COLONY_PARAMS,
+      KEYWORDS.DAMAGE_TYPES,
+      KEYWORDS.MATERIALS,
+      KEYWORDS.MODULE_PROPS,
+      KEYWORDS.SPECIAL_TECH_COST,
+      KEYWORDS.UNIT_PROPS,
+      ["особое"],
+    )
+    console.table(Analysis.excludeByDict(statAllEffects, filter))
+  },
+
+  showEffectsStat(filter = KEYWORDS.TECH_EFFECTS) {
     if(!filter) {
       console.table(statAllEffects)
     } else {
