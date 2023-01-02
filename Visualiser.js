@@ -196,10 +196,10 @@ const Analysis = {
           else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
           // eslint-disable-next-line no-empty
           else if(['Технология', "Слоты"].includes(k[0])) {}
-          // else if(k[0 ]== 'особое') {
-          //   tcost = 0
-          //   break
-          // }
+          else if(k[0] == 'суперпроект') {
+            tcost = 0
+            break
+          }
           else {
             // log('what is this?', j.name, k)
             fail = true
@@ -210,7 +210,7 @@ const Analysis = {
         tcost = +tcost.toFixed(2)
 
         // tcost<10 in case is's some superstructure
-        if(Math.abs(tcost-mult)>1 && tcost<10 && j.type != 'octagon') {
+        if(Math.abs(tcost-mult)>1 && tcost>0 && tcost<10 && j.type != 'octagon') {
           log(i, j.name, `cost looks bad: ${tcost}->${mult}`)
           cnt++
           continue
@@ -808,7 +808,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       // базовые вещи
       .replace(/^(выдаётся при высадке|выдаётся на старте)/, ALL_RIGHT)
       .replace(/^(немедленно)/, ALL_RIGHT)
-      .replace(/^(электростанция|наземное)/, ALL_RIGHT)
+      .replace(/^(электростанция|наземное|суперпроект)/, ALL_RIGHT)
       .replace(/^(неуязвимость к обычным болезням|взлом систем связи невозможен)/, ALL_RIGHT)
       .replace(/^(при подавлении армией|в военное время|на нечуждых планетах|в системе|вне родной системы)/, ALL_RIGHT)
       .replace(/^(пред-FTL)/, ALL_RIGHT)
