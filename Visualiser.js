@@ -188,7 +188,7 @@ const Analysis = {
         for(let k of j.cost) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
           else if(k[0] == 'Любой') tcost += +k[1]
-          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) teff += +k[1]/2
+          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) tcost += +k[1]/2
           else if(k[0]=='Этапы') tcost *= 2
           else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
           // eslint-disable-next-line no-empty
