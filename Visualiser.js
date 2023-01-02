@@ -148,7 +148,7 @@ async function Init() {
 
       Analysis.searchBadTechRefs()
 
-      // Analysis.countTechPrices()
+      Analysis.countTechPrices()
       log(statAllEffects)
 
       Analysis.totalTechCount()
@@ -188,7 +188,8 @@ const Analysis = {
         for(let k of j.cost) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
           else if(k[0] == 'Любой') tcost += +k[1]
-          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) tcost += +k[1]/2
+          // eslint-disable-next-line no-empty
+          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
           else if(k[0]=='Этапы') tcost *= 2
           else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
           // eslint-disable-next-line no-empty
@@ -204,6 +205,15 @@ const Analysis = {
             fail = true
             break
           }
+        }
+
+        tcost = +tcost.toFixed(2)
+
+        // tcost<10 in case is's some superstructure
+        if(Math.abs(tcost-mult)>1 && tcost<10) {
+          log(i, j.name, `cost looks bad: ${tcost}->${mult}`)
+          cnt++
+          continue
         }
         
         for(let k of j.effect) {
@@ -238,7 +248,7 @@ const Analysis = {
           let p = (d/mult).toFixed(2)
           if(p>1.5 || p<0.6) {
             cnt++
-            log(i, j.name, j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
+            // log(i, j.name, j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
           }
         }
       }
