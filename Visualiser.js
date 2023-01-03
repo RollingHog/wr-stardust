@@ -78,6 +78,7 @@ const tech = {}
 const techData = {
   badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
   levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
+  badTechCount: 0,
 }
 const stat = {}
 const inverted = {
@@ -139,7 +140,7 @@ async function Init() {
       // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
       console.log(listAllWithoutMilitary())
-      if(badTechCount) console.log('unrecognized tech:', badTechCount)
+      if(techData.badTechCount) console.log('unrecognized tech:', techData.badTechCount)
 
       for (let i of TREELIST) {
         drawTree(i)
@@ -152,6 +153,16 @@ async function Init() {
           .flat()
           .map(e => [e.name, e])
       )
+
+      for (let treeName of TREELIST) {
+        for (let j in tech[treeName]) {
+          let [cost, effects] = parseCostAndEffects(tech[treeName][j])
+          tech[treeName][j].cost = cost
+          tech[treeName][j].effect = effects
+          doNodeStat(treeName, tech[treeName][j])
+        }
+      }
+
 
       Analysis.searchBadTechRefs()
 
@@ -759,6 +770,7 @@ var KEYWORDS = {
     "гигеры",
     "пехота",
     "танки",
+    "титан",
     "нет FTL",
     "ужас",
   ],
@@ -780,15 +792,25 @@ var KEYWORDS = {
   ],
 }
 
-var badTechCount = 0
-
-function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
+function parseCostAndEffects(t) {
   const ITS_SPECIAL = 'особое:'
   const ALL_RIGHT = ITS_SPECIAL+'$1'
 
   const DISABLE_PARSE_IMMUNITY = false
 
-  const cost = cost_raw
+  const colorToParameterType = {
+    '#FF0000': 'Производство',
+    '#00FF00': 'Общество',
+    '#0000FF': 'Наука',
+    '#000000': "Любой",
+  }
+
+  const studyCubesType = colorToParameterType[t.borderColor]
+
+  const costRaw = t.cost
+  const effectRaw = t.effect
+
+  const cost = costRaw
     .split(',')
     .map(e => e
       .trim()
@@ -809,11 +831,11 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
     )
 
   if (cost.some(e => e.length < 2)) {
-    log('bad cost', name, cost, cost_raw)
-    badTechCount++
+    log('bad cost', t.name, cost, costRaw)
+    techData.badTechCount++
   }
 
-  let effect = effect_unparsed
+  let effect = effectRaw
     .split(',')
     .map(e => e
       .trim()
@@ -862,8 +884,8 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
   if (effect.some(e => e.length < 2)) {
     // it is non-split => not recognized string
     // effect = null
-    badTechCount++
-    console.warn(name, effect.filter(e=>e.length<2)[0], effect_unparsed)
+    techData.badTechCount++
+    console.warn(t.name, effect.filter(e=>e.length<2)[0], effectRaw)
   }
 
   return [cost, effect]
@@ -929,19 +951,12 @@ function parseShapeNode(filename, i) {
 
   const split1 = nodeText.split(sepDifficulty)
   const name = split1[0].trim()
-  const cost_raw = split1[1].split(sepEffect)[0].trim()
+  const costRaw = split1[1].split(sepEffect)[0].trim()
+  const effectRaw = split1[1].split(sepEffect)[1].trim()
 
-  const colorToParameterType = {
-    '#FF0000': 'Производство',
-    '#00FF00': 'Общество',
-    '#0000FF': 'Наука',
-    '#000000': "Любой",
-  }
-
-  const studyCubesType = colorToParameterType[borderColor]
-
-  const effect_unparsed = split1[1].split(sepEffect)[1].trim()
-  const [cost, effect] = parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType)
+  t.name = name
+  t.cost = costRaw
+  t.effect = effectRaw
 
   t.nodeCenter = {
     x: ++t.x + ++t.w / 2
@@ -952,12 +967,6 @@ function parseShapeNode(filename, i) {
     x: t.x
     , y: ++t.y + ++t.h / 2
   }
-
-  t.name = name
-  t.cost = cost
-  t.effect = effect
-
-  doNodeStat(filename, t)
 
   return t
 }
