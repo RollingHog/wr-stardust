@@ -1238,6 +1238,7 @@ const draw = {
         curr_dx = 0,
         curr_w = 0
       // let acc = ''
+      const isFirefox = navigator.userAgent.indexOf("Firefox") !== -1
       for (let i in arr) {
         if (i == 0) {
           let dy = arr.length == 3 ? '-0.6' : '-1.4'
@@ -1252,14 +1253,15 @@ const draw = {
           curr = getEl(id + '_t' + i)
           curr_dx = -(getEl(id + '_t' + (i - 1)).getBBox().width / 2)
           curr_w = +curr.getBBox().width
-          const dx = curr_dx - curr_w / 2
+          const dx = isFirefox 
+            ? -getEl(id + '_t' + (i - 1)).getBBox().width 
+            : curr_dx - curr_w / 2
           curr.setAttribute('dx', dx)
         }
       }
 
-      const isFirefox = navigator.userAgent.indexOf("Firefox") !== -1
       curr_dx = isFirefox 
-        ? -getEl(id).getBBox().width / 2 - getEl(id + '_t0').getBBox().width / 2
+        ? -getEl(id).getBBox().width / 2
         : -getEl(id + '_t').getBBox().width / 2
       getEl(id + '_t0').setAttribute('dx', curr_dx )
     },
