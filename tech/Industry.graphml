@@ -1576,7 +1576,7 @@
     <node id="n119">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="315.1585971683386" y="1263.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="315.1585971683386" y="1157.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.16015625" x="14.794921875" xml:space="preserve" y="-0.40234375">Реактор гиперпространства
@@ -1624,6 +1624,23 @@
 Сложность: 5
 Эффект: Общество +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n123">
+      <data key="d5" xml:space="preserve"><![CDATA[Эти громадные биостанции действительно напоминают лотос - исключительно по прихоти главного дизайнера проекта. 
+Органично совмещая в себе биологические, технологические и прочие компоненты, эти питаемые термоядерными реакторами и светом самой Галактики цветы
+медленно дрейфуют в межзвёздной пустоте к одним им ведомым целям.]]></data>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="315.1585971683386" y="1263.0"/>
+          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="149.48828125" x="55.130859375" xml:space="preserve" y="-0.40234375">Титан
+Сложность: 6
+Эффект: армия, 6 слотов,
+титан, ужас<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="octagon"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -2658,6 +2675,16 @@
       </data>
     </edge>
     <edge id="e103" source="n45" target="n114">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e104" source="n41" target="n123">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
