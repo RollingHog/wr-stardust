@@ -1549,7 +1549,7 @@
     <node id="n117">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="259.75" x="1471.6401148188015" y="1475.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1471.6401148188015" y="1579.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="160.884765625" x="49.4326171875" xml:space="preserve" y="-0.40234375">Мир-кольцо

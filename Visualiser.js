@@ -342,6 +342,7 @@ const Analysis = {
           .filter(e => e.type == 'octagon')
           .map(e => [e.name, {
             "Блок": e.effect[0][1], 
+            "Цена": +e.cost[0][1], 
             "Слоты": +e.effect[1][1],
             "Подтип": e.effect[2] ? e.effect[2][0] : '',
             "Свойства": e.effect.slice(3).map(e => e.join(':')).join(','),
