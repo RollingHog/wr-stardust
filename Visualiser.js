@@ -241,7 +241,7 @@ const Analysis = {
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.MATERIALS.includes(k[0])) {}
           // eslint-disable-next-line no-empty
-          else if(KEYWORDS.UNIT_PROPS.includes(k[0])) {}
+          else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
           // eslint-disable-next-line no-empty
           else if(k[0 ]== 'особое') {
             teff = 0
@@ -321,7 +321,7 @@ const Analysis = {
         KEYWORDS.DAMAGE_TYPES,
         KEYWORDS.MATERIALS,
         KEYWORDS.MODULE_PROPS,
-        KEYWORDS.UNIT_PROPS,
+        KEYWORDS.UNIT_TYPES,
         KEYWORDS.MILITARY_PARAMS,
         ["Слоты", "Тип отряда", "особое"],
       )
@@ -344,8 +344,7 @@ const Analysis = {
             "Блок": e.effect[0][1], 
             "Цена": +e.cost[0][1], 
             "Слоты": +e.effect[1][1],
-            "Подтип": e.effect[2] ? e.effect[2][0] : '',
-            "Свойства": e.effect.slice(3).map(e => e.join(':')).join(','),
+            "Свойства": e.effect.slice(2).map(e => e.join(':')).join(','),
           }])
       ))
     },
@@ -773,16 +772,16 @@ var KEYWORDS = {
     "Скорость",
     "Уклонение",
     "Щит",
+    "Полёт",
   ],
-  UNIT_PROPS: [
-    "ДУ",
-    "роботы",
-    "гигеры",
+  UNIT_TYPES: [
     "пехота",
     "танки",
     "титан",
-    "нет FTL",
-    "ужас",
+    "звездолёт",
+    "хабитат",
+    "наземная база",
+    "космическая база",
   ],
   DAMAGE_TYPES: [
     "био",
@@ -791,13 +790,17 @@ var KEYWORDS = {
     "странглет",
   ],
   MODULE_PROPS: [
+    "ДУ",
+    "роботы",
+    "гигеры",
+    "нет FTL",
+    "ужас",
     "ракеты",
     "ЭМИ",
     "ББ",
     //!!!
     "осадное",
     "экранирование",
-    "Полёт",
     "FTL",
   ],
 }
@@ -861,8 +864,9 @@ function parseCostAndEffects(t) {
       .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) [+-](\\d+)$`), '$1:$2')
       // Плюсы к научным веткам
       .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
-      // армии и корпуса кораблей
-      .replace(/(армия|корпус|хабитат|(?:наземная|космическая) база)$/, 'Тип отряда:$1')
+      // армии и звездолёты
+      .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), 'Тип юнита:$1')
+      // .replace(/(армия|$/, 'Тип отряда:$1')
       .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
       .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
       // модули и оружие, глобальные военные эффекты
@@ -874,8 +878,7 @@ function parseCostAndEffects(t) {
       .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
       // типы урона, эффекты оружия
       .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
-      .replace(new RegExp(`^(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
-      .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+?\\d+)?$`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), 'Особое:$1')
       // эффекты, дающие великих людей
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
