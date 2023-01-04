@@ -61,7 +61,13 @@ const VARS = {
     // 6.3,
     // 6.6,
     6, 6,
-  ]
+  ],
+  colorToParameterType: {
+    '#FF0000': 'Производство',
+    '#00FF00': 'Общество',
+    '#0000FF': 'Наука',
+    '#000000': "Любой",
+  }
 }
 
 const cache = Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}]))
@@ -362,8 +368,21 @@ const Analysis = {
     },
 
     drawGraph() {
-      
-    }
+
+    },
+
+    countTechByCostParamType() {
+      const sum = {}
+      Object.values(inverted.alltech).forEach( e => {
+        let paramType = VARS.colorToParameterType[e.borderColor]
+        if(!sum[paramType]) {
+          sum[paramType] = 1
+        } else {
+          sum[paramType] += 1
+        }
+      })
+      console.table(sum)
+    },
   }
 }
 
@@ -818,14 +837,7 @@ function parseCostAndEffects(t) {
 
   const DISABLE_PARSE_IMMUNITY = false
 
-  const colorToParameterType = {
-    '#FF0000': 'Производство',
-    '#00FF00': 'Общество',
-    '#0000FF': 'Наука',
-    '#000000': "Любой",
-  }
-
-  const studyCubesType = colorToParameterType[t.borderColor]
+  const studyCubesType = VARS.colorToParameterType[t.borderColor]
 
   const costRaw = t.cost
   const effectRaw = t.effect
