@@ -1491,7 +1491,6 @@
       </data>
     </node>
     <node id="n113">
-      <data key="d5" xml:space="preserve"><![CDATA["Да, именно. Просто берешь и гребёшь плазму из звезды"]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="609.3437461845423" y="1579.0"/>
@@ -2739,7 +2738,6 @@
       </data>
     </edge>
     <edge id="e103" source="n105" target="n121">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2750,7 +2748,6 @@
       </data>
     </edge>
     <edge id="e104" source="n103" target="n123">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2761,7 +2758,6 @@
       </data>
     </edge>
     <edge id="e105" source="n115" target="n124">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2772,7 +2768,6 @@
       </data>
     </edge>
     <edge id="e106" source="n37" target="n125">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2783,7 +2778,6 @@
       </data>
     </edge>
     <edge id="e107" source="n61" target="n115">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2794,7 +2788,6 @@
       </data>
     </edge>
     <edge id="e108" source="n126" target="n124">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2805,7 +2798,6 @@
       </data>
     </edge>
     <edge id="e109" source="n128" target="n127">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2816,7 +2808,6 @@
       </data>
     </edge>
     <edge id="e110" source="n127" target="n126">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2827,7 +2818,6 @@
       </data>
     </edge>
     <edge id="e111" source="n37" target="n128">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
