@@ -1074,7 +1074,10 @@
       </data>
     </node>
     <node id="n81">
-      <data key="d5" xml:space="preserve"><![CDATA["Пока вы ютитесь в своих стальных скорлупках - мы парим меж звёзд"]]></data>
+      <data key="d5" xml:space="preserve"><![CDATA["Пока вы ютитесь в своих стальных скорлупках - мы парим меж звёзд".
+
+
+"А, да. ГЕНОПУРИСТЫ СОСАААААТЬ!"]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1463.0"/>
@@ -1527,13 +1530,14 @@ FTL, гигеры<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelM
     <node id="n113">
       <data key="d5" xml:space="preserve"><![CDATA[Жахнуть пару ледяных комет, связать воду в верхней мантии, наморозить ледяные шапки, 
 устроить астропромышленный элекролиз...
-Для серьёзных дядек со вторым Кардышевым это не тот чтобы такая уж большая проблема.]]></data>
+Для серьёзных дядек со вторым Кардышевым это не такая уж большая проблема.
+И нет, эта трехкилометровая штука не похожа на земной нимбулайзер.]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="507.97681568287044" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="164.388671875" x="47.6806640625" xml:space="preserve" y="-0.40234375">Плланетарный нембулайзер
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="164.41796875" x="47.666015625" xml:space="preserve" y="-0.40234375">Плланетарный нимбулайзер
 Сложность: 8, 4 слота
 Эффект: :контроль 
 над процентом Воды<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -2522,6 +2526,17 @@ FTL, гигеры<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelM
       </data>
     </edge>
     <edge id="e98" source="n15" target="n112">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e99" source="n25" target="n113">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>

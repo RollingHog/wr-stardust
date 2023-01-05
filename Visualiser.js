@@ -110,6 +110,7 @@ async function Init() {
       ))
   }
   
+  console.time('load iframes')
   for (let i of TREELIST) {
     const src = `tech/${i}.graphml`
     if(isLocalFile) {
@@ -134,6 +135,7 @@ async function Init() {
       graphmls[i] = parser.parseFromString(xmlText, 'text/xml')
     }
   }
+  console.timeEnd('load iframes')
 
   await parseTechIframe(VARS.TREELIST_NOMIL[0])
   drawTree(VARS.TREELIST_NOMIL[0])
