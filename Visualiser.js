@@ -96,6 +96,7 @@ const svg = document.getElementById('svg')
 window.onload = Init
 async function Init() {
   getEl('el_loading').hidden = false
+  console.time('initial draw')
   const parser = new DOMParser()
   const isLocalFile = location.href.startsWith('file:///')
 
@@ -118,11 +119,13 @@ async function Init() {
           el.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
           , 'text/xml')
       } catch(e) {
+        alert('shit happened, see dev console')
         console.warn(`cannot read local files, run
         chrome with --allow-file-access-from-files
         or
         firefox with about:config - privacy.file_unique_origin : false`)
         console.warn(e)
+        getEl('el_loading').hidden = true
         break
       }
     } else {
@@ -135,6 +138,7 @@ async function Init() {
   await parseTechIframe(VARS.TREELIST_NOMIL[0])
   drawTree(VARS.TREELIST_NOMIL[0])
   getEl('el_loading').hidden = true
+  console.timeEnd('initial draw')
 
   setTimeout(function() {
 
@@ -483,7 +487,7 @@ const User = {
 async function parseTechIframe(tree_name) {
 
   graphmls[tree_name] = graphmls[tree_name].getElementsByTagName('graph')[0]
-  graphmls[tree_name].getElementsByTagName('data')[0].remove()
+  // graphmls[tree_name].getElementsByTagName('data')[0].remove()
   // graphmls[filename].getElementsByTagName('y:Fill').forEach(e => e.remove())
   // graphmls[filename].getElementsByTagName('y:BorderStyle').forEach(e => e.remove())
   graphmls[tree_name].getElementsByTagName('y:LabelModel').forEach(e => e.remove())
@@ -788,6 +792,7 @@ var KEYWORDS = {
     // военные
     "Конверсия",
     "Регенерация",
+    "Ремонт",
     "Ремонт (?:армий|флотов)",
     "Бомбардировка",
   ],
@@ -928,6 +933,12 @@ function parseShapeNode(filename, i) {
   const sepDifficulty = 'Сложность:'
   const sepEffect = 'Эффект:'
 
+  const descrDataEl = i.parentElement.parentElement.querySelector('data[key="d5"]')
+  let title = null
+  if(descrDataEl) {
+    title = descrDataEl.innerHTML.replace(/(<!\[CDATA\[|\]\]>)/g,'')
+  }
+
   const nlabel = i.getElementsByTagName('y:NodeLabel')[0]
   const fullText = nlabel.innerHTML
     .split('<')[0]
@@ -949,6 +960,7 @@ function parseShapeNode(filename, i) {
     , req: []
     , next: []
     , fullText
+    , title
 
     , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
     , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(0)
@@ -1133,7 +1145,7 @@ const draw = {
         return
     }
 
-    draw.SVG.Text(t.nodeCenter, t.name, t.fullText, t.id, t.fontSize)
+    draw.SVG.Text(t.nodeCenter, t)
 
     for (let i of t.next) {
       this.connectNodes(t, tech[treeName][i])
@@ -1150,7 +1162,7 @@ const draw = {
   },
 
   SVG: {
-    Prlg: function ({ id, x, y, h, w, borderColor, fill }) {
+    Prlg: function ({ id, x, y, h, w, borderColor, fill, title }) {
       const d = draw.POLYGON_DELTA
       var points = `
         ${x + d},${y}
@@ -1158,7 +1170,7 @@ const draw = {
         ${x + w - d},${y + h}
         ${x},${y + h}
       `
-      return draw.SVG.Poly(points, { id, borderColor, fill })
+      return draw.SVG.Poly(points, { id, borderColor, fill, title })
     },
 
     Hexagon: function ({ id, x, y, h, w, borderColor, fill }) {
@@ -1210,7 +1222,7 @@ const draw = {
       return draw.SVG.Poly(points, { id, borderColor, fill })
     },
 
-    Octagon: function ({ id, x, y, h, w, borderColor, fill }) {
+    Octagon: function ({ id, x, y, h, w, borderColor, fill, title }) {
       const d = draw.POLYGON_DELTA
       var points = `
         ${x + d},${y}
@@ -1222,10 +1234,10 @@ const draw = {
         ${x + w},${y + h / 3}
         ${x + w - d},${y}
       `
-      return draw.SVG.Poly(points, { id, borderColor, fill })
+      return draw.SVG.Poly(points, { id, borderColor, fill, title })
     },
 
-    Poly(points, { id, borderColor, fill }) {
+    Poly(points, { id, borderColor, fill, title }) {
       var el = document.createElementNS(draw.SVG_NS, 'polygon')
       el.setAttributeNS(null, 'id', id)
       el.setAttributeNS(null, 'points', points)
@@ -1233,7 +1245,7 @@ const draw = {
       el.setAttributeNS(null, 'stroke', borderColor)
       el.setAttributeNS(null, 'stroke-width', 3)
 
-      // if(title) el.innerHTML += '<title>'+title+'</title>'
+      if(title) el.innerHTML = '<title>'+title+'</title>'
       document.getElementById('svg').appendChild(el)
       return el
     },
@@ -1250,7 +1262,7 @@ const draw = {
       getEl('svg').insertBefore(line, getEl('svg').firstChild)
     },
 
-    Text: function ({ x, y }, text, fullText, id, fontSize) {
+    Text: function ({ x, y }, {text, fullText, id, fontSize, title}) {
 
       var el = document.createElementNS(draw.SVG_NS, 'text')
       el.setAttributeNS(null, 'x', x)
@@ -1291,6 +1303,7 @@ const draw = {
 
       curr_dx = -getEl(id + '_t').getBBox().width / 2
       getEl(id + '_t0').setAttribute('dx', curr_dx )
+      if(title) getEl(id + '_t').innerHTML += `<title>${title}</title>`
     },
 
     Point: function (x, y) {
@@ -1304,7 +1317,7 @@ const draw = {
       getEl('svg').appendChild(el)
     },
 
-    Rect: function ({ id, x, y, h, w, borderColor, fill }) {
+    Rect: function ({ id, x, y, h, w, borderColor, fill, title }) {
       var rect = document.createElementNS(draw.SVG_NS, 'rect')
       rect.setAttributeNS(null, 'id', id)
       rect.setAttributeNS(null, 'x', x)
@@ -1314,7 +1327,7 @@ const draw = {
       rect.setAttributeNS(null, 'fill', fill)
       rect.setAttributeNS(null, 'stroke', borderColor)
       rect.setAttributeNS(null, 'stroke-width', 3)
-      // if(title) rect.innerHTML += '<title>'+title+'</title>'
+      if(title) rect.innerHTML = '<title>'+title+'</title>'
       document.getElementById('svg').appendChild(rect)
       return rect
     }
