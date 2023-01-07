@@ -26,6 +26,14 @@ const TREELIST = [
 
 // constants
 const VARS = {
+  TREELIST_RU2EN: {
+    "Война": "Military",
+    "Социология": "Sociology",
+    "Биология": "Biology",
+    "Индустрия": "Industry",
+    "Наука": "Science",
+    // "Особые",
+  },
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
     font-family: Helvetica;
@@ -466,7 +474,7 @@ const User = {
       }
     }
 
-    if (list.length) log(`unrecognized tokens for ${treeName}: ` + tech_list)
+    if (list.length > 0) log(`unrecognized tokens for ${treeName}: `, tech_list)
 
     return list
   },
@@ -559,7 +567,7 @@ const parseDoc = {
       .map(({ tagName, innerText, children }) => 
         ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
     // const CONTENT_TAGS = ['DIV', 'P', 'UL']
-    let res = {}
+    let usersData = {}
     let interm = {
       user: {},
       planet: {},
@@ -574,7 +582,7 @@ const parseDoc = {
       if(e.tagName == 'H1') {
         if(last.user) {
           // res[last.planet] = interm.user
-          res[last.user] = interm.user
+          usersData[last.user] = interm.user
         }
         last.user = e.innerText
         interm.user = {}
@@ -586,10 +594,17 @@ const parseDoc = {
       }
       interm.user[last.H] = e.el
     }
-    res[last.user] = interm.user
-    for(let i in res)
-    parseDoc.techTableHTML(i, res[i])
-    return res
+    usersData[last.user] = interm.user
+
+    const templateName = '[Персонаж]'
+    for(let i in usersData) {
+      if(i == templateName) {
+        log('template name, skip:', templateName)
+        continue
+      }
+      parseDoc.techTableHTML(i, usersData[i])
+    }
+    return usersData
   },
   
   text(raw) {
@@ -713,20 +728,38 @@ const parseDoc = {
 
   techTableHTML(playerName, obj) {
     /**
-     * it is usually the sixth block, "specials"
+     * @param {string} str 
+     * @returns {string[]}
+     */
+    const splitFilter = str =>
+      str.split(',').filter(e => e).map(e => e.trim())
+    /**
+     * there is usually the sixth block, "specials"
      * @param {HTMLTableElement} el 
      * @returns 
      */
     const tech5TableToObj = el =>  
-      Object.fromEntries(Array.from(el.rows).map(e=>[e.children[0].innerText, e.children[1].innerText]))
+      Object.fromEntries(
+        Array.from(el.rows)
+        .map(e=>[VARS.TREELIST_RU2EN[e.children[0].innerText], splitFilter(e.children[1].innerText)])
+      )
     const data = {
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
-      buildings: obj.Здания.children[0].rows[0].children[1].innerText,
-      orbital: obj.Здания.children[0].rows[1].children[1].innerText,
+      buildings: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
+      orbital: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
     }
     // foo = data
     log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
+
+    for(let i of TREELIST) {
+      drawTree(i)
+      User.highlightStudiedTech(i,
+        data.techTable[i],
+        [].concat(data.buildings, data.orbital, data.localProjs[i])
+      )
+      savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
+    }
   }
 }
 
