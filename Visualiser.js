@@ -597,12 +597,17 @@ const parseDoc = {
     usersData[last.user] = interm.user
 
     const templateName = '[Персонаж]'
-    for(let i in usersData) {
-      if(i == templateName) {
+    for(let username in usersData) {
+      if(username == templateName) {
         log('template name, skip:', templateName)
         continue
       }
-      parseDoc.techTableHTML(i, usersData[i])
+
+      if (!getEl(username) || !getEl(username).checked) {
+        log(username, 'not marked to draw, skipping')
+        continue
+      }
+      parseDoc.techTableHTML(username, usersData[username])
     }
     return usersData
   },
