@@ -199,6 +199,7 @@ async function Init() {
           if(e.children[0].checked) {
             parseDoc.drawTech(e.innerText.trim(), techData.currentTreeName) 
           } else {
+            User.activePlayer = null
             drawTree(techData.currentTreeName)
           }
         }
@@ -215,7 +216,7 @@ async function Init() {
       })
       // if(!isLocalFile)
       parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
-      
+
       console.timeEnd('Player data load')
     })
   }, 0)
@@ -426,28 +427,35 @@ const Analysis = {
   }
 }
 
-function tspanHighlightOnClick() {
-  for (const i of document.querySelectorAll('tspan')) {
-    i.onclick = function(e) {
-      getEl('highlight_css').innerHTML = `.${e.target.className.baseVal} { fill: orange }`
-    }        
-  }
+const TreeView = {
+  tspanHighlightOnClick() {
+    for (const i of document.querySelectorAll('tspan')) {
+      i.onclick = function(e) {
+        getEl('highlight_css').innerHTML = `.${e.target.className.baseVal} { fill: orange }`
+      }        
+    }
+  },
+  
+  getMinMax(arr, attr) {
+    const t = arr.map(e => e[attr])
+    return [Math.min.apply(null, t), Math.max.apply(null, t)]
+  },
 }
 
 function drawTree(tree_name) {
   if (!tech[tree_name] || Object.keys(tech[tree_name]).length == 0) {
     parseTechIframe(tree_name)
   }
-
   
   if (cache[tree_name].html) {
     svg.innerHTML = cache[tree_name].html
     svg.setAttribute("viewBox", cache[tree_name].viewBox)
-    setTimeout(tspanHighlightOnClick,1)
+    setTimeout(TreeView.tspanHighlightOnClick,1)
     techData.currentTreeName = tree_name
+    User.drawActiveUser(tree_name)
     return
   }
-  tspanHighlightOnClick()
+  TreeView.tspanHighlightOnClick()
 
   svg.innerHTML = VARS.SVG_DEFAULT
 
@@ -455,8 +463,8 @@ function drawTree(tree_name) {
   for (let i of values)
     draw.Node(tree_name, i)
 
-  const x = getMinMax(values, 'x')
-    , y = getMinMax(values, 'y')
+  const x = TreeView.getMinMax(values, 'x')
+    , y = TreeView.getMinMax(values, 'y')
     , PAD_MIN = 20
   const viewBox = (x[0] - PAD_MIN)
     + ' ' + (y[0] - PAD_MIN)
@@ -468,14 +476,17 @@ function drawTree(tree_name) {
   cache[tree_name].viewBox = viewBox
 
   techData.currentTreeName = tree_name
-}
-
-function getMinMax(arr, attr) {
-  const t = arr.map(e => e[attr])
-  return [Math.min.apply(null, t), Math.max.apply(null, t)]
+  User.drawActiveUser(tree_name)
 }
 
 const User = {
+
+  activePlayer: null,
+  drawActiveUser(treeName) {
+    if(!this.activePlayer) return
+    parseDoc.drawTech(this.activePlayer, treeName)
+  },
+
   /**
    * 
    * @param {string} treeName 
@@ -812,10 +823,12 @@ const parseDoc = {
   drawTech(playerName, treeName) {
     if(!this.lastResult) return
     const data = this.lastResult[playerName]
-    drawTree(treeName)
+
     let projList = [].concat(data.buildings, data.orbital, data.localProjs[treeName])
     User.highlightStudiedTech(treeName, data.techTable[treeName], projList)
     User.highlightAvaltech(treeName, data.techTable[treeName], projList)
+
+    User.activePlayer = playerName
   },
 
   drawAndSaveTechs(playerName, data) {
