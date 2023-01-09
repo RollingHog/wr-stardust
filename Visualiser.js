@@ -92,6 +92,7 @@ const techData = {
   badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
   levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
   badTechCount: 0,
+  currentTreeName: null,
 }
 const stat = {}
 const inverted = {
@@ -150,7 +151,7 @@ async function Init() {
   getEl('el_loading').hidden = true
   console.timeEnd('initial draw')
 
-  setTimeout(function() {
+  setTimeout(function () {
 
     Promise.all(TREELIST
       .filter(e => e != VARS.TREELIST_NOMIL[0])
@@ -191,6 +192,17 @@ async function Init() {
       // log(statAllEffects)
 
       Analysis.totalTechCount()
+
+      getEl('players_selection').children.forEach(e=> (e.tagName=='LABEL')
+        ? e.onclick = function() { 
+          if(e.children[0].checked) {
+            parseDoc.drawTech(e.innerText.trim(), techData.currentTreeName) 
+          } else {
+            drawTree(techData.currentTreeName)
+          }
+        }
+        : null
+      )
     })
   }, 0)
 }
@@ -418,6 +430,7 @@ function drawTree(tree_name) {
     svg.innerHTML = cache[tree_name].html
     svg.setAttribute("viewBox", cache[tree_name].viewBox)
     setTimeout(tspanHighlightOnClick,1)
+    techData.currentTreeName = tree_name
     return
   }
   tspanHighlightOnClick()
@@ -439,6 +452,8 @@ function drawTree(tree_name) {
 
   cache[tree_name].html = svg.innerHTML
   cache[tree_name].viewBox = viewBox
+
+  techData.currentTreeName = tree_name
 }
 
 function getMinMax(arr, attr) {
@@ -778,6 +793,14 @@ const parseDoc = {
     // log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
 
     return data
+  },
+
+  drawTech(playerName, treeName) {
+    const data = this.lastResult[playerName]
+    drawTree(treeName)
+    let projList = [].concat(data.buildings, data.orbital, data.localProjs[treeName])
+    User.highlightStudiedTech(treeName, data.techTable[treeName], projList)
+    User.highlightAvaltech(treeName, data.techTable[treeName], projList)
   },
 
   drawAndSaveTechs(playerName, data) {
