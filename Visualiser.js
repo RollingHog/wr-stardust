@@ -26,6 +26,7 @@ const TREELIST = [
 
 // constants
 const VARS = {
+  PLAYERS_DATA_KEY: 'DATA__PLAYERS_DATA',
   TREELIST_RU2EN: {
     "Война": "Military",
     "Социология": "Sociology",
@@ -157,7 +158,7 @@ async function Init() {
       .filter(e => e != VARS.TREELIST_NOMIL[0])
       .map(e => parseTechIframe(e))
     )
-    .then(_ => {
+    .then(async _ => {
       for (let i of TREELIST) {
         drawTree(i)
       }
@@ -203,6 +204,19 @@ async function Init() {
         }
         : null
       )
+
+
+      console.time('Player data load')
+      
+      const elPlayersData = getEl('el_data_players')
+      await new Promise((resolve) => {
+        elPlayersData.onload = resolve
+        elPlayersData.src = elPlayersData.getAttribute('src2')
+      })
+      // if(!isLocalFile)
+      parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
+      
+      console.timeEnd('Player data load')
     })
   }, 0)
 }
@@ -796,6 +810,7 @@ const parseDoc = {
   },
 
   drawTech(playerName, treeName) {
+    if(!this.lastResult) return
     const data = this.lastResult[playerName]
     drawTree(treeName)
     let projList = [].concat(data.buildings, data.orbital, data.localProjs[treeName])
@@ -811,6 +826,15 @@ const parseDoc = {
       User.highlightAvaltech(i, data.techTable[i], projList)
       savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
     }
+  },
+
+  GDocToJS() {
+    if(!this.lastResult) {
+      log('nothing to save')
+      return
+    }
+    // , null, 4
+    savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult))
   },
 }
 
