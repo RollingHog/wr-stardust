@@ -435,6 +435,15 @@ const TreeView = {
       })
     }
   },
+
+  copyFirstLineOnClick() {
+    for(let i of document.querySelectorAll('text')) {
+      let el = i.children[0]
+      el ? el.addEventListener('click', function() {
+        navigator.clipboard.writeText(getEl(el.id).innerHTML)
+      }) : 0
+    }
+  },
   
   getMinMax(arr, attr) {
     const t = arr.map(e => e[attr])
@@ -451,11 +460,14 @@ function drawTree(tree_name) {
     svg.innerHTML = cache[tree_name].html
     svg.setAttribute("viewBox", cache[tree_name].viewBox)
     setTimeout(TreeView.tspanHighlightOnClick,1)
+    setTimeout(TreeView.copyFirstLineOnClick,1)
     techData.currentTreeName = tree_name
     User.drawActiveUser(tree_name)
     return
   }
+
   TreeView.tspanHighlightOnClick()
+  TreeView.copyFirstLineOnClick()
 
   svg.innerHTML = VARS.SVG_DEFAULT
 
@@ -1428,12 +1440,6 @@ const draw = {
       getEl(id + '_t0').setAttribute('dx', curr_dx )
 
       if(title) getEl(id + '_t').innerHTML += `<title>${title}</title>`
-
-      setTimeout( _ => 
-        getEl(id + '_t0') ? getEl(id + '_t0').addEventListener('click', function() {
-          navigator.clipboard.writeText(getEl(id + '_t0').innerHTML)
-        }) : 0
-      , 0)
     },
 
     Point: function (x, y) {
