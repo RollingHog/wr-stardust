@@ -862,22 +862,44 @@ const parseDoc = {
   },
 
   parsePlayerPost(text) {
-    const requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d)?)\) = \d+([^\n]*)/g)]
+    const requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d){0,10})\) = \d+([^\n]*)/g)]
       .map(e=>({text: (e[1].length ? e[1] : e[3]).trim(), rolls: e[2], rawRolls: e[2]}))
 
     for(let i of requests) {
       let rolls = {
+        sum: 0,
         critfails: 0,
         wins: 0,
         critwins: 0
       }
       for(let j of i.rolls.split(' + ')) {
+        rolls.sum += 1
         if(j == '1') rolls.critfails += 1
-        if(j == '10') rolls.critwins += 1
+        if(j == '10') {
+          rolls.critwins += 1
+          continue
+        }
         if(+j>4) rolls.wins += 1
       }
       i.rolls = rolls
     }
+
+    getEl('el_selected_tech_wrapper').hidden = false
+    getEl('el_selected_tech_list').innerHTML = `<table>
+    <thead><th>${['Технология', "КПровалы", "Успехи", "КУспехи"].join('</th><th>')}</th></thead>
+    <tbody>
+    <tr>
+    ${requests.map(e => '<td>' + [e.text, e.rolls.critfails, e.rolls.wins, e.rolls.critwins].join('</td><td>') ).join('</tr><tr>')}
+    </tr>
+    </tbody></table>`
+    // <tr>
+    //   <td>ВСЕГО</td>
+    //   <td>${[
+    //     requests.reduce( (a, e) => (+a + +e.rolls.critfails), 0),
+    //     requests.reduce( (a, e) => (+a + +e.rolls.wins), 0),
+    //     requests.reduce( (a, e) => (+a + +e.rolls.critwins), 0),
+    //   ].join('</td><td>')}</td>
+    // </tr>
 
     log(requests)
   }
