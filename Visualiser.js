@@ -886,10 +886,12 @@ const parseDoc = {
 
     getEl('el_selected_tech_wrapper').hidden = false
     getEl('el_selected_tech_list').innerHTML = `<table>
-    <thead><th>${['Технология', "КПровалы", "Успехи", "КУспехи"].join('</th><th>')}</th></thead>
+    <thead><th>${['Технология', "КПровалы", "Успехи", "КУспехи","&nbsp;"].join('</th><th>')}</th></thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, e.rolls.critfails, e.rolls.wins, e.rolls.critwins].join('</td><td>') ).join('</tr><tr>')}
+    ${requests.map(e => '<td>' + [e.text, e.rolls.critfails, e.rolls.wins, e.rolls.critwins].join('</td><td>') + '</td>' + 
+      '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
+    .join('</tr><tr>')}
     </tr>
     </tbody></table>`
     // <tr>
