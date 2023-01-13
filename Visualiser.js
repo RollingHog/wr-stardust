@@ -206,6 +206,7 @@ async function Init() {
         : null
       )
 
+      makeElDraggable(getEl('el_selected_tech_wrapper'))
 
       console.time('Player data load')
       
@@ -235,6 +236,48 @@ function countSuccessPossibility(treshold, nOfCubes) {
     if (goodCubes >= treshold) wins += 1
   }
   return +(wins / n).toFixed(3)
+}
+
+// eslint-disable-next-line no-unused-vars
+function makeElDraggable(el) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0
+  if (document.getElementById(el.id + "_header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(el.id + "_header").onmousedown = dragMouseDown
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    el.onmousedown = dragMouseDown
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event
+    e.preventDefault()
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX
+    pos4 = e.clientY
+    document.onmouseup = closeDragElement
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag
+  }
+
+  function elementDrag(e) {
+    e = e || window.event
+    e.preventDefault()
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX
+    pos2 = pos4 - e.clientY
+    pos3 = e.clientX
+    pos4 = e.clientY
+    // set the element's new position:
+    el.style.top = (el.offsetTop - pos2) + "px"
+    el.style.left = (el.offsetLeft - pos1) + "px"
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null
+    document.onmousemove = null
+  }
 }
 
 const Analysis = {
@@ -1096,14 +1139,14 @@ function parseCostAndEffects(t) {
       .trim()
       .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
       .replace(/ {2,}/g, ' ')
-      .replace(/^(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
+      .replace(/^(Общество|Производство|Наука) ([+-]\d+)/, '$1:$2')
       .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный:$1')
       // временный бонус
       .replace(/^на (\d+) хода?/i, 'Временно:$1')
       // вещества
       .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
       // Эффекты и бонусы:
-      .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) [+-](\\d+)$`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
       // Плюсы к научным веткам
       .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
       // армии и звездолёты
@@ -1112,8 +1155,8 @@ function parseCostAndEffects(t) {
       .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
       .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
       // модули и оружие, глобальные военные эффекты
-      .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) [+-]?(\\d+)$`), '$1:$2')
-      .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) [+-]?(\\d+)$`), '$1 $2:$3')
+      .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
       .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
       .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
       .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
