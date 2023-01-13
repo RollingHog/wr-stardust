@@ -854,6 +854,8 @@ const parseDoc = {
      */
     const splitFilter = str =>
       str.split(',').map(e => e.trim()).filter(e => e)
+        // TODO isSpecials
+        // .filter( e => e.replace(/\([^)]+\)/).trim() in inverted.alltech ? true : console.warn(this.techTableHTML.name, e))
     /**
      * there is usually the sixth block, "Specials"
      * @param {HTMLTableElement} el 
@@ -961,7 +963,7 @@ const parseDoc = {
     let data = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e=> e.children[0] && inverted.alltech[e.children[0].innerText] ? 
         inverted.alltech[e.children[0].innerText].effect
-        : null
+        : (console.warn(e.children[0]), null)
       )
       .filter( e => e )
     
