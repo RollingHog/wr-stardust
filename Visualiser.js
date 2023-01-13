@@ -852,10 +852,18 @@ const parseDoc = {
      * @param {string} str 
      * @returns {string[]}
      */
-    const splitFilter = str =>
-      str.split(',').map(e => e.trim()).filter(e => e)
-        // TODO isSpecials
-        // .filter( e => e.replace(/\([^)]+\)/).trim() in inverted.alltech ? true : console.warn(this.techTableHTML.name, e))
+    const splitFilter = (str, treeRuName) => {
+      let res = str.split(',').map(e => e.trim()).filter(e => e)
+
+      if(treeRuName !== 'Особые') {
+        res = res.filter( e => e.replace(/\([^)]+\)/, '').trim() in inverted.alltech 
+          ? true 
+          : console.warn(this.techTableHTML.name, e)
+        )
+      }
+
+      return res
+    }
     /**
      * there is usually the sixth block, "Specials"
      * @param {HTMLTableElement} el 
@@ -864,7 +872,7 @@ const parseDoc = {
     const tech5TableToObj = el =>  
       Object.fromEntries(
         Array.from(el.rows)
-        .map(e=>[VARS.TREELIST_RU2EN[e.children[0].innerText], splitFilter(e.children[1].innerText)])
+        .map(e=>[VARS.TREELIST_RU2EN[e.children[0].innerText], splitFilter(e.children[1].innerText, e.children[0].innerText)])
       )
     const data = {
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
