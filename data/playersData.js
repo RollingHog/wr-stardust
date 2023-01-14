@@ -71,9 +71,15 @@ var DATA__PLAYERS_DATA = {
     "techTable": {
       "Military": [],
       "Sociology": [],
-      "Biology": [],
-      "Industry": [],
-      "Science": [],
+      "Biology": [
+        "Секвенирование ДНК"
+      ],
+      "Industry": [
+        "Экзоминералогия"
+      ],
+      "Science": [
+        "Колониальная сеть"
+      ],
       "Specials": []
     },
     "buildings": [
