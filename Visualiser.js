@@ -508,7 +508,7 @@ const Analysis = {
             "Блок": e.effect[0][1], 
             "Цена": +e.cost[0][1], 
             "Слоты": +e.effect[1][1],
-            "Свойства": e.effect.slice(2).map(e => e.join(':')).join(','),
+            "Свойства": e.effect.slice(2).map(e => e.join(': ')).join(', '),
           }])
       ))
     },
@@ -518,7 +518,7 @@ const Analysis = {
         Object.values(inverted.alltech)
           .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
           .map(e => [e.name, {
-            "Свойства": e.effect.map(e => e.join(':')).join(','),
+            "Свойства": e.effect.map(e => e.join(': ')).join(', '),
           }])
       ))
     },
