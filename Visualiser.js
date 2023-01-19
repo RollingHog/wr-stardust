@@ -1010,8 +1010,8 @@ const parseDoc = {
   },
 
   parsePlayerPost(text) {
-    const requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d){0,10})\) = \d+([^\n]*)/g)]
-      .map(e=>({text: (e[1].length ? e[1] : e[3]).trim(), rolls: e[2], rawRolls: e[2]}))
+    let requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d+){0,10})\)/g)]
+      .map(e=>({text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2]}))
 
     for(let i of requests) {
       let rolls = {
@@ -1031,6 +1031,14 @@ const parseDoc = {
       }
       i.rolls = rolls
     }
+
+    let bonusThings = [...text.matchAll(/\+\+([^+]+)\+\+/g)].map( e => ({ text: e[1], rolls: {
+      sum: NaN,
+      critfails: NaN,
+      wins: NaN,
+      critwins: NaN
+    }, rawRolls: null }))
+    requests = requests.concat(bonusThings)
 
     getEl('el_selected_tech_wrapper').hidden = false
     getEl('el_selected_tech_list').innerHTML = `<table>
@@ -1059,8 +1067,6 @@ const parseDoc = {
     // log(requests)
     setTimeout(this.countTechStudyResult, 100)
   },
-
-
 
   countTechStudyResult() {
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
