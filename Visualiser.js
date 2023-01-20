@@ -149,7 +149,18 @@ async function Init() {
   getEl('el_loading').hidden = true
   console.timeEnd('initial draw')
 
-  setTimeout(function () {
+  setTimeout(async function () {
+
+    console.time('Player data load')
+      
+    const elPlayersData = getEl('el_data_players')
+    await new Promise((resolve) => {
+      elPlayersData.onload = resolve
+      elPlayersData.src = elPlayersData.getAttribute('src2')
+    })
+    parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
+
+    console.timeEnd('Player data load')
 
     Promise.all(TREELIST
       .filter(e => e != VARS.TREELIST_NOMIL[0])
@@ -208,18 +219,6 @@ async function Init() {
 
       HTMLUtils.makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
-
-      console.time('Player data load')
-      
-      const elPlayersData = getEl('el_data_players')
-      await new Promise((resolve) => {
-        elPlayersData.onload = resolve
-        elPlayersData.src = elPlayersData.getAttribute('src2')
-      })
-      // if(!isLocalFile)
-      parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
-
-      console.timeEnd('Player data load')
     })
   }, 0)
 }
@@ -659,7 +658,9 @@ const User = {
   highlightAvaltech(treeName, techList, projList) {
     techList
       .concat(projList)
+      .map( e => e.search('сломано') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
+      .filter( e => e )
       .map(e => {
         const t = inverted.alltech[e]
         // if(t.req.length == 0) return t.id
@@ -676,6 +677,7 @@ const User = {
 
   countSummaryCostAndEffect(techList) {
     let data = techList
+      .map( e => e.search('сломано') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
       .map( e => inverted.alltech[e] 
         ? inverted.alltech[e].effect
@@ -706,8 +708,6 @@ const User = {
     let startParams = userDataObj.colonyParams["Начальные параметры"].split('/')
       .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
     startParams = Object.fromEntries(startParams)
-
-    log(startParams)
 
     let data = 
       // local: 
