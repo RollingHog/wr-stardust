@@ -658,7 +658,7 @@ const User = {
       })
       .flat()
       .forEach( i => {
-        if(getEl(i).getAttribute('fill') == 'lightgrey') {
+        if(getEl(i) && getEl(i).getAttribute('fill') == 'lightgrey') {
           getEl(i).setAttribute('fill','lightyellow')
         }
       })
