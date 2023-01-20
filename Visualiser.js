@@ -659,6 +659,7 @@ const User = {
   highlightAvaltech(treeName, techList, projList) {
     techList
       .concat(projList)
+      .map( e => e.replace(/\([^)]+\)/,'').trim())
       .map(e => {
         const t = inverted.alltech[e]
         // if(t.req.length == 0) return t.id
@@ -675,6 +676,7 @@ const User = {
 
   countSummaryCostAndEffect(techList) {
     let data = techList
+      .map( e => e.replace(/\([^)]+\)/,'').trim())
       .map( e => inverted.alltech[e] 
         ? inverted.alltech[e].effect
         : null
@@ -1168,6 +1170,7 @@ var KEYWORDS = {
     "специалисты",
     "ресурсы",
   ],
+  // TECH_PROPS: [],
   MATERIALS: [
     // 1 ряд
     "Добыча",
@@ -1300,8 +1303,8 @@ function parseCostAndEffects(t) {
       .trim()
       .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
       .replace(/ {2,}/g, ' ')
-      .replace(/^(Общество|Производство|Наука) ([+-]\d+)/, '$1:$2')
-      .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный:$1')
+      .replace(/^(Общество|Производство|Наука) ([+-]\d+)$/, '$1:$2')
+      .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
       // временный бонус
       .replace(/^на (\d+) хода?/i, 'Временно:$1')
       // вещества
