@@ -2,10 +2,7 @@ var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "techTable": {
       "Military": [],
-      "Sociology": [
-        "Психологическая адаптация",
-        "Подтверждение авторитета"
-      ],
+      "Sociology": [],
       "Biology": [],
       "Industry": [],
       "Science": [],
