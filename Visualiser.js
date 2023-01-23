@@ -1060,8 +1060,8 @@ const parseDoc = {
 
   countTechStudyResult() {
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
-      .map(e=> e.children[0] && inverted.alltech[e.children[0].innerText] ? 
-        (e.children[0].style.backgroundColor='', e.children[0].innerText)
+      .map(e=> e.children[0] && inverted.alltech[e.children[0].innerText]
+        ? (e.children[0].style.backgroundColor='', e.children[0].innerText)
         : (console.warn(e.children[0]),e.children[0].style.backgroundColor='tomato', null)
       )
       .filter( e => e )
@@ -1074,6 +1074,23 @@ const parseDoc = {
         .map(e => `<td>${e[0]}</td><td>${e[1]}</td>`).join('</tr><tr>')
       + '</tr>'
     
+
+      const byType = {
+        rectangle: [],
+        parallelogram: [],
+        hexagon: [],
+      }
+
+      techList.forEach( e => {
+        if(['hexagon', 'rectangle', 'parallelogram'].includes(inverted.alltech[e].type)) 
+          byType[inverted.alltech[e].type].push(e)
+      })
+
+      getEl('el_tech_by_type_list').innerHTML = `
+      <strong>Технологии</strong><br>${byType.rectangle.join('<br>')}
+      <br><strong>Здания</strong><br>${byType.parallelogram.join('<br>')}
+      <br><strong>Проекты</strong><br>${byType.hexagon.join('<br>')}
+      `
   }
 }
 
