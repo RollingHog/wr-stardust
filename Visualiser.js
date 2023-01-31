@@ -8,7 +8,7 @@ getEl log
   draw
 */
 
-const VERSION = '1.0.0'
+const VERSION = '1.0.1'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
@@ -520,6 +520,19 @@ const Analysis = {
             "Свойства": e.effect.map(e => e.join(': ')).join(', '),
           }])
       ))
+    },
+
+    список_технологий_по_геометрической_форме() {
+      Analysis.reportTable(
+        Object.values(inverted.alltech)
+          .reduce( (acc, e) => {
+            if(!acc[e.type])
+              acc[e.type]=1
+            else
+              acc[e.type]+=1
+            return acc
+          }, {})
+      )
     },
 
     // drawGraph() {
