@@ -89,6 +89,7 @@ const techData = {
   graphmls: {},
   badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
   levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
+  subtreeBorders: Object.fromEntries(TREELIST.map(e => [e,[]])),
   badTechCount: 0,
   currentTreeName: null,
 }
@@ -149,7 +150,7 @@ async function Init() {
   getEl('el_loading').hidden = true
   console.timeEnd('initial draw')
 
-  setTimeout(async function () {
+  setTimeout(async function init2 () {
 
     console.time('Player data load')
       
@@ -189,6 +190,7 @@ async function Init() {
       }
 
       Analysis.reportBadY()
+      Analysis.countTechSubtreesBorders()
 
       // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
@@ -414,6 +416,17 @@ const Analysis = {
       }
     }
     Object.keys(techData.levels).map(i => techData.levels[i].sort((a,b)=>a<b))
+  },
+  countTechSubtreesBorders() {
+    techData.subtreeBorders = Object.fromEntries(
+      Object.entries(techData.badCells)
+        .map(e => [e[0], e[1]
+          .filter(e2 => e2.fullText.length > 2)
+          .map(({ fullText, x, w }) => ({ fullText: fullText.toLowerCase(), x1: x, x2: x + w }))
+        ]))
+  },
+  getSubtreeName(techObj) {
+    
   },
   searchBadTechRefs() {
     for (let i of Object.keys(tech)) {
