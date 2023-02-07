@@ -896,6 +896,7 @@ const parseDoc = {
 
       this.drawAndSaveTechs(username, usersRes[username])
     }
+
     return usersRes
   },
   
@@ -915,6 +916,7 @@ const parseDoc = {
       // this.lastResult = parseDoc.text(raw)
     }
     this.lastRaw = raw
+    parseDoc.GDocToJS()
   },
 
   async redoLast() {
@@ -1030,14 +1032,14 @@ const parseDoc = {
     getEl('el_selected_tech_wrapper').hidden = false
     getEl('el_selected_tech_list').innerHTML = `<table>
     <thead>
-      <th>${['Технология', "КПровалы", "Успехи", "КУспехи"].join('</th><th>')}</th>
+      <th>${['Технология', 'Цена', "КПровалы", "Успехи", "КУспехи"].join('</th><th>')}</th>
       <th onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
       <button>+</button>
       </th>
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, e.rolls.critfails, e.rolls.wins, e.rolls.critwins].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins].join('</td><td>') + '</td>' + 
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
@@ -1057,10 +1059,38 @@ const parseDoc = {
 
   countTechStudyResult() {
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
-      .map(e=> e.children[0] && inverted.alltech[e.children[0].innerText]
-        ? (e.children[0].style.backgroundColor='', e.children[0].innerText)
-        : (console.warn(e.children[0]),e.children[0].style.backgroundColor='tomato', null)
-      )
+      .map(e=> {
+        if(e.children[0] && inverted.alltech[e.children[0].innerText]) {
+          e.children[0].style.backgroundColor=''
+          e.children[2].style.backgroundColor=''
+          e.children[4].style.backgroundColor=''
+          e.children[0].title=''
+
+          if(e.children[1].innerText.length == 0) {
+            e.children[1].innerText = inverted.alltech[e.children[0].innerText].cost[0][1]
+          }
+
+          if (+e.children[2].innerText > 0) {
+            e.children[2].style.backgroundColor = 'tomato'
+          }
+
+          if( +e.children[4].innerText > 0) {
+            e.children[4].style.backgroundColor='lawngreen'
+          }
+
+          if(+e.children[3].innerText + +e.children[4].innerText < +e.children[1].innerText) {
+            e.style.backgroundColor='goldenrod'
+            return null
+          }
+
+          return e.children[0].innerText
+        } else {
+          console.warn(e.children[0])
+          e.children[0].style.backgroundColor='cyan'
+          e.children[0].title='Название технологии не найдено'
+          return null
+        }
+      })
       .filter( e => e )
 
     const result = User.countSummaryCostAndEffect(techList)
@@ -1070,24 +1100,28 @@ const parseDoc = {
         .sort()
         .map(e => `<td>${e[0]}</td><td>${e[1]}</td>`).join('</tr><tr>')
       + '</tr>'
-    
 
-      const byType = {
-        rectangle: [],
-        parallelogram: [],
-        hexagon: [],
-      }
+    const byType = {
+      rectangle: [],
+      parallelogram: [],
+      hexagon: [],
+    }
 
-      techList.forEach( e => {
-        if(['hexagon', 'rectangle', 'parallelogram'].includes(inverted.alltech[e].type)) 
-          byType[inverted.alltech[e].type].push(e)
-      })
+    techList.forEach(e => {
+      if (['hexagon', 'rectangle', 'parallelogram'].includes(inverted.alltech[e].type))
+        byType[inverted.alltech[e].type].push(e)
+    })
 
-      getEl('el_tech_by_type_list').innerHTML = `
-      <strong>Технологии</strong><br>${byType.rectangle.join('<br>')}
-      <br><strong>Здания</strong><br>${byType.parallelogram.join('<br>')}
-      <br><strong>Проекты</strong><br>${byType.hexagon.join('<br>')}
-      `
+    getEl('el_tech_by_type_list').innerHTML = [
+      ['Технологии', byType.rectangle],
+      ['Здания', byType.parallelogram],
+      ['Проекты', byType.hexagon],
+    ].map(e =>
+      `<strong>${e[0]}</strong>
+      <div>
+        ${e[1].map( e2 => `<span onclick="navigator.clipboard.writeText(getEl(el.id).textContent)">${e2}</span>`)}
+      </div>`
+    ).join('')
   }
 }
 
