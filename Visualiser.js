@@ -73,7 +73,14 @@ const VARS = {
     '#00FF00': 'Общество',
     '#0000FF': 'Наука',
     '#000000': "Любой",
-  }
+  },
+  fill2TreeType: {
+    "#FF9966": "Military",
+    "#CCFFCC": "Biology",
+    "#FFCC00": "Industry",
+    "#99CCFF": "Science",
+    "#CC99FF": "Sociology",
+  },
 }
 
 const cache = Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}]))
@@ -996,8 +1003,11 @@ const parseDoc = {
     }
     savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2))
   },
+}
 
-  parsePlayerPost(text) {
+// eslint-disable-next-line no-unused-vars
+const playerPost = {
+  parse(text) {
     let requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d+){0,10})\)/g)]
       .map(e=>({text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2]}))
       .map(( {text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёА-ЯЁ]+/g,''), rolls, rawRolls }))
@@ -1033,7 +1043,8 @@ const parseDoc = {
     getEl('el_selected_tech_list').innerHTML = `<table>
     <thead>
       <th>${['Технология', 'Цена', "КПровалы", "Успехи", "КУспехи"].join('</th><th>')}</th>
-      <th onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
+      <th 
+        onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
       <button>+</button>
       </th>
     </thead>
@@ -1119,7 +1130,15 @@ const parseDoc = {
     ].map(e =>
       `<strong>${e[0]}</strong>
       <div>
-        ${e[1].map( e2 => `<span onclick="navigator.clipboard.writeText(getEl(el.id).textContent)">${e2}</span>`)}
+        ${e[1]
+          .map( e2 => 
+            `<span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
+            >${e2}, </span>
+            <span style="background-color:${inverted.alltech[e2].fill}">
+              ${VARS.fill2TreeType[inverted.alltech[e2].fill]}
+            </span><br>`)
+          .join('')
+        }
       </div>`
     ).join('')
   }
