@@ -1,7 +1,6 @@
 // common.js
 /* global
 getEl log
-PLA
 */
 
 // draw.js
@@ -1151,9 +1150,16 @@ const playerPost = {
 
     const result = User.countSummaryCostAndEffect(techList)
 
-    getEl('el_tech_result_list').innerHTML = '<table><tbody><tr>'
-      + Object.entries(result)
-        .sort()
+    let effectList = Object.entries(result)
+      .sort()
+      .sort( (a,b) => {
+        if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
+        if(!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
+        return 0  
+      })
+      
+      getEl('el_tech_result_list').innerHTML = '<table><tbody><tr>'
+      + effectList
         .map(e => `<td>${e[0]}</td><td>${e[1]}</td>`).join('</tr><tr>')
       + '</tr>'
 
