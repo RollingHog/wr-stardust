@@ -1048,7 +1048,7 @@ const parseDoc = {
       log('nothing to save')
       return
     }
-    savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_TIMESTAMP_KEY} = ${(new Date()).toJSON()};`
+    savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_TIMESTAMP_KEY} = '${(new Date()).toJSON()}'`
     +`\nvar ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2))
   },
 }
