@@ -23,6 +23,7 @@ const TREELIST = [
 
 // constants
 const VARS = {
+  PLAYERS_TIMESTAMP_KEY: 'DATA__PLAYERS_TIMESTAMP',
   PLAYERS_DATA_KEY: 'DATA__PLAYERS_DATA',
   TREELIST_RU2EN: {
     "Война": "Military",
@@ -110,6 +111,8 @@ const svg = document.getElementById('svg')
 
 window.onload = Init
 async function Init() {
+  log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
+
   getEl('el_loading').hidden = false
   const parser = new DOMParser()
   const isLocalFile = location.href.startsWith('file:///')
@@ -1045,7 +1048,8 @@ const parseDoc = {
       log('nothing to save')
       return
     }
-    savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2))
+    savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_TIMESTAMP_KEY} = ${(new Date()).toJSON()};`
+    +`\nvar ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2))
   },
 }
 
