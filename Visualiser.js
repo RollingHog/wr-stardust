@@ -1348,6 +1348,9 @@ var KEYWORDS = {
   ],
 }
 
+/**
+ * @param {TTechObject} t 
+ */
 function parseCostAndEffects(t) {
   const ITS_SPECIAL = KEYWORDS.ITS_SPECIAL + ':'
   const ALL_RIGHT = ITS_SPECIAL+'$1'
@@ -1427,7 +1430,7 @@ function parseCostAndEffects(t) {
     // it is non-split => not recognized string
     // effect = null
     techData.badTechCount++
-    console.warn(t.name, effect.filter(e=>e.length<2)[0], effectRaw)
+    console.warn(t.treeName, t.name, effect.filter(e=>e.length<2)[0], effectRaw)
   }
 
   return [cost, effect]
