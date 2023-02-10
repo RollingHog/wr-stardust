@@ -23,6 +23,7 @@ const TREELIST = [
 
 // constants
 const VARS = {
+  DISABLE_PARSE_IMMUNITY: false,
   PLAYERS_TIMESTAMP_KEY: 'DATA__PLAYERS_TIMESTAMP',
   PLAYERS_DATA_KEY: 'DATA__PLAYERS_DATA',
   TREELIST_RU2EN: {
@@ -1230,6 +1231,7 @@ class TTechObject {
 
 var KEYWORDS = {
   ITS_SPECIAL: 'особое',
+  ALL_RIGHT: 'особое:$1',
   COLONY_PARAMS: [
     'Наука'
     , 'Производство'
@@ -1372,23 +1374,21 @@ const parseNode = {
    * @param {TTechObject} t 
    */
   costAndEffects(t) {
-    const ITS_SPECIAL = KEYWORDS.ITS_SPECIAL + ':'
-    const ALL_RIGHT = ITS_SPECIAL+'$1'
-
-    const DISABLE_PARSE_IMMUNITY = false
-
     const studyCubesType = VARS.colorToParameterType[t.borderColor]
+    const cost = this.cost(t.cost, t, studyCubesType)
+    const effect = this.effects(t.effect, t)
 
-    const costRaw = t.cost
-    const effectRaw = t.effect
+    return [cost, effect]
+  },
 
+  cost(costRaw, {treeName, name}, studyCubesType) {
     const cost = costRaw
       .split(',')
       .map(e => e
         .trim()
-        .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
+        .replace(/:/g, VARS.DISABLE_PARSE_IMMUNITY ? '' : KEYWORDS.ITS_SPECIAL+':')
         .replace(/ {2,}/g, ' ')
-        .replace(new RegExp(`^(${KEYWORDS.TECH_COST_MODS.join('|')})$`), ALL_RIGHT)
+        .replace(new RegExp(`^(${KEYWORDS.TECH_COST_MODS.join('|')})$`), KEYWORDS.ALL_RIGHT)
         .replace(/^(\d+)$/i, studyCubesType + ':$1')
         .replace(/^(\d+) этапа$/i, 'Этапы:$1')
         .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
@@ -1401,15 +1401,19 @@ const parseNode = {
       )
 
     if (cost.some(e => e.length < 2)) {
-      console.warn('bad cost', t.treeName, t.name, cost, costRaw)
+      console.warn('bad cost', treeName, name, cost, costRaw)
       techData.badTechCount++
     }
 
-    let effect = effectRaw
+    return cost
+  },
+
+  effects(effectRaw, {treeName, name}) {
+    const effect = effectRaw
       .split(',')
       .map(e => e
         .trim()
-        .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
+        .replace(/:/g, VARS.DISABLE_PARSE_IMMUNITY ? '' : KEYWORDS.ITS_SPECIAL + ':')
         .replace(/ {2,}/g, ' ')
         .replace(/^(Общество|Производство|Наука) ([+-]\d+)$/, '$1:$2')
         .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
@@ -1435,25 +1439,24 @@ const parseNode = {
         .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
         // типы урона, эффекты оружия
         .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
-        .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), ALL_RIGHT)
+        .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), KEYWORDS.ALL_RIGHT)
         // эффекты, дающие великих людей
         .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
         .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
         // базовые вещи
-        .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECT_MODS.join('|')})$`), ALL_RIGHT)
+        .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECT_MODS.join('|')})$`), KEYWORDS.ALL_RIGHT)
         // особый эффект - победа
-        .replace(/(победа)/, ALL_RIGHT)
+        .replace(/(победа)/, KEYWORDS.ALL_RIGHT)
         .split(':')
       )
 
     if (effect.some(e => e.length < 2)) {
       // it is non-split => not recognized string
-      // effect = null
       techData.badTechCount++
-      console.warn(t.treeName, t.name, effect.filter(e=>e.length<2)[0], effectRaw)
+      console.warn(treeName, name, effect.filter(e => e.length < 2)[0], effectRaw)
     }
 
-    return [cost, effect]
+    return effect
   },
 
   /**
