@@ -786,6 +786,7 @@ const User = {
 
   drawUserStat(playerName) {
     const data = User.countAllUserEffects(window[VARS.PLAYERS_DATA_KEY][playerName])
+      .filter( e => !KEYWORDS.TECH_EFFECT_MODS.includes(e[0].replace(/^:/,'')) )
 
     let t = {
       main: [],
@@ -1167,7 +1168,7 @@ const playerPost = {
 
     let effectList = Object.entries(result)
       .sort()
-      .filter( e => (log(e[0].replace(/^:/,'')),!KEYWORDS.TECH_EFFECT_MODS.includes(e[0].replace(/^:/,''))) )
+      .filter( e => !KEYWORDS.TECH_EFFECT_MODS.includes(e[0].replace(/^:/,'')) )
       .sort( (a,b) => {
         if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
         if(!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
