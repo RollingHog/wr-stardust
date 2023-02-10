@@ -1284,6 +1284,15 @@ var KEYWORDS = {
     "Ремонт (?:армий|флотов)",
     "Бомбардировка",
   ],
+  TECH_COST_MODS: [
+    'базовое',
+    'суперпроект',
+    'астропроект',
+    'почва',
+    'первый контакт',
+    'черная дыра',
+    'электростанция',
+  ],
   MILITARY_PARAMS: [
     "Атака",
     "Защита",
@@ -1341,9 +1350,7 @@ function parseCostAndEffects(t) {
       .trim()
       .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
       .replace(/ {2,}/g, ' ')
-      .replace(/(базовое|суперпроект|астропроект)/, ALL_RIGHT)
-      .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
-      .replace(/(электростанция)/, ALL_RIGHT)
+      .replace(new RegExp(`^(${KEYWORDS.TECH_COST_MODS.join('|')})$`), ALL_RIGHT)
       .replace(/^(\d+)$/i, studyCubesType + ':$1')
       .replace(/^(\d+) этапа$/i, 'Этапы:$1')
       .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
