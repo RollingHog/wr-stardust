@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-02-12T02:39:21.694Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-02-12T02:50:28.158Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -123,7 +123,20 @@ var DATA__PLAYERS_DATA = {
     "orbital": [
       "Гелиоприемник (чужое; сломано)"
     ],
-    "uniqueResources": null,
+    "uniqueResources": [
+      [
+        "Производство",
+        "+1"
+      ],
+      [
+        "особое",
+        "жарища пиздец"
+      ],
+      [
+        "особое",
+        "любые гелиотехнологии будут эффективнее"
+      ]
+    ],
     "localProjs": {
       "Military": [],
       "Sociology": [
@@ -147,7 +160,7 @@ var DATA__PLAYERS_DATA = {
     "startingFeature": [
       [
         "особое",
-        "поселение не будет производить осуждение при исследовании и использовании биотеха"
+        "население не производит осуждение при исследовании биотеха"
       ]
     ],
     "techTable": {
