@@ -1149,6 +1149,8 @@ const playerPost = {
 
         if(inverted.alltech[e.children[0].innerText]) {
 
+          e.children[0].style.backgroundColor = inverted.alltech[e.children[0].innerText].fill
+
           if(e.children[1].innerText.length == 0) {
             e.children[1].innerText = inverted.alltech[e.children[0].innerText].cost[0][1]
           }
