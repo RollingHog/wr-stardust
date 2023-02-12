@@ -1131,22 +1131,25 @@ const playerPost = {
   countTechStudyResult() {
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e=> {
-        if(e.children[0] && inverted.alltech[e.children[0].innerText]) {
-          e.children[0].style.backgroundColor=''
-          e.children[2].style.backgroundColor=''
-          e.children[4].style.backgroundColor=''
-          e.children[0].title=''
+        if(!e.children[0]) return null
+
+        e.children[0].style.backgroundColor=''
+        e.children[2].style.backgroundColor=''
+        e.children[4].style.backgroundColor=''
+        e.children[0].title=''
+
+        if (+e.children[2].innerText > 0) {
+          e.children[2].style.backgroundColor = 'tomato'
+        }
+
+        if( +e.children[4].innerText > 0) {
+          e.children[4].style.backgroundColor='lawngreen'
+        }
+
+        if(inverted.alltech[e.children[0].innerText]) {
 
           if(e.children[1].innerText.length == 0) {
             e.children[1].innerText = inverted.alltech[e.children[0].innerText].cost[0][1]
-          }
-
-          if (+e.children[2].innerText > 0) {
-            e.children[2].style.backgroundColor = 'tomato'
-          }
-
-          if( +e.children[4].innerText > 0) {
-            e.children[4].style.backgroundColor='lawngreen'
           }
 
           if(+e.children[3].innerText + +e.children[4].innerText < +e.children[1].innerText) {
@@ -1156,7 +1159,7 @@ const playerPost = {
 
           return e.children[0].innerText
         } else {
-          console.warn(e.children[0])
+          console.log(e.children[0])
           e.children[0].style.backgroundColor='cyan'
           e.children[0].title='Название технологии не найдено'
           return null
