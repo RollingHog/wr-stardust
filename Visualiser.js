@@ -779,8 +779,13 @@ const User = {
         data[i] = +startParams[i]
     }
 
-    let res = Object.entries(data).concat(userDataObj.startingFeature)
-    if(userDataObj.uniqueResources) res.concat(userDataObj.uniqueResources)
+    let res = Object.entries(data).concat(userDataObj.startingFeature
+      .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], i[1]])
+    )
+
+    if(userDataObj.uniqueResources) res = res.concat(userDataObj.uniqueResources
+      .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], i[1]])
+    )
 
     return res
   },
