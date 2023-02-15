@@ -713,7 +713,7 @@ const User = {
   highlightAvaltech(treeName, techList, projList) {
     techList
       .concat(projList)
-      .map( e => e.search('сломано') == -1 ? e : '')
+      .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
       .filter( e => e )
       .map(e => {
@@ -732,7 +732,7 @@ const User = {
 
   countSummaryCostAndEffect(techList, userDataObj = null) {
     let data = techList
-      .map( e => e.search('сломано') == -1 ? e : '')
+      .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
       .map( e => inverted.alltech[e] 
         ? inverted.alltech[e].effect
