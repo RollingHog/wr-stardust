@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-02-15T20:15:54.968Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-02-20T22:25:31.156Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -108,14 +108,16 @@ var DATA__PLAYERS_DATA = {
       "Industry": [
         "Экзоминералогия"
       ],
-      "Science": [],
+      "Science": [
+        "Постземная астрономия"
+      ],
       "Specials": []
     },
     "colonyParams": {
-      "Наука": "3",
+      "Наука": "5",
       "Производство": "4",
       "Общество": "8",
-      "Свободные кубы": "0",
+      "Свободные кубы": "1",
       "Начальные параметры": "2/1/3"
     },
     "additionalParams": {
@@ -147,12 +149,14 @@ var DATA__PLAYERS_DATA = {
         "жарища пиздец"
       ],
       [
-        "особое",
-        "любые гелиотехнологии будут эффективнее"
+        "Солнце",
+        "+2"
       ]
     ],
     "localProjs": {
-      "Military": [],
+      "Military": [
+        "Para bellum"
+      ],
       "Sociology": [
         "Психологическая адаптация",
         "Подтверждение авторитета"
@@ -160,7 +164,9 @@ var DATA__PLAYERS_DATA = {
       "Biology": [
         "Оценка внешней среды"
       ],
-      "Industry": [],
+      "Industry": [
+        "Экзометеорология"
+      ],
       "Science": [
         "Колониальная сеть",
         "Умное окружение"
