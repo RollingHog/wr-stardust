@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-02-20T22:25:31.156Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-02-24T23:27:24.026Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -365,7 +365,7 @@ var DATA__PLAYERS_DATA = {
       "Наука": "2",
       "Производство": "1",
       "Общество": "3",
-      "Свободные кубы": "0",
+      "Свободные кубы": "0 (однократно +15)",
       "Начальные параметры": "2/1/3"
     },
     "additionalParams": {
@@ -382,7 +382,68 @@ var DATA__PLAYERS_DATA = {
       "Базовое жильё"
     ],
     "orbital": [],
-    "uniqueResources": null,
+    "uniqueResources": [
+      [
+        ""
+      ]
+    ],
+    "localProjs": {
+      "Military": [],
+      "Sociology": [],
+      "Biology": [],
+      "Industry": [],
+      "Science": [],
+      "Specials": []
+    }
+  },
+  "Илоний Джобс": {
+    "startingFeature": [
+      [
+        "Общество",
+        "+1"
+      ],
+      [
+        "особое",
+        "улучшаемы"
+      ]
+    ],
+    "techTable": {
+      "Military": [],
+      "Sociology": [],
+      "Biology": [],
+      "Industry": [],
+      "Science": [],
+      "Specials": []
+    },
+    "colonyParams": {
+      "Наука": "2",
+      "Производство": "2",
+      "Общество": "3",
+      "Свободные кубы": "0 (однократно +15)",
+      "Начальные параметры": "2/2/2"
+    },
+    "additionalParams": {
+      "снабж. отряды": "0",
+      "чуждая среда": "0",
+      "непривычная среда": "0",
+      "аномалия": "0",
+      "доверие": "0",
+      "волнения": "0",
+      "осуждение": "0"
+    },
+    "buildings": [
+      "Базовая электростанция",
+      "Базовое жильё"
+    ],
+    "orbital": [],
+    "uniqueResources": [
+      [
+        ""
+      ],
+      [
+        ""
+      ]
+    ],
     "localProjs": {
       "Military": [],
       "Sociology": [],
