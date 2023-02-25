@@ -235,6 +235,7 @@ async function Init() {
 
       HTMLUtils.makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
+      HTMLUtils.makeElDraggable('el_help', 'el_help_header')
     })
   }, 0)
 }
@@ -870,6 +871,7 @@ const User = {
       <strong>Сводный отчет: ${playerName}</strong>
       <br>
       <table><tr>${t.main.map(e => `<td>${e[0]}<td>${e[1]}`).join('</tr><tr>')}</tr></table>
+      <br>
       <table><tr>${t.additional.map(e => `<td>${e[0]}<td>${e[1]==0?' ':`${+e[1]>=0?'+':'-'}${e[1]}`}`).join('</tr><tr>')}</tr></table>
       `
   },

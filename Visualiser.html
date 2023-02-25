@@ -49,6 +49,10 @@
     cursor: move;
   }
 
+  .modal .btn_close {
+    float: right;
+  }
+
   .modal .body {
     height: 90%;
     overflow-y: scroll;
@@ -89,7 +93,7 @@
     style="left: 260px; top: 50px; width: 50%;">
     <div id="el_selected_tech_header" class="header">
       <strong>Парсер</strong>
-      <button onclick="getEl('el_selected_tech_wrapper').hidden = true" style="float: right;" accesskey="й">Close</button>
+      <button onclick="getEl('el_selected_tech_wrapper').hidden = true" class="btn_close">Close</button>
     </div>
 
     <div class="body">
@@ -109,10 +113,18 @@
     style="right: 50px; top: 50px;">
     <div id="el_reports_header" class="header">
       <strong>Отчеты</strong>
-      <button onclick="getEl('el_reports_wrapper').hidden = true" style="float: right;" accesskey="й">Close</button>
+      <button onclick="getEl('el_reports_wrapper').hidden = true" class="btn_close">Close</button>
     </div>
     <button id="el_reports_home" onclick="Analysis.drawReportsList()">Full list</button>
     <div id="el_reports_list" class="body"></div>
+  </div>
+
+  <div id="el_help" class="modal" hidden style="width: auto;">
+    <div id="el_help_header" class="header">
+      Помощь
+      <button onclick="el_help.hidden=true" class="btn_close">Close</button>
+    </div>
+    <img src="xlam/_Cheatsheet.jpg" alt="" srcset="">
   </div>
   
   <!-- https://codepen.io/edmundojr/pen/xOYJGw -->
@@ -122,6 +134,8 @@
 
   <div id=el_GUI>
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
+      <button onclick="el_help.hidden=false" title="" accesskey="F1">Help</button>
+      <br>
       <button onclick="Analysis.drawReportsList()" title="">Reports</button>
       <br>
       <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png" accesskey="в">Dump</button>
