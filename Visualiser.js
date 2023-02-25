@@ -787,7 +787,6 @@ const User = {
       )
     }
 
-
     const result = {}
     for(let i of data) {
       if(i[0] === KEYWORDS.ITS_SPECIAL) {
@@ -857,11 +856,11 @@ const User = {
       return [e, a[1]]
     })
 
-    log( )
     t.additional = t.additional.sort().filter( e => {
       return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
       && KEYWORDS.SINGLE_TIME_EFFECTS.filter(e2 => e[0].startsWith(e2)).length == 0
       && !KEYWORDS.PLANET_PARAMS.includes(e[0])
+      && !e[0].startsWith(':?')
     })
     // t = [].concat(t.main, t.additional)
 
