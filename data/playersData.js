@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-02-25T00:17:42.344Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-02-25T00:45:31.980Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -286,7 +286,7 @@ var DATA__PLAYERS_DATA = {
       ],
       [
         "особое",
-        "вероятно горючий?"
+        "?вероятно горючий?"
       ]
     ],
     "localProjs": {
@@ -515,7 +515,7 @@ var DATA__PLAYERS_DATA = {
       ],
       [
         "особое",
-        "улучшаемы"
+        "?улучшаемы"
       ]
     ],
     "techTable": {
