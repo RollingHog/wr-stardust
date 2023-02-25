@@ -776,13 +776,13 @@ const User = {
 
     if(userDataObj) {
       data = data.concat(userDataObj.startingFeature
-        .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
+        .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], null] : [i[0], +i[1]])
       )
       if(userDataObj.uniqueResources) data = data.concat(userDataObj.uniqueResources
-        .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
+        .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], null] : [i[0], +i[1]])
       )
       if(userDataObj.greatPeople) data = data.concat(userDataObj.greatPeople
-        .map( i => i.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], '1'] : [j[0], +j[1]]))
+        .map( i => i.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
         .flat()
       )
     }
@@ -792,7 +792,7 @@ const User = {
     for(let i of data) {
       if(i[0] === KEYWORDS.ITS_SPECIAL) {
         i[0] = ':' + i[1]
-        i[1] = 1
+        i[1] = null
       }
 
       if(!result[i[0]]) 
@@ -871,7 +871,7 @@ const User = {
       <strong>Сводный отчет: ${playerName}</strong>
       <br>
       <table><tr>${t.main.map(e => `<td>${e[0]}<td>${e[1]}`).join('</tr><tr>')}</tr></table>
-      <table><tr>${t.additional.map(e => `<td>${e[0]}<td>${+e[1]>=0?'+':'-'}${e[1]}`).join('</tr><tr>')}</tr></table>
+      <table><tr>${t.additional.map(e => `<td>${e[0]}<td>${e[1]==0?' ':`${+e[1]>=0?'+':'-'}${e[1]}`}`).join('</tr><tr>')}</tr></table>
       `
   },
 }
