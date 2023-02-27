@@ -1,5 +1,6 @@
 /* global 
-  User
+  User 
+  playerPost
 */
 
 const EXAMPLE = {
@@ -14,7 +15,18 @@ const EXAMPLE = {
         'Оценка внешней среды',
         'Генная терапия',
       ],
-  }
+  },
+  PlayerPost: [
+    `
+теха ++Самообучение++
+1. Устранение Вируса 2d10: (10 + 9) = 11 — 1 от науки, 1 от устранение последствий.
+  2. Восстановление научных лабораторий 1d10: (1) = 6 — 1 от производства.
+Подземное строительство 2d10: (1 + 10) = 10 — 2 от производства
+Роботы с ДУ 6d10: (7 + 4 + 9 + 8 + 3 + 9) = 40 — 1 от производства, 2 от нейроинтерфейсов, 3 от "Инверсии".
+Ополчение 2d10: (9 + 3) = 14 — 1 от производства, 1 от Аркадии.
+Добыча образцов местной жизни 1d10: (4) = 4 — 1 свободный куб.
+    `
+  ]
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -22,4 +34,7 @@ const TEST = {
   highlightStudiedTech() {
     User.highlightStudiedTech('Biology', EXAMPLE.Biology.tech, EXAMPLE.Biology.proj)
   },
+  playerPost_parse() {
+    playerPost.parse(EXAMPLE.PlayerPost[0])
+  }
 }
