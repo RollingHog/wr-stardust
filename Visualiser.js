@@ -533,9 +533,30 @@ const Analysis = {
         KEYWORDS.MODULE_PROPS,
         KEYWORDS.UNIT_TYPES,
         KEYWORDS.MILITARY_PARAMS,
-        ["Слоты", "Тип отряда", "особое"],
+        ["Слоты", "Тип юнита", "Тип урона", "особое"],
       )
-      Analysis.reportTable(Analysis.excludeByDict(statAllEffects, filter))
+      let result = Analysis.excludeByDict(statAllEffects, filter)
+      // TODO
+      // result = Object.values(result)
+      //   .reduce( (acc, e) => {
+      //     for(let i of e.effect) {
+      //       const k = i[0]
+      //       if(!acc[k])
+      //         acc[k] = {
+      //           count: 0,
+      //           sum: 0,
+      //           list: [],
+      //         }
+
+      //         acc[k].count+=1
+      //         acc[k].sum+=+i[1]
+
+      //         acc[k].list.push(e.name)
+      //     }
+
+      //     return acc
+      //   }, {})
+      Analysis.reportTable(result)
     },
   
     вообще_все_эффекты(filter) {
@@ -555,10 +576,12 @@ const Analysis = {
             if(!acc[k])
               acc[k] = {
                 count: 0,
+                sum: 0,
                 list: [],
               }
 
-              acc[k].count+=+i[1]
+              acc[k].count+=1
+              acc[k].sum+=+i[1]
   
               acc[k].list.push(e.name)
           }
@@ -1408,7 +1431,6 @@ var KEYWORDS = {
     "Контршпионаж",
     "Пропаганда",
     "Полиция",
-    "Политика",
     "Устранение последствий",
     "Осуждение",
     "Доверие",
