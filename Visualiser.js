@@ -23,6 +23,7 @@ const TREELIST = [
 
 // constants
 const VARS = {
+  IS_LOCAL: window.location.protocol === 'file:',
   DISABLE_PARSE_IMMUNITY: false,
   PLAYERS_TIMESTAMP_KEY: 'DATA__PLAYERS_TIMESTAMP',
   PLAYERS_DATA_KEY: 'DATA__PLAYERS_DATA',
@@ -132,7 +133,7 @@ async function Init() {
 
   getEl('el_loading').hidden = false
   const parser = new DOMParser()
-  const isLocalFile = location.href.startsWith('file:///')
+  const isLocalFile = VARS.IS_LOCAL
 
   const iframes = Array.from(document.querySelectorAll('iframe.tech'))
   if(isLocalFile) {
@@ -190,6 +191,9 @@ async function Init() {
     
     console.timeEnd('Player data load')
     log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
+
+    HTMLUtils.enableHotkeysProcessing()
+    HTMLUtils.tipHotkeys()
 
     Promise.all(TREELIST
       .filter(e => e != VARS.TREELIST_NOMIL[0])
@@ -250,6 +254,8 @@ async function Init() {
       HTMLUtils.makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
       HTMLUtils.makeElDraggable('el_help', 'el_help_header')
+
+      Analysis.checkForOpenedWindows()
     })
   }, 0)
 }
@@ -343,6 +349,47 @@ const HTMLUtils = {
             .forEach((tr) => table.tBodies[0].appendChild(tr))
         })
     )
+  },
+
+  hideAllModals() {
+    for(let i of document.querySelectorAll('.modal')) {
+      i.hidden = true
+    }
+    location.hash = ''
+  },
+
+  tipHotkeys() {
+    for(let i of document.querySelectorAll('button[accesskey]')) {
+      i.title += '\nHotkey: '+i.accessKey
+    }
+  },
+
+  
+  enableHotkeysProcessing() {
+    const ignoreKeys = ['Alt']
+    
+    const hotkeysList = {
+      'Alt F1': _ => getEl('el_help').hidden = false,
+      'Escape': this.hideAllModals,
+      'Alt U': playerPost.prompt,
+      'Alt R': Analysis.drawReportsList,
+      'Alt P': parseDoc.file,
+    }
+
+    // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
+
+    document.body.addEventListener('keyup', function(evt) {
+      if(ignoreKeys.includes(evt.key)) return 
+      const keyComb = 
+        (evt.altKey ? 'Alt ' : '')
+        + evt.code.replace(/(Key|Digit)/,'')
+      if(hotkeysList[keyComb]) {
+        hotkeysList[keyComb]()
+        evt.stopPropagation()
+        return false
+      }
+      if(evt.altKey) log(keyComb)
+    })
   },
 }
   
@@ -488,16 +535,47 @@ const Analysis = {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => !dict.includes(key)))
   },
 
+  checkForOpenedWindows() {
+    if(location.hash.length <= 1) return
+
+    const path = decodeURIComponent(location.hash).split('#')
+
+    if(path[1] === 'report') {
+      Analysis.drawReportsList()
+      if(path[2]) {
+        Analysis.openReport(path[2])
+      }
+    }
+  },
+
   drawReportsList() {
+    if(VARS.IS_LOCAL) {
+      location.hash = 'report'
+    }
     getEl('el_reports_wrapper').hidden = false
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = ''
     
     for (let i of Object.keys(Analysis.Reports)) {
       getEl('el_reports_list').innerHTML += `<li 
-      onclick="Analysis.Reports['${i}'](); getEl('el_reports_home').hidden = false">
-      ${i}</li>`
+      onclick="Analysis.openReport('${i}')">
+      ${i.replace(/_/g,' ')}</li>`
     }
+  },
+
+  openReport(reportName) {
+    if(VARS.IS_LOCAL) {
+      location.hash = `report#${reportName}`
+    }
+    getEl('el_reports_home').hidden = false
+    Analysis.Reports[reportName]()
+  },
+
+  closeReports() {
+    if(VARS.IS_LOCAL) {
+      location.hash = ''
+    }
+    getEl('el_reports_wrapper').hidden = true
   },
   
   reportTable(obj) {
@@ -520,6 +598,13 @@ const Analysis = {
     tbody.innerHTML = res
 
     HTMLUtils.addTableSorting('#el_reports_list table')
+  },
+
+  formatReportEffects(list) {
+    return list
+      .map(e => e.join(': ')).join(', ')
+      .replace(/особое: /g, ':')
+      .replace(/: /g, ' ')
   },
 
   Reports: {
@@ -596,10 +681,10 @@ const Analysis = {
         Object.values(inverted.alltech)
           .filter(e => e.type == 'octagon')
           .map(e => [e.name, {
-            "Блок": e.effect[0][1], 
+            "Тип": e.effect[0][1], 
             "Цена": +e.cost[0][1], 
             "Слоты": +e.effect[1][1],
-            "Свойства": e.effect.slice(2).map(e => e.join(': ')).join(', '),
+            "Свойства": Analysis.formatReportEffects(e.effect.slice(2)),
           }])
       ))
     },
@@ -610,7 +695,7 @@ const Analysis = {
           .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
           .map(e => [e.name, {
             Цена: e.cost[0][1],
-            "Свойства": e.effect.map(e => e.join(': ')).join(', '),
+            "Свойства": Analysis.formatReportEffects(e.effect),
           }])
       ))
     },
@@ -621,7 +706,7 @@ const Analysis = {
           .filter(e => (e.type == "parallelogram"))
           .map(e => [e.name, {
             Цена: e.cost[0][1],
-            "Свойства": e.effect.map(e => e.join(': ')).join(', '),
+            "Свойства": Analysis.formatReportEffects(e.effect),
           }])
       ))
     },
@@ -1062,8 +1147,7 @@ const parseDoc = {
     return usersRes
   },
   
-  // eslint-disable-next-line no-unused-vars
-  async file(event) {
+  async file() {
     let raw
     const MIME_HTML = 'text/html'
     const rawClipboardObj = (await navigator.clipboard.read())[0]
@@ -1205,6 +1289,9 @@ const parseDoc = {
 
 // eslint-disable-next-line no-unused-vars
 const playerPost = {
+  prompt() {
+    playerPost.parse(prompt('player post here'))
+  },
   parse(text) {
     let requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d+){0,10})\)/g)]
       .map(e=>({text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2]}))
