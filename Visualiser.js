@@ -592,6 +592,17 @@ const Analysis = {
       ))
     },
 
+    список_зданий() {
+      Analysis.reportTable(Object.fromEntries(
+        Object.values(inverted.alltech)
+          .filter(e => (e.type == "parallelogram"))
+          .map(e => [e.name, {
+            Цена: e.cost[0][1],
+            "Свойства": e.effect.map(e => e.join(': ')).join(', '),
+          }])
+      ))
+    },
+
     список_технологий_по_типу() {
       Analysis.reportTable(
         Object.values(inverted.alltech)
