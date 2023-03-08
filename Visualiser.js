@@ -380,7 +380,7 @@ const HTMLUtils = {
 
   tipHotkeys() {
     for(let i of document.querySelectorAll('button[accesskey]')) {
-      i.title += '\nHotkey: '+i.accessKey
+      i.title += '\nHotkey: Alt+'+i.accessKey
     }
   },
 

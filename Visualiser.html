@@ -134,12 +134,12 @@
 
   <div id=el_GUI>
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
-      <button onclick="el_help.hidden=false" title="">Help</button>
+      <button onclick="el_help.hidden=false" accesskey="F1">Help</button>
       <br>
-      <button onclick="Analysis.drawReportsList()" title="">Reports</button>
+      <button onclick="Analysis.drawReportsList()" accesskey="R">Reports</button>
       <br>
-      <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png" accesskey="в">Dump</button>
-      <button onclick="playerPost.prompt()" title="" accesskey="г">Userpost</button>
+      <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png" accesskey="D">Dump</button>
+      <button onclick="playerPost.prompt()" title="" accesskey="U">Userpost</button>
       <!-- <br>
       <button onclick="parseDoc.GDocToJS()" title="">GDoc to JS(ON)</button> -->
       <!-- <button onclick="savingOps.openAsPng()" title="Open current tree as png in new tab">Png</button> -->
@@ -164,7 +164,7 @@
         </label><br>
       </section>
       <section id=doc_section>
-        <button onclick="parseDoc.file(event)" style="padding: 12px;" accesskey="з">Parse clipboard</button>
+        <button onclick="parseDoc.file(event)" style="padding: 12px;" accesskey="P">Parse clipboard</button>
         <button onclick="parseDoc.redoLast()" style="padding: 12px;">Redo last parse</button>
       </section>
     </div>
@@ -176,7 +176,7 @@
       <button onclick='drawTree("Sociology")' style="background-color: rgb(204, 153, 255);" accesskey="5">Sociology</button>
     </section>
   </div>
-  <input type=button  style="position: fixed; left: 8px; top: 50%;" value="&ofcir;" onclick="el_GUI.hidden=!el_GUI.hidden" accesskey="е" title="Toggle GUI">
+  <button style="position: fixed; left: 8px; top: 50%;" onclick="el_GUI.hidden=!el_GUI.hidden" accesskey="T" title="Toggle GUI">&ofcir;</button>
   <div style="text-align: center;">
     <a href="https://github.com/RollingHog/wr-stardust">Github</a>
   </div>
