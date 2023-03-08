@@ -100,13 +100,11 @@ const VARS = {
   },
 }
 
-const cache = Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}]))
-
-  ; (() => {
-    NodeList.prototype.forEach = Array.prototype.forEach
-    HTMLCollection.prototype.forEach = Array.prototype.forEach
-    HTMLCollection.prototype.filter = Array.prototype.filter
-  })()
+; (() => {
+  NodeList.prototype.forEach = Array.prototype.forEach
+  HTMLCollection.prototype.forEach = Array.prototype.forEach
+  HTMLCollection.prototype.filter = Array.prototype.filter
+})()
 
 const tech = {}
 const techData = {
@@ -116,6 +114,7 @@ const techData = {
   subtreeBorders: Object.fromEntries(TREELIST.map(e => [e,[]])),
   badTechCount: 0,
   currentTreeName: null,
+  cache: Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}])),
 }
 const stat = {}
 const inverted = {
@@ -174,8 +173,8 @@ async function Init() {
   }
   console.timeEnd('load iframes')
 
-  console.time('initial draw')
   await parseTechIframe(VARS.TREELIST_NOMIL[0])
+  console.time('initial draw')
   drawTree(VARS.TREELIST_NOMIL[0])
   getEl('el_loading').hidden = true
   console.timeEnd('initial draw')
@@ -197,17 +196,19 @@ async function Init() {
     HTMLUtils.enableHotkeysProcessing()
     HTMLUtils.tipHotkeys()
 
-    console.time('full trees  ')
+    console.time('other parse ')
     Promise.all(TREELIST
       .filter(e => e != VARS.TREELIST_NOMIL[0])
       .map(e => parseTechIframe(e))
     )
     .then(async _ => {
+      console.timeEnd('other parse ')
+      console.time('other draw  ')
       for (let i of TREELIST) {
         drawTree(i)
       }
       drawTree(VARS.TREELIST_NOMIL[0])
-      console.timeEnd('full trees  ')
+      console.timeEnd('other draw  ')
 
       inverted.alltech = Object.fromEntries(
         [...Object.values(tech)]
@@ -834,9 +835,9 @@ function drawTree(tree_name) {
     parseTechIframe(tree_name)
   }
   
-  if (cache[tree_name].html) {
-    svg.innerHTML = cache[tree_name].html
-    svg.setAttribute("viewBox", cache[tree_name].viewBox)
+  if (techData.cache[tree_name].html) {
+    svg.innerHTML = techData.cache[tree_name].html
+    svg.setAttribute("viewBox", techData.cache[tree_name].viewBox)
     setTimeout(TreeView.tspanHighlightOnClick,1)
     setTimeout(TreeView.copyFirstLineOnClick,1)
     techData.currentTreeName = tree_name
@@ -862,8 +863,8 @@ function drawTree(tree_name) {
     + ' ' + (y[1] + 100 - y[0])
   svg.setAttribute("viewBox", viewBox)
 
-  cache[tree_name].html = svg.innerHTML
-  cache[tree_name].viewBox = viewBox
+  techData.cache[tree_name].html = svg.innerHTML
+  techData.cache[tree_name].viewBox = viewBox
 
   techData.currentTreeName = tree_name
   User.drawActiveUser(tree_name)
