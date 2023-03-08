@@ -131,6 +131,8 @@ const svg = document.getElementById('svg')
 window.onload = Init
 async function Init() {
 
+  console.time('full load   ')
+
   getEl('el_loading').hidden = false
   const parser = new DOMParser()
   const isLocalFile = VARS.IS_LOCAL
@@ -180,7 +182,7 @@ async function Init() {
 
   setTimeout(async function init2 () {
 
-    console.time('Player data load')
+    console.time('player data ')
       
     const elPlayersData = getEl('el_data_players')
     await new Promise((resolve) => {
@@ -189,12 +191,13 @@ async function Init() {
     })
     parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
     
-    console.timeEnd('Player data load')
+    console.timeEnd('player data ')
     log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
 
     HTMLUtils.enableHotkeysProcessing()
     HTMLUtils.tipHotkeys()
 
+    console.time('full trees  ')
     Promise.all(TREELIST
       .filter(e => e != VARS.TREELIST_NOMIL[0])
       .map(e => parseTechIframe(e))
@@ -204,6 +207,7 @@ async function Init() {
         drawTree(i)
       }
       drawTree(VARS.TREELIST_NOMIL[0])
+      console.timeEnd('full trees  ')
 
       inverted.alltech = Object.fromEntries(
         [...Object.values(tech)]
@@ -212,6 +216,7 @@ async function Init() {
           .map(e => [e.name, e])
       )
 
+      console.time('node stat   ')
       for (let treeName of TREELIST) {
         for (let j in tech[treeName]) {
           let [cost, effects] = parseNode.costAndEffects(tech[treeName][j])
@@ -220,21 +225,11 @@ async function Init() {
           doNodeStat(treeName, tech[treeName][j])
         }
       }
+      console.timeEnd('node stat   ')
 
-      Analysis.reportBadY()
-      Analysis.countTechSubtreesBorders()
-
-      // console.log(listParam('cost', false))
-      console.log(listParam('costClear'))
-      console.log(listAllWithoutMilitary())
-      if(techData.badTechCount) console.log('unrecognized tech:', techData.badTechCount)
-
-      Analysis.searchBadTechRefs()
-
-      // Analysis.countTechPrices()
-      // log(statAllEffects)
-
-      Analysis.totalTechCount()
+      console.time('analysis    ')
+      Analysis.onInit()
+      console.timeEnd('analysis    ')
 
       getEl('players_selection').children.forEach(e=> (e.tagName=='LABEL')
         ? e.onclick = function() { 
@@ -255,7 +250,7 @@ async function Init() {
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
       HTMLUtils.makeElDraggable('el_help', 'el_help_header')
 
-      Analysis.checkForOpenedWindows()
+      console.timeEnd('full load   ')
     })
   }, 0)
 }
@@ -420,6 +415,30 @@ const HTMLUtils = {
 
 const Analysis = {
   // statistics and various checks
+  onInit() {
+    // extracted from Init
+    Analysis.reportBadY()
+    Analysis.countTechSubtreesBorders()
+
+    // console.log(listParam('cost', false))
+    if(techData.badTechCount) console.log('unrecognized tech:', techData.badTechCount)
+    
+    Analysis.searchBadTechRefs()
+    
+    // Analysis.countTechPrices()
+    // log(statAllEffects)
+    
+    setTimeout( _ => {
+      // all output to clear timestamps
+      console.log(listParam('costClear'))
+      console.log(listAllWithoutMilitary())
+      Analysis.totalTechCount()
+    }, 20)
+
+    Analysis.checkForOpenedWindows()
+
+  },
+
   countTechPrices() {
     let cnt = 0
     for (let i of Object.keys(tech)) {
