@@ -696,17 +696,39 @@ const Analysis = {
         }, {})
       Analysis.reportTable(result)
     },
+
+    особые_эффекты() {
+      const result = Object.values(inverted.alltech)
+        .reduce( (acc, e) => {
+          for(let i of e.effect) {
+            if(i[0] == KEYWORDS.ITS_SPECIAL) {
+              acc[i[1]] = acc[i[1]] ? acc[i[1]]+1 : 1
+            }
+          }
+          return acc
+        }, {})
+      Analysis.reportTable(result)
+    },
   
-    вообще_все_эффекты(filter) {
-      if(!filter) {
-        Analysis.reportTable(statAllEffects)
-      } else {
-        filter = KEYWORDS.TECH_EFFECTS
-        Analysis.reportTable(Analysis.filterObjectByDict(statAllEffects, filter))
-      }
+    вообще_все_эффекты() {
+      const result = Object.values(inverted.alltech)
+        .reduce( (acc, e) => {
+          for(let i of e.effect) {
+            const k = i[0]
+            if(!acc[k])
+              acc[k] = {
+                count: 0,
+                sum: 0,
+              }
+              acc[k].count+=1
+              acc[k].sum+=+i[1]
+          }
+          return acc
+        }, {})
+        Analysis.reportTable(result)
     },
 
-    вообще_все_эффекты_количественно(){
+    вообще_все_эффекты_подробно(){
       const result = Object.values(inverted.alltech)
         .reduce( (acc, e) => {
           for(let i of e.effect) {
