@@ -1365,11 +1365,12 @@ const playerPost = {
       critwins: null
     }, rawRolls: null }))
     requests = requests.concat(bonusThings)
+    const rollsTotal = requests.reduce( (sum, e) => sum + +e.rolls.sum,0)
 
     getEl('el_selected_tech_wrapper').hidden = false
     getEl('el_selected_tech_list').innerHTML = `<table>
     <thead>
-      <th>${['Технология', 'Цена', "КПровалы", "Успехи", "КУспехи", "Брошено"].join('</th><th>')}</th>
+      <th>${['Технология', 'Цена', "КПровалы", "Успехи", "КУспехи", "Брош.", "Дельта"].join('</th><th>')}</th>
       <th 
         onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
       <button>+</button>
@@ -1377,7 +1378,7 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, ''].join('</td><td>') + '</td>' + 
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
@@ -1387,8 +1388,15 @@ const playerPost = {
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.wins,0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)}</td>
-      <td>${requests.reduce( (sum, e) => sum + +e.rolls.sum,0)}</td>
+      <td>${rollsTotal}</td>
     </tr>
+    <tr>
+      <td colspan=2>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
+      <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
+      <td>${(requests.reduce( (sum, e) => sum + +e.rolls.wins,0)/rollsTotal/0.6*100-100).toFixed(0)}%</td>
+      <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
+    </tr>
+    
     </tbody></table>`
 
     // log(requests)
@@ -1404,15 +1412,20 @@ const playerPost = {
       wins: 3,
       critwins: 4,
       sum: 5,
+      delta: 6,
     }
 
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e => {
         if (!e.children[pos.name]) return null
 
+        let result = null
+
+        e.style.backgroundColor = ''
         e.children[pos.name].style.backgroundColor = ''
         e.children[pos.critfails].style.backgroundColor = ''
         e.children[pos.critwins].style.backgroundColor = ''
+        e.children[pos.delta].style.backgroundColor = ''
         e.children[pos.name].title = ''
 
         if (+e.children[pos.critfails].innerText > 0) {
@@ -1423,6 +1436,8 @@ const playerPost = {
           e.children[pos.critwins].style.backgroundColor = 'lawngreen'
         }
 
+        const sum = +e.children[pos.wins].innerText + +e.children[pos.critwins].innerText * 2
+
         if (inverted.alltech[e.children[pos.name].innerText]) {
 
           e.children[pos.name].style.backgroundColor = inverted.alltech[e.children[pos.name].innerText].fill
@@ -1431,20 +1446,31 @@ const playerPost = {
             e.children[pos.price].innerText = inverted.alltech[e.children[pos.name].innerText].cost[0][1]
           }
 
-          if (+e.children[pos.wins].innerText + +e.children[pos.critwins].innerText * 2 < +e.children[pos.price].innerText
+          if (sum < +e.children[pos.price].innerText
             && e.children[pos.wins].innerText !== ''
           ) {
             e.style.backgroundColor = 'goldenrod'
-            return null
+            result = null
+          } else {
+            result = e.children[pos.name].innerText
           }
-
-          return e.children[pos.name].innerText
         } else {
           console.log(e.children[pos.name].innerText)
           e.children[pos.name].style.backgroundColor = 'cyan'
           e.children[pos.name].title = 'Название технологии не найдено'
-          return null
+
+          if (sum < +e.children[pos.price].innerText
+            && e.children[pos.wins].innerText !== ''
+          ) {
+            e.style.backgroundColor = 'goldenrod'
+          }
+          result = null
         }
+        e.children[pos.delta].innerText = sum - +e.children[pos.price].innerText
+        if(+e.children[pos.delta].innerText > 1) {
+          e.children[pos.delta].style.backgroundColor = 'lawngreen'
+        }
+        return result
       })
       .filter(e => e)
 
