@@ -260,7 +260,7 @@ async function Init() {
       HTMLUtils.makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
       HTMLUtils.makeElDraggable('el_help', 'el_help_header')
-      HTMLUtils.makeElDraggable('el_battlecalc_wrapper', 'el_battlecalc_header')
+      HTMLUtils.makeElDraggable('el_unitcreator_wrapper', 'el_unitcreator_header')
 
       console.timeEnd('full load   ')
     })
@@ -612,7 +612,7 @@ const Analysis = {
           Analysis.openReport(i1)
         }
       },
-      'battlecalc': _ => BattleCalc.open()
+      'battlecalc': _ => UnitCreator.open()
     }
 
     for(let i of path) {
@@ -2009,20 +2009,20 @@ function listAllWithoutMilitary() {
   return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
 }
 
-const BattleCalc = {
+const UnitCreator = {
   open() {
-    getEl('el_bc_hull').innerHTML = Object.keys(VARS.hulls).map( e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
+    getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map( e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
     this.fillModulesList()
-    HTMLUtils.openModal('battlecalc')
+    HTMLUtils.openModal('unitcreator')
   },
   fillModulesList() {
-    getEl('el_bc_modules_datalist').innerHTML = Analysis.listModuleObjs()
+    getEl('el_uc_modules_datalist').innerHTML = Analysis.listModuleObjs()
       .map( e => `<option value="${e.name}">${e.effect}</option>`)
-    getEl('el_bc_modules_search').onchange = e => {
+    getEl('el_uc_modules_search').onchange = e => {
       // if(!e.isTrusted) return 
       log(e)
-      getEl('el_bc_modules').value += getEl('el_bc_modules_search').value + '\n'
-      getEl('el_bc_modules_search').value = ''
+      getEl('el_uc_modules').value += getEl('el_uc_modules_search').value + '\n'
+      getEl('el_uc_modules_search').value = ''
     }
   },
   createUnit(hullName, modulesList = [], startParams = []) {
@@ -2060,12 +2060,12 @@ const BattleCalc = {
     return str
   },
   processInput() {
-    const hull = getEl('el_bc_hull').value
+    const hull = getEl('el_uc_hull').value
     const unit = this.createUnit(hull)
-    getEl('el_bc_unit').innerHTML = this.createUnitTable(unit)
+    getEl('el_uc_unit').innerHTML = this.createUnitTable(unit)
   },
   close() {
-    HTMLUtils.closeModal('battlecalc')
+    HTMLUtils.closeModal('unitcreator')
   },
 }
 
