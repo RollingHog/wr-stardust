@@ -129,9 +129,20 @@
     <div id="el_bc_body" class="body">
       <div id="el_bc_input">
         Тип корпуса: <select id="el_bc_hull"></select>
+        <br>
+        <br>
+        <input id="el_bc_modules_search" list="el_bc_modules_datalist" placeholder="Поиск модуля">
+        <datalist id="el_bc_modules_datalist"></datalist>  
+        <br>
+        <br>
+        <textarea id="el_bc_modules" placeholder="Модули" style="height: 8em; width: 80%;" title="не знаешь что делаешь - не трогай"></textarea>
       </div>
+      <br>
+      <button onclick="BattleCalc.processInput()">Process</button>
+      <br>
+      <br>
       <div id="el_bc_unit">
-        
+
       </div>
     </div>
   </div>
