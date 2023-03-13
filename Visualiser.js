@@ -988,7 +988,6 @@ const User = {
   },
 
   /**
-   * 
    * @param {string} treeName 
    * @param {string[]} tech_list 
    * @param {string[]} proj_list 
@@ -1457,7 +1456,7 @@ const playerPost = {
     playerPost.parse(p)
   },
   extractRolls(text) {
-    const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)[^\n]*Сложность:? ?(\d+)/g)]
+    const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
       .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], rawRolls: e[2] }))
       .map(({text, rolls, rawRolls, treshold} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls, treshold }))
     return res
@@ -1528,7 +1527,7 @@ const playerPost = {
     </tr>
     
     </tbody></table>
-    Чтобы сложность не перезаписывалась - добавь в начало '+'`
+    Чтобы "Цена" не перезаписывалась - добавь в начало '+'`
 
     // log(requests)
     setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
