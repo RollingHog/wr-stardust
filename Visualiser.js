@@ -1151,6 +1151,9 @@ const User = {
       .sort( (a,b) => {
         if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
         if(!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
+        if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) {
+          return KEYWORDS.COLONY_PARAMS.indexOf(a[0]) - KEYWORDS.COLONY_PARAMS.indexOf(b[0])
+        }
         return 0  
       }) 
     // t = [].concat(t.main, t.additional)
