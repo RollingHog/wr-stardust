@@ -1077,6 +1077,7 @@ const User = {
       .filter( e => e )
       .map(e => {
         const t = inverted.alltech[e]
+        if(t.treeName !== treeName) return null
         // if(t.req.length == 0) return t.id
 
         return t.next
