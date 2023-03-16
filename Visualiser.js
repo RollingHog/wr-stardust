@@ -404,6 +404,7 @@ const HTMLUtils = {
     }
 
     let searchEnabled = false
+    let kMode = false 
 
     const hotkeysList = {
       'Alt F1': btnClickHdlrByText('help'),
@@ -416,10 +417,21 @@ const HTMLUtils = {
         }
       },
       'Ctrl F': _ => searchEnabled = true,
+      'Alt K': _ => kMode = true,
+
       'Alt U': btnClickHdlrByText('userpost'),
       'Alt R': btnClickHdlrByText('reports'),
       'Alt P': btnClickHdlrByText('parse clipboard'),
       'Alt T': _ => getEl('btn_toggleUI').click,
+    }
+    const kModeHotkeys = {
+      '1': _ => getEl('players_selection').querySelectorAll('label')[0].click(),
+      '2': _ => getEl('players_selection').querySelectorAll('label')[1].click(),
+      '3': _ => getEl('players_selection').querySelectorAll('label')[2].click(),
+      '4': _ => getEl('players_selection').querySelectorAll('label')[3].click(),
+      '5': _ => getEl('players_selection').querySelectorAll('label')[4].click(),
+      '6': _ => getEl('players_selection').querySelectorAll('label')[5].click(),
+      '7': _ => getEl('players_selection').querySelectorAll('label')[6].click(),
     }
 
     const ignoreKeys = ['Alt', 'Tab']
@@ -435,6 +447,11 @@ const HTMLUtils = {
         + evt.code.replace(/(Key|Digit)/,'')
       if(hotkeysList[keyComb]) {
         hotkeysList[keyComb]()
+        evt.stopPropagation()
+        return false
+      }
+      if(kMode && kModeHotkeys[keyComb]) {
+        kModeHotkeys[keyComb]()
         evt.stopPropagation()
         return false
       }
