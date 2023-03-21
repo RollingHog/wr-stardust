@@ -1,6 +1,7 @@
 // common.js
 /* global
 getEl log
+FILL_2_TREE_TYPE
 */
 
 // draw.js
@@ -101,13 +102,7 @@ const VARS = {
     '#0000FF': 'Наука',
     '#000000': "Любой",
   },
-  fill2TreeType: {
-    "#FF9966": "Military",
-    "#CCFFCC": "Biology",
-    "#FFCC00": "Industry",
-    "#99CCFF": "Science",
-    "#CC99FF": "Sociology",
-  },
+  fill2TreeType: FILL_2_TREE_TYPE,
 }
 
 ; (() => {
@@ -163,7 +158,9 @@ async function Init() {
       try {
         const el = document.querySelector(`[src="${src}"]`)
         techData.graphmls[i] = parser.parseFromString(
-          el.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+          el.contentWindow.document.body.firstChild.innerHTML
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
           , 'text/xml')
       } catch(e) {
         alert('shit happened, see dev console')
@@ -359,7 +356,9 @@ const HTMLUtils = {
   },
 
   openModal(name) {
-    const tgt = Array.from(document.querySelectorAll('.modal')).map(e => e.id).filter(e => e.includes(name))[0]
+    const tgt = Array.from(document.querySelectorAll('.modal'))
+      .map(e => e.id)
+      .filter(e => e.includes(name))[0]
     if(!tgt) return
     getEl(tgt).hidden = false
     this.registerModalPath(name)
