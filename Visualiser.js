@@ -2194,7 +2194,8 @@ const UnitCreator = {
   },
   processInput() {
     const hull = getEl('el_uc_hull').value
-    const unit = this.createUnit(hull)
+    const modules = getEl('el_uc_modules').value.split('\n').filter(e=>e && inverted.alltech[e])
+    const unit = this.createUnit(hull, modules)
     getEl('el_uc_unit').innerHTML = this.createUnitTable(unit)
   },
   close() {
