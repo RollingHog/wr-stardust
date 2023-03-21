@@ -15,10 +15,10 @@ const range = (cnt) => '0'.repeat(cnt)
 
 const TREELIST = [
   "Military",
+  "Sociology",
   "Biology",
   "Industry",
   "Science",
-  "Sociology",
 ]
 
 // constants
@@ -1656,13 +1656,25 @@ const playerPost = {
     ].map(e =>
       `<strong>${e[0]}</strong>
       <div>
-        ${e[1]
+        ${Object.entries(e[1]
+          .reduce((acc, e2) => {
+            const field = inverted.alltech[e2].fill 
+            if(acc[field] instanceof Array) {
+              acc[field].push(e2)
+            } else {
+              acc[field] = [e2]
+            }
+            return acc
+          }, {}))
+          .sort( (a,b) => TREELIST[a[0]] < TREELIST[b[0]] )
           .map( e2 => 
-            `<span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
-            >${e2}, </span>
-            <span style="background-color:${inverted.alltech[e2].fill}">
-              ${VARS.fill2TreeType[inverted.alltech[e2].fill]}
-            </span><br>`)
+            `
+            <span style="background-color:${e2[0]}">
+              ${VARS.fill2TreeType[e2[0]]}
+            </span>
+            <span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
+            >${e2[1].join(', ')}, </span>
+            <br>`)
           .join('')
         }
       </div>`
