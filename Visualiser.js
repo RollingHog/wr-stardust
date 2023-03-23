@@ -356,15 +356,22 @@ const HTMLUtils = {
         return
       }
 
-      location.hash += `${location.hash?'#':''}${name}${subName ? `__${subName}` : ''}`
+      HTMLUtils.unregisterModalPath(name)
+
+      location.hash += `#${name}${subName ? `__${subName}` : ''}`
     }
+  },
+
+  unregisterModalPath(name) {
+    let q = location.hash.split('#').filter(e => e)
+    location.hash = q.filter(e => !e.startsWith(name)).join('#')
   },
 
   closeModal(name) {
     const tgt = Array.from(document.querySelectorAll('.modal')).map(e => e.id).filter(e => e.includes(name))[0]
     if(!tgt) return
     getEl(tgt).hidden = true
-    this.registerModalPath('')
+    this.unregisterModalPath(name)
   },
 
   hideAllModals() {
