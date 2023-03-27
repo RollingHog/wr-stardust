@@ -171,14 +171,14 @@
 
   <div id=el_GUI>
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
-      <button onclick="el_help.hidden=false" accesskey="F1">Help</button>
+      <button onclick="el_help.hidden=false" hotkey="F1">Help</button>
       <br>
-      <button onclick="UnitCreator.open()" accesskey="C">Unit Creator</button>
+      <button onclick="UnitCreator.open()" hotkey="C">Unit Creator</button>
       <br>
-      <button onclick="Analysis.drawReportsList()" accesskey="R">Reports</button>
+      <button onclick="Analysis.drawReportsList()" hotkey="R">Reports</button>
       <br>
-      <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png" accesskey="D">Dump</button>
-      <button onclick="playerPost.prompt()" title="" accesskey="U">Userpost</button>
+      <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png" hotkey="D">Dump</button>
+      <button onclick="playerPost.prompt()" title="" hotkey="U">Userpost</button>
       <!-- <br>
       <button onclick="parseDoc.GDocToJS()" title="">GDoc to JS(ON)</button> -->
       <!-- <button onclick="savingOps.openAsPng()" title="Open current tree as png in new tab">Png</button> -->
@@ -203,19 +203,19 @@
         </label><br>
       </section>
       <section id=doc_section>
-        <button onclick="parseDoc.file(event)" style="padding: 12px;" accesskey="P">Parse clipboard</button>
+        <button onclick="parseDoc.file(event)" style="padding: 12px;" hotkey="P">Parse clipboard</button>
         <button onclick="parseDoc.redoLast()" style="padding: 12px;">Redo last parse</button>
       </section>
     </div>
     <section id="tech_tree_buttons" style="position: fixed; right: 8px; bottom: 8px;">
-      <button onclick='drawTree("Biology")'   style="background-color: rgb(204, 255, 204);" accesskey="1">Biology</button>
-      <button onclick='drawTree("Industry")'  style="background-color: rgb(255, 204,   0);" accesskey="2">Industry</button>
-      <button onclick='drawTree("Military")'  style="background-color: rgb(255, 153, 102);" accesskey="3">Military</button>
-      <button onclick='drawTree("Science")'   style="background-color: rgb(153, 204, 255);" accesskey="4">Science</button>
-      <button onclick='drawTree("Sociology")' style="background-color: rgb(204, 153, 255);" accesskey="5">Sociology</button>
+      <button onclick='drawTree("Biology")'   style="background-color: rgb(204, 255, 204);" hotkey="1">Biology</button>
+      <button onclick='drawTree("Industry")'  style="background-color: rgb(255, 204,   0);" hotkey="2">Industry</button>
+      <button onclick='drawTree("Military")'  style="background-color: rgb(255, 153, 102);" hotkey="3">Military</button>
+      <button onclick='drawTree("Science")'   style="background-color: rgb(153, 204, 255);" hotkey="4">Science</button>
+      <button onclick='drawTree("Sociology")' style="background-color: rgb(204, 153, 255);" hotkey="5">Sociology</button>
     </section>
   </div>
-  <button style="position: fixed; left: 8px; top: 30%;" onclick="el_GUI.hidden=!el_GUI.hidden" id="btn_toggleUI" accesskey="T" title="Toggle GUI">&ofcir;</button>
+  <button style="position: fixed; left: 8px; top: 30%;" onclick="el_GUI.hidden=!el_GUI.hidden" id="btn_toggleUI" hotkey="T" title="Toggle GUI">&ofcir;</button>
   <div style="text-align: center;">
     <a href="https://github.com/RollingHog/wr-stardust">Github</a>
   </div>
