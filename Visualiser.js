@@ -1513,8 +1513,11 @@ const playerPost = {
   },
   extractRolls(text) {
     const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
-      .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], rawRolls: e[2] }))
-      .map(({text, rolls, rawRolls, treshold} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls, treshold }))
+      .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], index: e.index, rawRolls: e[2] }))
+      .map(({text, rolls, rawRolls, treshold, index} ) => ( {
+         text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), 
+         rolls, rawRolls, treshold, index 
+      }))
     return res
   },
   parse(text) {
@@ -1547,8 +1550,11 @@ const playerPost = {
       wins: null,
       critwins: null,
       delta: null,
-    }, rawRolls: null }))
+    },
+    index: e.index,
+    rawRolls: null }))
     requests = requests.concat(bonusThings)
+      .sort( (a,b) => a.index - b.index)
     const rollsTotal = requests.reduce( (sum, e) => sum + +e.rolls.sum,0)
 
     getEl('el_selected_tech_wrapper').hidden = false
@@ -1688,7 +1694,10 @@ const playerPost = {
             }
             return acc
           }, {}))
-          .sort( (a,b) => TREELIST[a[0]] < TREELIST[b[0]] )
+          .sort( (a,b) => 
+            TREELIST.indexOf(VARS.fill2TreeType[a[0]]) 
+            - TREELIST.indexOf(VARS.fill2TreeType[b[0]]) 
+          )
           .map( e2 => 
             `
             <span style="background-color:${e2[0]}">
