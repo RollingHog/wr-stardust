@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-03-30T00:56:33.413Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-03-30T01:20:18.599Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -746,7 +746,7 @@ var DATA__PLAYERS_DATA = {
       "Производство": "0",
       "Общество": "0",
       "Свободные кубы": "0",
-      "Начальные параметры": ""
+      "Начальные параметры": "3/2/1"
     },
     "additionalParams": {
       "снабж. отряды": "0",
