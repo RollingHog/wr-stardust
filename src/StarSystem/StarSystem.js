@@ -104,6 +104,17 @@ function getKey(dict, roll) {
   }
 }
 
+var DEV = false
+function debug(data, str=null) {
+  if(!DEV) return
+  
+  if(str) {
+    log(str, data)
+  } else {
+    log(data)
+  }
+}
+
 const StarSystemGenerator = {
   start() {
     let rawCubes = prompt('paste here many d6 cubes in 2ch roll format')
@@ -134,11 +145,15 @@ const StarSystemGenerator = {
     const densityMod = Math.floor((nOfPlanets - 10) / 1)
     log(densityMod, nOfPlanets)
 
-    function pop1() {
-      return +randomD6Arr.splice(-1)
+    function pop1(str) {
+      const res = +randomD6Arr.splice(-1)
+      debug(res, str)
+      return res
     }
-    function pop3() {
-      return randomD6Arr.splice(-3).reduce((a, e) => a + +e, 0)
+    function pop3(str) {
+      const res = randomD6Arr.splice(-3).reduce((a, e) => a + +e, 0)
+      debug(res, str)
+      return res
     }
 
     function planet(type, size = null, special = null) {
@@ -151,7 +166,7 @@ const StarSystemGenerator = {
     }
 
     // first giant
-    const firstGiantType = getKey(genDict.firstGiant, pop3())
+    const firstGiantType = getKey(genDict.firstGiant, pop3('firstGiantType'))
     let firstLocation = 0
 
     switch(firstGiantType) {
