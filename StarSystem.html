@@ -19,13 +19,13 @@
   
   const E = {
     giant: {
-      none: 'none',
+      none: null,
       conventional: 'conventional',
       eccentric: 'eccentric',
       epistellar: 'epistellar',
     },
     type: {
-      none: 'none',
+      none: null,
       asteroid: 'asteroid',
       terrestrial: 'terrestrial',
       giant: 'giant',
@@ -33,13 +33,13 @@
     size: {
       tiny: 'tiny',
       small: 'small',
-      medium: 'standard',
+      medium: 'medium',
       large: 'large',
       huge: 'huge',
     }
   }
 
-  const genVars = {
+  const genDict = {
      firstGiant: {
       10: E.giant.none,
       12: E.giant.conventional,
@@ -47,7 +47,7 @@
       // (перешедший с окраин горячий юпитер, выбросил сформированные планеты)
       18: E.giant.epistellar,
      },
-     beyondSnowLine: 8,
+     BEYOND_SNOW_LINE: 8,
      otherGiants: {
       insideSnow: {
         [E.giant.none]: null,
@@ -79,7 +79,7 @@
     // -3 if the next orbit inward from the primary star is occupied by a gas giant; 
     // -3 if the orbit is adjacent to either the inner limit radius or the outer limit radius.
     // All of these modifiers are cumulative.
-     contents: {
+     orbitContents: {
       3: [E.type.none, E.size.medium],
       6: [E.type.asteroid, E.size.medium],
       8: [E.type.terrestrial, E.size.tiny],
@@ -97,17 +97,30 @@
     */
   }
 
-  function name(params) {
-    
+  function getKey(dict, roll) {
+    let i = +roll
+    while(i <= 18) {
+      if(dict[i]) return dict[i]
+      i++
+    }
+    // well, it is the last one
+    while(i > 0) {
+      if(dict[i]) return dict[i]
+      i--
+    }
   }
 
   const StarSystemGenerator = {
     start() {
-      let rawCubes = prompt('paste here many d6 cubes in 2ch roll format')
+      let rawCubes = null
+      // FIXME remove comment
+      // prompt('paste here many d6 cubes in 2ch roll format')
       if(!rawCubes) rawCubes = RAW_EXAMPLE
       const cubes = this.extractRolls(rawCubes)
-      this.generate(cubes)
-      log(cubes)
+      const system = this.generate(cubes)
+      // FIXME
+      // log(cubes)
+      log(system)
     },
     extractRolls(raw) {
       return [...raw.matchAll(/\d+d6: \((\d+(?: \+ \d+){0,20})\)/g)]
@@ -115,17 +128,26 @@
         .flat()
     },
     generate(randomD6Arr) {
+      function pop1() {
+        return +randomD6Arr.splice(-1)
+      }
       function pop3() {
-        return randomD6Arr.splice(-3).reduce( (a,e) => a+e, 0)
+        return randomD6Arr.splice(-3).reduce( (a,e) => a+ +e, 0)
       }
 
-      function planet(type) {
+      function planet(type, size, special = null) {
         return {type, size, special}
       }
 
       const system = []
 
+      const firstGiantType = getKey(genDict.firstGiant, pop3())
+
+      return system
     },
   }
+
+  // FIXME remove
+  StarSystemGenerator.start()
 </script>
 </html>
