@@ -39,7 +39,7 @@ const genDict = {
     // (перешедший с окраин горячий юпитер, выбросил сформированные планеты)
     18: E.giant.epistellar,
   },
-  BEYOND_SNOW_LINE: 8,
+  BEYOND_SNOW_LINE: 5,
   otherGiants: {
     insideSnow: {
       [E.giant.none]: null,
@@ -131,8 +131,8 @@ const StarSystemGenerator = {
 
     const density = getEl('el_density').value
     const nOfPlanets = density / 5
-    const densityMod = Math.floor((nOfPlanets - 10) / 2)
-    log(density, nOfPlanets)
+    const densityMod = Math.floor((nOfPlanets - 10) / 1)
+    log(densityMod, nOfPlanets)
 
     function pop1() {
       return +randomD6Arr.splice(-1)
@@ -156,7 +156,7 @@ const StarSystemGenerator = {
 
     switch(firstGiantType) {
       case E.giant.conventional:
-        firstLocation = Math.min(pop1()+genDict.BEYOND_SNOW_LINE-1, 11)
+        firstLocation = Math.min(pop1()+genDict.BEYOND_SNOW_LINE, 11)
         break
       case E.giant.eccentric:
         firstLocation = Math.min(pop1()+3, 11)
@@ -175,12 +175,13 @@ const StarSystemGenerator = {
     for(let i = 1; i <= 11; i++) {
       if(system[i]) continue
       let p
-      if(i < genDict.BEYOND_SNOW_LINE) {
+      if(i <= genDict.BEYOND_SNOW_LINE) {
         //inside snow
         p = genDict.otherGiants.insideSnow[firstGiantType]
       } else {
         p = genDict.otherGiants.outsideSnow[firstGiantType]
       }
+      p = Math.max(p + densityMod, 1)
       if(!p) continue
       if(pop3() > p) continue
       system[i] = planet(E.type.giant, giantSize(i))
@@ -198,7 +199,13 @@ const StarSystemGenerator = {
       system[i] = planet(content[0], content[1])
     }
 
-
+    // stat
+    let systemSummarySize = 0
+    for(let i = 1; i <= 11; i++) {
+      if(!system[i]) continue
+      systemSummarySize += Object.keys(E.size).indexOf(system[i].size)+1
+    }
+    log('systemSummarySize', systemSummarySize)
 
     return system
   },
