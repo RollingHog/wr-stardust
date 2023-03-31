@@ -90,6 +90,37 @@ const genDict = {
 Орбит в рыбной системе 11. 11 в солнечной системе не занята. Пояс астероидов на 8й, линия снега между ней и Марсом. Орбиты расположены не в абсолютных величинах, а в смысле обитаемости, что удобно и не требует перерасчётов.
 Плотность солнечной системы - 50, 8 планет и астероидный пояс (соси, Плутон!)
   */
+satelliteList: {
+  2: 0,
+  4: 1,
+  5: 2,
+  6: 3,
+  8: 4,
+  9: 5,
+  10: 6,
+  11: 8,
+  12: 9,
+  13: 10,
+  14: 12,
+  15: 15,
+  16: 20,
+},
+satelliteMods: {
+  size: {
+      [null]: 0,
+      [E.size.tiny]: -4,
+      [E.size.small]: -1,
+      [E.size.medium]: 0,
+      [E.size.large]: 1,
+      [E.size.huge]: 4,
+    },
+    type: {
+      [E.type.asteroid]: -6,
+      [E.type.satellite]: -6,
+      [E.type.terrestrial]: 0,
+      [E.type.giant]: +6,
+  },
+ },
 }
 
 function getKey(dict, roll) {
@@ -137,8 +168,9 @@ const StarSystemGenerator = {
       cubes, 
       getEl('el_density').value,
       userPlanet
-    )
-    log('rolles used:', startingLength - cubes.length)
+      )
+    const d = startingLength - cubes.length
+    log('rolles used', `${d/startingLength*100}%/${startingLength} total`)
     console.table(system)
   },
   extractRolls(raw) {
@@ -165,7 +197,15 @@ const StarSystemGenerator = {
     }
 
     function planet(type, size = null, special = null) {
-      return { type, size, special }
+      return { type, size, 
+        satellites: getKey(genDict.satelliteList, 
+          pop1()
+          + genDict.satelliteMods.type[type]
+          + genDict.satelliteMods.size[size]
+          - densityMod
+        ),
+        special 
+      }
     }
 
     function giantSize(i) {
