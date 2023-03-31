@@ -49,7 +49,7 @@ const genDict = {
       [E.giant.epistellar]: 6,
     },
     outsideSnow: {
-      [E.giant.none]: null,
+      [E.giant.none]: 4,
       [E.giant.conventional]: 15,
       // -
       [E.giant.eccentric]: 14,
@@ -94,12 +94,12 @@ const genDict = {
 function getKey(dict, roll) {
   let i = +roll
   while (i <= 18) {
-    if (dict[i]) return dict[i]
+    if (typeof dict[i] !== 'undefined') return dict[i]
     i++
   }
   // well, it is the last one
   while (i > 0) {
-    if (dict[i]) return dict[i]
+    if (typeof dict[i] !== 'undefined') return dict[i]
     i--
   }
 }
@@ -107,7 +107,7 @@ function getKey(dict, roll) {
 var DEV = false
 function debug(data, str=null) {
   if(!DEV) return
-  
+
   if(str) {
     log(str, data)
   } else {
@@ -143,16 +143,16 @@ const StarSystemGenerator = {
     const density = getEl('el_density').value
     const nOfPlanets = density / 5
     const densityMod = Math.floor((nOfPlanets - 10) / 1)
-    log(densityMod, nOfPlanets)
+    log({densityMod, nOfPlanets})
 
     function pop1(str) {
       const res = +randomD6Arr.splice(-1)
-      debug(res, str)
+      if(str) debug(res, str)
       return res
     }
     function pop3(str) {
       const res = randomD6Arr.splice(-3).reduce((a, e) => a + +e, 0)
-      debug(res, str)
+      if(str) debug(res, str)
       return res
     }
 
@@ -167,7 +167,7 @@ const StarSystemGenerator = {
 
     // first giant
     const firstGiantType = getKey(genDict.firstGiant, pop3('firstGiantType'))
-    let firstLocation = 0
+    let firstLocation = -1
 
     switch(firstGiantType) {
       case E.giant.conventional:
@@ -180,11 +180,13 @@ const StarSystemGenerator = {
         firstLocation = Math.max(4-pop1(), 1)
         break
     }
-    system[firstLocation] = planet(
-      E.type.giant, 
-      giantSize(firstLocation),
-      firstGiantType
-    )
+    if(firstGiantType) {
+      system[firstLocation] = planet(
+        E.type.giant, 
+        giantSize(firstLocation),
+        firstGiantType
+      )
+    }
 
     // other giants
     for(let i = 1; i <= 11; i++) {
@@ -198,7 +200,7 @@ const StarSystemGenerator = {
       }
       p = Math.max(p + densityMod, 1)
       if(!p) continue
-      if(pop3() > p) continue
+      if(pop3(null, i + ' giant exist') > p) continue
       system[i] = planet(E.type.giant, giantSize(i))
     }
 
