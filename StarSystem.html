@@ -20,7 +20,11 @@
   <br>
   Density: <input type="text" name="" id="el_density" style="width: 40px;" value="50">
   Location <select id="el_sp_location"></select>
-  Type <select id="el_sp_type"></select>
+  Type <select id="el_sp_type">
+    <option value="terrestrial" selected>terrestrial</option>
+    <option value="giant">giant</option>
+  </select>
+  Size <select id="el_sp_size"></select>
   <button onclick="StarSystemGenerator.start()" accesskey="i">Initiate generation</button>
 </body>
 <script src="./src/common.js"></script>
