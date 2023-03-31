@@ -168,6 +168,7 @@ const StarSystemGenerator = {
     // first giant
     const firstGiantType = getKey(genDict.firstGiant, pop3('firstGiantType'))
     let firstLocation = -1
+    let globalMod = densityMod
 
     switch(firstGiantType) {
       case E.giant.conventional:
@@ -175,8 +176,10 @@ const StarSystemGenerator = {
         break
       case E.giant.eccentric:
         firstLocation = Math.min(pop1()+3, 11)
+        globalMod -= 3
         break
-      case E.giant.epistellar:
+        case E.giant.epistellar:
+        globalMod -= 4
         firstLocation = Math.max(4-pop1(), 1)
         break
     }
@@ -198,7 +201,7 @@ const StarSystemGenerator = {
       } else {
         p = genDict.otherGiants.outsideSnow[firstGiantType]
       }
-      p = Math.max(p + densityMod, 1)
+      p = Math.max(p + globalMod, 1)
       if(!p) continue
       if(pop3(null, i + ' giant exist') > p) continue
       system[i] = planet(E.type.giant, giantSize(i))
@@ -211,7 +214,7 @@ const StarSystemGenerator = {
       if(system[i+1] && system[i+1].type == E.type.giant) mod -= 6
       if(system[i-1] && system[i-1].type == E.type.giant) mod -= 3
       if(i == 1 || i == 11) mod -= 3
-      let content = getKey(genDict.orbitContents, pop3() + mod + densityMod)
+      let content = getKey(genDict.orbitContents, pop3() + mod + globalMod)
       if(!content[0]) continue
       system[i] = planet(content[0], content[1])
     }
