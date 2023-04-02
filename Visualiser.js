@@ -301,6 +301,13 @@ const HTMLUtils = {
       el.onmousedown = dragMouseDown
     }
 
+    el.addEventListener('click', _ => {
+      for(let i of document.querySelectorAll('.modal')) {
+        i.style.zIndex = 0
+      }
+      el.style.zIndex = 1
+    })
+
     function dragMouseDown(e) {
       e = e || window.event
       e.preventDefault()
