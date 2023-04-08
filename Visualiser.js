@@ -104,7 +104,7 @@ const VARS = {
     [
       ["Строительство", -1],
       ["Пуски", -1],
-      ['Ветвь "Физика пространства"', -1],
+      ['Исследования (ветка "Физика пространства")', 1],
       ["особое","высокая гравитация"],
     ],
   },
@@ -1043,7 +1043,7 @@ const TechUtils = {
     return '<table><tbody><tr>' +
     effectsListArr.map(e => 
       `<td>${e[0]}</td>` +
-      `<td>${e[1]==0?' ':`${+e[1]>=0?'&nbsp;':'-'}${e[1]}`}`
+      `<td>${e[1]==0?' ':`${+e[1]>=0?'&nbsp;':''}${e[1]}`}`
     ).join('</tr><tr>') +
     '</tr>'
   },
@@ -1157,6 +1157,7 @@ const User = {
       if(userDataObj.uniqueResources) data = data.concat(userDataObj.uniqueResources
         .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], null] : [i[0], +i[1]])
       )
+      if(userDataObj.planetParams) data = data.concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
       if(userDataObj.greatPeople) data = data.concat(userDataObj.greatPeople
         .map( i => i.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
         .flat()
