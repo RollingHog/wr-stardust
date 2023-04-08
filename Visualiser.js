@@ -1138,6 +1138,11 @@ const User = {
       })
   },
 
+  /**
+   * @param {*} techList 
+   * @param {TGoogleDocUserObj | undefined} userDataObj 
+   * @returns 
+   */
   countSummaryCostAndEffect(techList, userDataObj = null) {
     let data = techList
       .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
@@ -1180,6 +1185,10 @@ const User = {
     return result
   },
 
+  /**
+   * @param {TGoogleDocUserObj} userDataObj 
+   * @returns 
+   */
   countAllUserEffects(userDataObj) {
     if(!userDataObj) return null
 
@@ -1553,6 +1562,48 @@ const parseDoc = {
     savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_TIMESTAMP_KEY} = '${(new Date()).toJSON()}'`
     +`\nvar ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2))
   },
+}
+
+const TFiveTechObj = {
+  Biology: [],
+  Industry: [],
+  Military: [],
+  Science: [],
+  Sociology: [],
+  Specials: [],
+}
+
+class TGoogleDocUserObj {
+  startingFeature = []
+  techTable = TFiveTechObj
+  planetParams = {
+    Вода: 0,
+    Гористость: 0,
+    'Масштаб аномалии': 0,
+    'Расстояние до звезды': 0,
+    'Ресурсы': 0,
+    'Тип аномалии': 0,
+    'Тип планеты': 0,
+  };
+  starSystemParams = {
+    'x': 0,
+    'y': 0,
+    'Плотность звёздной системы': '',
+    'Тип, масса и возраст звезды': 0,
+  };
+  colonyParams = {
+    'Наука': 0,
+    'Начальные параметры': '',
+    'Общество': 0,
+    'Производство': 0,
+    'Свободные кубы': 0,
+  }
+  additionalParams = {}
+  buildings = []
+  orbital = []
+  greatPeople = []
+  uniqueResources = []
+  localProjs = TFiveTechObj
 }
 
 // eslint-disable-next-line no-unused-vars
