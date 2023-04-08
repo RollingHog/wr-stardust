@@ -563,7 +563,7 @@ const Analysis = {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
           else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) teff += +k[1]/2
           else if(KEYWORDS.TECH_EFFECTS.includes(k[0])) teff += +k[1]/2
-          else if(k[0].startsWith('Исследования (')) teff += +k[1]/2
+          else if(k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')) teff += +k[1]/2
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.MATERIALS.includes(k[0])) {}
           // eslint-disable-next-line no-empty
@@ -1039,11 +1039,13 @@ function drawTree(tree_name) {
 }
 
 const TechUtils = {
-  createEffectsTable(effectsListArr) {
-    return '<table><tbody><tr>' +
+  createEffectsTable(effectsListArr, tableName = '') {
+    if(effectsListArr.length == 0 ) return ''
+    return '<br><table><tbody><tr>' +
+    (tableName ? `<tr><td colspan=2 align=center style="background: lightgrey">${tableName}</td></tr>` : '')  +
     effectsListArr.map(e => 
-      `<td>${e[0]}</td>` +
-      `<td>${e[1]==0?' ':`${+e[1]>=0?'&nbsp;':''}${e[1]}`}`
+      `<td ${e[1] === 0 ? 'colspan=2' : ''}>${e[0]}</td>` +
+      (e[1] === 0 ? '' : `<td>${`${+e[1]>=0?'&nbsp;':''}${e[1]}`}`)
     ).join('</tr><tr>') +
     '</tr>'
   },
@@ -1247,7 +1249,23 @@ const User = {
       }) 
     // t = [].concat(t.main, t.additional)
 
-    return TechUtils.createEffectsTable(effectsListArr)
+    return ( 
+      TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.includes(e[0])), 'Специализированные бонусы')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)), 'Исследования')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.MATERIALS.includes(e[0])), 'Ресурсы')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])), 'Дополнительные параметры')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.CREATION_KEYWORD)), 'Военные бонусы')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => !KEYWORDS.COLONY_PARAMS.includes(e[0])
+        && !e[0].startsWith(':')
+        && !KEYWORDS.TECH_EFFECTS.includes(e[0])
+        && !e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)
+        && !KEYWORDS.MATERIALS.includes(e[0])
+        && !KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])
+        && !e[0].startsWith(KEYWORDS.CREATION_KEYWORD)
+      ), 'Забытые техи')
+    )
   },
 
   drawUserStat(playerName) {
@@ -1257,7 +1275,7 @@ const User = {
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong>
-      <br>` + this.createUserTechEffectsTable(data)
+      ` + this.createUserTechEffectsTable(data)
   },
 }
 
@@ -1857,6 +1875,9 @@ var KEYWORDS = {
     "волнения",
     "непривычная среда",
     "чуждая среда",
+    'Защита колонии',
+    'Планетарный щит',
+    'Снабж. отряды',
   ],
   SPECIAL_TECH_COST: [
     "затраты",
@@ -1891,6 +1912,7 @@ var KEYWORDS = {
     "Экзоты",
     "Аномалия"
   ],
+  RESEARCH_KEYWORD: 'Исследования',
   TECH_EFFECTS: [
     // индустрия
     "Планетарная разведка",
@@ -1962,6 +1984,7 @@ var KEYWORDS = {
   ],
   UNIT_SLOTS_KEYWORD: 'Слоты',
   UNIT_TYPES_KEYWORD: 'Тип юнита',
+  CREATION_KEYWORD: 'Создание',
   UNIT_TYPES: Object.keys(VARS.hulls),
   DAMAGE_TYPES: [
     "био",
@@ -2022,7 +2045,7 @@ const parseNode = {
         .replace(/^(\d+) слот(а|ов)$/i, 'Слоты:$1')
         .replace(/^тех. (.+)$/i, 'Технология:$1')
         .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
-        .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|')}) ?\\((.+)\\)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((\\d+)\\)$`), '$1:$2')
         .split(':')
       )
@@ -2055,8 +2078,8 @@ const parseNode = {
         // Эффекты и бонусы:
         .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // Плюсы к научным веткам
-        .replace(/^Вет(?:ка|вь) "?([^ "]+)"? \+?(\d+)/i, 'Исследования (ветка "$1"):$2')
-        .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
+        .replace(/^Вет(?:ка|вь) "?([^ "]+)"? \+?(\d+)/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$1"):$2')
+        .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$2"):$1')
         // армии и звездолёты
         .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), KEYWORDS.UNIT_TYPES_KEYWORD+':$1')
         // .replace(/(армия|$/, 'Тип отряда:$1')
@@ -2069,7 +2092,7 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
         .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?(\\d+)$`), '$1:$2')
-        .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
+        .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, KEYWORDS.CREATION_KEYWORD + ' $1:$2')
         // типы урона, эффекты оружия
         .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), KEYWORDS.ALL_RIGHT)
         .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), KEYWORDS.ALL_RIGHT)
