@@ -1345,6 +1345,9 @@ const parseDoc = {
 
     // const CONTENT_TAGS = ['DIV', 'P', 'UL']
     let usersData = {}
+    /**
+     * @type {Object<string,TGoogleDocUserObj>}
+     */
     let usersRes = {}
     let interm = {
       user: {},
@@ -1544,6 +1547,11 @@ const parseDoc = {
     User.activePlayer = playerName
   },
 
+  /**
+   * 
+   * @param {*} playerName 
+   * @param {TGoogleDocUserObj} data 
+   */
   drawAndSaveTechs(playerName, data) {
     for(let i of TREELIST) {
       drawTree(i)
