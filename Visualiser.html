@@ -127,6 +127,24 @@
       <button id="el_reports_home" onclick="Analysis.drawReportsList()">Full list</button>
     </div>
     <div id="el_reports_list" class="body"></div>
+  </div>  
+
+  <div id="el_turnplanner_wrapper" hidden class="modal"
+    style="left: 18vw; top: 10px;">
+    <div id="el_tp_header" class="header">
+      <strong>Планировщик хода</strong>
+      <button onclick="TurnPlanner.close()" class="btn_close">Close</button>
+    </div>
+    <table class="body" style="width: 100%;">
+      <tr style="height: 2em;">
+        <th>Доступные ресурсы</th>
+        <th>Проекты</th>
+      </tr>
+      <tr>
+        <td width="50%" id="el_tp_resources" style="overflow-y: auto; overflow-x: hidden"></td>
+        <td width="50%" style="overflow-y: auto; overflow-x: hidden"></td>
+      </tr>
+    </table>
   </div>
 
   <div id="el_unitcreator_wrapper" hidden class="modal"
@@ -173,12 +191,14 @@
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
       <button onclick="el_help.hidden=false" hotkey="F1">Help</button>
       <br>
+      <button onclick="playerPost.prompt()" title="" hotkey="U">Userpost</button>
+      <br>
+      <button onclick="TurnPlanner.open()" title="" hotkey="N">Turn planner</button>
+      <br>
       <button onclick="UnitCreator.open()" hotkey="C">Unit Creator</button>
       <br>
       <button onclick="Analysis.drawReportsList()" hotkey="R">Reports</button>
-      <br>
       <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png" hotkey="M">Dump</button>
-      <button onclick="playerPost.prompt()" title="" hotkey="U">Userpost</button>
       <!-- <br>
       <button onclick="parseDoc.GDocToJS()" title="">GDoc to JS(ON)</button> -->
       <!-- <button onclick="savingOps.openAsPng()" title="Open current tree as png in new tab">Png</button> -->
