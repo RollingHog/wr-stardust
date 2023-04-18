@@ -129,22 +129,30 @@
     <div id="el_reports_list" class="body"></div>
   </div>  
 
+  <style>
+    #el_turnplanner_wrapper .body div {
+      display: inline-block; 
+      overflow-y: auto; 
+      overflow-x: hidden;
+      width: 49%;
+    }
+  </style>
   <div id="el_turnplanner_wrapper" hidden class="modal"
     style="left: 18vw; top: 10px;">
     <div id="el_tp_header" class="header">
       <strong>Планировщик хода</strong>
       <button onclick="TurnPlanner.close()" class="btn_close">Close</button>
     </div>
-    <table class="body" style="width: 100%;">
-      <tr style="height: 2em;">
-        <th>Доступные ресурсы</th>
-        <th>Проекты</th>
-      </tr>
-      <tr>
-        <td width="50%" id="el_tp_resources" style="overflow-y: auto; overflow-x: hidden"></td>
-        <td width="50%" style="overflow-y: auto; overflow-x: hidden"></td>
-      </tr>
-    </table>
+    <div class="body" style="width: 100%;">
+      <!-- <tr style="height: 2em;">
+          </tr> -->
+      <div id="el_tp_resources">
+        <h5>Доступные ресурсы</h5>
+      </div>
+      <div id="el_tp_tech">
+        <h5>Проекты</h5>
+      </div>
+    </div>
   </div>
 
   <div id="el_unitcreator_wrapper" hidden class="modal"
