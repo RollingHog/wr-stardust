@@ -2305,6 +2305,44 @@ function listAllWithoutMilitary() {
   return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
 }
 
+class TUnit {
+  name = ''
+  hull = ''
+  price = 0
+  expirience = 0
+  home = ''
+
+  initialParams = []
+  attack = 0
+  defence = 0
+  speed = 0
+
+  HP = 0
+  shield = 0
+  modules = []
+
+  parse(text) {
+    const arr = text.replace(/\n/g, ' - ').split(' - ').map(e => e.trim())
+    var result = {
+      hull: arr[0],
+      name: arr[1],
+      price: +arr[2].replace(/Цена/i, ''),
+      expirience: +arr[3].replace(/Опыт/i, ''),
+      home: arr[4].replace(/Родина/i, ''),
+      initialParams: arr[5],
+      HP: arr[6].replace(/Здоровье/i, ''),
+      shield: arr[7].replace(/Щит/i, ''),
+      modules: arr[9],
+    }
+    console.log(result)
+    return result
+  }
+
+  stringify() {
+
+  }
+}
+
 const UnitCreator = {
   open() {
     getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map( e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
