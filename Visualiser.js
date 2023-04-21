@@ -303,10 +303,7 @@ const HTMLUtils = {
     }
 
     el.addEventListener('click', _ => {
-      for(let i of document.querySelectorAll('.modal')) {
-        i.style.zIndex = 0
-      }
-      el.style.zIndex = 1
+      HTMLUtils.focusModal(el)
     })
 
     function dragMouseDown(e) {
@@ -377,6 +374,14 @@ const HTMLUtils = {
     if(!tgt) return
     getEl(tgt).hidden = false
     this.registerModalPath(name)
+    this.focusModal(getEl(tgt))
+  },
+
+  focusModal(el) {
+    for(let i of document.querySelectorAll('.modal')) {
+      i.style.zIndex = 0
+    }
+    el.style.zIndex = 1
   },
 
   registerModalPath(name, subName) {
@@ -687,7 +692,7 @@ const Analysis = {
           Analysis.openReport(i1)
         }
       },
-      'battlecalc': _ => UnitCreator.open(),
+      'unitcreator': _ => UnitCreator.open(),
       [TurnPlanner.NAME]: _ => TurnPlanner.open(),
     }
 
@@ -1640,6 +1645,7 @@ const playerPost = {
     const p = prompt('player post here')
     if(!p) return
     playerPost.parse(p)
+    HTMLUtils.openModal('selected_tech')
   },
   extractRolls(text) {
     const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
@@ -1687,7 +1693,6 @@ const playerPost = {
       .sort( (a,b) => a.index - b.index)
     const rollsTotal = requests.reduce( (sum, e) => sum + +e.rolls.sum,0)
 
-    getEl('el_selected_tech_wrapper').hidden = false
     getEl('el_selected_tech_list').innerHTML = `<table>
     <thead>
       <th>${['Технология', 'Цена', "КПровалы", "Успехи", "КУспехи", "Брош.", "Дельта"].join('</th><th>')}</th>
