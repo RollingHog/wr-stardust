@@ -1649,20 +1649,6 @@
     <node id="n124">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1464.6864834530606" y="841.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="134.107421875" x="62.8212890625" xml:space="preserve" y="-0.40234375">Жилой модуль
-Сложность: 4, 2 слота
-Эффект: Общество +1,
-:для планеты прописки<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="trapezoid2"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n125">
-      <data key="d6">
-        <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1181.8901148188015" y="1263.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
@@ -1674,7 +1660,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n126">
+    <node id="n125">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1181.8901148188015" y="736.0"/>
@@ -1688,7 +1674,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n127">
+    <node id="n126">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="895.616930501672" y="419.0"/>
@@ -1701,7 +1687,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n128">
+    <node id="n127">
       <data key="d5" xml:space="preserve"><![CDATA[Мощный электромагнит вдоль экватора планеты - и все дела.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1715,7 +1701,9 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n129">
+    <node id="n128">
+      <data key="d5" xml:space="preserve"><![CDATA[Проблема здесь не в непосредственно орбитальном заводе, а в массовости и масштабируемости
+]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1464.6864834530606" y="419.0"/>
@@ -1729,7 +1717,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n130">
+    <node id="n129">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="315.1585971683386" y="525.0"/>
@@ -1739,6 +1727,20 @@
 Сложность: 3, ресурсы(1)
 Эффект: Производство +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n130">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="1464.6864834530606" y="841.0"/>
+          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.69140625" x="19.529296875" xml:space="preserve" y="-0.40234375">Колонизация соседней планеты
+Сложность: 4, повторяемое
+Эффект: :создаёт колонию на планете
+ в своей ЗС<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="hexagon"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -2312,7 +2314,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e57" source="n23" target="n126">
+    <edge id="e57" source="n23" target="n125">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2322,7 +2324,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e58" source="n126" target="n55">
+    <edge id="e58" source="n125" target="n55">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2802,7 +2804,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e106" source="n125" target="n111">
+    <edge id="e106" source="n124" target="n111">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2812,7 +2814,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e107" source="n34" target="n125">
+    <edge id="e107" source="n34" target="n124">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2822,7 +2824,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e108" source="n126" target="n124">
+    <edge id="e108" source="n2" target="n89">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2832,7 +2834,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e109" source="n2" target="n89">
+    <edge id="e109" source="n61" target="n126">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2842,7 +2844,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e110" source="n61" target="n127">
+    <edge id="e110" source="n14" target="n127">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2852,7 +2854,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e111" source="n14" target="n128">
+    <edge id="e111" source="n45" target="n62">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2862,7 +2864,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e112" source="n45" target="n62">
+    <edge id="e112" source="n61" target="n128">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2872,7 +2874,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e113" source="n61" target="n129">
+    <edge id="e113" source="n14" target="n129">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2882,7 +2884,8 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e114" source="n14" target="n130">
+    <edge id="e114" source="n125" target="n130">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
