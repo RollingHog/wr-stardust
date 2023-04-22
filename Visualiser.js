@@ -34,7 +34,7 @@ const VARS = {
     "Биология": "Biology",
     "Индустрия": "Industry",
     "Наука": "Science",
-    "Особые": "Specials",
+    "Уникальные": "Unique",
   },
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
@@ -1457,7 +1457,7 @@ const parseDoc = {
     const splitFilter = (str, treeRuName) => {
       let res = str.split(',').map(e => e.trim()).filter(e => e)
 
-      if(treeRuName !== 'Особые') {
+      if(treeRuName !== 'Уникальные') {
         res = res.filter( e => e.replace(/\([^)]+\)/, '').trim() in inverted.alltech 
           ? true 
           : console.warn(this.playerHTML.name, e)
@@ -1467,7 +1467,7 @@ const parseDoc = {
       return res
     }
     /**
-     * there is usually the sixth block, "Specials"
+     * there is usually the sixth block, "Unique"
      * @param {HTMLTableElement} el 
      * @returns 
      */
@@ -1605,7 +1605,7 @@ const TFiveTechObj = {
   Military: [],
   Science: [],
   Sociology: [],
-  Specials: [],
+  Unique: [],
 }
 
 class TGoogleDocUserObj {

@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-04-21T22:41:19.686Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-04-22T12:10:31.056Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -28,7 +28,7 @@ var DATA__PLAYERS_DATA = {
         "Туманные вычисления",
         "Анализ космических лучей"
       ],
-      "Specials": []
+      "Unique": []
     },
     "planetParams": {
       "Тип планеты": 5,
@@ -144,7 +144,7 @@ var DATA__PLAYERS_DATA = {
         "Умное окружение",
         "Колониальная сеть"
       ],
-      "Specials": [
+      "Unique": [
         "Планетарная разведка"
       ]
     }
@@ -174,7 +174,7 @@ var DATA__PLAYERS_DATA = {
         "Самообучение",
         "Импланты"
       ],
-      "Specials": []
+      "Unique": []
     },
     "planetParams": {
       "Тип планеты": 2,
@@ -269,7 +269,7 @@ var DATA__PLAYERS_DATA = {
         "Колониальная сеть",
         "Умное окружение"
       ],
-      "Specials": [
+      "Unique": [
         "Планетарная разведка"
       ]
     }
@@ -301,7 +301,7 @@ var DATA__PLAYERS_DATA = {
         "Туманные вычисления",
         "Постземная астрономия"
       ],
-      "Specials": []
+      "Unique": []
     },
     "planetParams": {
       "Тип планеты": 5,
@@ -396,7 +396,7 @@ var DATA__PLAYERS_DATA = {
       "Science": [
         "Умное окружение"
       ],
-      "Specials": []
+      "Unique": []
     }
   },
   "Инженеры": {
@@ -438,7 +438,7 @@ var DATA__PLAYERS_DATA = {
         "Софогенез",
         "Физика элементарных частиц"
       ],
-      "Specials": []
+      "Unique": []
     },
     "planetParams": {
       "Тип планеты": 2,
@@ -456,7 +456,7 @@ var DATA__PLAYERS_DATA = {
       "Плотность звёздной системы": 25
     },
     "colonyParams": {
-      "Наука": "13",
+      "Наука": "14",
       "Производство": "11",
       "Общество": "5",
       "Свободные кубы": "2",
@@ -588,7 +588,7 @@ var DATA__PLAYERS_DATA = {
         "Умное окружение",
         "Когнитивные расширители"
       ],
-      "Specials": [
+      "Unique": [
         "Шикарный ИФП (+1 куб к ветке \"Физика пространства”)"
       ]
     }
@@ -616,7 +616,7 @@ var DATA__PLAYERS_DATA = {
         "Постземная астрономия",
         "Анализ космических лучей"
       ],
-      "Specials": []
+      "Unique": []
     },
     "planetParams": {
       "Тип планеты": 6,
@@ -724,7 +724,7 @@ var DATA__PLAYERS_DATA = {
         "Колониальная сеть",
         "Умное окружение"
       ],
-      "Specials": []
+      "Unique": []
     }
   },
   "Илоний Джобс": {
@@ -755,7 +755,7 @@ var DATA__PLAYERS_DATA = {
         "Постземная астрономия",
         "Анализ космических лучей"
       ],
-      "Specials": []
+      "Unique": []
     },
     "planetParams": {
       "Тип планеты": 6,
@@ -841,7 +841,7 @@ var DATA__PLAYERS_DATA = {
       "Science": [
         "Умное окружение"
       ],
-      "Specials": []
+      "Unique": []
     }
   },
   "Пророк Ракель": {
@@ -857,7 +857,7 @@ var DATA__PLAYERS_DATA = {
       "Biology": [],
       "Industry": [],
       "Science": [],
-      "Specials": []
+      "Unique": []
     },
     "planetParams": {
       "Тип планеты": 6,
@@ -910,7 +910,7 @@ var DATA__PLAYERS_DATA = {
       "Biology": [],
       "Industry": [],
       "Science": [],
-      "Specials": []
+      "Unique": []
     }
   }
 }
