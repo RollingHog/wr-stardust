@@ -202,8 +202,13 @@
   xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   </svg>
 
+  <style>
+    #el_GUI button, #el_GUI label{
+      pointer-events: auto; 
+    }
+  </style>
   <div id=el_GUI>
-    <div id="" style="position: fixed; left: 8px; bottom: 8px;">
+    <div id="" style="position: fixed; left: 8px; bottom: 8px; pointer-events: none;">
       <button onclick="el_help.hidden=false" hotkey="F1">Help</button>
       <br>
       <button onclick="playerPost.prompt()" title="" hotkey="U">Userpost</button>
