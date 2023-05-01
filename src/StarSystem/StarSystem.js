@@ -302,6 +302,7 @@ const StarSystemGenerator = {
    * @param {TSSGPlanet[]} system 
    */
   draw(canvasEl, system) {
+    canvasEl.innerHTML = ''
     for(let i = 1; i<system.length; i++) {
       const k = system[i]
       if(!k) continue
