@@ -20,6 +20,7 @@ const TREELIST = [
   "Biology",
   "Industry",
   "Science",
+  "Unique",
 ]
 
 // constants
@@ -1323,6 +1324,10 @@ async function parseTechIframe(tree_name) {
   for (let i of techData.graphmls[tree_name].getElementsByTagName('y:ShapeNode')) {
     try {
       const t = parseNode.node(tree_name, i)
+      if(!t) {
+        // it is very broken node
+        continue
+      }
       if (t.badCell) {
         techData.badCells[tree_name].push(t)
         continue
@@ -2198,7 +2203,7 @@ const parseNode = {
     }
 
     if (nodeText.indexOf(sepDifficulty) == -1 || nodeText.indexOf(sepEffect) == -1) {
-      warn(nodeText)
+      if(nodeText) warn(nodeText)
       return null
     }
 
