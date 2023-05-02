@@ -1,0 +1,1 @@
+move /y "C:\Users\DPaushev\Downloads\playersData.js" "C:\Users\DPaushev\Desktop\xlam\wr-stardust\data"
