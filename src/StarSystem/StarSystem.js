@@ -308,10 +308,12 @@ const StarSystemGenerator = {
       if(!k) continue
       
       let type = k.type
-      let size = 100
+      let sizeIndex = Object.keys(E.size).indexOf(k.size)
+      let size = 110 - (2 - sizeIndex) * 12
+
       switch (k.type) {
         case E.type.terrestrial:
-          size = 60
+          size -= 40
           if(i <= 4) type = type + '_hot'
           if(i >= genDict.BEYOND_SNOW_LINE) type = type + '_cold'
           break
@@ -335,7 +337,10 @@ const StarSystemGenerator = {
       //   .replace(/\([^)]+\)/g,'')
       //   .trim()
       //   .replace(/ /g, '_')
-      el.innerHTML = `${i}<br><img src='assets/planets/${type}.png' style="width:${size}%" alt="${k.type} ${k.size}">`
+      el.innerHTML = `${i}<br><img src='assets/planets/${type}.png' style="width:${size}%" 
+        alt="${k.type} ${k.size}"
+        title="${k.type} ${k.size}"
+      >`
       // el.title = name
       canvasEl.appendChild(el)
     }  
