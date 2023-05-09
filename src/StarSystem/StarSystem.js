@@ -248,7 +248,7 @@ const StarSystemGenerator = {
         firstLocation = Math.max(4-pop1(), 1)
         break
     }
-    if(firstGiantType && !planet[firstLocation]) {
+    if(firstGiantType && !system[firstLocation]) {
       system[firstLocation] = planet(
         E.type.giant, 
         giantSize(firstLocation),
@@ -339,8 +339,8 @@ const StarSystemGenerator = {
       //   .trim()
       //   .replace(/ /g, '_')
       el.innerHTML = `${i}<br><img src='assets/planets/${type}.png' style="width:${size}%" 
-        alt="${k.type} ${k.size}"
-        title="${k.type} ${k.size}"
+        alt="${k.type} ${k.size} ${k.special ? k.special : ''}"
+        title="${k.type} ${k.size} ${k.special ? k.special : ''}"
       >`
       // el.title = name
       canvasEl.appendChild(el)
