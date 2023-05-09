@@ -314,7 +314,7 @@ const StarSystemGenerator = {
 
       switch (k.type) {
         case E.type.terrestrial:
-          size -= 40
+          size -= 45
           if(i <= 4) type = type + '_hot'
           if(i >= genDict.BEYOND_SNOW_LINE) type = type + '_cold'
           break
