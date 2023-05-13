@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-05-13T02:32:50.827Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-05-13T03:03:36.490Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -217,7 +217,7 @@ var DATA__PLAYERS_DATA = {
       "y": 13,
       "Тип, масса и возраст звезды": "",
       "Плотность звёздной системы": 61,
-      "generatorCode": "&1=tt00uucc&2=at00&3=at00&4=gm05gtec&6=ts01&7=at00&8=gs06&9=gs06&10=at00&rest=51415332651441543315233536621153134513234216653632&density=61"
+      "generatorCode": "&1=tt00uucc&2=at00&3=at00&4=gm05gtec&5=tm01&7=at00&8=gs06&9=gs06&10=at00&rest=51415332651441543315233536621153134513234216653632&density=61"
     },
     "colonyParams": {
       "Наука": "8",
@@ -345,7 +345,7 @@ var DATA__PLAYERS_DATA = {
       "y": 14,
       "Тип, масса и возраст звезды": "",
       "Плотность звёздной системы": 37,
-      "generatorCode": ""
+      "generatorCode": "&1=at00&2=ts00&3=tt00&4=tt00&7=tl01uucc&8=gm04gtec&9=gm04&rest=5324362631224256236316546164425514553636314215555114&density=37"
     },
     "colonyParams": {
       "Наука": "9",
@@ -662,7 +662,7 @@ var DATA__PLAYERS_DATA = {
       "y": 28,
       "Тип, масса и возраст звезды": "1.1/, Теория",
       "Плотность звёздной системы": 63,
-      "generatorCode": ""
+      "generatorCode": "&2=gl06gtep&3=ts01&4=at00&5=at00&8=th05uucc&10=gs05&11=at00&rest=43646112334212131636244444362166631311121523356315&density=63"
     },
     "colonyParams": {
       "Наука": "6",
