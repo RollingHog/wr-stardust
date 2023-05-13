@@ -13,7 +13,7 @@ const EARTH_EXAMPLE = `99d6: ( 4 + 6 + 5 + 1 + 1 ) = 0`
 
 const E = {
   giant: {
-    none: null,
+    none: 'none',
     conventional: 'conventional',
     eccentric: 'eccentric',
     epistellar: 'epistellar',
@@ -159,7 +159,7 @@ class TSSGPlanet {
   satellites = 0
   capital = false
   user = null
-  special = null
+  giantType = null
 }
 
 const StarSystemGenerator = {
@@ -193,7 +193,7 @@ const StarSystemGenerator = {
     log('rolles used', `${d/startingLength*100}%/${startingLength} total`)
     console.table(system)
     getEl('el_sys_str').innerText = this.compress(system, density, cubes)
-    const str = this.compress(system, cubes)
+    const str = this.compress(system, density, cubes)
     console.log(this.decompress(str))
     this.draw(getEl('el_canvas'), system)
   },
@@ -220,9 +220,9 @@ const StarSystemGenerator = {
       e.type.slice(0,1),
       e.size.slice(0,1),
       e.satellites.toString(10).padStart(2, '0'),
-      // e.special?.slice(0,1),
-      e.user ? 'u' : '',
-      e.capital ? 'c' : '',
+      e.giantType ? 'gt' + e.giantType.slice(0,2) : '',
+      e.user ? 'uu' : '',
+      e.capital ? 'cc' : '',
     ].join('')).join('') 
     + `&${E.keys.rest}=` + cubes.join('')
     + `&${E.keys.density}=` + density
@@ -239,9 +239,9 @@ const StarSystemGenerator = {
     let restCubes = obj.filter(e => e[0] === E.keys.rest)
     if(restCubes.length) restCubes = restCubes[0][1]
     obj = obj.filter(e => e[0] !== E.keys.rest)
-    let density = obj.filter(e => e[0] === 'density')
+    let density = obj.filter(e => e[0] === E.keys.density)
     if(density.length) density = density[0][1]
-    obj = obj.filter(e => e[0] !== 'density')
+    obj = obj.filter(e => e[0] !== E.keys.density)
     
     let arr = []
     for(let i of obj) {
@@ -255,13 +255,14 @@ const StarSystemGenerator = {
         optional: arr[i].slice(4)
       }
 
+      const giantType = d.optional.match(/gt([a-z]{2})/)
       arr[i] = {
         type:  Object.keys(E.type).filter(e => e.startsWith(d.main.slice(0,1)))[0],
         size: Object.keys(E.size).filter(e => e.startsWith(d.main.slice(1,2)))[0],
         satellites: +d.main.slice(2,4),
-        special: '',
-        user: d.optional.indexOf('u') > -1,
-        capital: d.optional.indexOf('c') > -1,
+        giantType: giantType ? Object.keys(E.giant).filter(e => e.startsWith(giantType[1]))[0] : '',
+        user: d.optional.indexOf('uu') > -1,
+        capital: d.optional.indexOf('cc') > -1,
       }
     }
 
@@ -275,7 +276,7 @@ const StarSystemGenerator = {
     const system = []
 
     const nOfPlanets = density / 5
-    const fuckPlanetsMod = 2
+    const fuckPlanetsMod = 1
     const densityMod = Math.floor((nOfPlanets - 10) / 2) - fuckPlanetsMod
     log({densityMod, nOfPlanets})
 
@@ -290,7 +291,7 @@ const StarSystemGenerator = {
       return res
     }
 
-    function planet(type, size = null, {special =  null, capital = false, user = null} = {}) {
+    function planet(type, size = null, {giantType =  null, capital = false, user = null} = {}) {
       if(capital && !user) user = true
       return { type, size, 
         satellites: getKey(genDict.satelliteList, 
@@ -299,7 +300,7 @@ const StarSystemGenerator = {
           + genDict.satelliteMods.size[size]
           + densityMod
         ),
-        special,
+        giantType,
         capital,
         user
       }
@@ -330,28 +331,32 @@ const StarSystemGenerator = {
         firstLocation = Math.max(4-pop1(), 1)
         break
     }
+    console.log('first giant: ', firstGiantType, firstLocation)
+
     if(firstGiantType && !system[firstLocation]) {
       system[firstLocation] = planet(
         E.type.giant, 
         giantSize(firstLocation),
-        // firstGiantType
+        {giantType: firstGiantType}
       )
     }
 
-    // other giants
-    for(let i = 1; i <= 11; i++) {
-      if(system[i]) continue
-      let p
-      if(i <= genDict.BEYOND_SNOW_LINE) {
-        //inside snow
-        p = genDict.otherGiants.insideSnow[firstGiantType]
-      } else {
-        p = genDict.otherGiants.outsideSnow[firstGiantType]
+    if(firstGiantType !== E.giant.none) {
+      // other giants
+      for(let i = 1; i <= 11; i++) {
+        if(system[i]) continue
+        let p
+        if(i <= genDict.BEYOND_SNOW_LINE) {
+          //inside snow
+          p = genDict.otherGiants.insideSnow[firstGiantType]
+        } else {
+          p = genDict.otherGiants.outsideSnow[firstGiantType]
+        }
+        p = Math.max(p + globalMod, 1)
+        if(!p) continue
+        if(pop3(null, i + ' giant exist') > p) continue
+        system[i] = planet(E.type.giant, giantSize(i))
       }
-      p = Math.max(p + globalMod, 1)
-      if(!p) continue
-      if(pop3(null, i + ' giant exist') > p) continue
-      system[i] = planet(E.type.giant, giantSize(i))
     }
 
     // non-giant planets
@@ -422,8 +427,8 @@ const StarSystemGenerator = {
       //   .replace(/ /g, '_')
       el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}<br>
       <img src='assets/planets/${type}.png' style="width:${size}%" 
-        alt="${k.type} ${k.size} ${k.special ? k.special : ''}"
-        title="${k.type} ${k.size} ${k.special ? k.special : ''}"
+        alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
+        title="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
       >`
       // el.title = name
       canvasEl.appendChild(el)
