@@ -31,7 +31,11 @@ const E = {
     medium: 'medium',
     large: 'large',
     huge: 'huge',
-  }
+  },
+  keys: {
+    density: 'density',
+    rest: 'rest',
+  },
 }
 
 const genDict = {
@@ -179,15 +183,16 @@ const StarSystemGenerator = {
       size: getEl('el_sp_size').value,
       i: getEl('el_sp_location').value,
     }
+    const density = getEl('el_density').value
     const system = this.generate(
       cubes, 
-      getEl('el_density').value,
+      density,
       userPlanet
     )
     const d = startingLength - cubes.length
     log('rolles used', `${d/startingLength*100}%/${startingLength} total`)
     console.table(system)
-    getEl('el_sys_str').innerText = this.compress(system, cubes)
+    getEl('el_sys_str').innerText = this.compress(system, density, cubes)
     const str = this.compress(system, cubes)
     console.log(this.decompress(str))
     this.draw(getEl('el_canvas'), system)
@@ -207,7 +212,7 @@ const StarSystemGenerator = {
    * @param {Number[]} cubes 
    * @returns 
    */
-  compress(system, cubes = []) {
+  compress(system, density, cubes = []) {
     return system.map( (e,i) => [
       '&',
       i,
@@ -218,20 +223,25 @@ const StarSystemGenerator = {
       // e.special?.slice(0,1),
       e.user ? 'u' : '',
       e.capital ? 'c' : '',
-    ].join('')).join('') + '&rest=' + cubes.join('')
+    ].join('')).join('') 
+    + `&${E.keys.rest}=` + cubes.join('')
+    + `&${E.keys.density}=` + density
   },
 
   /**
-   * @returns {{system: TSSGPlanet[], restCubes: Number[]}}
+   * @returns {{system: TSSGPlanet[], restCubes: Number[], density: Number}}
    */
   decompress(query) {
     let obj = query
       .split('&')
       .filter( e => e)
       .map( e => e.split('='))
-    let restCubes = obj.filter(e => e[0] === 'rest')
-    if(restCubes) restCubes = restCubes[0][1]
-    obj = obj.filter(e => e[0] !== 'rest')
+    let restCubes = obj.filter(e => e[0] === E.keys.rest)
+    if(restCubes.length) restCubes = restCubes[0][1]
+    obj = obj.filter(e => e[0] !== E.keys.rest)
+    let density = obj.filter(e => e[0] === 'density')
+    if(density.length) density = density[0][1]
+    obj = obj.filter(e => e[0] !== 'density')
     
     let arr = []
     for(let i of obj) {
@@ -255,7 +265,7 @@ const StarSystemGenerator = {
       }
     }
 
-    return {system: arr, restCubes}
+    return {system: arr, restCubes, density}
   },
 
   generate(randomD6Arr, density, userPlanet) {
@@ -434,6 +444,13 @@ const StarSystemGenerator = {
   StarSystemGenerator.startRaw()
   if(location.hash) {
     log('loading from hash...')
-    StarSystemGenerator.draw(getEl('el_canvas'), StarSystemGenerator.decompress(location.hash).system)
+    const ddata = StarSystemGenerator.decompress(location.hash)
+    const userPlanet = ddata.system.filter(e => e.capital)[0]
+    log(ddata.density)
+    getEl('el_sp_location').value = ddata.system.indexOf(userPlanet)
+    getEl('el_sp_size').value = userPlanet.size
+    getEl('el_density').value = ddata.density
+    StarSystemGenerator.draw(getEl('el_canvas'), ddata.system)
+    getEl('el_sys_str').innerText = StarSystemGenerator.compress(ddata.system, ddata.density, ddata.restCubes.split(''))
   }
 })()
