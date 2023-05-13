@@ -333,15 +333,18 @@ const StarSystemGenerator = {
     }
     console.log('first giant: ', firstGiantType, firstLocation)
 
-    if(firstGiantType && !system[firstLocation]) {
-      system[firstLocation] = planet(
-        E.type.giant, 
-        giantSize(firstLocation),
-        {giantType: firstGiantType}
-      )
-    }
-
     if(firstGiantType !== E.giant.none) {
+      if(!system[firstLocation]) {
+        system[firstLocation] = planet(
+          E.type.giant, 
+          giantSize(firstLocation),
+          {giantType: firstGiantType}
+        )
+      } else {
+        log('cannot place first giant: location taken')
+      }
+
+
       // other giants
       for(let i = 1; i <= 11; i++) {
         if(system[i]) continue
@@ -429,7 +432,7 @@ const StarSystemGenerator = {
       <img src='assets/planets/${type}.png' style="width:${size}%" 
         alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
         title="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
-      >`
+      ><br>${k.giantType && k.giantType !== E.giant.conventional ? k.giantType : ''}`
       // el.title = name
       canvasEl.appendChild(el)
     }  
