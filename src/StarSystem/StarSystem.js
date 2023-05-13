@@ -160,8 +160,11 @@ class TSSGPlanet {
 
 const StarSystemGenerator = {
   start() {
-    let rawCubes = prompt('paste here many d6 cubes in 2ch roll format / leave empty to use default')
-    this.startRaw(rawCubes)
+    // prompt('paste here many d6 cubes in 2ch roll format / leave empty to use default')
+    this.startRaw(getEl('el_rolls').value)
+  },
+  clear() {
+    location.hash = ''
   },
   startRaw(rawCubes) {
     if (!rawCubes) rawCubes = RAW_EXAMPLE
@@ -184,6 +187,7 @@ const StarSystemGenerator = {
     const d = startingLength - cubes.length
     log('rolles used', `${d/startingLength*100}%/${startingLength} total`)
     console.table(system)
+    getEl('el_sys_str').innerText = this.compress(system, cubes)
     const str = this.compress(system, cubes)
     console.log(this.decompress(str))
     this.draw(getEl('el_canvas'), system)
@@ -427,4 +431,8 @@ const StarSystemGenerator = {
   }, 0)
   // FIXME remove
   StarSystemGenerator.startRaw()
+  if(location.hash) {
+    log('loading from hash...')
+    StarSystemGenerator.draw(getEl('el_canvas'), StarSystemGenerator.decompress(location.hash).system)
+  }
 })()
