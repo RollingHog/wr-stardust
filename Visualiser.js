@@ -858,6 +858,28 @@ const Analysis = {
       .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
   },
 
+  allEffectsVerbose(techObjsObj) {
+    return Object.values(techObjsObj)
+    .reduce( (acc, e) => {
+      for(let i of e.effect) {
+        const k = i[0]
+        if(!acc[k])
+          acc[k] = {
+            count: 0,
+            sum: 0,
+            list: [],
+          }
+
+          acc[k].count+=1
+          acc[k].sum+=+i[1]
+
+          acc[k].list.push(`${e.name}(${+i[1]})`)
+      }
+
+      return acc
+    }, {})
+  },
+
   Reports: {
    эффекты_тех() {
       let filter = [].concat(
@@ -928,26 +950,22 @@ const Analysis = {
     },
 
     вообще_все_эффекты_подробно(){
-      const result = Object.values(inverted.alltech)
-        .reduce( (acc, e) => {
-          for(let i of e.effect) {
-            const k = i[0]
-            if(!acc[k])
-              acc[k] = {
-                count: 0,
-                sum: 0,
-                list: [],
-              }
+      const result = Analysis.allEffectsVerbose(inverted.alltech)
+      Analysis.reportTable(result)
+    },
 
-              acc[k].count+=1
-              acc[k].sum+=+i[1]
-  
-              acc[k].list.push(e.name)
-          }
-
-          return acc
-        }, {})
-        Analysis.reportTable(result)
+    эффекты_игрока_подробно() {
+      const playerName = prompt('player name')
+      if(!playerName) return
+      const userDataObj = User.getSavedUserData(playerName)
+      const namesList = [].concat(
+        userDataObj.buildings,
+        userDataObj.orbital,
+        Object.values(userDataObj.localProjs).flat(),
+        Object.values(userDataObj.techTable).flat(),
+      )
+      const result = Analysis.allEffectsVerbose(namesList.map(e => inverted.alltech[e]).filter(e => e))
+      Analysis.reportTable(result)
     },
 
     эффекты_на_ТУ() {
@@ -1608,7 +1626,7 @@ const parseDoc = {
 
     const planetParams = Object.fromEntries(
       Array.from(obj['Характеристики планеты'].children[0].rows)
-        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]+\)/g,'').replace(/\+\d+/g,'').trim()))
+        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]*\)/g,'').replace(/\+\d+/g,'').trim()))
         .reduce( (acc, e) => acc = acc.concat(e), [])
         .map( (e,i,arr) => i%2 ? [arr[i-1], +arr[i]] : null)
         .filter(e => e)
