@@ -367,13 +367,13 @@ const HTMLUtils = {
     )
   },
 
-  openModal(name) {
+  openModal(name, subName = null) {
     const tgt = Array.from(document.querySelectorAll('.modal'))
       .map(e => e.id)
       .filter(e => e.includes(name))[0]
     if(!tgt) return
     getEl(tgt).hidden = false
-    this.registerModalPath(name)
+    this.registerModalPath(name, subName)
     this.focusModal(getEl(tgt))
   },
 
@@ -408,6 +408,37 @@ const HTMLUtils = {
     if(!tgt) return
     getEl(tgt).hidden = true
     this.unregisterModalPath(name)
+  },
+
+  checkForOpenedWindows() {
+    if(location.hash.length <= 1) return
+
+    const path = decodeURIComponent(location.hash).split('#')
+      .filter( e => e)
+      .map(e =>e.split('__'))
+
+    location.hash = ''
+
+    const modals = {
+      'report': i1 => {
+        Analysis.drawReportsList()
+        if(i1) {
+          Analysis.openReport(i1)
+        }
+      },
+      'unitcreator': _ => UnitCreator.open(),
+      [TurnPlanner.NAME]: _ => TurnPlanner.open(),
+      // TODO add processing from localstorage
+      'selected_tech': _ => {}
+    }
+
+    for(let i of path) {
+      if(modals[i[0]]) {
+        modals[i[0]](i[1])
+      } else {
+        warn('Unknown modal: ', i[0])
+      }
+    }
   },
 
   hideAllModals() {
@@ -516,7 +547,7 @@ const Analysis = {
       Analysis.totalTechCount()
     }, 20)
 
-    Analysis.checkForOpenedWindows()
+    HTMLUtils.checkForOpenedWindows()
 
   },
 
@@ -767,37 +798,6 @@ const Analysis = {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => !dict.includes(key)))
   },
 
-  checkForOpenedWindows() {
-    if(location.hash.length <= 1) return
-
-    const path = decodeURIComponent(location.hash).split('#')
-      .filter( e => e)
-      .map(e =>e.split('__'))
-
-    location.hash = ''
-
-    const modals = {
-      'report': i1 => {
-        Analysis.drawReportsList()
-        if(i1) {
-          Analysis.openReport(i1)
-        }
-      },
-      'unitcreator': _ => UnitCreator.open(),
-      [TurnPlanner.NAME]: _ => TurnPlanner.open(),
-      // TODO add processing from localstorage
-      'selected_tech': _ => {}
-    }
-
-    for(let i of path) {
-      if(modals[i[0]]) {
-        modals[i[0]](i[1])
-      } else {
-        warn('Unknown modal: ', i[0])
-      }
-    }
-  },
-
   drawReportsList() {
     HTMLUtils.openModal('report')
     getEl('el_reports_home').hidden = true
@@ -813,7 +813,12 @@ const Analysis = {
   openReport(reportName) {
     HTMLUtils.registerModalPath('report', reportName)
     getEl('el_reports_home').hidden = false
-    Analysis.Reports[reportName]()
+    if(Analysis.Reports[reportName])
+      Analysis.Reports[reportName]()
+    else {
+      // probably its user report
+      User.drawUserStat(reportName)
+    }
   },
 
   closeReports() {
@@ -1404,13 +1409,13 @@ const User = {
     const userData = User.getSavedUserData(playerName)
     const effectsData = User.countAllUserEffects(userData)
 
-    getEl('el_reports_wrapper').hidden = false
-    getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong><br>
       <a target=_blank 
         href="./StarSystem.html#${userData.starSystemParams.generatorCode}&user=${playerName}">Звездная система</a>
       ` + this.createUserTechEffectsTable(effectsData)
+
+    HTMLUtils.openModal('report', playerName)
   },
 }
 
