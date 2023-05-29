@@ -271,6 +271,7 @@ async function Init() {
             User.activePlayer = null
             drawTree(techData.currentTreeName)
             getEl('el_reports_wrapper').hidden = true
+            HTMLUtils.closeModal('report')
           }
         }
         : null
@@ -367,13 +368,13 @@ const HTMLUtils = {
     )
   },
 
-  openModal(name) {
+  openModal(name, subName = null) {
     const tgt = Array.from(document.querySelectorAll('.modal'))
       .map(e => e.id)
       .filter(e => e.includes(name))[0]
     if(!tgt) return
     getEl(tgt).hidden = false
-    this.registerModalPath(name)
+    this.registerModalPath(name, subName)
     this.focusModal(getEl(tgt))
   },
 
@@ -408,6 +409,37 @@ const HTMLUtils = {
     if(!tgt) return
     getEl(tgt).hidden = true
     this.unregisterModalPath(name)
+  },
+
+  checkForOpenedWindows() {
+    if(location.hash.length <= 1) return
+
+    const path = decodeURIComponent(location.hash).split('#')
+      .filter( e => e)
+      .map(e =>e.split('__'))
+
+    location.hash = ''
+
+    const modals = {
+      'report': i1 => {
+        Analysis.drawReportsList()
+        if(i1) {
+          Analysis.openReport(i1)
+        }
+      },
+      'unitcreator': _ => UnitCreator.open(),
+      [TurnPlanner.NAME]: _ => TurnPlanner.open(),
+      // TODO add processing from localstorage
+      'selected_tech': _ => {}
+    }
+
+    for(let i of path) {
+      if(modals[i[0]]) {
+        modals[i[0]](i[1])
+      } else {
+        warn('Unknown modal: ', i[0])
+      }
+    }
   },
 
   hideAllModals() {
@@ -516,7 +548,7 @@ const Analysis = {
       Analysis.totalTechCount()
     }, 20)
 
-    Analysis.checkForOpenedWindows()
+    HTMLUtils.checkForOpenedWindows()
 
   },
 
@@ -767,37 +799,6 @@ const Analysis = {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => !dict.includes(key)))
   },
 
-  checkForOpenedWindows() {
-    if(location.hash.length <= 1) return
-
-    const path = decodeURIComponent(location.hash).split('#')
-      .filter( e => e)
-      .map(e =>e.split('__'))
-
-    location.hash = ''
-
-    const modals = {
-      'report': i1 => {
-        Analysis.drawReportsList()
-        if(i1) {
-          Analysis.openReport(i1)
-        }
-      },
-      'unitcreator': _ => UnitCreator.open(),
-      [TurnPlanner.NAME]: _ => TurnPlanner.open(),
-      // TODO add processing from localstorage
-      'selected_tech': _ => {}
-    }
-
-    for(let i of path) {
-      if(modals[i[0]]) {
-        modals[i[0]](i[1])
-      } else {
-        warn('Unknown modal: ', i[0])
-      }
-    }
-  },
-
   drawReportsList() {
     HTMLUtils.openModal('report')
     getEl('el_reports_home').hidden = true
@@ -813,7 +814,12 @@ const Analysis = {
   openReport(reportName) {
     HTMLUtils.registerModalPath('report', reportName)
     getEl('el_reports_home').hidden = false
-    Analysis.Reports[reportName]()
+    if(Analysis.Reports[reportName])
+      Analysis.Reports[reportName]()
+    else {
+      // probably its user report
+      User.drawUserStat(reportName)
+    }
   },
 
   closeReports() {
@@ -856,6 +862,28 @@ const Analysis = {
   listModuleObjs() {
     return Object.values(inverted.alltech)
       .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
+  },
+
+  allEffectsVerbose(techObjsObj) {
+    return Object.values(techObjsObj)
+    .reduce( (acc, e) => {
+      for(let i of e.effect) {
+        const k = i[0]
+        if(!acc[k])
+          acc[k] = {
+            count: 0,
+            sum: 0,
+            list: [],
+          }
+
+          acc[k].count+=1
+          acc[k].sum+=+i[1]
+
+          acc[k].list.push(`${e.name}(${+i[1]})`)
+      }
+
+      return acc
+    }, {})
   },
 
   Reports: {
@@ -928,26 +956,22 @@ const Analysis = {
     },
 
     вообще_все_эффекты_подробно(){
-      const result = Object.values(inverted.alltech)
-        .reduce( (acc, e) => {
-          for(let i of e.effect) {
-            const k = i[0]
-            if(!acc[k])
-              acc[k] = {
-                count: 0,
-                sum: 0,
-                list: [],
-              }
+      const result = Analysis.allEffectsVerbose(inverted.alltech)
+      Analysis.reportTable(result)
+    },
 
-              acc[k].count+=1
-              acc[k].sum+=+i[1]
-  
-              acc[k].list.push(e.name)
-          }
-
-          return acc
-        }, {})
-        Analysis.reportTable(result)
+    эффекты_игрока_подробно() {
+      const playerName = prompt('player name')
+      if(!playerName) return
+      const userDataObj = User.getSavedUserData(playerName)
+      const namesList = [].concat(
+        userDataObj.buildings,
+        userDataObj.orbital,
+        Object.values(userDataObj.localProjs).flat(),
+        Object.values(userDataObj.techTable).flat(),
+      )
+      const result = Analysis.allEffectsVerbose(namesList.map(e => inverted.alltech[e]).filter(e => e))
+      Analysis.reportTable(result)
     },
 
     эффекты_на_ТУ() {
@@ -1386,13 +1410,13 @@ const User = {
     const userData = User.getSavedUserData(playerName)
     const effectsData = User.countAllUserEffects(userData)
 
-    getEl('el_reports_wrapper').hidden = false
-    getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong><br>
       <a target=_blank 
         href="./StarSystem.html#${userData.starSystemParams.generatorCode}&user=${playerName}">Звездная система</a>
       ` + this.createUserTechEffectsTable(effectsData)
+
+    HTMLUtils.openModal('report', playerName)
   },
 }
 
@@ -1608,7 +1632,7 @@ const parseDoc = {
 
     const planetParams = Object.fromEntries(
       Array.from(obj['Характеристики планеты'].children[0].rows)
-        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]+\)/g,'').replace(/\+\d+/g,'').trim()))
+        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]*\)/g,'').replace(/\+\d+/g,'').trim()))
         .reduce( (acc, e) => acc = acc.concat(e), [])
         .map( (e,i,arr) => i%2 ? [arr[i-1], +arr[i]] : null)
         .filter(e => e)
