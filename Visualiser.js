@@ -565,9 +565,8 @@ const Analysis = {
     let cnt = 0
     for (let i of Object.keys(tech)) {
       if(i == 'Military') continue
-      log('Tech tree:', i)
       for(let j of Object.values(tech[i])) {
-        const lvl = techData.levels[i].indexOf(j.y.toString())+1
+        const lvl = j.lvl
         const mult = VARS.DIFFICULTY_MULTS[lvl]
         let tcost = 0
         let teff = 0
@@ -575,23 +574,23 @@ const Analysis = {
         
         for(let k of j.cost) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
-          else if(k[0] == KEYWORDS.ANY_PARAM_KEYWORD) tcost += +k[1]
-          // eslint-disable-next-line no-empty
-          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
+          // else if(k[0] == KEYWORDS.ANY_PARAM_KEYWORD) tcost += +k[1]
+          // // eslint-disable-next-line no-empty
+          // else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
           else if(k[0]=='Этапы') tcost *= 2
-          else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
-          // eslint-disable-next-line no-empty
-          else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
-          // eslint-disable-next-line no-empty
-          else if(['Технология', "Слоты"].includes(k[0])) {}
-          else if(k[0] == 'суперпроект') {
+          // else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
+          // // eslint-disable-next-line no-empty
+          // else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
+          // // eslint-disable-next-line no-empty
+          // else if(['Технология', "Слоты"].includes(k[0])) {}
+          else if(k[1] == 'суперпроект') {
             tcost = 0
             break
           }
           else {
             // log('what is this?', j.name, k)
-            fail = true
-            break
+            // fail = true
+            // break
           }
         }
 
@@ -599,16 +598,18 @@ const Analysis = {
 
         // tcost<10 in case is's some superstructure
         if(Math.abs(tcost-mult)>1 && tcost>0 && tcost<10 && j.type != 'octagon') {
-          log(i, j.name, `cost looks bad: ${tcost}->${mult}`)
+          warn(i, j.name, `cost looks bad: ${tcost}->${mult}`, j)
           cnt++
           continue
         }
         
         for(let k of j.effect) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
-          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) teff += +k[1]/2
-          else if(KEYWORDS.TECH_EFFECTS.includes(k[0])) teff += +k[1]/2
-          else if(k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')) teff += +k[1]/2
+          else if(
+            KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])
+            || KEYWORDS.TECH_EFFECTS.includes(k[0])
+            || k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
+          ) teff += +k[1]/2
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.MATERIALS.includes(k[0])) {}
           // eslint-disable-next-line no-empty
@@ -620,8 +621,8 @@ const Analysis = {
           }
           else {
             // log('what is this?', j.name, k)
-            fail = true
-            break
+            // fail = true
+            // break
           }
         }
 
@@ -630,13 +631,14 @@ const Analysis = {
           continue
         }
 
-        let d = (+tcost/+teff).toFixed(2)
+        let d = (+tcost/+teff).toFixed(1)
 
         if(d && mult) {
-          let p = (d/mult).toFixed(2)
-          if(p>1.5 || p<0.6) {
+          let p = (d/mult).toFixed(1)
+          // || (p > 0.3 && p<0.7)
+          if(p>1.5) {
             cnt++
-            // log(i, j.name, j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
+            log(i, 'lvl', j.lvl, j.name,  j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
           }
         }
       }
