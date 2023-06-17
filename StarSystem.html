@@ -7,25 +7,52 @@
   <title>ИвТ - Генератор звёздной системы</title>
 </head>
 <body>
-  Click this to copy & generate:
-  <code onclick="navigator.clipboard.writeText(this.innerText)">
-    STAR SYSTEM GENERATOR
-    ##20d6##
-    ##20d6##
-    ##20d6##
-    ##20d6##
-    ##20d6##
-    ##20d6##
+  <div id="el_GUI" onkeydown=" event.key === 'Enter' ? el_ss_start.click() : null ">
+    Click this to copy & generate:
+    <code onclick="navigator.clipboard.writeText(this.innerText)">
+      STAR SYSTEM GENERATOR
+      ##20d6##
+      ##20d6##
+      ##20d6##
+      ##20d6##
+      ##20d6##
+      ##20d6##
+    </code>
+    <br>
+    Density: <input type="text" name="" id="el_density" style="width: 40px;" value="50">
+    Location <select id="el_sp_location"></select>
+    Type <select id="el_sp_type">
+      <option value="terrestrial" selected>terrestrial</option>
+      <option value="giant">giant</option>
+    </select>
+    Size <select id="el_sp_size"></select>
+    <input type="text" name="" id="el_rolls" style="width: 80px;" placeholder="rolls here">
+    <button id="el_ss_start" onclick="StarSystemGenerator.start()" accesskey="i">Start generation</button>
+    <button id="el_ss_clear" onclick="StarSystemGenerator.clear()" accesskey="c">Clear</button>
+  </div>
+  <style>
+    #el_canvas {
+      margin-top: 12px;
+      background-color: black;
+      width: 99vw;
+      height: 80vh;
+      position: relative;
+    }
+
+    .planet {
+      position: absolute;
+      text-align: center;
+      /* background-color: lightblue; */
+      top: 50%;
+      color: white;
+      transform: translate(0%, -50%);
+    }
+  </style>
+  <div id="el_canvas"></div>
+  <code id=el_sys_str
+    onclick="navigator.clipboard.writeText(this.innerText)" 
+    title="system compressed string">
   </code>
-  <br>
-  Density: <input type="text" name="" id="el_density" style="width: 40px;" value="50">
-  Location <select id="el_sp_location"></select>
-  Type <select id="el_sp_type">
-    <option value="terrestrial" selected>terrestrial</option>
-    <option value="giant">giant</option>
-  </select>
-  Size <select id="el_sp_size"></select>
-  <button onclick="StarSystemGenerator.start()" accesskey="i">Initiate generation</button>
 </body>
 <script src="./src/common.js"></script>
 <script src="./src/StarSystem/StarSystem.js"></script>

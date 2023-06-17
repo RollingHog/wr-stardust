@@ -9,7 +9,7 @@ FILL_2_TREE_TYPE
   draw
 */
 
-const VERSION = '1.0.1'
+const VERSION = '1.0.2'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
@@ -106,6 +106,7 @@ const VARS = {
       ["Строительство", -1],
       ["Пуски", -1],
       ['Исследования (ветка "Физика пространства")', 1],
+      ["Трансураны", 1],
       ["особое","высокая гравитация"],
     ],
   },
@@ -272,6 +273,7 @@ async function Init() {
             User.activePlayer = null
             drawTree(techData.currentTreeName)
             getEl('el_reports_wrapper').hidden = true
+            HTMLUtils.closeModal('report')
           }
         }
         : null
@@ -368,18 +370,19 @@ const HTMLUtils = {
     )
   },
 
-  openModal(name) {
+  openModal(name, subName = null) {
     const tgt = Array.from(document.querySelectorAll('.modal'))
       .map(e => e.id)
       .filter(e => e.includes(name))[0]
     if(!tgt) return
     getEl(tgt).hidden = false
-    this.registerModalPath(name)
+    this.registerModalPath(name, subName)
     this.focusModal(getEl(tgt))
   },
 
   focusModal(el) {
-    for(let i of document.querySelectorAll('.modal')) {
+    if(!el) return
+    for(let i of document.querySelectorAll('.modal:not([hidden])')) {
       i.style.zIndex = 0
     }
     el.style.zIndex = 1
@@ -404,14 +407,45 @@ const HTMLUtils = {
   },
 
   closeModal(name) {
-    const tgt = Array.from(document.querySelectorAll('.modal')).map(e => e.id).filter(e => e.includes(name))[0]
+    const tgt = Array.from(document.querySelectorAll('.modal:not([hidden])')).map(e => e.id).filter(e => e.includes(name))[0]
     if(!tgt) return
     getEl(tgt).hidden = true
     this.unregisterModalPath(name)
   },
 
+  checkForOpenedWindows() {
+    if(location.hash.length <= 1) return
+
+    const path = decodeURIComponent(location.hash).split('#')
+      .filter( e => e)
+      .map(e =>e.split('__'))
+
+    location.hash = ''
+
+    const modals = {
+      'report': i1 => {
+        Analysis.drawReportsList()
+        if(i1) {
+          Analysis.openReport(i1)
+        }
+      },
+      'unitcreator': _ => UnitCreator.open(),
+      [TurnPlanner.NAME]: _ => TurnPlanner.open(),
+      // TODO add processing from localstorage
+      'selected_tech': _ => {}
+    }
+
+    for(let i of path) {
+      if(modals[i[0]]) {
+        modals[i[0]](i[1])
+      } else {
+        warn('Unknown modal: ', i[0])
+      }
+    }
+  },
+
   hideAllModals() {
-    for(let i of document.querySelectorAll('.modal')) {
+    for(let i of document.querySelectorAll('.modal:not([hidden])')) {
       i.hidden = true
     }
     location.hash = ''
@@ -438,7 +472,12 @@ const HTMLUtils = {
           setTimeout(_ => searchEnabled = false, 50)
         }
         else {
-          this.hideAllModals()
+          let tgt = document.querySelector('.modal[style*="z-index: 1"]:not([hidden]) button.btn_close')
+          if(!tgt) tgt = document.querySelector('.modal:not([hidden]) button.btn_close')
+          if(!tgt) return
+          tgt.click()
+          this.focusModal(document.querySelector('.modal:not([hidden])'))
+          // this.hideAllModals()
         }
       },
       'Ctrl F': _ => searchEnabled = true,
@@ -511,7 +550,7 @@ const Analysis = {
       Analysis.totalTechCount()
     }, 20)
 
-    Analysis.checkForOpenedWindows()
+    HTMLUtils.checkForOpenedWindows()
 
   },
 
@@ -527,9 +566,8 @@ const Analysis = {
     let cnt = 0
     for (let i of Object.keys(tech)) {
       if(i == 'Military') continue
-      log('Tech tree:', i)
       for(let j of Object.values(tech[i])) {
-        const lvl = techData.levels[i].indexOf(j.y.toString())+1
+        const lvl = j.lvl
         const mult = VARS.DIFFICULTY_MULTS[lvl]
         let tcost = 0
         let teff = 0
@@ -537,23 +575,23 @@ const Analysis = {
         
         for(let k of j.cost) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
-          else if(k[0] == KEYWORDS.ANY_PARAM_KEYWORD) tcost += +k[1]
-          // eslint-disable-next-line no-empty
-          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
+          // else if(k[0] == KEYWORDS.ANY_PARAM_KEYWORD) tcost += +k[1]
+          // // eslint-disable-next-line no-empty
+          // else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
           else if(k[0]=='Этапы') tcost *= 2
-          else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
-          // eslint-disable-next-line no-empty
-          else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
-          // eslint-disable-next-line no-empty
-          else if(['Технология', "Слоты"].includes(k[0])) {}
-          else if(k[0] == 'суперпроект') {
+          // else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
+          // // eslint-disable-next-line no-empty
+          // else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
+          // // eslint-disable-next-line no-empty
+          // else if(['Технология', "Слоты"].includes(k[0])) {}
+          else if(k[1] == 'суперпроект') {
             tcost = 0
             break
           }
           else {
             // log('what is this?', j.name, k)
-            fail = true
-            break
+            // fail = true
+            // break
           }
         }
 
@@ -561,16 +599,18 @@ const Analysis = {
 
         // tcost<10 in case is's some superstructure
         if(Math.abs(tcost-mult)>1 && tcost>0 && tcost<10 && j.type != 'octagon') {
-          log(i, j.name, `cost looks bad: ${tcost}->${mult}`)
+          warn(i, j.name, `cost looks bad: ${tcost}->${mult}`, j)
           cnt++
           continue
         }
         
         for(let k of j.effect) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
-          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) teff += +k[1]/2
-          else if(KEYWORDS.TECH_EFFECTS.includes(k[0])) teff += +k[1]/2
-          else if(k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')) teff += +k[1]/2
+          else if(
+            KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])
+            || KEYWORDS.TECH_EFFECTS.includes(k[0])
+            || k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
+          ) teff += +k[1]/2
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.MATERIALS.includes(k[0])) {}
           // eslint-disable-next-line no-empty
@@ -582,8 +622,8 @@ const Analysis = {
           }
           else {
             // log('what is this?', j.name, k)
-            fail = true
-            break
+            // fail = true
+            // break
           }
         }
 
@@ -592,13 +632,14 @@ const Analysis = {
           continue
         }
 
-        let d = (+tcost/+teff).toFixed(2)
+        let d = (+tcost/+teff).toFixed(1)
 
         if(d && mult) {
-          let p = (d/mult).toFixed(2)
-          if(p>1.5 || p<0.6) {
+          let p = (d/mult).toFixed(1)
+          // || (p > 0.3 && p<0.7)
+          if(p>1.5) {
             cnt++
-            // log(i, j.name, j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
+            log(i, 'lvl', j.lvl, j.name,  j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
           }
         }
       }
@@ -669,43 +710,110 @@ const Analysis = {
     return +(wins / n).toFixed(3)
   },
 
+  countSuccessTable() {
+    for (let i = 1; i < 15; i++) {
+      let j = i
+      let p = Analysis.countSuccessPossibility(i, j)
+      while (p <= 0.6) {
+        j++
+        p = Analysis.countSuccessPossibility(i, j)
+      }
+      console.log(i, j-1, Analysis.countSuccessPossibility(i, j-1))
+      console.log(i, j, p)
+    }
+  },
+
+  /**
+   * @param {TGoogleDocUserObj} userObj 
+   */
+  countPlanetRawMisery(userObj) {
+    const planet = userObj.planetParams
+    const m = {
+      // unfamiliar / alien
+      u1: { unfamiliar: 1 },
+      u2: { unfamiliar: 2 },
+      u3: { unfamiliar: 3 },
+      a1: { alien: 1 },
+      a2: { alien: 2 },
+      a3: { alien: 3 },
+    }
+    const miseryTable = {
+      Вода: [
+        '1-20', m.u1, '80-100', m.u1, 
+      ],
+      Гористость: [
+        [1,5], m.u1,
+      ],
+      'Тип аномалии': [
+        // '7-9', m.u1,
+      ],
+      'Масштаб аномалии': [
+        // '1-10', m.u1, '90-100', m.u1,
+      ],
+      'Расстояние до звезды': [
+        [1, 11], m.a2,
+        [2, 3, 4, 8, 9, 10], m.a1,
+        [5, 7], m.u1,
+      ],
+      'Ресурсы': [
+        '1-10', m.u1
+      ],
+      'Тип планеты': [
+        [1,2], m.a1,  
+        [3], m.u3,
+        [5], m.u1,
+        [6], m.u2,
+      ],
+    }
+    const unfamTreshold = 4
+
+    const sumMisery = {
+      alien: 0,
+      unfamiliar: 0,
+      actionsList: [],
+    }
+    for(let i in miseryTable) {
+      const value = +planet[i]
+      const b = miseryTable[i]
+      if(!value) continue
+      for(let j in b) {
+        if(j%2 === 1) continue
+        const q = b[j]
+        if (Array.isArray(q)) {
+          if(q.includes(value)) {
+            if (b[+j+1].unfamiliar) sumMisery.unfamiliar += b[+j+1].unfamiliar
+            if (b[+j+1].alien) sumMisery.alien += b[+j+1].alien
+            const obj = Object.entries(b[+j+1])
+            sumMisery.actionsList.push([i, value, obj[0][0].slice(0,1) + obj[0][1].toString(10)].join(','))
+            break
+          }
+        }
+        else if(typeof q === 'string') {
+          const baf = q.split('-')
+          if(value >= +baf[0] && value <= +baf[1]) {
+            if (b[+j+1].unfamiliar) sumMisery.unfamiliar += b[+j+1].unfamiliar
+            if (b[+j+1].alien) sumMisery.alien += b[+j+1].alien
+            const obj = Object.entries(b[+j+1])
+            sumMisery.actionsList.push([i, value, obj[0][0].slice(0,1) + obj[0][1].toString(10)].join(','))
+            break
+          }
+        }
+      }
+    }
+    if(sumMisery.unfamiliar >= unfamTreshold) {
+      sumMisery.alien += Math.floor(sumMisery.unfamiliar/unfamTreshold)
+      sumMisery.unfamiliar = sumMisery.unfamiliar % (unfamTreshold)
+    }
+    sumMisery.actionsList = sumMisery.actionsList.join('; ')
+    return sumMisery
+  },
+
   filterObjectByDict(obj, dict) {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => dict.includes(key)))
   },
   
   excludeByDict(obj, dict) {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => !dict.includes(key)))
-  },
-
-  checkForOpenedWindows() {
-    if(location.hash.length <= 1) return
-
-    const path = decodeURIComponent(location.hash).split('#')
-      .filter( e => e)
-      .map(e =>e.split('__'))
-
-    location.hash = ''
-
-    const modals = {
-      'report': i1 => {
-        Analysis.drawReportsList()
-        if(i1) {
-          Analysis.openReport(i1)
-        }
-      },
-      'unitcreator': _ => UnitCreator.open(),
-      [TurnPlanner.NAME]: _ => TurnPlanner.open(),
-      // TODO add processing from localstorage
-      'selected_tech': _ => {}
-    }
-
-    for(let i of path) {
-      if(modals[i[0]]) {
-        modals[i[0]](i[1])
-      } else {
-        warn('Unknown modal: ', i[0])
-      }
-    }
   },
 
   drawReportsList() {
@@ -723,7 +831,12 @@ const Analysis = {
   openReport(reportName) {
     HTMLUtils.registerModalPath('report', reportName)
     getEl('el_reports_home').hidden = false
-    Analysis.Reports[reportName]()
+    if(Analysis.Reports[reportName])
+      Analysis.Reports[reportName]()
+    else {
+      // probably its user report
+      User.drawUserStat(reportName)
+    }
   },
 
   closeReports() {
@@ -766,6 +879,28 @@ const Analysis = {
   listModuleObjs() {
     return Object.values(inverted.alltech)
       .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
+  },
+
+  allEffectsVerbose(techObjsObj) {
+    return Object.values(techObjsObj)
+    .reduce( (acc, e) => {
+      for(let i of e.effect) {
+        const k = i[0]
+        if(!acc[k])
+          acc[k] = {
+            count: 0,
+            sum: 0,
+            list: [],
+          }
+
+          acc[k].count+=1
+          acc[k].sum+=+i[1]
+
+          acc[k].list.push(`${e.name}(${+i[1]})`)
+      }
+
+      return acc
+    }, {})
   },
 
   Reports: {
@@ -838,26 +973,22 @@ const Analysis = {
     },
 
     вообще_все_эффекты_подробно(){
-      const result = Object.values(inverted.alltech)
-        .reduce( (acc, e) => {
-          for(let i of e.effect) {
-            const k = i[0]
-            if(!acc[k])
-              acc[k] = {
-                count: 0,
-                sum: 0,
-                list: [],
-              }
+      const result = Analysis.allEffectsVerbose(inverted.alltech)
+      Analysis.reportTable(result)
+    },
 
-              acc[k].count+=1
-              acc[k].sum+=+i[1]
-  
-              acc[k].list.push(e.name)
-          }
-
-          return acc
-        }, {})
-        Analysis.reportTable(result)
+    эффекты_игрока_подробно() {
+      const playerName = prompt('player name')
+      if(!playerName) return
+      const userDataObj = User.getSavedUserData(playerName)
+      const namesList = [].concat(
+        userDataObj.buildings,
+        userDataObj.orbital,
+        Object.values(userDataObj.localProjs).flat(),
+        Object.values(userDataObj.techTable).flat(),
+      )
+      const result = Analysis.allEffectsVerbose(namesList.map(e => inverted.alltech[e]).filter(e => e))
+      Analysis.reportTable(result)
     },
 
     эффекты_на_ТУ() {
@@ -934,7 +1065,7 @@ const Analysis = {
     },
 
     // чтобы прикинуть сколько давать вкатившимся после начала игры
-    суммарная_стоимость_проектов_сделанных_каждым_из_игроков() {
+    суммарная_стоимость_проектов_игроков() {
       const result = Object.fromEntries(
         Object.entries(window[VARS.PLAYERS_DATA_KEY])
         .map(e => [e[0], {
@@ -952,6 +1083,28 @@ const Analysis = {
           .filter( e2 => e2 )
           .reduce((acc, i)=>acc + +i,0)
         }])
+      )
+      Analysis.reportTable(result)
+    },
+
+    основные_параметры_игроков() {
+      const result = Object.fromEntries(
+        Object.entries(window[VARS.PLAYERS_DATA_KEY])
+        .map( e => [ e[0], 
+          Object.fromEntries(
+            [].concat(
+              [[
+                'Итого',
+                Object.values(e[1].colonyParams)
+                .map(e2 => +e2)
+                .filter( e2 => !isNaN(e2))
+                .reduce((acc, e2) => acc+e2, 0)
+              ]],
+              Object.entries(e[1].colonyParams)
+                .filter( e2 => !isNaN(+e2[1]))
+            )
+          )
+        ])
       )
       Analysis.reportTable(result)
     },
@@ -980,6 +1133,14 @@ const Analysis = {
           .map(e => [e.name, e.title])
         )
       )
+    },
+
+    планетарная_хреновость() {
+      const a = []
+      for (let i in window[VARS.PLAYERS_DATA_KEY]) {
+        a.push([i, Analysis.countPlanetRawMisery(window[VARS.PLAYERS_DATA_KEY][i])])
+      }
+      Analysis.reportTable(Object.fromEntries(a))
     },
   }
 }
@@ -1071,6 +1232,10 @@ const User = {
   drawActiveUser(treeName) {
     if(!this.activePlayer) return
     parseDoc.drawTech(this.activePlayer, treeName)
+  },
+
+  getSavedUserData(playerName) {
+    return window[VARS.PLAYERS_DATA_KEY][playerName]
   },
 
   /**
@@ -1281,13 +1446,16 @@ const User = {
   },
 
   drawUserStat(playerName) {
-    const data = User.countAllUserEffects(window[VARS.PLAYERS_DATA_KEY][playerName])
+    const userData = User.getSavedUserData(playerName)
+    const effectsData = User.countAllUserEffects(userData)
 
-    getEl('el_reports_wrapper').hidden = false
-    getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = `<br>
-      <strong>Сводный отчет: ${playerName}</strong>
-      ` + this.createUserTechEffectsTable(data)
+      <strong>Сводный отчет: ${playerName}</strong><br>
+      <a target=_blank 
+        href="./StarSystem.html#${userData.starSystemParams.generatorCode}&user=${playerName}">Звездная система</a>
+      ` + this.createUserTechEffectsTable(effectsData)
+
+    HTMLUtils.openModal('report', playerName)
   },
 }
 
@@ -1507,11 +1675,12 @@ const parseDoc = {
 
     const planetParams = Object.fromEntries(
       Array.from(obj['Характеристики планеты'].children[0].rows)
-        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]+\)/g,'').replace(/\+\d+/g,'').trim()))
+        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]*\)/g,'').replace(/\+\d+/g,'').trim()))
         .reduce( (acc, e) => acc = acc.concat(e), [])
         .map( (e,i,arr) => i%2 ? [arr[i-1], +arr[i]] : null)
         .filter(e => e)
     )
+
     let starSystemParams = Array.from(obj['Характеристики звездной системы'].children[0].rows)
       .map(e => Array.from(e.children).map(e2 => e2.innerText))
     starSystemParams = { 
@@ -1521,6 +1690,7 @@ const parseDoc = {
       [starSystemParams[2][0]]: starSystemParams[2][1],
       // Плотность звёздной системы
       [starSystemParams[3][0]]: +starSystemParams[3][1].replace(/\([^)]+\)/g,'').trim(),
+      generatorCode: starSystemParams[4][1]
     }
 
     const startingFeature = parseNode.effects(
@@ -1657,12 +1827,48 @@ const playerPost = {
     HTMLUtils.openModal('selected_tech')
   },
   extractRolls(text) {
-    const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
-      .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], index: e.index, rawRolls: e[2] }))
-      .map(({text, rolls, rawRolls, treshold, index} ) => ( {
-         text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), 
-         rolls, rawRolls, treshold, index 
-      }))
+    const L = {
+      before: 1,
+      edges: 2,
+      rolls: 3,
+      after: 3,
+    }
+    const res = [...text.matchAll(/([^\nd]*)\d+d(\d{1,2}0): \((\d+(?: \+ \d+){0,20})\) = \d+([^\n]*)/g)]
+      .map( e => {
+        const s = (e[L.before].length ? e[L.before] : e[L.after]).trim()
+        const treshold = [...(e[L.before] + e[L.after]).matchAll(/Сложность:? ?(\d+)/gi)]
+
+        const isExp = s.search(/опыт /i)
+        if(isExp === 0) {
+          console.log('ОПЫТ detected:', s, s.search(/опыт/i))
+          return null
+        }
+        return {
+          text: s
+            .replace(/\([^)]+\)/g,'')
+            .replace(/^[^а-яёa-z]+/gi,'')
+            // TODO add reminder NOT to include these symbols in tech names
+            .split(',')[0]
+            .split('.')[0]
+            .split(' – ')[0]
+            .replace(/,? ?Сложность:? ?\d+/gi,'')
+            .replace(/[- :]+$/g,'')
+            .trim(), 
+          rolls: e[L.rolls], 
+          rawRolls: e[L.rolls],
+          treshold: treshold.length ? +treshold[0][1] : null,
+          edges: +e[L.edges], 
+          index: e.index, 
+        }
+      })
+      .filter( e => e)
+
+    // const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
+    //   .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], index: e.index, rawRolls: e[2] }))
+    //   .map(({text, rolls, rawRolls, treshold, index} ) => ( {
+    //      text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), 
+    //      rolls, rawRolls, treshold, index 
+    //   }))
     return res
   },
   parse(text) {
@@ -1772,19 +1978,23 @@ const playerPost = {
           e.children[pos.critwins].style.backgroundColor = 'lawngreen'
         }
 
-        const sum = +e.children[pos.wins].innerText + +e.children[pos.critwins].innerText * 2
+        const sum = +e.children[pos.wins].innerText 
+          + +e.children[pos.critwins].innerText * 2 
+          // - +e.children[pos.critfails].innerText
 
-        if (inverted.alltech[e.children[pos.name].innerText]) {
+        const techText = e.children[pos.name].innerText.trim()
 
-          e.children[pos.name].style.backgroundColor = inverted.alltech[e.children[pos.name].innerText].fill
+        if (inverted.alltech[techText]) {
+
+          e.children[pos.name].style.backgroundColor = inverted.alltech[techText].fill
 
           if (!e.children[pos.price].innerText.startsWith('+')) {
-            e.children[pos.price].innerText = inverted.alltech[e.children[pos.name].innerText].cost[0][1]
+            e.children[pos.price].innerText = inverted.alltech[techText].cost[0][1]
           }
 
-          result = e.children[pos.name].innerText
+          result = techText
         } else {
-          console.log('Не найдено', e.children[pos.name].innerText)
+          console.log('Не найдено', techText)
           e.children[pos.name].style.backgroundColor = 'cyan'
           e.children[pos.name].title = 'Название технологии не найдено'
           result = null
@@ -2090,7 +2300,7 @@ const parseNode = {
         // временный бонус
         .replace(/^на (\d+) хода?/i, 'Временно:$1')
         // вещества
-        .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // параметры планеты
         .replace(new RegExp(`^(${KEYWORDS.PLANET_PARAMS.join('|')}) \\+?(\\d+)`), '$1:$2')
         // Эффекты и бонусы:
@@ -2109,7 +2319,7 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
-        .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?(\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?([\\d.]+)$`), '$1:$2')
         .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, KEYWORDS.CREATION_KEYWORD + ' $1:$2')
         // типы урона, эффекты оружия
         .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), KEYWORDS.ALL_RIGHT)

@@ -13,7 +13,7 @@ const EARTH_EXAMPLE = `99d6: ( 4 + 6 + 5 + 1 + 1 ) = 0`
 
 const E = {
   giant: {
-    none: null,
+    none: 'none',
     conventional: 'conventional',
     eccentric: 'eccentric',
     epistellar: 'epistellar',
@@ -26,12 +26,26 @@ const E = {
     giant: 'giant',
   },
   size: {
+    dot: 'dot',
     tiny: 'tiny',
     small: 'small',
     medium: 'medium',
     large: 'large',
     huge: 'huge',
-  }
+  },
+  size2num: {
+    dot: 1,
+    tiny: 2,
+    small: 3,
+    medium: 4,
+    large: 5,
+    huge: 6,
+  },
+  keys: {
+    density: 'density',
+    rest: 'rest',
+    user: 'user',
+  },
 }
 
 const genDict = {
@@ -42,7 +56,7 @@ const genDict = {
     // (перешедший с окраин горячий юпитер, выбросил сформированные планеты)
     18: E.giant.epistellar,
   },
-  BEYOND_SNOW_LINE: 5,
+  BEYOND_SNOW_LINE: 6,
   otherGiants: {
     insideSnow: {
       [E.giant.none]: null,
@@ -69,16 +83,16 @@ const genDict = {
     17: E.size.large,
   },
   //  Modifiers:
-  // NOPE -6 if the orbit is adjacent to a forbidden zone caused by the presence of a companion star; 
-  // -6 if the next orbit outward from the primary star is occupied by a gas giant; 
-  // -3 if the next orbit inward from the primary star is occupied by a gas giant; 
+  // NOPE -6 if the orbit is adjacent to a forbidden zone caused by the presence of a companion star;
+  // -6 if the next orbit outward from the primary star is occupied by a gas giant;
+  // -3 if the next orbit inward from the primary star is occupied by a gas giant;
   // -3 if the orbit is adjacent to either the inner limit radius or the outer limit radius.
   // All of these modifiers are cumulative.
 
   // ?adjust to make planets not occur THAT OFTEN
   orbitContents: {
     3: [E.type.none, null],
-    6: [E.type.asteroid, E.size.tiny],
+    6: [E.type.asteroid, E.size.dot],
     8: [E.type.terrestrial, E.size.tiny],
     11: [E.type.terrestrial, E.size.small],
     15: [E.type.terrestrial, E.size.medium],
@@ -110,6 +124,7 @@ satelliteList: {
 satelliteMods: {
   size: {
       [null]: 0,
+      [E.size.dot]: -4,
       [E.size.tiny]: -4,
       [E.size.small]: -1,
       [E.size.medium]: 0,
@@ -149,10 +164,22 @@ function debug(data, str=null) {
   }
 }
 
+class TSSGPlanet {
+  type = E.type.asteroid
+  size = E.size.medium
+  satellites = 0
+  capital = false
+  user = null
+  giantType = null
+}
+
 const StarSystemGenerator = {
   start() {
-    let rawCubes = prompt('paste here many d6 cubes in 2ch roll format')
-    this.startRaw(rawCubes)
+    // prompt('paste here many d6 cubes in 2ch roll format / leave empty to use default')
+    this.startRaw(getEl('el_rolls').value)
+  },
+  clear() {
+    location.hash = ''
   },
   startRaw(rawCubes) {
     if (!rawCubes) rawCubes = RAW_EXAMPLE
@@ -167,25 +194,106 @@ const StarSystemGenerator = {
       size: getEl('el_sp_size').value,
       i: getEl('el_sp_location').value,
     }
+    const density = getEl('el_density').value
     const system = this.generate(
       cubes, 
-      getEl('el_density').value,
+      density,
       userPlanet
-      )
+    )
     const d = startingLength - cubes.length
     log('rolles used', `${d/startingLength*100}%/${startingLength} total`)
     console.table(system)
+    getEl('el_sys_str').innerText = this.compress(system, density, cubes)
+    const str = this.compress(system, density, cubes)
+    console.log(this.decompress(str))
+    this.draw(system)
   },
+
+  /**
+   * @returns {Number[]}
+   */
   extractRolls(raw) {
     return [...raw.matchAll(/\d+d6: \((\d+(?: \+ \d+){0,20})\)/g)]
       .map(e => e[1].split(' + ').map(e => +e))
       .flat()
   },
+
+  /**
+   * @param {TSSGPlanet} system 
+   * @param {Number[]} cubes 
+   * @returns 
+   */
+  compress(system, density, cubes = []) {
+    return system.map( (e,i) => [
+      '&',
+      i,
+      '=', 
+      e.type.slice(0,1),
+      e.size.slice(0,1),
+      e.satellites.toString(10).padStart(2, '0'),
+      e.giantType ? 'gt' + e.giantType.slice(0,2) : '',
+      e.user ? 'uu' : '',
+      e.capital ? 'cc' : '',
+    ].join('')).join('') 
+    + `&${E.keys.rest}=` + cubes.join('')
+    + `&${E.keys.density}=` + density
+  },
+
+  /**
+   * @returns {{system: TSSGPlanet[], restCubes: Number[], density: Number, user: string}}
+   */
+  decompress(query) {
+    let obj = query
+      .split('&')
+      .filter( e => e)
+      .map( e => e.split('='))
+    let restCubes = obj.filter(e => e[0] === E.keys.rest)
+    if(restCubes.length) restCubes = restCubes[0][1]
+    obj = obj.filter(e => e[0] !== E.keys.rest)
+    let density = obj.filter(e => e[0] === E.keys.density)
+    if(density.length) density = density[0][1]
+    else density = null
+    obj = obj.filter(e => e[0] !== E.keys.density)
+    let user = obj.filter(e => e[0] === E.keys.user)
+    if(user.length) user = decodeURIComponent(user[0][1])
+    else user = null
+    obj = obj.filter(e => e[0] !== E.keys.user)
+    
+    let arr = []
+    for(let i of obj) {
+      arr[i[0]] = i[1]
+    }
+
+    for(let i in arr) {
+      if(!arr[i]) continue
+      const d =  {
+        main: arr[i].slice(0,4),
+        optional: arr[i].slice(4)
+      }
+
+      const giantType = d.optional.match(/gt([a-z]{2})/)
+      arr[i] = {
+        type:  Object.keys(E.type).filter(e => e.startsWith(d.main.slice(0,1)))[0],
+        size: Object.keys(E.size).filter(e => e.startsWith(d.main.slice(1,2)))[0],
+        satellites: +d.main.slice(2,4),
+        giantType: giantType ? Object.keys(E.giant).filter(e => e.startsWith(giantType[1]))[0] : '',
+        user: d.optional.indexOf('uu') > -1,
+        capital: d.optional.indexOf('cc') > -1,
+      }
+    }
+
+    return {system: arr, restCubes, density, user}
+  },
+
   generate(randomD6Arr, density, userPlanet) {
+    /**
+     * @type Array<TSSGPlanet>
+     */
     const system = []
 
     const nOfPlanets = density / 5
-    const densityMod = Math.floor((nOfPlanets - 10) / 2)
+    const fuckPlanetsMod = 1
+    const densityMod = Math.floor((nOfPlanets - 10) / 2) - fuckPlanetsMod
     log({densityMod, nOfPlanets})
 
     function pop1(str) {
@@ -199,7 +307,8 @@ const StarSystemGenerator = {
       return res
     }
 
-    function planet(type, size = null, special = null) {
+    function planet(type, size = null, {giantType =  null, capital = false, user = null} = {}) {
+      if(capital && !user) user = true
       return { type, size, 
         satellites: getKey(genDict.satelliteList, 
           pop1()
@@ -207,7 +316,9 @@ const StarSystemGenerator = {
           + genDict.satelliteMods.size[size]
           + densityMod
         ),
-        special 
+        giantType,
+        capital,
+        user
       }
     }
 
@@ -216,7 +327,7 @@ const StarSystemGenerator = {
       return getKey(genDict.giantSize, pop3() + mod + densityMod)
     }
 
-    system[userPlanet.i] = planet(userPlanet.type, userPlanet.size, 'user')
+    system[userPlanet.i] = planet(userPlanet.type, userPlanet.size, { capital: true, user: true})
 
     // first giant
     const firstGiantType = getKey(genDict.firstGiant, pop3('firstGiantType'))
@@ -224,6 +335,9 @@ const StarSystemGenerator = {
     let globalMod = densityMod
 
     switch(firstGiantType) {
+      case E.giant.none:
+        globalMod -= 4
+        break
       case E.giant.conventional:
         firstLocation = Math.min(pop1()+genDict.BEYOND_SNOW_LINE, 11)
         break
@@ -236,34 +350,41 @@ const StarSystemGenerator = {
         firstLocation = Math.max(4-pop1(), 1)
         break
     }
-    if(firstGiantType && !planet[firstLocation]) {
-      system[firstLocation] = planet(
-        E.type.giant, 
-        giantSize(firstLocation),
-        firstGiantType
-      )
-    }
+    console.log('first giant: ', firstGiantType, firstLocation)
 
-    // other giants
-    for(let i = 1; i <= 11; i++) {
-      if(system[i]) continue
-      let p
-      if(i <= genDict.BEYOND_SNOW_LINE) {
-        //inside snow
-        p = genDict.otherGiants.insideSnow[firstGiantType]
+    if(firstGiantType !== E.giant.none) {
+      if(!system[firstLocation]) {
+        system[firstLocation] = planet(
+          E.type.giant, 
+          giantSize(firstLocation),
+          {giantType: firstGiantType}
+        )
       } else {
-        p = genDict.otherGiants.outsideSnow[firstGiantType]
+        log('cannot place first giant: location taken')
       }
-      p = Math.max(p + globalMod, 1)
-      if(!p) continue
-      if(pop3(null, i + ' giant exist') > p) continue
-      system[i] = planet(E.type.giant, giantSize(i))
+
+
+      // other giants
+      for(let i = 1; i <= 11; i++) {
+        if(system[i]) continue
+        let p
+        if(i <= genDict.BEYOND_SNOW_LINE) {
+          //inside snow
+          p = genDict.otherGiants.insideSnow[firstGiantType]
+        } else {
+          p = genDict.otherGiants.outsideSnow[firstGiantType]
+        }
+        p = Math.max(p + globalMod, 1)
+        if(!p) continue
+        if(pop3(null, i + ' giant exist') > p) continue
+        system[i] = planet(E.type.giant, giantSize(i))
+      }
     }
 
     // non-giant planets
     for(let i = 1; i <= 11; i++) {
       if(system[i]) continue
-      let mod = 0-2
+      let mod = 0
       if(system[i+1] && system[i+1].type == E.type.giant) mod -= 6
       if(system[i-1] && system[i-1].type == E.type.giant) mod -= 3
       if(i == 1 || i == 11) mod -= 3
@@ -284,16 +405,104 @@ const StarSystemGenerator = {
 
     return system
   },
+
+  /**
+   * 
+   * @param {TSSGPlanet[]} system 
+   * @param {string} playerName 
+   */
+  draw(system, playerName = null) {
+    const canvasEl = getEl('el_canvas')
+    canvasEl.innerHTML = ''
+    if (playerName) {
+      canvasEl.innerHTML = `<div style="
+      padding: 16px;
+      color: white;
+      text-align: center;
+  ">${playerName.toUpperCase()}</div>`
+    }
+    for(let i = 1; i<system.length; i++) {
+      const k = system[i]
+      if(!k) continue
+      
+      let type = k.type
+      let sizeIndex = Object.keys(E.size).indexOf(k.size)
+      let size = 110 - (3 - sizeIndex) * 12
+
+      switch (k.type) {
+        case E.type.terrestrial:
+          size -= 45
+          if(i <= 4) type = type + '_hot'
+          if(i >= genDict.BEYOND_SNOW_LINE + 1) type = type + '_cold'
+          break
+        case E.type.giant:
+          if(i <= 3) type = type + '_hot'
+          if(i >= 8) type = type + '_cold'
+            break
+        default:
+          break
+      }
+
+      const el = document.createElement('div')
+      el.className = 'planet'
+      // a + b*11 = 95
+      // a + b*1 = 5
+      // b = 9
+      // a = -4
+      el.style.left = `${8.5*i - 5}%`
+      // const imgName = name
+      //   .toLowerCase()
+      //   .replace(/\([^)]+\)/g,'')
+      //   .trim()
+      //   .replace(/ /g, '_')
+      let buildSlots = k.satellites
+      if(!k.capital) {
+        if (k.type === E.type.terrestrial) {
+          buildSlots = E.size2num[k.size]
+        }
+        else if(k.type === E.type.asteroid) {
+          buildSlots = 1
+        }
+      }
+      el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}<br>
+      <img src='assets/planets/${type}.png' style="width:${size}%" 
+        alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
+        title="${k.type} ${k.size}(${E.size2num[k.size]}) ${k.giantType ? k.giantType : ''}"
+      ><br>
+      Size ${k.type === E.type.asteroid ? 1 : E.size2num[k.size]}
+      <br>Slots ${buildSlots}
+      <br>${k.satellites > 0 
+        ? k.satellites < 4 
+          ? '&#9790;'.repeat(k.satellites) 
+          : '&#9790;*' + k.satellites
+        : ''}
+      <br>${k.giantType && k.giantType !== E.giant.conventional ? k.giantType : ''}`
+      // el.title = name
+      canvasEl.appendChild(el)
+    }  
+  },
 }
 
 ;(function  main() {
   getEl('el_sp_location').innerHTML = Object.keys(' '.repeat(11).split(''))
     .map( e => `<option value="${+e+1}">${+e+1}</option>`)
+  getEl('el_sp_location').value = 8
   getEl('el_sp_size').innerHTML = Object.keys(E.size)
-    .map( e => `<option value="${e}">${e}</option>`)
+    .map( e => `<option value="${e}">${e} (${E.size2num[e]})</option>`)
   setTimeout(_ => {
     getEl('el_sp_size').value = E.size.medium
   }, 0)
   // FIXME remove
   StarSystemGenerator.startRaw()
+  if(location.hash) {
+    log('loading from hash...')
+    const ddata = StarSystemGenerator.decompress(location.hash)
+    const userPlanet = ddata.system.filter(e => e.capital)[0]
+    log(ddata.density)
+    getEl('el_sp_location').value = ddata.system.indexOf(userPlanet)
+    getEl('el_sp_size').value = userPlanet.size
+    getEl('el_density').value = ddata.density
+    StarSystemGenerator.draw(ddata.system, ddata.user)
+    getEl('el_sys_str').innerText = StarSystemGenerator.compress(ddata.system, ddata.density, ddata.restCubes.split(''))
+  }
 })()
