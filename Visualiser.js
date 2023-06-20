@@ -572,6 +572,9 @@ const Analysis = {
         let tcost = 0
         let teff = 0
         let fail = false
+
+        // TODO
+        // inverted.alltech[j.name].effect[0][1] = +inverted.alltech[j.name].effect[0][1]*+j.lvl
         
         for(let k of j.cost) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
