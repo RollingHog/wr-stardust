@@ -408,6 +408,28 @@ const HTMLUtils = {
     location.hash = q.filter(e => !e.startsWith(name)).join('#')
   },
 
+  collapsedModalsList: [],
+
+  collapseModals() {
+    let tgts = Array.from(document.querySelectorAll('.modal:not([hidden])')).map(e => e.id)
+    if(!tgts.length) return
+    if(this.collapsedModalsList.length) tgts = tgts.concat(this.collapsedModalsList)
+    this.collapsedModalsList = tgts
+    for(let i of this.collapsedModalsList) {
+      getEl(i).hidden = true
+    }
+    getEl('btn_expand_modals').hidden = false
+  },
+
+  expandModals() {
+    if(!this.collapsedModalsList.length) return
+    for(let i of this.collapsedModalsList) {
+      getEl(i).hidden = false
+    }
+    this.collapsedModalsList = []
+    getEl('btn_expand_modals').hidden = true
+  },
+
   closeModal(name) {
     const tgt = Array.from(document.querySelectorAll('.modal:not([hidden])')).map(e => e.id).filter(e => e.includes(name))[0]
     if(!tgt) return
