@@ -134,30 +134,67 @@
       <button id="el_reports_home" onclick="Analysis.drawReportsList()">Full list</button>
     </div>
     <div id="el_reports_list" class="body"></div>
-  </div>  
-
-  <style>
-    #el_turnplanner_wrapper .body div {
-      display: inline-block; 
-      overflow-y: auto; 
-      overflow-x: hidden;
-      width: 49%;
-    }
-  </style>
+  </div>
+  
   <div id="el_turnplanner_wrapper" hidden class="modal"
-    style="left: 18vw; top: 10px;">
+  style="left: 18vw; top: 10px;">
+    <style>
+      #el_turnplanner_wrapper .body>div {
+        display: inline-block; 
+        overflow-y: auto; 
+        overflow-x: hidden;
+        width: 49%;
+        vertical-align: top;
+      }
+    </style>
     <div id="el_tp_header" class="header">
       <strong>Планировщик хода</strong>
       <button onclick="TurnPlanner.close()" class="btn_close">Close</button>
     </div>
     <div class="body" style="width: 100%;">
-      <!-- <tr style="height: 2em;">
-          </tr> -->
-      <div id="el_tp_resources">
-        <h5>Доступные ресурсы</h5>
+      <div style="display: block; width: 99%; text-align: center;">
+        Игрок: <select id="el_tp_player" value=-1></select>
       </div>
-      <div id="el_tp_tech">
+      <div id="el_tp_resources_wrapper">
+        <h5>Доступные ресурсы</h5>
+        <div id="el_tp_resources"></div>
+      </div>
+      <div id="el_tp_tech_wrapper">
         <h5>Проекты</h5>
+        <input id="el_tp_techs_search" list="el_tp_techs_datalist" placeholder="Доступные технологии">
+        <datalist id="el_tp_techs_datalist"></datalist>
+
+        <div id=el_tp_tech_example hidden2>
+          <table>
+            <tr>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+
+        <table id="el_tp_tech" style="width: 100%;">
+        <!-- 
+          <thead>
+            <tr>
+              <td>
+
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <table>
+                  <tr><td>1</td></tr>
+                  <tr><td>1</td></tr>
+                  <tr><td>1</td></tr>
+                  <tr><td>1</td></tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        -->
+        </table> 
       </div>
     </div>
   </div>
