@@ -656,7 +656,7 @@ const Analysis = {
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
           // eslint-disable-next-line no-empty
-          else if(k[0] == 'особое') {
+          else if(k[0] == 'особое' || k[0] == 'Временно' ) {
             teff = 0
             break
           }
@@ -673,10 +673,11 @@ const Analysis = {
         }
 
         let d = (+tcost/+teff).toFixed(1)
+        const delta = +tcost - +teff
 
         if(d && mult && j.lvl !== techData.MAX_TECH_LVL) {
           let p = (d/mult).toFixed(1)
-          if(p>1.5 || (p > 0.3 && p<0.7)) {
+          if(p>1.5 || (p > 0.1 && p<0.7)) {
             cnt++
             log(i, 'lvl', j.lvl, j.name,  j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
           }
