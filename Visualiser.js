@@ -635,7 +635,7 @@ const Analysis = {
         tcost = +tcost.toFixed(2)
 
         // tcost<10 in case is's some superstructure
-        if(Math.abs(tcost-mult)>1 && tcost>0 && tcost<10 && !['octagon','trapezoid2'].includes(j.type) ) {
+        if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 && !['octagon','trapezoid2'].includes(j.type) ) {
           log(i, j.name, `cost looks bad: ${tcost}->${mult}`, j)
           cnt++
           continue
@@ -656,7 +656,8 @@ const Analysis = {
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
           // eslint-disable-next-line no-empty
-          else if(k[0] == 'особое' || k[0] == 'Временно' ) {
+          else if(k[0] == 'Временно') {
+            // k[0] == 'особое' || 
             teff = 0
             break
           }
