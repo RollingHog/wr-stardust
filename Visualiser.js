@@ -149,6 +149,7 @@ const techData = {
   badTechCount: 0,
   badTechList: {
     cost: [],
+    effect: [],
   },
   currentTreeName: null,
   cache: {
@@ -674,7 +675,9 @@ const Analysis = {
             else if(KEYWORDS.MATERIALS.includes(k[0])) {}
             // eslint-disable-next-line no-empty
             else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
-            // eslint-disable-next-line no-empty
+            else if(KEYWORDS.MILITARY_PARAMS.includes(k[0])) teff += +k[1]
+            else if(KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k[0])) teff += +k[1]/2
+            else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]/1.5
             else if(k[0] == 'Временно') {
               // k[0] == 'особое' || 
               teff = 0
@@ -700,6 +703,7 @@ const Analysis = {
           if(delta < -0.6 || delta > 1) {
             cnt++
             log(i, 'lvl', j.lvl,`\n${j.name}\n`,  j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1?'ДОРОГО':"ДЕШЕВО")
+            techData.badTechList.effect.push([j.name, mult])
           }
         }
       }
@@ -711,16 +715,31 @@ const Analysis = {
     const iframes = Array.from(document.querySelectorAll('iframe.tech'))
     const files = Object.fromEntries(iframes.map(e=>[e.src.split('/').pop().split('.')[0],e.contentWindow.document.body.firstChild.innerText]))
     const changedFiles = Object.fromEntries(Object.keys(files).map(e => [e, false]))
+
+    // cost
     if(techData.badTechList.cost.length === 0) {
       log('no costs to fix')
-      return
+    } else {
+      log(`fixBadCosts, fixing ${techData.badTechList.cost.length} bad costs`)
     }
-    log(`fixBadCosts, fixing ${techData.badTechList.cost.length} bad costs`)
     for(let i of techData.badTechList.cost) {
       const treeName = inverted.alltech[i[0]].treeName
       files[treeName] = files[treeName].replace(new RegExp(`(${i[0]}\nСложность: )\\d+`, 'i'),`$1${i[1]}`)
       changedFiles[treeName] = true
     }
+
+    // effect
+    if(techData.badTechList.effect.length === 0) {
+      log('no effects to fix')
+    } else {
+      log(`fixBadCosts, fixing ${techData.badTechList.effect.length} bad effects`)
+    }
+    for(let i of techData.badTechList.effect) {
+      const treeName = inverted.alltech[i[0]].treeName
+      log(...files[treeName].matchAll(new RegExp(`(${i[0]}\nСложность:[^\n]*\nЭффект: )([^\\d]+)(\\d+)([^<]+)`, 'ig'),`$1${i[1]}`))
+      // changedFiles[treeName] = true
+    }
+
     for(let i in files) {
       if(!changedFiles[i]) continue
       savingOps.saveFile(`${i}.graphml`, files[i])
