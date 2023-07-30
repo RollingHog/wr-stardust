@@ -144,6 +144,9 @@ const techData = {
   levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
   subtreeBorders: Object.fromEntries(TREELIST.map(e => [e,[]])),
   badTechCount: 0,
+  badTechList: {
+    cost: [],
+  },
   currentTreeName: null,
   cache: {
     trees: Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}])),
@@ -640,6 +643,7 @@ const Analysis = {
         // tcost<10 in case is's some superstructure
         if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 && !['octagon','trapezoid2'].includes(j.type) ) {
           log(i, `\n${j.name}\n`, `cost looks bad: ${tcost}->${mult}`, j)
+          techData.badTechList.cost.push([j.name, mult])
           cnt++
           continue
         }
@@ -696,6 +700,25 @@ const Analysis = {
       // console.groupEnd()
     }
     log('Bad prices:', cnt)
+  },
+  fixBadCosts() {
+    const iframes = Array.from(document.querySelectorAll('iframe.tech'))
+    const files = Object.fromEntries(iframes.map(e=>[e.src.split('/').pop().split('.')[0],e.contentWindow.document.body.firstChild.innerText]))
+    const changedFiles = Object.fromEntries(Object.keys(files).map(e => [e, false]))
+    if(techData.badTechList.cost.length === 0) {
+      log('no costs to fix')
+      return
+    }
+    log(`fixBadCosts, fixing ${techData.badTechList.cost.length} bad costs`)
+    for(let i of techData.badTechList.cost) {
+      const treeName = inverted.alltech[i[0]].treeName
+      files[treeName] = files[treeName].replace(new RegExp(`(${i[0]}\nСложность: )\\d+`, 'i'),`$1${i[1]}`)
+      changedFiles[treeName] = true
+    }
+    for(let i in files) {
+      if(!changedFiles[i]) continue
+      savingOps.saveFile(`${i}.graphml`, files[i])
+    }
   },
   reportBadY() {
     // collapse stat bad Y's
