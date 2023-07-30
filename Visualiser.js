@@ -136,6 +136,9 @@ VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map
   HTMLCollection.prototype.filter = Array.prototype.filter
 })()
 
+/**
+ * @type {Object<string,Object<string,TTechObject>>}
+ */
 const tech = {}
 const techData = {
   MAX_TECH_LVL: 16,
@@ -595,7 +598,6 @@ const Analysis = {
   countTechPrices() {
     let cnt = 0
     for (let i of Object.keys(tech)) {
-      if(i == 'Military') continue
       // console.group(i)
       for(let j of Object.values(tech[i])) {
         const lvl = j.lvl
@@ -627,6 +629,7 @@ const Analysis = {
           else if(
             k[1] == 'суперпроект'
             || j.lvl >= techData.MAX_TECH_LVL-1
+            || ['космическая база', 'наземная база'].includes(j.effect[0][1])
           ) {
             tcost = 0
             break
@@ -641,7 +644,9 @@ const Analysis = {
         tcost = +tcost.toFixed(2)
 
         // tcost<10 in case is's some superstructure
-        if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 && !['octagon','trapezoid2'].includes(j.type) ) {
+        if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 
+          && !['octagon','trapezoid','trapezoid2','fatarrow'].includes(j.type) 
+        ) {
           log(i, `\n${j.name}\n`, `cost looks bad: ${tcost}->${mult}`, j)
           techData.badTechList.cost.push([j.name, mult])
           cnt++
