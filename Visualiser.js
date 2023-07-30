@@ -657,7 +657,7 @@ const Analysis = {
             }
             else if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
             else if(k[0]=='Сверхадаптация') {
-              teff += +k[1]*0.9
+              teff += +k[1]*2
             } 
             else if(
               KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])
@@ -699,7 +699,7 @@ const Analysis = {
       }
       // console.groupEnd()
     }
-    log('Bad prices:', cnt)
+    if(cnt) log('Bad prices:', cnt)
   },
   fixBadCosts() {
     const iframes = Array.from(document.querySelectorAll('iframe.tech'))
@@ -2516,7 +2516,7 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // Плюсы к научным веткам
         .replace(/^Вет(?:ка|вь) "?([^ "]+)"? \+?(\d+)/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$1"):$2')
-        .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$2"):$1')
+        .replace(/^\+?(\d+) (?:куб(?:а|ов)? )?к вет(?:ке|ви) "([^"]+)"/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$2"):$1')
         // армии и звездолёты
         .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), KEYWORDS.UNIT_TYPES_KEYWORD+':$1')
         // .replace(/(армия|$/, 'Тип отряда:$1')
