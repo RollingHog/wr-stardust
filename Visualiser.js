@@ -629,7 +629,6 @@ const Analysis = {
           else if(
             k[1] == 'суперпроект'
             || j.lvl >= techData.MAX_TECH_LVL-1
-            || ['космическая база', 'наземная база'].includes(j.effect[0][1])
           ) {
             tcost = 0
             break
@@ -645,7 +644,9 @@ const Analysis = {
 
         // tcost<10 in case is's some superstructure
         if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 
+          // do-not-touch-military-costs-dammit
           && !['octagon','trapezoid','trapezoid2','fatarrow'].includes(j.type) 
+          && !['космическая база', 'наземная база'].includes(j.effect[0][1])
         ) {
           log(i, `\n${j.name}\n`, `cost looks bad: ${tcost}->${mult}`, j)
           techData.badTechList.cost.push([j.name, mult])
