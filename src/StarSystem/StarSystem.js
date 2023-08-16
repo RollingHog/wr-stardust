@@ -1,6 +1,6 @@
 // common.js
 /* global
-  getEl log
+  getEl log locationSearchToArray
 */
 
 const RAW_EXAMPLE = `20d6: (3 + 4 + 5 + 6 + 3 + 2 + 5 + 3 + 3 + 5 + 5 + 5 + 2 + 4 + 1 + 4 + 3 + 4 + 5 + 3) = 75
@@ -243,10 +243,7 @@ const StarSystemGenerator = {
    * @returns {{system: TSSGPlanet[], restCubes: Number[], density: Number, user: string}}
    */
   decompress(query) {
-    let obj = query
-      .split('&')
-      .filter( e => e)
-      .map( e => e.split('='))
+    let obj = locationSearchToArray(query)
     let restCubes = obj.filter(e => e[0] === E.keys.rest)
     if(restCubes.length) restCubes = restCubes[0][1]
     obj = obj.filter(e => e[0] !== E.keys.rest)
