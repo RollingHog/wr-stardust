@@ -179,6 +179,8 @@ async function Init() {
           i.src = i.getAttribute('src2')
         })
       ))
+  } else {
+    getEl('post_text_iframe').src = getEl('post_text_iframe').getAttribute('src2')
   }
   
   for (let i of TREELIST) {
@@ -1994,7 +1996,7 @@ class TGoogleDocUserObj {
 const playerPost = {
   open() {
     let p = '' 
-    if(VARS.IS_LOCAL) {
+    if(VARS.IS_LOCAL || true) {
       p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
     } else {
       p = prompt('player post here')
