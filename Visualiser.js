@@ -1868,7 +1868,9 @@ const parseDoc = {
     }
 
     const startingFeature = parseNode.effects(
-      obj['Данные экспедиции'].children[0].rows[2].children[1].innerText.replace(/^[^-]+- ?/,''),
+      obj['Данные экспедиции'].children[0].rows[2].children[1].innerText
+        .replace(/^[^-]+- ?/,'')
+        .replace(/\([^)]+\)/g,''),
       {treeName: null, name: null}
     )
 
