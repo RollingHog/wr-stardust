@@ -1997,15 +1997,14 @@ class TGoogleDocUserObj {
 // eslint-disable-next-line no-unused-vars
 const playerPost = {
   open() {
-    let p = '' 
-    if(VARS.IS_LOCAL || true) {
-      p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
-    } else {
-      p = prompt('player post here')
-      if(!p) return
-    }
+    const p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
     playerPost.parse(p)
     HTMLUtils.openModal('selected_tech')
+  },
+  prompt() {
+    let p = prompt('player post here')
+    if(!p) return
+    playerPost.parse(p)
   },
   close() {
     HTMLUtils.closeModal('selected_tech')
@@ -2153,6 +2152,15 @@ const playerPost = {
         e.children[pos.critwins].style.backgroundColor = ''
         e.children[pos.delta].style.backgroundColor = ''
         e.children[pos.name].title = ''
+
+        // // collapse critfails/critwins
+        // const critfails = +e.children[pos.critfails].innerText
+        // const critwins = +e.children[pos.critwins].innerText
+        // const critdelta = Math.abs(critfails-critwins) || critfails
+        // if(critfails > 0 && critwins > 0) {
+        //   e.children[pos.critfails].innerText = critfails - critdelta
+        //   e.children[pos.critwins].innerText = critwins - critdelta
+        // }
 
         if (+e.children[pos.critfails].innerText > 0) {
           e.children[pos.critfails].style.backgroundColor = 'tomato'
@@ -2844,7 +2852,7 @@ const TurnPlanner = {
     // getEl('el_tp_tech').innerHTML = 
     this.fillTechsDatalist()
     getEl('el_tp_techs_search').disabled = false
-    getEl('el_tp_techs_search').onchange = e => {
+    getEl('el_tp_techs_search').onchange = _ => {
       // if(!e.isTrusted) return 
       this.addTech(getEl('el_tp_techs_search').value)
       getEl('el_tp_techs_search').value = ''
