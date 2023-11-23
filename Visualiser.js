@@ -186,6 +186,8 @@ async function Init() {
           i.src = i.getAttribute('src2')
         })
       ))
+  } else {
+    getEl('post_text_iframe').src = getEl('post_text_iframe').getAttribute('src2')
   }
   
   for (let i of TREELIST) {
@@ -1674,7 +1676,15 @@ const User = {
   createColonyDescription(playerName) {
     if(!window['DATA__TECH_TRESHOLDS']) return ''
     const techTresholds = window['DATA__TECH_TRESHOLDS'].data
-    let res = '<br>'
+    const planetDescriptions = window['DATA__TECH_TRESHOLDS'].planetDescriptions
+
+    let res = '<br><b>ПЛАНЕТА</b><br>'
+
+    const { planetParams } = this.getSavedUserData(playerName)
+
+    res += VARS.effectsOfPlanetSize[planetParams["Тип планеты"]].map(e => e.join(' ')).join('<br>')
+
+    res += '<br><b>ТЕХНОЛОГИИ</b><br>'
     for(let tree in techTresholds) {
       for(let subtree in techTresholds[tree]) {
         let lastProperStr = null
@@ -1954,7 +1964,9 @@ const parseDoc = {
     }
 
     const startingFeature = parseNode.effects(
-      obj['Данные экспедиции'].children[0].rows[2].children[1].innerText.replace(/^[^-]+- ?/,''),
+      obj['Данные экспедиции'].children[0].rows[2].children[1].innerText
+        .replace(/^[^-]+- ?/,'')
+        .replace(/\([^)]+\)/g,''),
       {treeName: null, name: null}
     )
 
@@ -2045,6 +2057,7 @@ const TFiveTechObj = {
   Unique: [],
 }
 
+// eslint-disable-next-line no-unused-vars
 class TGoogleDocUserObj {
   startingFeature = []
   techTable = TFiveTechObj
@@ -2081,15 +2094,14 @@ class TGoogleDocUserObj {
 // eslint-disable-next-line no-unused-vars
 const playerPost = {
   open() {
-    let p = '' 
-    if(VARS.IS_LOCAL) {
-      p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
-    } else {
-      p = prompt('player post here')
-      if(!p) return
-    }
+    const p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
     playerPost.parse(p)
     HTMLUtils.openModal('selected_tech')
+  },
+  prompt() {
+    let p = prompt('player post here')
+    if(!p) return
+    playerPost.parse(p)
   },
   close() {
     HTMLUtils.closeModal('selected_tech')
@@ -2238,6 +2250,15 @@ const playerPost = {
         e.children[pos.delta].style.backgroundColor = ''
         e.children[pos.name].title = ''
 
+        // // collapse critfails/critwins
+        // const critfails = +e.children[pos.critfails].innerText
+        // const critwins = +e.children[pos.critwins].innerText
+        // const critdelta = Math.abs(critfails-critwins) || critfails
+        // if(critfails > 0 && critwins > 0) {
+        //   e.children[pos.critfails].innerText = critfails - critdelta
+        //   e.children[pos.critwins].innerText = critwins - critdelta
+        // }
+
         if (+e.children[pos.critfails].innerText > 0) {
           e.children[pos.critfails].style.backgroundColor = 'tomato'
         }
@@ -2335,6 +2356,7 @@ const playerPost = {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 class TTechObject {
   id = ''
   type
@@ -2801,6 +2823,7 @@ function listAllWithoutMilitary() {
   return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
 }
 
+// eslint-disable-next-line no-unused-vars
 class TUnit {
   name = ''
   hull = ''
@@ -2929,7 +2952,7 @@ const TurnPlanner = {
     // getEl('el_tp_tech').innerHTML = 
     this.fillTechsDatalist()
     getEl('el_tp_techs_search').disabled = false
-    getEl('el_tp_techs_search').onchange = e => {
+    getEl('el_tp_techs_search').onchange = _ => {
       // if(!e.isTrusted) return 
       this.addTech(getEl('el_tp_techs_search').value)
       getEl('el_tp_techs_search').value = ''
