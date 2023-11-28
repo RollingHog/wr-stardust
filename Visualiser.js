@@ -2625,7 +2625,7 @@ const parseNode = {
         // Эффекты и бонусы:
         .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // Плюсы к научным веткам
-        .replace(/^Вет(?:ка|вь) "?([^ "]+)"? \+?(\d+)/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$1"):$2')
+        .replace(/^Вет(?:ка|вь) "?([^"]+)"? \+?(\d+)/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$1"):$2')
         .replace(/^\+?(\d+) (?:куб(?:а|ов)? )?к вет(?:ке|ви) "([^"]+)"/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$2"):$1')
         // армии и звездолёты
         .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), KEYWORDS.UNIT_TYPES_KEYWORD+':$1')
