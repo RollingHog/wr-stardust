@@ -39,6 +39,7 @@ const VARS = {
   NODE_T: {
     TECH: 'rectangle',
     BUILDING: 'parallelogram',
+    ORBITAL: 'ellipse',
     PROJECT: 'hexagon',
     HULL: 'octagon',
     MODULE_GROUND: 'trapezoid',
@@ -46,6 +47,7 @@ const VARS = {
     MODULE_BOTH: 'fatarrow',
   },
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
+  NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'ellipse', 'hexagon'],
   TREELIST_EN2RU: null,
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
@@ -2335,20 +2337,22 @@ const playerPost = {
       User.createUserTechEffectsTable(Object.entries(result.effect), result.cost)
 
     const byType = {
-      rectangle: [],
-      parallelogram: [],
-      hexagon: [],
+      [VARS.NODE_T.TECH]: [],
+      [VARS.NODE_T.BUILDING]: [],
+      [VARS.NODE_T.ORBITAL]: [],
+      [VARS.NODE_T.PROJECT]: [],
     }
 
     techList.forEach(e => {
-      if (['hexagon', 'rectangle', 'parallelogram'].includes(inverted.alltech[e].type))
+      if (VARS.NON_WAR_NODE_TYPES_ARR.includes(inverted.alltech[e].type))
         byType[inverted.alltech[e].type].push(e)
     })
 
     getEl('el_tech_by_type_list').innerHTML = [
-      ['Технологии', byType.rectangle],
-      ['Здания', byType.parallelogram],
-      ['Проекты', byType.hexagon],
+      ['Технологии', byType[VARS.NODE_T.TECH]],
+      ['Здания', byType[VARS.NODE_T.BUILDING]],
+      ['Орбитальные здания', byType[VARS.NODE_T.ORBITAL]],
+      ['Проекты', byType[VARS.NODE_T.PROJECT]],
     ].map(e => {
       let tableStr = Object.entries(e[1]
         .reduce((acc, e2) => {
@@ -2365,7 +2369,7 @@ const playerPost = {
           - TREELIST.indexOf(VARS.fill2TreeType[b[0]]) 
         )
 
-      if(e[0] !== 'Здания') {
+      if(['Технологии', 'Проекты'].includes(e[0])) {
         tableStr = tableStr.map( e2 => 
             `
             <span style="background-color:${e2[0]}">
@@ -2994,7 +2998,7 @@ const TurnPlanner = {
     const exclude = this.selectedTechs
       .concat(User.getFlatUserTech(this.activePlayer))
       .filter( techName => inverted.alltech[techName] 
-        && (['rectangle', 'parallelogram', 'hexagon'].includes(inverted.alltech[techName].type))
+        && (VARS.NON_WAR_NODE_TYPES_ARR.includes(inverted.alltech[techName].type))
       )
     return User.listAvalTech(techData.currentTreeName2, User.getFlatUserTech(this.activePlayer))
       .filter(techObj => !exclude.includes(techObj.name))
