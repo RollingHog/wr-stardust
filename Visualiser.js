@@ -2349,34 +2349,40 @@ const playerPost = {
       ['Технологии', byType.rectangle],
       ['Здания', byType.parallelogram],
       ['Проекты', byType.hexagon],
-    ].map(e =>
-      `<strong>${e[0]}</strong>
-      <div>
-        ${Object.entries(e[1]
-          .reduce((acc, e2) => {
-            const field = inverted.alltech[e2].fill 
-            if(acc[field] instanceof Array) {
-              acc[field].push(e2)
-            } else {
-              acc[field] = [e2]
-            }
-            return acc
-          }, {}))
-          .sort( (a,b) => 
-            TREELIST.indexOf(VARS.fill2TreeType[a[0]]) 
-            - TREELIST.indexOf(VARS.fill2TreeType[b[0]]) 
-          )
-          .map( e2 => 
+    ].map(e => {
+      let tableStr = Object.entries(e[1]
+        .reduce((acc, e2) => {
+          const field = inverted.alltech[e2].fill 
+          if(acc[field] instanceof Array) {
+            acc[field].push(e2)
+          } else {
+            acc[field] = [e2]
+          }
+          return acc
+        }, {}))
+        .sort( (a,b) => 
+          TREELIST.indexOf(VARS.fill2TreeType[a[0]]) 
+          - TREELIST.indexOf(VARS.fill2TreeType[b[0]]) 
+        )
+
+      if(e[0] !== 'Здания') {
+        tableStr = tableStr.map( e2 => 
             `
             <span style="background-color:${e2[0]}">
               ${VARS.fill2TreeType[e2[0]]}
             </span>
             <span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
             >${e2[1].join(', ')}, </span>
-            <br>`)
-          .join('')
-        }
+            <br>`).join('')
+      } else {
+        tableStr = tableStr.map(e2 => e2[1]).join(', ')
+      }
+
+      return `<strong>${e[0]}</strong>
+      <div>
+        ${tableStr}
       </div>`
+    }
     ).join('')
   }
 }
