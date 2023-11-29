@@ -9,7 +9,7 @@ FILL_2_TREE_TYPE
   draw
 */
 
-const VERSION = '1.0.2'
+const VERSION = '1.0.3'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
@@ -1473,6 +1473,7 @@ const User = {
     let res = []
     const targets = Array.from(svg.getElementsByTagName('rect'))
       .concat(Array.from(svg.getElementsByTagName('polygon')))
+      .concat(Array.from(svg.getElementsByTagName('ellipse')))
       .filter(e => typeof techData.badCells[treeName].find(a => a.id == e.id) === 'undefined')
 
     let list = tech_list
