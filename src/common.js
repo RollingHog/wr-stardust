@@ -1,5 +1,6 @@
 /* exported
-  log warn getEl locationSearchDecompress
+  log warn getEl 
+  locationSearchToArray FILL_2_TREE_TYPE
 */
 
 var log = console.log

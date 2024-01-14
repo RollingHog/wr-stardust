@@ -118,15 +118,16 @@
     style="left: 260px; top: 50px; width: 50%;">
     <div id="el_selected_tech_header" class="header">
       <strong>Userpost</strong>
+      <button onclick="HTMLUtils.collapseModals()" class="btn_collapse">Collapse</button>
       <button onclick="playerPost.close()" class="btn_close">Close</button>
     </div>
 
-    <div class="body">
+    <div class="body" style="width: 100%;">
       <div id="el_selected_tech_list" contenteditable="true"></div>
       <br>
 
       <strong>Результат</strong>
-      <button onclick="playerPost.countTechStudyResult()"->Parse</button>
+      <button onclick="playerPost.countTechStudyResult()"->Reparse</button>
       <div id="el_tech_result_list" contenteditable="true"></div>
       
       <strong>Раскладка по типам</strong>
