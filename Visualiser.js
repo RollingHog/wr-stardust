@@ -9,7 +9,7 @@ FILL_2_TREE_TYPE
   draw
 */
 
-const VERSION = '1.0.3'
+const VERSION = '1.0.4'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
