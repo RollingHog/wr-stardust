@@ -1,9 +1,17 @@
 /* exported
-  log warn getEl 
+  log warn warnNoTrace getEl 
   locationSearchToArray FILL_2_TREE_TYPE
 */
 
 var log = console.log
+
+function warnNoTrace(...args) {
+  console.warn(...args)
+  if(!getEl('el_error').hidden) return
+  getEl('el_error_inner').innerText = [...args]
+  getEl('el_error').hidden = false
+  setTimeout(_ => getEl('el_error').hidden = true, 4000)
+}
 
 // some wierd SO magic
 // https://stackoverflow.com/questions/63859312/how-to-properly-override-console-warn-in-javascript
