@@ -997,11 +997,11 @@ const Analysis = {
     }
   },
 
-  openReport(reportName) {
+  openReport(reportName, reportArgs = null) {
     HTMLUtils.registerModalPath('report', reportName)
     getEl('el_reports_home').hidden = false
     if(Analysis.Reports[reportName])
-      Analysis.Reports[reportName]()
+      Analysis.Reports[reportName](reportArgs)
     else {
       // probably its user report
       User.drawUserStat(reportName)
@@ -1012,17 +1012,17 @@ const Analysis = {
     HTMLUtils.closeModal('report')
   },
   
-  reportTable(obj) {
+  reportTable(obj, HTMLbefore = '<span></span>') {
     if(!Object.keys(obj).length) return
 
-    getEl('el_reports_list').innerHTML = '<table><thead></thead><tbody></tbody></table>'
-    const tbody = getEl('el_reports_list').children[0].tBodies[0]
+    getEl('el_reports_list').innerHTML = HTMLbefore + '<table><thead></thead><tbody></tbody></table>'
+    const tbody = getEl('el_reports_list').children[1].tBodies[0]
 
     const entries = Object.entries(obj)
     const isObj = typeof entries[0][1] == 'object'
     let res = ''
 
-    getEl('el_reports_list').children[0].tHead.innerHTML = 
+    getEl('el_reports_list').children[1].tHead.innerHTML = 
       `<tr><th>(index)</th><th>${isObj ? Object.keys(entries[0][1]).join('</th><th>') : 'value'}</th></tr>`
 
     for(let i of entries) {
@@ -1033,8 +1033,8 @@ const Analysis = {
 
     HTMLUtils.addTableSorting('#el_reports_list table')
     setTimeout(_=>{ 
-      getEl('el_reports_list').children[0].tHead.children[0].children[1].click()
-      getEl('el_reports_list').children[0].tHead.children[0].children[1].click()
+      getEl('el_reports_list').children[1].tHead.children[0].children[1].click()
+      getEl('el_reports_list').children[1].tHead.children[0].children[1].click()
     }, 0)
   },
 
@@ -1150,8 +1150,13 @@ const Analysis = {
       Analysis.reportTable(result)
     },
 
-    эффекты_игрока_подробно() {
-      const playerName = prompt('player name')
+    эффекты_игрока_подробно(reportArgs) {
+      let playerName
+      if(reportArgs && reportArgs.playerName) {
+        playerName = reportArgs.playerName
+      } else {
+        playerName = prompt('player name')
+      }
       if(!playerName) return
       const userDataObj = User.getSavedUserData(playerName)
       const namesList = [].concat(
@@ -1161,7 +1166,9 @@ const Analysis = {
         Object.values(userDataObj.techTable).flat(),
       )
       const result = Analysis.allEffectsVerbose(namesList.map(e => inverted.alltech[e]).filter(e => e))
-      Analysis.reportTable(result)
+      Analysis.reportTable(result, `<a class="fake_link" 
+        onclick="getEl('${playerName}').checked=false; getEl('${playerName}').click();">Сводный отчет: ${playerName}</a>`
+      )
     },
 
     эффекты_на_ТУ() {
@@ -1772,6 +1779,9 @@ const User = {
       <br>
       <a target=_blank 
         href="./ColonyVisual.html?user=${playerName}">Внешний вид колонии</a>
+      <br>
+      <a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
+        class="fake_link">Эффекты игрока подробно</a>
       ` + this.createUserTechEffectsTable(effectsData)
         + this.createColonyDescription(playerName)
 
