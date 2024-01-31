@@ -1358,7 +1358,7 @@ const Analysis = {
 
     предпочтения_игроков_по_техдревам() {
       const t = Object.entries(Analysis.countTechBalanceBySubtree())
-        .map(([name, e]) => [name, Object.entries(e).sort((a,b)=>b[1]-a[1]).join('; ')])
+        .map(([name, e]) => [name, Object.entries(e).sort((a,b)=>b[1]-a[1]).slice(0,5)])
       Analysis.reportTable(Object.fromEntries(t))
     }
   }
