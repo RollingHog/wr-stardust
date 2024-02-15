@@ -20,6 +20,9 @@ var draw = {
       case 'parallelogram':
         draw.SVG.Prlg(t)
         break
+      case 'parallelogram2':
+        draw.SVG.Prlg2(t)
+        break
       case 'trapezoid':
         draw.SVG.Trapezioid(t)
         break
@@ -67,6 +70,17 @@ var draw = {
         ${x + w},${y}
         ${x + w - d},${y + h}
         ${x},${y + h}
+      `
+      return draw.SVG.Poly(points, { id, borderColor, fill, title })
+    },
+
+    Prlg2: function ({ id, x, y, h, w, borderColor, fill, title }) {
+      const d = draw.POLYGON_DELTA
+      var points = `
+        ${x},${y}
+        ${x + w - d},${y}
+        ${x + w},${y + h}
+        ${x + d},${y + h}
       `
       return draw.SVG.Poly(points, { id, borderColor, fill, title })
     },
