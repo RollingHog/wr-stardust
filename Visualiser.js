@@ -2457,7 +2457,7 @@ const playerPost = {
           - TREELIST.indexOf(VARS.fill2TreeType[b[0]]) 
         )
 
-      if(['Технологии', 'Проекты'].includes(e[0])) {
+      if(['Технологии'].includes(e[0])) {
         tableStr = tableStr.map( e2 => 
             `
             <span style="background-color:${e2[0]}">
@@ -2467,7 +2467,9 @@ const playerPost = {
             >${e2[1].join(', ')}, </span>
             <br>`).join('')
       } else {
-        tableStr = tableStr.map(e2 => e2[1]).join(', ')
+        tableStr = `
+        <span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
+        >${tableStr.map(e2 => e2[1]).join(', ')}</span>`
       }
 
       return `<strong>${e[0]}</strong>
