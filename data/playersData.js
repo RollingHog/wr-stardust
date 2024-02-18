@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-02-15T01:59:49.916Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-02-18T13:07:48.559Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -501,7 +501,8 @@ var DATA__PLAYERS_DATA = {
         "Колониальная социология",
         "Целевой отбор",
         "Новые способы пропаганды",
-        "Колониальное управление"
+        "Колониальное управление",
+        "Мобилизация населения"
       ],
       "Biology": [],
       "Industry": [
