@@ -1,6 +1,7 @@
 // common.js
 /* global
   getEl log locationSearchToArray
+  getDictKey
 */
 
 const RAW_EXAMPLE = `20d6: (3 + 4 + 5 + 6 + 3 + 2 + 5 + 3 + 3 + 5 + 5 + 5 + 2 + 4 + 1 + 4 + 3 + 4 + 5 + 3) = 75
@@ -140,19 +141,6 @@ satelliteMods: {
  },
 }
 
-function getKey(dict, roll) {
-  let i = +roll
-  while (i <= 18) {
-    if (typeof dict[i] !== 'undefined') return dict[i]
-    i++
-  }
-  // well, it is the last one
-  while (i > 0) {
-    if (typeof dict[i] !== 'undefined') return dict[i]
-    i--
-  }
-}
-
 var DEV = false
 function debug(data, str=null) {
   if(!DEV) return
@@ -164,6 +152,7 @@ function debug(data, str=null) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 class TSSGPlanet {
   type = E.type.asteroid
   size = E.size.medium
@@ -307,7 +296,7 @@ const StarSystemGenerator = {
     function planet(type, size = null, {giantType =  null, capital = false, user = null} = {}) {
       if(capital && !user) user = true
       return { type, size, 
-        satellites: getKey(genDict.satelliteList, 
+        satellites: getDictKey(genDict.satelliteList, 
           pop1()
           + genDict.satelliteMods.type[type]
           + genDict.satelliteMods.size[size]
@@ -321,13 +310,13 @@ const StarSystemGenerator = {
 
     function giantSize(i) {
       const mod = i <= genDict.BEYOND_SNOW_LINE ? 4 : 0
-      return getKey(genDict.giantSize, pop3() + mod + densityMod)
+      return getDictKey(genDict.giantSize, pop3() + mod + densityMod)
     }
 
     system[userPlanet.i] = planet(userPlanet.type, userPlanet.size, { capital: true, user: true})
 
     // first giant
-    const firstGiantType = getKey(genDict.firstGiant, pop3('firstGiantType'))
+    const firstGiantType = getDictKey(genDict.firstGiant, pop3('firstGiantType'))
     let firstLocation = -1
     let globalMod = densityMod
 
@@ -385,7 +374,7 @@ const StarSystemGenerator = {
       if(system[i+1] && system[i+1].type == E.type.giant) mod -= 6
       if(system[i-1] && system[i-1].type == E.type.giant) mod -= 3
       if(i == 1 || i == 11) mod -= 3
-      let content = getKey(genDict.orbitContents, pop3() + mod + globalMod)
+      let content = getDictKey(genDict.orbitContents, pop3() + mod + globalMod)
       if(!content[0]) continue
       system[i] = planet(content[0], content[1])
     }

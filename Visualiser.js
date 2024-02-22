@@ -2,6 +2,7 @@
 /* global
 getEl log warn
 FILL_2_TREE_TYPE
+getDictKey
 */
 
 // draw.js
@@ -1378,6 +1379,51 @@ const Analysis = {
       const t = Object.entries(Analysis.countTechBalanceBySubtree())
         .map(([name, e]) => [name, Object.entries(e).sort((a,b)=>b[1]-a[1]).slice(0,5)])
       Analysis.reportTable(Object.fromEntries(t))
+    },
+
+    тип_критпровала_по_таблицам() {
+      const field = {
+        1: 'Социальный',
+        2: 'Экологический',
+        3: 'Научный',
+        4: 'Технический',
+        5: 'Военный',
+      }
+      const exactEvent = {
+        1: 'Инопланетное вторжение',
+        9: 'Астрономическое событие',
+        19: 'Научное событие',
+        29: 'Природное происшествие',
+        39: 'Культурный феномен / Социальное изменение',
+        49: 'Геологическая аномалия',
+        59: 'Политическое движение',
+        69: 'Преступление',
+        79: 'Болезнь',
+        89: 'Опыт лидеру',
+        99: 'Инопланетный артефакт',
+        100: 'Контакт',
+      }
+      const t = prompt('Кубы?')
+      // getEl('el_reports_list').innerHTML = 
+      const result = t.split('\n').map(s => {
+        s = s.replace(/\dd5/, 'D5').replace(/\dd100/, 'D100')
+        const s1 = s.split('D5:')
+        const s2 = s1[1].split('D100:')
+        return [
+          s1[0].trim(),
+          s2[0].trim().replace(/\) =.+$/, '').match(/\d+/g),
+          s2[1].trim().replace(/\) =.+$/, '').match(/\d+/g),
+        ]
+      })
+        .map(arr => [
+          arr[0],
+          arr[1].map(e => field[+e]).join('+'),
+          arr[2].map(e => getDictKey(exactEvent, +e)).join('+'),
+        ])
+      Analysis.reportTable(result, `<pre onclick="navigator.clipboard.writeText(this.innerText)"
+      >
+        ##2d5## ##2d100##
+      </pre>`) 
     }
   }
 }
@@ -1391,7 +1437,7 @@ const TreeView = {
     }
   },
 
-  copyFirstLineOnClick() {
+  copyFirstTechLineOnClick() {
     for(let i of document.querySelectorAll('text')) {
       let el = i.children[0]
       el ? el.addEventListener('click', function() {
@@ -1429,7 +1475,7 @@ function drawTree(tree_name) {
     svg.innerHTML = techData.cache.trees[tree_name].html
     svg.setAttribute("viewBox", techData.cache.trees[tree_name].viewBox)
     setTimeout(TreeView.tspanHighlightOnClick,1)
-    setTimeout(TreeView.copyFirstLineOnClick,1)
+    setTimeout(TreeView.copyFirstTechLineOnClick,1)
     setTimeout(TreeView.addTurnPlannerThings,1)
     techData.currentTreeName = tree_name
     User.drawActiveUser(tree_name)
@@ -1438,7 +1484,7 @@ function drawTree(tree_name) {
   }
 
   TreeView.tspanHighlightOnClick()
-  TreeView.copyFirstLineOnClick()
+  TreeView.copyFirstTechLineOnClick()
   TreeView.addTurnPlannerThings()
 
   svg.innerHTML = VARS.SVG_DEFAULT
