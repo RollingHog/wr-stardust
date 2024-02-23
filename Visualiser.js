@@ -161,6 +161,19 @@ const VARS = {
       "req": [],
       "next": [],
       "fullText": "",
+    },
+    "Резерв": {
+      "id": "n123002",
+      "type": 'parallelogram2',
+      "treeName": "Industry",
+      "borderColor": "#000000",
+      "fill": "#CC99FF",
+      "name": "Резерв",
+      "cost": [["Любой","1"]],
+      "effect": [["особое","резервирование кубов"]],
+      "req": [],
+      "next": [],
+      "fullText": "",
     }
   }
   NodeList.prototype.forEach = Array.prototype.forEach
@@ -2443,12 +2456,12 @@ const playerPost = {
 
         const techText = e.children[pos.name].innerText.trim()
 
-        if (inverted.alltech[techText]) {
+        if (TechUtils.get(techText)) {
 
-          e.children[pos.name].style.backgroundColor = inverted.alltech[techText].fill
+          e.children[pos.name].style.backgroundColor = TechUtils.get(techText).fill
 
           if (!e.children[pos.price].innerText.startsWith('+')) {
-            e.children[pos.price].innerText = inverted.alltech[techText].cost[0][1]
+            e.children[pos.price].innerText = TechUtils.get(techText).cost[0][1]
           }
 
           result = techText
@@ -2487,8 +2500,8 @@ const playerPost = {
     }
 
     techList.forEach(e => {
-      if (VARS.NON_WAR_NODE_TYPES_ARR.includes(inverted.alltech[e].type))
-        byType[inverted.alltech[e].type].push(e)
+      if (VARS.NON_WAR_NODE_TYPES_ARR.includes(TechUtils.get(e).type))
+        byType[TechUtils.get(e).type].push(e)
     })
 
     getEl('el_tech_by_type_list').innerHTML = [
@@ -2499,7 +2512,7 @@ const playerPost = {
     ].map(e => {
       let tableStr = Object.entries(e[1]
         .reduce((acc, e2) => {
-          const field = inverted.alltech[e2].fill 
+          const field = TechUtils.get(e2).fill 
           if(acc[field] instanceof Array) {
             acc[field].push(e2)
           } else {
