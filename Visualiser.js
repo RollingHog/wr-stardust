@@ -2156,15 +2156,17 @@ const parseDoc = {
       additionalParams,
       buildings: [].concat(
         // наземные
-        splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
-        // подземные
         splitFilter(obj.Здания.children[0].rows[2].children[1].innerText),
+        // подземные
+        splitFilter(obj.Здания.children[0].rows[3].children[1].innerText),
       ),
-      orbital: splitFilter(obj.Здания.children[0].rows[3].children[1].innerText),
-      astroProjs: splitFilter(obj.Здания.children[0].rows[4].children[1].innerText),
+      orbital: splitFilter(obj.Здания.children[0].rows[4].children[1].innerText),
+      astroProjs: splitFilter(obj.Здания.children[0].rows[5].children[1].innerText),
+      // TODO
+      prepaired: obj.Здания.children[0].rows[0].children[1].innerText.split(',').filter(e => e),
       greatPeople,
       uniqueResources,
-      localProjs: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
+      localProjs: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
     }
     // log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
 
@@ -2247,6 +2249,7 @@ class TGoogleDocUserObj {
   buildings = []
   /** @type {string[]} */
   orbital = []
+  prepaired = []
   greatPeople = []
   uniqueResources = []
   localProjs = []
