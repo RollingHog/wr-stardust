@@ -2343,8 +2343,7 @@ const playerPost = {
     return res
   },
   parse(text) {
-    const firstWord = text.slice(0, text.indexOf(' '))
-    log(firstWord)
+    const firstWord = text.slice(0, Math.min(text.indexOf(' '), text.indexOf('\n')))
     getEl('players_selection')
     for(let i of getEl('players_selection').querySelectorAll('label')) {
       if(i.innerText.startsWith(firstWord)) {
