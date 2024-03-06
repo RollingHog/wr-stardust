@@ -2302,6 +2302,7 @@ const playerPost = {
       before: 1,
       edges: 2,
       rolls: 3,
+      // TODO looks like it is never used and shouldn't be
       after: 3,
     }
     const res = [...text.matchAll(/([^\nd]*)\d+d(\d{1,2}0): \((\d+(?: \+ \d+){0,20})\) = \d+([^\n]*)/g)]
@@ -2317,7 +2318,9 @@ const playerPost = {
         return {
           text: s
             .replace(/\([^)]+\)/g,'')
-            .replace(/^[^а-яёa-z]+/gi,'')
+            .replace(/^\d[).] ?/gi,'')
+            // TODO scream test: was used to remove numeration? do not remove at least for two active turns
+            // .replace(/^[^а-яёa-z0-9]+/gi,'')
             // TODO add reminder NOT to include these symbols in tech names
             .split(',')[0]
             .split('.')[0]
