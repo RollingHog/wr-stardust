@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-03-10T23:20:10.898Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-03-10T23:26:14.238Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -480,7 +480,8 @@ var DATA__PLAYERS_DATA = {
     ],
     "orbital": [
       "Первичная орбитальная группировка",
-      "Космические телескопы"
+      "Космические телескопы",
+      "Звездолёт Рассеяния"
     ],
     "astroProjs": [],
     "prepaired": [],
@@ -681,7 +682,9 @@ var DATA__PLAYERS_DATA = {
       "Шахта",
       "Плавильный комбинат"
     ],
-    "orbital": [],
+    "orbital": [
+      "Звездолёт Рассеяния"
+    ],
     "astroProjs": [],
     "prepaired": [],
     "greatPeople": [
@@ -897,7 +900,8 @@ var DATA__PLAYERS_DATA = {
       "Дополненная реальность"
     ],
     "orbital": [
-      "Первичная орбитальная группировка"
+      "Первичная орбитальная группировка",
+      "Звездолёт Рассеяния"
     ],
     "astroProjs": [],
     "prepaired": [],
@@ -1211,7 +1215,8 @@ var DATA__PLAYERS_DATA = {
       "Базовое жильё",
       "Совет колонии",
       "Колониальная сеть",
-      "Шахта"
+      "Шахта",
+      "Звездолёт Рассеяния"
     ],
     "astroProjs": [],
     "prepaired": [],
