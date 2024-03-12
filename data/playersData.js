@@ -1,6 +1,7 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-03-10T23:26:14.238Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-03-12T18:54:05.028Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
+    "playerColor": "#00FFFF",
     "startingFeature": [
       [
         "Производство",
@@ -215,6 +216,7 @@ var DATA__PLAYERS_DATA = {
     ]
   },
   "Кошкодевочки Карины": {
+    "playerColor": "#AFFADE",
     "startingFeature": [
       [
         "особое",
@@ -381,6 +383,7 @@ var DATA__PLAYERS_DATA = {
     ]
   },
   "Юнитологическая федерация": {
+    "playerColor": "#FF0000",
     "startingFeature": [
       [
         "особое",
@@ -570,6 +573,7 @@ var DATA__PLAYERS_DATA = {
     ]
   },
   "Инженеры": {
+    "playerColor": "#9900ff",
     "startingFeature": [
       [
         "Великий человек (\"Компьютеры\")",
@@ -801,6 +805,7 @@ var DATA__PLAYERS_DATA = {
     ]
   },
   "Хоакин": {
+    "playerColor": "#800000",
     "startingFeature": [
       [
         "Строительство",
@@ -875,9 +880,9 @@ var DATA__PLAYERS_DATA = {
       "чуждая среда": "1",
       "непривычная среда": "2",
       "аномалия": "0",
-      "доверие": "2",
+      "доверие": "0",
       "волнения": "0",
-      "осуждение": "2"
+      "осуждение": "0"
     },
     "buildings": [
       "Базовая электростанция",
@@ -908,31 +913,31 @@ var DATA__PLAYERS_DATA = {
     "greatPeople": [
       {
         "name": "Хоакин Паэс ",
-        "lvl": 2,
+        "lvl": 4,
         "effect": [
           [
             "Исследования (ветка \"Государство\")",
-            "+2"
+            "+4"
           ]
         ]
       },
       {
         "name": "Соломон Шошани",
-        "lvl": 2,
+        "lvl": 3,
         "effect": [
           [
             "Исследования (ветка \"Компьютеры\")",
-            "+2"
+            "+3"
           ]
         ]
       },
       {
         "name": "Нора Пенья",
-        "lvl": 1,
+        "lvl": 2,
         "effect": [
           [
             "Исследования (ветка \"Космос\")",
-            "+1"
+            "+2"
           ]
         ]
       }
@@ -1004,6 +1009,7 @@ var DATA__PLAYERS_DATA = {
     ]
   },
   "Илоний Джобс": {
+    "playerColor": "#FF00FF",
     "startingFeature": [
       [
         "Общество",
@@ -1153,6 +1159,7 @@ var DATA__PLAYERS_DATA = {
     ]
   },
   "Пророк Ракель": {
+    "playerColor": "#D0F0C0",
     "startingFeature": [
       [
         "особое",
