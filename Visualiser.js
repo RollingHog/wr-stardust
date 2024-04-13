@@ -10,6 +10,14 @@ getDictKey
   draw
 */
 
+/**
+  @typedef draw
+  @type {object}
+  @property {string} id - an ID.
+  @property {string} name - your name.
+  @property {number} age - your age.
+ **/
+
 const VERSION = '1.1.1'
 console.log(VERSION)
 
