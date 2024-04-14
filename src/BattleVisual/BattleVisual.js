@@ -43,7 +43,7 @@ function addShipListeners(shipEl) {
   })
 }
 
-let nextId = 1
+let nextId = 0
 
 const onAddShipTemplate = {
   left(evt) {
@@ -63,6 +63,8 @@ const onAddShipTemplate = {
     shipT.querySelector('.id').innerText = nextId
     nextId++
 
+    shipT.querySelector('.parent').setAttribute('parent', shipT.id)
+
     shipT.querySelector('.image').innerHTML = `<img src="assets/ships/${size}.png">`
 
     if(size > 0) {
@@ -70,7 +72,7 @@ const onAddShipTemplate = {
       shipT.querySelector('.hp.curr').innerHTML = size
       shipT.querySelector('.hp.max').innerHTML = size
     }
-    
+
     shipT.hidden = false
     addShipListeners(shipT)
     if(!isRight) {
@@ -88,12 +90,15 @@ const onAddShipTemplate = {
 
 // eslint-disable-next-line no-unused-vars
 function addShipToBattle(shipId) {
-  log(shipId)
-  
   const shipT = getEl('n'+shipId).cloneNode(true)
   shipT.id = `n${nextId}`
   shipT.querySelector('.id').innerText = nextId
   nextId++
+
+  const parentId = shipT.querySelector('.parent').getAttribute('parent')
+  log(document.querySelectorAll(`[parent="${parentId}"]`))
+  shipT.querySelector('.serial').innerHTML = document.querySelectorAll(`[parent="${parentId}"]`).length 
+
   addShipListeners(shipT)
   document.querySelector('#battle_field').append(shipT)
 }
