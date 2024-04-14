@@ -17,9 +17,14 @@ function onShipEdit(evt) {
     if(i.innerHTML.includes('+') || i.innerHTML.includes('-')) {
       i.innerHTML = eval('+'+i.innerHTML)
     }
-    if(i.classList.contains('hp') && +i.innerHTML <= 0) {
-      el.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
-        .className += 'cross'
+    if(i.classList.contains('hp', 'curr') ) {
+      if(+i.innerHTML <= 0) {
+        el.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+          .classList.add('cross')
+      } else {
+        el.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+          .classList.remove('cross')
+      }
     }
   }
 
@@ -42,21 +47,23 @@ let nextId = 1
 
 const onAddShipTemplate = {
   left(evt) {
-    onAddShipTemplate.addTemplate(evt)
+    onAddShipTemplate.addTemplateWithSize(evt)
   },
   right(evt) {
-    onAddShipTemplate.addTemplate(evt, true)
+    onAddShipTemplate.addTemplateWithSize(evt, true)
   },
-  addTemplate(evt, isRight) {
-    // const sSize = prompt('Size? 1-6') || 1
-    // log(evt.target.parentNode.querySelector('.ship_field'))
+  addTemplateWithSize(evt, isRight) {
+    const size = prompt('Size? 0-6, 0 is planet')
+    onAddShipTemplate.addTemplate(isRight, size || 3)
+  },
+
+  addTemplate(isRight, size=3) {
     const shipT = getEl('ship_template').cloneNode(true)
     shipT.id = `n${nextId}`
     shipT.querySelector('.id').innerText = nextId
     nextId++
 
-    // shipT.className += ` ship_size_${sSize}`
-    shipT.querySelector('.image').innerHTML = `<img src="assets/ships/3.png">`
+    shipT.querySelector('.image').innerHTML = `<img src="assets/ships/${size}.png">`
     shipT.hidden = false
     addShipListeners(shipT)
     if(!isRight) {
@@ -88,8 +95,8 @@ function main() {
     shipBlock.left.querySelector('button').addEventListener('click', onAddShipTemplate.left)
     shipBlock.right.querySelector('button').addEventListener('click', onAddShipTemplate.right)
 
-    shipBlock.left.querySelector('button').click()
-    shipBlock.right.querySelector('button').click()
+    onAddShipTemplate.addTemplate()
+    onAddShipTemplate.addTemplate(true)
   // getEl('el_select_colony').innerHTML = Object.keys(playersData)
   //   .map (e => `<option value="${e}">${e}`)
   //   .join('\n')
@@ -101,3 +108,8 @@ function main() {
   // }
 }
 main()
+
+window.onbeforeunload = function (_) {
+  if (getEl('battle_field').innerHTML)
+    return true
+}
