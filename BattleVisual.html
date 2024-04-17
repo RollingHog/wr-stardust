@@ -37,10 +37,14 @@
       vertical-align: top;
     }
 
-    .b_add_ship {
+    .ship_block .top_btns {
       position: absolute;
       top: 1px;
-      width: 95%;
+      width: 100%;
+    }
+
+    .ship_block .top_btns button {
+      width: 25%;
     }
 
     .ship_field {
@@ -139,6 +143,10 @@
 </head>
 
 <body>
+  <button id="home_btn" style="position: fixed;top: 8px;right: 8px;" onclick="location.href='index.html'">HOME</button>
+
+  <!-- ship_template -->
+
   <div class="ship_wrap" id="ship_template" hidden>
     <table class="ship">
       <tr>
@@ -187,26 +195,36 @@
         <td colspan="3">
           <table style="width: 100%;">
             <tr>
-              <td class="param red">1</td>
-              <td class="param green">1</td>
-              <td class="param blue">1</td>
+              <td class="param red attack">1</td>
+              <td class="param green defence">1</td>
+              <td class="param blue speed">1</td>
             </tr>
           </table>
         </td>
     </table>
   </div>
 
+  
+
   <table id="t_wrap">
     <tr id="tr_field">
       <td class="ship_block">
-        <button class="b_add_ship">+</button>
+          <div class="top_btns"><button class="b_add_ship">+</button>
+            <button class="b_attack">АТК</button>
+            <button class="b_defend">ЗАЩ</button>
+          </div>
         <div class="ship_field"></div>
       </td>
-      <td style="border: 1px solid black;" class="space_bg">
+      <td id="battle_field_wrap" style="border: 1px solid black;" class="space_bg">
+        <!-- battle_field -->
         <div id="battle_field"></div>
       </td>
       <td class="ship_block">
-        <button class="b_add_ship">+</button>
+        <div class="top_btns">
+          <button class="b_add_ship">+</button>
+          <button class="b_attack">АТК</button>
+          <button class="b_defend">ЗАЩ</button>
+        </div>
         <div class="ship_field"></div>
       </td>
     </tr>

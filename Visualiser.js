@@ -1372,6 +1372,20 @@ const Analysis = {
       )
     },
 
+    технологии_дающие_материалы() {
+      const res = Object.values(inverted.alltech)
+        .filter(e => e.effect.some(eff => KEYWORDS.MATERIALS.includes(eff[0])))
+        .map(({ lvl, name, effect }) => ([name, {
+          lvl, effect:
+            effect
+              .filter(eff => KEYWORDS.MATERIALS.includes(eff[0]))
+              .map(e => e[0])
+              .flat()
+              .join(', ')
+        }]))
+      Analysis.reportTable(Object.fromEntries(res))
+    },
+
     планетарная_хреновость() {
       const a = []
       for (let i in window[VARS.PLAYERS_DATA_KEY]) {
