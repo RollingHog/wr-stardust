@@ -441,13 +441,20 @@ const StarSystemGenerator = {
       //   .replace(/\([^)]+\)/g,'')
       //   .trim()
       //   .replace(/ /g, '_')
-      let buildSlots = k.satellites
+      let alienity = 1
       if(!k.capital) {
-        if (k.type === E.type.terrestrial) {
-          buildSlots = E.size2num[k.size]
+        if(size <= 2) {
+          alienity += 1
         }
-        else if(k.type === E.type.asteroid) {
-          buildSlots = 1
+
+        if([1,11].includes(i)) {
+          alienity += 2
+        } else if([2,3,9,10,4,8].includes(i)) {
+          alienity += 1
+        }
+
+        if(k.type == E.type.giant) {
+          alienity += 2
         }
       }
       el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}<br>
@@ -456,7 +463,7 @@ const StarSystemGenerator = {
         title="${k.type} ${k.size}(${E.size2num[k.size]}) ${k.giantType ? k.giantType : ''}"
       ><br>
       Size ${k.type === E.type.asteroid ? 1 : E.size2num[k.size]}
-      <br>Slots ${buildSlots}
+      <br>${!k.capital ? `Al-ty ${alienity}` : 'Capital'}
       <br>${k.satellites > 0 
         ? k.satellites < 4 
           ? '&#9790;'.repeat(k.satellites) 
@@ -484,7 +491,7 @@ const StarSystemGenerator = {
     log('loading from hash...')
     const ddata = StarSystemGenerator.decompress(location.hash)
     const userPlanet = ddata.system.filter(e => e.capital)[0]
-    log(ddata.density)
+    log('density', ddata.density)
     getEl('el_sp_location').value = ddata.system.indexOf(userPlanet)
     getEl('el_sp_size').value = userPlanet.size
     getEl('el_density').value = ddata.density

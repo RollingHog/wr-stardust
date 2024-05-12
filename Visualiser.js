@@ -715,6 +715,10 @@ const Analysis = {
                 teff += +k[1]*ind/1.5
               }
             }
+            else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {
+              // TODO do better later
+              teff += +k[1]*0.6
+            }
             // eslint-disable-next-line no-empty
             else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
             // hacky but at least somehow checks efficency
