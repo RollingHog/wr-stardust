@@ -53,7 +53,8 @@ const onAddShipTemplate = {
     onAddShipTemplate.addTemplateWithSize(evt, true)
   },
   addTemplateWithSize(evt, isRight) {
-    const size = prompt('Size? 0-6, 0 is planet')
+    const size = prompt(`Size? 0-6, 0 is planet; "-" prefix is ground unit, "_" is building, "=" is 'orbital'\n'+' is 'robots', '%' is 'giger'
+    `)
     onAddShipTemplate.addTemplate(isRight, size || 3)
   },
 
@@ -67,7 +68,7 @@ const onAddShipTemplate = {
     tshipEl.querySelector('.parent').setAttribute('parent', tshipEl.id)
 
     if(size != 0) {
-      tshipEl.querySelector('.image').innerHTML = `<img src="assets/ships/${size}.png">`
+      tshipEl.querySelector('.image').innerHTML = `<img title='${size}' src="assets/ships/${size}.png">`
     } else {
       // planet
       tshipEl.querySelector('.image').innerHTML = `<img src="assets/planets/terrestrial.png">`
@@ -79,9 +80,9 @@ const onAddShipTemplate = {
       // TODO add to battle and remove template
     }
 
-    if(size > 0) {
+    if(size !== 0) {
       // its not a planet
-      tshipEl.querySelector('.hp.max').innerHTML = size*2
+      tshipEl.querySelector('.hp.max').innerHTML = (Math.abs(parseInt(size)) || 1) * 2
     }
     tshipEl.querySelector('.hp.curr').innerHTML = tshipEl.querySelector('.hp.max').innerHTML
 
