@@ -974,6 +974,7 @@ const Analysis = {
     const sumMisery = {
       alien: 0,
       unfamiliar: 0,
+      weather: 0,
       actionsList: [],
     }
     for(let i in miseryTable) {
@@ -1009,6 +1010,7 @@ const Analysis = {
       sumMisery.unfamiliar = sumMisery.unfamiliar % (unfamTreshold)
     }
     sumMisery.actionsList = sumMisery.actionsList.join('; ')
+    sumMisery.weather = Math.ceil(sumMisery.alien / 2) + (sumMisery.unfamiliar > 0 ? 1 : 0)
     return sumMisery
   },
 
@@ -2503,7 +2505,7 @@ const playerPost = {
 
         const sum = +e.children[pos.wins].innerText 
           + +e.children[pos.critwins].innerText * 2 
-          // - +e.children[pos.critfails].innerText
+          - +e.children[pos.critfails].innerText
 
         const techText = e.children[pos.name].innerText.trim()
 
