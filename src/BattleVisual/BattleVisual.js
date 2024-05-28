@@ -9,7 +9,7 @@ const shipBlock = {
   right: getEl('tr_field').children[2],
 }
 
-const SHIP_FIELD = 'ship_field'
+const UNIT_FIELD = 'unit_field'
 
 function onShipEdit(evt) {
   const el = evt.target
@@ -55,10 +55,11 @@ const onAddShipTemplate = {
   addTemplateWithSize(evt, isRight) {
     const size = prompt(`Size? 0-6, 0 is planet; "-" prefix is ground unit, "_" is building, "=" is 'orbital'\n'+' is 'robots', '%' is 'giger'
     `)
-    onAddShipTemplate.addTemplate(isRight, size || 3)
+    onAddShipTemplate.addTemplate(isRight, {size: size || 3})
   },
 
-  addTemplate(isRight, size=3) {
+  addTemplate(isRight, templateData = {size: 3}) {
+    const size = templateData.size
     /** @type {HTMLElement} */
     const tshipEl = getEl('ship_template').cloneNode(true)
     tshipEl.id = `n${nextId}`
@@ -86,42 +87,65 @@ const onAddShipTemplate = {
     }
     tshipEl.querySelector('.hp.curr').innerHTML = tshipEl.querySelector('.hp.max').innerHTML
 
+    if(templateData) {
+      for(let field in templateData) {
+        if(tshipEl.querySelector(`.${field}`)) {
+          tshipEl.querySelector(`.${field}`).innerText = templateData[field]
+        }
+      }
+      tshipEl.querySelector('.parent').setAttribute('parent', templateData.parent)
+    }
+
     tshipEl.hidden = false
-    tshipEl.querySelector('.image').addEventListener('click', () => addShipToBattle(tshipEl.id))
+    tshipEl.querySelector('.image').addEventListener('click', () => addUnitToBattle(tshipEl.id))
     addShipListeners(tshipEl)
     if(!isRight) {
       tshipEl.querySelector('.side').innerText = 'left'
-      tshipEl.querySelector('.ship').className += ' side_blue'
-      shipBlock.left.querySelector('.'+SHIP_FIELD).appendChild(tshipEl)
+      tshipEl.querySelector('.ship').className += ' side_left'
+      shipBlock.left.querySelector('.'+UNIT_FIELD).appendChild(tshipEl)
     } else {
       tshipEl.querySelector('.side').innerText = 'right'
-      tshipEl.querySelector('.ship').className += ' side_orange'
+      tshipEl.querySelector('.ship').className += ' side_right'
       tshipEl.querySelector('.image').className += ' mirror_vert'
-      shipBlock.right.querySelector('.'+SHIP_FIELD).appendChild(tshipEl)
+      shipBlock.right.querySelector('.'+UNIT_FIELD).appendChild(tshipEl)
     }
   }
 }
 
 // eslint-disable-next-line no-unused-vars
-function addShipToBattle(shipId) {
-  const shipT = (getEl('n'+shipId) || getEl(shipId)).cloneNode(true)
-  shipT.id = `n${nextId}`
-  shipT.querySelector('.id').innerText = nextId
+function addUnitToBattle(templateId = 0, unitData = {}) {
+  const shipWrapT = (getEl('n'+templateId) || getEl(templateId)).cloneNode(true)
+  shipWrapT.id = `n${nextId}`
+  shipWrapT.querySelector('.id').innerText = nextId
   nextId++
 
-  const parentId = shipT.querySelector('.parent').getAttribute('parent')
-  // log(document.querySelectorAll(`[parent="${parentId}"]`))
-  shipT.querySelector('.serial').innerHTML = document.querySelectorAll(`[parent="${parentId}"]`).length 
+  const parentId = shipWrapT.querySelector('.parent').getAttribute('parent')
+  shipWrapT.querySelector('.serial').innerHTML = document.querySelectorAll(`[parent="${parentId}"]`).length
 
-  addShipListeners(shipT)
-  document.querySelector('#battle_field').append(shipT)
+  if(unitData) {
+    for(let field in unitData) {
+      if(shipWrapT.querySelector(`.${field}`)) {
+        shipWrapT.querySelector(`.${field}`).innerText = unitData[field]
+      }
+    }
+
+    shipWrapT.querySelector('.ship').className = `ship side_${unitData.side}`
+    if(unitData.side === 'right') shipWrapT.querySelector('.image').className += ' mirror_vert'
+    shipWrapT.querySelector('.image').innerHTML = `<img title='${unitData.size}' src="assets/ships/${unitData.size}.png">`
+    shipWrapT.querySelector('.parent').setAttribute('parent', unitData.parent)
+    shipWrapT.style.left = unitData.left
+    shipWrapT.style.top = unitData.top
+  }
+
+  addShipListeners(shipWrapT)
+  document.querySelector('#battle_field').append(shipWrapT)
 }
 
 const formRolls = {
   getQuery(isRight) {
     return isRight 
-      ? '#battle_field .ship.side_orange'
-      : '#battle_field .ship.side_blue'
+      ? '#battle_field .ship.side_right'
+      : '#battle_field .ship.side_left'
   },
 
   attack(isRight = false) {
@@ -154,6 +178,67 @@ const formRolls = {
       log('DEF rolls copied', res)
     }
   },
+}
+
+const dumper = {
+  fieldsToSave: [
+    'id',
+    'parent',
+    'side',
+    'name',
+    'hp.curr',
+    'hp.max',
+    'shield.curr',
+    'shield.max',
+    'param.attack',
+    'param.defence',
+    'param.speed',
+  ],
+
+  save() {
+    const unitEls = Array.from(document.querySelectorAll('.ship'))
+
+    var unitData = unitEls.map( el => {
+      const res = {
+        top: el.parentNode.style.top,
+        left: el.parentNode.style.left,
+        size: el.querySelector('.image img')?.title
+      }
+      for(let field of this.fieldsToSave) {
+        res[field] = el.querySelector(`.${field}`).innerText
+      }
+      return res 
+    }).filter(obj => obj.id)
+    
+    console.log(JSON.stringify(unitData))
+  },
+
+  load() {
+    const jsonStr = prompt('Paste JSON here')
+    let data
+    try {
+      data = JSON.parse(jsonStr)
+    } catch(err) {
+      console.log('not a valid JSON', err)
+      return
+    }
+
+    const templates = data.filter( obj => !obj.top)
+    const units = data.filter( obj => obj.top)
+
+    nextId = 0
+    shipBlock.left.querySelector('.'+UNIT_FIELD).innerHTML = ''
+    shipBlock.right.querySelector('.'+UNIT_FIELD).innerHTML = ''
+    for(let obj of templates) {
+      onAddShipTemplate.addTemplate(obj.side === 'right', obj)
+    }
+
+    for(let obj of units) {
+      addUnitToBattle(0, obj)
+    }
+    log(units)
+
+  }
 }
 
 function addTopBtnsListeners() {

@@ -47,12 +47,12 @@
       width: 25%;
     }
 
-    .ship_field {
+    .unit_field {
       padding-top: 24px;
       overflow-y: auto;
     }
 
-    .ship_field .ship .image  {
+    .unit_field .ship .image  {
       cursor: auto;
     }
 
@@ -130,10 +130,10 @@
       transform: scaleX(-1);
     }
 
-    .side_blue {
+    .side_left {
       background-color: slateblue;
     }
-    .side_orange {
+    .side_right {
       background-color: orange;
     }
 
@@ -158,13 +158,13 @@
         <td colspan="3" class="unset_color">
           N <span class="serial" title="Номер в серии">0</span>
           <span class="id" hidden></span>
-          <span class="parent" parent="" hidden></span>
+          <span class="parent" hidden></span>
           <span hidden class="side"></span>
           &nbsp;
           <span style="float: right;" title="remove"        class="no_select b_remove"
           onclick="this.parentNode.parentNode.parentNode.parentNode.remove()">X</span>
           <span style="float: right;" title="add to battle" class="no_select b_add_to_battle"
-          onclick="addShipToBattle(this.parentNode.querySelector('.id').innerText)">+&nbsp;&nbsp;</span>
+          onclick="addUnitToBattle(this.parentNode.querySelector('.id').innerText)">+&nbsp;&nbsp;</span>
           <br>
           <div class="name can_edit">Name</div>
         </td>
@@ -218,7 +218,7 @@
             <button class="b_attack">АТК</button>
             <button class="b_defend">ЗАЩ</button>
           </div>
-        <div class="ship_field"></div>
+        <div class="unit_field"></div>
       </td>
       <td id="battle_field_wrap" style="border: 1px solid black;" class="mixed_space_and_ground_bg">
         <!-- battle_field -->
@@ -230,7 +230,7 @@
           <button class="b_attack">АТК</button>
           <button class="b_defend">ЗАЩ</button>
         </div>
-        <div class="ship_field"></div>
+        <div class="unit_field"></div>
       </td>
     </tr>
   </table>
