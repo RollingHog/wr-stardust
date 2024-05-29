@@ -2325,6 +2325,7 @@ const playerPost = {
     let p = prompt('player post here')
     if(!p) return
     playerPost.parse(p)
+    HTMLUtils.openModal('selected_tech')
   },
   close() {
     HTMLUtils.closeModal('selected_tech')

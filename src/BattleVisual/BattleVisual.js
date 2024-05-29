@@ -210,11 +210,13 @@ const dumper = {
       return res 
     }).filter(obj => obj.id)
     
-    console.log(JSON.stringify(unitData))
+    navigator.clipboard.writeText(JSON.stringify(unitData))
+    alert('copied to clipboard')
   },
 
   load() {
     const jsonStr = prompt('Paste JSON here')
+    if(!jsonStr) return
     let data
     try {
       data = JSON.parse(jsonStr)
@@ -236,8 +238,6 @@ const dumper = {
     for(let obj of units) {
       addUnitToBattle(0, obj)
     }
-    log(units)
-
   }
 }
 
@@ -265,6 +265,6 @@ function main() {
 main()
 
 window.onbeforeunload = function (_) {
-  if (getEl('battle_field').innerHTML)
+  if (getEl('battle_field').innerHTML.trim())
     return true
 }
