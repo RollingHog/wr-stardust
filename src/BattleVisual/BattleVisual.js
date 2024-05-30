@@ -62,6 +62,15 @@ const onAddShipTemplate = {
     const size = templateData.size
     /** @type {HTMLElement} */
     const tshipEl = getEl('ship_template').cloneNode(true)
+
+    if(templateData) {
+      for(let field in templateData) {
+        if(tshipEl.querySelector(`.${field}`)) {
+          tshipEl.querySelector(`.${field}`).innerText = templateData[field]
+        }
+      }
+    }
+
     tshipEl.id = `n${nextId}`
     tshipEl.querySelector('.id').innerText = nextId
     nextId++
@@ -69,7 +78,7 @@ const onAddShipTemplate = {
     tshipEl.querySelector('.parent').setAttribute('parent', tshipEl.id)
 
     if(size != 0) {
-      tshipEl.querySelector('.image').innerHTML = `<img title='${size}' src="assets/ships/${size}.png">`
+      tshipEl.querySelector('.image').innerHTML = `<img title='${size}' src="assets/units/${size}.png">`
     } else {
       // planet
       tshipEl.querySelector('.image').innerHTML = `<img src="assets/planets/terrestrial.png">`
@@ -86,15 +95,6 @@ const onAddShipTemplate = {
       tshipEl.querySelector('.hp.max').innerHTML = (Math.abs(parseInt(size)) || 1) * 2
     }
     tshipEl.querySelector('.hp.curr').innerHTML = tshipEl.querySelector('.hp.max').innerHTML
-
-    if(templateData) {
-      for(let field in templateData) {
-        if(tshipEl.querySelector(`.${field}`)) {
-          tshipEl.querySelector(`.${field}`).innerText = templateData[field]
-        }
-      }
-      tshipEl.querySelector('.parent').setAttribute('parent', templateData.parent)
-    }
 
     tshipEl.hidden = false
     tshipEl.querySelector('.image').addEventListener('click', () => addUnitToBattle(tshipEl.id))
@@ -122,7 +122,7 @@ function addUnitToBattle(templateId = 0, unitData = {}) {
   const parentId = shipWrapT.querySelector('.parent').getAttribute('parent')
   shipWrapT.querySelector('.serial').innerHTML = document.querySelectorAll(`[parent="${parentId}"]`).length
 
-  if(unitData) {
+  if(Object.keys(unitData).length > 0) {
     for(let field in unitData) {
       if(shipWrapT.querySelector(`.${field}`)) {
         shipWrapT.querySelector(`.${field}`).innerText = unitData[field]
@@ -131,7 +131,7 @@ function addUnitToBattle(templateId = 0, unitData = {}) {
 
     shipWrapT.querySelector('.ship').className = `ship side_${unitData.side}`
     if(unitData.side === 'right') shipWrapT.querySelector('.image').className += ' mirror_vert'
-    shipWrapT.querySelector('.image').innerHTML = `<img title='${unitData.size}' src="assets/ships/${unitData.size}.png">`
+    shipWrapT.querySelector('.image').innerHTML = `<img title='${unitData.size}' src="assets/units/${unitData.size}.png">`
     shipWrapT.querySelector('.parent').setAttribute('parent', unitData.parent)
     shipWrapT.style.left = unitData.left
     shipWrapT.style.top = unitData.top

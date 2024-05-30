@@ -296,7 +296,7 @@ async function Init() {
     parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
     
     console.timeEnd('player data ')
-    log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
+    // log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
 
     User.formUsersCheckboxes()
 
@@ -604,8 +604,9 @@ const Analysis = {
     
     setTimeout( _ => {
       // all output to clear timestamps
-      console.log(listParam('costClear'))
-      console.log(listAllWithoutMilitary())
+      // TODO disabled
+      // console.log(listParam('costClear'))
+      // console.log(listAllWithoutMilitary())
       Analysis.totalTechCount()
     }, 20)
 
