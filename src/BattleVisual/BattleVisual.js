@@ -149,6 +149,14 @@ const formRolls = {
       : '#battle_field .ship.side_left'
   },
 
+  all(isRight) {
+    const atk = formRolls.attack(isRight)
+    const def = formRolls.defence(isRight)
+    const res = atk + '\n' + def
+    navigator.clipboard.writeText(res)
+    log('all copied')
+  },
+
   attack(isRight = false) {
     const shipQuery = formRolls.getQuery(isRight)
     let res = ''
@@ -160,7 +168,9 @@ const formRolls = {
     if(res.length) {
       navigator.clipboard.writeText(res)
       log('ATK rolls copied', res)
+      return res
     }
+
   },
   
   defence(isRight = false) {
@@ -177,6 +187,7 @@ const formRolls = {
     if(res.length) {
       navigator.clipboard.writeText(res)
       log('DEF rolls copied', res)
+      return res
     }
   },
 }
@@ -247,11 +258,11 @@ function addTopBtnsListeners() {
   shipBlock.left.querySelector('button.b_add_ship').addEventListener('click', onAddShipTemplate.left)
   shipBlock.right.querySelector('button.b_add_ship').addEventListener('click', onAddShipTemplate.right)
 
-  shipBlock.left.querySelector('button.b_attack').addEventListener('click', ()=>formRolls.attack(false))
-  shipBlock.right.querySelector('button.b_attack').addEventListener('click', ()=>formRolls.attack(true))
+  shipBlock.left.querySelector('button.b_attack').addEventListener('click', ()=>formRolls.all(false))
+  shipBlock.right.querySelector('button.b_attack').addEventListener('click', ()=>formRolls.all(true))
 
-  shipBlock.left.querySelector('button.b_defend').addEventListener('click', ()=>formRolls.attack(false))
-  shipBlock.right.querySelector('button.b_defend').addEventListener('click', ()=>formRolls.defence(true))
+  // shipBlock.left.querySelector('button.b_defend').addEventListener('click', ()=>formRolls.defence(false))
+  // shipBlock.right.querySelector('button.b_defend').addEventListener('click', ()=>formRolls.defence(true))
 
 }
 
