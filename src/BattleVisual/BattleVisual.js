@@ -179,7 +179,6 @@ const formRolls = {
     for(let ship of document.querySelectorAll(shipQuery)) {
       const shipName = ship.querySelector('.name').innerHTML 
         + ' N' + ship.querySelector('.serial').innerHTML
-      const shieldNum = +ship.querySelector('.shield.curr').innerHTML
       res += `${shipName} Защита ##${ship.querySelector('.param.defence').innerHTML}d10##\n`
         // TODO уклонение
         // + (shieldNum>0 ? `${shipName} Щит ##${shieldNum}d10##\n` : '')
