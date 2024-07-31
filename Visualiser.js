@@ -693,7 +693,7 @@ const Analysis = {
           // else if(['Технология', "Слоты"].includes(k[0])) {}
           else if(
             k[1] == 'суперпроект'
-            || j.lvl >= techData.MAX_TECH_LVL-1
+            // || j.lvl >= techData.MAX_TECH_LVL-1
           ) {
             tcost = 0
             break
@@ -722,8 +722,8 @@ const Analysis = {
           continue
         }
         
-        //its regulated manually
-        if(!['octagon'].includes(j.type)) {
+        //hulls regulated manually
+        if(!['octagon'].includes(j.type) && j.effect[0][1] !== 'наземная база') {
           for(let k of j.effect) {
             if(k[0]==KEYWORDS.ANY_PARAM_KEYWORD) {
               if(mult <= 2) teff += +k[1]
@@ -734,12 +734,26 @@ const Analysis = {
               teff += +k[1]*2
             } 
             else if(
-              KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])
+              KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0].toLowerCase())
               || KEYWORDS.TECH_EFFECTS.includes(k[0])
               || k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
-            ) teff += +k[1]/2
-            // eslint-disable-next-line no-empty
-            else if(KEYWORDS.MATERIALS.includes(k[0])) {}
+            ) {
+              teff += +k[1]/2
+            } else if(
+              k[0].startsWith(KEYWORDS.CREATION_KEYWORD) 
+              || k[0].startsWith(KEYWORDS.UNIT_POINTS_KEYWORD)
+              || k[0].startsWith('Ремонт')
+            ) {
+              teff += +k[1]/1.6
+            }
+            else if(KEYWORDS.MATERIALS.includes(k[0])) {
+              const ind = KEYWORDS.MATERIALS.indexOf(k[0])
+              if(ind < 6) {
+                teff += +k[1]*ind/2.5
+              } else {
+                teff += +k[1]*ind/1.5
+              }
+            }
             // eslint-disable-next-line no-empty
             else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
             // hacky but at least somehow checks efficency
@@ -751,12 +765,21 @@ const Analysis = {
             else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]*1.3
             else if(KEYWORDS.DAMAGE_TYPES.includes(k[1])) teff += 0.5
             else if(k[0] == 'Временно') {
-              // k[0] == 'особое' || 
               teff = 0
               break
             }
-            else {
-              // log('what is this?', j.name, k)
+            else if(k[0] == KEYWORDS.ITS_SPECIAL) {
+              continue
+            }
+            else if(k[0] == KEYWORDS.UNIT_SLOTS_KEYWORD 
+              || k[0] == KEYWORDS.UNIT_TYPES_KEYWORD
+              || k[0].startsWith('Великий человек')
+              || KEYWORDS.MILITARY_PARAMS.some(e => k[0].startsWith(e))
+              || KEYWORDS.MILITARY_PARAMS_ADDITIONAL.some(e => k[0].startsWith(e))
+              ) {
+              continue
+            } else {
+              log('unrecognized effect', j.name, k)
               // fail = true
               // break
             }
@@ -2640,9 +2663,13 @@ var KEYWORDS = {
     "волнения",
     "непривычная среда",
     "чуждая среда",
-    'Защита колонии',
-    'Щит планеты',
-    'Снабж. отряды',
+    'защита колонии',
+    'щит планеты',
+    'снабж. отряды',
+    //особые
+    "Образцы",
+    "Экзоты",
+    "Аномалия",
   ],
   SPECIAL_TECH_COST: [
     "затраты",
@@ -2672,10 +2699,6 @@ var KEYWORDS = {
     // 4 ряд
     "Нейтроний",
     "Гиперплазма",
-    //особые
-    "Образцы",
-    "Экзоты",
-    "Аномалия"
   ],
   RESEARCH_KEYWORD: 'Исследования',
   TECH_EFFECTS: [
@@ -2713,7 +2736,6 @@ var KEYWORDS = {
   TECH_COST_MODS: [
     'базовое',
     'суперпроект',
-    'астропроект',
     'почва',
     'первый контакт',
     'черная дыра',
@@ -2754,6 +2776,7 @@ var KEYWORDS = {
   UNIT_SLOTS_KEYWORD: 'Слоты',
   UNIT_TYPES_KEYWORD: 'Тип юнита',
   CREATION_KEYWORD: 'Создание',
+  UNIT_POINTS_KEYWORD: 'Очки распределения',
   UNIT_TYPES: Object.keys(VARS.hulls),
   DAMAGE_TYPES: [
     "био",
@@ -2815,7 +2838,7 @@ const parseNode = {
         .replace(/^(\d+) слот(а|ов)$/i, 'Слоты:$1')
         .replace(/^тех. (.+)$/i, 'Технология:$1')
         .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
-        .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|')}) ?\\((.+)\\)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((\\d+)\\)$`), '$1:$2')
         .split(':')
       )
@@ -2838,6 +2861,7 @@ const parseNode = {
         .replace(/:/g, VARS.DISABLE_PARSE_IMMUNITY ? '' : KEYWORDS.ITS_SPECIAL + ':')
         .replace(/ {2,}/g, ' ')
         .replace(/^(Общество|Производство|Наука) ([+-]\d+)$/, '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
         // временный бонус
         .replace(/^на (\d+) хода?/i, 'Временно:$1')
