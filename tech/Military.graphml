@@ -1700,7 +1700,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
 Сложность: 1
 Эффект: +1 великий человек
 военной специализации, немедленно<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="parallelogram"/>
+          <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -2851,7 +2851,6 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
       </data>
     </edge>
     <edge id="e112" source="n87" target="n60">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2862,7 +2861,6 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
       </data>
     </edge>
     <edge id="e113" source="n7" target="n130">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
