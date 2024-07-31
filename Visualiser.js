@@ -438,18 +438,18 @@ function saveSVG(filename) {
 }
 
 const KEYWORDS = {
-  DAMAGE_TYPES: [],
+  DAMAGE_TYPES: [
+    "био",
+    "биологическое",
+    "рад",
+    "нано",
+  ],
   UNIT_PROPS: [
     "ДУ",
     "роботы",
     "нет FTL",
   ],
   MODULE_PROPS: [
-    "био",
-    "биологическое",
-    "рад",
-    "нано",
-    // damage types end
     "ЭМИ",
     "бронебойное",
     //!!!
