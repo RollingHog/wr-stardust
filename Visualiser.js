@@ -843,8 +843,6 @@ const Analysis = {
         .flat()
         .map(name => name.replace(/ ?\([^)]+\)/, ''))
         .filter(name => !name.startsWith(':'))
-        // FIXME remove
-      // log(username, objNames.sort().map(name =>[name, TechUtils.byName(name)]))
       for(let name of objNames) {
         const tek = TechUtils.byName(name)
         if(!tek) {
@@ -2011,7 +2009,8 @@ const parseDoc = {
 
       if(treeRuName !== 'Уникальные') {
         res = res.filter( thingName => {
-          const isKnown = thingName.replace(/\([^)]+\)/, '').trim() in inverted.alltech
+          const name = thingName.replace(/\([^)]+\)/, '').trim()
+          const isKnown = name in inverted.alltech || name in VARS.defaultProjectsList || name.startsWith(':')
           if(!isKnown) {
             warn('unknown thing', playerName, thingName)
           }
@@ -2754,7 +2753,7 @@ const parseNode = {
         .split(':')
       )
 
-    if (effect.some(e => e.length < 2)) {
+    if (effect.some(e => e[0] && e.length < 2)) {
       // it is non-split => not recognized string
       techData.badTechCount++
       warn(treeName, name, effect.filter(e => e.length < 2)[0], effectRaw)
