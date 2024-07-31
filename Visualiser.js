@@ -536,7 +536,7 @@ const Analysis = {
         
         for(let k of j.cost) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
-          else if(k[0] == 'Любой') tcost += +k[1]
+          else if(k[0] == KEYWORDS.ANY_PARAM_KEYWORD) tcost += +k[1]
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
           else if(k[0]=='Этапы') tcost *= 2
@@ -866,7 +866,7 @@ const Analysis = {
         .filter(e => e.lvl <= TL )
         .map( e => e.name )
 
-      const result = Object.entries(User.countSummaryCostAndEffect(techs))
+      const result = Object.entries(User.countSummaryCostAndEffect(techs).effect)
         .filter( e => [].concat(
           KEYWORDS.COLONY_PARAMS,
           // KEYWORDS.MATERIALS,
@@ -1156,42 +1156,43 @@ const User = {
     let data = techList
       .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
-      .map( e => inverted.alltech[e] 
-        ? inverted.alltech[e].effect
-        : null
-      )
-      .filter( e => e )
-    
-    data = [].concat.apply([], data)
+      .filter( e => inverted.alltech[e])
+
+    let effectsData = [].concat.apply([], data.map( e => inverted.alltech[e].effect))
+    let costData = [].concat.apply([], data.map( e => inverted.alltech[e].cost))
 
     if(userDataObj) {
-      data = data.concat(userDataObj.startingFeature
+      effectsData = effectsData.concat(userDataObj.startingFeature
         .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], null] : [i[0], +i[1]])
       )
-      if(userDataObj.uniqueResources) data = data.concat(userDataObj.uniqueResources
+      if(userDataObj.uniqueResources) effectsData = effectsData.concat(userDataObj.uniqueResources
         .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], null] : [i[0], +i[1]])
       )
-      if(userDataObj.planetParams) data = data.concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
-      if(userDataObj.greatPeople) data = data.concat(userDataObj.greatPeople
+      if(userDataObj.planetParams) effectsData = effectsData.concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
+      if(userDataObj.greatPeople) effectsData = effectsData.concat(userDataObj.greatPeople
         .map( i => i.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
         .flat()
       )
     }
 
-    const result = {}
-    for(let i of data) {
+    const effect = {}
+    for(let i of effectsData) {
       if(i[0] === KEYWORDS.ITS_SPECIAL) {
         i[0] = ':' + i[1]
         i[1] = null
       }
 
-      if(!result[i[0]]) 
-        result[i[0]] = +i[1]
+      if(!effect[i[0]]) 
+        effect[i[0]] = +i[1]
       else
-        result[i[0]] += +i[1]
+        effect[i[0]] += +i[1]
     }
 
-    return result
+    const cost = costData
+      .filter( e => !KEYWORDS.COLONY_PARAMS.includes(e[0]))
+      .filter( e => KEYWORDS.ANY_PARAM_KEYWORD !== e[0])
+
+    return { cost, effect }
   },
 
   /**
@@ -1207,14 +1208,13 @@ const User = {
 
     let data = 
       // local: 
+      // global: 
       this.countSummaryCostAndEffect([].concat(
         userDataObj.buildings,
         userDataObj.orbital,
         Object.values(userDataObj.localProjs).flat(),
-      // )),
-      // global: User.countSummaryCostAndEffect([].concat(
         Object.values(userDataObj.techTable).flat(),
-      ), userDataObj)
+      ), userDataObj).effect
     // }
 
     for(let i in startParams) {
@@ -1234,7 +1234,7 @@ const User = {
    * @param {[string, any][]} effectsListArr 
    * @returns 
    */
-  createUserTechEffectsTable(effectsListArr) {
+  createUserTechEffectsTable(effectsListArr, costListArr = null) {
     effectsListArr = effectsListArr
       .filter( e => {
         return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
@@ -1256,8 +1256,9 @@ const User = {
       }) 
     // t = [].concat(t.main, t.additional)
 
-    return ( 
-      TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
+    return (
+      (costListArr ? TechUtils.createEffectsTable(costListArr, 'COST') : '')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.includes(e[0])), 'Специализированные бонусы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)), 'Исследования')
@@ -1271,6 +1272,7 @@ const User = {
         && !KEYWORDS.MATERIALS.includes(e[0])
         && !KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])
         && !e[0].startsWith(KEYWORDS.CREATION_KEYWORD)
+        && !KEYWORDS.MILITARY_PARAMS.includes(e[0])
       ), 'Неотфильтрованные техи')
     )
   },
@@ -1799,7 +1801,7 @@ const playerPost = {
     const result = User.countSummaryCostAndEffect(techList)
 
     getEl('el_tech_result_list').innerHTML = 
-      User.createUserTechEffectsTable(Object.entries(result))
+      User.createUserTechEffectsTable(Object.entries(result.effect), result.cost)
 
     const byType = {
       rectangle: [],
@@ -1877,6 +1879,7 @@ var KEYWORDS = {
     , 'Общество'
     , 'Свободный'
   ],
+  ANY_PARAM_KEYWORD: 'Любой',
   ADDITIONAL_COLONY_PARAMS:[
     "осуждение",
     "волнения",
@@ -2367,7 +2370,7 @@ const UnitCreator = {
   createUnit(hullName, modulesList = [], startParams = []) {
     const hullEffect = parseNode.effects(VARS.hulls[hullName])
     
-    const sum = User.countSummaryCostAndEffect(modulesList, { startingFeature: hullEffect })
+    const sum = User.countSummaryCostAndEffect(modulesList, { startingFeature: hullEffect }).effect
     KEYWORDS.MILITARY_PARAMS.forEach(e => !sum[e] ? sum[e] = 0 : null )
     return sum
   },
