@@ -711,7 +711,7 @@ const Analysis = {
       ],
       'Тип планеты': [
         [1,2], m.a1,  
-        [3], m.u2,
+        [3], m.u3,
         [5], m.u1,
         [6], m.u2,
       ],
@@ -719,8 +719,8 @@ const Analysis = {
     const unfamTreshold = 4
 
     const sumMisery = {
-      unfamiliar: 0,
       alien: 0,
+      unfamiliar: 0,
       actionsList: [],
     }
     for(let i in miseryTable) {
@@ -755,16 +755,8 @@ const Analysis = {
       sumMisery.alien += Math.floor(sumMisery.unfamiliar/unfamTreshold)
       sumMisery.unfamiliar = sumMisery.unfamiliar % (unfamTreshold)
     }
+    sumMisery.actionsList = sumMisery.actionsList.join('; ')
     return sumMisery
-  },
-
-  // TODO move to Reports or rework
-  allPlayersMisery() {
-    const a = []
-    for(let i in window[VARS.PLAYERS_DATA_KEY]) {
-      a.push([i, this.countPlanetRawMisery(window[VARS.PLAYERS_DATA_KEY][i])])
-    }
-    console.table(Object.fromEntries(a))
   },
 
   filterObjectByDict(obj, dict) {
@@ -1078,6 +1070,14 @@ const Analysis = {
           .map(e => [e.name, e.title])
         )
       )
+    },
+
+    планетарная_хреновость() {
+      const a = []
+      for (let i in window[VARS.PLAYERS_DATA_KEY]) {
+        a.push([i, Analysis.countPlanetRawMisery(window[VARS.PLAYERS_DATA_KEY][i])])
+      }
+      Analysis.reportTable(Object.fromEntries(a))
     },
   }
 }
