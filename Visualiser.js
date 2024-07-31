@@ -1187,7 +1187,7 @@ const playerPost = {
             e.children[1].innerText = inverted.alltech[e.children[0].innerText].cost[0][1]
           }
 
-          if(+e.children[3].innerText + +e.children[4].innerText < +e.children[1].innerText) {
+          if(+e.children[3].innerText + +e.children[4].innerText*2 < +e.children[1].innerText) {
             e.style.backgroundColor='goldenrod'
             return null
           }
