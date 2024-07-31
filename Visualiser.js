@@ -810,7 +810,7 @@ const parseDoc = {
      * @returns {string[]}
      */
     const splitFilter = str =>
-      str.split(',').filter(e => e).map(e => e.trim())
+      str.split(',').map(e => e.trim()).filter(e => e)
     /**
      * there is usually the sixth block, "Specials"
      * @param {HTMLTableElement} el 
