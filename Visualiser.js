@@ -1769,7 +1769,7 @@ const playerPost = {
 
         const sum = +e.children[pos.wins].innerText + +e.children[pos.critwins].innerText * 2
 
-        const techText = e.children[pos.name].innerText
+        const techText = e.children[pos.name].innerText.trim()
 
         if (inverted.alltech[techText]) {
 
