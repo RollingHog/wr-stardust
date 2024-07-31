@@ -69,9 +69,9 @@ const genDict = {
     17: E.size.large,
   },
   //  Modifiers:
-  // NOPE -6 if the orbit is adjacent to a forbidden zone caused by the presence of a companion star; 
-  // -6 if the next orbit outward from the primary star is occupied by a gas giant; 
-  // -3 if the next orbit inward from the primary star is occupied by a gas giant; 
+  // NOPE -6 if the orbit is adjacent to a forbidden zone caused by the presence of a companion star;
+  // -6 if the next orbit outward from the primary star is occupied by a gas giant;
+  // -3 if the next orbit inward from the primary star is occupied by a gas giant;
   // -3 if the orbit is adjacent to either the inner limit radius or the outer limit radius.
   // All of these modifiers are cumulative.
 
@@ -153,6 +153,8 @@ class TSSGPlanet {
   type = E.type.asteroid
   size = E.size.medium
   satellites = 0
+  capital = false
+  user = null
   special = null
 }
 
@@ -182,13 +184,76 @@ const StarSystemGenerator = {
     const d = startingLength - cubes.length
     log('rolles used', `${d/startingLength*100}%/${startingLength} total`)
     console.table(system)
+    const str = this.compress(system, cubes)
+    console.log(this.decompress(str))
     this.draw(getEl('el_canvas'), system)
   },
+
+  /**
+   * @returns {Number[]}
+   */
   extractRolls(raw) {
     return [...raw.matchAll(/\d+d6: \((\d+(?: \+ \d+){0,20})\)/g)]
       .map(e => e[1].split(' + ').map(e => +e))
       .flat()
   },
+
+  /**
+   * @param {TSSGPlanet} system 
+   * @param {Number[]} cubes 
+   * @returns 
+   */
+  compress(system, cubes = []) {
+    return system.map( (e,i) => [
+      '&',
+      i,
+      '=', 
+      e.type.slice(0,1),
+      e.size.slice(0,1),
+      e.satellites.toString(10).padStart(2, '0'),
+      // e.special?.slice(0,1),
+      e.user ? 'u' : '',
+      e.capital ? 'c' : '',
+    ].join('')).join('') + '&rest=' + cubes.join('')
+  },
+
+  /**
+   * @returns {{system: TSSGPlanet[], restCubes: Number[]}}
+   */
+  decompress(query) {
+    let obj = query
+      .split('&')
+      .filter( e => e)
+      .map( e => e.split('='))
+    let restCubes = obj.filter(e => e[0] === 'rest')
+    if(restCubes) restCubes = restCubes[0][1]
+    obj = obj.filter(e => e[0] !== 'rest')
+    
+    let arr = []
+    for(let i of obj) {
+      arr[i[0]] = i[1]
+    }
+
+    for(let i in arr) {
+      if(!arr[i]) continue
+      const d =  {
+        main: arr[i].slice(0,4),
+        optional: arr[i].slice(4)
+      }
+
+      arr[i] = {
+        type:  Object.keys(E.type).filter(e => e.startsWith(d.main.slice(0,1)))[0],
+        size: Object.keys(E.size).filter(e => e.startsWith(d.main.slice(1,2)))[0],
+        satellites: +d.main.slice(2,4),
+        special: '',
+        user: d.optional.indexOf('u') > -1,
+        capital: d.optional.indexOf('c') > -1,
+      }
+    }
+
+    return {system: arr, restCubes}
+  },
+
   generate(randomD6Arr, density, userPlanet) {
     /**
      * @type Array<TSSGPlanet>
@@ -211,7 +276,8 @@ const StarSystemGenerator = {
       return res
     }
 
-    function planet(type, size = null, special = null) {
+    function planet(type, size = null, {special =  null, capital = false, user = null} = {}) {
+      if(capital && !user) user = true
       return { type, size, 
         satellites: getKey(genDict.satelliteList, 
           pop1()
@@ -219,7 +285,9 @@ const StarSystemGenerator = {
           + genDict.satelliteMods.size[size]
           + densityMod
         ),
-        special 
+        special,
+        capital,
+        user
       }
     }
 
@@ -228,7 +296,7 @@ const StarSystemGenerator = {
       return getKey(genDict.giantSize, pop3() + mod + densityMod)
     }
 
-    system[userPlanet.i] = planet(userPlanet.type, userPlanet.size, 'user')
+    system[userPlanet.i] = planet(userPlanet.type, userPlanet.size, { capital: true, user: true})
 
     // first giant
     const firstGiantType = getKey(genDict.firstGiant, pop3('firstGiantType'))
@@ -252,7 +320,7 @@ const StarSystemGenerator = {
       system[firstLocation] = planet(
         E.type.giant, 
         giantSize(firstLocation),
-        firstGiantType
+        // firstGiantType
       )
     }
 
