@@ -430,12 +430,12 @@ function parseShapeNode(filename, i) {
   let effect = effect_unparsed.replace(/^.*(Общество|Производство|Наука) \+(\d+).*/g, '$1:$2').split(':')
 
   if(effect == effect_unparsed)
-    effect = effect_unparsed.replace(/^\s*\+(\d+) свободн(ый|ых) куба?\s*/gi, 'Свободный:$1').split(':')
+    effect = effect_unparsed.replace(/^\s*\+(\d+) свободн(ый|ых) куба?\s*/gi, 'Свободный куб:$1').split(':')
 
   if(effect == effect_unparsed)
     effect = null
 
-  // console.log(name, cost, effect, effect_unparsed)
+  if(!effect) console.log(name, cost, effect, effect_unparsed)
 
   var t = {
     id: i.parentElement.parentElement.id
