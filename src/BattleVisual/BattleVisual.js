@@ -58,65 +58,113 @@ const onAddShipTemplate = {
   },
 
   addTemplate(isRight, size=3) {
-    const shipT = getEl('ship_template').cloneNode(true)
-    shipT.id = `n${nextId}`
-    shipT.querySelector('.id').innerText = nextId
+    /** @type {HTMLElement} */
+    const tshipEl = getEl('ship_template').cloneNode(true)
+    tshipEl.id = `n${nextId}`
+    tshipEl.querySelector('.id').innerText = nextId
     nextId++
 
-    shipT.querySelector('.parent').setAttribute('parent', shipT.id)
+    tshipEl.querySelector('.parent').setAttribute('parent', tshipEl.id)
 
-    shipT.querySelector('.image').innerHTML = `<img src="assets/ships/${size}.png">`
+    tshipEl.querySelector('.image').innerHTML = `<img src="assets/ships/${size}.png">`
 
     if(size > 0) {
       // its not a planet
-      shipT.querySelector('.hp.curr').innerHTML = size
-      shipT.querySelector('.hp.max').innerHTML = size
+      tshipEl.querySelector('.hp.curr').innerHTML = size*2
+      tshipEl.querySelector('.hp.max').innerHTML = size*2
     }
 
-    shipT.hidden = false
-    addShipListeners(shipT)
+    tshipEl.hidden = false
+    tshipEl.querySelector('.image').addEventListener('click', () => addShipToBattle(tshipEl.id))
+    addShipListeners(tshipEl)
     if(!isRight) {
-      shipT.querySelector('.side').innerText = 'left'
-      shipT.querySelector('.ship').className += ' side_blue'
-      shipBlock.left.querySelector('.'+SHIP_FIELD).appendChild(shipT)
+      tshipEl.querySelector('.side').innerText = 'left'
+      tshipEl.querySelector('.ship').className += ' side_blue'
+      shipBlock.left.querySelector('.'+SHIP_FIELD).appendChild(tshipEl)
     } else {
-      shipT.querySelector('.side').innerText = 'right'
-      shipT.querySelector('.ship').className += ' side_orange'
-      shipT.querySelector('.image').className += ' mirror_vert'
-      shipBlock.right.querySelector('.'+SHIP_FIELD).appendChild(shipT)
+      tshipEl.querySelector('.side').innerText = 'right'
+      tshipEl.querySelector('.ship').className += ' side_orange'
+      tshipEl.querySelector('.image').className += ' mirror_vert'
+      shipBlock.right.querySelector('.'+SHIP_FIELD).appendChild(tshipEl)
     }
   }
 }
 
 // eslint-disable-next-line no-unused-vars
 function addShipToBattle(shipId) {
-  const shipT = getEl('n'+shipId).cloneNode(true)
+  const shipT = (getEl('n'+shipId) || getEl(shipId)).cloneNode(true)
   shipT.id = `n${nextId}`
   shipT.querySelector('.id').innerText = nextId
   nextId++
 
   const parentId = shipT.querySelector('.parent').getAttribute('parent')
-  log(document.querySelectorAll(`[parent="${parentId}"]`))
+  // log(document.querySelectorAll(`[parent="${parentId}"]`))
   shipT.querySelector('.serial').innerHTML = document.querySelectorAll(`[parent="${parentId}"]`).length 
 
   addShipListeners(shipT)
   document.querySelector('#battle_field').append(shipT)
 }
 
-function main() {
-    shipBlock.left.querySelector('button').addEventListener('click', onAddShipTemplate.left)
-    shipBlock.right.querySelector('button').addEventListener('click', onAddShipTemplate.right)
+const formRolls = {
+  getQuery(isRight) {
+    return isRight 
+      ? '#battle_field .ship.side_orange'
+      : '#battle_field .ship.side_blue'
+  },
 
-    onAddShipTemplate.addTemplate()
+  attack(isRight = false) {
+    const shipQuery = formRolls.getQuery(isRight)
+    let res = ''
+    for(let ship of document.querySelectorAll(shipQuery)) {
+      const shipName = ship.querySelector('.name').innerHTML 
+        + ' N' + ship.querySelector('.serial').innerHTML
+      res += `${shipName}:\n`
+        + `Атака ##${ship.querySelector('.param.attack').innerHTML}d10##\n`
+    }
+    if(res.length) {
+      navigator.clipboard.writeText(res)
+      log('ATK rolls copied')
+    }
+  },
+  
+  defence(isRight = false) {
+    const shipQuery = formRolls.getQuery(isRight)
+    let res = ''
+    for(let ship of document.querySelectorAll(shipQuery)) {
+      const shipName = ship.querySelector('.name').innerHTML 
+        + ' N' + ship.querySelector('.serial').innerHTML
+      const shieldNum = +ship.querySelector('.shield.curr').innerHTML
+      res += `${shipName}:\n`
+        + `Защита ##${ship.querySelector('.param.defence').innerHTML}d10##\n`
+        // уклонение
+        + (shieldNum>0 ? `Щит ##${shieldNum}d10##\n` : '')
+    }
+    if(res.length) {
+      navigator.clipboard.writeText(res)
+      log('DEF rolls copied')
+    }
+  },
+}
+
+function addTopBtnsListeners() {
+  shipBlock.left.querySelector('button.b_add_ship').addEventListener('click', onAddShipTemplate.left)
+  shipBlock.right.querySelector('button.b_add_ship').addEventListener('click', onAddShipTemplate.right)
+
+  shipBlock.left.querySelector('button.b_attack').addEventListener('click', ()=>formRolls.attack(false))
+  shipBlock.right.querySelector('button.b_attack').addEventListener('click', ()=>formRolls.attack(true))
+
+  shipBlock.left.querySelector('button.b_defend').addEventListener('click', ()=>formRolls.attack(false))
+  shipBlock.right.querySelector('button.b_defend').addEventListener('click', ()=>formRolls.defence(true))
+
+}
+
+function main() {
+    addTopBtnsListeners()
+
+    onAddShipTemplate.addTemplate(false)
     onAddShipTemplate.addTemplate(true)
-  // getEl('el_select_colony').innerHTML = Object.keys(playersData)
-  //   .map (e => `<option value="${e}">${e}`)
-  //   .join('\n')
-  // getEl('el_select_colony').onchange = _ => createImage(getEl('el_select_colony').value)
   // if(location.search) {
   //   getEl('el_select_colony').value = locationSearchToArray(location.search)
-  //     .filter(([key]) => key === 'user')[0][1]
-  //   getEl('el_select_colony').onchange()
   // }
 }
 main()
