@@ -2479,6 +2479,13 @@ const playerPost = {
 
           if (!e.children[pos.price].innerText.startsWith('+')) {
             e.children[pos.price].innerText = TechUtils.get(techText).cost[0][1]
+            const specCost = TechUtils.get(techText).cost
+              .filter(e2 => KEYWORDS.SPECIAL_TECH_COST.includes(e2[0]))
+            if(specCost.length) {
+              // FIXME remove if it works properly
+              log(specCost)
+              e.children[pos.price].innerText =  +e.children[pos.price].innerText + +specCost[0][1]
+            }
           }
 
           result = techText
