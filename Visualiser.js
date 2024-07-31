@@ -752,7 +752,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .trim()
       .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
       .replace(/ {2,}/g, ' ')
-      .replace(/(базовое)/, ALL_RIGHT)
+      .replace(/(базовое|суперпроект)/, ALL_RIGHT)
       .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
       .replace(/(электростанция)/, ALL_RIGHT)
       .replace(/^(\d+)$/i, studyCubesType + ':$1')
@@ -808,7 +808,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       // базовые вещи
       .replace(/^(выдаётся при высадке|выдаётся на старте)/, ALL_RIGHT)
       .replace(/^(немедленно)/, ALL_RIGHT)
-      .replace(/^(электростанция|наземное|суперпроект)/, ALL_RIGHT)
+      .replace(/^(электростанция|наземное)/, ALL_RIGHT)
       .replace(/^(неуязвимость к обычным болезням|взлом систем связи невозможен)/, ALL_RIGHT)
       .replace(/^(при подавлении армией|в военное время|на нечуждых планетах|в системе|вне родной системы)/, ALL_RIGHT)
       .replace(/^(пред-FTL)/, ALL_RIGHT)
