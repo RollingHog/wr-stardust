@@ -73,6 +73,13 @@
   <div id="el_loading" hidden>
     Грузимся...
   </div>
+  <div id="el_error" hidden 
+    onclick="this.hidden = true"
+    style="position: fixed; right: 5px; top: 5px; background-color: yellow; padding: 6px;" >
+    Warnings detected
+    <br>
+    <span id="el_error_inner"></span>
+  </div>
   <include hidden>
     <!-- <iframe class="stardata" src="../map/stars.json"></iframe> -->
 

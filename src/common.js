@@ -1,8 +1,23 @@
 /* exported
-  log getEl
+  log warn getEl
 */
 
 var log = console.log
+
+// some wierd SO magic
+// https://stackoverflow.com/questions/63859312/how-to-properly-override-console-warn-in-javascript
+function warn(...args) {
+  let err = new Error("trace")
+  var stack = err.stack
+  if (stack) {
+    stack = stack.split('\n').slice(2, 3).join('\n').trim().replace('at ', '')
+    console.warn(...args, stack)
+  }
+  if(!getEl('el_error').hidden) return
+  getEl('el_error_inner').innerText = [...args]
+  getEl('el_error').hidden = false
+  setTimeout(_ => getEl('el_error').hidden = true, 4000)
+}
 
 function getEl(id) {
   return document.getElementById(id)

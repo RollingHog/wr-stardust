@@ -1,6 +1,6 @@
 // common.js
 /* global
-getEl log
+getEl log warn
 FILL_2_TREE_TYPE
 */
 
@@ -186,11 +186,11 @@ async function Init() {
           , 'text/xml')
       } catch(e) {
         alert('shit happened, see dev console')
-        console.warn(`cannot read local files, run
+        warn(`cannot read local files, run
         chrome with --allow-file-access-from-files
         or
         firefox with about:config - privacy.file_unique_origin : false`)
-        console.warn(e)
+        warn(e)
         getEl('el_loading').hidden = true
         break
       }
@@ -613,7 +613,7 @@ const Analysis = {
         if(!keys[j-1]) continue
         const delta = keys[j] - keys[j-1]
         if(delta>0 && delta<10) {
-          console.warn('bad y:', i, keys[j-1], keys[j])
+          warn('bad y:', i, keys[j-1], keys[j])
         }
       }
     }
@@ -642,7 +642,7 @@ const Analysis = {
         j.cost
           .filter(e => e[0] == 'Технология')
           .forEach(e => {
-            if (!(e[1] in inverted.alltech)) console.warn('unknown tech name here:', i, j.name, [e[1]])
+            if (!(e[1] in inverted.alltech)) warn('unknown tech name here:', i, j.name, [e[1]])
           })
       }
     }
@@ -694,13 +694,15 @@ const Analysis = {
       },
       'unitcreator': _ => UnitCreator.open(),
       [TurnPlanner.NAME]: _ => TurnPlanner.open(),
+      // TODO add processing from localstorage
+      'selected_tech': _ => {}
     }
 
     for(let i of path) {
       if(modals[i[0]]) {
         modals[i[0]](i[1])
       } else {
-        console.warn('Unknown modal: ', i[0])
+        warn('Unknown modal: ', i[0])
       }
     }
   },
@@ -1327,7 +1329,7 @@ async function parseTechIframe(tree_name) {
       }
       tech[tree_name][t.id] = t
     } catch (e) {
-      console.warn(i, e)
+      warn(i, e)
     }
   }
   //get arrow connections
@@ -1436,7 +1438,7 @@ const parseDoc = {
       this.lastResult = await parseDoc.HTML(raw)
     } else {
       raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
-      console.warn("can't parse plaintext: deprecated and removed")
+      warn("can't parse plaintext: deprecated and removed")
       // this.lastResult = parseDoc.text(raw)
     }
     this.lastRaw = raw
@@ -1460,7 +1462,7 @@ const parseDoc = {
       if(treeRuName !== 'Уникальные') {
         res = res.filter( e => e.replace(/\([^)]+\)/, '').trim() in inverted.alltech 
           ? true 
-          : console.warn(this.playerHTML.name, e)
+          : warn(this.playerHTML.name, e)
         )
       }
 
@@ -2062,7 +2064,7 @@ const parseNode = {
       )
 
     if (cost.some(e => e.length < 2)) {
-      console.warn('bad cost', treeName, name, cost, costRaw)
+      warn('bad cost', treeName, name, cost, costRaw)
       techData.badTechCount++
     }
 
@@ -2122,7 +2124,7 @@ const parseNode = {
     if (effect.some(e => e.length < 2)) {
       // it is non-split => not recognized string
       techData.badTechCount++
-      console.warn(treeName, name, effect.filter(e => e.length < 2)[0], effectRaw)
+      warn(treeName, name, effect.filter(e => e.length < 2)[0], effectRaw)
     }
 
     return effect
@@ -2196,7 +2198,7 @@ const parseNode = {
     }
 
     if (nodeText.indexOf(sepDifficulty) == -1 || nodeText.indexOf(sepEffect) == -1) {
-      console.warn(nodeText)
+      warn(nodeText)
       return null
     }
 
