@@ -625,9 +625,11 @@ const draw = {
       case 'octagon':
         box = draw.SVG.Octagon(t)
         break    
+      case 'ellipse':
+        return
       default:
         error('drawing not implemented for type '+t.type)
-        break
+        return
     }
 
     draw.SVG.Text(t.nodeCenter, t.name, t.fullText, t.id, box.getBBox())
