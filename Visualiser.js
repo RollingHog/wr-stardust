@@ -387,37 +387,53 @@ function getMinMax(arr, attr) {
   return [Math.min.apply(null, t), Math.max.apply(null, t)]
 }
 
-/**
- * 
- * @param {string} treeName 
- * @param {string[]} tech_list 
- * @param {string[]} proj_list 
- * @returns 
- */
-function highlightStudiedTech(treeName, tech_list, proj_list) {
-  let res = []
-  const targets = Array.from(svg.getElementsByTagName('rect'))
-    .concat(Array.from(svg.getElementsByTagName('polygon')))
-    .filter(e => typeof techData.badCells[treeName].find(a => a.id == e.id) === 'undefined')
+const User = {
+  /**
+   * 
+   * @param {string} treeName 
+   * @param {string[]} tech_list 
+   * @param {string[]} proj_list 
+   * @returns 
+   */
+  highlightStudiedTech(treeName, tech_list, proj_list) {
+    let res = []
+    const targets = Array.from(svg.getElementsByTagName('rect'))
+      .concat(Array.from(svg.getElementsByTagName('polygon')))
+      .filter(e => typeof techData.badCells[treeName].find(a => a.id == e.id) === 'undefined')
 
-  let list = tech_list.concat(proj_list)
+    let list = tech_list.concat(proj_list)
 
-  for (let i of targets) {
-    const pos_tech = list.indexOf(tech[treeName][i.id].name)
-    if (pos_tech != -1) {
-      res.push(i.id)
-      list.splice(pos_tech, 1)
-    } else if (tech[treeName][i.id].fullText.includes('базовое')) {
-      continue
-    } else {
-      i.setAttribute('fill', '#d9d9d9')
+    for (let i of targets) {
+      const pos_tech = list.indexOf(tech[treeName][i.id].name)
+      if (pos_tech != -1) {
+        res.push(i.id)
+        list.splice(pos_tech, 1)
+      } else if (tech[treeName][i.id].fullText.includes('базовое')) {
+        continue
+      } else {
+        i.setAttribute('fill', 'lightgrey')
+      }
     }
-  }
 
-  if (list.length) log(`unrecognized tokens for ${treeName}: ` + tech_list)
+    if (list.length) log(`unrecognized tokens for ${treeName}: ` + tech_list)
 
-  return list
+    return list
+  },
+
+  highlightAvaltech(treeName, techList, projList) {
+    techList
+      .concat(projList)
+      .map(e => inverted.alltech[e].next)
+      .flat()
+      .forEach( i =>{
+        if(getEl(i).getAttribute('fill') == 'lightgrey') {
+          getEl(i).setAttribute('fill','lightyellow')
+        }
+      })
+  },
 }
+
+
 
 async function parseTechIframe(tree_name) {
 
@@ -619,7 +635,7 @@ const parseDoc = {
       const studied = res[i]
   
       // built = 
-      highlightStudiedTech(i, studied, built)
+      User.highlightStudiedTech(i, studied, built)
   
       const withoutReqires = Object.values(tech[i])
         .filter(e => e.req.length == 0)

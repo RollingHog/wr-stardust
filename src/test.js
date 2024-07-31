@@ -1,5 +1,5 @@
 /* global 
-  highlightStudiedTech
+  User
 */
 
 const EXAMPLE = {
@@ -20,6 +20,6 @@ const EXAMPLE = {
 // eslint-disable-next-line no-unused-vars
 const TEST = {
   highlightStudiedTech() {
-    highlightStudiedTech('Biology', EXAMPLE.Biology.tech, EXAMPLE.Biology.proj)
+    User.highlightStudiedTech('Biology', EXAMPLE.Biology.tech, EXAMPLE.Biology.proj)
   },
 }
