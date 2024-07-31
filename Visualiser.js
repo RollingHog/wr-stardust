@@ -476,7 +476,7 @@ const Analysis = {
   },
 
   Reports: {
-    showEffectsStatWithoutGarbage() {
+   статистика_по_эффектам_тех() {
       let filter = [].concat(
         KEYWORDS.COLONY_PARAMS,
         KEYWORDS.ADDITIONAL_COLONY_PARAMS,
@@ -500,7 +500,7 @@ const Analysis = {
       }
     },
   
-    listHulls() {
+    список_корпусов() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
           .filter(e => e.type == 'octagon')
@@ -513,7 +513,7 @@ const Analysis = {
       ))
     },
 
-    listModules() {
+    список_модулей() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
           .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
