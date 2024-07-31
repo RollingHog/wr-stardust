@@ -1083,6 +1083,28 @@ const Analysis = {
       Analysis.reportTable(result)
     },
 
+    основные_параметры_игроков() {
+      const result = Object.fromEntries(
+        Object.entries(window[VARS.PLAYERS_DATA_KEY])
+        .map( e => [ e[0], 
+          Object.fromEntries(
+            [].concat(
+              [[
+                'Итого',
+                Object.values(e[1].colonyParams)
+                .map(e2 => +e2)
+                .filter( e2 => !isNaN(e2))
+                .reduce((acc, e2) => acc+e2, 0)
+              ]],
+              Object.entries(e[1].colonyParams)
+                .filter( e2 => !isNaN(+e2[1]))
+            )
+          )
+        ])
+      )
+      Analysis.reportTable(result)
+    },
+
     // drawGraph() {
 
     // },
