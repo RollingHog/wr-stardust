@@ -508,9 +508,10 @@ function parseShapeNode(filename, i) {
       .replace(/^(осуждение|волнения|непривычная среда) ?\((.+)\)$/i, '$1:+$2')
       .replace(/^(затраты|специалисты|ресурсы) ?\((.+)\)$/i, '$1:$2')
       .replace(new RegExp(`(${MATERIALS_LIST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+      .split(':')
     )
 
-  if(cost.some(e=>!e.includes(':'))) {
+  if(cost.some(e=> e.length < 2)) {
     log('bad cost', name, cost, cost_raw)
     badTechCount++
   }
