@@ -1,6 +1,6 @@
 // common.js
 /* global
-getEl log warn
+getEl log warn warnNoTrace
 FILL_2_TREE_TYPE
 */
 
@@ -46,6 +46,7 @@ const VARS = {
     MODULE_SPACE: 'trapezoid2',
     MODULE_BOTH: 'fatarrow',
   },
+  NODETYPE_2_NAME: {},
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'ellipse', 'hexagon'],
   TREELIST_EN2RU: null,
@@ -141,6 +142,7 @@ const VARS = {
   fill2TreeType: FILL_2_TREE_TYPE,
 }
 VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
+VARS.NODETYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
 
 ; (() => {
   NodeList.prototype.forEach = Array.prototype.forEach
@@ -588,6 +590,8 @@ const Analysis = {
   onInit() {
     // extracted from Init
     Analysis.reportBadY()
+    // TODO disable when not in transition
+    Analysis.reportBadUserData()
     Analysis.insertTechLevels()
     Analysis.countTechSubtreesBorders()
 
@@ -813,6 +817,24 @@ const Analysis = {
       }
     }
     Object.keys(techData.levels).map(i => techData.levels[i].sort((a,b)=>a<b))
+  },
+  reportBadUserData() {
+    // useful when transitions happen
+    for(let i of User.listUsers()) {
+      const data = User.getSavedUserData(i)
+      const projs = [].concat(Object.values(data.localProjs)).flat()
+      for(let j of projs) {
+        const tek = TechUtils.byName(j)
+        if(!tek) {
+          warn('bad project name', j)
+          continue
+        }
+        if(tek.type !== VARS.NODE_T.PROJECT) {
+          warn(`project ${j} should be in ${VARS.NODETYPE_2_NAME[tek.type]} category`)
+          continue
+        }
+      }
+    }
   },
   countTechSubtreesBorders() {
     techData.subtreeBorders = Object.fromEntries(
@@ -1436,7 +1458,7 @@ const TechUtils = {
     '</tr>'
   },
   byName(techName) {
-    return inverted.alltech[techName.replace(/ \([^)]+\)/,'')]
+    return inverted.alltech[techName.replace(/ \([^)]+\)/,'')] || null
   },
 
   countCosts(techNames) {
