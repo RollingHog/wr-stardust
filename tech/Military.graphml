@@ -59,9 +59,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="44.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.017578125" x="19.8662109375" y="6.948242187500028">Para bellum
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="156.484375" x="51.6328125" y="6.948242187500028">Para bellum
 Сложность: 1
-Эффект: +1 куб для военных проектов<y:LabelModel>
+Эффект: +1 свободный куб<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -696,9 +696,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-235.3982323275868" y="872.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="255.66015625" x="2.044921875" y="6.9482421875">Стелс-техника
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="226.134765625" x="16.8076171875" y="6.9482421875">Стелс-техника
 Сложность: 5, тех. Биосуперматериалы
-Эффект: скрывает действия наземных войск<y:LabelModel>
+Эффект: Уклонение армий +2<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
