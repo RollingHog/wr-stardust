@@ -108,6 +108,10 @@ async function Init() {
             })
         }
       }
+
+      let sum=0
+      for(let i of Object.keys(tech)) sum+=(Object.keys(tech[i]).length)
+      log('Total tech count', sum)
     })
   }, 0)
 }
