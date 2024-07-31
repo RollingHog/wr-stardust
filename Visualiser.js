@@ -541,6 +541,7 @@ function parseShapeNode(filename, i) {
     .split(',')
     .map( e => e
       .trim()
+      // .replace(/:/g,'')
       .replace(/ {2,}/g,' ')
       .replace(/(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
       .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный куб:$1')
