@@ -19,6 +19,7 @@ const E = {
   type: {
     none: null,
     asteroid: 'asteroid',
+    satellite: 'satellite',
     terrestrial: 'terrestrial',
     giant: 'giant',
   },
@@ -128,7 +129,15 @@ const StarSystemGenerator = {
       alert('No proper rolls in input')
       return
     }
-    const system = this.generate(cubes)
+    const userPlanet = {
+      type: getEl('el_sp_type').value,
+      i: getEl('el_sp_location').value,
+    }
+    const system = this.generate(
+      cubes, 
+      getEl('el_density').value,
+      userPlanet
+    )
     log('rolles used:', startingLength - cubes.length)
     console.table(system)
   },
@@ -137,10 +146,9 @@ const StarSystemGenerator = {
       .map(e => e[1].split(' + ').map(e => +e))
       .flat()
   },
-  generate(randomD6Arr) {
+  generate(randomD6Arr, density, userPlanet) {
     const system = []
 
-    const density = getEl('el_density').value
     const nOfPlanets = density / 5
     const densityMod = Math.floor((nOfPlanets - 10) / 1)
     log({densityMod, nOfPlanets})
@@ -165,6 +173,8 @@ const StarSystemGenerator = {
       return getKey(genDict.giantSize, pop3() + mod + densityMod)
     }
 
+    system[userPlanet.i] = planet(userPlanet.type, null, 'user')
+
     // first giant
     const firstGiantType = getKey(genDict.firstGiant, pop3('firstGiantType'))
     let firstLocation = -1
@@ -183,7 +193,7 @@ const StarSystemGenerator = {
         firstLocation = Math.max(4-pop1(), 1)
         break
     }
-    if(firstGiantType) {
+    if(firstGiantType && !planet[firstLocation]) {
       system[firstLocation] = planet(
         E.type.giant, 
         giantSize(firstLocation),
@@ -221,15 +231,24 @@ const StarSystemGenerator = {
 
     // stat
     let systemSummarySize = 0
+    let planetCount = 0
     for(let i = 1; i <= 11; i++) {
       if(!system[i]) continue
       systemSummarySize += Object.keys(E.size).indexOf(system[i].size)+1
+      planetCount++
     }
-    log('systemSummarySize', systemSummarySize)
+    log({systemSummarySize, planetCount})
 
     return system
   },
 }
 
-// FIXME remove
-StarSystemGenerator.startRaw()
+;(function  main() {
+  getEl('el_sp_location').innerHTML = Object.keys(' '.repeat(11).split(''))
+    .map( e => `<option value="${+e+1}">${+e+1}</option>`)
+  getEl('el_sp_type').innerHTML = Object.keys(E.type)
+    .map( e => `<option value="${e}">${e}</option>`)
+  setTimeout(_ => getEl('el_sp_type').value = E.type.terrestrial, 0)
+  // FIXME remove
+  StarSystemGenerator.startRaw()
+})()
