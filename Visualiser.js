@@ -104,7 +104,7 @@ async function Init() {
           j.cost
             .filter(e => e[0] == 'Технология')
             .forEach(e => {
-              if (!(e[1] in inverted.alltech)) log('unknown tech name here:', i, j.name, [e[1]])
+              if (!(e[1] in inverted.alltech)) console.warn('unknown tech name here:', i, j.name, [e[1]])
             })
         }
       }
@@ -580,7 +580,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
     // it is non-split => not recognized string
     // effect = null
     badTechCount++
-    log(name, effect, effect_unparsed)
+    console.warn(name, effect, effect_unparsed)
   }
 
   return [cost, effect]
