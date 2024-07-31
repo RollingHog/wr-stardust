@@ -145,7 +145,10 @@ const techData = {
   subtreeBorders: Object.fromEntries(TREELIST.map(e => [e,[]])),
   badTechCount: 0,
   currentTreeName: null,
-  cache: Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}])),
+  cache: {
+    trees: Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}])),
+    usersFlatTech: {},
+  }
 }
 const stat = {}
 const inverted = {
@@ -1229,9 +1232,9 @@ function drawTree(tree_name) {
     parseTechIframe(tree_name)
   }
   
-  if (techData.cache[tree_name].html) {
-    svg.innerHTML = techData.cache[tree_name].html
-    svg.setAttribute("viewBox", techData.cache[tree_name].viewBox)
+  if (techData.cache.trees[tree_name].html) {
+    svg.innerHTML = techData.cache.trees[tree_name].html
+    svg.setAttribute("viewBox", techData.cache.trees[tree_name].viewBox)
     setTimeout(TreeView.tspanHighlightOnClick,1)
     setTimeout(TreeView.copyFirstLineOnClick,1)
     setTimeout(TreeView.addTurnPlannerThings,1)
@@ -1259,8 +1262,8 @@ function drawTree(tree_name) {
     + ' ' + (y[1] + 100 - y[0])
   svg.setAttribute("viewBox", viewBox)
 
-  techData.cache[tree_name].html = svg.innerHTML
-  techData.cache[tree_name].viewBox = viewBox
+  techData.cache.trees[tree_name].html = svg.innerHTML
+  techData.cache.trees[tree_name].viewBox = viewBox
 
   techData.currentTreeName = tree_name
   User.drawActiveUser(tree_name)
@@ -1401,9 +1404,16 @@ const User = {
    * @returns {string[]}
    */
   getFlatUserTech(username) {
+    if(techData.cache.usersFlatTech[username]) return techData.cache.usersFlatTech[username]
     const data = User.getSavedUserData(username)
     let projList = [].concat(data.buildings, data.orbital, Object.values(data.localProjs))
-    return Object.values(data.techTable).concat(projList).flat()
+    const result = Object.values(data.techTable).concat(projList).flat()
+    techData.cache.usersFlatTech[username] = result
+    return result
+  },
+
+  checkIfUserHasTech(playerName, techName) {
+    return this.getFlatUserTech(playerName).includes(techName)
   },
 
   /**
@@ -1551,6 +1561,31 @@ const User = {
     )
   },
 
+  createColonyDescription(playerName) {
+    if(!window['DATA__TECH_TRESHOLDS']) return ''
+    const techTresholds = window['DATA__TECH_TRESHOLDS'].data
+    let res = '<br>'
+    for(let tree in techTresholds) {
+      for(let subtree in techTresholds[tree]) {
+        let lastProperStr = null
+        for(let conditionBlock of techTresholds[tree][subtree]) {
+          if(subtree !== 'other') {
+            if(
+              conditionBlock[0] !== "BASE"
+              && !this.checkIfUserHasTech(playerName, conditionBlock[0])
+            ) break
+            lastProperStr = conditionBlock[1]
+          } else {
+            if(this.checkIfUserHasTech(playerName, conditionBlock[0])) res += `${conditionBlock[1]}. `
+          }
+        }
+        if(lastProperStr) res += `${lastProperStr}. `
+      }
+      res += '<br><br>'
+    }
+    return res
+  },
+
   drawUserStat(playerName) {
     const userData = User.getSavedUserData(playerName)
     const effectsData = User.countAllUserEffects(userData)
@@ -1569,6 +1604,7 @@ const User = {
       <a target=_blank 
         href="./StarSystem.html#${userData.starSystemParams.generatorCode}&user=${playerName}">Звездная система</a>
       ` + this.createUserTechEffectsTable(effectsData)
+        + this.createColonyDescription(playerName)
 
     HTMLUtils.openModal('report', playerName)
   },
