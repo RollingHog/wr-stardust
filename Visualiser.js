@@ -1002,6 +1002,11 @@ function saveAllTechAsPng() {
 }
 
 // eslint-disable-next-line no-unused-vars
+function openAsPng() {
+
+}
+
+// eslint-disable-next-line no-unused-vars
 function saveFile(filename, data) {
   var file = new Blob([data], { type: 'text' })
   var a = document.createElement("a"),
