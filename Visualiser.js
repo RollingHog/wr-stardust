@@ -1,6 +1,6 @@
 // common.js
 /* global
-getEl log warn warnNoTrace
+getEl log warn
 FILL_2_TREE_TYPE
 */
 
@@ -9,7 +9,7 @@ FILL_2_TREE_TYPE
   draw
 */
 
-const VERSION = '1.0.4'
+const VERSION = '1.1.0'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
@@ -39,8 +39,9 @@ const VARS = {
   NODE_T: {
     TECH: 'rectangle',
     BUILDING: 'parallelogram',
+    PROJECT: 'parallelogram2',
     ORBITAL: 'ellipse',
-    PROJECT: 'hexagon',
+    ASTROPROJECT: 'hexagon',
     HULL: 'octagon',
     MODULE_GROUND: 'trapezoid',
     MODULE_SPACE: 'trapezoid2',
@@ -48,7 +49,7 @@ const VARS = {
   },
   NODETYPE_2_NAME: {},
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
-  NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'ellipse', 'hexagon'],
+  NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
   TREELIST_EN2RU: null,
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
@@ -139,10 +140,26 @@ const VARS = {
     '#0000FF': 'Наука',
     '#000000': "Свободный",
   },
+  defaultProjectsList: {},
   fill2TreeType: FILL_2_TREE_TYPE,
 }
 VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
 VARS.NODETYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
+VARS.defaultProjectsList = {
+  "Планетарная разведка": {
+    "id": "n123001",
+    "type": 'parallelogram2',
+    "treeName": "Industry",
+    "borderColor": "#0000FF",
+    "fill": "#CC99FF",
+    "name": "Планетарная разведка",
+    "cost": [["Наука","1"]],
+    "effect": [["особое","разведка планеты"]],
+    "req": [],
+    "next": [],
+    "fullText": "",
+  }
+}
 
 ; (() => {
   NodeList.prototype.forEach = Array.prototype.forEach
@@ -820,20 +837,22 @@ const Analysis = {
   },
   reportBadUserData() {
     // useful when transitions happen
-    for(let i of User.listUsers()) {
-      const data = User.getSavedUserData(i)
-      const projs = [].concat(Object.values(data.localProjs)).flat()
-      for(let j of projs) {
-        const tek = TechUtils.byName(j)
+    for(let username of User.listUsers()) {
+      const data = User.getSavedUserData(username)
+      const objNames = [].concat(Object.values(data.localProjs), data.buildings, data.orbital)
+        .flat()
+        .map(name => name.replace(/ ?\([^)]+\)/, ''))
+        .filter(name => !name.startsWith(':'))
+        // FIXME remove
+      // log(username, objNames.sort().map(name =>[name, TechUtils.byName(name)]))
+      for(let name of objNames) {
+        const tek = TechUtils.byName(name)
         if(!tek) {
-          warn(`player ${i} bad project name`, j)
-          continue
-        }
-        if(tek.type !== VARS.NODE_T.PROJECT) {
-          warn(`player ${i} project ${j} should be ${VARS.NODETYPE_2_NAME[tek.type]} category`)
+          warn(`player ${username} bad object name`, name)
           continue
         }
       }
+      // TODO check if correct block
     }
   },
   countTechSubtreesBorders() {
@@ -1253,10 +1272,10 @@ const Analysis = {
       ))
     },
 
-    список_астропроектов() {
+    список_проектов() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
-          .filter(e => (e.type == VARS.NODE_T.PROJECT))
+          .filter(e => (e.type == VARS.NODE_T.ASTROPROJECT || e.type == VARS.NODE_T.ASTROPROJECT))
           .map(e => [e.name, {
             Цена: e.cost[0][1],
             "Свойства": Analysis.formatReportEffects(e.effect),
@@ -1457,8 +1476,14 @@ const TechUtils = {
     ).join('</tr><tr>') +
     '</tr>'
   },
+
   byName(techName) {
-    return inverted.alltech[techName.replace(/ \([^)]+\)/,'')] || null
+    const cleanName = techName.replace(/ \([^)]+\)/,'') 
+    return inverted.alltech[cleanName] || VARS.defaultProjectsList[cleanName] || null
+  },
+
+  get(techName) {
+    return this.byName(techName)
   },
 
   countCosts(techNames) {
@@ -1981,10 +2006,13 @@ const parseDoc = {
       let res = str.split(',').map(e => e.trim()).filter(e => e)
 
       if(treeRuName !== 'Уникальные') {
-        res = res.filter( e => e.replace(/\([^)]+\)/, '').trim() in inverted.alltech 
-          ? true 
-          : warn(this.playerHTML.name, e)
-        )
+        res = res.filter( thingName => {
+          const isKnown = thingName.replace(/\([^)]+\)/, '').trim() in inverted.alltech
+          if(!isKnown) {
+            warn('unknown thing', playerName, thingName)
+          }
+          return isKnown
+        })
       }
 
       return res
@@ -2083,6 +2111,7 @@ const parseDoc = {
       orbital: splitFilter(obj.Здания.children[0].rows[2].children[1].innerText),
       greatPeople,
       uniqueResources,
+      // TODO it doesnt see bad names somehow
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
     }
     // log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
@@ -3082,7 +3111,7 @@ const TurnPlanner = {
     }
   },
   countSelectedCost() {
-    // FIXME wrong wrong wrong, techs can be studied by multiple params!
+    // TODO wrong wrong wrong, techs can be studied by multiple params!
     log(TechUtils.countCosts(this.selectedTechs))
   },
   close() {
@@ -3100,7 +3129,7 @@ const savingOps = {
     }
   },
   openAsPng() {
-    // FIXME
+    // TODO
   },
   // eslint-disable-next-line no-unused-vars
   saveSVG(filename) {
