@@ -214,7 +214,11 @@ const Analysis = {
 
   filterObjectByDict(obj, dict) {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => dict.includes(key)))
-  }
+  },
+
+  showEffectsStat() {
+    console.table(statAllEffects)
+  },
 }
 
 function tspanHighlightOnClick() {
@@ -618,7 +622,8 @@ const KEYWORDS = {
 var badTechCount = 0
 
 function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
-  const ALL_RIGHT = 'особое:$1'
+  const ITS_SPECIAL = 'особое:'
+  const ALL_RIGHT = ITS_SPECIAL+'$1'
 
   const DISABLE_PARSE_IMMUNITY = false
 
@@ -626,7 +631,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
     .split(',')
     .map(e => e
       .trim()
-      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
+      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
       .replace(/ {2,}/g, ' ')
       .replace(/(базовое)/, ALL_RIGHT)
       .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
@@ -651,7 +656,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
     .split(',')
     .map(e => e
       .trim()
-      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
+      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
       .replace(/ {2,}/g, ' ')
       .replace(/^(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
       .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный:$1')
