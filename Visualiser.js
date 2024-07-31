@@ -67,19 +67,37 @@ const SVG_DEFAULT = `<style> text {
 window.onload = Init
 async function Init() {
   const parser = new DOMParser()
-  for (let i of document.querySelectorAll('iframe.tech')) {
-    let tree_name = i.src.replace(/.*\/([^/]*).graphml$/, '$1')
-    try {
-      graphmls[tree_name] = parser.parseFromString(
-        i.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-        , 'text/xml')
-    } catch (e) {
-      warn(`cannot read files, run
-      chrome with --allow-file-access-from-files
-      or
-      firefox with about:config - privacy.file_unique_origin : false`)
-      warn(e)
-      break
+  const isLocalFile = location.href.startsWith('file:///')
+
+  const iframes = Array.from(document.querySelectorAll('iframe.tech'))
+  if(isLocalFile) {
+      await Promise.all(iframes.map(i => 
+        new Promise((resolve) => {
+          i.onload = resolve
+          i.src = i.getAttribute('src').replace('_', '')
+        })
+      ))
+  }
+  
+  for (let i of TREELIST) {
+    const src = `tech/${i}.graphml`
+    if(isLocalFile) {
+      try {
+        const el = document.querySelector(`[src="${src}"]`)
+        graphmls[i] = parser.parseFromString(
+          el.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+          , 'text/xml')
+      } catch(e) {
+        warn(`cannot read local files, run
+        chrome with --allow-file-access-from-files
+        or
+        firefox with about:config - privacy.file_unique_origin : false`)
+        warn(e)
+        break
+      }
+    } else {
+      // non-local, try to fetch data
+      graphmls[i] = (new DOMParser()).parseFromString(await fetch(src).then(e=>e.text()), 'text/xml').querySelector('graph')
     }
   }
 
