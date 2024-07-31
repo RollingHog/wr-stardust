@@ -1266,7 +1266,7 @@ const User = {
         && !KEYWORDS.MATERIALS.includes(e[0])
         && !KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])
         && !e[0].startsWith(KEYWORDS.CREATION_KEYWORD)
-      ), 'Забытые техи')
+      ), 'Неотфильтрованные техи')
     )
   },
 
