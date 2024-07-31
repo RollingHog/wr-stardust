@@ -1167,6 +1167,7 @@ const playerPost = {
 
     let effectList = Object.entries(result)
       .sort()
+      .filter( e => (log(e[0].replace(/^:/,'')),!KEYWORDS.TECH_EFFECT_MODS.includes(e[0].replace(/^:/,''))) )
       .sort( (a,b) => {
         if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
         if(!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
@@ -1175,7 +1176,7 @@ const playerPost = {
       
       getEl('el_tech_result_list').innerHTML = '<table><tbody><tr>'
       + effectList
-        .map(e => `<td>${e[0]}</td><td>${e[1]}</td>`).join('</tr><tr>')
+        .map(e => `<td>${e[0]}</td><td>${e[1]>=0?'+':'-'}${e[1]}</td>`).join('</tr><tr>')
       + '</tr>'
 
     const byType = {
