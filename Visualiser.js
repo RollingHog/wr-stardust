@@ -676,8 +676,8 @@ function doNodeStat(filename, t) {
   }
 
   let cost_facto = +cost[0][1]
-  if (cost[1] == '2 этапа')
-    cost_facto *= 2
+  if (cost[1] && cost[1][0] == 'Этапы')
+    cost_facto *= +cost[1][1]
   if (effects[0][1] != 0) { //its actual data
     stat[filename][t.y].costClear += cost_facto
   }
