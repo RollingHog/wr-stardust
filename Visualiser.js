@@ -878,7 +878,7 @@ function parseCostAndEffects(t) {
       .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
       // типы урона, эффекты оружия
       .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
-      .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), ITS_SPECIAL)
+      .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), ALL_RIGHT)
       // эффекты, дающие великих людей
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
