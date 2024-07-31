@@ -531,6 +531,19 @@ const Analysis = {
         Analysis.reportTable(Analysis.filterObjectByDict(statAllEffects, filter))
       }
     },
+
+    вообще_все_эффекты_количественно(){
+      const result = Object.values(inverted.alltech)
+        .reduce( (acc, e) => {
+          for(let i of e.effect)
+          if(!acc[i[0]])
+            acc[i[0]]=+i[1]
+          else
+            acc[i[0]]+=+i[1]
+          return acc
+        }, {})
+        Analysis.reportTable(result)
+    },
   
     список_корпусов() {
       Analysis.reportTable(Object.fromEntries(
