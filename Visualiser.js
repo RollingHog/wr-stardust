@@ -210,7 +210,7 @@ const Analysis = {
         tcost = +tcost.toFixed(2)
 
         // tcost<10 in case is's some superstructure
-        if(Math.abs(tcost-mult)>1 && tcost<10) {
+        if(Math.abs(tcost-mult)>1 && tcost<10 && j.type != 'octagon') {
           log(i, j.name, `cost looks bad: ${tcost}->${mult}`)
           cnt++
           continue
