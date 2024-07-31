@@ -23,7 +23,6 @@ const TREELIST = [
   "Sociology",
 ]
 
-
 // constants
 const VARS = {
   PLAYERS_DATA_KEY: 'DATA__PLAYERS_DATA',
@@ -590,6 +589,26 @@ const User = {
         }
       })
   },
+
+  countSummaryEffect(techList) {
+    let data = techList.map( e => e.effect )
+    
+    data = [].concat.apply([], data)
+    const result = {}
+    for(let i of data) {
+      if(i[0] === KEYWORDS.ITS_SPECIAL) {
+        i[0] = ':' + i[1]
+        i[1] = 1
+      }
+
+      if(!result[i[0]]) 
+        result[i[0]] = +i[1]
+      else
+        result[i[0]] += +i[1]
+    }
+
+    return result
+  },
 }
 
 
@@ -968,26 +987,14 @@ const parseDoc = {
 
 
   countTechStudyResult() {
-    let data = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
+    let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e=> e.children[0] && inverted.alltech[e.children[0].innerText] ? 
-        inverted.alltech[e.children[0].innerText].effect
-        : (console.warn(e.children[0]), null)
+        inverted.alltech[e.children[0].innerText]
+        : (console.warn(e.children[0]),e.children[0].style.backgroundColor='tomato', null)
       )
       .filter( e => e )
-    
-    data = [].concat.apply([], data)
-    const result = {}
-    for(let i of data) {
-      if(i[0] === KEYWORDS.ITS_SPECIAL) {
-        i[0] = ':' + i[1]
-        i[1] = 1
-      }
 
-      if(!result[i[0]]) 
-        result[i[0]] = +i[1]
-      else
-        result[i[0]] += +i[1]
-    }
+    const result = User.countSummaryEffect(techList)
 
     getEl('el_tech_result_list').innerHTML = '<table><tbody><tr>'
       + Object.entries(result)
