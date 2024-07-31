@@ -216,8 +216,12 @@ const Analysis = {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => dict.includes(key)))
   },
 
-  showEffectsStat() {
-    console.table(statAllEffects)
+  showEffectsStat(filter = null) {
+    if(!filter) {
+      console.table(statAllEffects)
+    } else {
+      console.table(Analysis.filterObjectByDict(statAllEffects, filter))
+    }
   },
 }
 
@@ -567,7 +571,7 @@ const KEYWORDS = {
     "осадное",
     "щит",
   ],
-  COLONY_PARAMETERS: [],
+  // COLONY_PARAMETERS: [],
   MATERIALS: [
     // 1 ряд
     "Добыча",
