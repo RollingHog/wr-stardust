@@ -96,14 +96,14 @@ satelliteList: {
   5: 2,
   6: 3,
   8: 4,
-  9: 5,
-  10: 6,
-  11: 8,
-  12: 9,
-  13: 10,
-  14: 12,
-  15: 15,
-  16: 20,
+  10: 5,
+  11: 6,
+  12: 8,
+  13: 9,
+  14: 10,
+  15: 12,
+  16: 14,
+  18: 16,
 },
 satelliteMods: {
   size: {
@@ -162,6 +162,7 @@ const StarSystemGenerator = {
     }
     const userPlanet = {
       type: getEl('el_sp_type').value,
+      size: getEl('el_sp_size').value,
       i: getEl('el_sp_location').value,
     }
     const system = this.generate(
@@ -182,7 +183,7 @@ const StarSystemGenerator = {
     const system = []
 
     const nOfPlanets = density / 5
-    const densityMod = Math.floor((nOfPlanets - 10) / 1)
+    const densityMod = Math.floor((nOfPlanets - 10) / 2)
     log({densityMod, nOfPlanets})
 
     function pop1(str) {
@@ -202,7 +203,7 @@ const StarSystemGenerator = {
           pop1()
           + genDict.satelliteMods.type[type]
           + genDict.satelliteMods.size[size]
-          - densityMod
+          + densityMod
         ),
         special 
       }
@@ -213,7 +214,7 @@ const StarSystemGenerator = {
       return getKey(genDict.giantSize, pop3() + mod + densityMod)
     }
 
-    system[userPlanet.i] = planet(userPlanet.type, null, 'user')
+    system[userPlanet.i] = planet(userPlanet.type, userPlanet.size, 'user')
 
     // first giant
     const firstGiantType = getKey(genDict.firstGiant, pop3('firstGiantType'))
@@ -286,9 +287,11 @@ const StarSystemGenerator = {
 ;(function  main() {
   getEl('el_sp_location').innerHTML = Object.keys(' '.repeat(11).split(''))
     .map( e => `<option value="${+e+1}">${+e+1}</option>`)
-  getEl('el_sp_type').innerHTML = Object.keys(E.type)
+  getEl('el_sp_size').innerHTML = Object.keys(E.size)
     .map( e => `<option value="${e}">${e}</option>`)
-  setTimeout(_ => getEl('el_sp_type').value = E.type.terrestrial, 0)
+  setTimeout(_ => {
+    getEl('el_sp_size').value = E.size.medium
+  }, 0)
   // FIXME remove
   StarSystemGenerator.startRaw()
 })()
