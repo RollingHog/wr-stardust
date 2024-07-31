@@ -36,7 +36,7 @@ var draw = {
         draw.SVG.Octagon(t)
         break
       case 'ellipse':
-        draw.SVG.Rect(t)
+        draw.SVG.Ellipse(t)
         break
       default:
         console.error('drawing not implemented for type ' + t.type)
@@ -142,6 +142,22 @@ var draw = {
       el.setAttributeNS(null, 'fill', fill)
       el.setAttributeNS(null, 'stroke', borderColor)
       el.setAttributeNS(null, 'stroke-width', 3)
+
+      if(title) el.innerHTML = '<title>'+title+'</title>'
+      document.getElementById('svg').appendChild(el)
+      return el
+    },
+
+    Ellipse({ id, nodeCenter, h, w, borderColor, fill, title }) {
+      var el = document.createElementNS(draw.SVG_NS, 'ellipse')
+      el.setAttributeNS(null, 'id', id)
+      el.setAttributeNS(null, 'fill', fill)
+      el.setAttributeNS(null, 'stroke', borderColor)
+      el.setAttributeNS(null, 'stroke-width', 3)
+      el.setAttributeNS(null, 'cx', nodeCenter.x)
+      el.setAttributeNS(null, 'cy', nodeCenter.y)
+      el.setAttributeNS(null, 'rx', w/2)
+      el.setAttributeNS(null, 'ry', h/2)
 
       if(title) el.innerHTML = '<title>'+title+'</title>'
       document.getElementById('svg').appendChild(el)
