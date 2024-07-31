@@ -496,7 +496,7 @@ const KEYWORDS = {
 
 var badTechCount = 0
 
-function parseCostAndEffects(cost_raw, effect_unparsed, studyCubesType) {
+function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
   const ALL_RIGHT = 'особое:$1'
 
   const DISABLE_PARSE_IMMUNITY = false
@@ -600,26 +600,35 @@ function parseShapeNode(filename, i) {
     .replace(/\n/g, ' ')
     .trim()
 
+  const borderColor = i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
+
+  const t = {
+    id: i.parentElement.parentElement.id
+    , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
+    , borderColor
+    , name: ''
+    , cost: []
+    , effect: []
+    , req: []
+    , next: []
+    , fullText
+
+    , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
+    , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(0)
+    , h: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('height')).toFixed(2)
+    , w: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('width')).toFixed(2)
+
+    , fill: i.getElementsByTagName('y:Fill')[0].getAttribute('color')
+
+  }
+
   // this is not tech node
   if (nlabel.getAttribute('fontSize') != 12) {
-    let t = {
-      id: i.parentElement.parentElement.id
-      , badCell: true
-      , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
-      , borderColor: i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
-      , fullText
-      , fontSize: nlabel.getAttribute('fontSize')
-      , next: []
-  
-      , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
-      , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(0)
-      , h: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('height')).toFixed(2)
-      , w: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('width')).toFixed(2)
-  
-      , fill: i.getElementsByTagName('y:Fill')[0].getAttribute('color')
-    }
-    // its number, lessen width
+    t.badCell = true
+    t.fontSize = nlabel.getAttribute('fontSize')
+
     if(t.fullText.length <= 2) {
+      // its number, lessen width
       t.w = t.w/1.4
       t.x = +t.x + +t.w - 5
     }
@@ -645,31 +654,11 @@ function parseShapeNode(filename, i) {
     '#0000FF': 'Наука',
     '#000000': "Любой",
   }
-  const borderColor = i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
+
   const studyCubesType = colorToParameterType[borderColor]
 
   const effect_unparsed = split1[1].split(sepEffect)[1].trim()
-  const [cost, effect] = parseCostAndEffects(cost_raw, effect_unparsed, studyCubesType)
-
-  var t = {
-    id: i.parentElement.parentElement.id
-    , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
-    , borderColor
-    , name
-    , cost
-    , effect
-    , req: []
-    , next: []
-    , fullText
-
-    , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
-    , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(0)
-    , h: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('height')).toFixed(2)
-    , w: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('width')).toFixed(2)
-
-    , fill: i.getElementsByTagName('y:Fill')[0].getAttribute('color')
-
-  }
+  const [cost, effect] = parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType)
 
   t.nodeCenter = {
     x: ++t.x + ++t.w / 2
@@ -680,6 +669,10 @@ function parseShapeNode(filename, i) {
     x: t.x
     , y: ++t.y + ++t.h / 2
   }
+
+  t.name = name
+  t.cost = cost
+  t.effect = effect
 
   doNodeStat(filename, t)
 
