@@ -1032,12 +1032,15 @@ const parseDoc = {
       {treeName: null, name: null}
     )
 
-    const uniqueResources = obj['Уникальные ресурсы'].children[0].rows[1].children[3].innerText.length
-    ? parseNode.effects(
-      obj['Уникальные ресурсы'].children[0].rows[1].children[3].innerText,
-      {treeName: null, name: obj['Уникальные ресурсы'].children[0].rows[1].children[0].innerText}
-    )
-    : null
+    let uniqueResources = Array.from(obj['Уникальные ресурсы'].children[0].rows)
+    uniqueResources.splice(0,1)
+    if(uniqueResources.length == 1 && uniqueResources[0].innerText == '') uniqueResources = null
+    else {
+      uniqueResources = parseNode.effects(
+        uniqueResources.map( e => e.children[3].innerText).join(','),
+        {treeName: null, name: playerName + ' уникальные ресурсы'}
+      )
+    }
 
     const data = {
       startingFeature,
