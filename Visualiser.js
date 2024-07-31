@@ -607,7 +607,9 @@ const Analysis = {
     
     Analysis.searchBadTechRefs()
     
-    Analysis.countTechPrices()
+    log('countTechPrices disabled')
+    // Analysis.countTechPrices()
+
     
     setTimeout( _ => {
       // all output to clear timestamps
@@ -1982,6 +1984,11 @@ async function parseTechIframe(tree_name) {
       tech[tree_name][target].req.push(source)
       tech[tree_name][source].next.push(target)
     } catch (e) {
+      // just ignore it
+      if(tree_name === 'Unique') {
+        log('"Unique" parse err')
+        continue
+      }
       console.log(e, tree_name, target, tech[tree_name][target], source)
     }
   }
@@ -2806,6 +2813,7 @@ var KEYWORDS = {
     'Гарантированная защита',
     'Двигатель',
     "Регенерация",
+    "Любимец",
   ],
   MODULE_PROPS: [
     "ДУ",
