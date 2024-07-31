@@ -778,11 +778,15 @@ const User = {
       data = data.concat(userDataObj.startingFeature
         .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
       )
+      if(userDataObj.uniqueResources) data = data.concat(userDataObj.uniqueResources
+        .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
+      )
+      if(userDataObj.greatPeople) data = data.concat(userDataObj.greatPeople
+        .map( i => i.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], '1'] : [j[0], +j[1]]))
+        .flat()
+      )
     }
 
-    if(userDataObj && userDataObj.uniqueResources) data = data.concat(userDataObj.uniqueResources
-      .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
-    )
 
     const result = {}
     for(let i of data) {
@@ -1081,6 +1085,17 @@ const parseDoc = {
       {treeName: null, name: null}
     )
 
+    let greatPeople = Array.from(obj['Великие люди'].children[0].rows)
+    greatPeople.splice(0,1)
+    greatPeople = greatPeople
+      .map(e=>Array.from(e.children))
+      .map(e2=>({name:e2[0].innerText, lvl: +e2[1].innerText, effect: e2[2].innerText.replace(/^.*-/,'').trim()}))
+      .filter(e => e.lvl > 0)
+    greatPeople.forEach( e => {
+        e.effect = e.effect.replace('Х',e.lvl)
+        e.effect = parseNode.effects(e.effect,{treeName: null, name: playerName + ' великие люди'})
+      })
+
     let uniqueResources = Array.from(obj['Уникальные ресурсы'].children[0].rows)
     uniqueResources.splice(0,1)
     if(uniqueResources.length == 1 && uniqueResources[0].innerText == '') uniqueResources = null
@@ -1098,6 +1113,7 @@ const parseDoc = {
       additionalParams,
       buildings: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
       orbital: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
+      greatPeople,
       uniqueResources,
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
     }
@@ -1357,7 +1373,7 @@ var KEYWORDS = {
     "Аномалия"
   ],
   TECH_EFFECTS: [
-      // индустрия
+    // индустрия
     "Планетарная разведка",
     "Солнце",
     "Строительство",
@@ -1407,6 +1423,7 @@ var KEYWORDS = {
     'вне родной системы',
   ],
   SINGLE_TIME_EFFECTS: [
+    "\\?",
     'Временно',
     'Великий человек',
     'выдаётся при высадке',
@@ -1522,6 +1539,7 @@ const parseNode = {
         // Эффекты и бонусы:
         .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // Плюсы к научным веткам
+        .replace(/^Вет(?:ка|вь) "?([^ "]+)"? \+?(\d+)/i, 'Исследования (ветка "$1"):$2')
         .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
         // армии и звездолёты
         .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), 'Тип юнита:$1')
