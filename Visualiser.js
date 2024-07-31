@@ -378,7 +378,8 @@ const HTMLUtils = {
   },
 
   focusModal(el) {
-    for(let i of document.querySelectorAll('.modal')) {
+    if(!el) return
+    for(let i of document.querySelectorAll('.modal:not([hidden])')) {
       i.style.zIndex = 0
     }
     el.style.zIndex = 1
@@ -403,14 +404,14 @@ const HTMLUtils = {
   },
 
   closeModal(name) {
-    const tgt = Array.from(document.querySelectorAll('.modal')).map(e => e.id).filter(e => e.includes(name))[0]
+    const tgt = Array.from(document.querySelectorAll('.modal:not([hidden])')).map(e => e.id).filter(e => e.includes(name))[0]
     if(!tgt) return
     getEl(tgt).hidden = true
     this.unregisterModalPath(name)
   },
 
   hideAllModals() {
-    for(let i of document.querySelectorAll('.modal')) {
+    for(let i of document.querySelectorAll('.modal:not([hidden])')) {
       i.hidden = true
     }
     location.hash = ''
@@ -437,7 +438,9 @@ const HTMLUtils = {
           setTimeout(_ => searchEnabled = false, 50)
         }
         else {
-          this.hideAllModals()
+          document.querySelector('.modal[style*="z-index: 1"]:not([hidden]) button.btn_close').click()
+          this.focusModal(document.querySelector('.modal:not([hidden])'))
+          // this.hideAllModals()
         }
       },
       'Ctrl F': _ => searchEnabled = true,
