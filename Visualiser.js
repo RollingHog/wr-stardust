@@ -531,7 +531,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/^(\d+)$/i, studyCubesType + ':$1')
       .replace(/^(\d+) этапа$/i, 'Этапы:$1')
       .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
-      .replace(/^(\d+) слота$/i, 'Слоты:$1')
+      .replace(/^(\d+) слот(а|ов)$/i, 'Слоты:$1')
       .replace(/^тех. (.+)$/i, 'Технология:$1')
       .replace(/^(осуждение|волнения|непривычная среда) ?\((.+)\)$/i, '$1:+$2')
       .replace(/^(затраты|специалисты|ресурсы) ?\((.+)\)$/i, '$1:$2')

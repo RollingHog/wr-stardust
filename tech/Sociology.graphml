@@ -448,20 +448,6 @@
     <node id="n33">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="991.0"/>
-          <y:Fill color="#CC99FF" transparent="false"/>
-          <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="247.216796875" x="6.2666015625" xml:space="preserve" y="-0.40234375">Единая теория разума
-Сложность: 5
-Эффект: особое: +1 куб к взаимодействию 
-с нечеловеческим разумом<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="rectangle"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n34">
-      <data key="d6">
-        <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="163.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
@@ -472,7 +458,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n35">
+    <node id="n34">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="71.0"/>
@@ -485,7 +471,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n36">
+    <node id="n35">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="531.0"/>
@@ -498,7 +484,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n37">
+    <node id="n36">
       <data key="d4" xml:space="preserve"/>
       <data key="d6">
         <y:ShapeNode>
@@ -512,7 +498,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n38">
+    <node id="n37">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="163.0"/>
@@ -525,7 +511,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n39">
+    <node id="n38">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="347.0"/>
@@ -539,7 +525,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n40">
+    <node id="n39">
       <data key="d5" xml:space="preserve"><![CDATA["Возьмите сто человек, и среди них обязательно будет трое воров, двое убийц и один злостный неплательщик налогов" 
  – Наставление молодого полицейского, стр. 2.]]></data>
       <data key="d6">
@@ -554,7 +540,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n41">
+    <node id="n40">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="619.7016846749204" y="1267.0"/>
@@ -568,7 +554,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n42">
+    <node id="n41">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="45.06050483528702" y="163.0"/>
@@ -582,7 +568,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n43">
+    <node id="n42">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="51.134030035745354" y="347.0"/>
@@ -595,7 +581,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n44">
+    <node id="n43">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="49.919324995653625" y="898.9999999999999"/>
@@ -609,7 +595,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n45">
+    <node id="n44">
       <data key="d4" xml:space="preserve"/>
       <data key="d6">
         <y:ShapeNode>
@@ -623,7 +609,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n46">
+    <node id="n45">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="907.0222745947374" y="436.0"/>
@@ -637,7 +623,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n47">
+    <node id="n46">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="-20.455687118765724"/>
@@ -648,7 +634,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n48">
+    <node id="n47">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="71.0"/>
@@ -659,7 +645,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n49">
+    <node id="n48">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="163.0"/>
@@ -670,7 +656,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n50">
+    <node id="n49">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="899.0"/>
@@ -684,7 +670,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n51">
+    <node id="n50">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="51.13403003574538" y="436.0"/>
@@ -697,7 +683,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n52">
+    <node id="n51">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="806.9999999999999"/>
@@ -710,12 +696,12 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n53">
+    <node id="n52">
       <data key="d5" xml:space="preserve"><![CDATA["Каждый индивидуум имеет право... на форк законодательства и внесение в него... не противоречащих настоящей Конституции изменений"
 – Конституция Сообщества, п. 19]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="1083.0"/>
+          <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="1175.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="234.736328125" x="12.5068359375" xml:space="preserve" y="6.948242187500114">Индивидуализация законодательства
@@ -725,7 +711,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n54">
+    <node id="n53">
       <data key="d5" xml:space="preserve"><![CDATA["Каждый гражданин имеет право на свободу... от явных проявлений государства"
  – Конституция Сообщества, п.4]]></data>
       <data key="d6">
@@ -740,7 +726,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n55">
+    <node id="n54">
       <data key="d5" xml:space="preserve"><![CDATA[И ЭТО НАШЕ СЛОВО! АМИНЬ!]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -754,7 +740,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n56">
+    <node id="n55">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="714.9999999999999"/>
@@ -768,7 +754,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n57">
+    <node id="n56">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="991.0"/>
@@ -781,7 +767,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n58">
+    <node id="n57">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="1083.0"/>
@@ -794,25 +780,25 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n59">
+    <node id="n58">
       <data key="d5" xml:space="preserve"><![CDATA[Это что-то вроде мяуканья кошки. 
 Не то чтобы тот же уровень, но трансцендентный ИИ должен примерно понять. 
 Сюда же от души напихано того, что с  должно выглядеть ювенальщиной и умильностью
  - просто на случай, если над нами уже занесли странглетовый тапок.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="1083.0"/>
+          <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="1267.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="242.306640625" x="8.7216796875" xml:space="preserve" y="-0.40234375">Трансцендентная дипломатия
 Сложность: 7
-Эффект: особое: договороспособность 
+Эффект: :договороспособность 
 при общении с трансцендентным разумом<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n60">
+    <node id="n59">
       <data key="d5" xml:space="preserve"><![CDATA[Желания народа - закон для государства.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -826,7 +812,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n61">
+    <node id="n60">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="255.0"/>
@@ -837,7 +823,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n62">
+    <node id="n61">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="347.0"/>
@@ -848,7 +834,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n63">
+    <node id="n62">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="436.0"/>
@@ -859,7 +845,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n64">
+    <node id="n63">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="531.0"/>
@@ -870,7 +856,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n65">
+    <node id="n64">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="623.0"/>
@@ -881,7 +867,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n66">
+    <node id="n65">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="715.0"/>
@@ -892,7 +878,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n67">
+    <node id="n66">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="807.0"/>
@@ -903,7 +889,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n68">
+    <node id="n67">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="899.0"/>
@@ -914,7 +900,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n69">
+    <node id="n68">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="991.0"/>
@@ -925,7 +911,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n70">
+    <node id="n69">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="907.0222745947374" y="71.0"/>
@@ -938,7 +924,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n71">
+    <node id="n70">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="715.0"/>
@@ -952,7 +938,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n72">
+    <node id="n71">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="1083.0"/>
@@ -963,7 +949,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n73">
+    <node id="n72">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="1175.0"/>
@@ -974,7 +960,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n74">
+    <node id="n73">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="899.0"/>
@@ -987,7 +973,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n75">
+    <node id="n74">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="531.0"/>
@@ -1000,7 +986,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n76">
+    <node id="n75">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="334.0" y="436.0"/>
@@ -1013,7 +999,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n77">
+    <node id="n76">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="47.775664736574896" y="531.0"/>
@@ -1026,7 +1012,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n78">
+    <node id="n77">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="347.0"/>
@@ -1039,7 +1025,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n79">
+    <node id="n78">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="54.77814515602017" y="71.0"/>
@@ -1052,7 +1038,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n80">
+    <node id="n79">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="54.77814515602017" y="-20.455687118765724"/>
@@ -1065,7 +1051,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n81">
+    <node id="n80">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="904.5928645145539" y="-20.455687118765724"/>
@@ -1078,23 +1064,23 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n82">
+    <node id="n81">
       <data key="d5" xml:space="preserve"><![CDATA["Разным людям кажутся интересными и достойными распространения разные вещи.
 Но невзирая на разные культуры, разные языки, разную морфологию сознания... 
 Всегда есть некий общий фундамент. Фундамент, который мы смогли найти и  захватить."]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1194.3428645145539" y="1175.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="1194.3428645145539" y="1267.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="96.853515625" x="81.4482421875" xml:space="preserve" y="6.9482421875">Идеальный мем
-Сложность: 70
+Сложность: 80
 Эффект: победа<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="ellipse"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n83">
+    <node id="n82">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="436.0"/>
@@ -1107,7 +1093,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n84">
+    <node id="n83">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="807.0"/>
@@ -1121,7 +1107,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n85">
+    <node id="n84">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="899.0"/>
@@ -1134,7 +1120,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n86">
+    <node id="n85">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="66.38924525429923" x="-45.08791578114938" y="1267.0000000000002"/>
@@ -1145,7 +1131,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n87">
+    <node id="n86">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="715.0"/>
@@ -1158,7 +1144,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n88">
+    <node id="n87">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="807.0"/>
@@ -1168,6 +1154,89 @@
 Сложность: 5
 Эффект: Шпионаж +3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n88">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="439.0"/>
+          <y:Fill color="#CC99FF" transparent="false"/>
+          <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="226.80859375" x="16.470703125" xml:space="preserve" y="-0.40234375">ЧВК
+Сложность: 3
+Эффект: :на 1д10 не растёт Осуждение
+от потери отряда<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n89">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="1484.0928645145539" y="1083.0"/>
+          <y:Fill color="#CC99FF" transparent="false"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="177.068359375" x="41.3408203125" xml:space="preserve" y="6.9482421875">Клиника рекомбинации разума
+Сложность: 2
+Эффект: Наука +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="parallelogram"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n90">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="1175.0"/>
+          <y:Fill color="#CC99FF" transparent="false"/>
+          <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="253.890625" x="2.9296875" xml:space="preserve" y="-0.40234375">Единая теория разума
+Сложность: 5
+Эффект: особое: +2 куба к взаимодействию 
+с нечеловеческим разумом<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n91">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="1175.0"/>
+          <y:Fill color="#CC99FF" transparent="false"/>
+          <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.07421875" x="30.837890625" xml:space="preserve" y="-0.40234375">Поддержание пассионарности
+Сложность: 5, осуждение (2)
+Эффект: Общество +2, :обществу 
+не грозит стагнация<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n92">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="334.0" y="899.0"/>
+          <y:Fill color="#CC99FF" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="201.900390625" x="28.9248046875" xml:space="preserve" y="-0.40234375">Космические бродяги
+Сложность: 6
+Эффект: Общество +1, :за каждый 
+приписанный к планете корабль<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n93">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="614.8428645145539" y="1083.0"/>
+          <y:Fill color="#CC99FF" transparent="false"/>
+          <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="228.00390625" x="15.873046875" xml:space="preserve" y="-0.40234375">Астранет
+Сложность: 6, любая тех. FTL-связи
+Эффект: :произвольное распределение
+кубов Общества по планетам<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="hexagon"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -1271,7 +1340,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e10" source="n13" target="n35">
+    <edge id="e10" source="n13" target="n34">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1311,7 +1380,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e14" source="n25" target="n39">
+    <edge id="e14" source="n25" target="n38">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1361,7 +1430,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e19" source="n6" target="n7">
+    <edge id="e19" source="n7" target="n30">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1371,7 +1440,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e20" source="n7" target="n30">
+    <edge id="e20" source="n17" target="n28">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1381,17 +1450,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e21" source="n17" target="n28">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e22" source="n10" target="n19">
+    <edge id="e21" source="n10" target="n19">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-1.3820044774961389" sy="7.817832611798885" tx="0.0" ty="0.0"/>
@@ -1401,7 +1460,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e23" source="n11" target="n13">
+    <edge id="e22" source="n11" target="n13">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1411,7 +1470,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e24" source="n50" target="n33">
+    <edge id="e23" source="n1" target="n26">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1421,7 +1480,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e25" source="n1" target="n26">
+    <edge id="e24" source="n12" target="n33">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1431,7 +1490,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e26" source="n12" target="n34">
+    <edge id="e25" source="n12" target="n17">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1441,7 +1500,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e27" source="n12" target="n17">
+    <edge id="e26" source="n35" target="n31">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1451,7 +1510,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e28" source="n36" target="n31">
+    <edge id="e27" source="n4" target="n31">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1461,7 +1520,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e29" source="n4" target="n31">
+    <edge id="e28" source="n14" target="n37">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1471,7 +1530,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e30" source="n14" target="n38">
+    <edge id="e29" source="n1" target="n36">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1481,7 +1540,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e31" source="n1" target="n37">
+    <edge id="e30" source="n2" target="n39">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1491,7 +1550,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e32" source="n2" target="n40">
+    <edge id="e31" source="n6" target="n43">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1501,7 +1560,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e33" source="n6" target="n44">
+    <edge id="e32" source="n19" target="n44">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1511,7 +1570,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e34" source="n19" target="n45">
+    <edge id="e33" source="n24" target="n45">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1521,7 +1580,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e35" source="n24" target="n46">
+    <edge id="e34" source="n0" target="n41">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1531,7 +1590,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e36" source="n0" target="n42">
+    <edge id="e35" source="n2" target="n42">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1541,7 +1600,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e37" source="n2" target="n43">
+    <edge id="e36" source="n3" target="n50">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1551,7 +1610,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e38" source="n3" target="n51">
+    <edge id="e37" source="n5" target="n51">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1561,7 +1620,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e39" source="n5" target="n52">
+    <edge id="e38" source="n51" target="n21">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1571,7 +1630,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e40" source="n52" target="n21">
+    <edge id="e39" source="n30" target="n53">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1581,7 +1640,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e41" source="n7" target="n53">
+    <edge id="e40" source="n30" target="n54">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1591,7 +1650,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e42" source="n30" target="n54">
+    <edge id="e41" source="n31" target="n55">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1601,7 +1660,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e43" source="n30" target="n55">
+    <edge id="e42" source="n49" target="n56">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1611,7 +1670,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e44" source="n31" target="n56">
+    <edge id="e43" source="n56" target="n57">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1621,7 +1680,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e45" source="n50" target="n57">
+    <edge id="e44" source="n53" target="n59">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1631,7 +1690,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e46" source="n57" target="n58">
+    <edge id="e45" source="n13" target="n69">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1641,7 +1700,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e47" source="n54" target="n60">
+    <edge id="e46" source="n15" target="n70">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1651,37 +1710,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e48" source="n13" target="n70">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e49" source="n74" target="n33">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e50" source="n15" target="n71">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e51" source="n71" target="n16">
+    <edge id="e47" source="n70" target="n16">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1693,7 +1722,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e52" source="n16" target="n74">
+    <edge id="e48" source="n16" target="n73">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1703,7 +1732,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e53" source="n33" target="n59">
+    <edge id="e49" source="n3" target="n75">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1713,7 +1742,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e54" source="n3" target="n76">
+    <edge id="e50" source="n75" target="n4">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1723,7 +1752,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e55" source="n76" target="n4">
+    <edge id="e51" source="n53" target="n40">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1733,7 +1762,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e56" source="n54" target="n41">
+    <edge id="e52" source="n75" target="n76">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1743,7 +1772,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e57" source="n76" target="n77">
+    <edge id="e53" source="n2" target="n77">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1753,7 +1782,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e58" source="n2" target="n78">
+    <edge id="e54" source="n0" target="n78">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1763,7 +1792,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e59" source="n0" target="n79">
+    <edge id="e55" source="n13" target="n80">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1773,7 +1802,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e60" source="n13" target="n81">
+    <edge id="e56" source="n24" target="n82">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1783,7 +1812,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e61" source="n58" target="n82">
+    <edge id="e57" source="n82" target="n32">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1793,7 +1822,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e62" source="n24" target="n83">
+    <edge id="e58" source="n82" target="n74">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1803,7 +1832,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e63" source="n83" target="n32">
+    <edge id="e59" source="n82" target="n20">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1813,7 +1842,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e64" source="n83" target="n75">
+    <edge id="e60" source="n75" target="n35">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1823,7 +1852,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e65" source="n83" target="n20">
+    <edge id="e61" source="n83" target="n84">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1833,7 +1862,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e66" source="n76" target="n36">
+    <edge id="e62" source="n83" target="n49">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1843,7 +1872,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e67" source="n84" target="n85">
+    <edge id="e63" source="n86" target="n87">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1853,7 +1882,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e68" source="n84" target="n50">
+    <edge id="e64" source="n20" target="n8">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1863,7 +1892,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e69" source="n87" target="n88">
+    <edge id="e65" source="n8" target="n86">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1873,7 +1902,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e70" source="n20" target="n8">
+    <edge id="e66" source="n86" target="n83">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1883,7 +1912,8 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e71" source="n8" target="n87">
+    <edge id="e67" source="n3" target="n88">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1893,7 +1923,96 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e72" source="n87" target="n84">
+    <edge id="e68" source="n56" target="n89">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e69" source="n57" target="n90">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e70" source="n90" target="n81">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e71" source="n90" target="n58">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e72" source="n57" target="n91">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e73" source="n30" target="n52">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e74" source="n6" target="n92">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e75" source="n92" target="n7">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e76" source="n7" target="n93">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
