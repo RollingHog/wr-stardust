@@ -134,13 +134,6 @@ async function Init() {
       .map(e => parseTechIframe(e))
     )
     .then(_ => {
-      Analysis.reportBadY()
-
-      // console.log(listParam('cost', false))
-      console.log(listParam('costClear'))
-      console.log(listAllWithoutMilitary())
-      if(techData.badTechCount) console.log('unrecognized tech:', techData.badTechCount)
-
       for (let i of TREELIST) {
         drawTree(i)
       }
@@ -162,6 +155,12 @@ async function Init() {
         }
       }
 
+      Analysis.reportBadY()
+
+      // console.log(listParam('cost', false))
+      console.log(listParam('costClear'))
+      console.log(listAllWithoutMilitary())
+      if(techData.badTechCount) console.log('unrecognized tech:', techData.badTechCount)
 
       Analysis.searchBadTechRefs()
 
@@ -789,6 +788,7 @@ var KEYWORDS = {
     "нано",
     "странглет",
   ],
+  // MODULE_NUM_PROPS: [],
   MODULE_PROPS: [
     "ДУ",
     "роботы",
