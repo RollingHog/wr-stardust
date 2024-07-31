@@ -49,11 +49,11 @@ const VARS = {
     // 1.2,
     1,
     // #3
-    2,
+    1,
     // 2.2,
     2,
     // #5
-    3,
+    2,
     // 3.2,
     // 3.5,
     3, 3,
@@ -639,35 +639,42 @@ const Analysis = {
 
         // tcost<10 in case is's some superstructure
         if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 && !['octagon','trapezoid2'].includes(j.type) ) {
-          log(i, j.name, `cost looks bad: ${tcost}->${mult}`, j)
+          log(i, `\n${j.name}\n`, `cost looks bad: ${tcost}->${mult}`, j)
           cnt++
           continue
         }
         
-        for(let k of j.effect) {
-          if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
-          else if(k[0]=='Сверхадаптация') {
-            teff += +k[1]*0.9
-          } 
-          else if(
-            KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])
-            || KEYWORDS.TECH_EFFECTS.includes(k[0])
-            || k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
-          ) teff += +k[1]/2
-          // eslint-disable-next-line no-empty
-          else if(KEYWORDS.MATERIALS.includes(k[0])) {}
-          // eslint-disable-next-line no-empty
-          else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
-          // eslint-disable-next-line no-empty
-          else if(k[0] == 'Временно') {
-            // k[0] == 'особое' || 
-            teff = 0
-            break
-          }
-          else {
-            // log('what is this?', j.name, k)
-            // fail = true
-            // break
+        //its regulated manually
+        if(!['octagon','trapezoid2'].includes(j.type)) {
+          for(let k of j.effect) {
+            if(k[0]==KEYWORDS.ANY_PARAM_KEYWORD) {
+              if(mult === 1) teff += +k[1]
+              else teff += +k[1]*2
+            }
+            else if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
+            else if(k[0]=='Сверхадаптация') {
+              teff += +k[1]*0.9
+            } 
+            else if(
+              KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])
+              || KEYWORDS.TECH_EFFECTS.includes(k[0])
+              || k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
+            ) teff += +k[1]/2
+            // eslint-disable-next-line no-empty
+            else if(KEYWORDS.MATERIALS.includes(k[0])) {}
+            // eslint-disable-next-line no-empty
+            else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
+            // eslint-disable-next-line no-empty
+            else if(k[0] == 'Временно') {
+              // k[0] == 'особое' || 
+              teff = 0
+              break
+            }
+            else {
+              // log('what is this?', j.name, k)
+              // fail = true
+              // break
+            }
           }
         }
 
@@ -680,9 +687,9 @@ const Analysis = {
         const delta = +tcost - +teff
 
         if(d && mult && j.lvl !== techData.MAX_TECH_LVL) {
-          if(delta < 0 || delta > 1) {
+          if(delta < -0.6 || delta > 1) {
             cnt++
-            log(i, 'lvl', j.lvl, j.name,  j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1?'ДОРОГО':"ДЕШЕВО")
+            log(i, 'lvl', j.lvl,`\n${j.name}\n`,  j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1?'ДОРОГО':"ДЕШЕВО")
           }
         }
       }
