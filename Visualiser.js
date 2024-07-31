@@ -2,6 +2,9 @@
 
 */
 
+const VERSION = '1.0.0'
+console.log(VERSION)
+
 // UTILS
 
 const log = console.log
