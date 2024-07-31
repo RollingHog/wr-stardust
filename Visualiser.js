@@ -9,7 +9,7 @@ FILL_2_TREE_TYPE
   draw
 */
 
-const VERSION = '1.0.1'
+const VERSION = '1.0.2'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
@@ -105,6 +105,7 @@ const VARS = {
       ["Строительство", -1],
       ["Пуски", -1],
       ['Исследования (ветка "Физика пространства")', 1],
+      ["Трансураны", 1],
       ["особое","высокая гравитация"],
     ],
   },
@@ -2311,7 +2312,7 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
-        .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?(\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?([\\d.]+)$`), '$1:$2')
         .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, KEYWORDS.CREATION_KEYWORD + ' $1:$2')
         // типы урона, эффекты оружия
         .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), KEYWORDS.ALL_RIGHT)
