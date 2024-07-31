@@ -1,6 +1,7 @@
 // common.js
 /* global
 getEl log
+PLA
 */
 
 // draw.js
@@ -426,7 +427,6 @@ const Analysis = {
         ]))
   },
   /**
-   * 
    * @param {TTechObject} techObj 
    */
   getSubtreeName(techObj) {
@@ -495,7 +495,7 @@ const Analysis = {
   },
 
   Reports: {
-   статистика_по_эффектам_тех() {
+   эффекты_тех() {
       let filter = [].concat(
         KEYWORDS.COLONY_PARAMS,
         KEYWORDS.ADDITIONAL_COLONY_PARAMS,
@@ -510,7 +510,7 @@ const Analysis = {
       Analysis.reportTable(Analysis.excludeByDict(statAllEffects, filter))
     },
   
-    showEffectsStat(filter) {
+    вообще_все_эффекты(filter) {
       if(!filter) {
         Analysis.reportTable(statAllEffects)
       } else {
@@ -542,7 +542,7 @@ const Analysis = {
       ))
     },
 
-    список_технологий_по_геометрической_форме() {
+    список_технологий_по_типу() {
       Analysis.reportTable(
         Object.values(inverted.alltech)
           .reduce( (acc, e) => {
@@ -553,6 +553,18 @@ const Analysis = {
             return acc
           }, {})
       )
+    },
+
+    // чтоьы прикинуть сколько давать вкатившимся после начала игры
+    суммарное_количество_проектов_сделанных_каждым_из_игроков() {
+      const result = Object.fromEntries(Object.entries(window[VARS.PLAYERS_DATA_KEY])
+        .map(e => [e[0],
+          e[1].buildings.length 
+          + e[1].orbital.length 
+          + Object.values(e[1].localProjs).flat().length 
+          + Object.values(e[1].techTable).flat().length
+        ]))
+      Analysis.reportTable(result)
     },
 
     // drawGraph() {
