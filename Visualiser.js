@@ -37,7 +37,7 @@ const tech = {}
 const badCells = Object.fromEntries(TREELIST.map(e=>[e,[]]))
 const stat = {}
 const techLevels = Object.fromEntries(TREELIST.map(e => [e,[]]))
-const difficultyMults = [
+const DIFFICULTY_MULTS = [
   0,
   1,
   1.2,
@@ -158,7 +158,7 @@ const Analysis = {
       if(i == 'Military') continue
       for(let j of Object.values(tech[i])) {
         const lvl = techLevels[i].indexOf(j.y.toString())+1
-        const mult = difficultyMults[lvl+1]
+        const mult = DIFFICULTY_MULTS[lvl+1]
         let d = +j.cost[0][1]/+j.effect[0][1]
         if(!PARAMLIST_RU.includes(j.effect[0][0])) {
           d *= 2
