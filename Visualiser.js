@@ -79,7 +79,6 @@ async function Init() {
       ))
   }
   
-  const parser = new DOMParser()
   for (let i of TREELIST) {
     const src = `tech/${i}.graphml`
     if(isLocalFile) {
