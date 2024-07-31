@@ -20,12 +20,12 @@ const lvlPadding = 10
 const cntPadding = 160
 
 function createImage(playerName = 'Беглецы') {
-  // FIXME its just an example
+  getEl('el_main').innerHTML = ''
+
   const buildingNamesList = [].concat(
-    playersData.Беглецы.buildings,
-    playersData.Беглецы.orbital
+    playersData[playerName].buildings,
+    playersData[playerName].orbital
   )
-  
   
   let lvl = 0
   let cnt = 0
@@ -46,13 +46,22 @@ function showBuilding(name, lvl, cnt, length) {
   el.style.zIndex = length - lvl
   el.style.bottom = `${2 + lvl * lvlPadding}vh`
   el.style.left = `${pageW/2 + (-lvl/2 + cnt)*cntPadding}px`
-  el.innerText = name
+  const imgName = name
+    .toLowerCase()
+    .replace(/\([^)]+\)/g,'')
+    .trim()
+    .replace(/ /g, '_')
+  el.innerHTML = `<img src='assets/buildings/${imgName}.png' alt="${name}">`
   el.title = name
 
-  document.body.appendChild(el)
+  getEl('el_main').appendChild(el)
 }
 
 function main() {
-  createImage()
+  getEl('el_select_colony').innerHTML = Object.keys(playersData)
+    .map (e => `<option value="${e}">${e}`)
+    .join('\n')
+  getEl('el_select_colony').onchange = _ => createImage(getEl('el_select_colony').value)
+  createImage(getEl('el_select_colony').value)
 }
 main()
