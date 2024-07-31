@@ -706,6 +706,19 @@ const Analysis = {
     return +(wins / n).toFixed(3)
   },
 
+  countSuccessTable() {
+    for (let i = 1; i < 15; i++) {
+      let j = i
+      let p = Analysis.countSuccessPossibility(i, j)
+      while (p <= 0.6) {
+        j++
+        p = Analysis.countSuccessPossibility(i, j)
+      }
+      console.log(i, j-1, Analysis.countSuccessPossibility(i, j-1))
+      console.log(i, j, p)
+    }
+  },
+
   /**
    * @param {TGoogleDocUserObj} userObj 
    */
