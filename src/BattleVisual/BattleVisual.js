@@ -53,7 +53,8 @@ const onAddShipTemplate = {
     onAddShipTemplate.addTemplateWithSize(evt, true)
   },
   addTemplateWithSize(evt, isRight) {
-    const size = prompt(`Size? 0-6, 0 is planet; "-" prefix is ground unit, "_" is building, "=" is 'orbital'\n'+' is 'robots', '%' is 'giger'
+    const size = prompt(`Size? 0-6, 0 is planet; "-" prefix is ground unit, "_" is building, "=" is 'orbital'
+'+' is 'robots', '%' is 'giger', '=' is 'non-purist' (militia now)
     `)
     onAddShipTemplate.addTemplate(isRight, {size: size || 3})
   },
@@ -170,8 +171,8 @@ const formRolls = {
         + ' N' + ship.querySelector('.serial').innerHTML
       const shieldNum = +ship.querySelector('.shield.curr').innerHTML
       res += `${shipName} Защита ##${ship.querySelector('.param.defence').innerHTML}d10##\n`
-        // уклонение
-        + (shieldNum>0 ? `${shipName} Щит ##${shieldNum}d10##\n` : '')
+        // TODO уклонение
+        // + (shieldNum>0 ? `${shipName} Щит ##${shieldNum}d10##\n` : '')
     }
     if(res.length) {
       navigator.clipboard.writeText(res)
@@ -180,6 +181,7 @@ const formRolls = {
   },
 }
 
+// eslint-disable-next-line no-unused-vars
 const dumper = {
   fieldsToSave: [
     'id',
