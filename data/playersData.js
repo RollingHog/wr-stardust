@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-04-21T19:16:56.197Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-04-21T19:19:47.885Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -572,7 +572,7 @@ var DATA__PLAYERS_DATA = {
         "Para bellum"
       ],
       "Sociology": [
-        "Подтверждение авторитета",
+        "Подтверждение авторитета (неактивно)",
         "Психологическая адаптация",
         "Мобилизация населения",
         "Целевой отбор"
