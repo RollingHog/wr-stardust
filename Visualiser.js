@@ -567,7 +567,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
       .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
       // модули и оружие, глобальные военные эффекты
-      .replace(/^(Атака|Защита|Скорость|Уклонение) (армий|флотов)? ?\+?(\d+)/, '$1$2:$3')
+      .replace(/^(Атака|Защита|Скорость|Уклонение) (армий|флотов)? ?\+?(\d+)/, '$1 $2:$3')
       .replace(/^\+?(\d+) очк(о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
       .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
       .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
@@ -693,6 +693,8 @@ function parseShapeNode(filename, i) {
   return t
 }
 
+var statAllEffects = {}
+
 function doNodeStat(filename, t) {
   var effects = t.effect,
     cost = t.cost
@@ -707,6 +709,11 @@ function doNodeStat(filename, t) {
   }
 
   for (let effect of effects) {
+    if(!statAllEffects[effect[0]]) {
+      statAllEffects[effect[0]] = 1
+    } else {
+      statAllEffects[effect[0]] += 1
+    }
 
     if(!PARAMLIST_RU.includes(effect[0])) continue
 
