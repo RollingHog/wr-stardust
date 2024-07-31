@@ -779,7 +779,8 @@ const User = {
         data[i] = +startParams[i]
     }
 
-    let res = Object.entries(data)
+    let res = Object.entries(data).concat(userDataObj.startingFeature)
+    if(userDataObj.uniqueResources) res.concat(userDataObj.uniqueResources)
 
     return res
   },
@@ -1021,12 +1022,26 @@ const parseDoc = {
       additionalParams[ak.pop()] = av.pop()
     }
 
+    const startingFeature = parseNode.effects(
+      obj['Данные экспедиции'].children[0].rows[2].children[1].innerText.replace(/^[^-]+- ?/,''),
+      {treeName: null, name: null}
+    )
+
+    const uniqueResources = obj['Уникальные ресурсы'].children[0].rows[1].children[3].innerText.length
+    ? parseNode.effects(
+      obj['Уникальные ресурсы'].children[0].rows[1].children[3].innerText,
+      {treeName: null, name: obj['Уникальные ресурсы'].children[0].rows[1].children[0].innerText}
+    )
+    : null
+
     const data = {
+      startingFeature,
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
       colonyParams,
       additionalParams,
       buildings: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
       orbital: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
+      uniqueResources,
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
     }
     // log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
@@ -1437,6 +1452,8 @@ const parseNode = {
         .replace(/^на (\d+) хода?/i, 'Временно:$1')
         // вещества
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
+        // параметры планеты
+        .replace(new RegExp(`^(${KEYWORDS.PLANET_PARAMS.join('|')}) \\+(\\d+)`), '$1:$2')
         // Эффекты и бонусы:
         .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // Плюсы к научным веткам
