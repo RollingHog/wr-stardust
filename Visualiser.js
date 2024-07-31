@@ -892,10 +892,9 @@ function listAllWithoutMilitary() {
   return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
 }
 
-const SVG_NS = "http://www.w3.org/2000/svg"
-const POLYGON_DELTA = 20
-
 const draw = {
+  SVG_NS: "http://www.w3.org/2000/svg",
+  POLYGON_DELTA: 20,
   Node: function (treeName, t) {
     //  for modules
     //  for projects - rounded rect
@@ -947,7 +946,7 @@ const draw = {
 
   SVG: {
     Prlg: function ({ id, x, y, h, w, borderColor, fill }) {
-      const d = POLYGON_DELTA
+      const d = draw.POLYGON_DELTA
       var points = `
         ${x + d},${y}
         ${x + w},${y}
@@ -958,7 +957,7 @@ const draw = {
     },
 
     Hexagon: function ({ id, x, y, h, w, borderColor, fill }) {
-      const d = POLYGON_DELTA
+      const d = draw.POLYGON_DELTA
       var points = `
         ${x + d},${y}
         ${x},${y + h / 2}
@@ -994,7 +993,7 @@ const draw = {
     },
 
     FatArrow: function ({ id, x, y, h, w, borderColor, fill }) {
-      const d = POLYGON_DELTA
+      const d = draw.POLYGON_DELTA
       var points = `
         ${x},${y}
         ${x + d},${y + h / 2}
@@ -1007,7 +1006,7 @@ const draw = {
     },
 
     Octagon: function ({ id, x, y, h, w, borderColor, fill }) {
-      const d = POLYGON_DELTA
+      const d = draw.POLYGON_DELTA
       var points = `
         ${x + d},${y}
         ${x},${y + h / 3}
@@ -1022,7 +1021,7 @@ const draw = {
     },
 
     Poly(points, { id, borderColor, fill }) {
-      var el = document.createElementNS(SVG_NS, 'polygon')
+      var el = document.createElementNS(draw.SVG_NS, 'polygon')
       el.setAttributeNS(null, 'id', id)
       el.setAttributeNS(null, 'points', points)
       el.setAttributeNS(null, 'fill', fill)
@@ -1035,7 +1034,7 @@ const draw = {
     },
 
     Line: function (x1, y1, x2, y2) {
-      var line = document.createElementNS(SVG_NS, 'line')
+      var line = document.createElementNS(draw.SVG_NS, 'line')
       line.setAttribute('x1', x1)
       line.setAttribute('y1', y1)
       line.setAttribute('x2', x2)
@@ -1048,7 +1047,7 @@ const draw = {
 
     Text: function ({ x, y }, text, fullText, id, fontSize) {
 
-      var el = document.createElementNS(SVG_NS, 'text')
+      var el = document.createElementNS(draw.SVG_NS, 'text')
       el.setAttributeNS(null, 'x', x)
       el.setAttributeNS(null, 'y', y)
       el.setAttributeNS(null, 'id', id + '_t')
@@ -1087,7 +1086,7 @@ const draw = {
     },
 
     Point: function (x, y) {
-      var el = document.createElementNS(SVG_NS, 'circle')
+      var el = document.createElementNS(draw.SVG_NS, 'circle')
       el.setAttributeNS(null, 'cx', x)
       el.setAttributeNS(null, 'cy', y)
       el.setAttributeNS(null, 'r', 3)
@@ -1098,7 +1097,7 @@ const draw = {
     },
 
     Rect: function ({ id, x, y, h, w, borderColor, fill }) {
-      var rect = document.createElementNS(SVG_NS, 'rect')
+      var rect = document.createElementNS(draw.SVG_NS, 'rect')
       rect.setAttributeNS(null, 'id', id)
       rect.setAttributeNS(null, 'x', x)
       rect.setAttributeNS(null, 'y', y)
