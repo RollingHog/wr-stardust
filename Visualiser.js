@@ -1075,6 +1075,10 @@ const User = {
     parseDoc.drawTech(this.activePlayer, treeName)
   },
 
+  getSavedUserData(playerName) {
+    return window[VARS.PLAYERS_DATA_KEY][playerName]
+  },
+
   /**
    * @param {string} treeName 
    * @param {string[]} tech_list 
@@ -1283,13 +1287,16 @@ const User = {
   },
 
   drawUserStat(playerName) {
-    const data = User.countAllUserEffects(window[VARS.PLAYERS_DATA_KEY][playerName])
+    const userData = User.getSavedUserData(playerName)
+    const effectsData = User.countAllUserEffects(userData)
 
     getEl('el_reports_wrapper').hidden = false
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = `<br>
-      <strong>Сводный отчет: ${playerName}</strong>
-      ` + this.createUserTechEffectsTable(data)
+      <strong>Сводный отчет: ${playerName}</strong><br>
+      <a target=_blank 
+        href="./StarSystem.html#${userData.starSystemParams.generatorCode}">Звездная система</a>
+      ` + this.createUserTechEffectsTable(effectsData)
   },
 }
 
@@ -1510,6 +1517,7 @@ const parseDoc = {
         .map( (e,i,arr) => i%2 ? [arr[i-1], +arr[i]] : null)
         .filter(e => e)
     )
+
     let starSystemParams = Array.from(obj['Характеристики звездной системы'].children[0].rows)
       .map(e => Array.from(e.children).map(e2 => e2.innerText))
     starSystemParams = { 
@@ -1519,6 +1527,7 @@ const parseDoc = {
       [starSystemParams[2][0]]: starSystemParams[2][1],
       // Плотность звёздной системы
       [starSystemParams[3][0]]: +starSystemParams[3][1].replace(/\([^)]+\)/g,'').trim(),
+      generatorCode: starSystemParams[4][1]
     }
 
     const startingFeature = parseNode.effects(
