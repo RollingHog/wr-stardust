@@ -85,7 +85,7 @@ const VARS = {
     // Планета вдвое больше Земли
     6: 'Строительство -1, Пуски -1, Ветвь "Физика пространства" +1',
   },
-  hullEffects: {
+  hulls: {
     "пехота": ``,
     "танки": `Защита +2, Скорость +1`,
     "титан": `Защита +3, Щит +1, ужас`,
@@ -260,6 +260,7 @@ async function Init() {
       HTMLUtils.makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
       HTMLUtils.makeElDraggable('el_help', 'el_help_header')
+      HTMLUtils.makeElDraggable('el_battlecalc_wrapper', 'el_battlecalc_header')
 
       console.timeEnd('full load   ')
     })
@@ -366,7 +367,12 @@ const HTMLUtils = {
 
   registerModalPath(name, subName) {
     if(VARS.IS_LOCAL) {
-      location.hash = `${name}${subName ? `__${subName}` : ''}`
+      if(!name) {
+        location.hash = ''
+        return
+      }
+
+      location.hash += `${location.hash?'#':''}${name}${subName ? `__${subName}` : ''}`
     }
   },
 
@@ -596,12 +602,23 @@ const Analysis = {
       .filter( e => e)
       .map(e =>e.split('__'))
 
-    for(let i of path) {
-      if(i[0] === 'report') {
+    location.hash = ''
+
+    const modals = {
+      'report': i1 => {
         Analysis.drawReportsList()
-        if(i[1]) {
-          Analysis.openReport(i[1])
+        if(i1) {
+          Analysis.openReport(i1)
         }
+      },
+      'battlecalc': _ => BattleCalc.open()
+    }
+
+    for(let i of path) {
+      if(modals[i[0]]) {
+        modals[i[0]](i[1])
+      } else {
+        console.warn('Unknown modal: ', i[0])
       }
     }
   },
@@ -1659,7 +1676,7 @@ var KEYWORDS = {
   ],
   UNIT_SLOTS_KEYWORD: 'Слоты',
   UNIT_TYPES_KEYWORD: 'Тип юнита',
-  UNIT_TYPES: Object.keys(VARS.hullEffects),
+  UNIT_TYPES: Object.keys(VARS.hulls),
   DAMAGE_TYPES: [
     "био",
     "рад",
@@ -1972,6 +1989,20 @@ function listAllWithoutMilitary() {
     }
   }
   return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
+}
+
+const BattleCalc = {
+  open() {
+    getEl('el_bc_hull').innerHTML = Object.keys(VARS.hulls).map( e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
+    HTMLUtils.openModal('battlecalc')
+  },
+  processInput() {
+    const hull = getEl('el_bc_hull').value
+    // User.countSummaryCostAndEffect()
+  },
+  close() {
+    HTMLUtils.closeModal('battlecalc')
+  },
 }
 
 const savingOps = {

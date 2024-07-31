@@ -40,7 +40,7 @@
     padding: 4px;
     background: white;
     border: 1px solid grey;
-    height: 80%;
+    height: 90vh;
   }
 
   .modal .header {
@@ -51,10 +51,11 @@
 
   .modal .btn_close {
     float: right;
+    margin-left: -5vw;
   }
 
   .modal .body {
-    height: 90%;
+    height: 87vh;
     overflow-y: scroll;
   }
 </style>
@@ -114,9 +115,25 @@
     <div id="el_reports_header" class="header">
       <strong>Отчеты</strong>
       <button onclick="Analysis.closeReports()" class="btn_close">Close</button>
+      <button id="el_reports_home" onclick="Analysis.drawReportsList()">Full list</button>
     </div>
-    <button id="el_reports_home" onclick="Analysis.drawReportsList()">Full list</button>
     <div id="el_reports_list" class="body"></div>
+  </div>
+
+  <div id="el_battlecalc_wrapper" hidden class="modal"
+    style="right: 10px; top: 30px;">
+    <div id="el_battlecalc_header" class="header">
+      <strong>Battle calc</strong>
+      <button onclick="BattleCalc.close()" class="btn_close">Close</button>
+    </div>
+    <div id="el_bc_body" class="body">
+      <div id="el_bc_input">
+        Тип корпуса: <select id="el_bc_hull"></select>
+      </div>
+      <div id="el_bc_unit">
+        
+      </div>
+    </div>
   </div>
 
   <div id="el_help" class="modal" hidden style="width: auto;">
@@ -135,6 +152,8 @@
   <div id=el_GUI>
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
       <button onclick="el_help.hidden=false" accesskey="F1">Help</button>
+      <br>
+      <button onclick="BattleCalc.open()" accesskey="B">Battle calc</button>
       <br>
       <button onclick="Analysis.drawReportsList()" accesskey="R">Reports</button>
       <br>
