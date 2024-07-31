@@ -123,25 +123,25 @@
   <div id="el_unitcreator_wrapper" hidden class="modal"
     style="right: 10px; top: 30px;">
     <div id="el_unitcreator_header" class="header">
-      <strong>Battle calc</strong>
+      <strong>Unit Creator</strong>
       <button onclick="UnitCreator.close()" class="btn_close">Close</button>
     </div>
-    <div id="el_bc_body" class="body">
-      <div id="el_bc_input">
-        Тип корпуса: <select id="el_bc_hull"></select>
+    <div id="el_uc_body" class="body">
+      <div id="el_uc_input">
+        Тип корпуса: <select id="el_uc_hull"></select>
         <br>
         <br>
-        <input id="el_bc_modules_search" list="el_bc_modules_datalist" placeholder="Поиск модуля">
-        <datalist id="el_bc_modules_datalist"></datalist>  
+        <input id="el_uc_modules_search" list="el_uc_modules_datalist" placeholder="Поиск модуля">
+        <datalist id="el_uc_modules_datalist"></datalist>  
         <br>
         <br>
-        <textarea id="el_bc_modules" placeholder="Модули" style="height: 8em; width: 80%;" title="не знаешь что делаешь - не трогай"></textarea>
+        <textarea id="el_uc_modules" placeholder="Модули" style="height: 8em; width: 80%;" title="не знаешь что делаешь - не трогай"></textarea>
       </div>
       <br>
       <button onclick="UnitCreator.processInput()">Process</button>
       <br>
       <br>
-      <div id="el_bc_unit">
+      <div id="el_uc_unit">
 
       </div>
     </div>
@@ -164,7 +164,7 @@
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
       <button onclick="el_help.hidden=false" accesskey="F1">Help</button>
       <br>
-      <button onclick="UnitCreator.open()" accesskey="B">Battle calc</button>
+      <button onclick="UnitCreator.open()" accesskey="C">Unit Creator</button>
       <br>
       <button onclick="Analysis.drawReportsList()" accesskey="R">Reports</button>
       <br>
