@@ -154,6 +154,7 @@ function countSuccessPossibility(treshold, nOfCubes) {
 }
 
 function countTechPrices() {
+  let cnt = 0
   for (let i of Object.keys(tech)) {
     for(let j of Object.values(tech[i])) {
       const lvl = techLevels[i].indexOf(j.y.toString())+1
@@ -164,10 +165,14 @@ function countTechPrices() {
       }
       if(d && mult) {
         let p = (d/mult).toFixed(2)
-        if(p>1.5 || p<0.6) log(j.name, j.effect[0][0], j.effect[0][1], p, p>1?'ДОРОГО':"ДЕШЕВО")
+        if(p>1.5 || p<0.6) {
+          cnt++
+          log(i, j.name, j.effect[0][0], j.effect[0][1], p, p>1?'ДОРОГО':"ДЕШЕВО")
+        }
       }
     }
   }
+  log('Bad prices:', cnt)
 }
 
 function tspanHighlight() {
