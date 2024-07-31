@@ -535,11 +535,19 @@ const Analysis = {
     вообще_все_эффекты_количественно(){
       const result = Object.values(inverted.alltech)
         .reduce( (acc, e) => {
-          for(let i of e.effect)
-          if(!acc[i[0]])
-            acc[i[0]]=+i[1]
-          else
-            acc[i[0]]+=+i[1]
+          for(let i of e.effect) {
+            const k = i[0]
+            if(!acc[k])
+              acc[k] = {
+                count: 0,
+                list: [],
+              }
+
+              acc[k].count+=+i[1]
+  
+              acc[k].list.push(e.name)
+          }
+
           return acc
         }, {})
         Analysis.reportTable(result)
