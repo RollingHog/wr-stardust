@@ -1769,17 +1769,19 @@ const playerPost = {
 
         const sum = +e.children[pos.wins].innerText + +e.children[pos.critwins].innerText * 2
 
-        if (inverted.alltech[e.children[pos.name].innerText]) {
+        const techText = e.children[pos.name].innerText
 
-          e.children[pos.name].style.backgroundColor = inverted.alltech[e.children[pos.name].innerText].fill
+        if (inverted.alltech[techText]) {
+
+          e.children[pos.name].style.backgroundColor = inverted.alltech[techText].fill
 
           if (!e.children[pos.price].innerText.startsWith('+')) {
-            e.children[pos.price].innerText = inverted.alltech[e.children[pos.name].innerText].cost[0][1]
+            e.children[pos.price].innerText = inverted.alltech[techText].cost[0][1]
           }
 
-          result = e.children[pos.name].innerText
+          result = techText
         } else {
-          console.log('Не найдено', e.children[pos.name].innerText)
+          console.log('Не найдено', techText)
           e.children[pos.name].style.backgroundColor = 'cyan'
           e.children[pos.name].title = 'Название технологии не найдено'
           result = null
