@@ -344,56 +344,33 @@ async function parseTechIframe(tree_name) {
 }
 
 const parseDoc = {
+  lastResult: null,
   async HTML(rawHTML) {
-    var l
+    var arr
     const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
-    l = html
+    arr = html
       .filter(e => e.tagName !== 'BR')
-      .map(({ tagName, innerText, innerHTML }) => ({ tagName, innerText, innerHTML }))
+      .map(({ tagName, innerText, children }) => ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
     // const CONTENT_TAGS = ['DIV', 'P', 'UL']
-    let hs = []
-    let content = []
-    let interm = {}
     let res = {}
-    let t = {}
-    // doesnt work
-    for (let i of l) {
-      if (i.tagName.startsWith('H')) {
-        // header
-        if (!hs.length) {
-          hs.push(i)
-          continue
-        }
-        let last = hs[hs.length - 1]
-        if (last.tagName > i.tagName) {
-          // new H is lower
-        } else if (last.tagName == i.tagName) {
-          // new H is same
-          interm[last.innerText] = content
-          content = []
-        } else if (last.tagName < i.tagName) {
-          // new H is higher order
-          interm[last.innerText] = content
-          content = []
-  
-          let prelast
-          while (hs.length) {
-            prelast = hs.pop()
-            if (prelast.tagName < last.tagName) {
-              t = Object.assign({}, interm)
-              interm = {}
-              interm[prelast.innerText] = t
-              break
-            }
-          }
-          hs.push(prelast)
-        }
-        hs.push(i)
-      } else {
-        content.push(i)
+    let interm = {}
+    let lastH1 = null
+    let lastH = null
+    for(let i in arr) {
+      let e = arr[i]
+      if(e.tagName == 'H1') {
+        if(lastH1) res[lastH1] = interm
+        lastH1 = e.innerText
+        interm = {}
+        continue
       }
+      if(e.tagName.match(/H\d/)) {
+        lastH = e.innerText
+        continue
+      }
+      interm[lastH] = e.el
     }
-    log(interm)
+    res[lastH1] = interm
     return res
   },
   
@@ -455,12 +432,12 @@ const parseDoc = {
     const rawClipboardObj = (await navigator.clipboard.read())[0]
   
     // eslint-disable-next-line no-constant-condition
-    if (rawClipboardObj.types.includes(MIME_HTML) && false) {
+    if (rawClipboardObj.types.includes(MIME_HTML)) {
       raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
-      parseDoc.HTML(raw)
+      this.lastResult = await parseDoc.HTML(raw)
     } else {
       raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
-      parseDoc.text(raw)
+      this.lastResult = parseDoc.text(raw)
     }
   }
 }
