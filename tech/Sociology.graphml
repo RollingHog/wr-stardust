@@ -1614,7 +1614,7 @@
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="156.484375" x="51.6328125" y="6.9482421875">Роботы-слуги
-Сложность: 2
+Сложность: 1
 Эффект: +1 свободный куб<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
