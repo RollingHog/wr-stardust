@@ -1963,7 +1963,9 @@ const playerPost = {
           e.children[pos.critwins].style.backgroundColor = 'lawngreen'
         }
 
-        const sum = +e.children[pos.wins].innerText + +e.children[pos.critwins].innerText * 2
+        const sum = +e.children[pos.wins].innerText 
+          + +e.children[pos.critwins].innerText * 2 
+          // - +e.children[pos.critfails].innerText
 
         const techText = e.children[pos.name].innerText.trim()
 
