@@ -36,6 +36,16 @@ const VARS = {
     "Наука": "Science",
     "Уникальные": "Unique",
   },
+  NODE_T: {
+    TECH: 'rectangle',
+    BUILDING: 'parallelogram',
+    PROJECT: 'hexagon',
+    HULL: 'octagon',
+    MODULE_GROUND: 'trapezoid',
+    MODULE_SPACE: 'trapezoid2',
+    MODULE_BOTH: 'fatarrow',
+  },
+  WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
   TREELIST_EN2RU: null,
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
@@ -680,7 +690,7 @@ const Analysis = {
             // eslint-disable-next-line no-empty
             else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
             // hacky but at least somehow checks efficency
-            else if(['trapezoid','trapezoid2','fatarrow'].includes(j.type) && KEYWORDS.UNIT_SLOTS_KEYWORD === k[0]) {
+            else if(VARS.WAR_MODULES_ARR.includes(j.type) && KEYWORDS.UNIT_SLOTS_KEYWORD === k[0]) {
               teff -= +k[1] * 1.5
             }
             else if(KEYWORDS.MILITARY_PARAMS.includes(k[0])) teff += +k[1]
@@ -1028,7 +1038,7 @@ const Analysis = {
 
   listModuleObjs() {
     return Object.values(inverted.alltech)
-      .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
+      .filter(e => (VARS.WAR_MODULES_ARR.includes(e.type)))
   },
 
   allEffectsVerbose(techObjsObj) {
@@ -2364,6 +2374,7 @@ class TTechObject {
   borderColor
   name
   lvl = 0
+  /** @type {[string, string]} */
   cost = []
   effect = []
   req = []
