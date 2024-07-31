@@ -1597,7 +1597,8 @@ const User = {
     // only after user data aquired
     let ts = ''
     for(let i of User.listUsers()) {
-      ts += `<label><input type="checkbox" id="${i}">${i}</label><br>`
+      const bgColor = User.getSavedUserData(i).playerColor
+      ts += `<label><input type="checkbox" id="${i}">${i}</label>&nbsp;<span style="background-color: ${bgColor}">&emsp;</span><br>`
     }
     getEl('players_selection').innerHTML = ts
   },
@@ -2166,6 +2167,8 @@ const parseDoc = {
       {treeName: null, name: null}
     )
 
+    const playerColor = obj['Данные экспедиции'].children[0].rows[0].children[5].innerText
+
     let greatPeople = Array.from(obj['Великие люди'].children[0].rows)
     greatPeople.splice(0,1)
     greatPeople = greatPeople
@@ -2193,6 +2196,7 @@ const parseDoc = {
       .filter(e => e)
 
     const data = {
+      playerColor,
       startingFeature,
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
       planetParams,
