@@ -912,6 +912,9 @@ const TechUtils = {
     ).join('</tr><tr>') +
     '</tr>'
   },
+  byName(techName) {
+    return inverted.alltech[techName.replace(/ \([^)]+\)/,'')]
+  },
 }
 
 const User = {
@@ -937,10 +940,28 @@ const User = {
       .filter(e => typeof techData.badCells[treeName].find(a => a.id == e.id) === 'undefined')
 
     let list = tech_list.concat(proj_list)
+    const bad = {
+      enemy: list
+        .filter( e => e.search(/\(.*чужое/) != -1)
+        .map(e => e.replace(/ \([^)]+\)/,'')),
+      broken: list
+        .filter( e => e.search(/\(.*сломано/) != -1)
+        .map(e => e.replace(/ \([^)]+\)/,'')),
+    }
+    log(bad)
+    list = list.map(e => e.replace(/ \([^)]+\)/,''))
 
     for (let i of targets) {
-      const pos_tech = list.indexOf(tech[treeName][i.id].name)
+      const name = tech[treeName][i.id].name
+      const pos_tech = list.indexOf(name)
       if (pos_tech != -1) {
+        if(bad.enemy.includes(name)) {
+          i.setAttribute('fill', 'red')
+          continue
+        } else if(bad.broken.includes(name)) {
+          i.setAttribute('fill', 'salmon')
+          continue
+        }
         res.push(i.id)
         list.splice(pos_tech, 1)
       } else if (tech[treeName][i.id].fullText.includes('базовое')) {
@@ -951,8 +972,6 @@ const User = {
     }
 
     // if (list.length > 0) log(`unrecognized tokens for ${treeName}: `, list)
-
-    return list
   },
 
   /**
@@ -1324,8 +1343,11 @@ const parseDoc = {
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
       colonyParams,
       additionalParams,
-      buildings: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
-      orbital: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
+      buildings: [].concat(
+        splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
+        splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
+      ),
+      orbital: splitFilter(obj.Здания.children[0].rows[2].children[1].innerText),
       greatPeople,
       uniqueResources,
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
