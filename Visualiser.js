@@ -675,9 +675,14 @@ const Analysis = {
             else if(KEYWORDS.MATERIALS.includes(k[0])) {}
             // eslint-disable-next-line no-empty
             else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
+            // hacky but at least somehow checks efficency
+            else if(['trapezoid','trapezoid2','fatarrow'].includes(j.type) && KEYWORDS.UNIT_SLOTS_KEYWORD === k[0]) {
+              teff -= +k[1] * 1.5
+            }
             else if(KEYWORDS.MILITARY_PARAMS.includes(k[0])) teff += +k[1]
             else if(KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k[0])) teff += +k[1]/2
-            else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]/1.5
+            else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]
+            else if(KEYWORDS.DAMAGE_TYPES.includes(k[1])) teff += 0.5
             else if(k[0] == 'Временно') {
               // k[0] == 'особое' || 
               teff = 0
