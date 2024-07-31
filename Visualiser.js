@@ -927,6 +927,15 @@ const Analysis = {
       })
       Analysis.reportTable(sum)
     },
+
+    технологии_с_комментариями() {
+      Analysis.reportTable(
+        Object.fromEntries(Object.values(inverted.alltech)
+          .filter(e => e.title)
+          .map(e => [e.name, e.title])
+        )
+      )
+    },
   }
 }
 
@@ -1201,8 +1210,6 @@ const User = {
       <br>` + this.createUserTechEffectsTable(data)
   },
 }
-
-
 
 async function parseTechIframe(tree_name) {
 
@@ -2063,7 +2070,10 @@ function doNodeStat(filename, t) {
       cost is full cost of level, 
       costClear is param-tech-only cost
     */
-    stat[filename][t.y] = { Общество: 0, Производство: 0, Наука: 0, Свободный: 0, cost: 0, costClear: 0, sum: 0 }
+    stat[filename][t.y] = {
+      Общество: 0, Производство: 0, Наука: 0, Свободный: 0, 
+      cost: 0, costClear: 0, sum: 0 
+    }
   }
 
   for (let effect of effects) {
