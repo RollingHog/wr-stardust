@@ -1,5 +1,5 @@
 /* exported
-  log warn getEl
+  log warn getEl locationSearchDecompress
 */
 
 var log = console.log
@@ -21,6 +21,15 @@ function warn(...args) {
 
 function getEl(id) {
   return document.getElementById(id)
+}
+
+function locationSearchToArray(query) {
+  return query
+    .replace(/^\?/, '')
+    .split('&')
+    .filter( e => e)
+    .map( e => e.split('='))
+    .map( ([key, value]) => [key, decodeURIComponent(value)])
 }
 
 var FILL_2_TREE_TYPE = {
