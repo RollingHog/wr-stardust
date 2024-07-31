@@ -730,7 +730,7 @@ const User = {
       })
   },
 
-  countSummaryCostAndEffect(techList, userDataObj) {
+  countSummaryCostAndEffect(techList, userDataObj = null) {
     let data = techList
       .map( e => e.search('сломано') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
@@ -742,11 +742,13 @@ const User = {
     
     data = [].concat.apply([], data)
 
-    data = data.concat(userDataObj.startingFeature
-      .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
-    )
+    if(userDataObj) {
+      data = data.concat(userDataObj.startingFeature
+        .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
+      )
+    }
 
-    if(userDataObj.uniqueResources) data = data.concat(userDataObj.uniqueResources
+    if(userDataObj && userDataObj.uniqueResources) data = data.concat(userDataObj.uniqueResources
       .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
     )
 
