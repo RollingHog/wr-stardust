@@ -89,7 +89,7 @@ async function Init() {
       // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
       console.log(listAllWithoutMilitary())
-      console.log('unrecognized tech:', badTechCount)
+      if(badTechCount) console.log('unrecognized tech:', badTechCount)
 
       for (let i of TREELIST) {
         drawTree(i)
@@ -447,10 +447,13 @@ const KEYWORDS = {
     "биологическое",
     "рад",
     "нано",
+    "странглет",
   ],
   UNIT_PROPS: [
     "ДУ",
     "роботы",
+    "гигеры",
+    "пехота",
     "нет FTL",
     "ужас",
   ],
@@ -497,6 +500,15 @@ const KEYWORDS = {
     "Генные модификации",
     "Адаптация",
     "Сверхадаптация",
+    // социальные
+    "Дипломатия",
+    "Шпионаж",
+    "Контршпионаж",
+    "Пропаганда",
+    "Автозаки",
+    "Политика",
+    "Устранение последствий",
+    "Осуждение",
   ],
 }
 
@@ -516,7 +528,6 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/(базовое)/, ALL_RIGHT)
       .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
       .replace(/(электростанция)/, ALL_RIGHT)
-      .replace(/(повторяемый)/, ALL_RIGHT)
       .replace(/^(\d+)$/i, studyCubesType + ':$1')
       .replace(/^(\d+) этапа$/i, 'Этапы:$1')
       .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
@@ -546,16 +557,13 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       // вещества
       .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
       // Эффекты и бонусы:
-      .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) [+-](\\d+)`), '$1:$2')
-      // : социальные
-      .replace(/(Дипломатия|Шпионаж|Контршпионаж|Пропаганда|Автозаки|Политика|Устранение последствий) [+-](\d+)/, '$1:$2')
-      .replace(/(Осуждение) -(\d+)/, '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) [+-](\\d+)$`), '$1:$2')
       // : военные
       .replace(/(Конверсия|Регенерация|Ремонт (?:армий|флотов)|Бомбардировка) \+(\d+)/, '$1:$2')
       // Плюсы к научным веткам
       .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
       // армии и корпуса кораблей
-      .replace(/(армия|корпус|(?:наземная|космическая) база)/, 'Тип отряда:$1')
+      .replace(/(армия|корпус|хабитат|(?:наземная|космическая) база)/, 'Тип отряда:$1')
       .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
       .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
       // модули и оружие, глобальные военные эффекты
