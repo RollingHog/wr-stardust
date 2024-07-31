@@ -48,7 +48,7 @@
   </include>
   <style id="highlight_css"></style>
 
-  <div style="position: absolute; left: 50px; top: 50px; width: 50%; height: 50%;" hidden>
+  <!-- <div style="position: absolute; left: 50px; top: 50px; width: 50%; height: 50%;" hidden>
     <svg viewBox="0 0 500 100" id="svg_graph" class="chart">
       <polyline
          fill="none"
@@ -60,15 +60,21 @@
            40,80
            60,20"/>
     </svg>
-  </div>
+  </div> -->
   <!-- <canvas id=canvas style="position: absolute; left: 5; top: 5;"></canvas> -->
 
   <div id="el_selected_tech_wrapper" hidden 
     style="position: absolute; left: 50px; top: 50px; width: 70%; padding: 4px; background: white; border: 1px solid grey;">
-    <button onclick="this.parentNode.hidden = true" style="float: right;">Close</button>
+    <div id="el_selected_tech_wrapper_header"
+      style="background-color: lightgray; text-align: center; cursor: move;">
+      <strong>Парсер</strong>
+      <button onclick="getEl('el_selected_tech_wrapper').hidden = true" style="float: right;">Close</button>
+    </div>
     <div id="el_selected_tech_list" contenteditable="true"></div>
-    <button onclick="parseDoc.countTechStudyResult()" style="float: right;">Parse</button>
+
+    <br>
     <strong>Результат</strong>
+    <button onclick="parseDoc.countTechStudyResult()">Parse</button>
     <div id="el_tech_result_list" contenteditable="true"></div>
   </div>
   
