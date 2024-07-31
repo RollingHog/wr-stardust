@@ -279,27 +279,13 @@
       <button onclick="parseDoc.GDocToJS()" title="">GDoc to JS(ON)</button> -->
       <!-- <button onclick="savingOps.openAsPng()" title="Open current tree as png in new tab">Png</button> -->
       <section id=players_selection style="background-color: white;">
-        <label>
-          <input type="checkbox" id="Беглецы"> Беглецы
-        </label><br>
-        <label>
-          <input type="checkbox" id="Кошкодевочки Карины"> Кошкодевочки Карины
-        </label><br>
-        <label>
-          <input type="checkbox" id="Юнитологическая федерация"> Юнитологическая федерация
-        </label><br>
-        <label>
-          <input type="checkbox" id="Инженеры"> Инженеры
-        </label><br>
-        <label>
-          <input type="checkbox" id="ЭНГЕЛЬС-1"> ЭНГЕЛЬС-1
-        </label><br>
-        <label>
-          <input type="checkbox" id="Илоний Джобс"> Илоний Джобс
-        </label><br>
-        <label>
-          <input type="checkbox" id="Пророк Ракель"> Пророк Ракель
-        </label><br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
       </section>
       <section id=doc_section>
         <label style="background: white; user-select: none;">
@@ -310,11 +296,11 @@
       </section>
     </div>
     <section id="tech_tree_buttons" style="position: fixed; right: 8px; bottom: 8px;">
-      <button onclick='drawTree("Biology")'   style="background-color: rgb(204, 255, 204);" hotkey="1">Biology</button>
-      <button onclick='drawTree("Industry")'  style="background-color: rgb(255, 204,   0);" hotkey="2">Industry</button>
-      <button onclick='drawTree("Military")'  style="background-color: rgb(255, 153, 102);" hotkey="3">Military</button>
-      <button onclick='drawTree("Science")'   style="background-color: rgb(153, 204, 255);" hotkey="4">Science</button>
-      <button onclick='drawTree("Sociology")' style="background-color: rgb(204, 153, 255);" hotkey="5">Sociology</button>
+      <button onclick='drawTree(this.innerText)' style="background-color: rgb(204, 255, 204);" hotkey="1">Biology</button>
+      <button onclick='drawTree(this.innerText)' style="background-color: rgb(255, 204,   0);" hotkey="2">Industry</button>
+      <button onclick='drawTree(this.innerText)' style="background-color: rgb(255, 153, 102);" hotkey="3">Military</button>
+      <button onclick='drawTree(this.innerText)' style="background-color: rgb(153, 204, 255);" hotkey="4">Science</button>
+      <button onclick='drawTree(this.innerText)' style="background-color: rgb(204, 153, 255);" hotkey="5">Sociology</button>
     </section>
   </div>
   <button style="position: fixed; left: 8px; top: 30%;" onclick="el_GUI.hidden=!el_GUI.hidden" id="btn_toggleUI" hotkey="T" title="Toggle GUI">&ofcir;</button>

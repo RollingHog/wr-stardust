@@ -230,6 +230,11 @@ async function Init() {
   }
   console.timeEnd('load iframes')
 
+  for(let i of document.querySelectorAll('#tech_tree_buttons button')) {
+    i.id = `btn_${i.innerText}`
+    i.disabled = true
+  }
+
   await parseTechIframe(VARS.TREELIST_NOMIL[0])
   console.time('initial draw')
   drawTree(VARS.TREELIST_NOMIL[0])
@@ -249,6 +254,8 @@ async function Init() {
     
     console.timeEnd('player data ')
     log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
+
+    User.formUsersCheckboxes()
 
     HTMLUtils.enableHotkeysProcessing()
     HTMLUtils.processHotkeyAttribute()
@@ -1379,6 +1386,7 @@ function drawTree(tree_name) {
     setTimeout(TreeView.addTurnPlannerThings,1)
     techData.currentTreeName = tree_name
     User.drawActiveUser(tree_name)
+    getEl('btn_'+tree_name).disabled = false
     return
   }
 
@@ -1406,6 +1414,7 @@ function drawTree(tree_name) {
 
   techData.currentTreeName = tree_name
   User.drawActiveUser(tree_name)
+  getEl('btn_'+tree_name).disabled = false
 }
 
 const TechUtils = {
@@ -1462,6 +1471,15 @@ const User = {
 
   listUsers() {
     return Object.keys(window[VARS.PLAYERS_DATA_KEY])
+  },
+
+  formUsersCheckboxes() {
+    // only after user data aquired
+    let ts = ''
+    for(let i of User.listUsers()) {
+      ts += `<label><input type="checkbox" id="${i}">${i}</label><br>`
+    }
+    getEl('players_selection').innerHTML = ts
   },
 
   /**
