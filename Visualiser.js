@@ -192,7 +192,7 @@ async function Init() {
 
       for (let treeName of TREELIST) {
         for (let j in tech[treeName]) {
-          let [cost, effects] = parseCostAndEffects(tech[treeName][j])
+          let [cost, effects] = parseNode.costAndEffects(tech[treeName][j])
           tech[treeName][j].cost = cost
           tech[treeName][j].effect = effects
           doNodeStat(treeName, tech[treeName][j])
@@ -852,7 +852,7 @@ async function parseTechIframe(tree_name) {
 
   for (let i of techData.graphmls[tree_name].getElementsByTagName('y:ShapeNode')) {
     try {
-      const t = parseShapeNode(tree_name, i)
+      const t = parseNode.node(tree_name, i)
       if (t.badCell) {
         techData.badCells[tree_name].push(t)
         continue
@@ -1209,6 +1209,25 @@ const playerPost = {
   }
 }
 
+class TTechObject {
+  id = ''
+  type
+  treeName = ''
+  borderColor
+  name
+  cost = []
+  effect = []
+  req = []
+  next = []
+  fullText = ''
+  title = ''
+  x
+  y
+  h
+  w
+  fill
+}
+
 var KEYWORDS = {
   ITS_SPECIAL: 'особое',
   COLONY_PARAMS: [
@@ -1348,205 +1367,188 @@ var KEYWORDS = {
   ],
 }
 
-/**
- * @param {TTechObject} t 
- */
-function parseCostAndEffects(t) {
-  const ITS_SPECIAL = KEYWORDS.ITS_SPECIAL + ':'
-  const ALL_RIGHT = ITS_SPECIAL+'$1'
+const parseNode = {
+  /**
+   * @param {TTechObject} t 
+   */
+  costAndEffects(t) {
+    const ITS_SPECIAL = KEYWORDS.ITS_SPECIAL + ':'
+    const ALL_RIGHT = ITS_SPECIAL+'$1'
 
-  const DISABLE_PARSE_IMMUNITY = false
+    const DISABLE_PARSE_IMMUNITY = false
 
-  const studyCubesType = VARS.colorToParameterType[t.borderColor]
+    const studyCubesType = VARS.colorToParameterType[t.borderColor]
 
-  const costRaw = t.cost
-  const effectRaw = t.effect
+    const costRaw = t.cost
+    const effectRaw = t.effect
 
-  const cost = costRaw
-    .split(',')
-    .map(e => e
-      .trim()
-      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
-      .replace(/ {2,}/g, ' ')
-      .replace(new RegExp(`^(${KEYWORDS.TECH_COST_MODS.join('|')})$`), ALL_RIGHT)
-      .replace(/^(\d+)$/i, studyCubesType + ':$1')
-      .replace(/^(\d+) этапа$/i, 'Этапы:$1')
-      .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
-      .replace(/^(\d+) слот(а|ов)$/i, 'Слоты:$1')
-      .replace(/^тех. (.+)$/i, 'Технология:$1')
-      .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
-      .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
-      .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((\\d+)\\)$`), '$1:$2')
-      .split(':')
-    )
+    const cost = costRaw
+      .split(',')
+      .map(e => e
+        .trim()
+        .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
+        .replace(/ {2,}/g, ' ')
+        .replace(new RegExp(`^(${KEYWORDS.TECH_COST_MODS.join('|')})$`), ALL_RIGHT)
+        .replace(/^(\d+)$/i, studyCubesType + ':$1')
+        .replace(/^(\d+) этапа$/i, 'Этапы:$1')
+        .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
+        .replace(/^(\d+) слот(а|ов)$/i, 'Слоты:$1')
+        .replace(/^тех. (.+)$/i, 'Технология:$1')
+        .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((\\d+)\\)$`), '$1:$2')
+        .split(':')
+      )
 
-  if (cost.some(e => e.length < 2)) {
-    console.warn('bad cost', t.name, cost, costRaw)
-    techData.badTechCount++
-  }
-
-  let effect = effectRaw
-    .split(',')
-    .map(e => e
-      .trim()
-      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
-      .replace(/ {2,}/g, ' ')
-      .replace(/^(Общество|Производство|Наука) ([+-]\d+)$/, '$1:$2')
-      .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
-      // временный бонус
-      .replace(/^на (\d+) хода?/i, 'Временно:$1')
-      // вещества
-      .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
-      // Эффекты и бонусы:
-      .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
-      // Плюсы к научным веткам
-      .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
-      // армии и звездолёты
-      .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), 'Тип юнита:$1')
-      // .replace(/(армия|$/, 'Тип отряда:$1')
-      .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
-      .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
-      // модули и оружие, глобальные военные эффекты
-      .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
-      .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
-      .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
-      .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
-      .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
-      .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
-      // типы урона, эффекты оружия
-      .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
-      .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), ALL_RIGHT)
-      // эффекты, дающие великих людей
-      .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
-      .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
-      // базовые вещи
-      .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECT_MODS.join('|')})$`), ALL_RIGHT)
-      // особый эффект - победа
-      .replace(/(победа)/, ALL_RIGHT)
-      .split(':')
-    )
-
-  if (effect.some(e => e.length < 2)) {
-    // it is non-split => not recognized string
-    // effect = null
-    techData.badTechCount++
-    console.warn(t.treeName, t.name, effect.filter(e=>e.length<2)[0], effectRaw)
-  }
-
-  return [cost, effect]
-}
-
-class TTechObject {
-  id = ''
-  type
-  treeName = ''
-  borderColor
-  name
-  cost = []
-  effect = []
-  req = []
-  next = []
-  fullText = ''
-  title = ''
-  x
-  y
-  h
-  w
-  fill
-}
-
-/**
- * 
- * @param {*} filename 
- * @param {*} i 
- * @returns {TTechObject | null}
- */
-function parseShapeNode(filename, i) {
-
-  const sepDifficulty = 'Сложность:'
-  const sepEffect = 'Эффект:'
-
-  const descrDataEl = i.parentElement.parentElement.querySelector('data[key="d5"]')
-  let title = null
-  if(descrDataEl) {
-    title = descrDataEl.innerHTML.replace(/(<!\[CDATA\[|\]\]>)/g,'')
-  }
-
-  const nlabel = i.getElementsByTagName('y:NodeLabel')[0]
-  const fullText = nlabel.innerHTML
-    .split('<')[0]
-    // .replace(/<.+$/g,'')
-    .trimRight()
-  let nodeText = fullText
-    .replace(/\n/g, ' ')
-    .trim()
-
-  const borderColor = i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
-
-  const t = {
-    id: i.parentElement.parentElement.id
-    , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
-    , treeName: filename
-    , borderColor
-    , name: ''
-    , cost: []
-    , effect: []
-    , req: []
-    , next: []
-    , fullText
-    , title
-
-    , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
-    , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(0)
-    , h: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('height')).toFixed(2)
-    , w: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('width')).toFixed(2)
-
-    , fill: i.getElementsByTagName('y:Fill')[0].getAttribute('color')
-
-  }
-
-  // this is not tech node
-  if (nlabel.getAttribute('fontSize') != 12) {
-    t.badCell = true
-    t.fontSize = nlabel.getAttribute('fontSize')
-
-    if(t.fullText.length <= 2) {
-      // its number, lessen width
-      t.w = t.w/1.4
-      t.x = +t.x + +t.w - 5
+    if (cost.some(e => e.length < 2)) {
+      console.warn('bad cost', t.treeName, t.name, cost, costRaw)
+      techData.badTechCount++
     }
+
+    let effect = effectRaw
+      .split(',')
+      .map(e => e
+        .trim()
+        .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
+        .replace(/ {2,}/g, ' ')
+        .replace(/^(Общество|Производство|Наука) ([+-]\d+)$/, '$1:$2')
+        .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
+        // временный бонус
+        .replace(/^на (\d+) хода?/i, 'Временно:$1')
+        // вещества
+        .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
+        // Эффекты и бонусы:
+        .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        // Плюсы к научным веткам
+        .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
+        // армии и звездолёты
+        .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), 'Тип юнита:$1')
+        // .replace(/(армия|$/, 'Тип отряда:$1')
+        .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
+        .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
+        // модули и оружие, глобальные военные эффекты
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
+        .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
+        .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
+        .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
+        .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
+        // типы урона, эффекты оружия
+        .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
+        .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), ALL_RIGHT)
+        // эффекты, дающие великих людей
+        .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
+        .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
+        // базовые вещи
+        .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECT_MODS.join('|')})$`), ALL_RIGHT)
+        // особый эффект - победа
+        .replace(/(победа)/, ALL_RIGHT)
+        .split(':')
+      )
+
+    if (effect.some(e => e.length < 2)) {
+      // it is non-split => not recognized string
+      // effect = null
+      techData.badTechCount++
+      console.warn(t.treeName, t.name, effect.filter(e=>e.length<2)[0], effectRaw)
+    }
+
+    return [cost, effect]
+  },
+
+  /**
+   * 
+   * @param {*} filename 
+   * @param {*} i 
+   * @returns {TTechObject | null}
+   */
+  node(filename, i) {
+
+    const sepDifficulty = 'Сложность:'
+    const sepEffect = 'Эффект:'
+
+    const descrDataEl = i.parentElement.parentElement.querySelector('data[key="d5"]')
+    let title = null
+    if(descrDataEl) {
+      title = descrDataEl.innerHTML.replace(/(<!\[CDATA\[|\]\]>)/g,'')
+    }
+
+    const nlabel = i.getElementsByTagName('y:NodeLabel')[0]
+    const fullText = nlabel.innerHTML
+      .split('<')[0]
+      // .replace(/<.+$/g,'')
+      .trimRight()
+    let nodeText = fullText
+      .replace(/\n/g, ' ')
+      .trim()
+
+    const borderColor = i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
+
+    const t = {
+      id: i.parentElement.parentElement.id
+      , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
+      , treeName: filename
+      , borderColor
+      , name: ''
+      , cost: []
+      , effect: []
+      , req: []
+      , next: []
+      , fullText
+      , title
+
+      , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
+      , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(0)
+      , h: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('height')).toFixed(2)
+      , w: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('width')).toFixed(2)
+
+      , fill: i.getElementsByTagName('y:Fill')[0].getAttribute('color')
+
+    }
+
+    // this is not tech node
+    if (nlabel.getAttribute('fontSize') != 12) {
+      t.badCell = true
+      t.fontSize = nlabel.getAttribute('fontSize')
+
+      if(t.fullText.length <= 2) {
+        // its number, lessen width
+        t.w = t.w/1.4
+        t.x = +t.x + +t.w - 5
+      }
+      t.nodeCenter = {
+        x: ++t.x + ++t.w / 2
+        , y: ++t.y + ++t.h / 2
+      }
+      return t
+    }
+
+    if (nodeText.indexOf(sepDifficulty) == -1 || nodeText.indexOf(sepEffect) == -1) {
+      console.warn(nodeText)
+      return null
+    }
+
+    const split1 = nodeText.split(sepDifficulty)
+    const name = split1[0].trim()
+    const costRaw = split1[1].split(sepEffect)[0].trim()
+    const effectRaw = split1[1].split(sepEffect)[1].trim()
+
+    t.name = name
+    t.cost = costRaw
+    t.effect = effectRaw
+
     t.nodeCenter = {
       x: ++t.x + ++t.w / 2
       , y: ++t.y + ++t.h / 2
     }
+
+    t.textCoords = {
+      x: t.x
+      , y: ++t.y + ++t.h / 2
+    }
+
     return t
-  }
-
-  if (nodeText.indexOf(sepDifficulty) == -1 || nodeText.indexOf(sepEffect) == -1) {
-    console.warn(nodeText)
-    return null
-  }
-
-  const split1 = nodeText.split(sepDifficulty)
-  const name = split1[0].trim()
-  const costRaw = split1[1].split(sepEffect)[0].trim()
-  const effectRaw = split1[1].split(sepEffect)[1].trim()
-
-  t.name = name
-  t.cost = costRaw
-  t.effect = effectRaw
-
-  t.nodeCenter = {
-    x: ++t.x + ++t.w / 2
-    , y: ++t.y + ++t.h / 2
-  }
-
-  t.textCoords = {
-    x: t.x
-    , y: ++t.y + ++t.h / 2
-  }
-
-  return t
+  },
 }
 
 var statAllEffects = {}
