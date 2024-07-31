@@ -441,12 +441,14 @@ function parseShapeNode(filename, i) {
       // вещества
       .replace(/(Добыча|Редкие металлы|Трансураны|Наноматериалы|Антиматерия|Метакрис|Экзотматерия|Нейтроний|Кварк-плазма) \+(\d+)/, '$1:$2')
       // Эффекты и бонусы
-      .replace(/(Строительство|Пуски|Орбита|Астроинженерия|Дипломатия|Шпионаж|Контршпионаж|Автозаки|Конверсия|Регенерация|Ремонт) \+(\d+)/, '$1:$2')
+      .replace(/(Строительство|Пуски|Орбита|Астроинженерия|Терраформинг|Дипломатия|Шпионаж|Контршпионаж|Пропаганда|Автозаки|Конверсия|Регенерация|Ремонт) \+(\d+)/, '$1:$2')
       // Плюсы к научным веткам
       .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
       // армии и корпуса кораблей
       .replace(/(армия|корпус)/, 'Тип отряда:$1')
       .replace(/(\d+) слота?/i, 'Слоты:$1')
+      // модули и оружие, глобальные военные эффекты
+      .replace(/(Атака|Защита|Скорость) \+?(\d+)/, '$1:$2')
       // эффекты, дающие великих людей
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
       // особый эффект - победа
@@ -498,31 +500,33 @@ function parseShapeNode(filename, i) {
 }
 
 function doNodeStat(filename, t) {
-  var effect = t.effect,
+  var effects = t.effect,
   cost = t.cost
 
-  if(effect == null)
-    effect = ['Общество', 0]
+  for (let effect of effects) {
+    if(effect == null)
+      effect = ['Общество', 0]
 
-  if (!stat[filename][t.y]) {
-    /*
-      sum is sum of all param cubes avaliable,
-      cost is full cost of level, 
-      costClear is param-tech-only cost
-    */
-    stat[filename][t.y] = {Общество:0, Производство: 0, Наука:0, Свободный:0, cost:0, costClear:0, sum:0}
-    stat[filename][t.y][effect[0]] = +effect[1]
+    if (!stat[filename][t.y]) {
+      /*
+        sum is sum of all param cubes avaliable,
+        cost is full cost of level, 
+        costClear is param-tech-only cost
+      */
+      stat[filename][t.y] = {Общество:0, Производство: 0, Наука:0, Свободный:0, cost:0, costClear:0, sum:0}
+      stat[filename][t.y][effect[0]] = +effect[1]
+      
+    }
+    else
+      stat[filename][t.y][effect[0]] += +effect[1]
     
+    stat[filename][t.y].sum += +effect[1]
   }
-  else
-    stat[filename][t.y][effect[0]] += +effect[1]
-  
-  stat[filename][t.y].sum += +effect[1]
 
   let cost_facto = +cost[0]
   if(cost[1] == '2 этапа')
     cost_facto *= 2
-  if(effect[1]!=0) { //its actually data
+  if(effects[0][1]!=0) { //its actual data
     stat[filename][t.y].costClear += cost_facto
   }
   stat[filename][t.y].cost += cost_facto
