@@ -452,6 +452,7 @@ const HTMLUtils = {
       }
       if(kMode && kModeHotkeys[keyComb]) {
         kModeHotkeys[keyComb]()
+        kMode = false
         evt.stopPropagation()
         return false
       }
