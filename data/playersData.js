@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2023-05-25T00:48:49.000Z'
+var DATA__PLAYERS_TIMESTAMP = '2023-05-25T13:57:24.191Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -700,7 +700,7 @@ var DATA__PLAYERS_DATA = {
     "colonyParams": {
       "Наука": "10",
       "Производство": "8",
-      "Общество": "11",
+      "Общество": "13",
       "Свободные кубы": "2",
       "Начальные параметры": "2/1/3"
     },
@@ -777,6 +777,10 @@ var DATA__PLAYERS_DATA = {
       [
         "особое",
         "?-1 куб к ветке \"Экзобиология\""
+      ],
+      [
+        "особое",
+        "?"
       ]
     ],
     "localProjs": {
