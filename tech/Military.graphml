@@ -1000,7 +1000,7 @@
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.048828125" x="14.8505859375" y="-0.40234375">Осадное мезонное вооружение
 Сложность: 5, тех. Многомерная физика
 Эффект: Атака 5, 
-бронебойное<y:LabelModel>
+ББ<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1516,7 +1516,7 @@
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="103.533203125" x="78.1083984375" y="-0.40234375">Мезонное оружие
 Сложность: 4
 Эффект: Атака 4,
-бронебойное<y:LabelModel>
+ББ<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
