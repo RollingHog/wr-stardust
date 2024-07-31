@@ -1400,7 +1400,9 @@ const parseDoc = {
       // this.lastResult = parseDoc.text(raw)
     }
     this.lastRaw = raw
-    parseDoc.GDocToJS()
+    if(getEl('el_doPlayersData').checked) {
+      parseDoc.GDocToJS()
+    }
   },
 
   async redoLast() {
@@ -1456,6 +1458,24 @@ const parseDoc = {
       additionalParams[nextK] = nextV
     }
 
+    const planetParams = Object.fromEntries(
+      Array.from(obj['Характеристики планеты'].children[0].rows)
+        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]+\)/g,'').replace(/\+\d+/g,'').trim()))
+        .reduce( (acc, e) => acc = acc.concat(e), [])
+        .map( (e,i,arr) => i%2 ? [arr[i-1], +arr[i]] : null)
+        .filter(e => e)
+    )
+    let starSystemParams = Array.from(obj['Характеристики звездной системы'].children[0].rows)
+      .map(e => Array.from(e.children).map(e2 => e2.innerText))
+    starSystemParams = { 
+      x: +starSystemParams[1][0],
+      y: +starSystemParams[1][1],
+      // Тип, масса и возраст звезды
+      [starSystemParams[2][0]]: starSystemParams[2][1],
+      // Плотность звёздной системы
+      [starSystemParams[3][0]]: +starSystemParams[3][1].replace(/\([^)]+\)/g,'').trim(),
+    }
+
     const startingFeature = parseNode.effects(
       obj['Данные экспедиции'].children[0].rows[2].children[1].innerText.replace(/^[^-]+- ?/,''),
       {treeName: null, name: null}
@@ -1477,7 +1497,7 @@ const parseDoc = {
     if(uniqueResources.length == 1 && uniqueResources[0].innerText == '') uniqueResources = null
     else {
       uniqueResources = parseNode.effects(
-        uniqueResources.map( e => e.children[3].innerText).join(','),
+        uniqueResources.map( e => e.children[2].innerText).join(','),
         {treeName: null, name: playerName + ' уникальные ресурсы'}
       )
     }
@@ -1485,6 +1505,8 @@ const parseDoc = {
     const data = {
       startingFeature,
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
+      planetParams,
+      starSystemParams,
       colonyParams,
       additionalParams,
       buildings: [].concat(
