@@ -1680,6 +1680,9 @@ const User = {
       <strong>Сводный отчет: ${playerName}</strong><br>
       <a target=_blank 
         href="./StarSystem.html#${userData.starSystemParams.generatorCode}&user=${playerName}">Звездная система</a>
+      <br>
+      <a target=_blank 
+        href="./ColonyVisual.html?user=${playerName}">Внешний вид колонии</a>
       ` + this.createUserTechEffectsTable(effectsData)
         + this.createColonyDescription(playerName)
 

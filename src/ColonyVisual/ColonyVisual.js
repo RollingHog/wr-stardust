@@ -3,7 +3,7 @@ console.log(VERSION)
 
 // common.js
 /* global
-getEl log
+getEl log locationSearchToArray
 */
 
 // eslint-disable-next-line no-undef
@@ -19,8 +19,15 @@ const lvlPadding = 10
 // see .building width
 const cntPadding = 160
 
-function createImage(playerName = 'Беглецы') {
+function createImage(playerName) {
   getEl('el_main').innerHTML = ''
+
+  let type = 'terrestrial'
+  const distToStar = playersData[playerName].planetParams['Расстояние до звезды']
+  if(distToStar <= 4) type = type + '_hot'
+  // see BEYOND_SNOW_LINE
+  else if(distToStar >= 7) type = type + '_cold'
+  document.body.style.backgroundImage = `url("assets/planets/${type}.png")`
 
   const buildingNamesList = [].concat(
     playersData[playerName].buildings,
@@ -62,6 +69,10 @@ function main() {
     .map (e => `<option value="${e}">${e}`)
     .join('\n')
   getEl('el_select_colony').onchange = _ => createImage(getEl('el_select_colony').value)
-  createImage(getEl('el_select_colony').value)
+  if(location.search) {
+    getEl('el_select_colony').value = locationSearchToArray(location.search)
+      .filter(([key]) => key === 'user')[0][1]
+    getEl('el_select_colony').onchange()
+  }
 }
 main()
