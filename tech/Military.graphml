@@ -963,9 +963,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-235.3982323275868" y="780.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="162.82421875" x="48.462890625" y="-0.40234375">Десантные капсулы
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="207.431640625" x="26.1591796875" y="-0.40234375">Десантные капсулы
 Сложность: 4
-Эффект: Возможна высадка
+Эффект: особое: возможна высадка
 без подавления МО и ПКО<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -2945,7 +2945,6 @@
       </data>
     </edge>
     <edge id="e81" source="n4" target="n110">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>

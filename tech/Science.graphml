@@ -193,9 +193,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="333.32552027269463" y="-30.369788302834735"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="229.978515625" x="14.8857421875" y="6.948242187500028">Звёдные карты
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="177.51953125" x="41.115234375" y="-0.4023437499999716">Звёдные карты
 Сложность: 1
-Эффект: открывает координаты Солнца<y:LabelModel>
+Эффект: особое:
+открывает координаты Солнца<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -616,10 +617,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269469" y="889.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="222.25" x="18.75" y="-0.40234375">Гиперпространственные волны
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="199.375" x="30.1875" y="6.9482421875">Гиперпространственные волны
 Сложность: 3, 2 этапа
-Эффект: +1 куб к добыче экзотической
-материи<y:LabelModel>
+Эффект: Экзотическая материя +2<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -832,7 +832,7 @@
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="179.44140625" x="40.154296875" y="-0.40234375">Варп-двигатель
 Сложность: 4, экзотматерия (2)
-Эффект: открывает 
+Эффект: особое: открывает 
 произвольный FTL<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -947,10 +947,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="1257.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="200.283203125" x="29.733398437499886" y="-0.40234375">Вычислительные потребности
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="196.708984375" x="31.520507812499886" y="6.9482421875">Вычислительные потребности
 Сложность: 3, 2 этапа, затраты (2)
-Эффект: +1 куб для строительства
-астроинженерных структур<y:LabelModel>
+Эффект: Астроинженерия +2<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1309,10 +1308,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="797.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="212.76953125" x="23.490234375" y="-0.40234375">Экстренная наномедицина
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="154.5859375" x="52.58203125" y="6.9482421875">Экстренная наномедицина
 Сложность: 4
-Эффект: регенерация стресса армий
- +1 за ход, в бою<y:LabelModel>
+Эффект: Регенерация +1<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1406,10 +1404,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="333.3255202726947" y="1073.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.064453125" x="60.3427734375" y="-0.40234375">Генератор червоточин
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.966796875" x="47.8916015625" y="-0.40234375">Генератор червоточин
 Сложность: 6
-Эффект: открывает FTL
-через червоточины<y:LabelModel>
+Эффект: особое: открывает 
+FTL через червоточины<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1484,9 +1482,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-247.13281306063857" y="1165.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="194.107421875" x="32.8212890625" y="-0.40234375">Струноукладчик
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="223.404296875" x="18.1728515625" y="-0.40234375">Струноукладчик
 Сложность: 30
-Эффект: позволяет создавать 
+Эффект: особое: позволяет создавать 
 суперструны до 15 парсек длиной<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -1543,10 +1541,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="429.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="196.796875" x="31.4765625" y="-0.40234375">Экранирование имплантов
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="167.458984375" x="46.1455078125" y="-0.40234375">Экранирование имплантов
 Сложность: 3
-Эффект: защита от ЭМ-излучения
-и радиации<y:LabelModel>
+Эффект: особое: защита
+от ЭМ-излучения и радиации<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1660,10 +1658,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-247.13281306063857" y="1257.0"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="211.228515625" x="24.2607421875" y="-0.40234375">Струностроительство
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="221.505859375" x="19.1220703125" y="-0.40234375">Струностроительство
 Сложность: 7
-Эффект: утраивает максимум длины
-суперструн струноукладчика<y:LabelModel>
+Эффект: особое: утраивает максимум 
+длины суперструн струноукладчика<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -3097,6 +3095,16 @@
       </data>
     </edge>
     <edge id="e97" source="n77" target="n110">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e98" source="n84" target="n110">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
