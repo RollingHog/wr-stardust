@@ -124,7 +124,7 @@ const VARS = {
     '#FF0000': 'Производство',
     '#00FF00': 'Общество',
     '#0000FF': 'Наука',
-    '#000000': "Любой",
+    '#000000': "Свободный",
   },
   fill2TreeType: FILL_2_TREE_TYPE,
 }
@@ -565,7 +565,7 @@ const Analysis = {
     
     Analysis.searchBadTechRefs()
     
-    // Analysis.countTechPrices()
+    Analysis.countTechPrices()
     
     setTimeout( _ => {
       // all output to clear timestamps
@@ -590,6 +590,7 @@ const Analysis = {
     let cnt = 0
     for (let i of Object.keys(tech)) {
       if(i == 'Military') continue
+      // console.group(i)
       for(let j of Object.values(tech[i])) {
         const lvl = j.lvl
         const mult = VARS.DIFFICULTY_MULTS[lvl]
@@ -606,9 +607,15 @@ const Analysis = {
           // // eslint-disable-next-line no-empty
           // else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
           else if(k[0]=='Этапы') tcost *= 2
+          else if(k[1]=='награда') {
+            // TODO rework maybe
+            tcost = 0
+            break
+          }
           // else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
-          // // eslint-disable-next-line no-empty
-          // else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
+          else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {
+            tcost += +k[1]*0.5
+          }
           // // eslint-disable-next-line no-empty
           // else if(['Технология', "Слоты"].includes(k[0])) {}
           else if(
@@ -628,7 +635,7 @@ const Analysis = {
         tcost = +tcost.toFixed(2)
 
         // tcost<10 in case is's some superstructure
-        if(Math.abs(tcost-mult)>1 && tcost>0 && tcost<10 && j.type != 'octagon') {
+        if(Math.abs(tcost-mult)>1 && tcost>0 && tcost<10 && !['octagon','trapezoid2'].includes(j.type) ) {
           log(i, j.name, `cost looks bad: ${tcost}->${mult}`, j)
           cnt++
           continue
@@ -636,6 +643,9 @@ const Analysis = {
         
         for(let k of j.effect) {
           if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
+          else if(k[0]=='Сверхадаптация') {
+            teff += +k[1]*0.9
+          } 
           else if(
             KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])
             || KEYWORDS.TECH_EFFECTS.includes(k[0])
@@ -664,7 +674,7 @@ const Analysis = {
 
         let d = (+tcost/+teff).toFixed(1)
 
-        if(d && mult) {
+        if(d && mult && j.lvl !== techData.MAX_TECH_LVL) {
           let p = (d/mult).toFixed(1)
           if(p>1.5 || (p > 0.3 && p<0.7)) {
             cnt++
@@ -672,6 +682,7 @@ const Analysis = {
           }
         }
       }
+      // console.groupEnd()
     }
     log('Bad prices:', cnt)
   },
@@ -2195,7 +2206,7 @@ var KEYWORDS = {
     , 'Общество'
     , 'Свободный'
   ],
-  ANY_PARAM_KEYWORD: 'Любой',
+  ANY_PARAM_KEYWORD: 'Свободный',
   ADDITIONAL_COLONY_PARAMS:[
     "осуждение",
     "волнения",
@@ -2270,6 +2281,8 @@ var KEYWORDS = {
   ],
   TECH_COST_MODS: [
     'базовое',
+    // награда за цепочку технологий, может нарушать правила стоимости
+    'награда',
     'суперпроект',
     'астропроект',
     'почва',
