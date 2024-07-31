@@ -99,7 +99,7 @@
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="249.279296875" x="5.2353515625" y="6.948242187500028">Авиакосмическая подготовка
 Сложность: 1, тех. Мобилизация населения
-Эффект: +1 очко характеристик флота<y:LabelModel>
+Эффект: +1 очко распределения флотам<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -118,7 +118,7 @@
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.263671875" x="19.7431640625" y="6.9482421875">Бронепехота
 Сложность: 2, тех. Экзоскелеты
-Эффект: +1 очко характеристик армии<y:LabelModel>
+Эффект: +1 очко распределения армиям<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -137,7 +137,7 @@
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.978515625" x="19.3857421875" y="6.9482421875">Военно-космические силы
 Сложность: 2
-Эффект: +1 очко характеристик флота<y:LabelModel>
+Эффект: +1 очко распределения флотам<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -309,7 +309,7 @@
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.3046875" x="19.72265625" y="6.9482421875">Специализация кораблей
 Сложность: 3
-Эффект: +1 очко характеристик флоту<y:LabelModel>
+Эффект: +1 очко распределения флотам<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -638,7 +638,7 @@
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.3046875" x="19.72265625" y="-0.40234375">Суперкорабли
 Сложность: 7, тех. Естественная
 навигация
-Эффект: +2 очка характеристик флоту<y:LabelModel>
+Эффект: +2 очка распределения флотам<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -657,7 +657,7 @@
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="222.466796875" x="18.6416015625" y="6.9482421875">Трансчеловеческие подразделения
 Сложность: 8, тех. Искусственное тело
-Эффект: +2 очка характеристик армии<y:LabelModel>
+Эффект: +2 очка распределения армиям<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>

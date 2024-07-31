@@ -829,7 +829,7 @@
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="228.30859375" x="15.720703124999886" y="-0.40234375">Совместное мышление
 Сложность: 3, 2 этапа, осуждение (1)
-Эффект: +1 очко характеристик армиям
+Эффект: +1 очко распределения армиям
 и флотам<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
