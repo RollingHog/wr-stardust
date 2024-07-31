@@ -23,8 +23,34 @@ const TREELIST = [
   "Science",
   "Sociology",
 ]
-const TREELIST_NOMIL = TREELIST.filter(e => e != 'Military')
-const cache = {}
+
+
+// constants
+const VARS = {
+  TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
+  SVG_DEFAULT: `<style> text {
+    font-family: Helvetica;
+    // font-size: 12;
+  } </style>`,
+  DIFFICULTY_MULTS: [
+    0,
+    1,
+    1.2,
+    2,
+    2.2,
+    3,
+    3.2,
+    3.5,
+    4,
+    4.3,
+    4.7,
+    5,
+    5.3,
+    5.7,
+  ]
+}
+
+const cache = Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}]))
 
   ; (() => {
     NodeList.prototype.forEach = Array.prototype.forEach
@@ -37,32 +63,12 @@ const tech = {}
 const badCells = Object.fromEntries(TREELIST.map(e=>[e,[]]))
 const stat = {}
 const techLevels = Object.fromEntries(TREELIST.map(e => [e,[]]))
-const DIFFICULTY_MULTS = [
-  0,
-  1,
-  1.2,
-  2,
-  2.2,
-  3,
-  3.2,
-  3.5,
-  4,
-  4.3,
-  4.7,
-  5,
-  5.3,
-  5.7,
-]
 const inverted = {
   tech: {},
   alltech: {},
 }
 
 const svg = document.getElementById('svg')
-const SVG_DEFAULT = `<style> text {
-  font-family: Helvetica;
-  // font-size: 12;
-} </style>`
 
 window.onload = Init
 async function Init() {
@@ -102,12 +108,12 @@ async function Init() {
     }
   }
 
-  await parseTechIframe(TREELIST_NOMIL[0])
-  drawTree(TREELIST_NOMIL[0])
+  await parseTechIframe(VARS.TREELIST_NOMIL[0])
+  drawTree(VARS.TREELIST_NOMIL[0])
 
   setTimeout(function() {
     Promise.all(TREELIST
-      .filter(e => e != TREELIST_NOMIL[0])
+      .filter(e => e != VARS.TREELIST_NOMIL[0])
       .map(e => parseTechIframe(e))
     )
     .then(_ => {
@@ -121,7 +127,7 @@ async function Init() {
       for (let i of TREELIST) {
         drawTree(i)
       }
-      drawTree(TREELIST_NOMIL[0])
+      drawTree(VARS.TREELIST_NOMIL[0])
 
       inverted.alltech = Object.assign(...Object.values(inverted.tech))
 
@@ -158,7 +164,7 @@ const Analysis = {
       if(i == 'Military') continue
       for(let j of Object.values(tech[i])) {
         const lvl = techLevels[i].indexOf(j.y.toString())+1
-        const mult = DIFFICULTY_MULTS[lvl+1]
+        const mult = VARS.DIFFICULTY_MULTS[lvl+1]
         let d = +j.cost[0][1]/+j.effect[0][1]
         if(!PARAMLIST_RU.includes(j.effect[0][0])) {
           d *= 2
@@ -225,7 +231,7 @@ function drawTree(tree_name) {
   }
 
   
-  if (cache[tree_name]) {
+  if (cache[tree_name].html) {
     svg.innerHTML = cache[tree_name].html
     svg.setAttribute("viewBox", cache[tree_name].viewBox)
     setTimeout(tspanHighlightOnClick,1)
@@ -233,7 +239,7 @@ function drawTree(tree_name) {
   }
   tspanHighlightOnClick()
 
-  svg.innerHTML = SVG_DEFAULT
+  svg.innerHTML = VARS.SVG_DEFAULT
 
   const values = Object.values(tech[tree_name]).concat(Object.values(badCells[tree_name]))
   for (let i of values)
@@ -248,7 +254,6 @@ function drawTree(tree_name) {
     + ' ' + (y[1] + 100 - y[0])
   svg.setAttribute("viewBox", viewBox)
 
-  cache[tree_name] = {}
   cache[tree_name].html = svg.innerHTML
   cache[tree_name].viewBox = viewBox
 }
@@ -834,7 +839,7 @@ function extractParam(param, fuckMilitary = true) {
   // let t={} //cost of cubes stat
   // for (i in tech) t[i]= tech[i].stat
   let list = {}
-  const iter = fuckMilitary ? TREELIST_NOMIL : TREELIST
+  const iter = fuckMilitary ? VARS.TREELIST_NOMIL : TREELIST
   for (let i of iter) {
     list[i] = []
     let arr = Object.keys(stat[i]).sort((a, b) => a - b)
