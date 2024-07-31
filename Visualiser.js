@@ -170,9 +170,9 @@ async function Init() {
       elPlayersData.src = elPlayersData.getAttribute('src2')
     })
     parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
-    log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
-
+    
     console.timeEnd('Player data load')
+    log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
 
     Promise.all(TREELIST
       .filter(e => e != VARS.TREELIST_NOMIL[0])
