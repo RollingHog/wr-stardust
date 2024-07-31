@@ -354,27 +354,33 @@ const parseDoc = {
         ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
     // const CONTENT_TAGS = ['DIV', 'P', 'UL']
     let res = {}
-    let interm = {}
+    let interm = {
+      user: {},
+      planet: {},
+    }
     let last = {
       H: null,
-      H1: null,
-      H2: null,
+      user: null,
+      planet: null,
     }
     for(let i in arr) {
       let e = arr[i]
       if(e.tagName == 'H1') {
-        if(last.H1) res[last.H1] = interm
-        last.H1 = e.innerText
-        interm = {}
+        if(last.user) {
+          // res[last.planet] = interm.user
+          res[last.user] = interm.user
+        }
+        last.user = e.innerText
+        interm.user = {}
         continue
       }
       if(e.tagName.match(/H\d/)) {
         last.H = e.innerText
         continue
       }
-      interm[last.H] = e.el
+      interm.user[last.H] = e.el
     }
-    res[last.H1] = interm
+    res[last.user] = interm.user
     for(let i in res)
     parseDoc.techTableHTML(i, i['Изученные технологии'])
     return res
