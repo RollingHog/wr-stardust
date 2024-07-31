@@ -1429,7 +1429,7 @@ FTL, гигеры<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelM
       </data>
     </node>
     <node id="n106">
-      <data key="d5" xml:space="preserve"><![CDATA[Оранжереи размеом с планету, 
+      <data key="d5" xml:space="preserve"><![CDATA[Оранжереи размером с континент, 
 плавающие в атмосфере газовых гигантов]]></data>
       <data key="d6">
         <y:ShapeNode>
