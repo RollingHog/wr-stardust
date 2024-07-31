@@ -647,6 +647,10 @@ const Analysis = {
     tbody.innerHTML = res
 
     HTMLUtils.addTableSorting('#el_reports_list table')
+    setTimeout(_=>{ 
+      getEl('el_reports_list').children[0].tHead.children[0].children[1].click()
+      getEl('el_reports_list').children[0].tHead.children[0].children[1].click()
+    }, 0)
   },
 
   formatReportEffects(list) {
@@ -723,6 +727,32 @@ const Analysis = {
           return acc
         }, {})
         Analysis.reportTable(result)
+    },
+
+    эффекты_на_ТУ() {
+      let TL = prompt('TL? 1-16/+')
+      if(!TL) return
+      if(TL == '+') TL = 16
+      TL = +TL
+      const techs = Object.values(inverted.alltech)
+        .filter(e => e.lvl <= TL )
+        .map( e => e.name )
+
+      const result = Object.entries(User.countSummaryCostAndEffect(techs))
+        .filter( e => [].concat(
+          KEYWORDS.COLONY_PARAMS,
+          // KEYWORDS.MATERIALS,
+          KEYWORDS.TECH_EFFECTS,
+        ).includes(e[0]))
+
+      result.push( ['ВСЕГО', result
+        .filter( e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
+        .reduce( (s,e)=> s + +e[1], 0 )
+      ])
+
+      const obj = Object.fromEntries(result)
+
+      Analysis.reportTable(obj)
     },
   
     список_корпусов() {
