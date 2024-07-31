@@ -86,9 +86,9 @@ const cache = Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}]
     HTMLCollection.prototype.filter = Array.prototype.filter
   })()
 
-const graphmls = {}
 const tech = {}
 const techData = {
+  graphmls: {},
   badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
   levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
   badTechCount: 0,
@@ -124,7 +124,7 @@ async function Init() {
     if(isLocalFile) {
       try {
         const el = document.querySelector(`[src="${src}"]`)
-        graphmls[i] = parser.parseFromString(
+        techData.graphmls[i] = parser.parseFromString(
           el.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
           , 'text/xml')
       } catch(e) {
@@ -140,7 +140,7 @@ async function Init() {
     } else {
       // non-local, try to fetch data
       const xmlText = await fetch(src).then(e=>e.text())
-      graphmls[i] = parser.parseFromString(xmlText, 'text/xml')
+      techData.graphmls[i] = parser.parseFromString(xmlText, 'text/xml')
     }
   }
   console.timeEnd('load iframes')
@@ -501,17 +501,17 @@ const User = {
 
 async function parseTechIframe(tree_name) {
 
-  graphmls[tree_name] = graphmls[tree_name].getElementsByTagName('graph')[0]
+  techData.graphmls[tree_name] = techData.graphmls[tree_name].getElementsByTagName('graph')[0]
   // graphmls[tree_name].getElementsByTagName('data')[0].remove()
   // graphmls[filename].getElementsByTagName('y:Fill').forEach(e => e.remove())
   // graphmls[filename].getElementsByTagName('y:BorderStyle').forEach(e => e.remove())
-  graphmls[tree_name].getElementsByTagName('y:LabelModel').forEach(e => e.remove())
-  graphmls[tree_name].getElementsByTagName('y:ModelParameter').forEach(e => e.remove())
+  techData.graphmls[tree_name].getElementsByTagName('y:LabelModel').forEach(e => e.remove())
+  techData.graphmls[tree_name].getElementsByTagName('y:ModelParameter').forEach(e => e.remove())
 
   tech[tree_name] = {}
   stat[tree_name] = {}
 
-  const FILL_COLOR = graphmls[tree_name]
+  const FILL_COLOR = techData.graphmls[tree_name]
     .getElementsByTagName('y:ShapeNode')[0]
     .getElementsByTagName('y:Fill')[0].getAttribute('color')
 
@@ -529,7 +529,7 @@ async function parseTechIframe(tree_name) {
     enumerable: false
   })
 
-  for (let i of graphmls[tree_name].getElementsByTagName('y:ShapeNode')) {
+  for (let i of techData.graphmls[tree_name].getElementsByTagName('y:ShapeNode')) {
     try {
       const t = parseShapeNode(tree_name, i)
       if (t.badCell) {
@@ -542,7 +542,7 @@ async function parseTechIframe(tree_name) {
     }
   }
   //get arrow connections
-  for (let i of graphmls[tree_name].getElementsByTagName('edge')) {
+  for (let i of techData.graphmls[tree_name].getElementsByTagName('edge')) {
     if (i.getElementsByTagName('y:Arrows')[0].getAttribute('target') == 'none')
       continue
 
