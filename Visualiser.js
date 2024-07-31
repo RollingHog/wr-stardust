@@ -1003,7 +1003,7 @@ function saveAllTechAsPng() {
 
 // eslint-disable-next-line no-unused-vars
 function openAsPng() {
-
+  // FIXME
 }
 
 // eslint-disable-next-line no-unused-vars
