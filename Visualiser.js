@@ -105,6 +105,9 @@ const techData = {
 const stat = {}
 const inverted = {
   tech: {},
+  /** 
+  * @type {Object.<string, TTechObject>} 
+  */
   alltech: {},
 }
 
@@ -547,6 +550,7 @@ const Analysis = {
         Object.values(inverted.alltech)
           .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
           .map(e => [e.name, {
+            Цена: e.cost[0][1],
             "Свойства": e.effect.map(e => e.join(': ')).join(', '),
           }])
       ))
@@ -726,7 +730,7 @@ const User = {
       })
   },
 
-  countSummaryCostAndEffect(techList) {
+  countSummaryCostAndEffect(techList, userDataObj) {
     let data = techList
       .map( e => e.search('сломано') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
@@ -737,6 +741,15 @@ const User = {
       .filter( e => e )
     
     data = [].concat.apply([], data)
+
+    data = data.concat(userDataObj.startingFeature
+      .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
+    )
+
+    if(userDataObj.uniqueResources) data = data.concat(userDataObj.uniqueResources
+      .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], +i[1]])
+    )
+
     const result = {}
     for(let i of data) {
       if(i[0] === KEYWORDS.ITS_SPECIAL) {
@@ -762,14 +775,14 @@ const User = {
 
     let data = 
       // local: 
-      User.countSummaryCostAndEffect([].concat(
+      this.countSummaryCostAndEffect([].concat(
         userDataObj.buildings,
         userDataObj.orbital,
         Object.values(userDataObj.localProjs).flat(),
       // )),
       // global: User.countSummaryCostAndEffect([].concat(
         Object.values(userDataObj.techTable).flat(),
-      ))
+      ), userDataObj)
     // }
 
     for(let i in startParams) {
@@ -779,13 +792,7 @@ const User = {
         data[i] = +startParams[i]
     }
 
-    let res = Object.entries(data).concat(userDataObj.startingFeature
-      .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], i[1]])
-    )
-
-    if(userDataObj.uniqueResources) res = res.concat(userDataObj.uniqueResources
-      .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], '1'] : [i[0], i[1]])
-    )
+    const res = Object.entries(data)
 
     return res
   },
