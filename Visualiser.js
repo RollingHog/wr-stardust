@@ -1253,7 +1253,7 @@ const Analysis = {
       ))
     },
 
-    список_проектов() {
+    список_астропроектов() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
           .filter(e => (e.type == VARS.NODE_T.PROJECT))
