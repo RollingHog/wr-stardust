@@ -1457,9 +1457,9 @@ const playerPost = {
     playerPost.parse(p)
   },
   extractRolls(text) {
-    const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)/g)]
-      .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2] }))
-      .map(({text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls }))
+    const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)[^\n]*Сложность:? ?(\d+)/g)]
+      .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], rawRolls: e[2] }))
+      .map(({text, rolls, rawRolls, treshold} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls, treshold }))
     return res
   },
   parse(text) {
@@ -1507,7 +1507,7 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, e.treshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta].join('</td><td>') + '</td>' + 
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
@@ -1527,7 +1527,8 @@ const playerPost = {
       <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
     </tr>
     
-    </tbody></table>`
+    </tbody></table>
+    Чтобы сложность не перезаписывалась - добавь в начало '+'`
 
     // log(requests)
     setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
@@ -1572,7 +1573,7 @@ const playerPost = {
 
           e.children[pos.name].style.backgroundColor = inverted.alltech[e.children[pos.name].innerText].fill
 
-          if (e.children[pos.price].innerText.length == 0) {
+          if (!e.children[pos.price].innerText.startsWith('+')) {
             e.children[pos.price].innerText = inverted.alltech[e.children[pos.name].innerText].cost[0][1]
           }
 
