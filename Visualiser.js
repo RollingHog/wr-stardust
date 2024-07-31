@@ -400,23 +400,23 @@ function highlightStudiedTech(treeName, tech_list, proj_list) {
     .concat(Array.from(svg.getElementsByTagName('polygon')))
     .filter(e => typeof techData.badCells[treeName].find(a => a.id == e.id) === 'undefined')
 
+  let list = tech_list.concat(proj_list)
+
   for (let i of targets) {
-    const pos_tech = tech_list.indexOf(tech[treeName][i.id].name)
-    const pos_proj = proj_list.indexOf(tech[treeName][i.id].name)
+    const pos_tech = list.indexOf(tech[treeName][i.id].name)
     if (pos_tech != -1) {
       res.push(i.id)
-      tech_list.splice(pos_tech, 1)
-    } else if (pos_proj != -1) {
-      res.push(i.id)
-      proj_list.splice(pos_proj, 1)
+      list.splice(pos_tech, 1)
+    } else if (tech[treeName][i.id].fullText.includes('базовое')) {
+      continue
     } else {
       i.setAttribute('fill', '#d9d9d9')
     }
   }
 
-  if (tech_list.length) log(`unrecognized tokens for ${treeName}: ` + tech_list)
+  if (list.length) log(`unrecognized tokens for ${treeName}: ` + tech_list)
 
-  return proj_list
+  return list
 }
 
 async function parseTechIframe(tree_name) {
