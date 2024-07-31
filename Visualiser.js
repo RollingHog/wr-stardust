@@ -29,9 +29,11 @@ const TREELIST = [
 const TREELIST_NOMIL = TREELIST.filter( e => e != 'Military')
 const cache = {}
 
-NodeList.prototype.forEach = Array.prototype.forEach
-HTMLCollection.prototype.forEach = Array.prototype.forEach
-HTMLCollection.prototype.filter = Array.prototype.filter
+;(()=>{
+  NodeList.prototype.forEach = Array.prototype.forEach
+  HTMLCollection.prototype.forEach = Array.prototype.forEach
+  HTMLCollection.prototype.filter = Array.prototype.filter
+})()
 
 const parser = new DOMParser()
 const graphmls = {}
@@ -209,8 +211,8 @@ async function parseTechIframe(tree_name) {
   )
 }
 
-var l
 async function parseDocHTML(rawHTML) {
+  var l
   const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
   l = html
     .filter(e => e.tagName !== 'BR')
@@ -311,13 +313,13 @@ function parseDocText(raw) {
   }
 }
 
-let raw
 // eslint-disable-next-line no-unused-vars
 async function parseDocFile(event) {
+  let raw
   const MIME_HTML = 'text/html'
   const rawClipboardObj = (await navigator.clipboard.read())[0]
   
-  if(rawObj.types.includes(MIME_HTML) && false) {
+  if(rawClipboardObj.types.includes(MIME_HTML) && false) {
     raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
     parseDocHTML(raw)
   } else {
