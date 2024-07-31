@@ -1449,10 +1449,10 @@
           <y:Geometry height="62.0" width="259.75" x="1468.163299135931" y="-73.92841316828148"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.1640625" x="40.79296875" xml:space="preserve" y="-0.40234375">Звездолёт Рассеяния
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="174.830078125" x="42.4599609375" xml:space="preserve" y="-0.40234375">Звездолёт Рассеяния
 Сложность: 0, базовое
 Эффект: выдаётся на старте,
-:корабль, увезший нас с Земли<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+:увезший нас с Земли корабль<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
