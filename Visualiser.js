@@ -77,7 +77,7 @@ async function Init() {
     .then(_ => {
       console.log(tech)
     
-      console.log(listParam('cost', false))
+      // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
       console.log(listAllWithoutMilitary())
       console.log('unrecognized tech:', badTechCount)
@@ -675,6 +675,8 @@ function doNodeStat(filename, t) {
     stat[filename][t.y].sum += +effect[1]
   }
 
+  if(!PARAMLIST_RU.includes(cost[0][0])) return
+  
   let cost_facto = +cost[0][1]
   if (cost[1] && cost[1][0] == 'Этапы')
     cost_facto *= +cost[1][1]
