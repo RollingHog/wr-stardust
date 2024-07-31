@@ -165,7 +165,7 @@ async function Init() {
       Analysis.searchBadTechRefs()
 
       // Analysis.countTechPrices()
-      log(statAllEffects)
+      // log(statAllEffects)
 
       Analysis.totalTechCount()
     })
@@ -839,7 +839,7 @@ function parseCostAndEffects(t) {
       .replace(/^тех. (.+)$/i, 'Технология:$1')
       .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
       .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
-      .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((\\d+)\\)$`), '$1:$2')
       .split(':')
     )
 
