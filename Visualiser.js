@@ -430,9 +430,9 @@ const Analysis = {
 const TreeView = {
   tspanHighlightOnClick() {
     for (const i of document.querySelectorAll('tspan')) {
-      i.onclick = function(e) {
+      i.addEventListener('click', function(e) {
         getEl('highlight_css').innerHTML = `.${e.target.className.baseVal} { fill: orange }`
-      }        
+      })
     }
   },
   
@@ -1426,7 +1426,14 @@ const draw = {
 
       curr_dx = -getEl(id + '_t').getBBox().width / 2
       getEl(id + '_t0').setAttribute('dx', curr_dx )
+
       if(title) getEl(id + '_t').innerHTML += `<title>${title}</title>`
+
+      setTimeout( _ => 
+        getEl(id + '_t0') ? getEl(id + '_t0').addEventListener('click', function() {
+          navigator.clipboard.writeText(getEl(id + '_t0').innerHTML)
+        }) : 0
+      , 0)
     },
 
     Point: function (x, y) {
