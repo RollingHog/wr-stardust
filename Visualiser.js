@@ -425,8 +425,15 @@ const Analysis = {
           .map(({ fullText, x, w }) => ({ fullText: fullText.toLowerCase(), x1: x, x2: x + w }))
         ]))
   },
+  /**
+   * 
+   * @param {TTechObject} techObj 
+   */
   getSubtreeName(techObj) {
-    
+    for(let i of techData.subtreeBorders[techObj.treeName]) {
+      if(techObj.nodeCenter.x > i.x1 && techObj.nodeCenter.x < i.x2)
+      return i.fullText
+    }
   },
   searchBadTechRefs() {
     for (let i of Object.keys(tech)) {
@@ -1319,6 +1326,31 @@ function parseCostAndEffects(t) {
   return [cost, effect]
 }
 
+class TTechObject {
+  id = ''
+  type
+  treeName = ''
+  borderColor
+  name
+  cost = []
+  effect = []
+  req = []
+  next = []
+  fullText = ''
+  title = ''
+  x
+  y
+  h
+  w
+  fill
+}
+
+/**
+ * 
+ * @param {*} filename 
+ * @param {*} i 
+ * @returns {TTechObject | null}
+ */
 function parseShapeNode(filename, i) {
 
   const sepDifficulty = 'Сложность:'
@@ -1344,6 +1376,7 @@ function parseShapeNode(filename, i) {
   const t = {
     id: i.parentElement.parentElement.id
     , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
+    , treeName: filename
     , borderColor
     , name: ''
     , cost: []
