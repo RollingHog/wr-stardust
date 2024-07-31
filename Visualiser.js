@@ -75,9 +75,11 @@ const cache = Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}]
 
 const graphmls = {}
 const tech = {}
-const badCells = Object.fromEntries(TREELIST.map(e=>[e,[]]))
+const techData = {
+  badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
+  levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
+}
 const stat = {}
-const techLevels = Object.fromEntries(TREELIST.map(e => [e,[]]))
 const inverted = {
   tech: {},
   alltech: {},
@@ -144,7 +146,12 @@ async function Init() {
       }
       drawTree(VARS.TREELIST_NOMIL[0])
 
-      inverted.alltech = Object.assign(...Object.values(inverted.tech))
+      inverted.alltech = Object.fromEntries(
+        [...Object.values(tech)]
+          .map(e => Object.values(e))
+          .flat()
+          .map(e => [e.name, e])
+      )
 
       Analysis.searchBadTechRefs()
 
@@ -179,7 +186,7 @@ const Analysis = {
       if(i == 'Military') continue
       log('Tech tree:', i)
       for(let j of Object.values(tech[i])) {
-        const lvl = techLevels[i].indexOf(j.y.toString())+1
+        const lvl = techData.levels[i].indexOf(j.y.toString())+1
         const mult = VARS.DIFFICULTY_MULTS[lvl]
         let tcost = 0
         let teff = 0
@@ -260,7 +267,7 @@ const Analysis = {
     for (let i of Object.keys(stat)) {
       const keys =  Object.keys(stat[i])
       for (let j in keys) {
-        if(!techLevels[i].includes(keys[j])) techLevels[i].push(keys[j])
+        if(!techData.levels[i].includes(keys[j])) techData.levels[i].push(keys[j])
         if(!keys[j-1]) continue
         const delta = keys[j] - keys[j-1]
         if(delta>0 && delta<10) {
@@ -268,7 +275,7 @@ const Analysis = {
         }
       }
     }
-    Object.keys(techLevels).map(i => techLevels[i].sort((a,b)=>a<b))
+    Object.keys(techData.levels).map(i => techData.levels[i].sort((a,b)=>a<b))
   },
   searchBadTechRefs() {
     for (let i of Object.keys(tech)) {
@@ -342,7 +349,7 @@ function drawTree(tree_name) {
 
   svg.innerHTML = VARS.SVG_DEFAULT
 
-  const values = Object.values(tech[tree_name]).concat(Object.values(badCells[tree_name]))
+  const values = Object.values(tech[tree_name]).concat(Object.values(techData.badCells[tree_name]))
   for (let i of values)
     draw.Node(tree_name, i)
 
@@ -375,7 +382,7 @@ function highlightStudiedTech(treeName, tech_list, proj_list) {
   let res = []
   const targets = Array.from(svg.getElementsByTagName('rect'))
     .concat(Array.from(svg.getElementsByTagName('polygon')))
-    .filter(e => typeof badCells[treeName].find(a => a.id == e.id) === 'undefined')
+    .filter(e => typeof techData.badCells[treeName].find(a => a.id == e.id) === 'undefined')
 
   for (let i of targets) {
     const pos_tech = tech_list.indexOf(tech[treeName][i.id].name)
@@ -430,7 +437,7 @@ async function parseTechIframe(tree_name) {
     try {
       const t = parseShapeNode(tree_name, i)
       if (t.badCell) {
-        badCells[tree_name].push(t)
+        techData.badCells[tree_name].push(t)
         continue
       }
       tech[tree_name][t.id] = t
