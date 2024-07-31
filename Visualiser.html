@@ -23,6 +23,14 @@
     padding-top: 40vh;
     font-size: xx-large;
   }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  td {
+    border: 1px solid grey;
+  }
 </style>
 
 <body>
@@ -53,28 +61,19 @@
            60,20"/>
     </svg>
   </div>
-  
   <!-- <canvas id=canvas style="position: absolute; left: 5; top: 5;"></canvas> -->
+
+  <div id="el_selected_tech_wrapper" hidden contenteditable="true"
+    style="position: absolute; left: 50px; top: 50px; width: 70%; padding: 4px; background: white; border: 1px solid grey;">
+    <button onclick="this.parentNode.hidden = true" style="float: right;">Close</button>
+    <div id="el_selected_tech_list"></div>
+  </div>
   
   <svg viewbox="-300 -100 2200 1450" id=svg style="background-color: white;"
   xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   </svg>
 
-  <!--
-  <svg viewBox="0 0 500 500" id="svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <switch>
-      <g requiredFeatures="http://www.w3.org/Graphics/SVG/feature/1.2/#TextFlow">
-        <textArea width="200" height="auto">
-         Text goes here
-        </textArea>
-      </g>
-      <foreignObject width="200" height="200" 
-       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-        <p xmlns="http://www.w3.org/1999/xhtml">Text goes here</p>
-      </foreignObject>
-      <text x="20" y="20">No automatic linewrapping.</text>
-    </switch>
-  </svg> -->
+
   <div id=el_GUI>
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
       <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png">Dump</button>
@@ -87,10 +86,10 @@
           <input type="checkbox" id="Беглецы"> Беглецы
         </label><br>
         <label>
-          <input type="checkbox" id="Кошкодевки Карины"> Кошкодевки Карины
+          <input type="checkbox" id="Кошкодевочки Карины"> Кошкодевочки Карины
         </label><br>
         <label>
-          <input type="checkbox" id="Технократы"> Технократы
+          <input type="checkbox" id="Юнитологическая федерация"> Юнитологическая федерация
         </label><br>
         <label>
           <input type="checkbox" id="Инженеры"> Инженеры
@@ -119,7 +118,6 @@
 <script src="src/test.js"></script>
 <script src="Visualiser.js"></script>
 <!-- 
-<node id="n27"> 
       <data key="d5"><![CDATA["Возьмите сто человек, и среди них обязательно будет трое воров, двое убийц и один злостный неплательщик налогов" 
  – Наставление молодого полицейского, стр. 2.]]></data>
  -->
