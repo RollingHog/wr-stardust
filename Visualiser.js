@@ -10,11 +10,6 @@ const warn = console.warn
 // eslint-disable-next-line no-unused-vars
 const error = console.error
 
-// eslint-disable-next-line no-unused-vars
-const time = console.time
-// eslint-disable-next-line no-unused-vars
-const timeEnd = console.timeEnd
-
 function getEl(id) {
   return document.getElementById(id)
 }
@@ -37,7 +32,6 @@ const cache = {}
     HTMLCollection.prototype.filter = Array.prototype.filter
   })()
 
-const parser = new DOMParser()
 const graphmls = {}
 const tech = {}
 const stat = {}
@@ -54,7 +48,7 @@ const SVG_DEFAULT = `<style> text {
 
 window.onload = Init
 async function Init() {
-
+  const parser = new DOMParser()
   for (let i of document.querySelectorAll('iframe.tech')) {
     let tree_name = i.src.replace(/.*\/([^/]*).graphml$/, '$1')
     try {
