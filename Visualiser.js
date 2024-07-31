@@ -643,11 +643,13 @@ const Analysis = {
 
         tcost = +tcost.toFixed(2)
 
+        const itIsMilitaryModule = ['octagon','trapezoid','trapezoid2','fatarrow'].includes(j.type) 
+          || ['космическая база', 'наземная база'].includes(j.effect[0][1])
+
         // tcost<10 in case is's some superstructure
         if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 
           // do-not-touch-military-costs-dammit
-          && !['octagon','trapezoid','trapezoid2','fatarrow'].includes(j.type) 
-          && !['космическая база', 'наземная база'].includes(j.effect[0][1])
+          && !itIsMilitaryModule
         ) {
           log(i, `\n${j.name}\n`, `cost looks bad: ${tcost}->${mult}`, j)
           techData.badTechList.cost.push([j.name, mult])
@@ -656,10 +658,10 @@ const Analysis = {
         }
         
         //its regulated manually
-        if(!['octagon','trapezoid2'].includes(j.type)) {
+        if(!['octagon'].includes(j.type)) {
           for(let k of j.effect) {
             if(k[0]==KEYWORDS.ANY_PARAM_KEYWORD) {
-              if(mult === 1) teff += +k[1]
+              if(mult <= 2) teff += +k[1]
               else teff += +k[1]*2
             }
             else if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
@@ -702,13 +704,14 @@ const Analysis = {
         }
 
         let d = (+tcost/+teff).toFixed(1)
-        const delta = +tcost - +teff
+        // TODO should it be like this for itIsMilitaryModule?
+        const delta = +tcost - +teff + (tcost > 1.1 && !itIsMilitaryModule ? -1 : 0)
 
         if(d && mult && j.lvl !== techData.MAX_TECH_LVL) {
           if(delta < -0.6 || delta > 1) {
             cnt++
             log(i, 'lvl', j.lvl,`\n${j.name}\n`,  j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1?'ДОРОГО':"ДЕШЕВО")
-            techData.badTechList.effect.push([j.name, mult])
+            techData.badTechList.effect.push([j.name, delta])
           }
         }
       }
@@ -740,9 +743,34 @@ const Analysis = {
       log(`fixBadCosts, fixing ${techData.badTechList.effect.length} bad effects`)
     }
     for(let i of techData.badTechList.effect) {
-      const treeName = inverted.alltech[i[0]].treeName
-      log(...files[treeName].matchAll(new RegExp(`(${i[0]}\nСложность:[^\n]*\nЭффект: )([^\\d]+)(\\d+)([^<]+)`, 'ig'),`$1${i[1]}`))
-      // changedFiles[treeName] = true
+      const tTech = inverted.alltech[i[0]] 
+      const treeName = tTech.treeName
+      let [fullEff, beforeEff, effName, effValue, afterEff] = 
+        [].concat(...files[treeName].matchAll(new RegExp(`(${i[0]}\nСложность:[^\n]*\nЭффект: )([^\\d\\-\\+]*[+-]?)(\\d+)([^<]*)`, 'ig'),`$1${i[1]}`))
+      if(!fullEff) {
+        log('fixBadCosts cant parse effect', i[0]) 
+        continue
+      }
+      const effCleanName = effName.replace(/[+-]/,'').trim()
+      effValue = +effValue
+      let correctionDelta = i[1]
+      // probably free cubes
+      if (effName.length < 2) correctionDelta = correctionDelta / 2
+      else if( KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(effCleanName)
+              || KEYWORDS.TECH_EFFECTS.includes(effCleanName)
+              || effCleanName.startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
+      ) correctionDelta = correctionDelta * 2
+      
+      const tgtValue = +(effValue + correctionDelta).toFixed(0)
+      // log(correctionDelta, tgtValue, {fullEff, beforeEff, effCleanName, effValue, afterEff})
+      if(tgtValue < 1) {
+        log(i[0], 'correctionDelta ducked up') 
+        continue
+      }
+      const resultStr = `${beforeEff}${effName}${tgtValue}${afterEff}`
+      log(i[0], `${effCleanName} ${effValue} -> ${tgtValue}`)
+      files[treeName] = files[treeName].replace(fullEff, resultStr)
+      changedFiles[treeName] = true
     }
 
     for(let i in files) {
