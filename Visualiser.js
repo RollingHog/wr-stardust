@@ -89,6 +89,7 @@ const svg = document.getElementById('svg')
 
 window.onload = Init
 async function Init() {
+  getEl('el_loading').hidden = false
   const parser = new DOMParser()
   const isLocalFile = location.href.startsWith('file:///')
 
@@ -127,8 +128,10 @@ async function Init() {
 
   await parseTechIframe(VARS.TREELIST_NOMIL[0])
   drawTree(VARS.TREELIST_NOMIL[0])
+  getEl('el_loading').hidden = true
 
   setTimeout(function() {
+
     Promise.all(TREELIST
       .filter(e => e != VARS.TREELIST_NOMIL[0])
       .map(e => parseTechIframe(e))
