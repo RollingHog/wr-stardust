@@ -416,7 +416,7 @@ const parseDoc = {
         .replace(/Планетарные проекты\n/, 'SPLITME')
         .split('SPLITME')
   
-      player.name = t[0].split('Трип')[0].slice(5, -1)
+      player.name = t[0].split('Трип')[0].slice(5, -1).trim()
   
       // EXCLUDE_PLAYERS.includes(player.name)
       if (player.name.indexOf('-') == 0) {
