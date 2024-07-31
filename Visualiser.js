@@ -941,7 +941,7 @@ const parseDoc = {
         continue
       }
 
-      usersRes[username] = parseDoc.techTableHTML(username, usersData[username])
+      usersRes[username] = parseDoc.playerHTML(username, usersData[username])
 
       if (!getEl(username) || !getEl(username).checked) {
         log(username, 'not marked to draw, skipping')
@@ -977,7 +977,7 @@ const parseDoc = {
     this.lastResult = await parseDoc.HTML(this.lastRaw) 
   },
 
-  techTableHTML(playerName, obj) {
+  playerHTML(playerName, obj) {
     /**
      * @param {string} str 
      * @returns {string[]}
@@ -988,7 +988,7 @@ const parseDoc = {
       if(treeRuName !== 'Особые') {
         res = res.filter( e => e.replace(/\([^)]+\)/, '').trim() in inverted.alltech 
           ? true 
-          : console.warn(this.techTableHTML.name, e)
+          : console.warn(this.playerHTML.name, e)
         )
       }
 
@@ -1010,9 +1010,19 @@ const parseDoc = {
       .map(e => [e.children[0].innerText.trim(),e.children[1].innerText.trim()])
       colonyParams = Object.fromEntries(colonyParams)
 
+    let additionalParamsRaw = Array.from(obj['Дополнительные параметры'].children[0].rows)
+      .map(e => Array.from(e.children))
+    let ak = [].concat(additionalParamsRaw[0],additionalParamsRaw[2]).map(e=>e.innerText.trim().toLowerCase())
+    let av = [].concat(additionalParamsRaw[1],additionalParamsRaw[3]).map(e=>e.innerText.trim())
+    let additionalParams = {}
+    while(ak.length) {
+      additionalParams[ak.pop()] = av.pop()
+    }
+
     const data = {
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
       colonyParams,
+      additionalParams,
       buildings: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
       orbital: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
