@@ -196,7 +196,8 @@ const StarSystemGenerator = {
     const system = []
 
     const nOfPlanets = density / 5
-    const densityMod = Math.floor((nOfPlanets - 10) / 2)
+    const fuckPlanetsMod = 2
+    const densityMod = Math.floor((nOfPlanets - 10) / 2) - fuckPlanetsMod
     log({densityMod, nOfPlanets})
 
     function pop1(str) {
@@ -274,7 +275,7 @@ const StarSystemGenerator = {
     // non-giant planets
     for(let i = 1; i <= 11; i++) {
       if(system[i]) continue
-      let mod = 0-2
+      let mod = 0
       if(system[i+1] && system[i+1].type == E.type.giant) mod -= 6
       if(system[i-1] && system[i-1].type == E.type.giant) mod -= 3
       if(i == 1 || i == 11) mod -= 3
