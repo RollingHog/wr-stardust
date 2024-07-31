@@ -113,7 +113,7 @@
     style="right: 50px; top: 50px;">
     <div id="el_reports_header" class="header">
       <strong>Отчеты</strong>
-      <button onclick="getEl('el_reports_wrapper').hidden = true" class="btn_close">Close</button>
+      <button onclick="Analysis.closeReports()" class="btn_close">Close</button>
     </div>
     <button id="el_reports_home" onclick="Analysis.drawReportsList()">Full list</button>
     <div id="el_reports_list" class="body"></div>
@@ -134,12 +134,12 @@
 
   <div id=el_GUI>
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
-      <button onclick="el_help.hidden=false" title="" accesskey="F1">Help</button>
+      <button onclick="el_help.hidden=false" title="">Help</button>
       <br>
       <button onclick="Analysis.drawReportsList()" title="">Reports</button>
       <br>
       <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png" accesskey="в">Dump</button>
-      <button onclick="playerPost.parse(prompt('player post here'))" title="" accesskey="г">Userpost</button>
+      <button onclick="playerPost.prompt()" title="" accesskey="г">Userpost</button>
       <!-- <br>
       <button onclick="parseDoc.GDocToJS()" title="">GDoc to JS(ON)</button> -->
       <!-- <button onclick="savingOps.openAsPng()" title="Open current tree as png in new tab">Png</button> -->
@@ -169,11 +169,11 @@
       </section>
     </div>
     <section id="tech_tree_buttons" style="position: fixed; right: 8px; bottom: 8px;">
-      <button onclick='drawTree("Biology")'  style="background-color: rgb(204, 255, 204);">Biology</button>
-      <button onclick='drawTree("Industry")' style="background-color: rgb(255, 204,   0);">Industry</button>
-      <button onclick='drawTree("Military")' style="background-color: rgb(255, 153, 102);">Military</button>
-      <button onclick='drawTree("Science")'  style="background-color: rgb(153, 204, 255);">Science</button>
-      <button onclick='drawTree("Sociology")'style="background-color: rgb(204, 153, 255);">Sociology</button>
+      <button onclick='drawTree("Biology")'   style="background-color: rgb(204, 255, 204);" accesskey="1">Biology</button>
+      <button onclick='drawTree("Industry")'  style="background-color: rgb(255, 204,   0);" accesskey="2">Industry</button>
+      <button onclick='drawTree("Military")'  style="background-color: rgb(255, 153, 102);" accesskey="3">Military</button>
+      <button onclick='drawTree("Science")'   style="background-color: rgb(153, 204, 255);" accesskey="4">Science</button>
+      <button onclick='drawTree("Sociology")' style="background-color: rgb(204, 153, 255);" accesskey="5">Sociology</button>
     </section>
   </div>
   <input type=button  style="position: fixed; left: 8px; top: 50%;" value="&ofcir;" onclick="el_GUI.hidden=!el_GUI.hidden" accesskey="е" title="Toggle GUI">
