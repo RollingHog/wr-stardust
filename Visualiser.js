@@ -271,6 +271,7 @@ async function Init() {
             User.activePlayer = null
             drawTree(techData.currentTreeName)
             getEl('el_reports_wrapper').hidden = true
+            HTMLUtils.closeModal('report')
           }
         }
         : null
