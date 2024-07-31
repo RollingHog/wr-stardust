@@ -256,14 +256,22 @@ function getMinMax(arr, attr) {
   return [Math.min.apply(null, t), Math.max.apply(null, t)]
 }
 
-function highlightStudiedTech(field, tech_list, proj_list) {
+/**
+ * 
+ * @param {string} treeName 
+ * @param {string[]} tech_list 
+ * @param {string[]} proj_list 
+ * @returns 
+ */
+function highlightStudiedTech(treeName, tech_list, proj_list) {
   let res = []
   const targets = Array.from(svg.getElementsByTagName('rect'))
     .concat(Array.from(svg.getElementsByTagName('polygon')))
+    .filter(e => typeof badCells[treeName].find(a => a.id == e.id) === 'undefined')
 
   for (let i of targets) {
-    const pos_tech = tech_list.indexOf(tech[field][i.id].name)
-    const pos_proj = proj_list.indexOf(tech[field][i.id].name)
+    const pos_tech = tech_list.indexOf(tech[treeName][i.id].name)
+    const pos_proj = proj_list.indexOf(tech[treeName][i.id].name)
     if (pos_tech != -1) {
       res.push(i.id)
       tech_list.splice(pos_tech, 1)
@@ -275,7 +283,7 @@ function highlightStudiedTech(field, tech_list, proj_list) {
     }
   }
 
-  if (tech_list.length) log(`unrecognized tokens for ${field}: ` + tech_list)
+  if (tech_list.length) log(`unrecognized tokens for ${treeName}: ` + tech_list)
 
   return proj_list
 }
@@ -433,7 +441,7 @@ const parseDoc = {
       // if(!confirm(player+'?')) continue
   
       log({ t, buildings, local_projects })
-      this.techTable(player.name, t[1], buildings, local_projects)
+      this.techTableOld(player.name, t[1], buildings, local_projects)
     }
   },
   
@@ -453,7 +461,7 @@ const parseDoc = {
     }
   },
 
-  techTable(player, raw, buildings, local_projects){
+  techTableOld(player, raw, buildings, local_projects){
     //may be empty
     var res = raw.split('\n')
       .filter(e => e != '')
