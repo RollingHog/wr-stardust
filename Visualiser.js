@@ -2519,7 +2519,7 @@ const playerPost = {
       } else {
         tableStr = `
         <span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
-        >${tableStr.map(e2 => e2[1]).join(', ')}</span>`
+        >${tableStr.map(e2 => e2[1]).join(', ')}, </span>`
       }
 
       return `<strong>${e[0]}</strong>
