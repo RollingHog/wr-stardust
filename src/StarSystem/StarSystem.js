@@ -410,7 +410,8 @@ const StarSystemGenerator = {
       //   .replace(/\([^)]+\)/g,'')
       //   .trim()
       //   .replace(/ /g, '_')
-      el.innerHTML = `${i}<br><img src='assets/planets/${type}.png' style="width:${size}%" 
+      el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}<br>
+      <img src='assets/planets/${type}.png' style="width:${size}%" 
         alt="${k.type} ${k.size} ${k.special ? k.special : ''}"
         title="${k.type} ${k.size} ${k.special ? k.special : ''}"
       >`
