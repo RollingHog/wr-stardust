@@ -1061,7 +1061,7 @@ const parseDoc = {
   countTechStudyResult() {
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e=> e.children[0] && inverted.alltech[e.children[0].innerText] ? 
-        e.children[0].innerText
+        (e.children[0].style.backgroundColor='', e.children[0].innerText)
         : (console.warn(e.children[0]),e.children[0].style.backgroundColor='tomato', null)
       )
       .filter( e => e )
