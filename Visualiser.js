@@ -902,6 +902,13 @@ const parseDoc = {
     // </tr>
 
     log(requests)
+  },
+
+  countTechStudyResult() {
+    const data = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
+      .map(e=>[inverted.alltech[e.children[0].innerText], +e.children[2].innerText+(+e.children[3].innerText)])
+    
+    
   }
 }
 
