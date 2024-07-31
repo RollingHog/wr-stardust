@@ -703,6 +703,11 @@ const User = {
   countAllUserEffects(userDataObj) {
     if(!userDataObj) return null
 
+    let startParams = userDataObj.colonyParams["Начальные параметры"].split('/')
+      .forEach((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
+
+    log(startParams)
+
     let data = 
       // local: 
       User.countSummaryCostAndEffect([].concat(
@@ -715,7 +720,9 @@ const User = {
       ))
     // }
 
-    return Object.entries(data)
+    let res = Object.entries(data)
+
+    return res
   },
 
   drawUserStat(playerName) {
@@ -818,6 +825,7 @@ async function parseTechIframe(tree_name) {
 
 const parseDoc = {
   lastRaw: null,
+  lastNodes: null,
   lastResult: null,
   async HTML(rawHTML) {
     var arr
@@ -828,7 +836,7 @@ const parseDoc = {
         ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
 
     if(arr.length < 3) {
-      log("pretty sure it's not a google doc")
+      log("pretty sure it's not a proper google doc")
       return this.lastResult
     }
 
@@ -862,6 +870,7 @@ const parseDoc = {
       interm.user[last.H] = e.el
     }
     usersData[last.user] = interm.user
+    this.lastNodes = usersData
 
     const templateName = '[Персонаж]'
     for(let username in usersData) {
@@ -882,57 +891,6 @@ const parseDoc = {
     return usersRes
   },
   
-  text(raw) {
-    // old parser
-  
-    let players = raw.split('Данные экспедиции')
-    players.shift()
-    players.shift()
-    for (let i of players) {
-      const player = {}
-      var t = i
-        .replace(/Изученные технологии/, 'SPLITME')
-        .replace(/Общеимперские бонусы/, 'SPLITME')
-        .replace(/Квента/, 'SPLITME')
-        .replace(/Здания\s*\n\s*Наземные/, 'SPLITME')
-        //4 - buildings
-        .replace(/Орбитальные\n/, 'SPLITME')
-        //5 - local_projects
-        .replace(/Планетарные проекты\n/, 'SPLITME')
-        .split('SPLITME')
-  
-      player.name = t[0].split('Трип')[0].slice(5, -1).trim()
-  
-      // EXCLUDE_PLAYERS.includes(player.name)
-      if (player.name.indexOf('-') == 0) {
-        log('marked as excluded, skipping', player.name)
-        continue
-      }
-  
-      if (!getEl(player.name) || !getEl(player.name).checked) {
-        log(player.name, 'not marked to draw, skipping')
-        continue
-      }
-  
-      var buildings = t[4]
-        .replace(/\([^)]+\)/g, '')
-        .split(',')
-        .map(e => e.trim())
-        .filter(e => e != '')
-      // .map(e => e.toLowerCase())
-  
-      var local_projects = t[6]
-        .split('\n')
-        .map(e => e.trim())
-        .filter(e => e != '')
-  
-      // if(!confirm(player+'?')) continue
-  
-      log({ t, buildings, local_projects })
-      this.techTableOld(player.name, t[1], buildings, local_projects)
-    }
-  },
-  
   // eslint-disable-next-line no-unused-vars
   async file(event) {
     let raw
@@ -945,65 +903,14 @@ const parseDoc = {
       this.lastResult = await parseDoc.HTML(raw)
     } else {
       raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
-      this.lastResult = parseDoc.text(raw)
+      console.warn("can't parse plaintext: deprecated and removed")
+      // this.lastResult = parseDoc.text(raw)
     }
     this.lastRaw = raw
   },
 
   async redoLast() {
     this.lastResult = await parseDoc.HTML(this.lastRaw) 
-  },
-
-  techTableOld(player, raw, buildings, local_projects){
-    //may be empty
-    var res = raw.split('\n')
-      .filter(e => e != '')
-      .filter((_, i) => i % 2)
-      .map(e =>
-        e.split(',')
-          .map(e => e.replace(/(^\s+|\s+$)/g, ''))
-          .filter(e => e != '')
-        //  .map(e => e.toLowerCase())
-      )
-  
-    res = TREELIST.map((e, i) =>
-      [e, res[i]]
-    )
-    res = new Map(res)
-    res = Object.fromEntries(res)
-    // log(res)
-  
-    let built = buildings
-      .concat(local_projects)
-  
-    for (let i of TREELIST) {
-      drawTree(i)
-      const studied = res[i]
-  
-      // built = 
-      User.highlightStudiedTech(i, studied, built)
-  
-      const withoutReqires = Object.values(tech[i])
-        .filter(e => e.req.length == 0)
-        .map(e => e.id)
-  
-      // TODO doesn't work
-      // eslint-disable-next-line no-unused-vars
-      const avaliableTech = studied
-        .map(e => inverted.tech[i][e])
-        .filter(e => e)
-        .concat(withoutReqires)
-        .map(e => tech[i][e].name)
-        .filter((elem, pos, arr) => arr.indexOf(elem) == pos)
-      //TODO make_array_unique() func
-  
-      // log(player, {avaliableTech})
-  
-      savingOps.saveSvgAsPng(svg, `${player} ${i}.png`)
-    }
-  
-    if (built.length)
-      log('unrecognized tokens for buildings: ' + built)
   },
 
   techTableHTML(playerName, obj) {
@@ -1033,8 +940,15 @@ const parseDoc = {
         Array.from(el.rows)
         .map(e=>[VARS.TREELIST_RU2EN[e.children[0].innerText], splitFilter(e.children[1].innerText, e.children[0].innerText)])
       )
+
+    let colonyParams = Array.from(obj.Параметры.children[0].rows)
+      .slice(1)
+      .map(e => [e.children[0].innerText.trim(),e.children[1].innerText.trim()])
+      colonyParams = Object.fromEntries(colonyParams)
+
     const data = {
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
+      colonyParams,
       buildings: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
       orbital: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
@@ -1154,9 +1068,9 @@ const parseDoc = {
 var KEYWORDS = {
   ITS_SPECIAL: 'особое',
   COLONY_PARAMS: [
-    'Общество'
+    'Наука'
     , 'Производство'
-    , 'Наука'
+    , 'Общество'
     , 'Свободный'
   ],
   ADDITIONAL_COLONY_PARAMS:[
