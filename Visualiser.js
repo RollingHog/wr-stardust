@@ -76,12 +76,14 @@ async function Init() {
     .map(e => parseTechIframe(e))
   )
   .then(_ => {
+    // FIXME uncomment as soon as tech effects debugged
+    /*
     console.log(tech)
   
     console.log(listParam('cost', false))
     console.log(listParam('costClear'))
     console.log(listAllWithoutMilitary())
-
+    */
     console.log('unrecognized tech effects:', badEffectCount)
 
     for(let i of TREELIST) {
