@@ -79,6 +79,7 @@ async function Init() {
       ))
   }
   
+  const parser = new DOMParser()
   for (let i of TREELIST) {
     const src = `tech/${i}.graphml`
     if(isLocalFile) {
@@ -97,7 +98,8 @@ async function Init() {
       }
     } else {
       // non-local, try to fetch data
-      graphmls[i] = (new DOMParser()).parseFromString(await fetch(src).then(e=>e.text()), 'text/xml').querySelector('graph')
+      const xmlText = await fetch(src).then(e=>e.text())
+      graphmls[i] = parser.parseFromString(xmlText, 'text/xml').querySelector('graph')
     }
   }
 
