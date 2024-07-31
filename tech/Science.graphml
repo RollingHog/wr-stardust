@@ -1112,7 +1112,7 @@
     <node id="n57">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="839.25" x="-246.1744797273053" y="-122.36978830283473"/>
+          <y:Geometry height="62.0" width="839.25" x="-246.1744797273053" y="-121.73957660566944"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="330.26953125" x="254.490234375" y="13.07373046875">ФИЗИКА ПРОСТРАНСТВА<y:LabelModel>
@@ -1129,7 +1129,7 @@
     <node id="n58">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="546.0231843171296" x="631.9458183051021" y="-122.36978830283473"/>
+          <y:Geometry height="62.0" width="546.0231843171296" x="631.9458183051021" y="-121.73957660566944"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="196.6259765625" x="174.69860387731478" y="13.07373046875">КОМПЬЮТЕРЫ<y:LabelModel>
@@ -1146,7 +1146,7 @@
     <node id="n59">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="546.0231843171296" x="1207.9690026222315" y="-122.36978830283473"/>
+          <y:Geometry height="62.0" width="546.0231843171296" x="1207.9690026222315" y="-121.73957660566944"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="155.1123046875" x="195.45543981481478" y="13.07373046875">ИМПЛАНТЫ<y:LabelModel>
