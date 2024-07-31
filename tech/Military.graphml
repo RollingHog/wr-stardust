@@ -20,10 +20,9 @@
           <y:Geometry height="62.0" width="259.75" x="54.0" y="136.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="123.044921875" x="68.3525390625" y="-0.40234375">Ополчение
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="165.109375" x="47.3203125" y="6.9482421875">Ополчение
 Сложность: 2
-Эффект: Защита +1,
-при обороне колонии<y:LabelModel>
+Эффект: Защита колонии +1<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -40,9 +39,9 @@
           <y:Geometry height="62.0" width="259.75" x="54.0" y="44.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="244.62109375" x="7.564453125" y="6.9482421875">Разведывательный корпус
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="201.876953125" x="28.9365234375" y="6.9482421875">Разведывательный корпус
 Сложность: 1
-Эффект: +1 куб при планетарной разведке<y:LabelModel>
+Эффект: Планетарная разведка +1<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1183,7 +1182,7 @@
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="207.91796875" x="25.916015625" y="-0.40234375">Супероружие
 Сложность: 4, 2 этапа, тех. Энергия 
 гиперпространства
-Эффект: Атака +3, против колоний<y:LabelModel>
+Эффект: Бомбардировка +3<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -2078,10 +2077,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-235.3982323275868" y="964.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="181.90234375" x="38.923828125" y="-0.40234375">Силовая броня
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="119.4765625" x="70.13671875" y="-0.40234375">Силовая броня
 Сложность: 5
 Эффект: Защита +3,
-убирает условие Чуждой среды<y:LabelModel>
+Сверхадаптация +3<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
