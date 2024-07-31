@@ -284,9 +284,6 @@ const HTMLUtils = {
     }
   },
 
-  makeTable(obj) {
-  },
-
   addTableSorting(tableQuery) {
     // somewhere from SO
     const getCellValue = (tr, idx) =>
@@ -650,7 +647,6 @@ const User = {
   },
 
   /**
-   * 
    * @param {*} treeName 
    * @param {*} techList 
    * @param {*} projList 
@@ -1002,6 +998,7 @@ const parseDoc = {
   parsePlayerPost(text) {
     let requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d+){0,10})\)/g)]
       .map(e=>({text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2]}))
+      .map(( {text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёА-ЯЁ]+/g,''), rolls, rawRolls }))
 
     for(let i of requests) {
       let rolls = {
