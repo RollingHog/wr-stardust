@@ -325,6 +325,9 @@ const StarSystemGenerator = {
     let globalMod = densityMod
 
     switch(firstGiantType) {
+      case E.giant.none:
+        globalMod -= 4
+        break
       case E.giant.conventional:
         firstLocation = Math.min(pop1()+genDict.BEYOND_SNOW_LINE, 11)
         break
@@ -420,10 +423,10 @@ const StarSystemGenerator = {
         case E.type.terrestrial:
           size -= 45
           if(i <= 4) type = type + '_hot'
-          if(i >= genDict.BEYOND_SNOW_LINE) type = type + '_cold'
+          if(i >= genDict.BEYOND_SNOW_LINE + 1) type = type + '_cold'
           break
         case E.type.giant:
-          if(i <= 4) type = type + '_hot'
+          if(i <= 3) type = type + '_hot'
           if(i >= 8) type = type + '_cold'
             break
         default:
