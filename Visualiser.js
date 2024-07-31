@@ -474,7 +474,7 @@ const User = {
       }
     }
 
-    if (list.length > 0) log(`unrecognized tokens for ${treeName}: `, tech_list)
+    // if (list.length > 0) log(`unrecognized tokens for ${treeName}: `, list)
 
     return list
   },
@@ -754,10 +754,9 @@ const parseDoc = {
 
     for(let i of TREELIST) {
       drawTree(i)
-      User.highlightStudiedTech(i,
-        data.techTable[i],
-        [].concat(data.buildings, data.orbital, data.localProjs[i])
-      )
+      let projList = [].concat(data.buildings, data.orbital, data.localProjs[i])
+      User.highlightStudiedTech(i, data.techTable[i], projList)
+      User.highlightAvaltech(i, data.techTable[i], projList)
       savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
     }
   }
