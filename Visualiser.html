@@ -120,11 +120,11 @@
     <div id="el_reports_list" class="body"></div>
   </div>
 
-  <div id="el_battlecalc_wrapper" hidden class="modal"
+  <div id="el_unitcreator_wrapper" hidden class="modal"
     style="right: 10px; top: 30px;">
-    <div id="el_battlecalc_header" class="header">
+    <div id="el_unitcreator_header" class="header">
       <strong>Battle calc</strong>
-      <button onclick="BattleCalc.close()" class="btn_close">Close</button>
+      <button onclick="UnitCreator.close()" class="btn_close">Close</button>
     </div>
     <div id="el_bc_body" class="body">
       <div id="el_bc_input">
@@ -138,7 +138,7 @@
         <textarea id="el_bc_modules" placeholder="Модули" style="height: 8em; width: 80%;" title="не знаешь что делаешь - не трогай"></textarea>
       </div>
       <br>
-      <button onclick="BattleCalc.processInput()">Process</button>
+      <button onclick="UnitCreator.processInput()">Process</button>
       <br>
       <br>
       <div id="el_bc_unit">
@@ -164,7 +164,7 @@
     <div id="" style="position: fixed; left: 8px; bottom: 8px;">
       <button onclick="el_help.hidden=false" accesskey="F1">Help</button>
       <br>
-      <button onclick="BattleCalc.open()" accesskey="B">Battle calc</button>
+      <button onclick="UnitCreator.open()" accesskey="B">Battle calc</button>
       <br>
       <button onclick="Analysis.drawReportsList()" accesskey="R">Reports</button>
       <br>
