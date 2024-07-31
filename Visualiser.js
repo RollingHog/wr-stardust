@@ -440,7 +440,7 @@ const TreeView = {
     for(let i of document.querySelectorAll('text')) {
       let el = i.children[0]
       el ? el.addEventListener('click', function() {
-        navigator.clipboard.writeText(getEl(el.id).innerHTML)
+        navigator.clipboard.writeText(getEl(el.id).textContent)
       }) : 0
     }
   },
@@ -886,7 +886,12 @@ const parseDoc = {
 
     getEl('el_selected_tech_wrapper').hidden = false
     getEl('el_selected_tech_list').innerHTML = `<table>
-    <thead><th>${['Технология', "КПровалы", "Успехи", "КУспехи","&nbsp;"].join('</th><th>')}</th></thead>
+    <thead>
+      <th>${['Технология', "КПровалы", "Успехи", "КУспехи"].join('</th><th>')}</th>
+      <th onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
+      <button>+</button>
+      </th>
+    </thead>
     <tbody>
     <tr>
     ${requests.map(e => '<td>' + [e.text, e.rolls.critfails, e.rolls.wins, e.rolls.critwins].join('</td><td>') + '</td>' + 
@@ -903,18 +908,45 @@ const parseDoc = {
     //   ].join('</td><td>')}</td>
     // </tr>
 
-    log(requests)
+    // log(requests)
+    setTimeout(this.countTechStudyResult, 100)
   },
 
+
+
   countTechStudyResult() {
-    const data = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
-      .map(e=>[inverted.alltech[e.children[0].innerText], +e.children[2].innerText+(+e.children[3].innerText)])
+    let data = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
+      .map(e=> e.children[0] && inverted.alltech[e.children[0].innerText] ? 
+        inverted.alltech[e.children[0].innerText].effect
+        : null
+      )
+      .filter( e => e )
     
+    data = [].concat.apply([], data)
+    const result = {}
+    for(let i of data) {
+      if(i[0] === KEYWORDS.ITS_SPECIAL) {
+        i[0] = ':' + i[1]
+        i[1] = 1
+      }
+
+      if(!result[i[0]]) 
+        result[i[0]] = +i[1]
+      else
+        result[i[0]] += +i[1]
+    }
+
+    getEl('el_tech_result_list').innerHTML = '<table><tbody><tr>'
+      + Object.entries(result)
+        .sort()
+        .map(e => `<td>${e[0]}</td><td>${e[1]}</td>`).join('</tr><tr>')
+      + '</tr>'
     
   }
 }
 
 var KEYWORDS = {
+  ITS_SPECIAL: 'особое',
   COLONY_PARAMS: [
     'Общество'
     , 'Производство'
@@ -1023,7 +1055,7 @@ var KEYWORDS = {
 }
 
 function parseCostAndEffects(t) {
-  const ITS_SPECIAL = 'особое:'
+  const ITS_SPECIAL = KEYWORDS.ITS_SPECIAL + ':'
   const ALL_RIGHT = ITS_SPECIAL+'$1'
 
   const DISABLE_PARSE_IMMUNITY = false
