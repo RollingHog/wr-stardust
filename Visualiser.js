@@ -515,7 +515,7 @@ const parseDoc = {
 
   techTableHTML(playerName, obj) {
     /**
-     * 
+     * it is usually the sixth block, "specials"
      * @param {HTMLTableElement} el 
      * @returns 
      */
