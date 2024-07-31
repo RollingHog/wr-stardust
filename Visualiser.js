@@ -660,27 +660,27 @@ const Analysis = {
         KEYWORDS.MILITARY_PARAMS,
         ["Слоты", "Тип юнита", "Тип урона", "особое"],
       )
-      let result = Analysis.excludeByDict(statAllEffects, filter)
-      // TODO
-      // result = Object.values(result)
-      //   .reduce( (acc, e) => {
-      //     for(let i of e.effect) {
-      //       const k = i[0]
-      //       if(!acc[k])
-      //         acc[k] = {
-      //           count: 0,
-      //           sum: 0,
-      //           list: [],
-      //         }
+      let result = Object.values(inverted.alltech)
+        .reduce( (acc, e) => {
+          for(let i of e.effect) {
+            const k = i[0]
+            if(filter.includes(k)) continue
 
-      //         acc[k].count+=1
-      //         acc[k].sum+=+i[1]
+            if(!acc[k])
+              acc[k] = {
+                count: 0,
+                sum: 0,
+                list: [],
+              }
 
-      //         acc[k].list.push(e.name)
-      //     }
+              acc[k].count+=1
+              acc[k].sum+=+i[1]
 
-      //     return acc
-      //   }, {})
+              acc[k].list.push(e.name)
+          }
+
+          return acc
+        }, {})
       Analysis.reportTable(result)
     },
   
