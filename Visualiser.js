@@ -264,21 +264,6 @@ async function Init() {
   }, 0)
 }
 
-// counting win possibility for debils
-// eslint-disable-next-line no-unused-vars
-function countSuccessPossibility(treshold, nOfCubes) {
-  const n = 250000
-  let wins = 0
-  for (let i = 0; i < n; i++) {
-    let goodCubes = 0
-    for (let j = 0; j < nOfCubes; j++) {
-      goodCubes += +(Math.random() * 10).toFixed(0) % 10 > 3 ? 1 : 0
-    }
-    if (goodCubes >= treshold) wins += 1
-  }
-  return +(wins / n).toFixed(3)
-}
-
 // eslint-disable-next-line no-unused-vars
 const HTMLUtils = {
   makeElDraggable(elID, headerID) {
@@ -625,6 +610,21 @@ const Analysis = {
     let sum=0
     for(let i of Object.keys(tech)) sum+=(Object.keys(tech[i]).length)
     log('Total tech count', sum)
+  },
+
+  // counting win possibility for debils
+// eslint-disable-next-line no-unused-vars
+  countSuccessPossibility(treshold, nOfCubes) {
+    const n = 250000
+    let wins = 0
+    for (let i = 0; i < n; i++) {
+      let goodCubes = 0
+      for (let j = 0; j < nOfCubes; j++) {
+        goodCubes += +(Math.random() * 10).toFixed(0) % 10 > 3 ? 1 : 0
+      }
+      if (goodCubes >= treshold) wins += 1
+    }
+    return +(wins / n).toFixed(3)
   },
 
   filterObjectByDict(obj, dict) {
@@ -1385,7 +1385,9 @@ const parseDoc = {
     const tech5TableToObj = el =>  
       Object.fromEntries(
         Array.from(el.rows)
-        .map(e=>[VARS.TREELIST_RU2EN[e.children[0].innerText], splitFilter(e.children[1].innerText, e.children[0].innerText)])
+        .map(e=>[VARS.TREELIST_RU2EN[e.children[0].innerText], 
+          splitFilter(e.children[1].innerText, e.children[0].innerText)]
+        )
       )
 
     let colonyParams = Array.from(obj.Параметры.children[0].rows)
@@ -1395,8 +1397,10 @@ const parseDoc = {
 
     let additionalParamsRaw = Array.from(obj['Дополнительные параметры'].children[0].rows)
       .map(e => Array.from(e.children))
-    let ak = [].concat(additionalParamsRaw[0],additionalParamsRaw[2],additionalParamsRaw[4]).map(e=>e.innerText.trim().toLowerCase())
-    let av = [].concat(additionalParamsRaw[1],additionalParamsRaw[3],additionalParamsRaw[5]).map(e=>e.innerText.trim())
+    let ak = [].concat(additionalParamsRaw[0],additionalParamsRaw[2],additionalParamsRaw[4])
+      .map(e=>e.innerText.trim().toLowerCase())
+    let av = [].concat(additionalParamsRaw[1],additionalParamsRaw[3],additionalParamsRaw[5])
+      .map(e=>e.innerText.trim())
     let additionalParams = {}
     while(ak.length) {
       let nextK = ak.pop()
