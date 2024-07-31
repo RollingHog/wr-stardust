@@ -482,9 +482,14 @@ const User = {
   highlightAvaltech(treeName, techList, projList) {
     techList
       .concat(projList)
-      .map(e => inverted.alltech[e].next)
+      .map(e => {
+        const t = inverted.alltech[e]
+        // if(t.req.length == 0) return t.id
+
+        return t.next
+      })
       .flat()
-      .forEach( i =>{
+      .forEach( i => {
         if(getEl(i).getAttribute('fill') == 'lightgrey') {
           getEl(i).setAttribute('fill','lightyellow')
         }
@@ -558,6 +563,7 @@ async function parseTechIframe(tree_name) {
 }
 
 const parseDoc = {
+  lastRaw: null,
   lastResult: null,
   async HTML(rawHTML) {
     var arr
@@ -677,6 +683,11 @@ const parseDoc = {
       raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
       this.lastResult = parseDoc.text(raw)
     }
+    this.lastRaw = raw
+  },
+
+  async redoLast() {
+    this.lastResult = await parseDoc.HTML(this.lastRaw) 
   },
 
   techTableOld(player, raw, buildings, local_projects){
@@ -1301,7 +1312,7 @@ const draw = {
       getEl('svg').insertBefore(line, getEl('svg').firstChild)
     },
 
-    Text: function ({ x, y }, {text, fullText, id, fontSize, title}) {
+    Text: function ({ x, y }, {fullText, id, fontSize, title}) {
 
       var el = document.createElementNS(draw.SVG_NS, 'text')
       el.setAttributeNS(null, 'x', x)
@@ -1457,7 +1468,10 @@ const savingOps = {
           .replace("image/png", "image/octet-stream")
         savingOps.triggerDownload(imgURI, fileName)
       }
-      document.removeChild(canvas)
+      
+      try {
+        document.removeChild(canvas)
+      } catch (error) {}
     }
     img.src = url
   },
