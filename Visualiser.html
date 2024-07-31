@@ -2,8 +2,6 @@
 <HTML>
 <HEAD>
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8" />
-  <!-- <link href="/web/css/bootstrap3.min.css" type="text/css" rel="stylesheet" />  
-  <script src="/web/js/vue.min.js"></script> -->
   <script>
   </script>
   <TITLE></TITLE>
@@ -70,9 +68,9 @@
   }
 </style>
 <style id="style__text_title">
-  text:has(title) {
-    /* fill: darkred; */
-  }
+  /* text:has(title) {
+    fill: darkred;
+  } */
 </style>
 
 <body>
@@ -282,6 +280,7 @@
         <br>
         <br>
         <br>
+        Загрузка игроков...
         <br>
         <br>
         <br>
@@ -295,6 +294,13 @@
         <button onclick="parseDoc.redoLast()" style="padding: 12px;">Redo last parse</button>
       </section>
     </div>
+    <section  style="position: fixed; left: 8px; top: 8px;" hidden>
+      // TODO
+      <select name="data_sources_selector" id="data_sources_selector" title="Файл сохраненных данных">
+        <option value="0">#0</option>
+        <option value="2">#2</option>
+      </select>
+    </section>
     <section id="tech_tree_buttons" style="position: fixed; right: 8px; bottom: 8px;">
       <button onclick='drawTree(this.innerText)' style="background-color: rgb(204, 255, 204);" hotkey="1">Biology</button>
       <button onclick='drawTree(this.innerText)' style="background-color: rgb(255, 204,   0);" hotkey="2">Industry</button>
