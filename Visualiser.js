@@ -92,12 +92,12 @@ async function Init() {
 // counting win possibility for debils
 // eslint-disable-next-line no-unused-vars
 function countSuccessPossibility(treshold, nOfCubes) {
-  const n = 100000
+  const n = 250000
   let wins = 0
   for(let i=0; i<n;i++){
     let goodCubes = 0
     for(let j=0; j<nOfCubes; j++) {
-      goodCubes += +(Math.random()*10).toFixed(0)>4 ? 1 : 0
+      goodCubes += +(Math.random()*10).toFixed(0)%10>3 ? 1 : 0
     }
     if(goodCubes>=treshold) wins += 1
   }
