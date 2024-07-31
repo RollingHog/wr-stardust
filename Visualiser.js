@@ -57,11 +57,11 @@ async function Init() {
         i.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>')
       , 'text/xml')
     } catch (e) {
-      alert(`cannot read files, run
+      warn(`cannot read files, run
       chrome with --allow-file-access-from-files
       or
       firefox with about:config - privacy.file_unique_origin : false`)
-      error(e)
+      warn(e)
       break
     }
   }
@@ -209,21 +209,63 @@ async function parseTechIframe(tree_name) {
   )
 }
 
-let html
-// eslint-disable-next-line no-unused-vars
-async function parseDocFile(event) {
-  const MIME_HTML = 'text/html'
-  const rawObj = (await navigator.clipboard.read())[0]
-  
-  let raw
-  if(rawObj.types.includes(MIME_HTML) && false) {
-    raw = await rawObj.getType(MIME_HTML).then(e => e.text())
-    html = (new DOMParser).parseFromString(raw, MIME_HTML)
-  } else {
-    html = await rawObj.getType('text/plain').then(e => e.text())
-  }
+var l
+async function parseDocHTML(rawHTML) {
+  const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
+  l = html
+    .filter(e => e.tagName !== 'BR')
+    .map(({tagName, innerText, innerHTML}) => ({tagName, innerText, innerHTML}))
+  // const CONTENT_TAGS = ['DIV', 'P', 'UL']
+  let hs = []
+  let content = []
+  let interm = {}
+  let res = {}
+  let t = {}
+  // doesnt work
+  for(let i of l) {
+    if(i.tagName.startsWith('H')) {
+      // header
+      if(!hs.length) {
+        hs.push(i)
+        continue
+      }
+      let last = hs[hs.length-1]
+      if(last.tagName > i.tagName) {
+        // new H is lower
+      } else if(last.tagName == i.tagName) {
+        // new H is same
+        interm[last.innerText] = content
+        content = []
+      } else if(last.tagName < i.tagName) {
+        // new H is higher order
+        interm[last.innerText] = content
+        content = []
 
-  let players = html.split('Данные экспедиции')
+        let prelast
+        while(hs.length) {
+          prelast = hs.pop()
+          if(prelast.tagName < last.tagName) {
+            t = Object.assign({}, interm)
+            interm = {}
+            interm[prelast.innerText] = t
+            break
+          }
+        }
+        hs.push(prelast)
+      }
+      hs.push(i)
+    } else {
+      content.push(i)
+    }
+  }
+  log(interm)
+  return res
+}
+
+function parseDocText(raw) {
+  // old parser
+
+  let players = raw.split('Данные экспедиции')
   players.shift()
   players.shift()
   for (let i of players) {
@@ -245,8 +287,10 @@ async function parseDocFile(event) {
     if(player.name.indexOf('-')==0)
       continue
     
-    if(!getEl(player.name) || !getEl(player.name).checked)
+    if(!getEl(player.name) || !getEl(player.name).checked) {
+      log(player.name, 'not marked to draw, skipping')
       continue
+    }
 
     var buildings = t[4]
       .replace(/\([^)]+\)/g,'')
@@ -262,9 +306,24 @@ async function parseDocFile(event) {
       
     // if(!confirm(player+'?')) continue
 
-    // log(buildings, t[1].concat(buildings))
+    log({t, buildings, local_projects})
     parseTechTable(player.name, t[1], buildings, local_projects)
   }
+}
+
+let raw
+// eslint-disable-next-line no-unused-vars
+async function parseDocFile(event) {
+  const MIME_HTML = 'text/html'
+  const rawClipboardObj = (await navigator.clipboard.read())[0]
+  
+  if(rawObj.types.includes(MIME_HTML) && false) {
+    raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
+    parseDocHTML(raw)
+  } else {
+    raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
+    parseDocText(raw)
+  }  
 }
 
 function parseTechTable(player, raw, buildings, local_projects) {
