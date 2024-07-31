@@ -106,12 +106,17 @@ function getKey(dict, roll) {
 
 const StarSystemGenerator = {
   start() {
-    let rawCubes
-    // FIXME remove comment
-    // = prompt('paste here many d6 cubes in 2ch roll format')
+    let rawCubes = prompt('paste here many d6 cubes in 2ch roll format')
+    this.startRaw(rawCubes)
+  },
+  startRaw(rawCubes) {
     if (!rawCubes) rawCubes = RAW_EXAMPLE
     const cubes = this.extractRolls(rawCubes)
     const startingLength = cubes.length
+    if(startingLength == 0) {
+      alert('No proper rolls in input')
+      return
+    }
     const system = this.generate(cubes)
     log('rolles used:', startingLength - cubes.length)
     console.table(system)
@@ -193,4 +198,4 @@ const StarSystemGenerator = {
 }
 
 // FIXME remove
-StarSystemGenerator.start()
+StarSystemGenerator.startRaw()
