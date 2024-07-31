@@ -2283,7 +2283,7 @@ const parseNode = {
         // временный бонус
         .replace(/^на (\d+) хода?/i, 'Временно:$1')
         // вещества
-        .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // параметры планеты
         .replace(new RegExp(`^(${KEYWORDS.PLANET_PARAMS.join('|')}) \\+?(\\d+)`), '$1:$2')
         // Эффекты и бонусы:
