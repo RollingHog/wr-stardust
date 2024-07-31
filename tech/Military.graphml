@@ -41,6 +41,8 @@
       </data>
     </node>
     <node id="n2">
+      <data key="d5" xml:space="preserve"><![CDATA[«Оружие несёт угнетение, хаос и смерть… но иногда оно же приносит победу»
+– Режиналду Леонардо Педро Боливар де Аленсар-Арарипе, "Принципы современной войны"]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="44.0"/>
@@ -2799,7 +2801,6 @@
       </data>
     </edge>
     <edge id="e109" source="n12" target="n128">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2810,7 +2811,6 @@
       </data>
     </edge>
     <edge id="e110" source="n112" target="n129">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
