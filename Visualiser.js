@@ -2147,6 +2147,11 @@ const parseDoc = {
       )
     }
 
+    const prepaired = obj.Здания.children[0].rows[0].children[1].innerText
+      .trim()
+      .split(',')
+      .filter(e => e)
+
     const data = {
       startingFeature,
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
@@ -2163,7 +2168,7 @@ const parseDoc = {
       orbital: splitFilter(obj.Здания.children[0].rows[4].children[1].innerText),
       astroProjs: splitFilter(obj.Здания.children[0].rows[5].children[1].innerText),
       // TODO
-      prepaired: obj.Здания.children[0].rows[0].children[1].innerText.split(',').filter(e => e),
+      prepaired,
       greatPeople,
       uniqueResources,
       localProjs: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
