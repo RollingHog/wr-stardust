@@ -866,7 +866,7 @@ const Analysis = {
    * @param {TTechObject} techObj 
    */
   getSubtreeName(techObj) {
-    if(!techObj) return null
+    if(!techObj || !techObj.nodeCenter) return null
     for(let i of techData.subtreeBorders[techObj.treeName]) {
       if(techObj.nodeCenter.x > i.x1 && techObj.nodeCenter.x < i.x2)
       return i.fullText
