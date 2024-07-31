@@ -42,7 +42,7 @@ const genDict = {
     // (перешедший с окраин горячий юпитер, выбросил сформированные планеты)
     18: E.giant.epistellar,
   },
-  BEYOND_SNOW_LINE: 5,
+  BEYOND_SNOW_LINE: 6,
   otherGiants: {
     insideSnow: {
       [E.giant.none]: null,
@@ -312,9 +312,11 @@ const StarSystemGenerator = {
       switch (k.type) {
         case E.type.terrestrial:
           size = 60
+          if(i <= 4) type = type + '_hot'
           if(i >= genDict.BEYOND_SNOW_LINE) type = type + '_cold'
           break
         case E.type.giant:
+          if(i <= 4) type = type + '_hot'
           if(i >= 8) type = type + '_cold'
             break
         default:
@@ -343,6 +345,7 @@ const StarSystemGenerator = {
 ;(function  main() {
   getEl('el_sp_location').innerHTML = Object.keys(' '.repeat(11).split(''))
     .map( e => `<option value="${+e+1}">${+e+1}</option>`)
+  getEl('el_sp_location').value = 8
   getEl('el_sp_size').innerHTML = Object.keys(E.size)
     .map( e => `<option value="${e}">${e}</option>`)
   setTimeout(_ => {
