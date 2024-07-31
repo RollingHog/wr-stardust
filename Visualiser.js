@@ -826,11 +826,11 @@ const Analysis = {
       for(let j of projs) {
         const tek = TechUtils.byName(j)
         if(!tek) {
-          warn('bad project name', j)
+          warn(`player ${i} bad project name`, j)
           continue
         }
         if(tek.type !== VARS.NODE_T.PROJECT) {
-          warn(`project ${j} should be in ${VARS.NODETYPE_2_NAME[tek.type]} category`)
+          warn(`player ${i} project ${j} should be ${VARS.NODETYPE_2_NAME[tek.type]} category`)
           continue
         }
       }
