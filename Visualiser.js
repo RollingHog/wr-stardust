@@ -350,7 +350,8 @@ const parseDoc = {
     const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
     arr = html
       .filter(e => e.tagName !== 'BR')
-      .map(({ tagName, innerText, children }) => ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
+      .map(({ tagName, innerText, children }) => 
+        ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
     // const CONTENT_TAGS = ['DIV', 'P', 'UL']
     let res = {}
     let interm = {}
