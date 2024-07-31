@@ -196,10 +196,10 @@ const Analysis = {
           else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
           // eslint-disable-next-line no-empty
           else if(['Технология', "Слоты"].includes(k[0])) {}
-          else if(k[0 ]== 'особое') {
-            tcost = 0
-            break
-          }
+          // else if(k[0 ]== 'особое') {
+          //   tcost = 0
+          //   break
+          // }
           else {
             // log('what is this?', j.name, k)
             fail = true
