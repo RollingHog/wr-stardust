@@ -13,6 +13,12 @@
   "rules": {
     "semi": ["warn", "never"],
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "no-empty": ["error", { "allowEmptyCatch": true }] 
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "max-len": ["warn", { 
+      "code": 110,
+      "ignoreComments": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true 
+    }]
   }
 }
