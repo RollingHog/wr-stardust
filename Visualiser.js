@@ -459,7 +459,7 @@ const HTMLUtils = {
       'unitcreator': _ => UnitCreator.open(),
       [TurnPlanner.NAME]: _ => TurnPlanner.open(),
       // TODO add processing from localstorage
-      'selected_tech': _ => {}
+      'selected_tech': _ => playerPost.open()
     }
 
     for(let i of path) {
