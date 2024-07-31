@@ -482,6 +482,99 @@ const KEYWORDS = {
 
 var badTechCount = 0
 
+function parseCostAndEffects(cost_raw, effect_unparsed, studyCubesType) {
+  const ALL_RIGHT = ':$1'
+
+  const DISABLE_PARSE_IMMUNITY = false
+
+  const cost = cost_raw
+    .split(',')
+    .map(e => e
+      .trim()
+      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
+      .replace(/ {2,}/g, ' ')
+      .replace(/(базовое)/, ALL_RIGHT)
+      .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
+      .replace(/(электростанция)/, ALL_RIGHT)
+      .replace(/(повторяемый)/, ALL_RIGHT)
+      .replace(/^(\d+)$/i, studyCubesType + ':$1')
+      .replace(/^(\d+) этапа$/i, 'Этапы:$1')
+      .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
+      .replace(/^(\d+) слота$/i, 'Слоты:$1')
+      .replace(/^тех. (.+)$/i, 'Технология:$1')
+      .replace(/^(осуждение|волнения|непривычная среда) ?\((.+)\)$/i, '$1:+$2')
+      .replace(/^(затраты|специалисты|ресурсы) ?\((.+)\)$/i, '$1:$2')
+      .replace(new RegExp(`(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+      .split(':')
+    )
+
+  if (cost.some(e => e.length < 2)) {
+    log('bad cost', name, cost, cost_raw)
+    badTechCount++
+  }
+
+  let effect = effect_unparsed
+    .split(',')
+    .map(e => e
+      .trim()
+      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
+      .replace(/ {2,}/g, ' ')
+      .replace(/(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
+      .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный:$1')
+      // временный бонус
+      .replace(/^на (\d+) хода?/i, 'Временно:$1')
+      // вещества
+      .replace(new RegExp(`(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
+      // Эффекты и бонусы:
+      // : индустрия
+      .replace(/(Планетарная разведка|Георазведка|Строительство|Пуски|Орбита|Астроинженерия) \+(\d+)/, '$1:$2')
+      // : биология и терраформинг
+      .replace(/(Терраформинг|Генные модификации|Адаптация|Сверхадаптация) \+(\d+)/, '$1:$2')
+      // : социальные
+      .replace(/(Дипломатия|Шпионаж|Контршпионаж|Пропаганда|Автозаки|Политика|Устранение последствий) [+-](\d+)/, '$1:$2')
+      .replace(/(Осуждение) -(\d+)/, '$1:$2')
+      // : военные
+      .replace(/(Конверсия|Регенерация|Ремонт (?:армий|флотов)|Бомбардировка) \+(\d+)/, '$1:$2')
+      // Плюсы к научным веткам
+      .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
+      // армии и корпуса кораблей
+      .replace(/(армия|корпус|(?:наземная|космическая) база)/, 'Тип отряда:$1')
+      .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
+      .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
+      // модули и оружие, глобальные военные эффекты
+      .replace(/(Атака|Защита|Скорость|Уклонение) (армий|флотов)? ?\+?(\d+)/, '$1$2:$3')
+      .replace(/\+?(\d+) очк(о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
+      .replace(/(Защита колонии|планетарный щит|Мины) \+?(\d+)/, '$1:$2')
+      .replace(/Создание (армий|флотов|баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
+      .replace(/(Двигатель) \+?(\d+)/, '$1:$2')
+      // типы урона, эффекты оружия
+      .replace(new RegExp(`(${KEYWORDS.DAMAGE_TYPES.join('|')})`), '$1:$2')
+      .replace(new RegExp(`(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
+      .replace(new RegExp(`(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
+      // эффекты, дающие великих людей
+      .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
+      // базовые вещи
+      .replace(/(выдаётся при высадке)/, ALL_RIGHT)
+      .replace(/(немедленно)/, ALL_RIGHT)
+      .replace(/(электростанция|наземное)/, ALL_RIGHT)
+      .replace(/(неуязвимость к обычным болезням|взлом систем связи невозможен)/, ALL_RIGHT)
+      .replace(/(при подавлении армией|в военное время|на нечуждых планетах|в системе)/, ALL_RIGHT)
+      .replace(/(пред-FTL)/, ALL_RIGHT)
+      // особый эффект - победа
+      .replace(/(победа)/, ALL_RIGHT)
+      .split(':')
+    )
+
+  if (effect.some(e => e.length < 2)) {
+    // it is non-split => not recognized string
+    // effect = null
+    badTechCount++
+    log(name, effect, effect_unparsed)
+  }
+
+  return [cost, effect]
+}
+
 function parseShapeNode(filename, i) {
 
   const sepDifficulty = 'Сложность:'
@@ -542,103 +635,15 @@ function parseShapeNode(filename, i) {
     '#000000': "Любой",
   }
   const borderColor = i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
+  const studyCubesType = colorToParameterType[borderColor]
 
-  const ALL_RIGHT = ':$1'
-
-  const DISABLE_PARSE_IMMUNITY = false
-
-  //parse COST
-  const cost = cost_raw
-    .split(',')
-    .map(e => e
-      .trim()
-      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
-      .replace(/ {2,}/g, ' ')
-      .replace(/(базовое)/, ALL_RIGHT)
-      .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
-      .replace(/(электростанция)/, ALL_RIGHT)
-      .replace(/(повторяемый)/, ALL_RIGHT)
-      .replace(/^(\d+)$/i, colorToParameterType[borderColor] + ':$1')
-      .replace(/^(\d+) этапа$/i, 'Этапы:$1')
-      .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
-      .replace(/^(\d+) слота$/i, 'Слоты:$1')
-      .replace(/^тех. (.+)$/i, 'Технология:$1')
-      .replace(/^(осуждение|волнения|непривычная среда) ?\((.+)\)$/i, '$1:+$2')
-      .replace(/^(затраты|специалисты|ресурсы) ?\((.+)\)$/i, '$1:$2')
-      .replace(new RegExp(`(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
-      .split(':')
-    )
-
-  if (cost.some(e => e.length < 2)) {
-    log('bad cost', name, cost, cost_raw)
-    badTechCount++
-  }
-
-  // parse EFFECTS
   const effect_unparsed = split1[1].split(sepEffect)[1].trim()
-  let effect = effect_unparsed
-    .split(',')
-    .map(e => e
-      .trim()
-      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
-      .replace(/ {2,}/g, ' ')
-      .replace(/(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
-      .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный:$1')
-      // временный бонус
-      .replace(/^на (\d+) хода?/i, 'Временно:$1')
-      // вещества
-      .replace(new RegExp(`(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
-      // Эффекты и бонусы:
-      // : индустрия
-      .replace(/(Планетарная разведка|Георазведка|Строительство|Пуски|Орбита|Астроинженерия) \+(\d+)/, '$1:$2')
-      // : биология и терраформинг
-      .replace(/(Терраформинг|Генные модификации|Адаптация|Сверхадаптация) \+(\d+)/, '$1:$2')
-      // : социальные
-      .replace(/(Дипломатия|Шпионаж|Контршпионаж|Пропаганда|Автозаки|Политика|Устранение последствий) [+-](\d+)/, '$1:$2')
-      .replace(/(Осуждение) -(\d+)/, '$1:$2')
-      // : военные
-      .replace(/(Конверсия|Регенерация|Ремонт (?:армий|флотов)|Бомбардировка) \+(\d+)/, '$1:$2')
-      // Плюсы к научным веткам
-      .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
-      // армии и корпуса кораблей
-      .replace(/(армия|корпус|(?:наземная|космическая) база)/, 'Тип отряда:$1')
-      .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
-      .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
-      // модули и оружие, глобальные военные эффекты
-      .replace(/(Атака|Защита|Скорость|Уклонение) (армий|флотов)? ?\+?(\d+)/, '$1$2:$3')
-      .replace(/\+?(\d+) очк(о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
-      .replace(/(Защита колонии|планетарный щит|Мины) \+?(\d+)/, '$1:$2')
-      .replace(/Создание (армий|флотов|баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
-      .replace(/(Двигатель) \+?(\d+)/, '$1:$2')
-      // типы урона, эффекты оружия
-      .replace(new RegExp(`(${KEYWORDS.DAMAGE_TYPES.join('|')})`), '$1:$2')
-      .replace(new RegExp(`(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
-      .replace(new RegExp(`(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
-      // эффекты, дающие великих людей
-      .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
-      // базовые вещи
-      .replace(/(выдаётся при высадке)/, ALL_RIGHT)
-      .replace(/(немедленно)/, ALL_RIGHT)
-      .replace(/(электростанция|наземное)/, ALL_RIGHT)
-      .replace(/(неуязвимость к обычным болезням|взлом систем связи невозможен)/, ALL_RIGHT)
-      .replace(/(при подавлении армией|в военное время|на нечуждых планетах|в системе)/, ALL_RIGHT)
-      .replace(/(пред-FTL)/, ALL_RIGHT)
-      // особый эффект - победа
-      .replace(/(победа)/, ALL_RIGHT)
-      .split(':')
-    )
-
-  if (effect.some(e => e.length < 2)) {
-    // it is non-split => not recognized string
-    // effect = null
-    badTechCount++
-    log(name, effect, effect_unparsed)
-  }
+  const [cost, effect] = parseCostAndEffects(cost_raw, effect_unparsed, studyCubesType)
 
   var t = {
     id: i.parentElement.parentElement.id
     , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
-    , borderColor: i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
+    , borderColor
     , name
     , cost
     , effect
