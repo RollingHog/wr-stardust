@@ -194,10 +194,13 @@ async function Init() {
       getEl('players_selection').children.forEach(e=> (e.tagName=='LABEL')
         ? e.onclick = function() { 
           if(e.children[0].checked) {
-            parseDoc.drawTech(e.innerText.trim(), techData.currentTreeName) 
+            let playerName = e.innerText.trim()
+            parseDoc.drawTech(playerName, techData.currentTreeName)
+            User.drawUserStat(playerName)
           } else {
             User.activePlayer = null
             drawTree(techData.currentTreeName)
+            getEl('el_reports_wrapper').hidden = true
           }
         }
         : null
@@ -647,6 +650,12 @@ const User = {
     return list
   },
 
+  /**
+   * 
+   * @param {*} treeName 
+   * @param {*} techList 
+   * @param {*} projList 
+   */
   highlightAvaltech(treeName, techList, projList) {
     techList
       .concat(projList)
@@ -664,8 +673,13 @@ const User = {
       })
   },
 
-  countSummaryEffect(techList) {
-    let data = techList.map( e => e.effect )
+  countSummaryCostAndEffect(techList) {
+    let data = techList
+      .map( e => inverted.alltech[e] 
+        ? inverted.alltech[e].effect
+        : null
+      )
+      .filter( e => e )
     
     data = [].concat.apply([], data)
     const result = {}
@@ -682,6 +696,54 @@ const User = {
     }
 
     return result
+  },
+
+  countAllUserEffects(userDataObj) {
+    if(!userDataObj) return null
+
+    let data = 
+      // local: 
+      User.countSummaryCostAndEffect([].concat(
+        userDataObj.buildings,
+        userDataObj.orbital,
+        Object.values(userDataObj.localProjs).flat(),
+      // )),
+      // global: User.countSummaryCostAndEffect([].concat(
+        Object.values(userDataObj.techTable).flat(),
+      ))
+    // }
+
+    return Object.entries(data)
+  },
+
+  drawUserStat(playerName) {
+    const data = User.countAllUserEffects(window[VARS.PLAYERS_DATA_KEY][playerName])
+
+    let t = {
+      main: [],
+      additional: []
+    }
+    for(let i of Object.values(data)) {
+      if(KEYWORDS.COLONY_PARAMS.includes(i[0])) {
+        t.main.push(i)
+      } else {
+        t.additional.push(i)
+      }
+    }
+
+    t.main = t.main.sort()
+    t.additional = t.additional.sort()
+    // t = [].concat(t.main, t.additional)
+    log(t)
+
+    getEl('el_reports_wrapper').hidden = false
+    getEl('el_reports_home').hidden = true
+    getEl('el_reports_list').innerHTML = `<br>
+      <strong>Сводный отчет: ${playerName}</strong>
+      <br>
+      <table><tr>${t.main.map(e => `<td>${e[0]}<td>${e[1]}`).join('</tr><tr>')}</tr></table>
+      <table><tr>${t.additional.map(e => `<td>${e[0]}<td>${e[1]}`).join('</tr><tr>')}</tr></table>
+      `
   },
 }
 
@@ -1071,12 +1133,12 @@ const parseDoc = {
   countTechStudyResult() {
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e=> e.children[0] && inverted.alltech[e.children[0].innerText] ? 
-        inverted.alltech[e.children[0].innerText]
+        e.children[0].innerText
         : (console.warn(e.children[0]),e.children[0].style.backgroundColor='tomato', null)
       )
       .filter( e => e )
 
-    const result = User.countSummaryEffect(techList)
+    const result = User.countSummaryCostAndEffect(techList)
 
     getEl('el_tech_result_list').innerHTML = '<table><tbody><tr>'
       + Object.entries(result)
