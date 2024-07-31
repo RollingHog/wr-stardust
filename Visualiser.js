@@ -217,13 +217,13 @@ const Analysis = {
           continue
         }
 
-        let d = +tcost/+teff
+        let d = (+tcost/+teff).toFixed(2)
 
         if(d && mult) {
           let p = (d/mult).toFixed(2)
           if(p>1.5 || p<0.6) {
             cnt++
-            log(i, j.name, j.effect[0][0], j.effect[0][1], d, mult, p>1?'ДОРОГО':"ДЕШЕВО")
+            log(i, j.name, j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
           }
         }
       }
