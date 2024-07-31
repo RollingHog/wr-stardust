@@ -74,8 +74,8 @@ const genDict = {
 
   // ?adjust to make planets not occur THAT OFTEN
   orbitContents: {
-    3: [E.type.none, E.size.medium],
-    6: [E.type.asteroid, E.size.medium],
+    3: [E.type.none, null],
+    6: [E.type.asteroid, E.size.tiny],
     8: [E.type.terrestrial, E.size.tiny],
     11: [E.type.terrestrial, E.size.small],
     15: [E.type.terrestrial, E.size.medium],
@@ -129,6 +129,11 @@ const StarSystemGenerator = {
   generate(randomD6Arr) {
     const system = []
 
+    const density = getEl('el_density').value
+    const nOfPlanets = density / 5
+    const densityMod = Math.floor((nOfPlanets - 10) / 2)
+    log(density, nOfPlanets)
+
     function pop1() {
       return +randomD6Arr.splice(-1)
     }
@@ -142,7 +147,7 @@ const StarSystemGenerator = {
 
     function giantSize(i) {
       const mod = i <= genDict.BEYOND_SNOW_LINE ? 4 : 0
-      return getKey(genDict.giantSize, pop3() + mod)
+      return getKey(genDict.giantSize, pop3() + mod + densityMod)
     }
 
     // first giant
@@ -184,14 +189,16 @@ const StarSystemGenerator = {
     // non-giant planets
     for(let i = 1; i <= 11; i++) {
       if(system[i]) continue
-      let mod = 0
+      let mod = 0-2
       if(system[i+1] && system[i+1].type == E.type.giant) mod -= 6
       if(system[i-1] && system[i-1].type == E.type.giant) mod -= 3
       if(i == 1 || i == 11) mod -= 3
-      let content = getKey(genDict.orbitContents, pop3() + mod)
+      let content = getKey(genDict.orbitContents, pop3() + mod + densityMod)
       if(!content[0]) continue
       system[i] = planet(content[0], content[1])
     }
+
+
 
     return system
   },
