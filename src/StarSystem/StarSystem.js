@@ -32,6 +32,14 @@ const E = {
     large: 'large',
     huge: 'huge',
   },
+  size2num: {
+    // 1 is asteroid/satellite only
+    tiny: 2,
+    small: 3,
+    medium: 4,
+    large: 5,
+    huge: 6,
+  },
   keys: {
     density: 'density',
     rest: 'rest',
@@ -448,7 +456,7 @@ const StarSystemGenerator = {
       el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}<br>
       <img src='assets/planets/${type}.png' style="width:${size}%" 
         alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
-        title="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
+        title="${k.type} ${k.size}(${E.size2num[k.size]}) ${k.giantType ? k.giantType : ''}"
       ><br>
       ${k.satellites > 0 
         ? k.satellites < 4 
@@ -467,7 +475,7 @@ const StarSystemGenerator = {
     .map( e => `<option value="${+e+1}">${+e+1}</option>`)
   getEl('el_sp_location').value = 8
   getEl('el_sp_size').innerHTML = Object.keys(E.size)
-    .map( e => `<option value="${e}">${e}</option>`)
+    .map( e => `<option value="${e}">${e} (${E.size2num[e]})</option>`)
   setTimeout(_ => {
     getEl('el_sp_size').value = E.size.medium
   }, 0)
