@@ -26,6 +26,7 @@ const E = {
     giant: 'giant',
   },
   size: {
+    dot: 'dot',
     tiny: 'tiny',
     small: 'small',
     medium: 'medium',
@@ -33,7 +34,7 @@ const E = {
     huge: 'huge',
   },
   size2num: {
-    // 1 is asteroid/satellite only
+    dot: 1,
     tiny: 2,
     small: 3,
     medium: 4,
@@ -91,7 +92,7 @@ const genDict = {
   // ?adjust to make planets not occur THAT OFTEN
   orbitContents: {
     3: [E.type.none, null],
-    6: [E.type.asteroid, E.size.tiny],
+    6: [E.type.asteroid, E.size.dot],
     8: [E.type.terrestrial, E.size.tiny],
     11: [E.type.terrestrial, E.size.small],
     15: [E.type.terrestrial, E.size.medium],
@@ -123,6 +124,7 @@ satelliteList: {
 satelliteMods: {
   size: {
       [null]: 0,
+      [E.size.dot]: -4,
       [E.size.tiny]: -4,
       [E.size.small]: -1,
       [E.size.medium]: 0,
@@ -425,7 +427,7 @@ const StarSystemGenerator = {
       
       let type = k.type
       let sizeIndex = Object.keys(E.size).indexOf(k.size)
-      let size = 110 - (2 - sizeIndex) * 12
+      let size = 110 - (3 - sizeIndex) * 12
 
       switch (k.type) {
         case E.type.terrestrial:
@@ -453,12 +455,23 @@ const StarSystemGenerator = {
       //   .replace(/\([^)]+\)/g,'')
       //   .trim()
       //   .replace(/ /g, '_')
+      let buildSlots = k.satellites
+      if(!k.capital) {
+        if (k.type === E.type.terrestrial) {
+          buildSlots = E.size2num[k.size]
+        }
+        else if(k.type === E.type.asteroid) {
+          buildSlots = 1
+        }
+      }
       el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}<br>
       <img src='assets/planets/${type}.png' style="width:${size}%" 
         alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
         title="${k.type} ${k.size}(${E.size2num[k.size]}) ${k.giantType ? k.giantType : ''}"
       ><br>
-      ${k.satellites > 0 
+      Size ${k.type === E.type.asteroid ? 1 : E.size2num[k.size]}
+      <br>Slots ${buildSlots}
+      <br>${k.satellites > 0 
         ? k.satellites < 4 
           ? '&#9790;'.repeat(k.satellites) 
           : '&#9790;*' + k.satellites
