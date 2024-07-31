@@ -419,6 +419,7 @@ const Analysis = {
   onInit() {
     // extracted from Init
     Analysis.reportBadY()
+    Analysis.insertTechLevels()
     Analysis.countTechSubtreesBorders()
 
     // console.log(listParam('cost', false))
@@ -438,6 +439,14 @@ const Analysis = {
 
     Analysis.checkForOpenedWindows()
 
+  },
+
+  insertTechLevels() {
+    for (let treeName of TREELIST) {
+      for (let j in tech[treeName]) {
+        tech[treeName][j].lvl = +techData.levels[treeName].indexOf(tech[treeName][j].y.toString())+1
+      }
+    }
   },
 
   countTechPrices() {
@@ -1517,6 +1526,7 @@ class TTechObject {
   treeName = ''
   borderColor
   name
+  lvl = 0
   cost = []
   effect = []
   req = []
