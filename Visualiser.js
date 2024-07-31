@@ -36,6 +36,7 @@ const VARS = {
     "Наука": "Science",
     "Уникальные": "Unique",
   },
+  TREELIST_EN2RU: null,
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
     font-family: Helvetica;
@@ -127,6 +128,7 @@ const VARS = {
   },
   fill2TreeType: FILL_2_TREE_TYPE,
 }
+VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
 
 ; (() => {
   NodeList.prototype.forEach = Array.prototype.forEach
@@ -283,7 +285,7 @@ async function Init() {
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
       HTMLUtils.makeElDraggable('el_help', 'el_help_header')
       HTMLUtils.makeElDraggable('el_unitcreator_wrapper', 'el_unitcreator_header')
-      HTMLUtils.makeElDraggable('el_turnplanner_wrapper', 'el_turnplanner_header')
+      HTMLUtils.makeElDraggable('el_turnplanner_wrapper', 'el_tp_header')
 
       console.timeEnd('full load   ')
     })
@@ -1167,6 +1169,20 @@ const TreeView = {
       }) : 0
     }
   },
+
+  addTurnPlannerThings() {
+    if(!TurnPlanner.active) return
+    for(let i of svg.children) {
+      if(!i.id) continue
+      const id = i.id.split('_')[0]
+      i.addEventListener('click', function (evt) {
+        if(!TurnPlanner.addTech(tech[techData.currentTreeName][id].name)) return
+        getEl(id).style.fill = 'orange'
+        evt.stopPropagation()
+      })
+    }
+    TurnPlanner.highlightSelected()
+  },
   
   getMinMax(arr, attr) {
     const t = arr.map(e => e[attr])
@@ -1184,6 +1200,7 @@ function drawTree(tree_name) {
     svg.setAttribute("viewBox", techData.cache[tree_name].viewBox)
     setTimeout(TreeView.tspanHighlightOnClick,1)
     setTimeout(TreeView.copyFirstLineOnClick,1)
+    setTimeout(TreeView.addTurnPlannerThings,1)
     techData.currentTreeName = tree_name
     User.drawActiveUser(tree_name)
     return
@@ -1191,6 +1208,7 @@ function drawTree(tree_name) {
 
   TreeView.tspanHighlightOnClick()
   TreeView.copyFirstLineOnClick()
+  TreeView.addTurnPlannerThings()
 
   svg.innerHTML = VARS.SVG_DEFAULT
 
@@ -1228,6 +1246,25 @@ const TechUtils = {
   byName(techName) {
     return inverted.alltech[techName.replace(/ \([^)]+\)/,'')]
   },
+
+  countCosts(techNames) {
+    let t = [].concat.apply([], techNames.map( e => inverted.alltech[e].cost))  
+    let res = {}
+
+    for(let i of t) {
+      if(i[0] === KEYWORDS.ITS_SPECIAL) {
+        i[0] = ':' + i[1]
+        i[1] = null
+      }
+
+      if(!res[i[0]]) 
+        res[i[0]] = +i[1]
+      else
+        res[i[0]] += +i[1]
+    }
+
+    return Object.entries(res)
+  }
 }
 
 const User = {
@@ -1247,19 +1284,22 @@ const User = {
     return window[VARS.PLAYERS_DATA_KEY][playerName]
   },
 
+  listUsers() {
+    return Object.keys(window[VARS.PLAYERS_DATA_KEY])
+  },
+
   /**
    * @param {string} treeName 
    * @param {string[]} tech_list 
-   * @param {string[]} proj_list 
    * @returns 
    */
-  highlightStudiedTech(treeName, tech_list, proj_list) {
+  highlightStudiedTech(treeName, tech_list) {
     let res = []
     const targets = Array.from(svg.getElementsByTagName('rect'))
       .concat(Array.from(svg.getElementsByTagName('polygon')))
       .filter(e => typeof techData.badCells[treeName].find(a => a.id == e.id) === 'undefined')
 
-    let list = tech_list.concat(proj_list)
+    let list = tech_list
     const bad = {
       enemy: list
         .filter( e => e.search(/\(.*чужое/) != -1)
@@ -1299,24 +1339,47 @@ const User = {
   },
 
   /**
+   * @param {string|null} treeName 
+   * @param {*} techList 
+   * @returns {TTechObject[]}
+   */
+  listAvalTech(treeName, techList) {
+    return techList
+      .map( e => e.search('(чужое)') == -1 ? e : '')
+      .map( e => e.replace(/\([^)]+\)/,'').trim())
+      .filter( e => e )
+      .map(
+        /**
+         * @param {TTechObject} e 
+         */
+        (e) => {
+        const t = inverted.alltech[e]
+        if(!t) return null
+        if(treeName && t.treeName !== treeName) return null
+        // if(t.req.length == 0) return t.id
+        return t.next.map( e2 => tech[t.treeName][e2])
+      })
+      .flat()
+      .filter( e => e )
+  },
+
+  /**
+   * @returns {string[]}
+   */
+  getFlatUserTech(username) {
+    const data = User.getSavedUserData(username)
+    let projList = [].concat(data.buildings, data.orbital, Object.values(data.localProjs))
+    return Object.values(data.techTable).concat(projList).flat()
+  },
+
+  /**
    * @param {*} treeName 
    * @param {*} techList 
    * @param {*} projList 
    */
-  highlightAvaltech(treeName, techList, projList) {
-    techList
-      .concat(projList)
-      .map( e => e.search('(чужое)') == -1 ? e : '')
-      .map( e => e.replace(/\([^)]+\)/,'').trim())
-      .filter( e => e )
-      .map(e => {
-        const t = inverted.alltech[e]
-        if(t.treeName !== treeName) return null
-        // if(t.req.length == 0) return t.id
-
-        return t.next
-      })
-      .flat()
+  highlightAvaltech(treeName, techList) {
+    User.listAvalTech(treeName, techList)
+      .map( e => e.id)
       .forEach( i => {
         if(getEl(i) && getEl(i).getAttribute('fill') == 'lightgrey') {
           getEl(i).setAttribute('fill','lightyellow')
@@ -1330,13 +1393,13 @@ const User = {
    * @returns 
    */
   countSummaryCostAndEffect(techList, userDataObj = null) {
-    let data = techList
+    let techListFiltered = techList
       .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
       .filter( e => inverted.alltech[e])
 
-    let effectsData = [].concat.apply([], data.map( e => inverted.alltech[e].effect))
-    let costData = [].concat.apply([], data.map( e => inverted.alltech[e].cost))
+    let effectsData = [].concat.apply([], techListFiltered.map( e => inverted.alltech[e].effect))
+    let costData = TechUtils.countCosts(techListFiltered)
 
     if(userDataObj) {
       effectsData = effectsData.concat(userDataObj.startingFeature
@@ -1759,8 +1822,8 @@ const parseDoc = {
     const data = this.lastResult[playerName]
 
     let projList = [].concat(data.buildings, data.orbital, data.localProjs[treeName])
-    User.highlightStudiedTech(treeName, data.techTable[treeName], projList)
-    User.highlightAvaltech(treeName, data.techTable[treeName], projList)
+    User.highlightStudiedTech(treeName, data.techTable[treeName].concat(projList))
+    User.highlightAvaltech(treeName, data.techTable[treeName].concat(projList))
 
     User.activePlayer = playerName
   },
@@ -1774,8 +1837,8 @@ const parseDoc = {
     for(let i of TREELIST) {
       drawTree(i)
       let projList = [].concat(data.buildings, data.orbital, data.localProjs[i])
-      User.highlightStudiedTech(i, data.techTable[i], projList)
-      User.highlightAvaltech(i, data.techTable[i], projList)
+      User.highlightStudiedTech(i, data.techTable[i].concat(projList))
+      User.highlightAvaltech(i, data.techTable[i].concat(projList))
       savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
     }
   },
@@ -2645,14 +2708,79 @@ const UnitCreator = {
 
 const TurnPlanner = {
   NAME: 'turnplanner',
+  active: false,
+  activePlayer:  'Беглецы',
+  selectedTechs: [],
   open() {
     // getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map(e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
     // this.fillModulesList()
-    const data = User.countAllUserEffects(window[VARS.PLAYERS_DATA_KEY]['Беглецы'])
-    getEl('el_tp_resources').innerHTML = User.createUserTechEffectsTable(data)
+    getEl('el_tp_player').innerHTML = User.listUsers().map( e => `<option value="${e}">${e}</option>`)
+    if(User.activePlayer) {
+      getEl('el_tp_player').value = User.activePlayer
+    } else {
+      getEl('el_tp_player').selectedIndex = -1
+      getEl('el_tp_techs_search').disabled = true
+    }
+    getEl('el_tp_player').onchange = evt => {
+      TurnPlanner.activePlayer = evt.target.options[evt.target.selectedIndex].value
+      TurnPlanner.onSetUser()
+    }
+    this.active = true
     HTMLUtils.openModal(this.NAME)
   },
+  onSetUser() {
+    const data = User.countAllUserEffects(User.getSavedUserData(this.activePlayer))
+    parseDoc.drawTech(this.activePlayer, techData.currentTreeName)
+    getEl('el_tp_resources').innerHTML = User.createUserTechEffectsTable(data)
+    // getEl('el_tp_tech').innerHTML = 
+    this.fillTechsDatalist()
+    getEl('el_tp_techs_search').disabled = false
+    getEl('el_tp_techs_search').onchange = e => {
+      // if(!e.isTrusted) return 
+      this.addTech(getEl('el_tp_techs_search').value)
+      getEl('el_tp_techs_search').value = ''
+    }
+  },
+  getFilteredAvalTechList() {
+    const exclude = this.selectedTechs
+      .concat(User.getFlatUserTech(this.activePlayer))
+      .filter( techName => inverted.alltech[techName] 
+        && (['rectangle', 'parallelogram', 'hexagon'].includes(inverted.alltech[techName].type))
+      )
+    return User.listAvalTech(techData.currentTreeName2, User.getFlatUserTech(this.activePlayer))
+      .filter(techObj => !exclude.includes(techObj.name))
+      .sort( (a,b) => a.treeName > b.treeName ? 1 : -1)
+  },
+  fillTechsDatalist() {
+    getEl('el_tp_techs_datalist').innerHTML = this.getFilteredAvalTechList()
+    .map( 
+      /**
+       * @param {TTechObject} e 
+       */
+      (e) => `<option value="${e.name}">[${VARS.TREELIST_EN2RU[e.treeName]}] ${e.effect.map(e2 => e2.join(': ')).join('; ')}</option>`)
+  },
+  addTech(techName) {
+    if(!this.getFilteredAvalTechList().map(e => e.name).includes(techName)) return false
+    getEl('el_tp_tech').innerText += `${techName} (${Analysis.getSubtreeName(TechUtils.byName(techName))})\n`
+    this.selectedTechs.push(techName)
+    if(!inverted.alltech[techName]) return false
+    this.fillTechsDatalist()
+    this.highlightSelected()
+    return true
+  },
+  highlightSelected() {
+    for(let i of TurnPlanner.selectedTechs) {
+      if(inverted.alltech[i].treeName !== techData.currentTreeName) continue
+      getEl(inverted.alltech[i].id).style.fill = 'orange'
+    }
+  },
+  countSelectedCost() {
+    // FIXME wrong wrong wrong, techs can be studied by multiple params!
+    log(TechUtils.countCosts(this.selectedTechs))
+  },
   close() {
+    this.active = false
+    drawTree(techData.currentTreeName)
     HTMLUtils.closeModal(this.NAME)
   },
 }
