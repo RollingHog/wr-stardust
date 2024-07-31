@@ -36,6 +36,23 @@ const graphmls = {}
 const tech = {}
 const badCells = Object.fromEntries(TREELIST.map(e=>[e,[]]))
 const stat = {}
+const techLevels = Object.fromEntries(TREELIST.map(e => [e,[]]))
+const difficultyMults = [
+  0,
+  1,
+  1.2,
+  2,
+  2.2,
+  3,
+  3.2,
+  3.5,
+  4,
+  4.3,
+  4.7,
+  5,
+  5.3,
+  5.7,
+]
 const inverted = {
   tech: {},
   alltech: {},
@@ -79,6 +96,7 @@ async function Init() {
       for (let i of Object.keys(stat)) {
         const keys =  Object.keys(stat[i])
         for (let j in keys) {
+          if(!techLevels[i].includes(keys[j])) techLevels[i].push(keys[j])
           if(!keys[j-1]) continue
           const delta = keys[j] - keys[j-1]
           if(delta>0 && delta<10) {
@@ -86,6 +104,8 @@ async function Init() {
           }
         }
       }
+      Object.keys( i => techLevels[i].sort())
+
       // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
       console.log(listAllWithoutMilitary())
@@ -109,6 +129,8 @@ async function Init() {
         }
       }
 
+      countTechPrices()
+
       let sum=0
       for(let i of Object.keys(tech)) sum+=(Object.keys(tech[i]).length)
       log('Total tech count', sum)
@@ -129,6 +151,23 @@ function countSuccessPossibility(treshold, nOfCubes) {
     if (goodCubes >= treshold) wins += 1
   }
   return +(wins / n).toFixed(3)
+}
+
+function countTechPrices() {
+  for (let i of Object.keys(tech)) {
+    for(let j of Object.values(tech[i])) {
+      const lvl = techLevels[i].indexOf(j.y.toString())+1
+      const mult = difficultyMults[lvl+1]
+      let d = +j.cost[0][1]/+j.effect[0][1]
+      if(!PARAMLIST_RU.includes(j.effect[0][0])) {
+        d *= 2
+      }
+      if(d && mult) {
+        let p = (d/mult).toFixed(2)
+        if(p>1.5 || p<0.6) log(j.name, j.effect[0][0], j.effect[0][1], p, p>1?'ДОРОГО':"ДЕШЕВО")
+      }
+    }
+  }
 }
 
 function tspanHighlight() {
@@ -568,7 +607,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
       // модули и оружие, глобальные военные эффекты
       .replace(/^(Атака|Защита|Скорость|Уклонение) (армий|флотов)? ?\+?(\d+)/, '$1 $2:$3')
-      .replace(/^\+?(\d+) очк(о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
+      .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
       .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
       .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
       .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
