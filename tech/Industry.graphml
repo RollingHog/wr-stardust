@@ -943,7 +943,7 @@
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="182.775390625" x="38.4873046875" y="-0.40234375">Звёздная материя
 Сложность: 7, экзотматерия (1),
 тех. Управление гравитацией
-Эффект: Нейтрониум +1<y:LabelModel>
+Эффект: Нейтроний +1<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -3003,7 +3003,6 @@
       </data>
     </edge>
     <edge id="e88" source="n28" target="n109">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -3014,7 +3013,6 @@
       </data>
     </edge>
     <edge id="e89" source="n29" target="n32">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -3025,7 +3023,6 @@
       </data>
     </edge>
     <edge id="e90" source="n26" target="n110">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -3036,7 +3033,6 @@
       </data>
     </edge>
     <edge id="e91" source="n110" target="n71">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
