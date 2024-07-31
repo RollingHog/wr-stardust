@@ -839,7 +839,7 @@ const Analysis = {
     // useful when transitions happen
     for(let username of User.listUsers()) {
       const data = User.getSavedUserData(username)
-      const objNames = [].concat(Object.values(data.localProjs), data.buildings, data.orbital)
+      const objNames = [].concat(data.localProjs, data.buildings, data.orbital)
         .flat()
         .map(name => name.replace(/ ?\([^)]+\)/, ''))
         .filter(name => !name.startsWith(':'))
@@ -1203,7 +1203,7 @@ const Analysis = {
       const namesList = [].concat(
         userDataObj.buildings,
         userDataObj.orbital,
-        Object.values(userDataObj.localProjs).flat(),
+        userDataObj.localProjs,
         Object.values(userDataObj.techTable).flat(),
       )
       const result = Analysis.allEffectsVerbose(namesList.map(e => inverted.alltech[e]).filter(e => e))
@@ -1303,12 +1303,12 @@ const Analysis = {
         .map(e => [e[0], {
           'Кол-во':  e[1].buildings.length 
               + e[1].orbital.length 
-              + Object.values(e[1].localProjs).flat().length 
+              + e[1].localProjs.length 
               + Object.values(e[1].techTable).flat().length,
           'Цена': [].concat(
             e[1].buildings, 
             e[1].orbital,
-            Object.values(e[1].localProjs).flat(),
+            e[1].localProjs,
             Object.values(e[1].techTable).flat(),
           )
           .map( e2 => inverted.alltech[e2] ? inverted.alltech[e2].cost[0][1] : null)
@@ -1618,7 +1618,7 @@ const User = {
   getFlatUserTech(username) {
     if(techData.cache.usersFlatTech[username]) return techData.cache.usersFlatTech[username]
     const data = User.getSavedUserData(username)
-    let projList = [].concat(data.buildings, data.orbital, Object.values(data.localProjs))
+    let projList = [].concat(data.buildings, data.orbital, data.localProjs)
     const result = Object.values(data.techTable).concat(projList).flat()
     techData.cache.usersFlatTech[username] = result
     return result
@@ -1708,7 +1708,7 @@ const User = {
       this.countSummaryCostAndEffect([].concat(
         userDataObj.buildings,
         userDataObj.orbital,
-        Object.values(userDataObj.localProjs).flat(),
+        userDataObj.localProjs,
         Object.values(userDataObj.techTable).flat(),
       ), userDataObj).effect
     // }
@@ -2121,8 +2121,6 @@ const parseDoc = {
       localProjs: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
     }
     // log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
-    // FIXME remove
-    log(data.localProjs)
 
     return data
   },
@@ -2131,7 +2129,7 @@ const parseDoc = {
     if(!this.lastResult) return
     const data = this.lastResult[playerName]
 
-    let projList = [].concat(data.buildings, data.orbital, data.localProjs[treeName])
+    let projList = [].concat(data.buildings, data.orbital, data.localProjs)
     User.highlightStudiedTech(treeName, data.techTable[treeName].concat(projList))
     User.highlightAvaltech(treeName, data.techTable[treeName].concat(projList))
 
@@ -2146,7 +2144,7 @@ const parseDoc = {
   drawAndSaveTechs(playerName, data) {
     for(let i of TREELIST) {
       drawTree(i)
-      let projList = [].concat(data.buildings, data.orbital, data.localProjs[i])
+      let projList = [].concat(data.buildings, data.orbital, data.localProjs)
       User.highlightStudiedTech(i, data.techTable[i].concat(projList))
       User.highlightAvaltech(i, data.techTable[i].concat(projList))
       savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
@@ -2205,7 +2203,7 @@ class TGoogleDocUserObj {
   orbital = []
   greatPeople = []
   uniqueResources = []
-  localProjs = TFiveTechObj
+  localProjs = []
 }
 
 // eslint-disable-next-line no-unused-vars
