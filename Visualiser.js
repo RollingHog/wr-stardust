@@ -1125,6 +1125,7 @@ const playerPost = {
     // </tr>
 
     // log(requests)
+    setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
     setTimeout(this.countTechStudyResult, 100)
   },
 
