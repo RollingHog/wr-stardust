@@ -495,8 +495,6 @@ const parseDoc = {
   },
 }
 
-// function techTable() 
-
 // eslint-disable-next-line no-unused-vars
 function saveSVG(filename) {
   saveFile(filename + '.svg', svg.outerHTML)
