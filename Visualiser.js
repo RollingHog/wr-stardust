@@ -717,6 +717,7 @@ const Analysis = {
    * @param {TTechObject} techObj 
    */
   getSubtreeName(techObj) {
+    if(!techObj) return null
     for(let i of techData.subtreeBorders[techObj.treeName]) {
       if(techObj.nodeCenter.x > i.x1 && techObj.nodeCenter.x < i.x2)
       return i.fullText
@@ -850,6 +851,21 @@ const Analysis = {
     }
     sumMisery.actionsList = sumMisery.actionsList.join('; ')
     return sumMisery
+  },
+
+  countTechBalanceBySubtree() {
+    const res = {}
+    for(let user of User.listUsers()) {
+      const techNames = User.getFlatUserTech(user)
+      res[user] = {}
+      for(let i of techNames) {
+        let name = this.getSubtreeName(TechUtils.byName(i))
+        if(!name) continue
+        if(!res[user][name]) res[user][name] = 0
+        res[user][name] += 1
+      }
+    }
+    return res
   },
 
   filterObjectByDict(obj, dict) {
@@ -1186,6 +1202,12 @@ const Analysis = {
       }
       Analysis.reportTable(Object.fromEntries(a))
     },
+
+    предпочтения_игроков_по_техдревам() {
+      const t = Object.entries(Analysis.countTechBalanceBySubtree())
+        .map(([name, e]) => [name, Object.entries(e).sort((a,b)=>b[1]-a[1]).join('; ')])
+      Analysis.reportTable(Object.fromEntries(t))
+    }
   }
 }
 
