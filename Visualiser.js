@@ -302,40 +302,43 @@ const Analysis = {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => !dict.includes(key)))
   },
 
-  showEffectsStatWithoutGarbage() {
-    let filter = [].concat(
-      KEYWORDS.COLONY_PARAMS,
-      KEYWORDS.DAMAGE_TYPES,
-      KEYWORDS.MATERIALS,
-      KEYWORDS.MODULE_PROPS,
-      KEYWORDS.SPECIAL_TECH_COST,
-      KEYWORDS.UNIT_PROPS,
-      KEYWORDS.MILITARY_PARAMS,
-      ["Слоты", "Тип отряда", "особое"],
-    )
-    console.table(Analysis.excludeByDict(statAllEffects, filter))
-  },
-
-  showEffectsStat(filter = KEYWORDS.TECH_EFFECTS) {
-    if(!filter) {
-      console.table(statAllEffects)
-    } else {
-      console.table(Analysis.filterObjectByDict(statAllEffects, filter))
-    }
-  },
-
-  listHulls() {
-    console.table(Object.fromEntries(
-      Object.values(inverted.alltech)
-        .filter(e => e.type == 'octagon')
-        .map(e => [e.name, {
-          "Блок": e.effect[0][1], 
-          "Слоты": +e.effect[1][1],
-          "Подтип": e.effect[2] ? e.effect[2][0] : '',
-          "Свойства": e.effect.slice(3).map(e => e.join(':')).join(','),
-        }])
-    ))
-  },
+  Reports: {
+    showEffectsStatWithoutGarbage() {
+      let filter = [].concat(
+        KEYWORDS.COLONY_PARAMS,
+        KEYWORDS.ADDITIONAL_COLONY_PARAMS,
+        KEYWORDS.SPECIAL_TECH_COST,
+        KEYWORDS.DAMAGE_TYPES,
+        KEYWORDS.MATERIALS,
+        KEYWORDS.MODULE_PROPS,
+        KEYWORDS.UNIT_PROPS,
+        KEYWORDS.MILITARY_PARAMS,
+        ["Слоты", "Тип отряда", "особое"],
+      )
+      console.table(Analysis.excludeByDict(statAllEffects, filter))
+    },
+  
+    showEffectsStat(filter = KEYWORDS.TECH_EFFECTS) {
+      if(!filter) {
+        console.table(statAllEffects)
+      } else {
+        console.table(Analysis.filterObjectByDict(statAllEffects, filter))
+      }
+    },
+  
+    listHulls() {
+      console.table(Object.fromEntries(
+        Object.values(inverted.alltech)
+          .filter(e => e.type == 'octagon')
+          .map(e => [e.name, {
+            "Блок": e.effect[0][1], 
+            "Слоты": +e.effect[1][1],
+            "Подтип": e.effect[2] ? e.effect[2][0] : '',
+            "Свойства": e.effect.slice(3).map(e => e.join(':')).join(','),
+          }])
+      ))
+    },
+  }
 }
 
 function tspanHighlightOnClick() {
