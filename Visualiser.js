@@ -507,11 +507,14 @@ function parseShapeNode(filename, i) {
 
   const ALL_RIGHT = ':$1'
 
+  const DISABLE_PARSE_IMMUNITY = false
+
   //parse COST
   const cost = cost_raw
     .split(',')
     .map(e => e
       .trim()
+      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
       .replace(/ {2,}/g,' ')
       .replace(/(базовое)/, ALL_RIGHT)
       .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
@@ -532,8 +535,6 @@ function parseShapeNode(filename, i) {
     log('bad cost', name, cost, cost_raw)
     badTechCount++
   }
-
-  // log(name, cost)
     
   // parse EFFECTS
   const effect_unparsed = split1[1].split(sepEffect)[1].trim()
@@ -541,7 +542,7 @@ function parseShapeNode(filename, i) {
     .split(',')
     .map( e => e
       .trim()
-      // .replace(/:/g,'')
+      .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
       .replace(/ {2,}/g,' ')
       .replace(/(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
       .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный куб:$1')
