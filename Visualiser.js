@@ -165,10 +165,52 @@ const Analysis = {
       for(let j of Object.values(tech[i])) {
         const lvl = techLevels[i].indexOf(j.y.toString())+1
         const mult = VARS.DIFFICULTY_MULTS[lvl+1]
-        let d = +j.cost[0][1]/+j.effect[0][1]
-        if(!PARAMLIST_RU.includes(j.effect[0][0])) {
-          d *= 2
+        let tcost = 0
+        let teff = 0
+        let fail = false
+        
+        for(let k of j.cost) {
+          if(KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
+          else if(k[0] == 'Любой') tcost += +k[1]
+          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) teff += +k[1]/2
+          else if(k[0]=='Этапы') tcost *= 2
+          else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
+          // eslint-disable-next-line no-empty
+          else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
+          // eslint-disable-next-line no-empty
+          else if(['особое', 'Технология', "Слоты"].includes(k[0])) {}
+          else {
+            // log('what is this?', j.name, k)
+            fail = true
+            break
+          }
         }
+        
+        for(let k of j.effect) {
+          if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
+          else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) teff += +k[1]/2
+          else if(KEYWORDS.TECH_EFFECTS.includes(k[0])) teff += +k[1]/2
+          else if(k[0].startsWith('Исследования (')) teff += +k[1]/2
+          // eslint-disable-next-line no-empty
+          else if(KEYWORDS.MATERIALS.includes(k[0])) {}
+          // eslint-disable-next-line no-empty
+          else if(KEYWORDS.UNIT_PROPS.includes(k[0])) {}
+          // eslint-disable-next-line no-empty
+          else if(k[0] == 'особое') {}
+          else {
+            // log('what is this?', j.name, k)
+            fail = true
+            break
+          }
+        }
+
+        if(fail) {
+          // unrecognized effects
+          continue
+        }
+
+        let d = +tcost/+teff
+
         if(d && mult) {
           let p = (d/mult).toFixed(2)
           if(p>1.5 || p<0.6) {
@@ -547,7 +589,7 @@ const parseDoc = {
   }
 }
 
-const KEYWORDS = {
+var KEYWORDS = {
   DAMAGE_TYPES: [
     "био",
     "биологическое",
@@ -571,7 +613,6 @@ const KEYWORDS = {
     "осадное",
     "щит",
   ],
-  // COLONY_PARAMETERS: [],
   MATERIALS: [
     // 1 ряд
     "Добыча",
@@ -592,6 +633,23 @@ const KEYWORDS = {
     "Образцы",
     "Экзоты",
     "Аномалия"
+  ],
+  SPECIAL_TECH_COST: [
+    "затраты",
+    "специалисты",
+    "ресурсы",
+  ],
+  COLONY_PARAMS: [
+    'Общество'
+    , 'Производство'
+    , 'Наука'
+    , 'Свободный'
+  ],
+  ADDITIONAL_COLONY_PARAMS:[
+    "осуждение",
+    "волнения",
+    "непривычная среда",
+    "чуждая среда",
   ],
   TECH_EFFECTS: [
       // индустрия
@@ -645,8 +703,8 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
       .replace(/^(\d+) слот(а|ов)$/i, 'Слоты:$1')
       .replace(/^тех. (.+)$/i, 'Технология:$1')
-      .replace(/^(осуждение|волнения|непривычная среда) ?\((.+)\)$/i, '$1:+$2')
-      .replace(/^(затраты|специалисты|ресурсы) ?\((.+)\)$/i, '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
       .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
       .split(':')
     )
@@ -826,14 +884,14 @@ function doNodeStat(filename, t) {
       statAllEffects[effect[0]] += 1
     }
 
-    if(!PARAMLIST_RU.includes(effect[0])) continue
+    if(!KEYWORDS.COLONY_PARAMS.includes(effect[0])) continue
 
     stat[filename][t.y][effect[0]] += +effect[1]
 
     stat[filename][t.y].sum += +effect[1]
   }
 
-  if(!PARAMLIST_RU.includes(effects[0][0])) return
+  if(!KEYWORDS.COLONY_PARAMS.includes(effects[0][0])) return
   
   let cost_facto = +cost[0][1]
   if (cost[1] && cost[1][0] == 'Этапы')
@@ -880,20 +938,13 @@ function listParam(param = 'costClear', fuckMilitary = true) {
   return res
 }
 
-const PARAMLIST_RU = [
-  'Общество'
-  , 'Производство'
-  , 'Наука'
-  , 'Свободный'
-]
-
 function listAllWithoutMilitary() {
   //delete stat['Military']
 
   let list = {}
   let res = []
 
-  for (let i of PARAMLIST_RU) {
+  for (let i of KEYWORDS.COLONY_PARAMS) {
     list[i] = listParam(i).split('\n')
     for (let j in list[i]) {
       if (typeof res[j] == "undefined")
