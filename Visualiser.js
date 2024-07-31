@@ -82,7 +82,7 @@ async function Init() {
           if(!keys[j-1]) continue
           const delta = keys[j] - keys[j-1]
           if(delta>0 && delta<10) {
-            log('bad y:', i, keys[j-1], keys[j])
+            console.warn('bad y:', i, keys[j-1], keys[j])
           }
         }
       }
