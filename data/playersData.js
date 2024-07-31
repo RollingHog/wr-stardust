@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-02-18T13:07:48.559Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-02-23T01:24:52.058Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -106,6 +106,7 @@ var DATA__PLAYERS_DATA = {
       "Первичная орбитальная группировка"
     ],
     "astroProjs": [],
+    "prepaired": [],
     "greatPeople": [
       {
         "name": "Денис Сухой",
@@ -287,6 +288,7 @@ var DATA__PLAYERS_DATA = {
       "Гелиоприемник (чужое; сломано)"
     ],
     "astroProjs": [],
+    "prepaired": [],
     "greatPeople": [
       {
         "name": "Карина",
@@ -421,6 +423,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "orbital": [],
     "astroProjs": [],
+    "prepaired": [],
     "greatPeople": [
       {
         "name": "Фил Спенсер",
@@ -596,6 +599,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "orbital": [],
     "astroProjs": [],
+    "prepaired": [],
     "greatPeople": [
       {
         "name": "Скэсуед Анихам",
@@ -784,6 +788,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "orbital": [],
     "astroProjs": [],
+    "prepaired": [],
     "greatPeople": [
       {
         "name": "Хоакин Паэс ",
@@ -944,6 +949,7 @@ var DATA__PLAYERS_DATA = {
       "Спутники связи"
     ],
     "astroProjs": [],
+    "prepaired": [],
     "greatPeople": [
       {
         "name": "Илоний Джобс",
@@ -1057,6 +1063,7 @@ var DATA__PLAYERS_DATA = {
       "Шахта"
     ],
     "astroProjs": [],
+    "prepaired": [],
     "greatPeople": [
       {
         "name": " пророк Ракель",
