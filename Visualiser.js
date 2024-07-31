@@ -831,6 +831,13 @@ const draw = {
   }  
 }
 
+// eslint-disable-next-line no-unused-vars
+function saveAllTechAsPng() {
+  for (const i of document.querySelectorAll('#tech_tree_buttons button')) {
+    i.click()
+    saveSvgAsPng(svg, `${i.innerText}.png`)
+  }
+}
 
 // eslint-disable-next-line no-unused-vars
 function saveFile(filename, data) {
