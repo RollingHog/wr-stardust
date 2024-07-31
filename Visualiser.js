@@ -1,6 +1,7 @@
 // common.js
 /* global
 getEl log
+PLA
 */
 
 // draw.js
@@ -8,7 +9,7 @@ getEl log
   draw
 */
 
-const VERSION = '1.0.0'
+const VERSION = '1.0.1'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
@@ -96,6 +97,7 @@ const techData = {
   graphmls: {},
   badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
   levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
+  subtreeBorders: Object.fromEntries(TREELIST.map(e => [e,[]])),
   badTechCount: 0,
   currentTreeName: null,
 }
@@ -156,7 +158,7 @@ async function Init() {
   getEl('el_loading').hidden = true
   console.timeEnd('initial draw')
 
-  setTimeout(async function () {
+  setTimeout(async function init2 () {
 
     console.time('Player data load')
       
@@ -196,6 +198,7 @@ async function Init() {
       }
 
       Analysis.reportBadY()
+      Analysis.countTechSubtreesBorders()
 
       // console.log(listParam('cost', false))
       console.log(listParam('costClear'))
@@ -422,6 +425,23 @@ const Analysis = {
     }
     Object.keys(techData.levels).map(i => techData.levels[i].sort((a,b)=>a<b))
   },
+  countTechSubtreesBorders() {
+    techData.subtreeBorders = Object.fromEntries(
+      Object.entries(techData.badCells)
+        .map(e => [e[0], e[1]
+          .filter(e2 => e2.fullText.length > 2)
+          .map(({ fullText, x, w }) => ({ fullText: fullText.toLowerCase(), x1: x, x2: x + w }))
+        ]))
+  },
+  /**
+   * @param {TTechObject} techObj 
+   */
+  getSubtreeName(techObj) {
+    for(let i of techData.subtreeBorders[techObj.treeName]) {
+      if(techObj.nodeCenter.x > i.x1 && techObj.nodeCenter.x < i.x2)
+      return i.fullText
+    }
+  },
   searchBadTechRefs() {
     for (let i of Object.keys(tech)) {
       for (let j of Object.values(tech[i])) {
@@ -482,7 +502,7 @@ const Analysis = {
   },
 
   Reports: {
-   статистика_по_эффектам_тех() {
+   эффекты_тех() {
       let filter = [].concat(
         KEYWORDS.COLONY_PARAMS,
         KEYWORDS.ADDITIONAL_COLONY_PARAMS,
@@ -497,7 +517,7 @@ const Analysis = {
       Analysis.reportTable(Analysis.excludeByDict(statAllEffects, filter))
     },
   
-    showEffectsStat(filter) {
+    вообще_все_эффекты(filter) {
       if(!filter) {
         Analysis.reportTable(statAllEffects)
       } else {
@@ -527,6 +547,31 @@ const Analysis = {
             "Свойства": e.effect.map(e => e.join(': ')).join(', '),
           }])
       ))
+    },
+
+    список_технологий_по_типу() {
+      Analysis.reportTable(
+        Object.values(inverted.alltech)
+          .reduce( (acc, e) => {
+            if(!acc[e.type])
+              acc[e.type]=1
+            else
+              acc[e.type]+=1
+            return acc
+          }, {})
+      )
+    },
+
+    // чтоьы прикинуть сколько давать вкатившимся после начала игры
+    суммарное_количество_проектов_сделанных_каждым_из_игроков() {
+      const result = Object.fromEntries(Object.entries(window[VARS.PLAYERS_DATA_KEY])
+        .map(e => [e[0],
+          e[1].buildings.length 
+          + e[1].orbital.length 
+          + Object.values(e[1].localProjs).flat().length 
+          + Object.values(e[1].techTable).flat().length
+        ]))
+      Analysis.reportTable(result)
     },
 
     // drawGraph() {
@@ -1346,6 +1391,31 @@ function parseCostAndEffects(t) {
   return [cost, effect]
 }
 
+class TTechObject {
+  id = ''
+  type
+  treeName = ''
+  borderColor
+  name
+  cost = []
+  effect = []
+  req = []
+  next = []
+  fullText = ''
+  title = ''
+  x
+  y
+  h
+  w
+  fill
+}
+
+/**
+ * 
+ * @param {*} filename 
+ * @param {*} i 
+ * @returns {TTechObject | null}
+ */
 function parseShapeNode(filename, i) {
 
   const sepDifficulty = 'Сложность:'
@@ -1371,6 +1441,7 @@ function parseShapeNode(filename, i) {
   const t = {
     id: i.parentElement.parentElement.id
     , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
+    , treeName: filename
     , borderColor
     , name: ''
     , cost: []
