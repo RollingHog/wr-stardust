@@ -438,7 +438,10 @@ const HTMLUtils = {
           setTimeout(_ => searchEnabled = false, 50)
         }
         else {
-          document.querySelector('.modal[style*="z-index: 1"]:not([hidden]) button.btn_close').click()
+          let tgt = document.querySelector('.modal[style*="z-index: 1"]:not([hidden]) button.btn_close')
+          if(!tgt) tgt = document.querySelector('.modal:not([hidden]) button.btn_close')
+          if(!tgt) return
+          tgt.click()
           this.focusModal(document.querySelector('.modal:not([hidden])'))
           // this.hideAllModals()
         }
