@@ -478,12 +478,26 @@ const KEYWORDS = {
     "Экзоты",
     "Аномалия"
   ],
+  TECH_EFFECTS: [
+      // индустрия
+    "Планетарная разведка",
+    "Георазведка",
+    "Строительство",
+    "Пуски",
+    "Орбита",
+    "Астроинженерия",
+    // биология и терраформинг
+    "Терраформинг",
+    "Генные модификации",
+    "Адаптация",
+    "Сверхадаптация",
+  ],
 }
 
 var badTechCount = 0
 
 function parseCostAndEffects(cost_raw, effect_unparsed, studyCubesType) {
-  const ALL_RIGHT = ':$1'
+  const ALL_RIGHT = 'особое:$1'
 
   const DISABLE_PARSE_IMMUNITY = false
 
@@ -526,10 +540,7 @@ function parseCostAndEffects(cost_raw, effect_unparsed, studyCubesType) {
       // вещества
       .replace(new RegExp(`(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
       // Эффекты и бонусы:
-      // : индустрия
-      .replace(/(Планетарная разведка|Георазведка|Строительство|Пуски|Орбита|Астроинженерия) \+(\d+)/, '$1:$2')
-      // : биология и терраформинг
-      .replace(/(Терраформинг|Генные модификации|Адаптация|Сверхадаптация) \+(\d+)/, '$1:$2')
+      .replace(new RegExp(`(${KEYWORDS.TECH_EFFECTS.join('|')}) [+-](\\d+)`), '$1:$2')
       // : социальные
       .replace(/(Дипломатия|Шпионаж|Контршпионаж|Пропаганда|Автозаки|Политика|Устранение последствий) [+-](\d+)/, '$1:$2')
       .replace(/(Осуждение) -(\d+)/, '$1:$2')
