@@ -859,7 +859,7 @@ const parseDoc = {
       return
     }
     // , null, 4
-    savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult))
+    savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2))
   },
 
   parsePlayerPost(text) {
