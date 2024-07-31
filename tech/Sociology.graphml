@@ -122,7 +122,7 @@
     <node id="n8">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="715.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="623.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.97265625" x="59.888671875" xml:space="preserve" y="6.9482421875">Земной миф
@@ -1147,7 +1147,7 @@
     <node id="n87">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="623.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1194.3428645145539" y="715.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="156.484375" x="51.6328125" xml:space="preserve" y="6.9482421875">Мнемогенез
@@ -1160,7 +1160,7 @@
     <node id="n88">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="715.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1484.0928645145539" y="807.0"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="125.67578125" x="67.037109375" xml:space="preserve" y="6.9482421875">Смертельные мемы
@@ -1874,7 +1874,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e70" source="n8" target="n84">
+    <edge id="e70" source="n87" target="n88">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1885,7 +1885,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e71" source="n20" target="n87">
+    <edge id="e71" source="n20" target="n8">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1896,7 +1896,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e72" source="n87" target="n8">
+    <edge id="e72" source="n8" target="n87">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1907,7 +1907,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e73" source="n87" target="n88">
+    <edge id="e73" source="n87" target="n84">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
