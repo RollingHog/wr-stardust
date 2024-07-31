@@ -32,7 +32,7 @@ const VARS = {
     "Биология": "Biology",
     "Индустрия": "Industry",
     "Наука": "Science",
-    // "Особые",
+    "Особые": "Specials",
   },
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
@@ -572,8 +572,15 @@ const parseDoc = {
       .filter(e => e.tagName !== 'BR')
       .map(({ tagName, innerText, children }) => 
         ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
+
+    if(arr.length < 3) {
+      log("pretty sure it's not a google doc")
+      return this.lastResult
+    }
+
     // const CONTENT_TAGS = ['DIV', 'P', 'UL']
     let usersData = {}
+    let usersRes = {}
     let interm = {
       user: {},
       planet: {},
@@ -609,13 +616,16 @@ const parseDoc = {
         continue
       }
 
+      usersRes[username] = parseDoc.techTableHTML(username, usersData[username])
+
       if (!getEl(username) || !getEl(username).checked) {
         log(username, 'not marked to draw, skipping')
         continue
       }
-      parseDoc.techTableHTML(username, usersData[username])
+
+      this.drawAndSaveTechs(username, usersRes[username])
     }
-    return usersData
+    return usersRes
   },
   
   text(raw) {
@@ -750,7 +760,7 @@ const parseDoc = {
     const splitFilter = str =>
       str.split(',').filter(e => e).map(e => e.trim())
     /**
-     * there is usually the sixth block, "specials"
+     * there is usually the sixth block, "Specials"
      * @param {HTMLTableElement} el 
      * @returns 
      */
@@ -765,9 +775,12 @@ const parseDoc = {
       orbital: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
     }
-    // foo = data
-    log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
+    // log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
 
+    return data
+  },
+
+  drawAndSaveTechs(playerName, data) {
     for(let i of TREELIST) {
       drawTree(i)
       let projList = [].concat(data.buildings, data.orbital, data.localProjs[i])
@@ -775,7 +788,7 @@ const parseDoc = {
       User.highlightAvaltech(i, data.techTable[i], projList)
       savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
     }
-  }
+  },
 }
 
 var KEYWORDS = {
