@@ -801,7 +801,7 @@ const User = {
 
   drawUserStat(playerName) {
     const data = User.countAllUserEffects(window[VARS.PLAYERS_DATA_KEY][playerName])
-      .filter( e => !KEYWORDS.TECH_EFFECT_MODS.includes(e[0].replace(/^:/,'')) )
+      .filter( e => !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0].replace(/^:/,'')) )
 
     let t = {
       main: [],
@@ -821,7 +821,12 @@ const User = {
       return [e, a[1]]
     })
 
-    t.additional = t.additional.sort()
+    log( )
+    t.additional = t.additional.sort().filter( e => {
+      return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
+      && KEYWORDS.SINGLE_TIME_EFFECTS.filter(e2 => e[0].startsWith(e2)).length == 0
+      && !KEYWORDS.PLANET_PARAMS.includes(e[0])
+    })
     // t = [].concat(t.main, t.additional)
 
     getEl('el_reports_wrapper').hidden = false
@@ -830,7 +835,7 @@ const User = {
       <strong>Сводный отчет: ${playerName}</strong>
       <br>
       <table><tr>${t.main.map(e => `<td>${e[0]}<td>${e[1]}`).join('</tr><tr>')}</tr></table>
-      <table><tr>${t.additional.map(e => `<td>${e[0]}<td>${e[1]}`).join('</tr><tr>')}</tr></table>
+      <table><tr>${t.additional.map(e => `<td>${e[0]}<td>${+e[1]>=0?'+':'-'}${e[1]}`).join('</tr><tr>')}</tr></table>
       `
   },
 }
@@ -1029,11 +1034,14 @@ const parseDoc = {
 
     let additionalParamsRaw = Array.from(obj['Дополнительные параметры'].children[0].rows)
       .map(e => Array.from(e.children))
-    let ak = [].concat(additionalParamsRaw[0],additionalParamsRaw[2]).map(e=>e.innerText.trim().toLowerCase())
-    let av = [].concat(additionalParamsRaw[1],additionalParamsRaw[3]).map(e=>e.innerText.trim())
+    let ak = [].concat(additionalParamsRaw[0],additionalParamsRaw[2],additionalParamsRaw[4]).map(e=>e.innerText.trim().toLowerCase())
+    let av = [].concat(additionalParamsRaw[1],additionalParamsRaw[3],additionalParamsRaw[5]).map(e=>e.innerText.trim())
     let additionalParams = {}
     while(ak.length) {
-      additionalParams[ak.pop()] = av.pop()
+      let nextK = ak.pop()
+      let nextV = av.pop()
+      if(!nextK) continue
+      additionalParams[nextK] = nextV
     }
 
     const startingFeature = parseNode.effects(
@@ -1355,12 +1363,8 @@ var KEYWORDS = {
     'черная дыра',
     'электростанция',
   ],
-  TECH_EFFECT_MODS: [
-    'выдаётся при высадке',
-    'выдаётся на старте',
-    'немедленно',
+  TECH_UNIQUE_EFFECTS: [
     'электростанция',
-    'наземное',
     'неуязвимость к обычным болезням',
     'взлом систем связи невозможен',
     'при подавлении армией',
@@ -1368,6 +1372,17 @@ var KEYWORDS = {
     'на нечуждых планетах',
     'в системе',
     'вне родной системы',
+  ],
+  SINGLE_TIME_EFFECTS: [
+    'Временно',
+    'Великий человек',
+    'выдаётся при высадке',
+    'выдаётся на старте',
+    'немедленно',
+    'позволяет перебросить куб на Ресурсы (только вверх)',
+  ],
+  TECH_EFFECT_MODS: [
+    'наземное',
   ],
   MILITARY_PARAMS: [
     "Атака",
@@ -1493,6 +1508,8 @@ const parseNode = {
         .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
         .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
         // базовые вещи
+        .replace(new RegExp(`^(${KEYWORDS.TECH_UNIQUE_EFFECTS.join('|')})$`), KEYWORDS.ALL_RIGHT)
+        .replace(new RegExp(`^(${KEYWORDS.SINGLE_TIME_EFFECTS.join('|')})$`), KEYWORDS.ALL_RIGHT)
         .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECT_MODS.join('|')})$`), KEYWORDS.ALL_RIGHT)
         // особый эффект - победа
         .replace(/(победа)/, KEYWORDS.ALL_RIGHT)
