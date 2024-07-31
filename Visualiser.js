@@ -108,13 +108,6 @@ async function Init() {
             })
         }
       }
-
-      for (const i of document.querySelectorAll('tspan')) {
-        i.onclick = function(e) {
-          getEl('highlight_css').innerHTML = `.${e.target.className.baseVal} { fill: red }`
-          log()
-        }        
-      }
     })
   }, 0)
 }
@@ -134,16 +127,28 @@ function countSuccessPossibility(treshold, nOfCubes) {
   return +(wins / n).toFixed(3)
 }
 
+function tspanHighlight() {
+  for (const i of document.querySelectorAll('tspan')) {
+    i.onclick = function(e) {
+      getEl('highlight_css').innerHTML = `.${e.target.className.baseVal} { fill: orange }`
+      log()
+    }        
+  }
+}
+
 function drawTree(tree_name) {
   if (!tech[tree_name] || Object.keys(tech[tree_name]).length == 0) {
     parseTechIframe(tree_name)
   }
 
+  
   if (cache[tree_name]) {
     svg.innerHTML = cache[tree_name].html
     svg.setAttribute("viewBox", cache[tree_name].viewBox)
+    setTimeout(tspanHighlight,1)
     return
   }
+  tspanHighlight()
 
   svg.innerHTML = SVG_DEFAULT
 
@@ -163,7 +168,6 @@ function drawTree(tree_name) {
   cache[tree_name] = {}
   cache[tree_name].html = svg.innerHTML
   cache[tree_name].viewBox = viewBox
-
 }
 
 function getMinMax(arr, attr) {
