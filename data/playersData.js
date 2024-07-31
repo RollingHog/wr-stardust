@@ -1,3 +1,4 @@
+var DATA__PLAYERS_TIMESTAMP = '2023-02-09T22:30:03.333Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "techTable": {
