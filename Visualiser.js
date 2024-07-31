@@ -704,7 +704,8 @@ const User = {
     if(!userDataObj) return null
 
     let startParams = userDataObj.colonyParams["Начальные параметры"].split('/')
-      .forEach((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
+      .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
+    startParams = Object.fromEntries(startParams)
 
     log(startParams)
 
@@ -719,6 +720,13 @@ const User = {
         Object.values(userDataObj.techTable).flat(),
       ))
     // }
+
+    for(let i in startParams) {
+      if(data[i])
+        data[i] += +startParams[i]
+      else
+        data[i] = +startParams[i]
+    }
 
     let res = Object.entries(data)
 
@@ -740,10 +748,14 @@ const User = {
       }
     }
 
-    t.main = t.main.sort()
+    // just re-ordering 
+    t.main = KEYWORDS.COLONY_PARAMS.map(e => {
+      let a = t.main.find(f => f[0] == e) || [null, 0]
+      return [e, a[1]]
+    })
+
     t.additional = t.additional.sort()
     // t = [].concat(t.main, t.additional)
-    log(t)
 
     getEl('el_reports_wrapper').hidden = false
     getEl('el_reports_home').hidden = true
