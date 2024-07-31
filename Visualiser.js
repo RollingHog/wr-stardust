@@ -351,6 +351,26 @@ const HTMLUtils = {
     )
   },
 
+  openModal(name) {
+    const tgt = Array.from(document.querySelectorAll('.modal')).map(e => e.id).filter(e => e.includes(name))[0]
+    if(!tgt) return
+    getEl(tgt).hidden = false
+    this.registerModalPath(name)
+  },
+
+  registerModalPath(name, subName) {
+    if(VARS.IS_LOCAL) {
+      location.hash = `${name}${subName ? `__${subName}` : ''}`
+    }
+  },
+
+  closeModal(name) {
+    const tgt = Array.from(document.querySelectorAll('.modal')).map(e => e.id).filter(e => e.includes(name))[0]
+    if(!tgt) return
+    getEl(tgt).hidden = true
+    this.registerModalPath('')
+  },
+
   hideAllModals() {
     for(let i of document.querySelectorAll('.modal')) {
       i.hidden = true
@@ -364,16 +384,20 @@ const HTMLUtils = {
     }
   },
 
-  
   enableHotkeysProcessing() {
-    const ignoreKeys = ['Alt']
-    
+    const ignoreKeys = ['Alt', 'Tab']
+
     const hotkeysList = {
-      'Alt F1': _ => getEl('el_help').hidden = false,
+      'Alt F1': btnClickHdlrByText('help'),
       'Escape': this.hideAllModals,
-      'Alt U': playerPost.prompt,
-      'Alt R': Analysis.drawReportsList,
-      'Alt P': parseDoc.file,
+      'Alt U': btnClickHdlrByText('userpost'),
+      'Alt R': btnClickHdlrByText('reports'),
+      'Alt P': btnClickHdlrByText('parse clipboard'),
+    }
+
+    function btnClickHdlrByText (text) {
+      return _ => Array.from(document.querySelectorAll('button'))
+        .filter(e => e.innerText.toLowerCase().includes(text))[0].click()
     }
 
     // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
@@ -539,20 +563,21 @@ const Analysis = {
     if(location.hash.length <= 1) return
 
     const path = decodeURIComponent(location.hash).split('#')
+      .filter( e => e)
+      .map(e =>e.split('__'))
 
-    if(path[1] === 'report') {
-      Analysis.drawReportsList()
-      if(path[2]) {
-        Analysis.openReport(path[2])
+    for(let i of path) {
+      if(i[0] === 'report') {
+        Analysis.drawReportsList()
+        if(i[1]) {
+          Analysis.openReport(i[1])
+        }
       }
     }
   },
 
   drawReportsList() {
-    if(VARS.IS_LOCAL) {
-      location.hash = 'report'
-    }
-    getEl('el_reports_wrapper').hidden = false
+    HTMLUtils.openModal('report')
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = ''
     
@@ -564,18 +589,13 @@ const Analysis = {
   },
 
   openReport(reportName) {
-    if(VARS.IS_LOCAL) {
-      location.hash = `report#${reportName}`
-    }
+    HTMLUtils.registerModalPath('report', reportName)
     getEl('el_reports_home').hidden = false
     Analysis.Reports[reportName]()
   },
 
   closeReports() {
-    if(VARS.IS_LOCAL) {
-      location.hash = ''
-    }
-    getEl('el_reports_wrapper').hidden = true
+    HTMLUtils.closeModal('report')
   },
   
   reportTable(obj) {
@@ -1290,7 +1310,9 @@ const parseDoc = {
 // eslint-disable-next-line no-unused-vars
 const playerPost = {
   prompt() {
-    playerPost.parse(prompt('player post here'))
+    const p = prompt('player post here')
+    if(!p) return
+    playerPost.parse(p)
   },
   parse(text) {
     let requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d+){0,10})\)/g)]
