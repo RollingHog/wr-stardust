@@ -319,6 +319,7 @@ async function parseDocFile(event) {
   const MIME_HTML = 'text/html'
   const rawClipboardObj = (await navigator.clipboard.read())[0]
   
+  // eslint-disable-next-line no-constant-condition
   if(rawClipboardObj.types.includes(MIME_HTML) && false) {
     raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
     parseDocHTML(raw)
