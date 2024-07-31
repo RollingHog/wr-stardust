@@ -75,14 +75,11 @@ async function Init() {
       .map(e => parseTechIframe(e))
     )
     .then(_ => {
-      // FIXME uncomment as soon as tech effects debugged
-      /*
       console.log(tech)
     
       console.log(listParam('cost', false))
       console.log(listParam('costClear'))
       console.log(listAllWithoutMilitary())
-      */
       console.log('unrecognized tech:', badTechCount)
 
       for (let i of TREELIST) {
@@ -500,8 +497,8 @@ function parseShapeNode(filename, i) {
     }
     // its number, lessen width
     if(t.fullText.length <= 2) {
-      t.w = t.w/1.2
-      t.x = +t.x + +t.w/2 
+      t.w = t.w/1.4
+      t.x = +t.x + +t.w - 5
     }
     t.nodeCenter = {
       x: ++t.x + ++t.w / 2
