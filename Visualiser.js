@@ -111,7 +111,6 @@ const svg = document.getElementById('svg')
 
 window.onload = Init
 async function Init() {
-  log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
 
   getEl('el_loading').hidden = false
   const parser = new DOMParser()
@@ -170,6 +169,7 @@ async function Init() {
       elPlayersData.src = elPlayersData.getAttribute('src2')
     })
     parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
+    log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
 
     console.timeEnd('Player data load')
 
