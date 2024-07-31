@@ -1304,6 +1304,7 @@ var KEYWORDS = {
     "Ремонт",
     "Ремонт (?:армий|флотов)",
     "Бомбардировка",
+    'Скорость FTL',
   ],
   TECH_COST_MODS: [
     'базовое',
@@ -1351,7 +1352,13 @@ var KEYWORDS = {
     "нано",
     "странглет",
   ],
-  // MODULE_NUM_PROPS: [],
+  MODULE_NUM_PROPS: [
+    'Защита колонии',
+    'планетарный щит',
+    'Мины',
+    'Гарантированная защита',
+    'Двигатель',
+  ],
   MODULE_PROPS: [
     "ДУ",
     "роботы",
@@ -1434,9 +1441,8 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
-        .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?(\\d+)$`), '$1:$2')
         .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
-        .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
         // типы урона, эффекты оружия
         .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
         .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), KEYWORDS.ALL_RIGHT)
