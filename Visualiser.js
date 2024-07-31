@@ -1158,7 +1158,7 @@ const playerPost = {
   parse(text) {
     let requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d+){0,10})\)/g)]
       .map(e=>({text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2]}))
-      .map(( {text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёА-ЯЁ]+/g,''), rolls, rawRolls }))
+      .map(( {text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls }))
 
     for(let i of requests) {
       let rolls = {
