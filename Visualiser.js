@@ -397,28 +397,41 @@ const HTMLUtils = {
   },
 
   enableHotkeysProcessing() {
-    const ignoreKeys = ['Alt', 'Tab']
-
-    const hotkeysList = {
-      'Alt F1': btnClickHdlrByText('help'),
-      'Escape': this.hideAllModals,
-      'Alt U': btnClickHdlrByText('userpost'),
-      'Alt R': btnClickHdlrByText('reports'),
-      'Alt P': btnClickHdlrByText('parse clipboard'),
-    }
 
     function btnClickHdlrByText (text) {
       return _ => Array.from(document.querySelectorAll('button'))
         .filter(e => e.innerText.toLowerCase().includes(text))[0].click()
     }
 
+    let searchEnabled = false
+
+    const hotkeysList = {
+      'Alt F1': btnClickHdlrByText('help'),
+      'Escape': _ => {
+        if(searchEnabled) {
+          setTimeout(_ => searchEnabled = false, 50)
+        }
+        else {
+          this.hideAllModals()
+        }
+      },
+      'Ctrl F': _ => searchEnabled = true,
+      'Alt U': btnClickHdlrByText('userpost'),
+      'Alt R': btnClickHdlrByText('reports'),
+      'Alt P': btnClickHdlrByText('parse clipboard'),
+      'Alt T': _ => getEl('btn_toggleUI').click,
+    }
+
+    const ignoreKeys = ['Alt', 'Tab']
+
     // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
 
-    document.body.addEventListener('keyup', function(evt) {
+    document.body.addEventListener('keydown', function(evt) {
       if(!evt.code) return
       if(ignoreKeys.includes(evt.key)) return 
       const keyComb = 
-        (evt.altKey ? 'Alt ' : '')
+        (evt.ctrlKey ? 'Ctrl ' : '')
+        + (evt.altKey ? 'Alt ' : '')
         + evt.code.replace(/(Key|Digit)/,'')
       if(hotkeysList[keyComb]) {
         hotkeysList[keyComb]()
@@ -1008,7 +1021,6 @@ const User = {
         .filter( e => e.search(/\(.*сломано/) != -1)
         .map(e => e.replace(/ \([^)]+\)/,'')),
     }
-    log(bad)
     list = list.map(e => e.replace(/ \([^)]+\)/,''))
 
     for (let i of targets) {
