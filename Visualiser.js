@@ -496,7 +496,6 @@ const Analysis = {
     Analysis.searchBadTechRefs()
     
     // Analysis.countTechPrices()
-    // log(statAllEffects)
     
     setTimeout( _ => {
       // all output to clear timestamps
@@ -2108,8 +2107,6 @@ const parseNode = {
   },
 }
 
-var statAllEffects = {}
-
 function doNodeStat(filename, t) {
   var effects = t.effect,
     cost = t.cost
@@ -2127,11 +2124,6 @@ function doNodeStat(filename, t) {
   }
 
   for (let effect of effects) {
-    if(!statAllEffects[effect[0]]) {
-      statAllEffects[effect[0]] = 1
-    } else {
-      statAllEffects[effect[0]] += 1
-    }
 
     if(!KEYWORDS.COLONY_PARAMS.includes(effect[0])) continue
 
