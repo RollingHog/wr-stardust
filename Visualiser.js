@@ -201,7 +201,7 @@ async function Init() {
     log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
 
     HTMLUtils.enableHotkeysProcessing()
-    HTMLUtils.tipHotkeys()
+    HTMLUtils.processHotkeyAttribute()
 
     console.time('other parse ')
     Promise.all(TREELIST
@@ -381,24 +381,22 @@ const HTMLUtils = {
     location.hash = ''
   },
 
-  tipHotkeys() {
+  hotkeyElsList: {},
+
+  processHotkeyAttribute() {
     for(let i of document.querySelectorAll('button[hotkey]')) {
-      i.title += '\nHotkey: Alt+'+i.getAttribute('hotkey')
+      const hk = i.getAttribute('hotkey')
+      i.title += '\nHotkey: Alt+' + hk
+      this.hotkeyElsList[`Alt ${hk}`] = i
     }
   },
 
   enableHotkeysProcessing() {
 
-    function btnClickHdlrByText (text) {
-      return _ => Array.from(document.querySelectorAll('button'))
-        .filter(e => e.innerText.toLowerCase().includes(text))[0].click()
-    }
-
     let searchEnabled = false
     let kMode = false 
 
     const hotkeysList = {
-      'Alt F1': btnClickHdlrByText('help'),
       'Escape': _ => {
         if(searchEnabled) {
           setTimeout(_ => searchEnabled = false, 50)
@@ -409,11 +407,6 @@ const HTMLUtils = {
       },
       'Ctrl F': _ => searchEnabled = true,
       'Alt K': _ => kMode = true,
-
-      'Alt U': btnClickHdlrByText('userpost'),
-      'Alt R': btnClickHdlrByText('reports'),
-      'Alt P': btnClickHdlrByText('parse clipboard'),
-      'Alt T': _ => getEl('btn_toggleUI').click,
     }
     const kModeHotkeys = {
       '1': _ => getEl('players_selection').querySelectorAll('label')[0].click(),
@@ -429,6 +422,8 @@ const HTMLUtils = {
 
     // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
 
+    const that = this
+
     document.body.addEventListener('keydown', function(evt) {
       if(!evt.code) return
       if(ignoreKeys.includes(evt.key)) return 
@@ -438,6 +433,11 @@ const HTMLUtils = {
         + evt.code.replace(/(Key|Digit)/,'')
       if(hotkeysList[keyComb]) {
         hotkeysList[keyComb]()
+        evt.stopPropagation()
+        return false
+      }
+      if(that.hotkeyElsList[keyComb]) {
+        that.hotkeyElsList[keyComb].click()
         evt.stopPropagation()
         return false
       }
