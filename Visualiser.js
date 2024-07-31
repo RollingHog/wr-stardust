@@ -635,7 +635,7 @@ const Analysis = {
         tcost = +tcost.toFixed(2)
 
         // tcost<10 in case is's some superstructure
-        if(Math.abs(tcost-mult)>1 && tcost>0 && tcost<10 && !['octagon','trapezoid2'].includes(j.type) ) {
+        if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 && !['octagon','trapezoid2'].includes(j.type) ) {
           log(i, j.name, `cost looks bad: ${tcost}->${mult}`, j)
           cnt++
           continue
@@ -656,7 +656,8 @@ const Analysis = {
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
           // eslint-disable-next-line no-empty
-          else if(k[0] == 'особое' || k[0] == 'Временно' ) {
+          else if(k[0] == 'Временно') {
+            // k[0] == 'особое' || 
             teff = 0
             break
           }
@@ -676,10 +677,9 @@ const Analysis = {
         const delta = +tcost - +teff
 
         if(d && mult && j.lvl !== techData.MAX_TECH_LVL) {
-          let p = (d/mult).toFixed(1)
-          if(p>1.5 || (p > 0.1 && p<0.7)) {
+          if(delta < 0 || delta > 1) {
             cnt++
-            log(i, 'lvl', j.lvl, j.name,  j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
+            log(i, 'lvl', j.lvl, j.name,  j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1?'ДОРОГО':"ДЕШЕВО")
           }
         }
       }
