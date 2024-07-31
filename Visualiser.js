@@ -1261,7 +1261,7 @@ const draw = {
       }
 
       curr_dx = isFirefox 
-        ? -getEl(id).getBBox().width / 2
+        ? -getEl(id + '_t0').getBBox().width / 2 - 10
         : -getEl(id + '_t').getBBox().width / 2
       getEl(id + '_t0').setAttribute('dx', curr_dx )
     },
