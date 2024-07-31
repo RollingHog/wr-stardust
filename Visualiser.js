@@ -435,7 +435,8 @@ function parseShapeNode(filename, i) {
   if(effect == effect_unparsed)
     effect = null
 
-  if(!effect) console.log(name, cost, effect, effect_unparsed)
+  if(!effect) 
+    console.log(name, cost, effect, effect_unparsed)
 
   var t = {
     id: i.parentElement.parentElement.id
