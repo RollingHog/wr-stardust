@@ -1257,7 +1257,10 @@ const draw = {
         }
       }
 
-      curr_w = getEl(id + '_t').getBBox().width
+      const isFirefox = navigator.userAgent.indexOf("Firefox") !== -1
+      curr_w = isFirefox 
+        ? getEl(id + '_t0').getBBox().width 
+        : getEl(id + '_t').getBBox().width
       getEl(id + '_t0').setAttribute('dx', -curr_w / 2)
     },
 
