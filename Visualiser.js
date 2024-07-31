@@ -789,28 +789,27 @@ const draw = {
   Node: function (treeName, t) {
     //  for modules
     //  for projects - rounded rect
-    let box
     switch (t.type) {
       case 'rectangle':
-        box = draw.SVG.Rect(t)
+        draw.SVG.Rect(t)
         break
       case 'parallelogram':
-        box = draw.SVG.Prlg(t)
+        draw.SVG.Prlg(t)
         break
       case 'trapezoid':
-        box = draw.SVG.Trapezioid(t)
+        draw.SVG.Trapezioid(t)
         break
       case 'trapezoid2':
-        box = draw.SVG.Trapezioid2(t)
+        draw.SVG.Trapezioid2(t)
         break
       case 'hexagon':
-        box = draw.SVG.Hexagon(t)
+        draw.SVG.Hexagon(t)
         break
       case 'fatarrow':
-        box = draw.SVG.FatArrow(t)
+        draw.SVG.FatArrow(t)
         break
       case 'octagon':
-        box = draw.SVG.Octagon(t)
+        draw.SVG.Octagon(t)
         break
       case 'ellipse':
         return
