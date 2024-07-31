@@ -1907,6 +1907,10 @@ const parseDoc = {
   lastResult: null,
   async HTML(rawHTML) {
     var arr
+    if(!rawHTML) {
+      warn('parseDoc: empty HTML')
+      return
+    }
     const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
     arr = html
       .filter(e => e.tagName !== 'BR')
@@ -2105,16 +2109,20 @@ const parseDoc = {
       colonyParams,
       additionalParams,
       buildings: [].concat(
-        splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
+        // наземные
         splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
+        // подземные
+        splitFilter(obj.Здания.children[0].rows[2].children[1].innerText),
       ),
-      orbital: splitFilter(obj.Здания.children[0].rows[2].children[1].innerText),
+      orbital: splitFilter(obj.Здания.children[0].rows[3].children[1].innerText),
+      astroProjs: splitFilter(obj.Здания.children[0].rows[4].children[1].innerText),
       greatPeople,
       uniqueResources,
-      // TODO it doesnt see bad names somehow
-      localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
+      localProjs: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
     }
     // log(Object.values(data).map(e=> e && e.innerHTML ? e.innerHTML.replace(/ style="[^"]+"/g,'') : e))
+    // FIXME remove
+    log(data.localProjs)
 
     return data
   },
