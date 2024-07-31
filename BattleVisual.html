@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ИвТ - Визуализатор боев</title>
+  <link rel="stylesheet" href="src/common.css">
   <style>
-    body::before {
+    body2 {
       content: "";
       position: absolute;
       width: 100%;
@@ -22,14 +24,194 @@
       background-repeat: no-repeat;
       background-position: top 20vh left;
     }
+
+    table#t_wrap {
+      width: 97vw;
+      height: 97vh;
+    }
+
+    .ship_block {
+      position: relative;
+      width: 20%;
+      padding: 4px;
+      vertical-align: top;
+    }
+
+    .b_add_ship {
+      position: absolute;
+      top: 1px;
+      width: 95%;
+    }
+
+    .ship_field {
+      padding-top: 24px;
+      overflow-y: auto;
+    }
+
+    .ship_field .ship .image  {
+      cursor: auto;
+    }
+
+    #battle_field .ship_wrap {
+      position: absolute;
+      left: 50vw;
+    }
+
+
+    .ship {
+      /* width: 100%; */
+      width: 100px;
+    }
+
+    .ship .image {
+      cursor: move;
+      /* background: url("assets/ships/3.png"); */
+      background-repeat: no-repeat;
+    }
+
+    .image image {
+      height: 42px;
+    }
+
+    .ship td {
+      /* border: 1px solid black; */
+    }
+
+    .red {
+      background-color: red
+    } 
+
+    .green {
+      background-color: green
+    }
+
+    .blue {
+      background-color: blue
+    }
+
+    .space_bg {
+      background-color: darkslateblue;
+    }
+
+    .reset_color, .unset_color, .black {
+      color: black !important;
+    }
+
+    .can_edit {
+      -webkit-user-modify: read-write;
+      -moz-user-modify: read-write;
+      /* user-modify: read-write; */
+    }
+
+    .half {
+      display: inline-block;
+      width: 47%;
+    }
+
+    .third {
+      display: inline-block;
+      width: 30%;
+      overflow: hidden;
+    }
+
+    .mirror_vert {
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+    }
+
+    .side_blue {
+      background-color: slateblue;
+    }
+    .side_orange {
+      background-color: orange;
+    }
+
+    .cross {
+      /* https://stackoverflow.com/questions/21956790/css-cross-through-an-element */
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='3'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='3'/></svg>");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 100% 100%, auto;
+    }
   </style>
 </head>
+
 <body>
-  <div id="el_main"></div>
+  <div class="ship_wrap" id="ship_template" hidden>
+    <table class="ship">
+      <tr>
+        <td colspan="3" class="unset_color">
+          N <span class="id"></span>
+          <span hidden class="side"></span>
+          &nbsp;
+          <span style="float: right;" title="remove"        class="no_select"
+          onclick="this.parentNode.parentNode.parentNode.parentNode.remove()">X</span>
+          <span style="float: right;" title="add to battle" class="no_select"
+          onclick="addShipToBattle(this.parentNode.querySelector('.id').innerText)">+&nbsp;&nbsp;</span>
+          <br>
+          <div class="name can_edit">Name</div>
+        </td>
+      </tr>
+      <tr class="image">
+        <td colspan="3" class="reset_color no_select">
+          >
+      <tr>
+        <td colspan="3">
+          <table style="width: 100%;">
+            <tr>
+              <td class="green param hp curr can_edit">3</td>
+              <td class="green">/</td>
+              <td class="green       hp max can_edit">3</td>
+              <td>&nbsp;</td>
+              <td class="blue param  shield curr can_edit">0</td>
+              <td class="blue">/</td>
+              <td class="blue        shield max can_edit">0</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!-- maybe this will be initial+module bonuses in future, but not now -->
+      <!-- <tr class="can_edit">
+        <td>1
+        <td>2
+        <td>3
+      <tr class="can_edit">
+        <td>4
+        <td>5
+        <td>6 -->
+      <tr style="border-top: 1px solid black;" class="can_edit params">
+        <td colspan="3">
+          <table style="width: 100%;">
+            <tr>
+              <td class="param red">1</td>
+              <td class="param green">1</td>
+              <td class="param blue">1</td>
+            </tr>
+          </table>
+        </td>
+    </table>
+  </div>
+
+  <table id="t_wrap">
+    <tr id="tr_field">
+      <td class="ship_block">
+        <button class="b_add_ship">+</button>
+        <div class="ship_field"></div>
+      </td>
+      <td style="border: 1px solid black;" class="space_bg">
+        <div id="battle_field"></div>
+      </td>
+      <td class="ship_block">
+        <button class="b_add_ship">+</button>
+        <div class="ship_field"></div>
+      </td>
+    </tr>
+  </table>
 </body>
-<select name="" id="el_select_colony"></select>
 <script src="data/playersData.js"></script>
 <script src="src/common.js"></script>
-<script src="src/ColonyVisual/buildingLocations.js"></script>
-<script src="src/ColonyVisual/ColonyVisual.js"></script>
+<script src="src/BattleVisual/BattleVisual.js"></script>
+
 </html>
