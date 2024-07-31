@@ -1652,12 +1652,41 @@ const playerPost = {
     HTMLUtils.openModal('selected_tech')
   },
   extractRolls(text) {
-    const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
-      .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], index: e.index, rawRolls: e[2] }))
-      .map(({text, rolls, rawRolls, treshold, index} ) => ( {
-         text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), 
-         rolls, rawRolls, treshold, index 
-      }))
+    const res = [...text.matchAll(/([^\nd]*)\d+d10: \((\d+(?: \+ \d+){0,20})\) = \d+([^\n]*)/g)]
+      .map( e => {
+        const s = (e[1].length ? e[1] : e[3]).trim()
+        const treshold = [...(e[1] + e[3]).matchAll(/Сложность:? ?(\d+)/gi)]
+
+        const isExp = s.search(/опыт /i)
+        if(isExp === 0) {
+          console.log('ОПЫТ detected:', s, s.search(/опыт/i))
+          return null
+        }
+        return {
+          text: s
+            .replace(/\([^)]+\)/g,'')
+            .replace(/^[^а-яёa-z]+/gi,'')
+            // TODO add reminder NOT to include these symbols in tech names
+            .split(',')[0]
+            .split('.')[0]
+            .split(' – ')[0]
+            .replace(/,? ?Сложность:? ?\d+/gi,'')
+            .replace(/[- :]+$/g,'')
+            .trim(), 
+          rolls: e[2], 
+          rawRolls: e[2],
+          treshold: treshold.length ? +treshold[0][1] : null, 
+          index: e.index, 
+        }
+      })
+      .filter( e => e)
+
+    // const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
+    //   .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], index: e.index, rawRolls: e[2] }))
+    //   .map(({text, rolls, rawRolls, treshold, index} ) => ( {
+    //      text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), 
+    //      rolls, rawRolls, treshold, index 
+    //   }))
     return res
   },
   parse(text) {
