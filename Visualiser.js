@@ -268,7 +268,7 @@ const Analysis = {
         }
       }
     }
-    Object.keys( i => techLevels[i].sort())
+    Object.keys(techLevels).map(i => techLevels[i].sort((a,b)=>a<b))
   },
   searchBadTechRefs() {
     for (let i of Object.keys(tech)) {
