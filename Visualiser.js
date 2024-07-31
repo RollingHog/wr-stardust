@@ -683,7 +683,7 @@ const Analysis = {
             }
             else if(KEYWORDS.MILITARY_PARAMS.includes(k[0])) teff += +k[1]
             else if(KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k[0])) teff += +k[1]/2
-            else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]
+            else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]*1.3
             else if(KEYWORDS.DAMAGE_TYPES.includes(k[1])) teff += 0.5
             else if(k[0] == 'Временно') {
               // k[0] == 'особое' || 
@@ -705,7 +705,7 @@ const Analysis = {
 
         let d = (+tcost/+teff).toFixed(1)
         // TODO should it be like this for itIsMilitaryModule?
-        const delta = +tcost - +teff + (tcost > 1.1 && !itIsMilitaryModule ? -1 : 0)
+        const delta = +(+tcost - +teff + (tcost > 1.1 && !itIsMilitaryModule ? -1*0 : 0)).toFixed(2)
 
         if(d && mult && j.lvl !== techData.MAX_TECH_LVL) {
           if(delta < -0.6 || delta > 1) {
@@ -2421,6 +2421,7 @@ var KEYWORDS = {
     "Генные модификации",
     "Адаптация",
     "Сверхадаптация",
+    "Взаимодействие с местной биосферой",
     // социальные
     "Дипломатия",
     "Шпионаж",
