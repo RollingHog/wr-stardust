@@ -10,7 +10,7 @@ getDictKey
   draw
 */
 
-const VERSION = '1.1.0'
+const VERSION = '1.1.1'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
@@ -1878,10 +1878,12 @@ const User = {
 
     // check if params in doc are bad
     effectsData
-      .filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
-      .forEach( e => {
-        if(+userData.colonyParams[e[0]] !== +e[1]) {
-          warn(`${e[0]} ${userData.colonyParams[e[0]]} should be ${e[1]}`)
+      .forEach( eff => {
+        if( KEYWORDS.COLONY_PARAMS.includes(eff[0]) && +userData.colonyParams[eff[0]] !== +eff[1]) {
+          warn(`${eff[0]} ${userData.colonyParams[eff[0]]} should be ${eff[1]}`)
+        }
+        if( KEYWORDS.MATERIALS.includes(eff[0]) && +userData.materials[eff[0]] !== +eff[1]) {
+          warn(`${eff[0]} ${userData.materials[eff[0]]} should be ${eff[1]}`)
         }
       })
 
@@ -2111,7 +2113,7 @@ const parseDoc = {
     let additionalParamsRaw = Array.from(obj['Дополнительные параметры'].children[0].rows)
       .map(e => Array.from(e.children))
     let ak = [].concat(additionalParamsRaw[0],additionalParamsRaw[2],additionalParamsRaw[4])
-      .map(e=>e.innerText.trim().toLowerCase())
+      .map(e=>e.innerText.trim().toLowerCase().replace('неприв. среда', 'непривычная среда'))
     let av = [].concat(additionalParamsRaw[1],additionalParamsRaw[3],additionalParamsRaw[5])
       .map(e=>e.innerText.trim())
     let additionalParams = {}
@@ -2121,6 +2123,21 @@ const parseDoc = {
       if(!nextK) continue
       additionalParams[nextK] = nextV
     }
+
+    let materialsRaw = Array.from(obj['Ресурсы'].children[0].rows)
+      .map(e => Array.from(e.children))
+    ak = [].concat(materialsRaw[0], materialsRaw[2])
+      .map(e => e.innerText.trim())
+    av = [].concat(materialsRaw[1], materialsRaw[3])
+      .map(e => e.innerText.trim())
+    let materials = []
+    while (ak.length) {
+      let nextK = ak.shift()
+      let nextV = av.shift()
+      if (!nextK) continue
+      materials.push([nextK, +nextV || 0])
+    }
+    materials = Object.fromEntries(materials.filter(e => e[0] !== '-'))
 
     const planetParams = Object.fromEntries(
       Array.from(obj['Характеристики планеты'].children[0].rows)
@@ -2193,6 +2210,7 @@ const parseDoc = {
       // TODO
       prepaired,
       greatPeople,
+      materials,
       uniqueResources,
       localProjs: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
     }
@@ -2273,6 +2291,8 @@ class TGoogleDocUserObj {
     'Свободные кубы': 0,
   }
   additionalParams = {}
+  /** @type {Object<string, number>} */
+  materials = {}
   /** @type {string[]} */
   buildings = []
   /** @type {string[]} */
@@ -2487,8 +2507,6 @@ const playerPost = {
             const specCost = TechUtils.get(techText).cost
               .filter(e2 => KEYWORDS.SPECIAL_TECH_COST.includes(e2[0]))
             if(specCost.length) {
-              // FIXME remove if it works properly
-              log(specCost)
               e.children[pos.price].innerText =  +e.children[pos.price].innerText + +specCost[0][1]
             }
           }
@@ -2616,7 +2634,7 @@ var KEYWORDS = {
     "непривычная среда",
     "чуждая среда",
     'Защита колонии',
-    'Планетарный щит',
+    'Щит планеты',
     'Снабж. отряды',
   ],
   SPECIAL_TECH_COST: [
@@ -2739,7 +2757,7 @@ var KEYWORDS = {
   MODULE_NUM_PROPS: [
     "Полёт",
     'Защита колонии',
-    'планетарный щит',
+    'Щит планеты',
     'Мины',
     'Гарантированная защита',
     'Двигатель',
