@@ -1295,7 +1295,7 @@ const User = {
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong><br>
       <a target=_blank 
-        href="./StarSystem.html#${userData.starSystemParams.generatorCode}">Звездная система</a>
+        href="./StarSystem.html#${userData.starSystemParams.generatorCode}&user=${playerName}">Звездная система</a>
       ` + this.createUserTechEffectsTable(effectsData)
   },
 }

@@ -35,6 +35,7 @@ const E = {
   keys: {
     density: 'density',
     rest: 'rest',
+    user: 'user',
   },
 }
 
@@ -195,7 +196,7 @@ const StarSystemGenerator = {
     getEl('el_sys_str').innerText = this.compress(system, density, cubes)
     const str = this.compress(system, density, cubes)
     console.log(this.decompress(str))
-    this.draw(getEl('el_canvas'), system)
+    this.draw(system)
   },
 
   /**
@@ -229,7 +230,7 @@ const StarSystemGenerator = {
   },
 
   /**
-   * @returns {{system: TSSGPlanet[], restCubes: Number[], density: Number}}
+   * @returns {{system: TSSGPlanet[], restCubes: Number[], density: Number, user: string}}
    */
   decompress(query) {
     let obj = query
@@ -241,7 +242,12 @@ const StarSystemGenerator = {
     obj = obj.filter(e => e[0] !== E.keys.rest)
     let density = obj.filter(e => e[0] === E.keys.density)
     if(density.length) density = density[0][1]
+    else density = null
     obj = obj.filter(e => e[0] !== E.keys.density)
+    let user = obj.filter(e => e[0] === E.keys.user)
+    if(user.length) user = decodeURIComponent(user[0][1])
+    else user = null
+    obj = obj.filter(e => e[0] !== E.keys.user)
     
     let arr = []
     for(let i of obj) {
@@ -266,7 +272,7 @@ const StarSystemGenerator = {
       }
     }
 
-    return {system: arr, restCubes, density}
+    return {system: arr, restCubes, density, user}
   },
 
   generate(randomD6Arr, density, userPlanet) {
@@ -389,11 +395,19 @@ const StarSystemGenerator = {
 
   /**
    * 
-   * @param {HTMLElement} canvasEl 
    * @param {TSSGPlanet[]} system 
+   * @param {string} playerName 
    */
-  draw(canvasEl, system) {
+  draw(system, playerName = null) {
+    const canvasEl = getEl('el_canvas')
     canvasEl.innerHTML = ''
+    if (playerName) {
+      canvasEl.innerHTML = `<div style="
+      padding: 16px;
+      color: white;
+      text-align: center;
+  ">${playerName.toUpperCase()}</div>`
+    }
     for(let i = 1; i<system.length; i++) {
       const k = system[i]
       if(!k) continue
@@ -432,7 +446,13 @@ const StarSystemGenerator = {
       <img src='assets/planets/${type}.png' style="width:${size}%" 
         alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
         title="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
-      ><br>${k.giantType && k.giantType !== E.giant.conventional ? k.giantType : ''}`
+      ><br>
+      ${k.satellites > 0 
+        ? k.satellites < 4 
+          ? '&#9790;'.repeat(k.satellites) 
+          : '&#9790;*' + k.satellites
+        : ''}
+      <br>${k.giantType && k.giantType !== E.giant.conventional ? k.giantType : ''}`
       // el.title = name
       canvasEl.appendChild(el)
     }  
@@ -458,7 +478,7 @@ const StarSystemGenerator = {
     getEl('el_sp_location').value = ddata.system.indexOf(userPlanet)
     getEl('el_sp_size').value = userPlanet.size
     getEl('el_density').value = ddata.density
-    StarSystemGenerator.draw(getEl('el_canvas'), ddata.system)
+    StarSystemGenerator.draw(ddata.system, ddata.user)
     getEl('el_sys_str').innerText = StarSystemGenerator.compress(ddata.system, ddata.density, ddata.restCubes.split(''))
   }
 })()
