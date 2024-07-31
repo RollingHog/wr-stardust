@@ -1698,7 +1698,7 @@
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="20.973448152134893" y="418.99999999999994"/>
           <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="208.404296875" x="25.6728515625" xml:space="preserve" y="-0.40234374999994316">Министерство Ресурсов
 Сложность: 3, 
 тех. Общеколониальные программы
@@ -2842,7 +2842,6 @@
       </data>
     </edge>
     <edge id="e112" source="n121" target="n128">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
