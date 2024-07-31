@@ -149,9 +149,16 @@ function debug(data, str=null) {
   }
 }
 
+class TSSGPlanet {
+  type = E.type.asteroid
+  size = E.size.medium
+  satellites = 0
+  special = null
+}
+
 const StarSystemGenerator = {
   start() {
-    let rawCubes = prompt('paste here many d6 cubes in 2ch roll format')
+    let rawCubes = prompt('paste here many d6 cubes in 2ch roll format / leave empty to use default')
     this.startRaw(rawCubes)
   },
   startRaw(rawCubes) {
@@ -171,10 +178,11 @@ const StarSystemGenerator = {
       cubes, 
       getEl('el_density').value,
       userPlanet
-      )
+    )
     const d = startingLength - cubes.length
     log('rolles used', `${d/startingLength*100}%/${startingLength} total`)
     console.table(system)
+    this.draw(getEl('el_canvas'), system)
   },
   extractRolls(raw) {
     return [...raw.matchAll(/\d+d6: \((\d+(?: \+ \d+){0,20})\)/g)]
@@ -182,6 +190,9 @@ const StarSystemGenerator = {
       .flat()
   },
   generate(randomD6Arr, density, userPlanet) {
+    /**
+     * @type Array<TSSGPlanet>
+     */
     const system = []
 
     const nOfPlanets = density / 5
@@ -283,6 +294,46 @@ const StarSystemGenerator = {
     log({systemSummarySize, planetCount})
 
     return system
+  },
+
+  /**
+   * 
+   * @param {HTMLElement} canvasEl 
+   * @param {TSSGPlanet[]} system 
+   */
+  draw(canvasEl, system) {
+    for(let i = 1; i<system.length; i++) {
+      const k = system[i]
+      if(!k) continue
+      
+      let type = k.type
+      switch (k.type) {
+        case E.type.terrestrial:
+          if(i >= genDict.BEYOND_SNOW_LINE) type = type + '_cold'
+          break
+        case E.type.giant:
+          if(i >= 8) type = type + '_cold'
+            break
+        default:
+          break
+      }
+
+      const el = document.createElement('div')
+      el.className = 'planet'
+      // a + b*11 = 95
+      // a + b*1 = 5
+      // b = 9
+      // a = -4
+      el.style.left = `${8*i - 1}%`
+      // const imgName = name
+      //   .toLowerCase()
+      //   .replace(/\([^)]+\)/g,'')
+      //   .trim()
+      //   .replace(/ /g, '_')
+      el.innerHTML = `${i}<br><img src='assets/planets/${type}.png' alt="${k.type} ${k.size}">`
+      // el.title = name
+      canvasEl.appendChild(el)
+    }  
   },
 }
 

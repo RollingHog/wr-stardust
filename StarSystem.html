@@ -7,25 +7,46 @@
   <title>ИвТ - Генератор звёздной системы</title>
 </head>
 <body>
-  Click this to copy & generate:
-  <code onclick="navigator.clipboard.writeText(this.innerText)">
-    STAR SYSTEM GENERATOR
-    ##20d6##
-    ##20d6##
-    ##20d6##
-    ##20d6##
-    ##20d6##
-    ##20d6##
-  </code>
-  <br>
-  Density: <input type="text" name="" id="el_density" style="width: 40px;" value="50">
-  Location <select id="el_sp_location"></select>
-  Type <select id="el_sp_type">
-    <option value="terrestrial" selected>terrestrial</option>
-    <option value="giant">giant</option>
-  </select>
-  Size <select id="el_sp_size"></select>
-  <button onclick="StarSystemGenerator.start()" accesskey="i">Initiate generation</button>
+  <div id="el_GUI">
+    Click this to copy & generate:
+    <code onclick="navigator.clipboard.writeText(this.innerText)">
+      STAR SYSTEM GENERATOR
+      ##20d6##
+      ##20d6##
+      ##20d6##
+      ##20d6##
+      ##20d6##
+      ##20d6##
+    </code>
+    <br>
+    Density: <input type="text" name="" id="el_density" style="width: 40px;" value="50">
+    Location <select id="el_sp_location"></select>
+    Type <select id="el_sp_type">
+      <option value="terrestrial" selected>terrestrial</option>
+      <option value="giant">giant</option>
+    </select>
+    Size <select id="el_sp_size"></select>
+    <button onclick="StarSystemGenerator.start()" accesskey="i">Initiate generation</button>
+  </div>
+  <style>
+    #el_canvas {
+      margin-top: 12px;
+      background-color: black;
+      width: 99vw;
+      height: 80vh;
+      position: relative;
+    }
+
+    .planet {
+      position: absolute;
+      text-align: center;
+      /* background-color: lightblue; */
+      top: 50%;
+      color: white;
+      transform: translate(0%, -50%);
+    }
+  </style>
+  <div id="el_canvas"></div>
 </body>
 <script src="./src/common.js"></script>
 <script src="./src/StarSystem/StarSystem.js"></script>
