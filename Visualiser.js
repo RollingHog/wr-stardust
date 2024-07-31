@@ -498,6 +498,11 @@ function parseShapeNode(filename, i) {
   
       , fill: i.getElementsByTagName('y:Fill')[0].getAttribute('color')
     }
+    // its number, lessen width
+    if(t.fullText.length <= 2) {
+      t.w = t.w/1.2
+      t.x = +t.x + +t.w/2 
+    }
     t.nodeCenter = {
       x: ++t.x + ++t.w / 2
       , y: ++t.y + ++t.h / 2
