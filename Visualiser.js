@@ -102,7 +102,7 @@ async function Init() {
         j.cost
           .filter(e => e[0] == 'Технология')
           .forEach(e => {
-            if (!(e[1] in inverted.alltech)) log('unknown tech name here:', j.name, [e[1]])
+            if (!(e[1] in inverted.alltech)) log('unknown tech name here:', i, j.name, [e[1]])
           })
       }
     }
