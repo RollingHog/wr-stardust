@@ -511,6 +511,7 @@ function parseShapeNode(filename, i) {
     .split(',')
     .map(e => e
       .trim()
+      .replace(/ {2,}/g,' ')
       .replace(/(базовое)/, ALL_RIGHT)
       .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
       .replace(/(электростанция)/, ALL_RIGHT)
