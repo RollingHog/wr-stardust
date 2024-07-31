@@ -1,6 +1,7 @@
 /* exported
   log warn warnNoTrace getEl 
   locationSearchToArray FILL_2_TREE_TYPE
+  getDictKey
 */
 
 var log = console.log
@@ -47,4 +48,22 @@ var FILL_2_TREE_TYPE = {
   "#FFCC00": "Industry",
   "#99CCFF": "Science",
   "#CC99FF": "Sociology",
+}
+
+/**
+ * dictObj is list of upper tresholds
+ * @param {Object<string, any>} dictObj 
+ * @param {number} rollNum 
+ */
+function getDictKey(dictObj, rollNum) {
+  let i = +rollNum
+  while (i <= 18) {
+    if (typeof dictObj[i] !== 'undefined') return dictObj[i]
+    i++
+  }
+  // well, it is the last one
+  while (i > 0) {
+    if (typeof dictObj[i] !== 'undefined') return dictObj[i]
+    i--
+  }
 }
