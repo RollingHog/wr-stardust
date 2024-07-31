@@ -2000,6 +2000,9 @@ const playerPost = {
     playerPost.parse(p)
     HTMLUtils.openModal('selected_tech')
   },
+  close() {
+    HTMLUtils.closeModal('selected_tech')
+  },
   extractRolls(text) {
     const L = {
       before: 1,
