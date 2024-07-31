@@ -143,25 +143,25 @@ const VARS = {
   defaultProjectsList: {},
   fill2TreeType: FILL_2_TREE_TYPE,
 }
-VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
-VARS.NODETYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
-VARS.defaultProjectsList = {
-  "Планетарная разведка": {
-    "id": "n123001",
-    "type": 'parallelogram2',
-    "treeName": "Industry",
-    "borderColor": "#0000FF",
-    "fill": "#CC99FF",
-    "name": "Планетарная разведка",
-    "cost": [["Наука","1"]],
-    "effect": [["особое","разведка планеты"]],
-    "req": [],
-    "next": [],
-    "fullText": "",
-  }
-}
 
 ; (() => {
+  VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
+  VARS.NODETYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
+  VARS.defaultProjectsList = {
+    "Планетарная разведка": {
+      "id": "n123001",
+      "type": 'parallelogram2',
+      "treeName": "Industry",
+      "borderColor": "#0000FF",
+      "fill": "#CC99FF",
+      "name": "Планетарная разведка",
+      "cost": [["Наука","1"]],
+      "effect": [["особое","разведка планеты"]],
+      "req": [],
+      "next": [],
+      "fullText": "",
+    }
+  }
   NodeList.prototype.forEach = Array.prototype.forEach
   HTMLCollection.prototype.forEach = Array.prototype.forEach
   HTMLCollection.prototype.filter = Array.prototype.filter
@@ -658,9 +658,9 @@ const Analysis = {
           // // eslint-disable-next-line no-empty
           // else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
           else if(k[0]=='Этапы') tcost *= 2
-          else if(k[1]=='награда') {
+          else if(k[1]==KEYWORDS.REWARD_KEYWORD) {
             // TODO rework maybe
-            tcost = 0
+            tcost = tcost*1.6
             break
           }
           // else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
@@ -692,6 +692,7 @@ const Analysis = {
         if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 
           // do-not-touch-military-costs-dammit
           && !itIsMilitaryModule
+          && !j.cost[j.cost.length-1][1] === KEYWORDS.REWARD_KEYWORD
         ) {
           log(i, `\n${j.name}\n`, `cost looks bad: ${tcost}->${mult}`, j)
           techData.badTechList.cost.push([j.name, mult])
@@ -2586,10 +2587,10 @@ var KEYWORDS = {
     "Бомбардировка",
     'Скорость FTL',
   ],
+  // приз за цепочку технологий, может нарушать правила стоимости
+  REWARD_KEYWORD: 'приз',
   TECH_COST_MODS: [
     'базовое',
-    // награда за цепочку технологий, может нарушать правила стоимости
-    'награда',
     'суперпроект',
     'астропроект',
     'почва',
@@ -2685,6 +2686,7 @@ const parseNode = {
         .trim()
         .replace(/:/g, VARS.DISABLE_PARSE_IMMUNITY ? '' : KEYWORDS.ITS_SPECIAL+':')
         .replace(/ {2,}/g, ' ')
+        .replace(new RegExp(`^(${KEYWORDS.REWARD_KEYWORD})$`), KEYWORDS.ALL_RIGHT)
         .replace(new RegExp(`^(${KEYWORDS.TECH_COST_MODS.join('|')})$`), KEYWORDS.ALL_RIGHT)
         .replace(/^(\d+)$/i, studyCubesType + ':$1')
         .replace(/^(\d+) этапа$/i, 'Этапы:$1')
