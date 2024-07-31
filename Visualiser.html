@@ -94,6 +94,8 @@
     <iframe class=tech src2="tech/Military.graphml"></iframe>
     <iframe class=tech src2="tech/Science.graphml"></iframe>
     <iframe class=tech src2="tech/Sociology.graphml"></iframe>
+
+    <iframe id="post_text_iframe" src2="xlam/post.txt"></iframe>
   </include>
   <style id="highlight_css"></style>
 
@@ -263,7 +265,7 @@
     <div id="" style="position: fixed; left: 8px; bottom: 8px; pointer-events: none;">
       <button onclick="el_help.hidden=false" hotkey="F1">Help</button>
       <br>
-      <button onclick="playerPost.prompt()" title="" hotkey="U">Userpost</button>
+      <button onclick="playerPost.open()" title="" hotkey="U">Userpost</button>
       <br>
       <button onclick="TurnPlanner.open()" title="" hotkey="N">Turn planner</button>
       <br>

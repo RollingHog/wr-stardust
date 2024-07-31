@@ -170,7 +170,8 @@ async function Init() {
   const parser = new DOMParser()
   const isLocalFile = VARS.IS_LOCAL
 
-  const iframes = Array.from(document.querySelectorAll('iframe.tech'))
+  console.time('load iframes')
+  const iframes = Array.from(document.querySelectorAll('iframe[src2]'))
   if(isLocalFile) {
       await Promise.all(iframes.map(i => 
         new Promise((resolve) => {
@@ -180,7 +181,6 @@ async function Init() {
       ))
   }
   
-  console.time('load iframes')
   for (let i of TREELIST) {
     const src = `tech/${i}.graphml`
     if(isLocalFile) {
@@ -1989,9 +1989,14 @@ class TGoogleDocUserObj {
 
 // eslint-disable-next-line no-unused-vars
 const playerPost = {
-  prompt() {
-    const p = prompt('player post here')
-    if(!p) return
+  open() {
+    let p = '' 
+    if(VARS.IS_LOCAL) {
+      p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
+    } else {
+      p = prompt('player post here')
+      if(!p) return
+    }
     playerPost.parse(p)
     HTMLUtils.openModal('selected_tech')
   },
