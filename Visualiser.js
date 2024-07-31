@@ -415,6 +415,7 @@ const HTMLUtils = {
     // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
 
     document.body.addEventListener('keyup', function(evt) {
+      if(!evt.code) return
       if(ignoreKeys.includes(evt.key)) return 
       const keyComb = 
         (evt.altKey ? 'Alt ' : '')
@@ -674,6 +675,11 @@ const Analysis = {
       .replace(/: /g, ' ')
   },
 
+  listModuleObjs() {
+    return Object.values(inverted.alltech)
+      .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
+  },
+
   Reports: {
    эффекты_тех() {
       let filter = [].concat(
@@ -685,6 +691,7 @@ const Analysis = {
         KEYWORDS.MODULE_PROPS,
         KEYWORDS.UNIT_TYPES,
         KEYWORDS.MILITARY_PARAMS,
+        KEYWORDS.MILITARY_PARAMS_ADDITIONAL,
         ["Слоты", "Тип юнита", "Тип урона", "особое"],
       )
       let result = Object.values(inverted.alltech)
@@ -758,8 +765,7 @@ const Analysis = {
 
     список_модулей() {
       Analysis.reportTable(Object.fromEntries(
-        Object.values(inverted.alltech)
-          .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
+          Analysis.listModuleObjs()
           .map(e => [e.name, {
             Цена: e.cost[0][1],
             "Свойства": Analysis.formatReportEffects(e.effect),
@@ -895,6 +901,17 @@ function drawTree(tree_name) {
 
   techData.currentTreeName = tree_name
   User.drawActiveUser(tree_name)
+}
+
+const TechUtils = {
+  createEffectsTable(effectsListArr) {
+    return '<table><tbody><tr>' +
+    effectsListArr.map(e => 
+      `<td>${e[0]}</td>` +
+      `<td>${e[1]==0?' ':`${+e[1]>=0?'&nbsp;':'-'}${e[1]}`}`
+    ).join('</tr><tr>') +
+    '</tr>'
+  },
 }
 
 const User = {
@@ -1040,7 +1057,7 @@ const User = {
    * @param {[string, any][]} effectsListArr 
    * @returns 
    */
-  createTechEffectsTable(effectsListArr) {
+  createUserTechEffectsTable(effectsListArr) {
     effectsListArr = effectsListArr
       .filter( e => {
         return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
@@ -1059,12 +1076,7 @@ const User = {
       }) 
     // t = [].concat(t.main, t.additional)
 
-    return '<table><tbody><tr>' +
-      effectsListArr.map(e => 
-        `<td>${e[0]}</td>` +
-        `<td>${e[1]==0?' ':`${+e[1]>=0?'&nbsp;':'-'}${e[1]}`}`
-      ).join('</tr><tr>') +
-      '</tr>'
+    return TechUtils.createEffectsTable(effectsListArr)
   },
 
   drawUserStat(playerName) {
@@ -1074,7 +1086,7 @@ const User = {
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong>
-      <br>` + this.createTechEffectsTable(data)
+      <br>` + this.createUserTechEffectsTable(data)
   },
 }
 
@@ -1504,7 +1516,7 @@ const playerPost = {
     const result = User.countSummaryCostAndEffect(techList)
 
     getEl('el_tech_result_list').innerHTML = 
-      User.createTechEffectsTable(Object.entries(result))
+      User.createUserTechEffectsTable(Object.entries(result))
 
     const byType = {
       rectangle: [],
@@ -1629,7 +1641,6 @@ var KEYWORDS = {
     "Доверие",
     // военные
     "Конверсия",
-    "Регенерация",
     "Ремонт",
     "Ремонт (?:армий|флотов)",
     "Бомбардировка",
@@ -1670,9 +1681,10 @@ var KEYWORDS = {
     "Атака",
     "Защита",
     "Скорость",
+  ],
+  MILITARY_PARAMS_ADDITIONAL: [
     "Уклонение",
     "Щит",
-    "Полёт",
   ],
   UNIT_SLOTS_KEYWORD: 'Слоты',
   UNIT_TYPES_KEYWORD: 'Тип юнита',
@@ -1684,11 +1696,13 @@ var KEYWORDS = {
     "странглет",
   ],
   MODULE_NUM_PROPS: [
+    "Полёт",
     'Защита колонии',
     'планетарный щит',
     'Мины',
     'Гарантированная защита',
     'Двигатель',
+    "Регенерация",
   ],
   MODULE_PROPS: [
     "ДУ",
@@ -1748,6 +1762,8 @@ const parseNode = {
   },
 
   effects(effectRaw, {treeName, name} = {treeName: null, name: null}) {
+    if(!effectRaw.length) return []
+
     const effect = effectRaw
       .split(',')
       .map(e => e
@@ -1774,12 +1790,14 @@ const parseNode = {
         .replace(/(\d+) слота? (МО|ПКО)$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + '($2):$1')
         // модули и оружие, глобальные военные эффекты
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
         .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?(\\d+)$`), '$1:$2')
         .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
         // типы урона, эффекты оружия
-        .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
+        .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), KEYWORDS.ALL_RIGHT)
         .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), KEYWORDS.ALL_RIGHT)
         // эффекты, дающие великих людей
         .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
@@ -1994,11 +2012,57 @@ function listAllWithoutMilitary() {
 const BattleCalc = {
   open() {
     getEl('el_bc_hull').innerHTML = Object.keys(VARS.hulls).map( e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
+    this.fillModulesList()
     HTMLUtils.openModal('battlecalc')
+  },
+  fillModulesList() {
+    getEl('el_bc_modules_datalist').innerHTML = Analysis.listModuleObjs()
+      .map( e => `<option value="${e.name}">${e.effect}</option>`)
+    getEl('el_bc_modules_search').onchange = e => {
+      // if(!e.isTrusted) return 
+      log(e)
+      getEl('el_bc_modules').value += getEl('el_bc_modules_search').value + '\n'
+      getEl('el_bc_modules_search').value = ''
+    }
+  },
+  createUnit(hullName, modulesList = [], startParams = []) {
+    const hullEffect = parseNode.effects(VARS.hulls[hullName])
+    
+    const sum = User.countSummaryCostAndEffect(modulesList, { startingFeature: hullEffect })
+    KEYWORDS.MILITARY_PARAMS.forEach(e => !sum[e] ? sum[e] = 0 : null )
+    return sum
+  },
+  createUnitTable(effectsObj) {
+    log(effectsObj)
+    const str = '<table>'
+        + '<tbody><tr>' +
+        KEYWORDS.MILITARY_PARAMS.map(e => 
+          `<td>${e}</td>` +
+          `<td>${effectsObj[e]}`
+        ).join('</tr><tr>') +
+        '</tr></tbody></table>'
+
+      + '<table><tbody><tr>' +
+      [].concat(KEYWORDS.MILITARY_PARAMS_ADDITIONAL, KEYWORDS.MODULE_NUM_PROPS)
+        .filter( e => effectsObj[e])
+        .map(e => 
+          `<td>${e}</td>` +
+          `<td>${effectsObj[e]}`
+        ).join('</tr><tr>') +
+        '</tr></tbody></table>'
+
+      + '<table><tbody><tr>' +
+      [].concat(KEYWORDS.DAMAGE_TYPES, KEYWORDS.MODULE_PROPS)
+        .filter( e => e in effectsObj || `:${e}` in effectsObj)
+        .join(', ') +
+        '</tr></tbody></table>'
+    
+    return str
   },
   processInput() {
     const hull = getEl('el_bc_hull').value
-    // User.countSummaryCostAndEffect()
+    const unit = this.createUnit(hull)
+    getEl('el_bc_unit').innerHTML = this.createUnitTable(unit)
   },
   close() {
     HTMLUtils.closeModal('battlecalc')
