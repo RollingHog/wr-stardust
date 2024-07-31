@@ -1572,7 +1572,7 @@ const User = {
   },
 
   /**
-   * @param {*} techList 
+   * @param {string[]} techList list of tech names
    * @param {TGoogleDocUserObj | undefined} userDataObj 
    * @returns 
    */
@@ -2112,7 +2112,9 @@ class TGoogleDocUserObj {
     'Свободные кубы': 0,
   }
   additionalParams = {}
+  /** @type {string[]} */
   buildings = []
+  /** @type {string[]} */
   orbital = []
   greatPeople = []
   uniqueResources = []
@@ -2135,6 +2137,7 @@ const playerPost = {
     HTMLUtils.closeModal('selected_tech')
   },
   extractRolls(text) {
+    // L means "location in array returned by regexp"
     const L = {
       before: 1,
       edges: 2,
