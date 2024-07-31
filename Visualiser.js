@@ -34,6 +34,7 @@ const cache = {}
 
 const graphmls = {}
 const tech = {}
+const badCells = Object.fromEntries(TREELIST.map(e=>[e,[]]))
 const stat = {}
 const inverted = {
   tech: {},
@@ -68,10 +69,11 @@ async function Init() {
   await parseTechIframe(TREELIST_NOMIL[0])
   drawTree(TREELIST_NOMIL[0])
 
-  setTimeout(_ => Promise.all(TREELIST
-    .filter(e => e != TREELIST_NOMIL[0])
-    .map(e => parseTechIframe(e))
-  )
+  setTimeout(function() {
+    Promise.all(TREELIST
+      .filter(e => e != TREELIST_NOMIL[0])
+      .map(e => parseTechIframe(e))
+    )
     .then(_ => {
       // FIXME uncomment as soon as tech effects debugged
       /*
@@ -101,7 +103,8 @@ async function Init() {
         }
       }
 
-    }), 0)
+    })
+  }, 0)
 }
 
 // counting win possibility for debils
@@ -132,7 +135,7 @@ function drawTree(tree_name) {
 
   svg.innerHTML = SVG_DEFAULT
 
-  const values = Object.values(tech[tree_name])
+  const values = Object.values(tech[tree_name]).concat(Object.values(badCells[tree_name]))
   for (let i of values)
     draw.Node(tree_name, i)
 
@@ -213,8 +216,10 @@ async function parseTechIframe(tree_name) {
   for (let i of graphmls[tree_name].getElementsByTagName('y:ShapeNode')) {
     try {
       const t = parseShapeNode(tree_name, i)
-      if (!t)
+      if (t.badCell) {
+        badCells[tree_name].push(t)
         continue
+      }
       tech[tree_name][t.id] = t
     } catch (e) {
       console.warn(i, e)
@@ -475,8 +480,30 @@ function parseShapeNode(filename, i) {
     .replace(/\n/g, ' ')
     .trim()
 
-  if (nlabel.getAttribute('fontSize') != 12)
-    return null
+  // this is not tech node
+  if (nlabel.getAttribute('fontSize') != 12) {
+    let t = {
+      id: i.parentElement.parentElement.id
+      , badCell: true
+      , type: i.getElementsByTagName('y:Shape')[0].getAttribute('type')
+      , borderColor: i.getElementsByTagName('y:BorderStyle')[0].getAttribute('color')
+      , fullText
+      , fontSize: nlabel.getAttribute('fontSize')
+      , next: []
+  
+      , x: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('x')).toFixed(2)
+      , y: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('y')).toFixed(0)
+      , h: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('height')).toFixed(2)
+      , w: Number(i.getElementsByTagName('y:Geometry')[0].getAttribute('width')).toFixed(2)
+  
+      , fill: i.getElementsByTagName('y:Fill')[0].getAttribute('color')
+    }
+    t.nodeCenter = {
+      x: ++t.x + ++t.w / 2
+      , y: ++t.y + ++t.h / 2
+    }
+    return t
+  }
 
   if (nodeText.indexOf(sepDifficulty) == -1 || nodeText.indexOf(sepEffect) == -1) {
     console.warn(nodeText)
@@ -783,7 +810,7 @@ const draw = {
         return
     }
 
-    draw.SVG.Text(t.nodeCenter, t.name, t.fullText, t.id, box.getBBox())
+    draw.SVG.Text(t.nodeCenter, t.name, t.fullText, t.id, box.getBBox(), t.fontSize)
 
     for (let i of t.next) {
       connectNodes(t, tech[treeName][i])
@@ -891,7 +918,7 @@ const draw = {
       getEl('svg').insertBefore(line, getEl('svg').firstChild)
     },
 
-    Text: function ({ x, y }, text, fullText, id) {
+    Text: function ({ x, y }, text, fullText, id, fontSize) {
 
       var el = document.createElementNS(SVG_NS, 'text')
       el.setAttributeNS(null, 'x', x)
