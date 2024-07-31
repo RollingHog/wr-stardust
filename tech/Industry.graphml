@@ -15,16 +15,15 @@
   <graph edgedefault="directed" id="G">
     <data key="d0" xml:space="preserve"/>
     <node id="n0">
-      <data key="d5" xml:space="preserve"><![CDATA[Автоматически запускает добычу всех разведанных ресурсов первого ряда.]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="20.973448152134836" y="117.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="219.15625" x="20.296875" xml:space="preserve" y="6.9482421875">Экзодобыча
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="219.15625" x="20.296875" xml:space="preserve" y="6.9482421875">Шахта
 Сложность: 1
 Эффект: Производство +1, Добыча +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -72,11 +71,11 @@
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1181.8901148188015" y="25.07158683171849"/>
           <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="108.419921875" x="75.6650390625" xml:space="preserve" y="6.948242187500028">Экзометеорология
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="106.73828125" x="76.505859375" xml:space="preserve" y="6.948242187500028">Метеослужба
 Сложность: 1
 Эффект: Наука +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -94,16 +93,17 @@
       </data>
     </node>
     <node id="n6">
+      <data key="d5" xml:space="preserve"><![CDATA[запускает добычу Трансуранов и Редких металлов]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="20.973448152134836" y="209.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="148.046875" x="55.8515625" xml:space="preserve" y="-0.40234375">Обработка руд
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="148.046875" x="55.8515625" xml:space="preserve" y="-0.40234375">Плавильный комбинат
 Сложность: 1
 Эффект: Трансураны +1, 
 Редкие металлы +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -185,7 +185,7 @@
 Сложность: 2, :звездолёт Рассеяния
 Эффект: :звездолёт Рассеяния починен,
 :"Колонист" бесплатно<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="ellipse"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -194,11 +194,11 @@
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="315.1585971683386" y="209.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="152.248046875" x="53.7509765625" xml:space="preserve" y="6.9482421875">Экстенсивная добыча
 Сложность: 1
 Эффект: Производство +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -419,10 +419,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1181.8901148188015" y="1157.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.9482421875">Заселение пустоты
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.9482421875">Колонизация пустоты
 Сложность: 5
 Эффект: Общество +5<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="rectangle"/>
+          <y:Shape type="hexagon"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -507,9 +507,9 @@
           <y:Geometry height="62.0" width="259.75" x="-272.7325341974022" y="209.00000000000003"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="152.248046875" x="53.7509765625" xml:space="preserve" y="6.948242187499972">Шахты
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="219.15625" x="20.296875" xml:space="preserve" y="6.948242187499972">Промышленные рудники
 Сложность: 1
-Эффект: Производство +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: Производство +1, Добыча +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
@@ -732,7 +732,7 @@
 Сложность: 1
 Эффект: Производство +6, на 1 ход,
 :звездолёт Рассеяния разобран<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="ellipse"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -748,7 +748,7 @@
 Сложность: 1
 Эффект: Защита колонии +1,
 Адаптация +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -1150,10 +1150,9 @@
           <y:Geometry height="62.0" width="259.75" x="1468.163299135931" y="25.07158683171852"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="182.06640625" x="38.841796875" xml:space="preserve" y="-0.40234375">Звездолёт Рассеяния
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="166.78515625" x="46.482421875" xml:space="preserve" y="6.9482421875">Звездолёт Рассеяния
 Сложность: 0, базовое
-Эффект: выдаётся на старте, 
-:аналогичен корпусу "Колонист"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: выдаётся на старте<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="ellipse"/>
         </y:ShapeNode>
       </data>
@@ -1215,12 +1214,12 @@
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="-268.7765518478652" y="117.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="188.376953125" x="35.6865234375" xml:space="preserve" y="-0.40234375">Георазведка
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="188.376953125" x="35.6865234375" xml:space="preserve" y="-0.40234375">Бюро георазведки
 Сложность: 1
 Эффект: позволяет перебросить
 куб на Ресурсы (только вверх)<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -1697,11 +1696,11 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1464.6864834530606" y="524.9999999999999"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.69140625" x="19.529296875" xml:space="preserve" y="-0.40234375">Колонизация соседней планеты
-Сложность: 3, :повторяемое
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.69140625" x="19.529296875" xml:space="preserve" y="-0.40234375">Колониальная база
+Сложность: 3, :повторяемое, :сброс
 Эффект: :создаёт колонию на планете
  в своей ЗС<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="hexagon"/>
+          <y:Shape type="ellipse"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -2837,7 +2836,6 @@
       </data>
     </edge>
     <edge id="e109" source="n28" target="n128">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2848,7 +2846,6 @@
       </data>
     </edge>
     <edge id="e110" source="n93" target="n129">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2859,7 +2856,6 @@
       </data>
     </edge>
     <edge id="e111" source="n19" target="n130">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2870,7 +2866,6 @@
       </data>
     </edge>
     <edge id="e112" source="n130" target="n93">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2881,7 +2876,6 @@
       </data>
     </edge>
     <edge id="e113" source="n93" target="n34">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2892,7 +2886,6 @@
       </data>
     </edge>
     <edge id="e114" source="n129" target="n91">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
