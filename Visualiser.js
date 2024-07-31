@@ -397,31 +397,62 @@ const HTMLUtils = {
   },
 
   enableHotkeysProcessing() {
-    const ignoreKeys = ['Alt', 'Tab']
-
-    const hotkeysList = {
-      'Alt F1': btnClickHdlrByText('help'),
-      'Escape': this.hideAllModals,
-      'Alt U': btnClickHdlrByText('userpost'),
-      'Alt R': btnClickHdlrByText('reports'),
-      'Alt P': btnClickHdlrByText('parse clipboard'),
-    }
 
     function btnClickHdlrByText (text) {
       return _ => Array.from(document.querySelectorAll('button'))
         .filter(e => e.innerText.toLowerCase().includes(text))[0].click()
     }
 
+    let searchEnabled = false
+    let kMode = false 
+
+    const hotkeysList = {
+      'Alt F1': btnClickHdlrByText('help'),
+      'Escape': _ => {
+        if(searchEnabled) {
+          setTimeout(_ => searchEnabled = false, 50)
+        }
+        else {
+          this.hideAllModals()
+        }
+      },
+      'Ctrl F': _ => searchEnabled = true,
+      'Alt K': _ => kMode = true,
+
+      'Alt U': btnClickHdlrByText('userpost'),
+      'Alt R': btnClickHdlrByText('reports'),
+      'Alt P': btnClickHdlrByText('parse clipboard'),
+      'Alt T': _ => getEl('btn_toggleUI').click,
+    }
+    const kModeHotkeys = {
+      '1': _ => getEl('players_selection').querySelectorAll('label')[0].click(),
+      '2': _ => getEl('players_selection').querySelectorAll('label')[1].click(),
+      '3': _ => getEl('players_selection').querySelectorAll('label')[2].click(),
+      '4': _ => getEl('players_selection').querySelectorAll('label')[3].click(),
+      '5': _ => getEl('players_selection').querySelectorAll('label')[4].click(),
+      '6': _ => getEl('players_selection').querySelectorAll('label')[5].click(),
+      '7': _ => getEl('players_selection').querySelectorAll('label')[6].click(),
+    }
+
+    const ignoreKeys = ['Alt', 'Tab']
+
     // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
 
-    document.body.addEventListener('keyup', function(evt) {
+    document.body.addEventListener('keydown', function(evt) {
       if(!evt.code) return
       if(ignoreKeys.includes(evt.key)) return 
       const keyComb = 
-        (evt.altKey ? 'Alt ' : '')
+        (evt.ctrlKey ? 'Ctrl ' : '')
+        + (evt.altKey ? 'Alt ' : '')
         + evt.code.replace(/(Key|Digit)/,'')
       if(hotkeysList[keyComb]) {
         hotkeysList[keyComb]()
+        evt.stopPropagation()
+        return false
+      }
+      if(kMode && kModeHotkeys[keyComb]) {
+        kModeHotkeys[keyComb]()
+        kMode = false
         evt.stopPropagation()
         return false
       }
@@ -1008,7 +1039,6 @@ const User = {
         .filter( e => e.search(/\(.*сломано/) != -1)
         .map(e => e.replace(/ \([^)]+\)/,'')),
     }
-    log(bad)
     list = list.map(e => e.replace(/ \([^)]+\)/,''))
 
     for (let i of targets) {
@@ -1047,6 +1077,7 @@ const User = {
       .filter( e => e )
       .map(e => {
         const t = inverted.alltech[e]
+        if(t.treeName !== treeName) return null
         // if(t.req.length == 0) return t.id
 
         return t.next
@@ -1151,6 +1182,9 @@ const User = {
       .sort( (a,b) => {
         if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
         if(!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
+        if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) {
+          return KEYWORDS.COLONY_PARAMS.indexOf(a[0]) - KEYWORDS.COLONY_PARAMS.indexOf(b[0])
+        }
         return 0  
       }) 
     // t = [].concat(t.main, t.additional)
