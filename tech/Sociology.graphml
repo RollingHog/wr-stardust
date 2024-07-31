@@ -518,8 +518,6 @@
       </data>
     </node>
     <node id="n38">
-      <data key="d5" xml:space="preserve"><![CDATA["Возьмите сто человек, и среди них обязательно будет трое воров, двое убийц и один злостный неплательщик налогов" 
- – Наставление молодого полицейского, стр. 2.]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="405.0000000000001"/>
@@ -1330,7 +1328,8 @@
       </data>
     </node>
     <node id="n100">
-      <data key="d5" xml:space="preserve"><![CDATA[Желания народа - закон для государства.]]></data>
+      <data key="d4" xml:space="preserve"/>
+      <data key="d5" xml:space="preserve"><![CDATA[Необходимые государственные структуры - возникают и распадаются, как только в них исчезнет нужда. ]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="614.8428645145539" y="1417.0000000000002"/>
@@ -1359,8 +1358,7 @@
       </data>
     </node>
     <node id="n102">
-      <data key="d5" xml:space="preserve"><![CDATA["Cogito. Ergo sum."
- - Первые слова ИИ "Голем"]]></data>
+      <data key="d5" xml:space="preserve"><![CDATA[Друг и помощник, который всегда с тобой]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="904.5928645145539" y="1141.0000000000002"/>
@@ -1407,8 +1405,8 @@
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="249.337890625" x="5.2060546875" xml:space="preserve" y="-0.40234375">Зов прародины
-Сложность: 4
-Эффект: :+3 на любые действия связанные
+Сложность: 3
+Эффект: :+4 на любые действия связанные
  с поиском и возвращением Земли<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -2317,7 +2315,6 @@
       </data>
     </edge>
     <edge id="e90" source="n12" target="n27">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2328,7 +2325,6 @@
       </data>
     </edge>
     <edge id="e91" source="n21" target="n105">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
