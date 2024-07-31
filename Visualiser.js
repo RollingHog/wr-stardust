@@ -452,8 +452,10 @@ const KEYWORDS = {
     "ДУ",
     "роботы",
     "нет FTL",
+    "ужас",
   ],
   MODULE_PROPS: [
+    "ракеты",
     "ЭМИ",
     "ББ",
     //!!!
@@ -471,7 +473,7 @@ const KEYWORDS = {
     "Наноматериалы",
     "Антиматерия",
     // 3 ряд
-    "Метакрис",
+    "Стазокерамика",
     "Экзотическая материя",
     "Экзотматерия",
     // 4 ряд
@@ -485,7 +487,7 @@ const KEYWORDS = {
   TECH_EFFECTS: [
       // индустрия
     "Планетарная разведка",
-    "Георазведка",
+    "Солнце",
     "Строительство",
     "Пуски",
     "Орбита",
@@ -522,7 +524,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/^тех. (.+)$/i, 'Технология:$1')
       .replace(/^(осуждение|волнения|непривычная среда) ?\((.+)\)$/i, '$1:+$2')
       .replace(/^(затраты|специалисты|ресурсы) ?\((.+)\)$/i, '$1:$2')
-      .replace(new RegExp(`(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
       .split(':')
     )
 
@@ -537,14 +539,14 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .trim()
       .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ':')
       .replace(/ {2,}/g, ' ')
-      .replace(/(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
+      .replace(/^(Общество|Производство|Наука) [+-](\d+)/, '$1:$2')
       .replace(/^\+?(\d+) свободн(ый|ых) куба?/i, 'Свободный:$1')
       // временный бонус
       .replace(/^на (\d+) хода?/i, 'Временно:$1')
       // вещества
-      .replace(new RegExp(`(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) \\+(\\d+)`), '$1:$2')
       // Эффекты и бонусы:
-      .replace(new RegExp(`(${KEYWORDS.TECH_EFFECTS.join('|')}) [+-](\\d+)`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) [+-](\\d+)`), '$1:$2')
       // : социальные
       .replace(/(Дипломатия|Шпионаж|Контршпионаж|Пропаганда|Автозаки|Политика|Устранение последствий) [+-](\d+)/, '$1:$2')
       .replace(/(Осуждение) -(\d+)/, '$1:$2')
@@ -557,24 +559,24 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
       .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
       .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
       // модули и оружие, глобальные военные эффекты
-      .replace(/(Атака|Защита|Скорость|Уклонение) (армий|флотов)? ?\+?(\d+)/, '$1$2:$3')
-      .replace(/\+?(\d+) очк(о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
-      .replace(/(Защита колонии|планетарный щит|Мины) \+?(\d+)/, '$1:$2')
-      .replace(/Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
-      .replace(/(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
+      .replace(/^(Атака|Защита|Скорость|Уклонение) (армий|флотов)? ?\+?(\d+)/, '$1$2:$3')
+      .replace(/^\+?(\d+) очк(о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
+      .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
+      .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
+      .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
       // типы урона, эффекты оружия
-      .replace(new RegExp(`(${KEYWORDS.DAMAGE_TYPES.join('|')})`), '$1:$2')
-      .replace(new RegExp(`(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
-      .replace(new RegExp(`(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+\\d+)?$`), '$1:$2')
       // эффекты, дающие великих людей
       .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)? ?(.+)?$/i, 'Великий человек ($2):$1')
       // базовые вещи
-      .replace(/(выдаётся при высадке|выдаётся на старте)/, ALL_RIGHT)
-      .replace(/(немедленно)/, ALL_RIGHT)
-      .replace(/(электростанция|наземное)/, ALL_RIGHT)
-      .replace(/(неуязвимость к обычным болезням|взлом систем связи невозможен)/, ALL_RIGHT)
-      .replace(/(при подавлении армией|в военное время|на нечуждых планетах|в системе|вне родной системы)/, ALL_RIGHT)
-      .replace(/(пред-FTL)/, ALL_RIGHT)
+      .replace(/^(выдаётся при высадке|выдаётся на старте)/, ALL_RIGHT)
+      .replace(/^(немедленно)/, ALL_RIGHT)
+      .replace(/^(электростанция|наземное)/, ALL_RIGHT)
+      .replace(/^(неуязвимость к обычным болезням|взлом систем связи невозможен)/, ALL_RIGHT)
+      .replace(/^(при подавлении армией|в военное время|на нечуждых планетах|в системе|вне родной системы)/, ALL_RIGHT)
+      .replace(/^(пред-FTL)/, ALL_RIGHT)
       // особый эффект - победа
       .replace(/(победа)/, ALL_RIGHT)
       .split(':')
@@ -584,7 +586,7 @@ function parseCostAndEffects(name, cost_raw, effect_unparsed, studyCubesType) {
     // it is non-split => not recognized string
     // effect = null
     badTechCount++
-    console.warn(name, effect, effect_unparsed)
+    console.warn(name, effect.filter(e=>e.length<2)[0], effect_unparsed)
   }
 
   return [cost, effect]
