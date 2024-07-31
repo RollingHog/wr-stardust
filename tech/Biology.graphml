@@ -1053,9 +1053,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="212.734375" x="23.5078125" y="-0.40234375">Стандартный преобразователь
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="225.408203125" x="17.1708984375" y="-0.40234375">Стандартный преобразователь
 Сложность: 3, 2 слота
-Эффект: особое: температа планеты
+Эффект: особое: температура планеты
 становится нормальной<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
