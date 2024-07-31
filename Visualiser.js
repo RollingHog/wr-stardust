@@ -1181,17 +1181,17 @@ const playerPost = {
     }
 
     let bonusThings = [...text.matchAll(/\+\+([^+]+)\+\+/g)].map( e => ({ text: e[1], rolls: {
-      sum: NaN,
-      critfails: NaN,
-      wins: NaN,
-      critwins: NaN
+      sum: null,
+      critfails: null,
+      wins: null,
+      critwins: null
     }, rawRolls: null }))
     requests = requests.concat(bonusThings)
 
     getEl('el_selected_tech_wrapper').hidden = false
     getEl('el_selected_tech_list').innerHTML = `<table>
     <thead>
-      <th>${['Технология', 'Цена', "КПровалы", "Успехи", "КУспехи"].join('</th><th>')}</th>
+      <th>${['Технология', 'Цена', "КПровалы", "Успехи", "КУспехи", "Брошено"].join('</th><th>')}</th>
       <th 
         onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
       <button>+</button>
@@ -1199,19 +1199,19 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum].join('</td><td>') + '</td>' + 
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
+    </tbody><tbody>
+    <tr>
+      <td colspan=2>ВСЕГО</td>
+      <td>${requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)}</td>
+      <td>${requests.reduce( (sum, e) => sum + +e.rolls.wins,0)}</td>
+      <td>${requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)}</td>
+      <td>${requests.reduce( (sum, e) => sum + +e.rolls.sum,0)}</td>
+    </tr>
     </tbody></table>`
-    // <tr>
-    //   <td>ВСЕГО</td>
-    //   <td>${[
-    //     requests.reduce( (a, e) => (+a + +e.rolls.critfails), 0),
-    //     requests.reduce( (a, e) => (+a + +e.rolls.wins), 0),
-    //     requests.reduce( (a, e) => (+a + +e.rolls.critwins), 0),
-    //   ].join('</td><td>')}</td>
-    // </tr>
 
     // log(requests)
     setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
@@ -1219,45 +1219,56 @@ const playerPost = {
   },
 
   countTechStudyResult() {
+    const pos = {
+      name: 0,
+      price: 1,
+      critfails: 2,
+      wins: 3,
+      critwins: 4,
+      sum: 5,
+    }
+
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
-      .map(e=> {
-        if(!e.children[0]) return null
+      .map(e => {
+        if (!e.children[pos.name]) return null
 
-        e.children[0].style.backgroundColor=''
-        e.children[2].style.backgroundColor=''
-        e.children[4].style.backgroundColor=''
-        e.children[0].title=''
+        e.children[pos.name].style.backgroundColor = ''
+        e.children[pos.critfails].style.backgroundColor = ''
+        e.children[pos.critwins].style.backgroundColor = ''
+        e.children[pos.name].title = ''
 
-        if (+e.children[2].innerText > 0) {
-          e.children[2].style.backgroundColor = 'tomato'
+        if (+e.children[pos.critfails].innerText > 0) {
+          e.children[pos.critfails].style.backgroundColor = 'tomato'
         }
 
-        if( +e.children[4].innerText > 0) {
-          e.children[4].style.backgroundColor='lawngreen'
+        if (+e.children[pos.critwins].innerText > 0) {
+          e.children[pos.critwins].style.backgroundColor = 'lawngreen'
         }
 
-        if(inverted.alltech[e.children[0].innerText]) {
+        if (inverted.alltech[e.children[pos.name].innerText]) {
 
-          e.children[0].style.backgroundColor = inverted.alltech[e.children[0].innerText].fill
+          e.children[pos.name].style.backgroundColor = inverted.alltech[e.children[pos.name].innerText].fill
 
-          if(e.children[1].innerText.length == 0) {
-            e.children[1].innerText = inverted.alltech[e.children[0].innerText].cost[0][1]
+          if (e.children[pos.price].innerText.length == 0) {
+            e.children[pos.price].innerText = inverted.alltech[e.children[pos.name].innerText].cost[0][1]
           }
 
-          if(+e.children[3].innerText + +e.children[4].innerText*2 < +e.children[1].innerText) {
-            e.style.backgroundColor='goldenrod'
+          if (+e.children[pos.wins].innerText + +e.children[pos.critwins].innerText * 2 < +e.children[pos.price].innerText
+            && e.children[pos.wins].innerText !== ''
+          ) {
+            e.style.backgroundColor = 'goldenrod'
             return null
           }
 
-          return e.children[0].innerText
+          return e.children[pos.name].innerText
         } else {
-          console.log(e.children[0])
-          e.children[0].style.backgroundColor='cyan'
-          e.children[0].title='Название технологии не найдено'
+          console.log(e.children[pos.name].innerText)
+          e.children[pos.name].style.backgroundColor = 'cyan'
+          e.children[pos.name].title = 'Название технологии не найдено'
           return null
         }
       })
-      .filter( e => e )
+      .filter(e => e)
 
     const result = User.countSummaryCostAndEffect(techList)
 
