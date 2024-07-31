@@ -65,12 +65,14 @@ const genDict = {
     16: E.size.medium,
     17: E.size.large,
   },
-  //  Modifiers: 
-  // -6 if the orbit is adjacent to a forbidden zone caused by the presence of a companion star; 
+  //  Modifiers:
+  // NOPE -6 if the orbit is adjacent to a forbidden zone caused by the presence of a companion star; 
   // -6 if the next orbit outward from the primary star is occupied by a gas giant; 
   // -3 if the next orbit inward from the primary star is occupied by a gas giant; 
   // -3 if the orbit is adjacent to either the inner limit radius or the outer limit radius.
   // All of these modifiers are cumulative.
+
+  // ?adjust to make planets not occur THAT OFTEN
   orbitContents: {
     3: [E.type.none, E.size.medium],
     6: [E.type.asteroid, E.size.medium],
@@ -104,15 +106,15 @@ function getKey(dict, roll) {
 
 const StarSystemGenerator = {
   start() {
-    let rawCubes = null
+    let rawCubes
     // FIXME remove comment
-    // prompt('paste here many d6 cubes in 2ch roll format')
+    // = prompt('paste here many d6 cubes in 2ch roll format')
     if (!rawCubes) rawCubes = RAW_EXAMPLE
     const cubes = this.extractRolls(rawCubes)
+    const startingLength = cubes.length
     const system = this.generate(cubes)
-    // FIXME
-    // log(cubes)
-    log(system)
+    log('rolles used:', startingLength - cubes.length)
+    console.table(system)
   },
   extractRolls(raw) {
     return [...raw.matchAll(/\d+d6: \((\d+(?: \+ \d+){0,20})\)/g)]
@@ -120,6 +122,8 @@ const StarSystemGenerator = {
       .flat()
   },
   generate(randomD6Arr) {
+    const system = []
+
     function pop1() {
       return +randomD6Arr.splice(-1)
     }
@@ -127,13 +131,62 @@ const StarSystemGenerator = {
       return randomD6Arr.splice(-3).reduce((a, e) => a + +e, 0)
     }
 
-    function planet(type, size, special = null) {
+    function planet(type, size = null, special = null) {
       return { type, size, special }
     }
 
-    const system = []
+    function giantSize(i) {
+      const mod = i <= genDict.BEYOND_SNOW_LINE ? 4 : 0
+      return getKey(genDict.giantSize, pop3() + mod)
+    }
 
+    // first giant
     const firstGiantType = getKey(genDict.firstGiant, pop3())
+    let firstLocation = 0
+
+    switch(firstGiantType) {
+      case E.giant.conventional:
+        firstLocation = Math.min(pop1()+genDict.BEYOND_SNOW_LINE-1, 11)
+        break
+      case E.giant.eccentric:
+        firstLocation = Math.min(pop1()+3, 11)
+        break
+      case E.giant.epistellar:
+        firstLocation = Math.max(4-pop1(), 1)
+        break
+    }
+    system[firstLocation] = planet(
+      E.type.giant, 
+      giantSize(firstLocation),
+      firstGiantType
+    )
+
+    // other giants
+    for(let i = 1; i <= 11; i++) {
+      if(system[i]) continue
+      let p
+      if(i < genDict.BEYOND_SNOW_LINE) {
+        //inside snow
+        p = genDict.otherGiants.insideSnow[firstGiantType]
+      } else {
+        p = genDict.otherGiants.outsideSnow[firstGiantType]
+      }
+      if(!p) continue
+      if(pop3() > p) continue
+      system[i] = planet(E.type.giant, giantSize(i))
+    }
+
+    // non-giant planets
+    for(let i = 1; i <= 11; i++) {
+      if(system[i]) continue
+      let mod = 0
+      if(system[i+1] && system[i+1].type == E.type.giant) mod -= 6
+      if(system[i-1] && system[i-1].type == E.type.giant) mod -= 3
+      if(i == 1 || i == 11) mod -= 3
+      let content = getKey(genDict.orbitContents, pop3() + mod)
+      if(!content[0]) continue
+      system[i] = planet(content[0], content[1])
+    }
 
     return system
   },
