@@ -162,9 +162,10 @@ const Analysis = {
     let cnt = 0
     for (let i of Object.keys(tech)) {
       if(i == 'Military') continue
+      log('Tech tree:', i)
       for(let j of Object.values(tech[i])) {
         const lvl = techLevels[i].indexOf(j.y.toString())+1
-        const mult = VARS.DIFFICULTY_MULTS[lvl+1]
+        const mult = VARS.DIFFICULTY_MULTS[lvl]
         let tcost = 0
         let teff = 0
         let fail = false
@@ -178,7 +179,11 @@ const Analysis = {
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
           // eslint-disable-next-line no-empty
-          else if(['особое', 'Технология', "Слоты"].includes(k[0])) {}
+          else if(['Технология', "Слоты"].includes(k[0])) {}
+          else if(k[0 ]== 'особое') {
+            tcost = 0
+            break
+          }
           else {
             // log('what is this?', j.name, k)
             fail = true
@@ -196,7 +201,10 @@ const Analysis = {
           // eslint-disable-next-line no-empty
           else if(KEYWORDS.UNIT_PROPS.includes(k[0])) {}
           // eslint-disable-next-line no-empty
-          else if(k[0] == 'особое') {}
+          else if(k[0 ]== 'особое') {
+            teff = 0
+            break
+          }
           else {
             // log('what is this?', j.name, k)
             fail = true
@@ -204,7 +212,7 @@ const Analysis = {
           }
         }
 
-        if(fail) {
+        if(fail || tcost == 0 || teff == 0) {
           // unrecognized effects
           continue
         }
@@ -215,7 +223,7 @@ const Analysis = {
           let p = (d/mult).toFixed(2)
           if(p>1.5 || p<0.6) {
             cnt++
-            log(i, j.name, j.effect[0][0], j.effect[0][1], p, p>1?'ДОРОГО':"ДЕШЕВО")
+            log(i, j.name, j.effect[0][0], j.effect[0][1], d, mult, p>1?'ДОРОГО':"ДЕШЕВО")
           }
         }
       }
