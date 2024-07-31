@@ -195,7 +195,7 @@
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="214.01171875" x="22.869140625" y="6.9482421875">Адаптация земных микроорганизмов
 Сложность: 2, непривычная среда (2)
-Эффект: Терроформирование +1<y:LabelModel>
+Эффект: Терраформирование +1<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -290,7 +290,7 @@
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="214.01171875" x="22.869140625" y="-0.40234375">Адаптация земных растений
 Сложность: 3, непривычная среда (3)
-Эффект: убирает 
+Эффект: особое: убирает 
 условие неподходящей почвы<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -347,10 +347,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="359.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="229.978515625" x="14.8857421875" y="-0.40234375">Ксенопитомник
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="200.37109375" x="29.689453125" y="-0.40234375">Ксенопитомник
 Сложность: 2, образцы (3)
-Эффект: +2 для любых взаимодействий
- с местной жизнью<y:LabelModel>
+Эффект: особое: +2 для любых 
+взаимодействий с местной жизнью<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -367,8 +367,8 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="451.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="180.23828125" x="39.755859375" y="6.9482421875">Теория экстремофилии
-Сложность: 3, чуждая среда (1)
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="136.01171875" x="61.869140625" y="6.9482421875">Теория экстремофилии
+Сложность: 3
 Эффект: Наука +1<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -386,10 +386,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1366.7963686342591" y="543.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="183.05078125" x="38.349609375" y="-0.40234375">Пантропия
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.80859375" x="47.970703125" y="6.9482421875">Пантропия
 Сложность: 3, осуждение (1)
-Эффект: +1 куб к преодолению 
-условий среды<y:LabelModel>
+Эффект: Адаптация +1<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -406,10 +405,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1366.7963686342591" y="635.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="243.630859375" x="8.0595703125" y="-0.40234375">Сверхчеловеческая адаптация
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="177.8125" x="40.96875" y="6.9482421875">Сверхчеловеческая адаптация
 Сложность: 5, осуждение (2)
-Эффект: убирает любые вредные условия
-среды, кроме вакуума и сверхтемператур<y:LabelModel>
+Эффект: Сверхадаптация +1<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -426,10 +424,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1366.7963686342591" y="727.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="208.732421875" x="25.5087890625" y="-0.40234375">Пустотная адаптация
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="166.955078125" x="46.3974609375" y="6.9482421875">Пустотная адаптация
 Сложность: 5
-Эффект: убирает условия вакуума и
-сверхтемператур<y:LabelModel>
+Эффект: Сверхадаптация +3<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -503,10 +500,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="251.048828125" x="4.3505859375" y="-0.40234375">Строительство миров
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="251.048828125" x="4.3505859375" y="6.9482421875">Строительство миров
 Сложность: 6, тех. Управление гравитацией
-Эффект: игнорирование условий
-среды при терраформинге<y:LabelModel>
+Эффект: Терраформинг +2<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -732,7 +728,7 @@
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.53125" x="35.109375" y="6.948242187500028">Добыча образцов местной жизни
 Сложность: 1
-Эффект: +2 образца<y:LabelModel>
+Эффект: Образцы +2<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -749,10 +745,10 @@
           <y:Geometry height="62.0" width="259.75" x="-75.95833333333326" y="267.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="147.84765625" x="55.951171875" y="-0.40234375">Институт экзобиологии
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="133.03515625" x="63.357421875" y="-0.40234375">Институт экзобиологии
 Сложность: 2
-Эффект: +1 при изучении
-раздела Экзобиология<y:LabelModel>
+Эффект: +2 куба
+к ветке "Экзобиология"<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -811,9 +807,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000001" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="172.29296875" x="43.728515625" y="6.9482421875">Хомо Темпестас
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="143.91015625" x="57.919921875" y="6.9482421875">Хомо Темпестас
 Сложность: 7
-Эффект: Атака всех армий +2<y:LabelModel>
+Эффект: Атака армий +2<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -830,10 +826,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="911.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.673828125" x="60.0380859375" y="-0.40234375">Лестница Дедала
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="192.607421875" x="33.5712890625" y="6.9482421875">Лестница Дедала
 Сложность: 5
-Эффект: +2 куба
-к генным манипуляциям<y:LabelModel>
+Эффект:Генные модификации +2<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -928,7 +923,7 @@
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="234.14453125" x="12.802734375" y="-0.40234375">Ксеносимбиоз
 Сложность: 3, осуждение (1)
-Эффект: +1 к дружественным действиям
+Эффект: +2 к дружественным действиям
 с инопланетной жизнью<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -1004,15 +999,17 @@
 Пожирая до десяти тонн антиматерии в час, она перенаправляет потоки магмы в мантии планеты, а при необходимости даже разгоняет или замедляет ядро, 
 чтобы добиться желаемого ландшафта и уровня тектонической активности. 
 Станция способна работать в двух режимах. В первом преобразования ведутся грубо и завершаются за месяц, но на поверхности выживает разве что планктон.
-Во втором же трансформация длится годами, и единственным её признаком остаётся низкий глухой гул, слышимый в любой точке планеты.]]></data>
+Во втором же трансформация длится годами, и единственным её признаком остаётся низкий глухой гул, слышимый в любой точке планеты.
+
+К сведению: энергоёмкость около 1е30, зарядка от сферы Дайсона - полчаса. Должна была бы тащить на себе несколько гигатонн антиматерии.]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="183.21484375" x="38.267578125" y="-0.40234375">Станция геоглиптики
-Сложность: 6, занимает 4 слота
-Эффект: контроль 
+Сложность: 8, занимает 4 слота
+Эффект: особое: контроль 
 над Гористостью<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -1056,10 +1053,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="202.919921875" x="28.4150390625" y="-0.40234375">Стандартный преобразователь
-Сложность: 2, 2 этапа
-Эффект:температурные условия 
-планеты приводятся к нормальным<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="212.734375" x="23.5078125" y="-0.40234375">Стандартный преобразователь
+Сложность: 3, 2 слота
+Эффект: особое: температа планеты
+становится нормальной<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1153,10 +1150,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="83.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="135.80078125" x="61.974609375" y="-0.4023437499999716">Базовое жильё
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="182.9453125" x="38.40234375" y="6.948242187500028">Базовое жильё
 Сложность: 1, базовое
-Эффект: просто жильё,
-выдаётся при высадке<y:LabelModel>
+Эффект: выдаётся при высадке<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1571,10 +1567,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="635.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="231.4140625" x="14.16796875" y="-0.40234375">Станция контроля погоды
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.146484375" x="19.8017578125" y="-0.40234375">Станция контроля погоды
 Сложность: 4, непривычная среда (1)
-Эффект: убирает условие непривычной 
-среды рядом с колонией<y:LabelModel>
+Эффект: особое: убирает условие 
+непривычной среды рядом с колонией<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1652,9 +1648,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="819.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="126.0390625" x="66.85546875" y="-0.40234375">Биотерминатор
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="172.275390625" x="43.7373046875" y="-0.40234375">Биотерминатор
 Сложность: 5
-Эффект: Уничтожает 
+Эффект: особое: Уничтожает 
 биосферу планеты<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
