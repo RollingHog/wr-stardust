@@ -1588,7 +1588,15 @@ const User = {
   createColonyDescription(playerName) {
     if(!window['DATA__TECH_TRESHOLDS']) return ''
     const techTresholds = window['DATA__TECH_TRESHOLDS'].data
-    let res = '<br>'
+    const planetDescriptions = window['DATA__TECH_TRESHOLDS'].planetDescriptions
+
+    let res = '<br><b>ПЛАНЕТА</b><br>'
+
+    const { planetParams } = this.getSavedUserData(playerName)
+
+    res += VARS.effectsOfPlanetSize[planetParams["Тип планеты"]].map(e => e.join(' ')).join('<br>')
+
+    res += '<br><b>ТЕХНОЛОГИИ</b><br>'
     for(let tree in techTresholds) {
       for(let subtree in techTresholds[tree]) {
         let lastProperStr = null
@@ -1961,6 +1969,7 @@ const TFiveTechObj = {
   Unique: [],
 }
 
+// eslint-disable-next-line no-unused-vars
 class TGoogleDocUserObj {
   startingFeature = []
   techTable = TFiveTechObj
@@ -2259,6 +2268,7 @@ const playerPost = {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 class TTechObject {
   id = ''
   type
@@ -2724,6 +2734,7 @@ function listAllWithoutMilitary() {
   return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
 }
 
+// eslint-disable-next-line no-unused-vars
 class TUnit {
   name = ''
   hull = ''
