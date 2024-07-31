@@ -726,7 +726,13 @@ const Analysis = {
             else if(VARS.WAR_MODULES_ARR.includes(j.type) && KEYWORDS.UNIT_SLOTS_KEYWORD === k[0]) {
               teff -= +k[1] * 1.5
             }
-            else if(KEYWORDS.MILITARY_PARAMS.includes(k[0])) teff += +k[1]
+            else if(KEYWORDS.MILITARY_PARAMS.includes(k[0])) {
+              if(j.type !== VARS.NODE_T.TECH) {
+                teff += +k[1]/2.5
+              } else {
+                teff += +k[1]
+              }
+            }
             else if(KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k[0])) teff += +k[1]/2
             else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]*1.3
             else if(KEYWORDS.DAMAGE_TYPES.includes(k[1])) teff += 0.5
@@ -2803,7 +2809,8 @@ var KEYWORDS = {
     "экранирование",
     "FTL",
     'пред-FTL',
-    'автономность'
+    'автономность',
+    'ПКО',
   ],
 }
 
@@ -2874,7 +2881,7 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), KEYWORDS.UNIT_TYPES_KEYWORD+':$1')
         // .replace(/(армия|$/, 'Тип отряда:$1')
         .replace(/(\d+) слот(?:а|ов)?$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + ':$1')
-        .replace(/(\d+) слота? (МО|ПКО)$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + '($2):$1')
+        // .replace(/(\d+) слота? (МО|ПКО)$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + '($2):$1')
         // модули и оружие, глобальные военные эффекты
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) ([+-]?\\d+)$`), '$1:$2')
