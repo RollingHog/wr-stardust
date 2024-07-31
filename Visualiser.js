@@ -280,6 +280,7 @@ async function Init() {
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
       HTMLUtils.makeElDraggable('el_help', 'el_help_header')
       HTMLUtils.makeElDraggable('el_unitcreator_wrapper', 'el_unitcreator_header')
+      HTMLUtils.makeElDraggable('el_turnplanner_wrapper', 'el_turnplanner_header')
 
       console.timeEnd('full load   ')
     })
@@ -686,7 +687,8 @@ const Analysis = {
           Analysis.openReport(i1)
         }
       },
-      'battlecalc': _ => UnitCreator.open()
+      'battlecalc': _ => UnitCreator.open(),
+      [TurnPlanner.NAME]: _ => TurnPlanner.open(),
     }
 
     for(let i of path) {
@@ -2360,6 +2362,20 @@ const UnitCreator = {
   },
   close() {
     HTMLUtils.closeModal('unitcreator')
+  },
+}
+
+const TurnPlanner = {
+  NAME: 'turnplanner',
+  open() {
+    // getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map(e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
+    // this.fillModulesList()
+    const data = User.countAllUserEffects(window[VARS.PLAYERS_DATA_KEY]['Беглецы'])
+    getEl('el_tp_resources').innerHTML = User.createUserTechEffectsTable(data)
+    HTMLUtils.openModal(this.NAME)
+  },
+  close() {
+    HTMLUtils.closeModal(this.NAME)
   },
 }
 
