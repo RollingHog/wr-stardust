@@ -26,7 +26,9 @@
       <option value="giant">giant</option>
     </select>
     Size <select id="el_sp_size"></select>
+    <input type="text" name="" id="el_rolls" style="width: 80px;" placeholder="rolls here">
     <button id="el_ss_start" onclick="StarSystemGenerator.start()" accesskey="i">Start generation</button>
+    <button id="el_ss_clear" onclick="StarSystemGenerator.clear()" accesskey="c">Clear</button>
   </div>
   <style>
     #el_canvas {
@@ -47,6 +49,10 @@
     }
   </style>
   <div id="el_canvas"></div>
+  <code id=el_sys_str
+    onclick="navigator.clipboard.writeText(this.innerText)" 
+    title="system compressed string">
+  </code>
 </body>
 <script src="./src/common.js"></script>
 <script src="./src/StarSystem/StarSystem.js"></script>
