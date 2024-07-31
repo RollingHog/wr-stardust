@@ -1064,6 +1064,10 @@ const Analysis = {
   },
 
   Reports: {
+    кнопочки() {
+      Analysis.reportTable({'только проекты': `<button onclick="Object.values(tech[techData.currentTreeName]).filter(e=>e.type!=='hexagon').forEach(e=>getEl(e.id).setAttribute('fill','white'))">do</button>`})
+    },
+
    эффекты_тех() {
       let filter = [].concat(
         KEYWORDS.COLONY_PARAMS,
