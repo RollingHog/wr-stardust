@@ -590,15 +590,26 @@ const Analysis = {
       )
     },
 
-    // чтоьы прикинуть сколько давать вкатившимся после начала игры
-    суммарное_количество_проектов_сделанных_каждым_из_игроков() {
-      const result = Object.fromEntries(Object.entries(window[VARS.PLAYERS_DATA_KEY])
-        .map(e => [e[0],
-          e[1].buildings.length 
-          + e[1].orbital.length 
-          + Object.values(e[1].localProjs).flat().length 
-          + Object.values(e[1].techTable).flat().length
-        ]))
+    // чтобы прикинуть сколько давать вкатившимся после начала игры
+    суммарная_стоимость_проектов_сделанных_каждым_из_игроков() {
+      const result = Object.fromEntries(
+        Object.entries(window[VARS.PLAYERS_DATA_KEY])
+        .map(e => [e[0], {
+          'Кол-во':  e[1].buildings.length 
+              + e[1].orbital.length 
+              + Object.values(e[1].localProjs).flat().length 
+              + Object.values(e[1].techTable).flat().length,
+          'Цена': [].concat(
+            e[1].buildings, 
+            e[1].orbital,
+            Object.values(e[1].localProjs).flat(),
+            Object.values(e[1].techTable).flat(),
+          )
+          .map( e2 => inverted.alltech[e2] ? inverted.alltech[e2].cost[0][1] : null)
+          .filter( e2 => e2 )
+          .reduce((acc, i)=>acc + +i,0)
+        }])
+      )
       Analysis.reportTable(result)
     },
 
