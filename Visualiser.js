@@ -1373,17 +1373,22 @@ const playerPost = {
     if(!p) return
     playerPost.parse(p)
   },
+  extractRolls(text) {
+    const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)/g)]
+      .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2] }))
+      .map(({text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls }))
+    return res
+  },
   parse(text) {
-    let requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d+){0,10})\)/g)]
-      .map(e=>({text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2]}))
-      .map(( {text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls }))
+    let requests = this.extractRolls(text)
 
     for(let i of requests) {
       let rolls = {
         sum: 0,
         critfails: 0,
         wins: 0,
-        critwins: 0
+        critwins: 0,
+        delta: 0
       }
       for(let j of i.rolls.split(' + ')) {
         rolls.sum += 1
@@ -1394,6 +1399,7 @@ const playerPost = {
         }
         if(+j>4) rolls.wins += 1
       }
+      rolls.delta = rolls.critwins * 2 + rolls.wins
       i.rolls = rolls
     }
 
@@ -1401,7 +1407,8 @@ const playerPost = {
       sum: null,
       critfails: null,
       wins: null,
-      critwins: null
+      critwins: null,
+      delta: null,
     }, rawRolls: null }))
     requests = requests.concat(bonusThings)
     const rollsTotal = requests.reduce( (sum, e) => sum + +e.rolls.sum,0)
@@ -1417,7 +1424,7 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, ''].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta].join('</td><td>') + '</td>' + 
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
@@ -1428,6 +1435,7 @@ const playerPost = {
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.wins,0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)}</td>
       <td>${rollsTotal}</td>
+      <td></td>
     </tr>
     <tr>
       <td colspan=2>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
@@ -1485,34 +1493,29 @@ const playerPost = {
             e.children[pos.price].innerText = inverted.alltech[e.children[pos.name].innerText].cost[0][1]
           }
 
-          if (sum < +e.children[pos.price].innerText
-            && e.children[pos.wins].innerText !== ''
-          ) {
-            e.style.backgroundColor = 'goldenrod'
-            result = null
-          } else {
-            result = e.children[pos.name].innerText
-          }
+          result = e.children[pos.name].innerText
         } else {
-          console.log(e.children[pos.name].innerText)
+          console.log('Не найдено', e.children[pos.name].innerText)
           e.children[pos.name].style.backgroundColor = 'cyan'
           e.children[pos.name].title = 'Название технологии не найдено'
+          result = null
+        }
 
-          if (sum < +e.children[pos.price].innerText
-            && e.children[pos.wins].innerText !== ''
-          ) {
-            e.style.backgroundColor = 'goldenrod'
-          }
+        if (sum < +e.children[pos.price].innerText
+          && e.children[pos.wins].innerText !== ''
+        ) {
+          e.style.backgroundColor = 'goldenrod'
           result = null
         }
         e.children[pos.delta].innerText = sum - +e.children[pos.price].innerText
         if(+e.children[pos.delta].innerText > 1) {
-          e.children[pos.delta].style.backgroundColor = 'lawngreen'
+          e.children[pos.delta].style.backgroundColor = 'aquamarine'
         }
         return result
       })
       .filter(e => e)
-
+    
+    // getEl('el_selected_tech_list').children[0].tBodies[1].rows[0].children[pos.delta-1].innerText = summaryDelta
     const result = User.countSummaryCostAndEffect(techList)
 
     getEl('el_tech_result_list').innerHTML = 
