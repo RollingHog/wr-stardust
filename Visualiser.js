@@ -1053,6 +1053,9 @@ const User = {
       broken: list
         .filter( e => e.search(/\(.*сломано/) != -1)
         .map(e => e.replace(/ \([^)]+\)/,'')),
+      inactive: list
+        .filter( e => e.search(/\(.*неактивно/) != -1)
+        .map(e => e.replace(/ \([^)]+\)/,'')),
     }
     list = list.map(e => e.replace(/ \([^)]+\)/,''))
 
@@ -1066,6 +1069,8 @@ const User = {
         } else if(bad.broken.includes(name)) {
           i.setAttribute('fill', 'salmon')
           continue
+        } else if(bad.inactive.includes(name)) {
+          i.setAttribute('fill', 'gray')
         }
         res.push(i.id)
         list.splice(pos_tech, 1)
@@ -1087,7 +1092,7 @@ const User = {
   highlightAvaltech(treeName, techList, projList) {
     techList
       .concat(projList)
-      .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
+      .map( e => e.search('(чужое)') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
       .filter( e => e )
       .map(e => {
