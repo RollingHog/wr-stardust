@@ -8,10 +8,6 @@ console.log(VERSION)
 // UTILS
 
 const log = console.log
-// eslint-disable-next-line no-unused-vars
-const warn = console.warn
-// eslint-disable-next-line no-unused-vars
-const error = console.error
 
 function getEl(id) {
   return document.getElementById(id)
@@ -115,11 +111,11 @@ async function Init() {
           el.contentWindow.document.body.firstChild.innerHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
           , 'text/xml')
       } catch(e) {
-        warn(`cannot read local files, run
+        console.warn(`cannot read local files, run
         chrome with --allow-file-access-from-files
         or
         firefox with about:config - privacy.file_unique_origin : false`)
-        warn(e)
+        console.warn(e)
         break
       }
     } else {
@@ -349,6 +345,16 @@ const Analysis = {
             "Слоты": +e.effect[1][1],
             "Подтип": e.effect[2] ? e.effect[2][0] : '',
             "Свойства": e.effect.slice(3).map(e => e.join(':')).join(','),
+          }])
+      ))
+    },
+
+    listModules() {
+      console.table(Object.fromEntries(
+        Object.values(inverted.alltech)
+          .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
+          .map(e => [e.name, {
+            "Свойства": e.effect.map(e => e.join(':')).join(','),
           }])
       ))
     },
@@ -779,7 +785,6 @@ var KEYWORDS = {
   ],
   DAMAGE_TYPES: [
     "био",
-    "биологическое",
     "рад",
     "нано",
     "странглет",
@@ -792,6 +797,7 @@ var KEYWORDS = {
     "осадное",
     "экранирование",
     "Полёт",
+    "FTL",
   ],
 }
 
@@ -819,7 +825,7 @@ function parseCostAndEffects(t) {
       .trim()
       .replace(/:/g, DISABLE_PARSE_IMMUNITY ? '' : ITS_SPECIAL)
       .replace(/ {2,}/g, ' ')
-      .replace(/(базовое|суперпроект)/, ALL_RIGHT)
+      .replace(/(базовое|суперпроект|астропроект)/, ALL_RIGHT)
       .replace(/(почва|первый контакт|черная дыра)/, ALL_RIGHT)
       .replace(/(электростанция)/, ALL_RIGHT)
       .replace(/^(\d+)$/i, studyCubesType + ':$1')
@@ -834,7 +840,7 @@ function parseCostAndEffects(t) {
     )
 
   if (cost.some(e => e.length < 2)) {
-    log('bad cost', t.name, cost, costRaw)
+    console.warn('bad cost', t.name, cost, costRaw)
     techData.badTechCount++
   }
 
@@ -860,13 +866,13 @@ function parseCostAndEffects(t) {
       .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
       // модули и оружие, глобальные военные эффекты
       .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) [+-]?(\\d+)$`), '$1:$2')
-      .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) [+-]?(\\d+)$`), '$1:$2')
+      .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) [+-]?(\\d+)$`), '$1 $2:$3')
       .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
       .replace(/^(Защита колонии|планетарный щит|Мины|Гарантированная защита) \+?(\d+)/, '$1:$2')
       .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
       .replace(/^(Двигатель|Скорость FTL) \+?(\d+)/, '$1:$2')
       // типы урона, эффекты оружия
-      .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})`), 'Тип урона:$2')
+      .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
       .replace(new RegExp(`^(${KEYWORDS.UNIT_PROPS.join('|')}) ?(\\+\\d+)?`), '$1:$2')
       .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')}) ?(\\+?\\d+)?$`), '$1:$2')
       // эффекты, дающие великих людей
@@ -1100,7 +1106,7 @@ const draw = {
         draw.SVG.Rect(t)
         break
       default:
-        error('drawing not implemented for type ' + t.type)
+        console.error('drawing not implemented for type ' + t.type)
         return
     }
 
