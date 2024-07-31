@@ -25,6 +25,7 @@ const TREELIST = [
 
 // constants
 const VARS = {
+  isInit: false,
   IS_LOCAL: window.location.protocol === 'file:',
   DISABLE_PARSE_IMMUNITY: false,
   PLAYERS_TIMESTAMP_KEY: 'DATA__PLAYERS_TIMESTAMP',
@@ -215,7 +216,7 @@ const svg = document.getElementById('svg')
 
 window.onload = Init
 async function Init() {
-
+  VARS.isInit = true
   console.time('full load   ')
 
   getEl('el_loading').hidden = false
@@ -325,21 +326,23 @@ async function Init() {
       }
       console.timeEnd('node stat   ')
 
-      console.time('analysis    ')
-      Analysis.onInit()
-      console.timeEnd('analysis    ')
-
       getEl('players_selection').children.forEach(e=> (e.tagName=='LABEL')
         ? e.onclick = function() { 
           if(e.children[0].checked) {
             let playerName = e.innerText.trim()
             parseDoc.drawTech(playerName, techData.currentTreeName)
-            User.drawUserStat(playerName)
+            if(!VARS.isInit) {
+              User.drawUserStat(playerName)
+            }
           } else {
             User.activePlayer = null
             drawTree(techData.currentTreeName)
             getEl('el_reports_wrapper').hidden = true
             HTMLUtils.closeModal('report')
+          }
+          if(!VARS.isInit) {
+            // isInit means 99% auto-click
+            navigator.clipboard.writeText(e.innerText)
           }
         }
         : null
@@ -351,7 +354,12 @@ async function Init() {
       HTMLUtils.makeElDraggable('el_unitcreator_wrapper', 'el_unitcreator_header')
       HTMLUtils.makeElDraggable('el_turnplanner_wrapper', 'el_tp_header')
 
+      console.time('analysis    ')
+      Analysis.onInit()
+      console.timeEnd('analysis    ')
+
       console.timeEnd('full load   ')
+      VARS.isInit = false
     })
   }, 0)
 }
@@ -2335,6 +2343,16 @@ const playerPost = {
     return res
   },
   parse(text) {
+    const firstWord = text.slice(0, text.indexOf(' '))
+    log(firstWord)
+    getEl('players_selection')
+    for(let i of getEl('players_selection').querySelectorAll('label')) {
+      if(i.innerText.startsWith(firstWord)) {
+        i.click()
+        break
+      }
+    }
+
     let requests = this.extractRolls(text)
 
     for(let i of requests) {

@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-02-23T04:26:04.728Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-02-28T19:39:43.783Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "startingFeature": [
@@ -307,11 +307,11 @@ var DATA__PLAYERS_DATA = {
     "greatPeople": [
       {
         "name": "Карина",
-        "lvl": 4,
+        "lvl": 5,
         "effect": [
           [
             "особое",
-            "+4 к политическим взаимодействиям"
+            "+5 к политическим взаимодействиям"
           ]
         ]
       }
