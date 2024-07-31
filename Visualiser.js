@@ -835,45 +835,46 @@ const User = {
     return res
   },
 
+  /**
+   * 
+   * @param {[string, any][]} effectsListArr 
+   * @returns 
+   */
+  createTechEffectsTable(effectsListArr) {
+    effectsListArr = effectsListArr
+      .filter( e => {
+        return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
+        && KEYWORDS.SINGLE_TIME_EFFECTS.filter(e2 => e[0].endsWith(e2)).length == 0
+        && KEYWORDS.MODULE_PROPS.filter(e2 => e[0].endsWith(e2)).length == 0
+        && !KEYWORDS.PLANET_PARAMS.includes(e[0])
+        && e[0] !== KEYWORDS.UNIT_TYPES_KEYWORD
+        && e[0] !== KEYWORDS.UNIT_SLOTS_KEYWORD
+        && !e[0].startsWith(':?')
+      })
+      .sort()
+      .sort( (a,b) => {
+        if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
+        if(!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
+        return 0  
+      }) 
+    // t = [].concat(t.main, t.additional)
+
+    return '<table><tbody><tr>' +
+      effectsListArr.map(e => 
+        `<td>${e[0]}</td>` +
+        `<td>${e[1]==0?' ':`${+e[1]>=0?'&nbsp;':'-'}${e[1]}`}`
+      ).join('</tr><tr>') +
+      '</tr>'
+  },
+
   drawUserStat(playerName) {
     const data = User.countAllUserEffects(window[VARS.PLAYERS_DATA_KEY][playerName])
-      .filter( e => !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0].replace(/^:/,'')) )
-
-    let t = {
-      main: [],
-      additional: []
-    }
-    for(let i of Object.values(data)) {
-      if(KEYWORDS.COLONY_PARAMS.includes(i[0])) {
-        t.main.push(i)
-      } else {
-        t.additional.push(i)
-      }
-    }
-
-    // just re-ordering 
-    t.main = KEYWORDS.COLONY_PARAMS.map(e => {
-      let a = t.main.find(f => f[0] == e) || [null, 0]
-      return [e, a[1]]
-    })
-
-    t.additional = t.additional.sort().filter( e => {
-      return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
-      && KEYWORDS.SINGLE_TIME_EFFECTS.filter(e2 => e[0].startsWith(e2)).length == 0
-      && !KEYWORDS.PLANET_PARAMS.includes(e[0])
-      && !e[0].startsWith(':?')
-    })
-    // t = [].concat(t.main, t.additional)
 
     getEl('el_reports_wrapper').hidden = false
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong>
-      <br>
-      <table><tr>${t.main.map(e => `<td>${e[0]}<td>${e[1]}`).join('</tr><tr>')}</tr></table>
-      <br>
-      <table><tr>${t.additional.map(e => `<td>${e[0]}<td>${e[1]==0?' ':`${+e[1]>=0?'+':'-'}${e[1]}`}`).join('</tr><tr>')}</tr></table>
-      `
+      <br>` + this.createTechEffectsTable(data)
   },
 }
 
@@ -1272,19 +1273,8 @@ const playerPost = {
 
     const result = User.countSummaryCostAndEffect(techList)
 
-    let effectList = Object.entries(result)
-      .sort()
-      .filter( e => !KEYWORDS.TECH_EFFECT_MODS.includes(e[0].replace(/^:/,'')) )
-      .sort( (a,b) => {
-        if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
-        if(!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
-        return 0  
-      })
-      
-      getEl('el_tech_result_list').innerHTML = '<table><tbody><tr>'
-      + effectList
-        .map(e => `<td>${e[0]}</td><td>${e[1]>=0?'+':'-'}${e[1]}</td>`).join('</tr><tr>')
-      + '</tr>'
+    getEl('el_tech_result_list').innerHTML = 
+      User.createTechEffectsTable(Object.entries(result))
 
     const byType = {
       rectangle: [],
@@ -1454,6 +1444,8 @@ var KEYWORDS = {
     "Щит",
     "Полёт",
   ],
+  UNIT_SLOTS_KEYWORD: 'Слоты',
+  UNIT_TYPES_KEYWORD: 'Тип юнита',
   UNIT_TYPES: [
     "пехота",
     "танки",
@@ -1554,10 +1546,10 @@ const parseNode = {
         .replace(/^Вет(?:ка|вь) "?([^ "]+)"? \+?(\d+)/i, 'Исследования (ветка "$1"):$2')
         .replace(/^\+?(\d+) (?:куба? )?к вет(?:ке|ви) "([^"]+)"/i, 'Исследования (ветка "$2"):$1')
         // армии и звездолёты
-        .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), 'Тип юнита:$1')
+        .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), KEYWORDS.UNIT_TYPES_KEYWORD+':$1')
         // .replace(/(армия|$/, 'Тип отряда:$1')
-        .replace(/(\d+) слот(?:а|ов)?$/i, 'Слоты:$1')
-        .replace(/(\d+) слота? (МО|ПКО)$/i, 'Слоты($2):$1')
+        .replace(/(\d+) слот(?:а|ов)?$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + ':$1')
+        .replace(/(\d+) слота? (МО|ПКО)$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + '($2):$1')
         // модули и оружие, глобальные военные эффекты
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
