@@ -453,6 +453,7 @@ const KEYWORDS = {
   UNIT_PROPS: [
     "ДУ",
     "роботы",
+    "нет FTL",
   ],
   MODULE_PROPS: [
     "био",
@@ -579,7 +580,7 @@ function parseShapeNode(filename, i) {
       .replace(/(выдаётся при высадке)/, ALL_RIGHT)
       .replace(/(немедленно)/, ALL_RIGHT)
       .replace(/(электростанция|наземное)/, ALL_RIGHT)
-      .replace(/(неуязвимость к обычным болезням)/, ALL_RIGHT)
+      .replace(/(неуязвимость к обычным болезням|взлом систем связи невозможен)/, ALL_RIGHT)
       .replace(/(при подавлении армией|в военное время|на нечуждых планетах|в системе)/, ALL_RIGHT)
       .replace(/(пред-FTL)/, ALL_RIGHT)
       // особый эффект - победа
