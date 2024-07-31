@@ -11,3 +11,10 @@
 table {
   border-collapse: collapse;
 }
+
+#home_btn {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+}

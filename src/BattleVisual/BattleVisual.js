@@ -66,13 +66,24 @@ const onAddShipTemplate = {
 
     tshipEl.querySelector('.parent').setAttribute('parent', tshipEl.id)
 
-    tshipEl.querySelector('.image').innerHTML = `<img src="assets/ships/${size}.png">`
+    if(size != 0) {
+      tshipEl.querySelector('.image').innerHTML = `<img src="assets/ships/${size}.png">`
+    } else {
+      // planet
+      tshipEl.querySelector('.image').innerHTML = `<img src="assets/planets/terrestrial.png">`
+      tshipEl.querySelector('.param.speed').innerHTML = 0
+      tshipEl.querySelector('.hp.max').innerHTML = 10
+      setTimeout(()=>tshipEl.querySelector('.b_add_to_battle').click(), 20)
+      setTimeout(()=>tshipEl.querySelector('.b_remove').click(), 50)
+      
+      // TODO add to battle and remove template
+    }
 
     if(size > 0) {
       // its not a planet
-      tshipEl.querySelector('.hp.curr').innerHTML = size*2
       tshipEl.querySelector('.hp.max').innerHTML = size*2
     }
+    tshipEl.querySelector('.hp.curr').innerHTML = tshipEl.querySelector('.hp.max').innerHTML
 
     tshipEl.hidden = false
     tshipEl.querySelector('.image').addEventListener('click', () => addShipToBattle(tshipEl.id))
@@ -118,12 +129,11 @@ const formRolls = {
     for(let ship of document.querySelectorAll(shipQuery)) {
       const shipName = ship.querySelector('.name').innerHTML 
         + ' N' + ship.querySelector('.serial').innerHTML
-      res += `${shipName}:\n`
-        + `Атака ##${ship.querySelector('.param.attack').innerHTML}d10##\n`
+      res += `${shipName} Атака ##${ship.querySelector('.param.attack').innerHTML}d10##\n`
     }
     if(res.length) {
       navigator.clipboard.writeText(res)
-      log('ATK rolls copied')
+      log('ATK rolls copied', res)
     }
   },
   
@@ -134,14 +144,13 @@ const formRolls = {
       const shipName = ship.querySelector('.name').innerHTML 
         + ' N' + ship.querySelector('.serial').innerHTML
       const shieldNum = +ship.querySelector('.shield.curr').innerHTML
-      res += `${shipName}:\n`
-        + `Защита ##${ship.querySelector('.param.defence').innerHTML}d10##\n`
+      res += `${shipName} Защита ##${ship.querySelector('.param.defence').innerHTML}d10##\n`
         // уклонение
-        + (shieldNum>0 ? `Щит ##${shieldNum}d10##\n` : '')
+        + (shieldNum>0 ? `${shipName} Щит ##${shieldNum}d10##\n` : '')
     }
     if(res.length) {
       navigator.clipboard.writeText(res)
-      log('DEF rolls copied')
+      log('DEF rolls copied', res)
     }
   },
 }

@@ -143,7 +143,7 @@
 </head>
 
 <body>
-  <button id="home_btn" style="position: fixed;top: 8px;right: 8px;" onclick="location.href='index.html'">HOME</button>
+  <button id="home_btn" onclick="location.href='index.html'">HOME</button>
 
   <!-- ship_template -->
 
@@ -156,9 +156,9 @@
           <span class="parent" parent="" hidden></span>
           <span hidden class="side"></span>
           &nbsp;
-          <span style="float: right;" title="remove"        class="no_select"
+          <span style="float: right;" title="remove"        class="no_select b_remove"
           onclick="this.parentNode.parentNode.parentNode.parentNode.remove()">X</span>
-          <span style="float: right;" title="add to battle" class="no_select"
+          <span style="float: right;" title="add to battle" class="no_select b_add_to_battle"
           onclick="addShipToBattle(this.parentNode.querySelector('.id').innerText)">+&nbsp;&nbsp;</span>
           <br>
           <div class="name can_edit">Name</div>

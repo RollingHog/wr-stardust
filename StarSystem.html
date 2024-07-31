@@ -5,9 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ИвТ - Генератор звёздной системы</title>
+  <link rel="stylesheet" href="src/common.css">
 </head>
 <body>
-  <button id="home_btn" style="position: fixed;top: 8px;right: 8px;" onclick="location.href='index.html'">HOME</button>
+  <button id="home_btn" onclick="location.href='index.html'">HOME</button>
   <div id="el_GUI" onkeydown=" event.key === 'Enter' ? el_ss_start.click() : null ">
     Click this to copy & generate:
     <code onclick="navigator.clipboard.writeText(this.innerText)">
