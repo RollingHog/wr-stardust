@@ -64,6 +64,13 @@ const onAddShipTemplate = {
     nextId++
 
     shipT.querySelector('.image').innerHTML = `<img src="assets/ships/${size}.png">`
+
+    if(size > 0) {
+      // its not a planet
+      shipT.querySelector('.hp.curr').innerHTML = size
+      shipT.querySelector('.hp.max').innerHTML = size
+    }
+    
     shipT.hidden = false
     addShipListeners(shipT)
     if(!isRight) {
