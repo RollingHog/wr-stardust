@@ -1819,10 +1819,16 @@ const playerPost = {
     HTMLUtils.openModal('selected_tech')
   },
   extractRolls(text) {
-    const res = [...text.matchAll(/([^\nd]*)\d+d10: \((\d+(?: \+ \d+){0,20})\) = \d+([^\n]*)/g)]
+    const L = {
+      before: 1,
+      edges: 2,
+      rolls: 3,
+      after: 3,
+    }
+    const res = [...text.matchAll(/([^\nd]*)\d+d(\d{1,2}0): \((\d+(?: \+ \d+){0,20})\) = \d+([^\n]*)/g)]
       .map( e => {
-        const s = (e[1].length ? e[1] : e[3]).trim()
-        const treshold = [...(e[1] + e[3]).matchAll(/Сложность:? ?(\d+)/gi)]
+        const s = (e[L.before].length ? e[L.before] : e[L.after]).trim()
+        const treshold = [...(e[L.before] + e[L.after]).matchAll(/Сложность:? ?(\d+)/gi)]
 
         const isExp = s.search(/опыт /i)
         if(isExp === 0) {
@@ -1840,9 +1846,10 @@ const playerPost = {
             .replace(/,? ?Сложность:? ?\d+/gi,'')
             .replace(/[- :]+$/g,'')
             .trim(), 
-          rolls: e[2], 
-          rawRolls: e[2],
-          treshold: treshold.length ? +treshold[0][1] : null, 
+          rolls: e[L.rolls], 
+          rawRolls: e[L.rolls],
+          treshold: treshold.length ? +treshold[0][1] : null,
+          edges: +e[L.edges], 
           index: e.index, 
         }
       })
