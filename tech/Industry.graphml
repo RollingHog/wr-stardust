@@ -235,10 +235,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1181.8901148188015" y="525.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="259.216796875" x="0.2666015625" xml:space="preserve" y="-0.40234375">Орбитальное производство
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="196.2109375" x="31.76953125" xml:space="preserve" y="-0.40234375">Орбитальное производство
 Сложность: 3
-Эффект: +1 свободный куб, :любой корабль
-размера 3+ может колонизировать другие ЗС<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: +1 свободный куб,
+:можно колонизировать другие ЗС<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -1615,9 +1615,9 @@
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="187.251953125" x="36.2490234375" xml:space="preserve" y="-0.40234374999994316">Теория досветовой колонизации
-Сложность: 2
+Сложность: 2, :корабль 2+
 Эффект: Наука +2,
-:колонии на других планетах ЗС<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+:колонии на планетах своей ЗС<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -1628,10 +1628,10 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1464.6864834530606" y="840.9999999999999"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="188.1953125" x="35.77734375" xml:space="preserve" y="-0.40234375">Хабитат
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="188.51171875" x="35.619140625" xml:space="preserve" y="-0.40234375">Хабитат
 Сложность: 4, ресурсы(2)
-Эффект: хабитат, автономность,
-2 слота, +1 свободный куб<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: хабитат, 2 слота,
+автономность, +1 свободный куб<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="octagon"/>
         </y:ShapeNode>
       </data>
@@ -1655,34 +1655,6 @@
     <node id="n124">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1464.6864834530606" y="629.9999999999999"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="221.83984375" x="18.955078125" xml:space="preserve" y="-0.40234375">Колонист
-Сложность: 4
-Эффект: звездолёт, 0 слотов, :мирный
-Скорость 0.5, :колонизация<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="octagon"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n125">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1464.6864834530606" y="524.9999999999999"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.69140625" x="19.529296875" xml:space="preserve" y="-0.40234375">Колониальная база
-Сложность: 3, :повторяемое, :сброс
-Эффект: :создаёт колонию на планете
- в своей ЗС<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="ellipse"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n126">
-      <data key="d6">
-        <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="892.1401148188015" y="1052.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
@@ -1694,7 +1666,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n127">
+    <node id="n125">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="-273.2117008640688" y="1157.0"/>
@@ -1708,7 +1680,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n128">
+    <node id="n126">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="20.973448152134893" y="945.9999999999999"/>
@@ -1721,7 +1693,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n129">
+    <node id="n127">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="20.973448152134893" y="418.99999999999994"/>
@@ -1732,6 +1704,20 @@
 тех. Общеколониальные программы
 Эффект: +6 кубов к ветви "Добыча"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n128">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="1464.6864834530606" y="525.0"/>
+          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="212.634765625" x="23.5576171875" xml:space="preserve" y="-0.40234375">Колониальный модуль
+Сложность: 3
+Эффект: :позволяет основать новую 
+колонию, :тратится при основании<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="fatarrow"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -2605,7 +2591,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e87" source="n128" target="n114">
+    <edge id="e87" source="n126" target="n114">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2755,7 +2741,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e102" source="n121" target="n125">
+    <edge id="e102" source="n21" target="n123">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2765,7 +2751,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e103" source="n16" target="n124">
+    <edge id="e103" source="n28" target="n124">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2775,7 +2761,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e104" source="n21" target="n123">
+    <edge id="e104" source="n92" target="n125">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2785,7 +2771,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e105" source="n28" target="n126">
+    <edge id="e105" source="n19" target="n126">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2795,7 +2781,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e106" source="n92" target="n127">
+    <edge id="e106" source="n126" target="n92">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2805,7 +2791,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e107" source="n19" target="n128">
+    <edge id="e107" source="n92" target="n34">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2815,7 +2801,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e108" source="n128" target="n92">
+    <edge id="e108" source="n125" target="n90">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2825,7 +2811,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e109" source="n92" target="n34">
+    <edge id="e109" source="n11" target="n127">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2835,7 +2821,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e110" source="n127" target="n90">
+    <edge id="e110" source="n127" target="n15">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2845,7 +2831,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e111" source="n11" target="n129">
+    <edge id="e111" source="n15" target="n22">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2855,17 +2841,8 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e112" source="n129" target="n15">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e113" source="n15" target="n22">
+    <edge id="e112" source="n121" target="n128">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
