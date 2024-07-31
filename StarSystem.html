@@ -7,7 +7,7 @@
   <title>ИвТ - Генератор звёздной системы</title>
 </head>
 <body>
-  <div id="el_GUI">
+  <div id="el_GUI" onkeydown=" event.key === 'Enter' ? el_ss_start.click() : null ">
     Click this to copy & generate:
     <code onclick="navigator.clipboard.writeText(this.innerText)">
       STAR SYSTEM GENERATOR
@@ -26,7 +26,7 @@
       <option value="giant">giant</option>
     </select>
     Size <select id="el_sp_size"></select>
-    <button onclick="StarSystemGenerator.start()" accesskey="i">Initiate generation</button>
+    <button id="el_ss_start" onclick="StarSystemGenerator.start()" accesskey="i">Start generation</button>
   </div>
   <style>
     #el_canvas {
