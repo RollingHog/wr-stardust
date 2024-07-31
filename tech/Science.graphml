@@ -17,19 +17,6 @@
     <node id="n0">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-242.05819813419447" y="1265.4324263674614"/>
-          <y:Fill color="#99CCFF" transparent="false"/>
-          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="129.90625" x="64.921875" xml:space="preserve" y="6.9482421875">Теория немыслимого
-Сложность: 6
-Эффект: Аномалия +4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="rectangle"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n1">
-      <data key="d6">
-        <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="333.32552027269463" y="1357.4324263674612"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
@@ -40,7 +27,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n2">
+    <node id="n1">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-242.05819813419447" y="1173.4324263674614"/>
@@ -53,7 +40,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n3">
+    <node id="n2">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.1744797273053" y="805.4324263674615"/>
@@ -66,7 +53,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n4">
+    <node id="n3">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="713.4324263674615"/>
@@ -79,7 +66,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n5">
+    <node id="n4">
       <data key="d5" xml:space="preserve"><![CDATA["На данный момент движение по ул. Козлова одностороннее. На проспекте Земли на движение к центру выделено две встречных полосы..."]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -93,7 +80,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n6">
+    <node id="n5">
       <data key="d5" xml:space="preserve"><![CDATA[Гоголы? Где?]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -108,7 +95,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n7">
+    <node id="n6">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="1449.4324263674614"/>
@@ -122,7 +109,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n8">
+    <node id="n7">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="1265.4324263674614"/>
@@ -135,7 +122,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n9">
+    <node id="n8">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269469" y="989.4324263674615"/>
@@ -148,7 +135,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n10">
+    <node id="n9">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="333.3255202726947" y="1265.4324263674612"/>
@@ -162,7 +149,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n11">
+    <node id="n10">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="45.63366106925011" y="1173.4324263674612"/>
@@ -175,7 +162,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n12">
+    <node id="n11">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-242.05819813419447" y="989.4324263674615"/>
@@ -188,7 +175,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n13">
+    <node id="n12">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1494.242186939361" y="989.4324263674614"/>
@@ -201,7 +188,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n14">
+    <node id="n13">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="1204.492186939361" y="897.4324263674615"/>
@@ -214,7 +201,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n15">
+    <node id="n14">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269463" y="805.4324263674615"/>
@@ -228,7 +215,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n16">
+    <node id="n15">
       <data key="d5" xml:space="preserve"><![CDATA["Световой конус Власти… Волна реструктуризации пространства на уровне планковских длин.
 Единственный способ ее остановить - единовременно свернуть в Сингулярность уже преобразованное пространство. 
 На начальном этапе для этого достаточно энергии одной батарейки. 
@@ -245,7 +232,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n17">
+    <node id="n16">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.17447972730525" y="69.43242636746147"/>
@@ -258,7 +245,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n18">
+    <node id="n17">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="337.7606692888984" y="69.43242636746147"/>
@@ -272,7 +259,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n19">
+    <node id="n18">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="337.7606692888984" y="437.43242636746146"/>
@@ -286,7 +273,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n20">
+    <node id="n19">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="345.43242636746146"/>
@@ -299,7 +286,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n21">
+    <node id="n20">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="529.4324263674615"/>
@@ -312,7 +299,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n22">
+    <node id="n21">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.575520272694604" y="621.4324263674615"/>
@@ -325,7 +312,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n23">
+    <node id="n22">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="1449.4324263674614"/>
@@ -336,7 +323,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n24">
+    <node id="n23">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="1357.4324263674614"/>
@@ -347,7 +334,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n25">
+    <node id="n24">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="1265.4324263674614"/>
@@ -358,7 +345,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n26">
+    <node id="n25">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="1173.4324263674614"/>
@@ -369,7 +356,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n27">
+    <node id="n26">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="1081.4324263674614"/>
@@ -380,7 +367,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n28">
+    <node id="n27">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="989.4324263674615"/>
@@ -391,7 +378,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n29">
+    <node id="n28">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="897.4324263674615"/>
@@ -402,7 +389,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n30">
+    <node id="n29">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="805.4324263674615"/>
@@ -413,7 +400,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n31">
+    <node id="n30">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="713.4324263674615"/>
@@ -424,7 +411,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n32">
+    <node id="n31">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="621.4324263674615"/>
@@ -435,7 +422,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n33">
+    <node id="n32">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="529.4324263674615"/>
@@ -446,7 +433,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n34">
+    <node id="n33">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="437.43242636746146"/>
@@ -457,7 +444,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n35">
+    <node id="n34">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="345.43242636746146"/>
@@ -468,7 +455,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n36">
+    <node id="n35">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="253.43242636746146"/>
@@ -479,7 +466,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n37">
+    <node id="n36">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="161.43242636746146"/>
@@ -490,7 +477,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n38">
+    <node id="n37">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-346.0405406644748" y="70.06263806462674"/>
@@ -501,7 +488,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n39">
+    <node id="n38">
       <data key="d5" xml:space="preserve"><![CDATA[Некоторые эксперименты в реальной, кхм, реальности тяжеловато даются даже цивилизациям второго типа. Особенно это касается теологических экспериментов.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -515,7 +502,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n40">
+    <node id="n39">
       <data key="d5" xml:space="preserve"><![CDATA[А также уничтожать струны не больше этой длины. Но - тссс!]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -530,7 +517,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n41">
+    <node id="n40">
       <data key="d5" xml:space="preserve"><![CDATA[максимальная скорость вычислений  
 в материальной вселенной]]></data>
       <data key="d6">
@@ -545,7 +532,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n42">
+    <node id="n41">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222315" y="1357.4324263674612"/>
@@ -558,7 +545,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n43">
+    <node id="n42">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="161.43242636746146"/>
@@ -571,7 +558,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n44">
+    <node id="n43">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222315" y="1081.4324263674612"/>
@@ -585,7 +572,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n45">
+    <node id="n44">
       <data key="d5" xml:space="preserve"><![CDATA[Вы же знаете что делаете, правда?]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -599,7 +586,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n46">
+    <node id="n45">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="529.4324263674615"/>
@@ -613,7 +600,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n47">
+    <node id="n46">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="45.63366106925011" y="1265.4324263674614"/>
@@ -626,7 +613,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n48">
+    <node id="n47">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-247.13281306063857" y="1357.4324263674614"/>
@@ -640,7 +627,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n49">
+    <node id="n48">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="437.43242636746146"/>
@@ -653,21 +640,22 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n50">
+    <node id="n49">
       <data key="d5" xml:space="preserve"><![CDATA[Гоголы? Где?]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="1449.4324263674614"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.80859375" x="47.970703125" xml:space="preserve" y="6.9482421875">Мёртвые души
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.80859375" x="47.970703125" xml:space="preserve" y="-0.40234375">Мёртвые души
 Сложность: 6, осуждение (1)
-Эффект: Наука +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: 1 великий человек,
+немедленно<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n51">
+    <node id="n50">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="161.43242636746146"/>
@@ -680,7 +668,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n52">
+    <node id="n51">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="333.3255202726947" y="1173.4324263674614"/>
@@ -694,7 +682,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n53">
+    <node id="n52">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="253.43242636746146"/>
@@ -707,7 +695,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n54">
+    <node id="n53">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269469" y="1081.4324263674614"/>
@@ -720,7 +708,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n55">
+    <node id="n54">
       <data key="d5" xml:space="preserve"><![CDATA[Черные лебеди - нахуй! Совсем!]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -734,7 +722,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n56">
+    <node id="n55">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="914.7421869393612" y="69.43242636746147"/>
@@ -747,7 +735,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n57">
+    <node id="n56">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="897.4324263674615"/>
@@ -760,7 +748,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n58">
+    <node id="n57">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="805.4324263674615"/>
@@ -773,7 +761,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n59">
+    <node id="n58">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1494.242186939361" y="713.4324263674615"/>
@@ -787,7 +775,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n60">
+    <node id="n59">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="621.4324263674615"/>
@@ -800,7 +788,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n61">
+    <node id="n60">
       <data key="d5" xml:space="preserve"><![CDATA["Cogito. Ergo sum."
  - Первые слова ИИ "Голем"]]></data>
       <data key="d6">
@@ -815,7 +803,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n62">
+    <node id="n61">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.17447972730525" y="437.43242636746146"/>
@@ -829,20 +817,20 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n63">
+    <node id="n62">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.1744797273053" y="713.4324263674615"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="174.19140625" x="42.779296875" xml:space="preserve" y="6.9482421875">Генератор антиматерии
-Сложность: 4, электростанция
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="147.2734375" x="56.23828125" xml:space="preserve" y="6.9482421875">Генератор антиматерии
+Сложность: 4
 Эффект: Антиматерия +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n64">
+    <node id="n63">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="546.0231843171296" x="1207.9690026222315" y="-21.307150238207967"/>
@@ -853,7 +841,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n65">
+    <node id="n64">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="546.0231843171296" x="631.9458183051021" y="-21.307150238207967"/>
@@ -864,7 +852,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n66">
+    <node id="n65">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="839.25" x="-246.1744797273053" y="-21.307150238207967"/>
@@ -875,7 +863,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n67">
+    <node id="n66">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.17447972730525" y="345.43242636746146"/>
@@ -888,7 +876,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n68">
+    <node id="n67">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="337.7606692888983" y="713.4324263674615"/>
@@ -901,7 +889,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n69">
+    <node id="n68">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="1357.4324263674614"/>
@@ -914,7 +902,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n70">
+    <node id="n69">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="338.71900262223187" y="345.43242636746146"/>
@@ -928,7 +916,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n71">
+    <node id="n70">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.17447972730525" y="161.43242636746146"/>
@@ -941,7 +929,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n72">
+    <node id="n71">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="69.43242636746147"/>
@@ -954,7 +942,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n73">
+    <node id="n72">
       <data key="d5" xml:space="preserve"><![CDATA[Реально полное. И возможность отвесить подзатыльник на расстоянии в десяток парсеков.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -968,7 +956,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n74">
+    <node id="n73">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="1357.4324263674612"/>
@@ -981,7 +969,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n75">
+    <node id="n74">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.1744797273053" y="529.4324263674615"/>
@@ -994,7 +982,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n76">
+    <node id="n75">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="337.7606692888984" y="529.4324263674615"/>
@@ -1007,7 +995,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n77">
+    <node id="n76">
       <data key="d5" xml:space="preserve"><![CDATA[Свободный и мгновенный доступ к мыслям и размышлениям всех остальных через нейроинтерфейсы; небывалое чувство общности и взаимопонимания. Как-то так это всё описывают.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1022,7 +1010,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n78">
+    <node id="n77">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="334.28385360602795" y="989.4324263674615"/>
@@ -1036,7 +1024,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n79">
+    <node id="n78">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="1265.4324263674612"/>
@@ -1049,7 +1037,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n80">
+    <node id="n79">
       <data key="d5" xml:space="preserve"><![CDATA[На данном этапе есть все технические возможности для жизни человека в одной только виртуальной вселенной, отдельно от любого тела, кроме компьютерных суперкластеров.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1063,7 +1051,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n81">
+    <node id="n80">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="1173.4324263674612"/>
@@ -1076,7 +1064,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n82">
+    <node id="n81">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-242.05819813419447" y="1081.4324263674614"/>
@@ -1090,7 +1078,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n83">
+    <node id="n82">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.575520272694604" y="529.4324263674615"/>
@@ -1103,7 +1091,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n84">
+    <node id="n83">
       <data key="d5" xml:space="preserve"><![CDATA[Он функционирует на основе квантовой механики на фемтомасштабе, позволяя использовать максимальную вычислительную мощность на единицу пространства.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1117,7 +1105,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n85">
+    <node id="n84">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="1173.4324263674612"/>
@@ -1130,7 +1118,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n86">
+    <node id="n85">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="989.4324263674614"/>
@@ -1143,7 +1131,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n87">
+    <node id="n86">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="989.4324263674614"/>
@@ -1156,7 +1144,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n88">
+    <node id="n87">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="1081.4324263674612"/>
@@ -1169,7 +1157,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n89">
+    <node id="n88">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="621.4324263674615"/>
@@ -1182,7 +1170,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n90">
+    <node id="n89">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269469" y="897.4324263674615"/>
@@ -1195,7 +1183,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n91">
+    <node id="n90">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="334.28385360602795" y="897.4324263674615"/>
@@ -1209,7 +1197,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n92">
+    <node id="n91">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="334.28385360602795" y="805.4324263674615"/>
@@ -1222,7 +1210,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n93">
+    <node id="n92">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="713.4324263674615"/>
@@ -1235,7 +1223,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n94">
+    <node id="n93">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="805.4324263674614"/>
@@ -1248,7 +1236,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n95">
+    <node id="n94">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="805.4324263674615"/>
@@ -1261,7 +1249,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n96">
+    <node id="n95">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.575520272694604" y="713.4324263674615"/>
@@ -1274,7 +1262,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n97">
+    <node id="n96">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="621.4324263674615"/>
@@ -1287,7 +1275,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n98">
+    <node id="n97">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="529.4324263674615"/>
@@ -1301,7 +1289,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n99">
+    <node id="n98">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="529.4324263674615"/>
@@ -1314,7 +1302,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n100">
+    <node id="n99">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="437.43242636746146"/>
@@ -1327,7 +1315,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n101">
+    <node id="n100">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="437.43242636746146"/>
@@ -1340,7 +1328,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n102">
+    <node id="n101">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269463" y="437.43242636746146"/>
@@ -1353,7 +1341,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n103">
+    <node id="n102">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="345.43242636746146"/>
@@ -1366,7 +1354,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n104">
+    <node id="n103">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269463" y="345.43242636746146"/>
@@ -1379,7 +1367,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n105">
+    <node id="n104">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="437.43242636746146"/>
@@ -1392,7 +1380,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n106">
+    <node id="n105">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="345.43242636746146"/>
@@ -1405,7 +1393,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n107">
+    <node id="n106">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="338.7190026222319" y="253.43242636746146"/>
@@ -1418,7 +1406,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n108">
+    <node id="n107">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-246.17447972730525" y="253.43242636746146"/>
@@ -1431,7 +1419,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n109">
+    <node id="n108">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="345.43242636746146"/>
@@ -1444,7 +1432,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n110">
+    <node id="n109">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="253.43242636746146"/>
@@ -1457,7 +1445,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n111">
+    <node id="n110">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="253.43242636746146"/>
@@ -1470,7 +1458,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n112">
+    <node id="n111">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.57552027269463" y="253.43242636746146"/>
@@ -1483,7 +1471,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n113">
+    <node id="n112">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="161.43242636746146"/>
@@ -1497,7 +1485,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n114">
+    <node id="n113">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="161.43242636746146"/>
@@ -1510,7 +1498,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n115">
+    <node id="n114">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="631.9458183051021" y="69.43242636746147"/>
@@ -1523,7 +1511,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n116">
+    <node id="n115">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="43.57552027269466" y="69.43242636746147"/>
@@ -1536,7 +1524,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n117">
+    <node id="n116">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="43.57552027269463" y="161.43242636746146"/>
@@ -1549,7 +1537,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n118">
+    <node id="n117">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-249.65129541017558" y="897.4324263674614"/>
@@ -1562,7 +1550,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n119">
+    <node id="n118">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="333.32552027269475" y="1081.4324263674616"/>
@@ -1575,7 +1563,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n120">
+    <node id="n119">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="45.63366106925011" y="1357.4324263674614"/>
@@ -1588,7 +1576,33 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e0" source="n116" target="n117">
+    <node id="n120">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="333.3255202726947" y="1449.4324263674614"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
+          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="129.90625" x="64.921875" xml:space="preserve" y="6.9482421875">Теория немыслимого
+Сложность: 7
+Эффект: Аномалия +4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n121">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="-246.88381717046275" y="1265.4324263674614"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
+          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="147.12109375" x="56.314453125" xml:space="preserve" y="6.9482421875">Гиперплазма
+Сложность: 6
+Эффект: Гиперплазма +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e0" source="n115" target="n116">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1598,7 +1612,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e1" source="n115" target="n114">
+    <edge id="e1" source="n114" target="n113">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1608,7 +1622,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e2" source="n72" target="n113">
+    <edge id="e2" source="n71" target="n112">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1618,7 +1632,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e3" source="n114" target="n111">
+    <edge id="e3" source="n113" target="n110">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1628,7 +1642,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e4" source="n117" target="n112">
+    <edge id="e4" source="n116" target="n111">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1638,7 +1652,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e5" source="n113" target="n110">
+    <edge id="e5" source="n112" target="n109">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1648,7 +1662,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e6" source="n114" target="n107">
+    <edge id="e6" source="n113" target="n106">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1658,7 +1672,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e7" source="n110" target="n103">
+    <edge id="e7" source="n109" target="n102">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1668,7 +1682,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e8" source="n103" target="n101">
+    <edge id="e8" source="n102" target="n100">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1678,7 +1692,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e9" source="n111" target="n106">
+    <edge id="e9" source="n110" target="n105">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1688,7 +1702,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e10" source="n106" target="n105">
+    <edge id="e10" source="n105" target="n104">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1698,7 +1712,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e11" source="n112" target="n104">
+    <edge id="e11" source="n111" target="n103">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1708,7 +1722,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e12" source="n104" target="n102">
+    <edge id="e12" source="n103" target="n101">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1718,7 +1732,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e13" source="n110" target="n109">
+    <edge id="e13" source="n109" target="n108">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1728,7 +1742,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e14" source="n111" target="n109">
+    <edge id="e14" source="n110" target="n108">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1738,7 +1752,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e15" source="n109" target="n100">
+    <edge id="e15" source="n108" target="n99">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1748,7 +1762,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e16" source="n100" target="n98">
+    <edge id="e16" source="n99" target="n97">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1758,7 +1772,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e17" source="n98" target="n60">
+    <edge id="e17" source="n97" target="n59">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1768,7 +1782,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e18" source="n105" target="n99">
+    <edge id="e18" source="n104" target="n98">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1778,7 +1792,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e19" source="n87" target="n84">
+    <edge id="e19" source="n86" target="n83">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1790,7 +1804,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e20" source="n84" target="n81">
+    <edge id="e20" source="n83" target="n80">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1800,7 +1814,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e21" source="n92" target="n91">
+    <edge id="e21" source="n91" target="n90">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1810,7 +1824,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e22" source="n91" target="n78">
+    <edge id="e22" source="n90" target="n77">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1820,7 +1834,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e23" source="n88" target="n77">
+    <edge id="e23" source="n87" target="n76">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1830,7 +1844,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e24" source="n102" target="n76">
+    <edge id="e24" source="n101" target="n75">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1840,7 +1854,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e25" source="n81" target="n79">
+    <edge id="e25" source="n80" target="n78">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1850,7 +1864,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e26" source="n102" target="n75">
+    <edge id="e26" source="n101" target="n74">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1860,7 +1874,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e27" source="n91" target="n87">
+    <edge id="e27" source="n90" target="n86">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1870,7 +1884,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e28" source="n86" target="n73">
+    <edge id="e28" source="n85" target="n72">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1880,7 +1894,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e29" source="n116" target="n71">
+    <edge id="e29" source="n115" target="n70">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1890,7 +1904,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e30" source="n97" target="n93">
+    <edge id="e30" source="n96" target="n92">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1900,7 +1914,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e31" source="n93" target="n95">
+    <edge id="e31" source="n92" target="n94">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1910,7 +1924,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e32" source="n107" target="n70">
+    <edge id="e32" source="n106" target="n69">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1920,7 +1934,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e33" source="n76" target="n89">
+    <edge id="e33" source="n75" target="n88">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="34.957065718508034" ty="-15.589239091575905"/>
@@ -1930,7 +1944,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e34" source="n99" target="n89">
+    <edge id="e34" source="n98" target="n88">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1940,7 +1954,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e35" source="n117" target="n107">
+    <edge id="e35" source="n116" target="n106">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1950,7 +1964,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e36" source="n97" target="n59">
+    <edge id="e36" source="n96" target="n58">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1960,7 +1974,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e37" source="n93" target="n58">
+    <edge id="e37" source="n92" target="n57">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1970,7 +1984,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e38" source="n95" target="n57">
+    <edge id="e38" source="n94" target="n56">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1980,7 +1994,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e39" source="n115" target="n56">
+    <edge id="e39" source="n114" target="n55">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1990,7 +2004,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e40" source="n66" target="n116">
+    <edge id="e40" source="n65" target="n115">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2000,7 +2014,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e41" source="n65" target="n115">
+    <edge id="e41" source="n64" target="n114">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-143.13659215856478" sy="7.571417255760764" tx="0.0" ty="0.0"/>
@@ -2010,7 +2024,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e42" source="n64" target="n72">
+    <edge id="e42" source="n63" target="n71">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-146.61340784143522" sy="-3.0823697914401578" tx="0.0" ty="0.0"/>
@@ -2020,7 +2034,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e43" source="n114" target="n53">
+    <edge id="e43" source="n113" target="n52">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2030,7 +2044,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e44" source="n54" target="n52">
+    <edge id="e44" source="n53" target="n51">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2040,7 +2054,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e45" source="n72" target="n51">
+    <edge id="e45" source="n71" target="n50">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2050,7 +2064,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e46" source="n103" target="n49">
+    <edge id="e46" source="n102" target="n48">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2060,7 +2074,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e47" source="n101" target="n46">
+    <edge id="e47" source="n100" target="n45">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2070,7 +2084,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e48" source="n72" target="n43">
+    <edge id="e48" source="n71" target="n42">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2080,7 +2094,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e49" source="n47" target="n48">
+    <edge id="e49" source="n46" target="n47">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2090,7 +2104,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e50" source="n48" target="n40">
+    <edge id="e50" source="n47" target="n39">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2100,7 +2114,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e51" source="n102" target="n83">
+    <edge id="e51" source="n101" target="n82">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2110,7 +2124,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e52" source="n96" target="n92">
+    <edge id="e52" source="n95" target="n91">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2120,7 +2134,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e53" source="n83" target="n22">
+    <edge id="e53" source="n82" target="n21">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2130,7 +2144,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e54" source="n22" target="n96">
+    <edge id="e54" source="n21" target="n95">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2140,7 +2154,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e55" source="n112" target="n67">
+    <edge id="e55" source="n111" target="n66">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2150,7 +2164,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e56" source="n101" target="n21">
+    <edge id="e56" source="n100" target="n20">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2160,7 +2174,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e57" source="n21" target="n97">
+    <edge id="e57" source="n20" target="n96">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2170,7 +2184,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e58" source="n104" target="n62">
+    <edge id="e58" source="n103" target="n61">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2180,7 +2194,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e59" source="n22" target="n63">
+    <edge id="e59" source="n21" target="n62">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2190,7 +2204,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e60" source="n110" target="n20">
+    <edge id="e60" source="n109" target="n19">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2200,7 +2214,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e61" source="n106" target="n19">
+    <edge id="e61" source="n105" target="n18">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2210,7 +2224,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e62" source="n115" target="n18">
+    <edge id="e62" source="n114" target="n17">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2220,7 +2234,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e63" source="n96" target="n15">
+    <edge id="e63" source="n95" target="n14">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2230,7 +2244,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e64" source="n86" target="n88">
+    <edge id="e64" source="n85" target="n87">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2240,7 +2254,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e65" source="n88" target="n85">
+    <edge id="e65" source="n87" target="n84">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2250,7 +2264,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e66" source="n79" target="n74">
+    <edge id="e66" source="n78" target="n73">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2260,7 +2274,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e67" source="n61" target="n87">
+    <edge id="e67" source="n60" target="n86">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2270,7 +2284,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e68" source="n74" target="n45">
+    <edge id="e68" source="n73" target="n44">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2280,7 +2294,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e69" source="n80" target="n69">
+    <edge id="e69" source="n79" target="n68">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2290,7 +2304,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e70" source="n81" target="n80">
+    <edge id="e70" source="n80" target="n79">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2300,7 +2314,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e71" source="n85" target="n80">
+    <edge id="e71" source="n84" target="n79">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2310,7 +2324,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e72" source="n14" target="n13">
+    <edge id="e72" source="n13" target="n12">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2320,7 +2334,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e73" source="n95" target="n14">
+    <edge id="e73" source="n94" target="n13">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2330,7 +2344,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e74" source="n14" target="n86">
+    <edge id="e74" source="n13" target="n85">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2340,7 +2354,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e75" source="n15" target="n90">
+    <edge id="e75" source="n14" target="n89">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2350,7 +2364,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e76" source="n12" target="n82">
+    <edge id="e76" source="n11" target="n81">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2360,7 +2374,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e77" source="n11" target="n10">
+    <edge id="e77" source="n10" target="n9">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2370,7 +2384,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e78" source="n90" target="n9">
+    <edge id="e78" source="n89" target="n8">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2380,7 +2394,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e79" source="n9" target="n54">
+    <edge id="e79" source="n8" target="n53">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2390,7 +2404,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e80" source="n54" target="n11">
+    <edge id="e80" source="n53" target="n10">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2400,7 +2414,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e81" source="n11" target="n47">
+    <edge id="e81" source="n10" target="n46">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2410,7 +2424,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e82" source="n85" target="n8">
+    <edge id="e82" source="n84" target="n7">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2420,7 +2434,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e83" source="n8" target="n69">
+    <edge id="e83" source="n7" target="n68">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2430,7 +2444,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e84" source="n87" target="n44">
+    <edge id="e84" source="n86" target="n43">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2440,7 +2454,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e85" source="n74" target="n41">
+    <edge id="e85" source="n73" target="n40">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2450,7 +2464,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e86" source="n89" target="n5">
+    <edge id="e86" source="n88" target="n4">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2460,7 +2474,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e87" source="n94" target="n61">
+    <edge id="e87" source="n93" target="n60">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2470,7 +2484,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e88" source="n89" target="n4">
+    <edge id="e88" source="n88" target="n3">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2480,7 +2494,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e89" source="n4" target="n94">
+    <edge id="e89" source="n3" target="n93">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2490,7 +2504,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e90" source="n4" target="n55">
+    <edge id="e90" source="n3" target="n54">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2500,7 +2514,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e91" source="n80" target="n42">
+    <edge id="e91" source="n79" target="n41">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2510,7 +2524,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e92" source="n69" target="n7">
+    <edge id="e92" source="n68" target="n6">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2520,7 +2534,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e93" source="n8" target="n6">
+    <edge id="e93" source="n7" target="n5">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2530,7 +2544,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e94" source="n69" target="n50">
+    <edge id="e94" source="n68" target="n49">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2540,7 +2554,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e95" source="n85" target="n39">
+    <edge id="e95" source="n84" target="n38">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2550,7 +2564,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e96" source="n71" target="n108">
+    <edge id="e96" source="n70" target="n107">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2560,7 +2574,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e97" source="n96" target="n3">
+    <edge id="e97" source="n95" target="n2">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2570,7 +2584,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e98" source="n82" target="n2">
+    <edge id="e98" source="n81" target="n1">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2580,7 +2594,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e99" source="n90" target="n12">
+    <edge id="e99" source="n89" target="n11">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2590,7 +2604,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e100" source="n47" target="n1">
+    <edge id="e100" source="n46" target="n0">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2600,7 +2614,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e101" source="n11" target="n0">
+    <edge id="e101" source="n14" target="n117">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2610,7 +2624,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e102" source="n15" target="n118">
+    <edge id="e102" source="n8" target="n118">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2620,7 +2634,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e103" source="n9" target="n119">
+    <edge id="e103" source="n46" target="n119">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2630,7 +2644,7 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e104" source="n47" target="n120">
+    <edge id="e104" source="n119" target="n15">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2640,7 +2654,27 @@ FTL через червоточины<y:LabelModel><y:SmartNodeLabelModel distan
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e105" source="n120" target="n16">
+    <edge id="e105" source="n119" target="n120">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e106" source="n10" target="n121">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e107" source="n121" target="n47">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
