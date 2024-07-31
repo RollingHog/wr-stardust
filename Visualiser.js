@@ -136,6 +136,7 @@ const VARS = {
 
 const tech = {}
 const techData = {
+  MAX_TECH_LVL: 16,
   graphmls: {},
   badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
   levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
@@ -583,7 +584,10 @@ const Analysis = {
           // else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {}
           // // eslint-disable-next-line no-empty
           // else if(['Технология', "Слоты"].includes(k[0])) {}
-          else if(k[1] == 'суперпроект') {
+          else if(
+            k[1] == 'суперпроект'
+            || j.lvl >= techData.MAX_TECH_LVL-1
+          ) {
             tcost = 0
             break
           }
@@ -598,7 +602,7 @@ const Analysis = {
 
         // tcost<10 in case is's some superstructure
         if(Math.abs(tcost-mult)>1 && tcost>0 && tcost<10 && j.type != 'octagon') {
-          warn(i, j.name, `cost looks bad: ${tcost}->${mult}`, j)
+          log(i, j.name, `cost looks bad: ${tcost}->${mult}`, j)
           cnt++
           continue
         }
@@ -635,8 +639,7 @@ const Analysis = {
 
         if(d && mult) {
           let p = (d/mult).toFixed(1)
-          // || (p > 0.3 && p<0.7)
-          if(p>1.5) {
+          if(p>1.5 || (p > 0.3 && p<0.7)) {
             cnt++
             log(i, 'lvl', j.lvl, j.name,  j.effect[0][0], j.effect[0][1], `${d}->${mult}`, p>1?'ДОРОГО':"ДЕШЕВО")
           }
@@ -991,9 +994,9 @@ const Analysis = {
     },
 
     эффекты_на_ТУ() {
-      let TL = prompt('TL? 1-16/+')
+      let TL = prompt(`TL? 1-${techData.MAX_TECH_LVL}/+`)
       if(!TL) return
-      if(TL == '+') TL = 16
+      if(TL == '+') TL = techData.MAX_TECH_LVL
       TL = +TL
       const techs = Object.values(inverted.alltech)
         .filter(e => e.lvl <= TL )
@@ -1233,6 +1236,10 @@ const User = {
     parseDoc.drawTech(this.activePlayer, treeName)
   },
 
+  /**
+   * @param {string} playerName 
+   * @returns {TGoogleDocUserObj}
+   */
   getSavedUserData(playerName) {
     return window[VARS.PLAYERS_DATA_KEY][playerName]
   },
@@ -1448,6 +1455,15 @@ const User = {
     const userData = User.getSavedUserData(playerName)
     const effectsData = User.countAllUserEffects(userData)
 
+    // check if params in doc are bad
+    effectsData
+      .filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
+      .forEach( e => {
+        if(+userData.colonyParams[e[0]] !== +e[1]) {
+          warn(`${e[0]} ${userData.colonyParams[e[0]]} should be ${e[1]}`)
+        }
+      })
+
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong><br>
       <a target=_blank 
@@ -1651,7 +1667,7 @@ const parseDoc = {
 
     let colonyParams = Array.from(obj.Параметры.children[0].rows)
       .slice(1)
-      .map(e => [e.children[0].innerText.trim(),e.children[1].innerText.trim()])
+      .map(e => [e.children[0].innerText.trim().replace('Свободные кубы', 'Свободный'),e.children[1].innerText.trim()])
       colonyParams = Object.fromEntries(colonyParams)
 
     let additionalParamsRaw = Array.from(obj['Дополнительные параметры'].children[0].rows)
@@ -2497,7 +2513,7 @@ function listParam(param = 'costClear', fuckMilitary = true) {
   res = res.slice(0, -1)
   res += '\n'
   // eslint-disable-next-line no-unused-vars
-  for (let i in range(16)) {
+  for (let i in range(techData.MAX_TECH_LVL)) {
     for (let j in t) {
       res += (t[j].shift() || 0) + '\t'
     }
