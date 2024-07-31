@@ -85,6 +85,16 @@ const VARS = {
     // Планета вдвое больше Земли
     6: 'Строительство -1, Пуски -1, Ветвь "Физика пространства" +1',
   },
+  hulls: {
+    "пехота": ``,
+    "танки": `Защита +2, Скорость +1`,
+    "титан": `Защита +3, Щит +1, ужас`,
+    "нанорой": `Регенерация 5, нано, ужас`,
+    "звездолёт": ``,
+    "хабитат": `Слоупок 1`,
+    "наземная база": `неподвижна`,
+    "космическая база": `неподвижна`,
+  },
   colorToParameterType: {
     '#FF0000': 'Производство',
     '#00FF00': 'Общество',
@@ -250,6 +260,7 @@ async function Init() {
       HTMLUtils.makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
       HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
       HTMLUtils.makeElDraggable('el_help', 'el_help_header')
+      HTMLUtils.makeElDraggable('el_unitcreator_wrapper', 'el_unitcreator_header')
 
       console.timeEnd('full load   ')
     })
@@ -356,7 +367,12 @@ const HTMLUtils = {
 
   registerModalPath(name, subName) {
     if(VARS.IS_LOCAL) {
-      location.hash = `${name}${subName ? `__${subName}` : ''}`
+      if(!name) {
+        location.hash = ''
+        return
+      }
+
+      location.hash += `${location.hash?'#':''}${name}${subName ? `__${subName}` : ''}`
     }
   },
 
@@ -399,6 +415,7 @@ const HTMLUtils = {
     // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
 
     document.body.addEventListener('keyup', function(evt) {
+      if(!evt.code) return
       if(ignoreKeys.includes(evt.key)) return 
       const keyComb = 
         (evt.altKey ? 'Alt ' : '')
@@ -595,12 +612,23 @@ const Analysis = {
       .filter( e => e)
       .map(e =>e.split('__'))
 
-    for(let i of path) {
-      if(i[0] === 'report') {
+    location.hash = ''
+
+    const modals = {
+      'report': i1 => {
         Analysis.drawReportsList()
-        if(i[1]) {
-          Analysis.openReport(i[1])
+        if(i1) {
+          Analysis.openReport(i1)
         }
+      },
+      'battlecalc': _ => UnitCreator.open()
+    }
+
+    for(let i of path) {
+      if(modals[i[0]]) {
+        modals[i[0]](i[1])
+      } else {
+        console.warn('Unknown modal: ', i[0])
       }
     }
   },
@@ -660,6 +688,11 @@ const Analysis = {
       .replace(/: /g, ' ')
   },
 
+  listModuleObjs() {
+    return Object.values(inverted.alltech)
+      .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
+  },
+
   Reports: {
    эффекты_тех() {
       let filter = [].concat(
@@ -671,6 +704,7 @@ const Analysis = {
         KEYWORDS.MODULE_PROPS,
         KEYWORDS.UNIT_TYPES,
         KEYWORDS.MILITARY_PARAMS,
+        KEYWORDS.MILITARY_PARAMS_ADDITIONAL,
         ["Слоты", "Тип юнита", "Тип урона", "особое"],
       )
       let result = Object.values(inverted.alltech)
@@ -792,8 +826,7 @@ const Analysis = {
 
     список_модулей() {
       Analysis.reportTable(Object.fromEntries(
-        Object.values(inverted.alltech)
-          .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
+          Analysis.listModuleObjs()
           .map(e => [e.name, {
             Цена: e.cost[0][1],
             "Свойства": Analysis.formatReportEffects(e.effect),
@@ -931,6 +964,20 @@ function drawTree(tree_name) {
   User.drawActiveUser(tree_name)
 }
 
+const TechUtils = {
+  createEffectsTable(effectsListArr) {
+    return '<table><tbody><tr>' +
+    effectsListArr.map(e => 
+      `<td>${e[0]}</td>` +
+      `<td>${e[1]==0?' ':`${+e[1]>=0?'&nbsp;':'-'}${e[1]}`}`
+    ).join('</tr><tr>') +
+    '</tr>'
+  },
+  byName(techName) {
+    return inverted.alltech[techName.replace(/ \([^)]+\)/,'')]
+  },
+}
+
 const User = {
 
   activePlayer: null,
@@ -954,10 +1001,28 @@ const User = {
       .filter(e => typeof techData.badCells[treeName].find(a => a.id == e.id) === 'undefined')
 
     let list = tech_list.concat(proj_list)
+    const bad = {
+      enemy: list
+        .filter( e => e.search(/\(.*чужое/) != -1)
+        .map(e => e.replace(/ \([^)]+\)/,'')),
+      broken: list
+        .filter( e => e.search(/\(.*сломано/) != -1)
+        .map(e => e.replace(/ \([^)]+\)/,'')),
+    }
+    log(bad)
+    list = list.map(e => e.replace(/ \([^)]+\)/,''))
 
     for (let i of targets) {
-      const pos_tech = list.indexOf(tech[treeName][i.id].name)
+      const name = tech[treeName][i.id].name
+      const pos_tech = list.indexOf(name)
       if (pos_tech != -1) {
+        if(bad.enemy.includes(name)) {
+          i.setAttribute('fill', 'red')
+          continue
+        } else if(bad.broken.includes(name)) {
+          i.setAttribute('fill', 'salmon')
+          continue
+        }
         res.push(i.id)
         list.splice(pos_tech, 1)
       } else if (tech[treeName][i.id].fullText.includes('базовое')) {
@@ -968,8 +1033,6 @@ const User = {
     }
 
     // if (list.length > 0) log(`unrecognized tokens for ${treeName}: `, list)
-
-    return list
   },
 
   /**
@@ -1074,7 +1137,7 @@ const User = {
    * @param {[string, any][]} effectsListArr 
    * @returns 
    */
-  createTechEffectsTable(effectsListArr) {
+  createUserTechEffectsTable(effectsListArr) {
     effectsListArr = effectsListArr
       .filter( e => {
         return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
@@ -1093,12 +1156,7 @@ const User = {
       }) 
     // t = [].concat(t.main, t.additional)
 
-    return '<table><tbody><tr>' +
-      effectsListArr.map(e => 
-        `<td>${e[0]}</td>` +
-        `<td>${e[1]==0?' ':`${+e[1]>=0?'&nbsp;':'-'}${e[1]}`}`
-      ).join('</tr><tr>') +
-      '</tr>'
+    return TechUtils.createEffectsTable(effectsListArr)
   },
 
   drawUserStat(playerName) {
@@ -1108,7 +1166,7 @@ const User = {
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong>
-      <br>` + this.createTechEffectsTable(data)
+      <br>` + this.createUserTechEffectsTable(data)
   },
 }
 
@@ -1346,8 +1404,11 @@ const parseDoc = {
       techTable: tech5TableToObj(obj['Изученные технологии'].children[0]),
       colonyParams,
       additionalParams,
-      buildings: splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
-      orbital: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
+      buildings: [].concat(
+        splitFilter(obj.Здания.children[0].rows[0].children[1].innerText),
+        splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
+      ),
+      orbital: splitFilter(obj.Здания.children[0].rows[2].children[1].innerText),
       greatPeople,
       uniqueResources,
       localProjs: tech5TableToObj(obj['Планетарные проекты'].children[0]),
@@ -1395,17 +1456,22 @@ const playerPost = {
     if(!p) return
     playerPost.parse(p)
   },
+  extractRolls(text) {
+    const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)/g)]
+      .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2] }))
+      .map(({text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls }))
+    return res
+  },
   parse(text) {
-    let requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d+){0,10})\)/g)]
-      .map(e=>({text: (e[1].length ? e[1] : '').trim(), rolls: e[2], rawRolls: e[2]}))
-      .map(( {text, rolls, rawRolls} ) => ( { text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), rolls, rawRolls }))
+    let requests = this.extractRolls(text)
 
     for(let i of requests) {
       let rolls = {
         sum: 0,
         critfails: 0,
         wins: 0,
-        critwins: 0
+        critwins: 0,
+        delta: 0
       }
       for(let j of i.rolls.split(' + ')) {
         rolls.sum += 1
@@ -1416,6 +1482,7 @@ const playerPost = {
         }
         if(+j>4) rolls.wins += 1
       }
+      rolls.delta = rolls.critwins * 2 + rolls.wins
       i.rolls = rolls
     }
 
@@ -1423,7 +1490,8 @@ const playerPost = {
       sum: null,
       critfails: null,
       wins: null,
-      critwins: null
+      critwins: null,
+      delta: null,
     }, rawRolls: null }))
     requests = requests.concat(bonusThings)
     const rollsTotal = requests.reduce( (sum, e) => sum + +e.rolls.sum,0)
@@ -1439,7 +1507,7 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, ''].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, '', e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta].join('</td><td>') + '</td>' + 
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
@@ -1450,6 +1518,7 @@ const playerPost = {
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.wins,0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)}</td>
       <td>${rollsTotal}</td>
+      <td></td>
     </tr>
     <tr>
       <td colspan=2>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
@@ -1507,38 +1576,33 @@ const playerPost = {
             e.children[pos.price].innerText = inverted.alltech[e.children[pos.name].innerText].cost[0][1]
           }
 
-          if (sum < +e.children[pos.price].innerText
-            && e.children[pos.wins].innerText !== ''
-          ) {
-            e.style.backgroundColor = 'goldenrod'
-            result = null
-          } else {
-            result = e.children[pos.name].innerText
-          }
+          result = e.children[pos.name].innerText
         } else {
-          console.log(e.children[pos.name].innerText)
+          console.log('Не найдено', e.children[pos.name].innerText)
           e.children[pos.name].style.backgroundColor = 'cyan'
           e.children[pos.name].title = 'Название технологии не найдено'
+          result = null
+        }
 
-          if (sum < +e.children[pos.price].innerText
-            && e.children[pos.wins].innerText !== ''
-          ) {
-            e.style.backgroundColor = 'goldenrod'
-          }
+        if (sum < +e.children[pos.price].innerText
+          && e.children[pos.wins].innerText !== ''
+        ) {
+          e.style.backgroundColor = 'goldenrod'
           result = null
         }
         e.children[pos.delta].innerText = sum - +e.children[pos.price].innerText
         if(+e.children[pos.delta].innerText > 1) {
-          e.children[pos.delta].style.backgroundColor = 'lawngreen'
+          e.children[pos.delta].style.backgroundColor = 'aquamarine'
         }
         return result
       })
       .filter(e => e)
-
+    
+    // getEl('el_selected_tech_list').children[0].tBodies[1].rows[0].children[pos.delta-1].innerText = summaryDelta
     const result = User.countSummaryCostAndEffect(techList)
 
     getEl('el_tech_result_list').innerHTML = 
-      User.createTechEffectsTable(Object.entries(result))
+      User.createUserTechEffectsTable(Object.entries(result))
 
     const byType = {
       rectangle: [],
@@ -1664,7 +1728,6 @@ var KEYWORDS = {
     "Доверие",
     // военные
     "Конверсия",
-    "Регенерация",
     "Ремонт",
     "Ремонт (?:армий|флотов)",
     "Бомбардировка",
@@ -1705,22 +1768,14 @@ var KEYWORDS = {
     "Атака",
     "Защита",
     "Скорость",
+  ],
+  MILITARY_PARAMS_ADDITIONAL: [
     "Уклонение",
     "Щит",
-    "Полёт",
   ],
   UNIT_SLOTS_KEYWORD: 'Слоты',
   UNIT_TYPES_KEYWORD: 'Тип юнита',
-  UNIT_TYPES: [
-    "пехота",
-    "танки",
-    "титан",
-    "нанорой",
-    "звездолёт",
-    "хабитат",
-    "наземная база",
-    "космическая база",
-  ],
+  UNIT_TYPES: Object.keys(VARS.hulls),
   DAMAGE_TYPES: [
     "био",
     "рад",
@@ -1728,11 +1783,13 @@ var KEYWORDS = {
     "странглет",
   ],
   MODULE_NUM_PROPS: [
+    "Полёт",
     'Защита колонии',
     'планетарный щит',
     'Мины',
     'Гарантированная защита',
     'Двигатель',
+    "Регенерация",
   ],
   MODULE_PROPS: [
     "ДУ",
@@ -1748,6 +1805,7 @@ var KEYWORDS = {
     "экранирование",
     "FTL",
     'пред-FTL',
+    'автономность'
   ],
 }
 
@@ -1791,6 +1849,8 @@ const parseNode = {
   },
 
   effects(effectRaw, {treeName, name} = {treeName: null, name: null}) {
+    if(!effectRaw.length) return []
+
     const effect = effectRaw
       .split(',')
       .map(e => e
@@ -1817,12 +1877,14 @@ const parseNode = {
         .replace(/(\d+) слота? (МО|ПКО)$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + '($2):$1')
         // модули и оружие, глобальные военные эффекты
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
         .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?(\\d+)$`), '$1:$2')
         .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, 'Создание $1:$2')
         // типы урона, эффекты оружия
-        .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), 'Тип урона:$1')
+        .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), KEYWORDS.ALL_RIGHT)
         .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), KEYWORDS.ALL_RIGHT)
         // эффекты, дающие великих людей
         .replace(/^\+?(\d+) велик(?:ий|их) (?:человека?)$/i, 'Великий человек:$1')
@@ -2032,6 +2094,66 @@ function listAllWithoutMilitary() {
     }
   }
   return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
+}
+
+const UnitCreator = {
+  open() {
+    getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map( e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
+    this.fillModulesList()
+    HTMLUtils.openModal('unitcreator')
+  },
+  fillModulesList() {
+    getEl('el_uc_modules_datalist').innerHTML = Analysis.listModuleObjs()
+      .map( e => `<option value="${e.name}">${e.effect}</option>`)
+    getEl('el_uc_modules_search').onchange = e => {
+      // if(!e.isTrusted) return 
+      log(e)
+      getEl('el_uc_modules').value += getEl('el_uc_modules_search').value + '\n'
+      getEl('el_uc_modules_search').value = ''
+    }
+  },
+  createUnit(hullName, modulesList = [], startParams = []) {
+    const hullEffect = parseNode.effects(VARS.hulls[hullName])
+    
+    const sum = User.countSummaryCostAndEffect(modulesList, { startingFeature: hullEffect })
+    KEYWORDS.MILITARY_PARAMS.forEach(e => !sum[e] ? sum[e] = 0 : null )
+    return sum
+  },
+  createUnitTable(effectsObj) {
+    log(effectsObj)
+    const str = '<table>'
+        + '<tbody><tr>' +
+        KEYWORDS.MILITARY_PARAMS.map(e => 
+          `<td>${e}</td>` +
+          `<td>${effectsObj[e]}`
+        ).join('</tr><tr>') +
+        '</tr></tbody></table>'
+
+      + '<table><tbody><tr>' +
+      [].concat(KEYWORDS.MILITARY_PARAMS_ADDITIONAL, KEYWORDS.MODULE_NUM_PROPS)
+        .filter( e => effectsObj[e])
+        .map(e => 
+          `<td>${e}</td>` +
+          `<td>${effectsObj[e]}`
+        ).join('</tr><tr>') +
+        '</tr></tbody></table>'
+
+      + '<table><tbody><tr>' +
+      [].concat(KEYWORDS.DAMAGE_TYPES, KEYWORDS.MODULE_PROPS)
+        .filter( e => e in effectsObj || `:${e}` in effectsObj)
+        .join(', ') +
+        '</tr></tbody></table>'
+    
+    return str
+  },
+  processInput() {
+    const hull = getEl('el_uc_hull').value
+    const unit = this.createUnit(hull)
+    getEl('el_uc_unit').innerHTML = this.createUnitTable(unit)
+  },
+  close() {
+    HTMLUtils.closeModal('unitcreator')
+  },
 }
 
 const savingOps = {
