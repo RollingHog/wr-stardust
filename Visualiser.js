@@ -203,7 +203,8 @@ async function Init() {
         : null
       )
 
-      makeElDraggable(getEl('el_selected_tech_wrapper'))
+      HTMLUtils.makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
+      HTMLUtils.makeElDraggable('el_reports_wrapper', 'el_reports_header')
 
       console.time('Player data load')
       
@@ -236,46 +237,85 @@ function countSuccessPossibility(treshold, nOfCubes) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function makeElDraggable(el) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0
-  if (document.getElementById(el.id + "_header")) {
-    /* if present, the header is where you move the DIV from:*/
-    document.getElementById(el.id + "_header").onmousedown = dragMouseDown
-  } else {
-    /* otherwise, move the DIV from anywhere inside the DIV:*/
-    el.onmousedown = dragMouseDown
-  }
+const HTMLUtils = {
+  makeElDraggable(elID, headerID) {
+    const el = document.getElementById(elID)
+    const headerEl = document.getElementById(headerID)
 
-  function dragMouseDown(e) {
-    e = e || window.event
-    e.preventDefault()
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX
-    pos4 = e.clientY
-    document.onmouseup = closeDragElement
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag
-  }
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0
+    if (headerEl) {
+      /* if present, the header is where you move the DIV from:*/
+      headerEl.onmousedown = dragMouseDown
+    } else {
+      /* otherwise, move the DIV from anywhere inside the DIV:*/
+      el.onmousedown = dragMouseDown
+    }
 
-  function elementDrag(e) {
-    e = e || window.event
-    e.preventDefault()
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX
-    pos2 = pos4 - e.clientY
-    pos3 = e.clientX
-    pos4 = e.clientY
-    // set the element's new position:
-    el.style.top = (el.offsetTop - pos2) + "px"
-    el.style.left = (el.offsetLeft - pos1) + "px"
-  }
+    function dragMouseDown(e) {
+      e = e || window.event
+      e.preventDefault()
+      // get the mouse cursor position at startup:
+      pos3 = e.clientX
+      pos4 = e.clientY
+      document.onmouseup = closeDragElement
+      // call a function whenever the cursor moves:
+      document.onmousemove = elementDrag
+    }
 
-  function closeDragElement() {
-    /* stop moving when mouse button is released:*/
-    document.onmouseup = null
-    document.onmousemove = null
-  }
+    function elementDrag(e) {
+      e = e || window.event
+      e.preventDefault()
+      // calculate the new cursor position:
+      pos1 = pos3 - e.clientX
+      pos2 = pos4 - e.clientY
+      pos3 = e.clientX
+      pos4 = e.clientY
+      // set the element's new position:
+      el.style.top = (el.offsetTop - pos2) + "px"
+      el.style.left = (el.offsetLeft - pos1) + "px"
+    }
+
+    function closeDragElement() {
+      /* stop moving when mouse button is released:*/
+      document.onmouseup = null
+      document.onmousemove = null
+    }
+  },
+
+  makeTable(obj) {
+  },
+
+  addTableSorting(tableQuery) {
+    // somewhere from SO
+    const getCellValue = (tr, idx) =>
+      tr.children[idx].innerText || tr.children[idx].textContent
+
+    const comparer = (idx, asc) => (a, b) =>
+      ((v1, v2) =>
+        v1 !== "" && v2 !== "" && !isNaN(v1) && !isNaN(v2)
+          ? v1 - v2
+          : v1.toString().localeCompare(v2))(
+            getCellValue(asc ? a : b, idx),
+            getCellValue(asc ? b : a, idx)
+          )
+
+    Array.from(document.querySelector(tableQuery).tHead.rows[0].cells).forEach(
+      (th) =>
+        th.addEventListener("click", function () {
+          const table = document.querySelector(tableQuery)
+          Array.from(table.tBodies[0].children)
+            .sort(
+              comparer(
+                Array.from(th.parentNode.children).indexOf(th),
+                (this.asc = !this.asc)
+              )
+            )
+            .forEach((tr) => table.tBodies[0].appendChild(tr))
+        })
+    )
+  },
 }
+  
 
 const Analysis = {
   // statistics and various checks
@@ -401,6 +441,40 @@ const Analysis = {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => !dict.includes(key)))
   },
 
+  drawReportsList() {
+    getEl('el_reports_wrapper').hidden = false
+    getEl('el_reports_home').hidden = true
+    getEl('el_reports_list').innerHTML = ''
+    
+    for (let i of Object.keys(Analysis.Reports)) {
+      getEl('el_reports_list').innerHTML += `<li 
+      onclick="Analysis.Reports['${i}'](); getEl('el_reports_home').hidden = false">
+      ${i}</li>`
+    }
+  },
+  
+  reportTable(obj) {
+    if(!Object.keys(obj).length) return
+
+    getEl('el_reports_list').innerHTML = '<table><thead></thead><tbody></tbody></table>'
+    const tbody = getEl('el_reports_list').children[0].tBodies[0]
+
+    const entries = Object.entries(obj)
+    const isObj = typeof entries[0][1] == 'object'
+    let res = ''
+
+    getEl('el_reports_list').children[0].tHead.innerHTML = 
+      `<tr><th>(index)</th><th>${isObj ? Object.keys(entries[0][1]).join('</th><th>') : 'value'}</th></tr>`
+
+    for(let i of entries) {
+      res += `<tr><td>${i[0]}</td><td>${isObj ? Object.values(i[1]).join('</td><td>') : i[1]}</td></tr>`
+    }
+
+    tbody.innerHTML = res
+
+    HTMLUtils.addTableSorting('#el_reports_list table')
+  },
+
   Reports: {
     showEffectsStatWithoutGarbage() {
       let filter = [].concat(
@@ -414,19 +488,20 @@ const Analysis = {
         KEYWORDS.MILITARY_PARAMS,
         ["Слоты", "Тип отряда", "особое"],
       )
-      console.table(Analysis.excludeByDict(statAllEffects, filter))
+      Analysis.reportTable(Analysis.excludeByDict(statAllEffects, filter))
     },
   
-    showEffectsStat(filter = KEYWORDS.TECH_EFFECTS) {
+    showEffectsStat(filter) {
       if(!filter) {
-        console.table(statAllEffects)
+        Analysis.reportTable(statAllEffects)
       } else {
-        console.table(Analysis.filterObjectByDict(statAllEffects, filter))
+        filter = KEYWORDS.TECH_EFFECTS
+        Analysis.reportTable(Analysis.filterObjectByDict(statAllEffects, filter))
       }
     },
   
     listHulls() {
-      console.table(Object.fromEntries(
+      Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
           .filter(e => e.type == 'octagon')
           .map(e => [e.name, {
@@ -439,7 +514,7 @@ const Analysis = {
     },
 
     listModules() {
-      console.table(Object.fromEntries(
+      Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
           .filter(e => (e.type == "trapezoid" || e.type == 'trapezoid2' || e.type == 'fatarrow'))
           .map(e => [e.name, {
@@ -462,7 +537,7 @@ const Analysis = {
           sum[paramType] += 1
         }
       })
-      console.table(sum)
+      Analysis.reportTable(sum)
     },
   }
 }
@@ -534,6 +609,7 @@ function drawTree(tree_name) {
 const User = {
 
   activePlayer: null,
+
   drawActiveUser(treeName) {
     if(!this.activePlayer) return
     parseDoc.drawTech(this.activePlayer, treeName)
