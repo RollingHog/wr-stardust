@@ -523,9 +523,9 @@ const Analysis = {
       ))
     },
 
-    drawGraph() {
+    // drawGraph() {
 
-    },
+    // },
 
     countTechByCostParamType() {
       const sum = {}
