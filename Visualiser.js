@@ -1215,6 +1215,17 @@ const Analysis = {
       ))
     },
 
+    список_проектов() {
+      Analysis.reportTable(Object.fromEntries(
+        Object.values(inverted.alltech)
+          .filter(e => (e.type == VARS.NODE_T.PROJECT))
+          .map(e => [e.name, {
+            Цена: e.cost[0][1],
+            "Свойства": Analysis.formatReportEffects(e.effect),
+          }])
+      ))
+    },
+
     список_технологий_по_типу() {
       Analysis.reportTable(
         Object.values(inverted.alltech)
