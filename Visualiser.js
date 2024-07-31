@@ -11,6 +11,7 @@ makeElDraggable
   draw
 */
 
+// TODO
 /**
   @typedef draw
   @type {object}
@@ -19,7 +20,7 @@ makeElDraggable
   @property {number} age - your age.
  **/
 
-const VERSION = '1.1.1'
+const VERSION = '1.2.0'
 console.log(VERSION)
 
 const range = (cnt) => '0'.repeat(cnt)
@@ -30,6 +31,7 @@ const TREELIST = [
   "Biology",
   "Industry",
   "Science",
+  'Unique',
 ]
 
 // constants
@@ -235,11 +237,16 @@ async function Init() {
   console.time('load iframes')
   const iframes = Array.from(document.querySelectorAll('iframe[src2]'))
   if(isLocalFile) {
-      await Promise.all(iframes.map(i => 
-        new Promise((resolve) => {
+      await Promise.all(iframes.map(i => {
+        const src2 = i.getAttribute('src2')
+        if(src2.startsWith('tech') && !TREELIST.includes(src2.match(/tech\/(\w+).graphml/)[1])) {
+          return true
+        }
+        return new Promise((resolve) => {
           i.onload = resolve
-          i.src = i.getAttribute('src2')
+          i.src = src2
         })
+      }
       ))
   } else {
     getEl('post_text_iframe').src = getEl('post_text_iframe').getAttribute('src2')
@@ -1949,6 +1956,11 @@ async function parseTechIframe(tree_name) {
   for (let i of techData.graphmls[tree_name].getElementsByTagName('y:ShapeNode')) {
     try {
       const t = parseNode.node(tree_name, i)
+      if(!t) {
+        // possibly empty cell
+        continue
+      }
+
       if (t.badCell) {
         techData.badCells[tree_name].push(t)
         continue
@@ -2982,7 +2994,8 @@ const parseNode = {
     }
 
     if (nodeText.indexOf(sepDifficulty) == -1 || nodeText.indexOf(sepEffect) == -1) {
-      warn(nodeText)
+      // possibly empty node
+      // warn(nodeText)
       return null
     }
 

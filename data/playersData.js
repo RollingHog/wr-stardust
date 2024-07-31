@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-06-02T09:27:51.168Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-06-06T05:52:52.671Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "playerColor": "#00FFFF",
@@ -47,7 +47,9 @@ var DATA__PLAYERS_DATA = {
         "Физика элементарных частиц",
         "Бионика"
       ],
-      "Unique": []
+      "Unique": [
+        "Быть Беглецами"
+      ]
     },
     "planetParams": {
       "Тип планеты": 5,
@@ -426,7 +428,9 @@ var DATA__PLAYERS_DATA = {
         "Самообучение",
         "Компактные квантовые процессоры"
       ],
-      "Unique": []
+      "Unique": [
+        "Быть Юнитологической федерацией"
+      ]
     },
     "planetParams": {
       "Тип планеты": 5,
@@ -627,7 +631,9 @@ var DATA__PLAYERS_DATA = {
         "Мобилизация населения",
         "Автономность имплантатов"
       ],
-      "Unique": []
+      "Unique": [
+        "Быть Инженерами"
+      ]
     },
     "planetParams": {
       "Тип планеты": 2,
