@@ -719,7 +719,7 @@ function listParam(param = 'costClear', fuckMilitary = true) {
   res = res.slice(0, -1)
   res += '\n'
   // eslint-disable-next-line no-unused-vars
-  for (let i in range(14)) {
+  for (let i in range(15)) {
     for (let j in t) {
       res += (t[j].shift() || 0) + '\t'
     }
@@ -728,27 +728,6 @@ function listParam(param = 'costClear', fuckMilitary = true) {
   }
   return res
 }
-
-/*
-function drawParam(param = 'costClear') {
-  //delete stat['Military']
-  const t = extractParam(param)
-  let res = param+'\n'
-  for (i in t) {
-    res += i+'\t'
-  }
-  res = res.slice(0,-1)
-  res += '\n'
-  for (i in range(14)) {
-    for (j in t) {
-      res += (t[j].shift() || 0) +'\t'
-    }
-    res = res.slice(0,-1)
-    res += '\n'
-  }
-  return res
-}
-*/
 
 const PARAMLIST_RU = [
   'Общество'
