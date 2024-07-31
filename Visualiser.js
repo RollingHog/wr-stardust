@@ -2464,16 +2464,29 @@ const playerPost = {
     setTimeout(this.countTechStudyResult, 100)
   },
 
+  fieldPositionsInTable: {
+    name: 0,
+    price: 1,
+    critfails: 2,
+    wins: 3,
+    critwins: 4,
+    sum: 5,
+    delta: 6,
+  },
+
+  formBattleRolls() {
+    const pos = playerPost.fieldPositionsInTable
+    let result = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
+      .map(e => {
+        return e.children[pos.name].innerText + ': ' +
+           (+e.children[pos.wins].innerText + +e.children[pos.critwins].innerText)
+      }).join('\n')
+    navigator.clipboard.writeText(result)
+    alert('copied')
+  },
+
   countTechStudyResult() {
-    const pos = {
-      name: 0,
-      price: 1,
-      critfails: 2,
-      wins: 3,
-      critwins: 4,
-      sum: 5,
-      delta: 6,
-    }
+    const pos = playerPost.fieldPositionsInTable
 
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e => {
