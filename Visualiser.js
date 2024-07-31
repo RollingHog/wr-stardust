@@ -952,7 +952,9 @@ const draw = {
         }
         else {
           el.innerHTML += `<tspan id="${id}_t${i}" dx='-${getEl(id + '_t' + (i - 1)).getBBox().width / 2}' dy="1.2em" 
-          class="${arr[i].replace(/(^.+:|\+\d|,)/g,'').trim().replace(/ /g,'_')}">${arr[i]}</tspan>`
+          class="">${arr[i]}</tspan>`
+          // it breaks dnload  for some reason
+          // ${arr[i].replace(/(^.+:|\+\d)/g,'').replace(/[\d)(,.ё_)]/g,'').trim().replace(/ /g,'_')}
           curr = getEl(id + '_t' + i)
           curr_dx = +curr.getAttribute('dx')
           curr_w = +curr.getBBox().width
