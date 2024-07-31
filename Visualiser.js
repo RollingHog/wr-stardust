@@ -861,6 +861,27 @@ const parseDoc = {
     // , null, 4
     savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult))
   },
+
+  parsePlayerPost(text) {
+    const requests = [...text.matchAll(/([^\n]*)\dd10: \((\d+(?: \+ \d)?)\) = \d+([^\n]*)/g)]
+      .map(e=>({text: (e[1].length ? e[1] : e[3]).trim(), rolls: e[2], rawRolls: e[2]}))
+
+    for(let i of requests) {
+      let rolls = {
+        critfails: 0,
+        wins: 0,
+        critwins: 0
+      }
+      for(let j of i.rolls.split(' + ')) {
+        if(j == '1') rolls.critfails += 1
+        if(j == '10') rolls.critwins += 1
+        if(+j>4) rolls.wins += 1
+      }
+      i.rolls = rolls
+    }
+
+    log(requests)
+  }
 }
 
 var KEYWORDS = {
