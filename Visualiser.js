@@ -1764,7 +1764,7 @@ const User = {
   countAllUserEffects(userDataObj) {
     if(!userDataObj) return null
 
-    let startParams = userDataObj.colonyParams["Начальные параметры"].split('/')
+    let startParams = userDataObj.colonyParams['Начальные кубы'].split('/')
       .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
     startParams = Object.fromEntries(startParams)
 
@@ -2103,8 +2103,10 @@ const parseDoc = {
 
     let colonyParams = Array.from(obj.Параметры.children[0].rows)
       .slice(1)
-      .map(e => [e.children[0].innerText.trim().replace('Свободные кубы', 'Свободный'),e.children[1].innerText.trim()])
-      colonyParams = Object.fromEntries(colonyParams)
+      .map(e => {
+        return [e.children[0].innerText.trim().replace('Свободные кубы', 'Свободный'), e.children[1].innerText.trim()]
+      })
+    colonyParams = Object.fromEntries(colonyParams)
 
     let additionalParamsRaw = Array.from(obj['Дополнительные параметры'].children[0].rows)
       .map(e => Array.from(e.children))
@@ -2265,7 +2267,7 @@ class TGoogleDocUserObj {
   }
   colonyParams = {
     'Наука': 0,
-    'Начальные параметры': '',
+    'Начальные кубы': '',
     'Общество': 0,
     'Производство': 0,
     'Свободные кубы': 0,
