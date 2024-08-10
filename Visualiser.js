@@ -1744,12 +1744,14 @@ const User = {
     let effectsData = [].concat.apply([], techListFiltered.map( e => inverted.alltech[e].effect))
     let costData = TechUtils.countCosts(techListFiltered)
 
+    const isSpecial = (str) => [KEYWORDS.ITS_SPECIAL, KEYWORDS.ONLY_ONCE_KW].includes(str)
+
     if(userDataObj) {
       effectsData = effectsData.concat(userDataObj.startingFeature
-        .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], null] : [i[0], +i[1]])
+        .map( i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
       )
       if(userDataObj.uniqueResources) effectsData = effectsData.concat(userDataObj.uniqueResources
-        .map( i => i[0] === KEYWORDS.ITS_SPECIAL ? [':' + i[1], null] : [i[0], +i[1]])
+        .map( i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
       )
       if(userDataObj.planetParams) effectsData = effectsData.concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
       if(userDataObj.greatPeople) effectsData = effectsData.concat(userDataObj.greatPeople
@@ -1760,7 +1762,7 @@ const User = {
 
     const effect = {}
     for(let i of effectsData) {
-      if(i[0] === KEYWORDS.ITS_SPECIAL) {
+      if(isSpecial(i[0])) {
         i[0] = ':' + i[1]
         i[1] = null
       }
@@ -2775,13 +2777,13 @@ var KEYWORDS = {
     'в системе',
     'вне родной системы',
   ],
+  ONLY_ONCE_KW: 'разово',
   SINGLE_TIME_EFFECTS: [
     "\\?",
     'Временно',
     'Великий человек',
     'выдаётся при высадке',
     'выдаётся на старте',
-    'немедленно',
     'позволяет перебросить куб на Ресурсы \\(только вверх\\)',
   ],
   TECH_EFFECT_MODS: [
@@ -2890,6 +2892,7 @@ const parseNode = {
         .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
         // временный бонус
         .replace(/^на (\d+) хода?/i, 'Временно:$1')
+        .replace(new RegExp(`^${KEYWORDS.ONLY_ONCE_KW} (.*)`, 'i'), `${KEYWORDS.ONLY_ONCE_KW}:$1`)
         // вещества
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // параметры планеты
