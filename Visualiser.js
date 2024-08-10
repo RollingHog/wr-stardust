@@ -2406,11 +2406,13 @@ const playerPost = {
     return res
   },
   parse(text) {
-    const firstWord = text.slice(0, Math.min(text.indexOf(' '), text.indexOf('\n')))
+    const firstWord = text.slice(0, Math.min(text.indexOf(' '), text.indexOf('\n'), text.indexOf(':')))
     getEl('players_selection')
     for(let i of getEl('players_selection').querySelectorAll('label')) {
-      if(i.innerText.startsWith(firstWord)) {
-        i.click()
+      if(i.innerText.startsWith(firstWord) ) {
+        if(!i.querySelector('input[type="checkbox"]').checked) {
+          i.click()
+        }
         break
       }
     }
