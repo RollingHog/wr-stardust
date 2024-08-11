@@ -1610,7 +1610,7 @@ const User = {
   },
 
   listUsers() {
-    return Object.keys(window[VARS.PLAYERS_DATA_KEY])
+    return Object.keys(window[VARS.PLAYERS_DATA_KEY]).filter(name => !name.startsWith('-'))
   },
 
   formUsersCheckboxes() {
