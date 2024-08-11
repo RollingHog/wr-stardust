@@ -1760,10 +1760,12 @@ const User = {
       )
     }
 
+    const addIfOnce = (str) => KEYWORDS.ONLY_ONCE_KW === str ? `${KEYWORDS.ONLY_ONCE_KW}: `: '' 
+
     const effect = {}
     for(let i of effectsData) {
       if(isSpecial(i[0])) {
-        i[0] = ':' + i[1]
+        i[0] = ':' + addIfOnce(i[0]) + i[1]
         i[1] = null
       }
 
@@ -1898,6 +1900,7 @@ const User = {
   drawUserStat(playerName) {
     const userData = User.getSavedUserData(playerName)
     const effectsData = User.countAllUserEffects(userData)
+      .filter( e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
 
     // check if params in doc are bad
     effectsData
@@ -3308,7 +3311,13 @@ const savingOps = {
   saveAllTechAsPng() {
     for (const i of document.querySelectorAll('#tech_tree_buttons button')) {
       i.click()
-      savingOps.saveSvgAsPng(svg, `${i.innerText}.png`)
+      const playerName = document.querySelector('#players_selection input:checked').id
+
+      if(playerName) {
+        savingOps.saveSvgAsPng(svg, `${playerName} ${i.innerText}.png`)
+      } else {
+        savingOps.saveSvgAsPng(svg, `${i.innerText}.png`)
+      }
     }
   },
   openAsPng() {

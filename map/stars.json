@@ -4971,12 +4971,12 @@
     "y": 24,
     "StarsL": [
       {
-        "mass": 0.9501,
+        "mass": 1,
         "evol_stage": "W",
-        "age": 3.0,
+        "age": 4.6,
         "spectral_type": "G",
-        "temp": 3800,
-        "lum": 0.0,
+        "temp": 5772,
+        "lum": 1.0,
         "radius": 0.0,
         "color": ""
       }
