@@ -29,19 +29,22 @@ function createImage(playerName) {
   else if(distToStar >= 7) type = type + '_cold'
   document.body.style.backgroundImage = `url("assets/planets/${type}.png")`
 
-  const buildingNamesList = [].concat(
-    playersData[playerName].buildings,
-    playersData[playerName].orbital
-  )
-  
+  const buildingNamesList = playersData[playerName].buildings
+  const orbitalNamesList = playersData[playerName].orbital
   let lvl = 0
   let cnt = 0
-  for(let i of buildingNamesList) {
+  for(let name of buildingNamesList) {
     if(cnt > lvl) {
       cnt = 0
       lvl++
     }
-    showBuilding(i, lvl, cnt, buildingNamesList.length)
+    showBuilding(name, lvl, cnt, buildingNamesList.length)
+    cnt++
+  }
+
+  cnt = 0
+  for(let name of orbitalNamesList) {
+    showOrbital(name, 0, cnt)
     cnt++
   }
 }
@@ -58,6 +61,26 @@ function showBuilding(name, lvl, cnt, length) {
     .replace(/\([^)]+\)/g,'')
     .trim()
     .replace(/ /g, '_')
+  el.innerHTML = `<img src='assets/buildings/${imgName}.png' alt="${name}">`
+  el.title = name
+
+  getEl('el_main').appendChild(el)
+}
+
+function showOrbital(name, lvl, cnt, length) {
+  const el = document.createElement('div')
+  el.className = 'orbital'
+  el.style.zIndex = length - lvl
+  el.style.top = `${2 + lvl * lvlPadding}vh`
+  el.style.left = `${pageW/4.5 + (-lvl/2 + cnt)*cntPadding}px`
+  const isNativeOrbital = !name.includes("(орб")
+  const imgName = isNativeOrbital 
+    ? name
+      .toLowerCase()
+      .replace(/\([^)]+\)/g,'')
+      .trim()
+      .replace(/ /g, '_')
+    : 'orbital_default'
   el.innerHTML = `<img src='assets/buildings/${imgName}.png' alt="${name}">`
   el.title = name
 

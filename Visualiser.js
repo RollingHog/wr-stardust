@@ -2542,19 +2542,24 @@ const playerPost = {
         //   e.children[pos.critwins].innerText = critwins - critdelta
         // }
 
-        if (+e.children[pos.critfails].innerText > 0) {
+        /**
+         * @type {string}
+         */
+        const techText = e.children[pos.name].innerText.trim()
+
+        const isReserve = techText.startsWith("Резерв")
+
+        if (+e.children[pos.critfails].innerText > 0 && !isReserve) {
           e.children[pos.critfails].style.backgroundColor = 'tomato'
         }
 
-        if (+e.children[pos.critwins].innerText > 0) {
+        if (+e.children[pos.critwins].innerText > 0 && !isReserve) {
           e.children[pos.critwins].style.backgroundColor = 'lawngreen'
         }
 
         const sum = +e.children[pos.wins].innerText 
           + +e.children[pos.critwins].innerText * 2 
           - +e.children[pos.critfails].innerText
-
-        const techText = e.children[pos.name].innerText.trim()
 
         if (TechUtils.get(techText)) {
 

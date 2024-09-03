@@ -7,14 +7,16 @@
   <title>ИвТ - Визуализатор зданий в колонии</title>
   <link rel="stylesheet" href="src/common.css">
   <style>
-    .building {
+    .building, .orbital {
       position: absolute;
       text-align: center;
-      max-width: 160px;
-      max-height: 120px;
       transform: translate(-50%);
-      /* border: 1px solid rebeccapurple; */
-      background-color: wheat;
+      /* background-color: wheat; */
+    }
+
+    .building, .orbital, .building img, .orbital img {
+      max-width: 96px;
+      max-height: 72px;
     }
 
     body::before {
