@@ -300,7 +300,7 @@ async function Init() {
       elPlayersData.onload = resolve
       elPlayersData.src = elPlayersData.getAttribute('src2')
     })
-    parseDoc.lastResult = window[VARS.PLAYERS_DATA_KEY]
+    parseDoc.lastResult = User.getAllUsersData()
     
     console.timeEnd('player data ')
     // log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
@@ -1326,7 +1326,7 @@ const Analysis = {
     // чтобы прикинуть сколько давать вкатившимся после начала игры
     суммарная_стоимость_проектов_игроков() {
       const result = Object.fromEntries(
-        Object.entries(window[VARS.PLAYERS_DATA_KEY])
+        Object.entries(User.getAllUsersData())
         .map(e => [e[0], {
           'Кол-во':  e[1].buildings.length 
               + e[1].orbital.length 
@@ -1348,7 +1348,7 @@ const Analysis = {
 
     основные_параметры_игроков() {
       const result = Object.fromEntries(
-        Object.entries(window[VARS.PLAYERS_DATA_KEY])
+        Object.entries(User.getAllUsersData())
         .map( e => [ e[0], 
           Object.fromEntries(
             [].concat(
@@ -1410,8 +1410,8 @@ const Analysis = {
 
     планетарная_хреновость() {
       const a = []
-      for (let i in window[VARS.PLAYERS_DATA_KEY]) {
-        a.push([i, Analysis.countPlanetRawMisery(window[VARS.PLAYERS_DATA_KEY][i])])
+      for (let i in User.getAllUsersData()) {
+        a.push([i, Analysis.countPlanetRawMisery(User.getSavedUserData(i))])
       }
       Analysis.reportTable(Object.fromEntries(a))
     },
@@ -1607,6 +1607,19 @@ const User = {
    */
   getSavedUserData(playerName) {
     return window[VARS.PLAYERS_DATA_KEY][playerName]
+  },
+
+  getAllUsersData() {
+    const filtered = Object.keys(window[VARS.PLAYERS_DATA_KEY])
+      .filter(name => !name.startsWith('-'))
+      .reduce((obj, key) => {
+        return {
+          ...obj,
+          [key]: window[VARS.PLAYERS_DATA_KEY][key]
+        };
+      }, {})
+
+    return filtered
   },
 
   listUsers() {
