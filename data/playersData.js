@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-09-12T16:13:00.650Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-09-13T00:49:50.991Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "playerColor": "#00FFFF",
@@ -173,6 +173,7 @@ var DATA__PLAYERS_DATA = {
         "effect": []
       }
     ],
+    "secondaryColonies": [],
     "materials": {
       "Добыча": 3,
       "Редкие металлы": 0,
@@ -377,6 +378,7 @@ var DATA__PLAYERS_DATA = {
         ]
       }
     ],
+    "secondaryColonies": [],
     "materials": {
       "Добыча": 2,
       "Редкие металлы": 1,
@@ -575,6 +577,7 @@ var DATA__PLAYERS_DATA = {
         ]
       }
     ],
+    "secondaryColonies": [],
     "materials": {
       "Добыча": 3,
       "Редкие металлы": 1,
@@ -862,6 +865,7 @@ var DATA__PLAYERS_DATA = {
         "effect": []
       }
     ],
+    "secondaryColonies": [],
     "materials": {
       "Добыча": 1,
       "Редкие металлы": 1,
@@ -1087,6 +1091,7 @@ var DATA__PLAYERS_DATA = {
         ]
       }
     ],
+    "secondaryColonies": [],
     "materials": {
       "Добыча": 3,
       "Редкие металлы": 1,
@@ -1285,6 +1290,28 @@ var DATA__PLAYERS_DATA = {
         ]
       }
     ],
+    "secondaryColonies": [
+      {
+        "lvl": "1",
+        "speciality": "Космос",
+        "effect": [
+          [
+            "Исследования (ветка \"Космос\")",
+            "+2"
+          ]
+        ]
+      },
+      {
+        "lvl": "1",
+        "speciality": "Космос",
+        "effect": [
+          [
+            "Исследования (ветка \"Космос\")",
+            "+2"
+          ]
+        ]
+      }
+    ],
     "materials": {
       "Добыча": 3,
       "Редкие металлы": 1,
@@ -1453,6 +1480,7 @@ var DATA__PLAYERS_DATA = {
         ]
       }
     ],
+    "secondaryColonies": [],
     "materials": {
       "Добыча": 0,
       "Редкие металлы": 0,

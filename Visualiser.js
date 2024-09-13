@@ -1771,6 +1771,10 @@ const User = {
         .map( i => i.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
         .flat()
       )
+      if(userDataObj.secondaryColonies) effectsData = effectsData.concat(userDataObj.secondaryColonies
+        .map( colony => colony.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
+        .flat()
+      )
     }
 
     const addIfOnce = (str) => KEYWORDS.ONLY_ONCE_KW === str ? `${KEYWORDS.ONLY_ONCE_KW}: `: '' 
@@ -2228,6 +2232,15 @@ const parseDoc = {
         e.effect = parseNode.effects(e.effect,{treeName: null, name: playerName + ' великие люди'})
       })
 
+    let secondaryColonies = !obj['Вторичные колонии'] ? [] : Array.from(obj['Вторичные колонии'].querySelectorAll('tbody tr'))
+      .map(row => Array.from(row.children).map(el => el.innerText))
+    secondaryColonies.splice(0,1)
+    secondaryColonies = secondaryColonies.map(row => ({
+      lvl: row[1], 
+      speciality: row[2], 
+      effect: parseNode.effects(row[3], {treeName: null, name: playerName + ' вторичные колонии'})
+    }))
+
     let uniqueResources = Array.from(obj['Уникальные ресурсы'].children[0].rows)
     uniqueResources.splice(0,1)
     if(uniqueResources.length == 1 && uniqueResources[0].innerText == '') uniqueResources = null
@@ -2262,6 +2275,7 @@ const parseDoc = {
       // TODO
       prepaired,
       greatPeople,
+      secondaryColonies,
       materials,
       uniqueResources,
       localProjs: splitFilter(obj.Здания.children[0].rows[1].children[1].innerText),
@@ -2354,6 +2368,8 @@ class TGoogleDocUserObj {
   orbital = []
   prepaired = []
   greatPeople = []
+  /** @type { {lvl: string; speciality: string; effect: any[]}[] }  */
+  secondaryColonies = []
   uniqueResources = []
   localProjs = []
 }
