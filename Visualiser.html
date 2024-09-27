@@ -307,7 +307,11 @@
       <section id=doc_section>
         <label style="background: white; user-select: none;">
           <input type="checkbox" id="el_doPlayersData" checked>create playersData
-        </label><br>
+        </label>
+        <label style="background: white; user-select: none;">
+          <input type="checkbox" id="el_playerQuiet" title="do not show player data on click">Quiet
+        </label>
+        <br>
         <button onclick="parseDoc.file(event)" style="padding: 12px;" hotkey="P">Parse clipboard</button>
         <button onclick="parseDoc.redoLast()" style="padding: 12px;">Redo last parse</button>
       </section>

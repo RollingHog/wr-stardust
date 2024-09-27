@@ -347,7 +347,7 @@ async function Init() {
           if(e.children[0].checked) {
             let playerName = e.innerText.trim()
             parseDoc.drawTech(playerName, techData.currentTreeName)
-            if(!VARS.isInit) {
+            if(!VARS.isInit && !getEl('el_playerQuiet').checked) {
               User.drawUserStat(playerName)
             }
           } else {
@@ -654,7 +654,7 @@ const Analysis = {
               else teff += +k[1]*2
             }
             else if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
-            else if(k[0]=='Сверхадаптация') {
+            else if(k[0]=='Сверхадаптация' || k[0] == KEYWORDS.RESERVE_KW) {
               teff += +k[1]*2
             } 
             else if(
@@ -1207,6 +1207,7 @@ const Analysis = {
           KEYWORDS.COLONY_PARAMS,
           // KEYWORDS.MATERIALS,
           KEYWORDS.TECH_EFFECTS,
+          [KEYWORDS.RESERVE_KW],
         ).includes(e[0]))
 
       result.push( ['ВСЕГО', result
@@ -1818,7 +1819,7 @@ const User = {
       (costListArr ? TechUtils.createEffectsTable(costListArr, 'COST') : '')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
-      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.includes(e[0])), 'Специализированные бонусы')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).includes(e[0])), 'Специализированные бонусы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)), 'Исследования')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.MATERIALS.includes(e[0])), 'Ресурсы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])), 'Дополнительные параметры')
@@ -1826,6 +1827,7 @@ const User = {
       + TechUtils.createEffectsTable(effectsListArr.filter(e => !KEYWORDS.COLONY_PARAMS.includes(e[0])
         && !e[0].startsWith(':')
         && !KEYWORDS.TECH_EFFECTS.includes(e[0])
+        && !e[0].startsWith(KEYWORDS.RESERVE_KW)
         && !e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)
         && !KEYWORDS.MATERIALS.includes(e[0])
         && !KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])
@@ -2717,6 +2719,7 @@ var KEYWORDS = {
     "Гиперплазма",
   ],
   RESEARCH_KEYWORD: 'Исследования',
+  RESERVE_KW: 'Резерв',
   TECH_EFFECTS: [
     // индустрия
     "Планетарная разведка",
@@ -2890,9 +2893,9 @@ const parseNode = {
         // вещества
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // параметры планеты
-        .replace(new RegExp(`^(${KEYWORDS.PLANET_PARAMS.join('|')}) \\+?(\\d+)`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.PLANET_PARAMS.join('|')}) [+-]?(\\d+)`), '$1:$2')
         // Эффекты и бонусы:
-        .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // Плюсы к научным веткам
         .replace(/^Вет(?:ка|вь) "?([^"]+)"? ([+-]?\d+)/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$1"):$2')
         .replace(/^\+?(\d+) (?:куб(?:а|ов)? )?к вет(?:ке|ви) "([^"]+)"/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$2"):$1')
