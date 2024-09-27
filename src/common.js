@@ -140,7 +140,7 @@ const hotkeysLib = {
   enableHotkeysProcessing(hotkeysList_, kModeHotkeys_) {
     let kMode = false 
     const hotkeysList = Object.assign({'Alt K': _ => kMode = true}, hotkeysList_)
-    const kModeHotkeys = kModeHotkeys_
+    const kModeHotkeys =  Object.assign({}, kModeHotkeys_)
 
     const ignoreKeys = ['Alt', 'Tab']
 
