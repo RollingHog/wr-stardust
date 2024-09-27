@@ -2,6 +2,8 @@
   log warn warnNoTrace getEl 
   locationSearchToArray FILL_2_TREE_TYPE
   getDictKey
+  makeElDraggable
+  hotkeysLib
 */
 
 var log = console.log
@@ -117,4 +119,59 @@ function makeElDraggable(elID, headerID) {
     document.onmouseup = null
     document.onmousemove = null
   }
+}
+
+const hotkeysLib = {
+  hotkeyElsList: {},
+
+  init(hotkeysList_, kModeHotkeys_) {
+    this.enableHotkeysProcessing(hotkeysList_, kModeHotkeys_)
+    this.processHotkeyAttribute()
+  },
+
+  processHotkeyAttribute() {
+    for(let i of document.querySelectorAll('button[hotkey]')) {
+      const hk = i.getAttribute('hotkey')
+      i.title += '\nHotkey: Alt+' + hk
+      this.hotkeyElsList[`Alt ${hk}`] = i
+    }
+  },
+
+  enableHotkeysProcessing(hotkeysList_, kModeHotkeys_) {
+    let kMode = false 
+    const hotkeysList = Object.assign({'Alt K': _ => kMode = true}, hotkeysList_)
+    const kModeHotkeys = kModeHotkeys_
+
+    const ignoreKeys = ['Alt', 'Tab']
+
+    // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
+
+    const that = this
+
+    document.body.addEventListener('keydown', function(evt) {
+      if(!evt.code) return
+      if(ignoreKeys.includes(evt.key)) return 
+      const keyComb = 
+        (evt.ctrlKey ? 'Ctrl ' : '')
+        + (evt.altKey ? 'Alt ' : '')
+        + evt.code.replace(/(Key|Digit)/,'')
+      if(hotkeysList[keyComb]) {
+        hotkeysList[keyComb]()
+        evt.stopPropagation()
+        return false
+      }
+      if(that.hotkeyElsList[keyComb]) {
+        that.hotkeyElsList[keyComb].click()
+        evt.stopPropagation()
+        return false
+      }
+      if(kMode && kModeHotkeys[keyComb]) {
+        kModeHotkeys[keyComb]()
+        kMode = false
+        evt.stopPropagation()
+        return false
+      }
+      if(evt.altKey) log(keyComb)
+    })
+  },
 }

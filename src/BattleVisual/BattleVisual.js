@@ -2,6 +2,7 @@
 /* global
 getEl log 
 makeElDraggable
+hotkeysLib
 */
 
 const shipBlock = {
@@ -53,13 +54,14 @@ const onAddShipTemplate = {
     onAddShipTemplate.addTemplateWithSize(evt, true)
   },
   addTemplateWithSize(evt, isRight) {
-    const size = prompt(`Size? 0-6, 0 is planet; "-" prefix is ground unit, "_" is building, "=" is 'orbital'
-'+' is 'robots', '%' is 'giger', '=' is 'non-purist' (militia now)
-    `)
-    onAddShipTemplate.addTemplate(isRight, {size: size || 3})
+    const size = prompt(`Size? 0-6, 0 is planet;\n"-" prefix is ground unit, "_" is non-war building, "=" is non-war 'orbital';
+postfixes: '+' is 'robots', '%' is 'giger', '=' is 'non-purist' (militia now)
+${isRight ? 'RIGHT' : 'LEFT'}
+`)
+    onAddShipTemplate.addTemplate(isRight, {size: size || '3'})
   },
 
-  addTemplate(isRight, templateData = {size: 3}) {
+  addTemplate(isRight, templateData = {size: '3'}) {
     const size = templateData.size
     /** @type {HTMLElement} */
     const tshipEl = getEl('ship_template').cloneNode(true)
@@ -78,23 +80,27 @@ const onAddShipTemplate = {
 
     tshipEl.querySelector('.parent').setAttribute('parent', tshipEl.id)
 
-    if(size != 0) {
-      tshipEl.querySelector('.image').innerHTML = `<img title='${size}' src="assets/units/${size}.png">`
-    } else {
+    if(size == 0) {
       // planet
       tshipEl.querySelector('.image').innerHTML = `<img src="assets/planets/terrestrial.png">`
       tshipEl.querySelector('.param.speed').innerHTML = 0
       tshipEl.querySelector('.hp.max').innerHTML = 10
       setTimeout(()=>tshipEl.querySelector('.b_add_to_battle').click(), 20)
       setTimeout(()=>tshipEl.querySelector('.b_remove').click(), 50)
-      
       // TODO add to battle and remove template
-    }
-
-    if(size !== 0) {
-      // its not a planet
+    } else if(size.startsWith('_')) {
+      // building
+      tshipEl.querySelector('.image').innerHTML = `<img src="assets/buildings/default.png">`
+      tshipEl.querySelector('.hp.max').innerHTML = (Math.abs(parseInt(size.slice(1))) || 2)
+    } else if(size.startsWith('=')) {
+      // orbital
+      tshipEl.querySelector('.image').innerHTML = `<img src="assets/buildings/orbital_default.png">`
+      tshipEl.querySelector('.hp.max').innerHTML = (Math.abs(parseInt(size.slice(1))) || 2)
+    } else {
+      tshipEl.querySelector('.image').innerHTML = `<img title='${size}' src="assets/units/${size}.png">`
       tshipEl.querySelector('.hp.max').innerHTML = (Math.abs(parseInt(size)) || 1) * 2
     }
+
     tshipEl.querySelector('.hp.curr').innerHTML = tshipEl.querySelector('.hp.max').innerHTML
 
     tshipEl.hidden = false
@@ -266,6 +272,7 @@ function addTopBtnsListeners() {
 }
 
 function main() {
+    hotkeysLib.init()
     addTopBtnsListeners()
 
     onAddShipTemplate.addTemplate(false)

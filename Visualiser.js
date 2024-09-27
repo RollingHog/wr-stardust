@@ -4,6 +4,7 @@ getEl log warn
 FILL_2_TREE_TYPE
 getDictKey
 makeElDraggable
+hotkeysLib
 */
 
 // draw.js
@@ -307,8 +308,7 @@ async function Init() {
 
     User.formUsersCheckboxes()
 
-    HTMLUtils.enableHotkeysProcessing()
-    HTMLUtils.processHotkeyAttribute()
+    HTMLUtils.initHotkeysLib()
 
     console.time('other parse ')
     Promise.all(TREELIST
@@ -382,6 +382,35 @@ async function Init() {
 
 // eslint-disable-next-line no-unused-vars
 const HTMLUtils = {
+  initHotkeysLib() {
+    let searchEnabled = false
+
+    hotkeysLib.init({
+      'Escape': _ => {
+        if(searchEnabled) {
+          setTimeout(_ => searchEnabled = false, 50)
+        }
+        else {
+          let tgt = document.querySelector('.modal[style*="z-index: 1"]:not([hidden]) button.btn_close')
+          if(!tgt) tgt = document.querySelector('.modal:not([hidden]) button.btn_close')
+          if(!tgt) return
+          tgt.click()
+          this.focusModal(document.querySelector('.modal:not([hidden])'))
+          // this.hideAllModals()
+        }
+      },
+      'Ctrl F': _ => searchEnabled = true,
+    }, {
+      '1': _ => getEl('players_selection').querySelectorAll('label')[0].click(),
+      '2': _ => getEl('players_selection').querySelectorAll('label')[1].click(),
+      '3': _ => getEl('players_selection').querySelectorAll('label')[2].click(),
+      '4': _ => getEl('players_selection').querySelectorAll('label')[3].click(),
+      '5': _ => getEl('players_selection').querySelectorAll('label')[4].click(),
+      '6': _ => getEl('players_selection').querySelectorAll('label')[5].click(),
+      '7': _ => getEl('players_selection').querySelectorAll('label')[6].click(),
+    })
+  },
+
   addTableSorting(tableQuery) {
     // somewhere from SO
     const getCellValue = (tr, idx) =>
@@ -513,84 +542,8 @@ const HTMLUtils = {
       i.hidden = true
     }
     location.hash = ''
-  },
-
-  hotkeyElsList: {},
-
-  processHotkeyAttribute() {
-    for(let i of document.querySelectorAll('button[hotkey]')) {
-      const hk = i.getAttribute('hotkey')
-      i.title += '\nHotkey: Alt+' + hk
-      this.hotkeyElsList[`Alt ${hk}`] = i
-    }
-  },
-
-  enableHotkeysProcessing() {
-
-    let searchEnabled = false
-    let kMode = false 
-
-    const hotkeysList = {
-      'Escape': _ => {
-        if(searchEnabled) {
-          setTimeout(_ => searchEnabled = false, 50)
-        }
-        else {
-          let tgt = document.querySelector('.modal[style*="z-index: 1"]:not([hidden]) button.btn_close')
-          if(!tgt) tgt = document.querySelector('.modal:not([hidden]) button.btn_close')
-          if(!tgt) return
-          tgt.click()
-          this.focusModal(document.querySelector('.modal:not([hidden])'))
-          // this.hideAllModals()
-        }
-      },
-      'Ctrl F': _ => searchEnabled = true,
-      'Alt K': _ => kMode = true,
-    }
-    const kModeHotkeys = {
-      '1': _ => getEl('players_selection').querySelectorAll('label')[0].click(),
-      '2': _ => getEl('players_selection').querySelectorAll('label')[1].click(),
-      '3': _ => getEl('players_selection').querySelectorAll('label')[2].click(),
-      '4': _ => getEl('players_selection').querySelectorAll('label')[3].click(),
-      '5': _ => getEl('players_selection').querySelectorAll('label')[4].click(),
-      '6': _ => getEl('players_selection').querySelectorAll('label')[5].click(),
-      '7': _ => getEl('players_selection').querySelectorAll('label')[6].click(),
-    }
-
-    const ignoreKeys = ['Alt', 'Tab']
-
-    // log(Object.entries(hotkeysList).map(e => `${e[0]}: ${e[1].name}`).join('\n'))
-
-    const that = this
-
-    document.body.addEventListener('keydown', function(evt) {
-      if(!evt.code) return
-      if(ignoreKeys.includes(evt.key)) return 
-      const keyComb = 
-        (evt.ctrlKey ? 'Ctrl ' : '')
-        + (evt.altKey ? 'Alt ' : '')
-        + evt.code.replace(/(Key|Digit)/,'')
-      if(hotkeysList[keyComb]) {
-        hotkeysList[keyComb]()
-        evt.stopPropagation()
-        return false
-      }
-      if(that.hotkeyElsList[keyComb]) {
-        that.hotkeyElsList[keyComb].click()
-        evt.stopPropagation()
-        return false
-      }
-      if(kMode && kModeHotkeys[keyComb]) {
-        kModeHotkeys[keyComb]()
-        kMode = false
-        evt.stopPropagation()
-        return false
-      }
-      if(evt.altKey) log(keyComb)
-    })
-  },
+  }, 
 }
-  
 
 const Analysis = {
   // statistics and various checks
@@ -745,10 +698,11 @@ const Analysis = {
             else if(KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k[0])) teff += +k[1]/2
             else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]*1.3
             else if(KEYWORDS.DAMAGE_TYPES.includes(k[1])) teff += 0.5
-            else if(k[0] == 'Временно') {
-              teff = 0
-              break
-            }
+            // FIXME
+            // else if(k[0] == 'Временно') {
+            //   teff = 0
+            //   break
+            // }
             else if(k[0] == KEYWORDS.ITS_SPECIAL) {
               continue
             }
@@ -1616,7 +1570,7 @@ const User = {
         return {
           ...obj,
           [key]: window[VARS.PLAYERS_DATA_KEY][key]
-        };
+        }
       }, {})
 
     return filtered
@@ -2772,6 +2726,7 @@ var KEYWORDS = {
     "Орбита",
     "Астроинженерия",
     // биология и терраформинг
+    "Метеозащита",
     "Терраформинг",
     "Генные модификации",
     "Адаптация",
@@ -2817,7 +2772,8 @@ var KEYWORDS = {
   ONLY_ONCE_KW: 'разово',
   SINGLE_TIME_EFFECTS: [
     "\\?",
-    'Временно',
+    // FIXME removeme
+    // 'Временно',
     'Великий человек',
     'выдаётся при высадке',
     'выдаётся на старте',
@@ -2924,11 +2880,12 @@ const parseNode = {
         .trim()
         .replace(/:/g, VARS.DISABLE_PARSE_IMMUNITY ? '' : KEYWORDS.ITS_SPECIAL + ':')
         .replace(/ {2,}/g, ' ')
-        .replace(/^(Общество|Производство|Наука) ([+-]\d+)$/, '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.COLONY_PARAMS.join('|')}) ([+-]\\d+)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
-        // временный бонус
-        .replace(/^на (\d+) хода?/i, 'Временно:$1')
+        // FIXME removeme
+        // // временный бонус
+        // .replace(/^на (\d+) хода?/i, 'Временно:$1')
         .replace(new RegExp(`^${KEYWORDS.ONLY_ONCE_KW} (.*)`, 'i'), `${KEYWORDS.ONLY_ONCE_KW}:$1`)
         // вещества
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
