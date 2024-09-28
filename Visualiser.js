@@ -21,6 +21,11 @@ hotkeysLib
   @property {number} age - your age.
  **/
 
+  /**
+   * @typedef {(string | null)} effKey
+   * @typedef {(string | number)} effValue
+   */
+
 const VERSION = '1.2.0'
 console.log(VERSION)
 
@@ -1365,8 +1370,16 @@ const Analysis = {
 
     планетарная_хреновость() {
       const a = []
-      for (let i in User.getAllUsersData()) {
-        a.push([i, Analysis.countPlanetRawMisery(User.getSavedUserData(i))])
+      for (let username in User.getAllUsersData()) {
+        const data = User.getSavedUserData(username)
+        const misery = Analysis.countPlanetRawMisery(data)
+        a.push([username, misery])
+        if(
+          data.additionalParams['чуждая среда'] != misery.alien ||
+          data.additionalParams['непривычная среда'] != misery.unfamiliar
+        ) {
+          warn(`User ${username}: misery should be a${misery.alien}u${misery.unfamiliar}`)
+        }
       }
       Analysis.reportTable(Object.fromEntries(a))
     },
@@ -1564,6 +1577,9 @@ const User = {
     return window[VARS.PLAYERS_DATA_KEY][playerName]
   },
 
+  /**
+   * @returns {Object <string, TGoogleDocUserObj>}
+   */
   getAllUsersData() {
     const filtered = Object.keys(window[VARS.PLAYERS_DATA_KEY])
       .filter(name => !name.startsWith('-'))
@@ -1756,7 +1772,7 @@ const User = {
 
   /**
    * @param {TGoogleDocUserObj} userDataObj 
-   * @returns 
+   * @returns {[effKey, effValue][]}
    */
   countAllUserEffects(userDataObj) {
     if(!userDataObj) return null
@@ -1877,7 +1893,7 @@ const User = {
     const effectsData = User.countAllUserEffects(userData)
       .filter( e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
 
-    // check if params in doc are bad
+    // checking if params in doc are bad
     effectsData
       .forEach( eff => {
         if( KEYWORDS.COLONY_PARAMS.includes(eff[0]) && +userData.colonyParams[eff[0]] !== +eff[1]) {
