@@ -1817,7 +1817,9 @@ const User = {
 
     return (
       (costListArr ? TechUtils.createEffectsTable(costListArr, 'COST') : '')
-      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры')
+      + `Сумма Основных параметров: ${effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
+        .reduce( (acc, el) => acc += +el[1], 0) }` 
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).includes(e[0])), 'Специализированные бонусы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)), 'Исследования')

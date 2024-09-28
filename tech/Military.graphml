@@ -1294,8 +1294,6 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
       </data>
     </node>
     <node id="n99">
-      <data key="d5" xml:space="preserve"><![CDATA[Ну ладно, не в галактике.
-Но в игровом секторе космоса точно!]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1210.8332853228762" y="1424.0"/>
