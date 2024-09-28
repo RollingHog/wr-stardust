@@ -22,7 +22,7 @@ hotkeysLib
  **/
 
   /**
-   * @typedef {(string | null)} effKey
+   * @typedef {(string | number)} effKey
    * @typedef {(string | number)} effValue
    */
 
@@ -1772,7 +1772,7 @@ const User = {
 
   /**
    * @param {TGoogleDocUserObj} userDataObj 
-   * @returns {[effKey, effValue][]}
+   * @returns {Object.<effKey, effValue>}
    */
   countAllUserEffects(userDataObj) {
     if(!userDataObj) return null
@@ -1799,14 +1799,12 @@ const User = {
         data[i] = +startParams[i]
     }
 
-    const res = Object.entries(data)
-
-    return res
+    return data
   },
 
   /**
    * 
-   * @param {[string, any][]} effectsListArr 
+   * @param {[effKey, effValue][]} effectsListArr 
    * @returns 
    */
   createUserTechEffectsTable(effectsListArr, costListArr = null) {
@@ -1833,9 +1831,7 @@ const User = {
 
     return (
       (costListArr ? TechUtils.createEffectsTable(costListArr, 'COST') : '')
-      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры')
-      + `Сумма Основных параметров: ${effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
-        .reduce( (acc, el) => acc += +el[1], 0) }` 
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).includes(e[0])), 'Специализированные бонусы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)), 'Исследования')
@@ -1890,11 +1886,22 @@ const User = {
 
   drawUserStat(playerName) {
     const userData = User.getSavedUserData(playerName)
-    const effectsData = User.countAllUserEffects(userData)
+    const effectsDataObj = User.countAllUserEffects(userData)
+    const effectsDataArr = Object.entries(effectsDataObj)
       .filter( e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
 
+    const mainParamsSum = effectsDataArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
+        .reduce( (acc, el) => acc += +el[1], 0)
+
+    log(mainParamsSum, "Эффективная Рождаемость:",
+      (+effectsDataObj.Рождаемость || 0)
+      - +(userData.additionalParams['чуждая среда'] || 0)
+      - ( (+(userData.additionalParams['непривычная среда'] || 0) > 0) ? 1 : 0)
+      + +(effectsDataObj.Сверхадаптация || 0) 
+      + (+effectsDataObj.Метеозащита || 0))
+
     // checking if params in doc are bad
-    effectsData
+    effectsDataArr
       .forEach( eff => {
         if( KEYWORDS.COLONY_PARAMS.includes(eff[0]) && +userData.colonyParams[eff[0]] !== +eff[1]) {
           warn(`${eff[0]} ${userData.colonyParams[eff[0]]} should be ${eff[1]}`)
@@ -1914,7 +1921,7 @@ const User = {
       <br>
       <a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
         class="fake_link">Эффекты игрока подробно</a>
-      ` + this.createUserTechEffectsTable(effectsData)
+      ` + this.createUserTechEffectsTable(effectsDataArr)
         + this.createColonyDescription(playerName)
 
     HTMLUtils.openModal('report', playerName)
@@ -3263,7 +3270,9 @@ const TurnPlanner = {
     HTMLUtils.openModal(this.NAME)
   },
   onSetUser() {
-    const data = User.countAllUserEffects(User.getSavedUserData(this.activePlayer))
+    const data = Object.entries(
+      User.countAllUserEffects(User.getSavedUserData(this.activePlayer))
+    )
     parseDoc.drawTech(this.activePlayer, techData.currentTreeName)
     getEl('el_tp_resources').innerHTML = User.createUserTechEffectsTable(data)
     // getEl('el_tp_tech').innerHTML = 
