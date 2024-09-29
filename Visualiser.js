@@ -1557,7 +1557,14 @@ const TechUtils = {
     }
 
     return Object.entries(res)
-  }
+  },
+
+  formListForComparison() {
+    const list = Object.values(inverted.alltech).map(
+      ({cost, effect, name, type, treeName})=>({cost, effect, name, type, treeName})
+    )
+    savingOps.saveFile(`tech_${Date.now()}.json`, JSON.stringify(list, 0, 2))
+  },
 }
 
 const User = {
