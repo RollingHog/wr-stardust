@@ -1,5 +1,6 @@
 /* exported
-  log warn warnNoTrace getEl 
+  log warn warnNoTrace 
+  getEl qs
   locationSearchToArray FILL_2_TREE_TYPE
   getDictKey
   makeElDraggable
@@ -33,6 +34,10 @@ function warn(...args) {
 
 function getEl(id) {
   return document.getElementById(id)
+}
+
+function qs(selector) {
+  return document.querySelector(selector)
 }
 
 function locationSearchToArray(query) {

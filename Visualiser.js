@@ -1,6 +1,7 @@
 // common.js
 /* global
-getEl log warn
+getEl qs
+log warn
 FILL_2_TREE_TYPE
 getDictKey
 makeElDraggable
@@ -22,7 +23,7 @@ hotkeysLib
  **/
 
   /**
-   * @typedef {(string | number)} effKey
+   * @typedef {(typeof KEYWORDS.ADDITIONAL_COLONY_PARAMS[number] | typeof KEYWORDS.COLONY_PARAMS[number] | typeof KEYWORDS.PLANET_PARAMS[number])} effKey
    * @typedef {(string | number)} effValue
    */
 
@@ -291,9 +292,9 @@ async function Init() {
     i.disabled = true
   }
 
-  await parseTechIframe(VARS.TREELIST_NOMIL[0])
+  await parseTechIframe(VARS.TREELIST_NOMIL[3])
   console.time('initial draw')
-  drawTree(VARS.TREELIST_NOMIL[0])
+  drawTree(VARS.TREELIST_NOMIL[3])
   getEl('el_loading').hidden = true
   console.timeEnd('initial draw')
 
@@ -317,7 +318,7 @@ async function Init() {
 
     console.time('other parse ')
     Promise.all(TREELIST
-      .filter(e => e != VARS.TREELIST_NOMIL[0])
+      .filter(e => e != VARS.TREELIST_NOMIL[3])
       .map(e => parseTechIframe(e))
     )
     .then(async _ => {
@@ -326,7 +327,7 @@ async function Init() {
       for (let i of TREELIST) {
         drawTree(i)
       }
-      drawTree(VARS.TREELIST_NOMIL[0])
+      drawTree(VARS.TREELIST_NOMIL[3])
       console.timeEnd('other draw  ')
 
       inverted.alltech = Object.fromEntries(
@@ -944,12 +945,11 @@ const Analysis = {
         [6], m.u2,
       ],
     }
-    const unfamTreshold = 4
 
     const sumMisery = {
       alien: 0,
       unfamiliar: 0,
-      weather: 0,
+      // weather: 0,
       actionsList: [],
     }
     for(let i in miseryTable) {
@@ -980,12 +980,14 @@ const Analysis = {
         }
       }
     }
-    if(sumMisery.unfamiliar >= unfamTreshold) {
-      sumMisery.alien += Math.floor(sumMisery.unfamiliar/unfamTreshold)
-      sumMisery.unfamiliar = sumMisery.unfamiliar % (unfamTreshold)
-    }
+
+    // const unfamTreshold = 2
+    // if(sumMisery.unfamiliar >= unfamTreshold) {
+    //   sumMisery.alien += Math.floor(sumMisery.unfamiliar/unfamTreshold)
+    //   sumMisery.unfamiliar = sumMisery.unfamiliar % (unfamTreshold)
+    // }
     sumMisery.actionsList = sumMisery.actionsList.join('; ')
-    sumMisery.weather = Math.ceil(sumMisery.alien / 2) + (sumMisery.unfamiliar > 0 ? 1 : 0)
+    // sumMisery.weather = Math.ceil(sumMisery.alien * 2) + sumMisery.unfamiliar
     return sumMisery
   },
 
@@ -1043,13 +1045,13 @@ const Analysis = {
     if(!Object.keys(obj).length) return
 
     getEl('el_reports_list').innerHTML = HTMLbefore + '<table><thead></thead><tbody></tbody></table>'
-    const tbody = getEl('el_reports_list').children[1].tBodies[0]
+    const tbody = qs('#el_reports_list table').tBodies[0]
 
     const entries = Object.entries(obj)
     const isObj = typeof entries[0][1] == 'object'
     let res = ''
 
-    getEl('el_reports_list').children[1].tHead.innerHTML = 
+    qs('#el_reports_list table').tHead.innerHTML = 
       `<tr><th>(index)</th><th>${isObj ? Object.keys(entries[0][1]).join('</th><th>') : 'value'}</th></tr>`
 
     for(let i of entries) {
@@ -1060,8 +1062,8 @@ const Analysis = {
 
     HTMLUtils.addTableSorting('#el_reports_list table')
     setTimeout(_=>{ 
-      getEl('el_reports_list').children[1].tHead.children[0].children[1].click()
-      getEl('el_reports_list').children[1].tHead.children[0].children[1].click()
+      qs('#el_reports_list table').tHead.children[0].children[1].click()
+      qs('#el_reports_list table').tHead.children[0].children[1].click()
     }, 0)
   },
 
@@ -1368,20 +1370,40 @@ const Analysis = {
       Analysis.reportTable(Object.fromEntries(res))
     },
 
-    планетарная_хреновость() {
-      const a = []
+    планетарная_чуждость_и_погода() {
+      /**
+       * @type {[string, ReturnType<typeof Analysis.countPlanetRawMisery>][]}
+       */
+      const arr = []
+      const antiHostility = {}
+
       for (let username in User.getAllUsersData()) {
-        const data = User.getSavedUserData(username)
-        const misery = Analysis.countPlanetRawMisery(data)
-        a.push([username, misery])
+        const userData = User.getSavedUserData(username)
+        const userEff = User.countAllUserEffects(userData)
+        const misery = Analysis.countPlanetRawMisery(userData)
+        arr.push([username, misery])
+        
+        antiHostility[username] = 
+          (userEff.Сверхадаптация || 0) * 2 +
+          (userEff.Адаптация || 0) +
+          Math.floor((userEff["Защита колонии"] || 0) / 2)
+
         if(
-          data.additionalParams['чуждая среда'] != misery.alien ||
-          data.additionalParams['непривычная среда'] != misery.unfamiliar
+          userData.additionalParams['чуждая среда'] != misery.alien ||
+          userData.additionalParams['непривычная среда'] != misery.unfamiliar
         ) {
           warn(`User ${username}: misery should be a${misery.alien}u${misery.unfamiliar}`)
         }
       }
-      Analysis.reportTable(Object.fromEntries(a))
+      
+      Analysis.reportTable(Object.fromEntries(arr),
+        '<div onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor=\'darkgrey\'"'
+        + 'title="click to copy"><pre>'
+        + arr.map(el => {
+          const totalHostlility = el[1].alien * 2 + el[1].unfamiliar - antiHostility[el[0]]
+          return `${el[0].padEnd(13, ' ')}: Враждебность среды: ##${totalHostlility}d10##`
+        }).join('\n') + '</pre></div>'
+      )
     },
 
     предпочтения_игроков_по_техдревам() {
@@ -1779,7 +1801,7 @@ const User = {
 
   /**
    * @param {TGoogleDocUserObj} userDataObj 
-   * @returns {Object.<effKey, effValue>}
+   * @returns {Object.<string, effValue>}
    */
   countAllUserEffects(userDataObj) {
     if(!userDataObj) return null
@@ -1900,7 +1922,7 @@ const User = {
     const mainParamsSum = effectsDataArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
         .reduce( (acc, el) => acc += +el[1], 0)
 
-    log(mainParamsSum, "Эффективная Рождаемость:",
+    log(playerName, mainParamsSum, "Эффективная Рождаемость:",
       (+effectsDataObj.Рождаемость || 0)
       - +(userData.additionalParams['чуждая среда'] || 0)
       - ( (+(userData.additionalParams['непривычная среда'] || 0) > 0) ? 1 : 0)
@@ -2698,7 +2720,8 @@ class TTechObject {
   fill
 }
 
-var KEYWORDS = {
+
+var KEYWORDS = /** @type {const} */ ({
   ITS_SPECIAL: 'особое',
   ALL_RIGHT: 'особое:$1',
   COLONY_PARAMS: [
@@ -2864,7 +2887,7 @@ var KEYWORDS = {
     'автономность',
     'ПКО',
   ],
-}
+})
 
 const parseNode = {
   /**
