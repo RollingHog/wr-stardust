@@ -1,7 +1,7 @@
 /* exported
   log warn warnNoTrace 
   getEl qs
-  locationSearchToArray FILL_2_TREE_TYPE
+  locationSearchToArray FILL_2_TREE_TYPE PLAYERS_DATA_KEY
   getDictKey
   makeElDraggable
   hotkeysLib
@@ -48,6 +48,8 @@ function locationSearchToArray(query) {
     .map( e => e.split('='))
     .map( ([key, value]) => [key, decodeURIComponent(value)])
 }
+
+var PLAYERS_DATA_KEY = /** @type {const} */ ('DATA__PLAYERS_DATA')
 
 var FILL_2_TREE_TYPE = {
   "#FF9966": "Military",

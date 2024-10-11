@@ -2,6 +2,7 @@
 /* global
   getEl log locationSearchToArray
   getDictKey
+  PLAYERS_DATA_KEY
 */
 
 const RAW_EXAMPLE = `20d6: (3 + 4 + 5 + 6 + 3 + 2 + 5 + 3 + 3 + 5 + 5 + 5 + 2 + 4 + 1 + 4 + 3 + 4 + 5 + 3) = 75
