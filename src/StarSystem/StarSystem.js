@@ -1,8 +1,13 @@
 // common.js
 /* global
-  getEl log locationSearchToArray
-  getDictKey
-  PLAYERS_DATA_KEY
+getEl log locationSearchToArray
+getDictKey
+PLAYERS_DATA_KEY
+*/
+
+// rules.js
+/* global
+countPlanetRawMisery
 */
 
 const RAW_EXAMPLE = `20d6: (3 + 4 + 5 + 6 + 3 + 2 + 5 + 3 + 3 + 5 + 5 + 5 + 2 + 4 + 1 + 4 + 3 + 4 + 5 + 3) = 75
@@ -13,7 +18,7 @@ const RAW_EXAMPLE = `20d6: (3 + 4 + 5 + 6 + 3 + 2 + 5 + 3 + 3 + 5 + 5 + 5 + 2 + 
 
 const EARTH_EXAMPLE = `99d6: ( 4 + 6 + 5 + 1 + 1 ) = 0`
 
-const E = {
+const E = /** @type {const} */({
   giant: {
     none: 'none',
     conventional: 'conventional',
@@ -48,7 +53,7 @@ const E = {
     rest: 'rest',
     user: 'user',
   },
-}
+})
 
 const genDict = {
   firstGiant: {
@@ -394,6 +399,48 @@ const StarSystemGenerator = {
   },
 
   /**
+   * @param {number} orbitNum 
+   * @param {TSSGPlanet} planet 
+   */
+  countPlanetAlienity(orbitNum, planet) {
+    let alienity = 1
+
+    const userObj = {
+      planetParams: {
+        Вода: 15,
+        Гористость: 2,
+        'Расстояние до звезды': orbitNum,
+        'Ресурсы': 15,
+        'Тип планеты': E.size2num[planet.size],
+      }
+    }
+
+    // FIXME
+    const newAlienityData = countPlanetRawMisery(userObj)
+    log(JSON.stringify(newAlienityData))
+
+    newAlienityData.alien += 1
+
+    if (planet.type == E.type.giant) {
+      alienity += 3
+      newAlienityData.alien += 3
+    }
+
+    if (planet.size <= 2) {
+      alienity += 1
+    }
+
+    if ([1, 11].includes(orbitNum)) {
+      alienity += 2
+    } else if ([2, 3, 9, 10, 4, 8].includes(orbitNum)) {
+      alienity += 1
+    }
+
+    // `${alienity}/${newAlienityData.alien}`
+    return alienity
+  },
+
+  /**
    * 
    * @param {TSSGPlanet[]} system 
    * @param {string} playerName 
@@ -444,19 +491,7 @@ const StarSystemGenerator = {
       //   .replace(/ /g, '_')
       let alienity = 1
       if(!k.capital) {
-        if(size <= 2) {
-          alienity += 1
-        }
-
-        if([1,11].includes(i)) {
-          alienity += 2
-        } else if([2,3,9,10,4,8].includes(i)) {
-          alienity += 1
-        }
-
-        if(k.type == E.type.giant) {
-          alienity += 2
-        }
+        alienity = this.countPlanetAlienity(i, k)
       }
       el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}<br>
       <img src='assets/planets/${type}.png' style="width:${size}%" 
