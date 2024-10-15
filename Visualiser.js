@@ -2742,7 +2742,6 @@ var KEYWORDS = /** @type {const} */ ({
     'взлом систем связи невозможен',
     'при подавлении армией',
     'в военное время',
-    'на нечуждых планетах',
     'в системе',
     'вне родной системы',
   ],
@@ -3281,7 +3280,7 @@ const savingOps = {
   saveAllTechAsPng() {
     for (const i of document.querySelectorAll('#tech_tree_buttons button')) {
       i.click()
-      const playerName = document.querySelector('#players_selection input:checked').id
+      const playerName = (document.querySelector('#players_selection input:checked') || {}).id
 
       if(playerName) {
         savingOps.saveSvgAsPng(svg, `${playerName} ${i.innerText}.png`)
