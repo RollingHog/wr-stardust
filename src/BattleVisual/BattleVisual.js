@@ -55,7 +55,7 @@ const onAddShipTemplate = {
   },
   addTemplateWithSize(evt, isRight) {
     const size = prompt(`Size? 0-6, 0 is planet;\n"-" prefix is ground unit, "_" is non-war building, "=" is non-war 'orbital';
-postfixes: '+' is 'robots', '%' is 'giger', '=' is 'non-purist' (militia now)
+postfixes: '!' is 'robots', '%' is 'giger', '=' is 'non-purist' (militia now)
 ${isRight ? 'RIGHT' : 'LEFT'}
 `)
     onAddShipTemplate.addTemplate(isRight, {size: size || '3'})
