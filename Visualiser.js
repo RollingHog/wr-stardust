@@ -18,19 +18,10 @@ hotkeysLib
 countPlanetRawMisery
 */
 
-// TODO
 /**
-  @typedef draw
-  @type {object}
-  @property {string} id - an ID.
-  @property {string} name - your name.
-  @property {number} age - your age.
- **/
-
-  /**
-   * @typedef {(typeof KEYWORDS.ADDITIONAL_COLONY_PARAMS[number] | typeof KEYWORDS.COLONY_PARAMS[number] | typeof KEYWORDS.PLANET_PARAMS[number])} effKey
-   * @typedef {(string | number)} effValue
-   */
+ * @typedef {(typeof KEYWORDS.ADDITIONAL_COLONY_PARAMS[number] | typeof KEYWORDS.COLONY_PARAMS[number] | typeof KEYWORDS.PLANET_PARAMS[number])} effKey
+ * @typedef {(string | number)} effValue
+ */
 
 const VERSION = '1.2.0'
 console.log(VERSION)
@@ -47,7 +38,7 @@ const TREELIST = [
 ]
 
 // constants
-const VARS = {
+const VARS = /** @type {const} */({
   isInit: false,
   IS_LOCAL: window.location.protocol === 'file:',
   DISABLE_PARSE_IMMUNITY: false,
@@ -75,7 +66,7 @@ const VARS = {
   NODETYPE_2_NAME: {},
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
-  TREELIST_EN2RU: null,
+  TREELIST_EN2RU: {},
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
     font-family: Helvetica;
@@ -167,7 +158,7 @@ const VARS = {
   },
   defaultProjectsList: {},
   fill2TreeType: FILL_2_TREE_TYPE,
-}
+})
 
 ; (() => {
   VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
@@ -665,7 +656,7 @@ const Analysis = {
               else teff += +k[1]*2
             }
             else if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
-            else if(k[0]=='Сверхадаптация' || k[0] == KEYWORDS.RESERVE_KW) {
+            else if(k[0]=='Сверхадаптация' || k[0] == KEYWORDS.RESERVE_KW || k[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW + ' (')) {
               teff += +k[1]*2
             } 
             else if(
@@ -677,6 +668,7 @@ const Analysis = {
             } else if(
               k[0].startsWith(KEYWORDS.CREATION_KEYWORD) 
               || k[0].startsWith(KEYWORDS.UNIT_POINTS_KEYWORD)
+              || KEYWORDS.IDEOLOGIES.includes(k[0])
               || k[0].startsWith('Ремонт')
             ) {
               teff += +k[1]/1.6
@@ -1779,8 +1771,9 @@ const User = {
       (costListArr ? TechUtils.createEffectsTable(costListArr, 'COST') : '')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.IDEOLOGIES.includes(e[0])), 'Идеология')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).includes(e[0])), 'Специализированные бонусы')
-      + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)), 'Исследования')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD) ||  e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)), 'Исследования')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.MATERIALS.includes(e[0])), 'Ресурсы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])), 'Дополнительные параметры')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.CREATION_KEYWORD)), 'Военные бонусы')
@@ -1788,7 +1781,8 @@ const User = {
         && !e[0].startsWith(':')
         && !KEYWORDS.TECH_EFFECTS.includes(e[0])
         && !e[0].startsWith(KEYWORDS.RESERVE_KW)
-        && !e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD)
+        && !KEYWORDS.IDEOLOGIES.includes(e[0])
+        && !e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD ||  e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW))
         && !KEYWORDS.MATERIALS.includes(e[0])
         && !KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])
         && !e[0].startsWith(KEYWORDS.CREATION_KEYWORD)
@@ -2305,13 +2299,13 @@ class TGoogleDocUserObj {
 const playerPost = {
   open() {
     const p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
-    playerPost.parse(p)
+    playerPost.populateWindow(p)
     HTMLUtils.openModal('selected_tech')
   },
   prompt() {
     let p = prompt('player post here')
     if(!p) return
-    playerPost.parse(p)
+    playerPost.populateWindow(p)
     HTMLUtils.openModal('selected_tech')
   },
   close() {
@@ -2366,7 +2360,21 @@ const playerPost = {
     //   }))
     return res
   },
-  parse(text) {
+  populateWindow(text) {
+    console.time('playerPost')
+
+    const player = this.detectPlayer(text)
+    // this.remindSpecialEffects(player)
+    this.parse(text)
+    setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
+    setTimeout(() => {
+      this.countTechStudyResult()
+      console.timeEnd('playerPost')
+  }, 100)
+
+  }, 
+
+  detectPlayer(text) {
     const firstWord = text.slice(0, Math.min(text.indexOf(' '), text.indexOf('\n'), text.indexOf(':')))
     getEl('players_selection')
     for(let i of getEl('players_selection').querySelectorAll('label')) {
@@ -2374,9 +2382,19 @@ const playerPost = {
         if(!i.querySelector('input[type="checkbox"]').checked) {
           i.click()
         }
-        break
+        return i.innerText
       }
     }
+  },
+
+  remindSpecialEffects(playerName) {
+    const userEff = User.countAllUserEffects(User.getSavedUserData(playerName))
+    log(userEff)
+    getEl('el_special_tech_eff_reminder').innerHTML = ''
+  },
+
+  parse(text) {
+
 
     let requests = this.extractRolls(text)
 
@@ -2446,10 +2464,6 @@ const playerPost = {
     
     </tbody></table>
     Чтобы "Цена" не перезаписывалась - добавь в начало '+'`
-
-    // log(requests)
-    setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
-    setTimeout(this.countTechStudyResult, 100)
   },
 
   fieldPositionsInTable: {
@@ -2476,6 +2490,7 @@ const playerPost = {
   countTechStudyResult() {
     const pos = playerPost.fieldPositionsInTable
 
+    getEl('el_selected_tech_list').hidden = true
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e => {
         if (!e.children[pos.name]) return null
@@ -2612,6 +2627,7 @@ const playerPost = {
       </div>`
     }
     ).join('')
+    getEl('el_selected_tech_list').hidden = false
   }
 }
 
@@ -2691,6 +2707,7 @@ var KEYWORDS = /** @type {const} */ ({
     "Гиперплазма",
   ],
   RESEARCH_KEYWORD: 'Исследования',
+  IGNORE_CRITFAIL_KW: 'Игнорирование критпровала',
   RESERVE_KW: 'Резерв',
   TECH_EFFECTS: [
     // индустрия
@@ -2716,15 +2733,17 @@ var KEYWORDS = /** @type {const} */ ({
     "Устранение последствий",
     "Осуждение",
     "Доверие",
-    // политические
-    "ГМО",
-    "Хром",
     // военные
     "Конверсия",
     "Ремонт",
     "Ремонт (?:армий|флотов)",
     "Бомбардировка",
     'Скорость FTL',
+  ],
+  IDEOLOGIES: [
+    // идеологии/zeals
+    "ГМО",
+    "Хром",
   ],
   // приз за цепочку технологий, может нарушать правила стоимости
   REWARD_KEYWORD: 'приз',
@@ -2869,9 +2888,13 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.PLANET_PARAMS.join('|')}) [+-]?(\\d+)`), '$1:$2')
         // Эффекты и бонусы:
         .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        // идеологии
+        .replace(new RegExp(`^(${KEYWORDS.IDEOLOGIES.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         // Плюсы к научным веткам
         .replace(/^Вет(?:ка|вь) "?([^"]+)"? ([+-]?\d+)/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$1"):$2')
         .replace(/^\+?(\d+) (?:куб(?:а|ов)? )?к вет(?:ке|ви) "([^"]+)"/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$2"):$1')
+        // игнорирование критпровала, всегда +1
+        .replace(new RegExp(`^(${KEYWORDS.IGNORE_CRITFAIL_KW} \\([^\\)]+\\))$`), '$1:+1')
         // армии и звездолёты
         .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), KEYWORDS.UNIT_TYPES_KEYWORD+':$1')
         // .replace(/(армия|$/, 'Тип отряда:$1')
