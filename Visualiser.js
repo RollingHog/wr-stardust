@@ -524,10 +524,10 @@ const HTMLUtils = {
           Analysis.openReport(i1)
         }
       },
-      'unitcreator': _ => UnitCreator.open(),
-      [TurnPlanner.NAME]: _ => TurnPlanner.open(),
+      'unitcreator': _ => setTimeout(UnitCreator.open),
+      [TurnPlanner.NAME]: _ => setTimeout(TurnPlanner.open),
       // TODO add processing from localstorage
-      'selected_tech': _ => playerPost.open()
+      'selected_tech': _ => setTimeout(playerPost.open)
     }
 
     for(let i of path) {
@@ -1459,7 +1459,7 @@ const TechUtils = {
       `<td ${e[1] === 0 ? 'colspan=2' : ''}>${e[0]}</td>` +
       (e[1] === 0 ? '' : `<td>${`${+e[1]>=0?'&nbsp;':''}${e[1]}`}`)
     ).join('</tr><tr>') +
-    '</tr>'
+    '</tr></tbody></table>'
   },
 
   byName(techName) {
@@ -2361,22 +2361,23 @@ const playerPost = {
     return res
   },
   populateWindow(text) {
-    console.time('playerPost')
-
+    // console.time('playerPost parse')
     const player = this.detectPlayer(text)
-    // this.remindSpecialEffects(player)
+    this.remindSpecialEffects(player)
     this.parse(text)
     setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
     setTimeout(() => {
+      // console.time('playerPost countTechStudyResult')
       this.countTechStudyResult()
-      console.timeEnd('playerPost')
   }, 100)
 
   }, 
 
   detectPlayer(text) {
     const firstWord = text.slice(0, Math.min(text.indexOf(' '), text.indexOf('\n'), text.indexOf(':')))
-    getEl('players_selection')
+    const playerName = User.listUsers().filter(playerName => playerName.startsWith(firstWord))[0]
+    if(!playerName) return 
+
     for(let i of getEl('players_selection').querySelectorAll('label')) {
       if(i.innerText.startsWith(firstWord) ) {
         if(!i.querySelector('input[type="checkbox"]').checked) {
@@ -2388,14 +2389,18 @@ const playerPost = {
   },
 
   remindSpecialEffects(playerName) {
+    if(!playerName) {
+      getEl('el_special_tech_eff_reminder').innerHTML = 'нет'
+      return
+    }
     const userEff = User.countAllUserEffects(User.getSavedUserData(playerName))
-    log(userEff)
-    getEl('el_special_tech_eff_reminder').innerHTML = ''
+    const remindTechs = Object.entries(userEff).filter(([key, _])=>{
+      return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)
+    }).map( ([key, value])=> key+': '+value )
+    getEl('el_special_tech_eff_reminder').innerHTML = remindTechs.join(', ')
   },
 
   parse(text) {
-
-
     let requests = this.extractRolls(text)
 
     for(let i of requests) {
@@ -2591,6 +2596,7 @@ const playerPost = {
       ['Орбитальные здания', byType[VARS.NODE_T.ORBITAL]],
       ['Проекты', byType[VARS.NODE_T.PROJECT]],
     ].map(e => {
+      if(!e[1].length) return ''
       let tableStr = Object.entries(e[1]
         .reduce((acc, e2) => {
           const field = TechUtils.get(e2).fill 
