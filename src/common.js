@@ -2,6 +2,7 @@
   log warn warnNoTrace 
   getEl qs
   locationSearchToArray FILL_2_TREE_TYPE PLAYERS_DATA_KEY
+  capitalizeFirstLetter
   getDictKey
   makeElDraggable
   hotkeysLib
@@ -47,6 +48,10 @@ function locationSearchToArray(query) {
     .filter( e => e)
     .map( e => e.split('='))
     .map( ([key, value]) => [key, decodeURIComponent(value)])
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 var PLAYERS_DATA_KEY = /** @type {const} */ ('DATA__PLAYERS_DATA')

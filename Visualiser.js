@@ -3,6 +3,7 @@
 getEl qs
 log warn
 FILL_2_TREE_TYPE PLAYERS_DATA_KEY
+capitalizeFirstLetter
 getDictKey
 makeElDraggable
 hotkeysLib
@@ -377,7 +378,7 @@ async function Init() {
       console.timeEnd('analysis    ')
 
       console.timeEnd('full load   ')
-      VARS.isInit = false
+      setTimeout( _=> VARS.isInit = false, 200)
     })
   }, 0)
 }
@@ -701,11 +702,7 @@ const Analysis = {
             else if(KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k[0])) teff += +k[1]/2
             else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]*1.3
             else if(KEYWORDS.DAMAGE_TYPES.includes(k[1])) teff += 0.5
-            // FIXME
-            // else if(k[0] == 'Временно') {
-            //   teff = 0
-            //   break
-            // }
+            // TODO разово
             else if(k[0] == KEYWORDS.ITS_SPECIAL) {
               continue
             }
@@ -859,7 +856,7 @@ const Analysis = {
     for (let i of Object.keys(tech)) {
       for (let j of Object.values(tech[i])) {
         j.cost
-          .filter(e => e[0] == 'Технология')
+          .filter(e => e[0] == KEYWORDS.TECH_KW)
           .forEach(e => {
             if (!(e[1] in inverted.alltech)) warn('unknown tech name here:', i, j.name, [e[1]])
           })
@@ -1315,10 +1312,28 @@ const Analysis = {
       )
     },
 
-    предпочтения_игроков_по_техдревам() {
+    любимые_техдрева_игроков() {
       const t = Object.entries(Analysis.countTechBalanceBySubtree())
-        .map(([name, e]) => [name, Object.entries(e).sort((a,b)=>b[1]-a[1]).slice(0,5)])
-      Analysis.reportTable(Object.fromEntries(t))
+        .map(([name, list]) => [name, Object.entries(list).sort((a, b) => b[1] - a[1]).slice(0, 5)])
+      const mostUsedMaxColumn = 3
+      const mostUsed = Object.entries(t
+        .map(([_, list]) => list.map(e => e[0]).slice(0, mostUsedMaxColumn))
+        .flat()
+        .reduce((prev, el) => {
+          return (
+            prev[el] ? ++prev[el] : (prev[el] = 1),
+            prev
+          )
+        }, {})
+      )
+        .sort((a, b) => b[1] - a[1])
+
+      Analysis.reportTable(
+        Object.fromEntries(t),
+        '<strong>Сумма по первым стобцам</strong><br>' + 
+        mostUsed.map(([k, v]) => k + ': ' + v)
+          .join('<br>')
+      )
     },
 
     тип_критпровала_по_таблицам() {
@@ -1476,7 +1491,7 @@ const TechUtils = {
     let res = {}
 
     for(let i of t) {
-      if(i[0] === KEYWORDS.ITS_SPECIAL) {
+      if(i[0] === KEYWORDS.ITS_SPECIAL || i[0].startsWith(KEYWORDS.TECH_KW)) {
         i[0] = ':' + i[1]
         i[1] = null
       }
@@ -1655,7 +1670,7 @@ const User = {
   /**
    * @param {string[]} techList list of tech names
    * @param {TGoogleDocUserObj | undefined} userDataObj 
-   * @returns 
+   * @returns {{cost: [effKey, effValue][], effect: [effKey, effValue][]}}
    */
   countSummaryCostAndEffect(techList, userDataObj = null) {
     let techListFiltered = techList
@@ -1742,10 +1757,41 @@ const User = {
 
   /**
    * 
+   * @param {*} playerName 
+   * @returns {Object.<string, effValue>}
+   */
+  getUserEffects(playerName) {
+    if(!playerName) return null
+    return  this.countAllUserEffects(this.getSavedUserData(playerName))
+  },
+
+  /**
+   * 
+   * @param {*} costListArr 
+   * @param {ReturnType<typeof User.getUserEffects>} userEff 
+   * @returns 
+   */
+  createTechCostTable(costListArr, userEff) {
+    if(!costListArr) return ''
+    costListArr = costListArr.map(([k,v])=>{
+      if(KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(k))) {
+        const aval = userEff[capitalizeFirstLetter(k)]
+        const resK = k+` (есть ${aval})` +
+          (aval < v ? ' (МАЛО)' : '')
+
+        return [resK, v]
+      }
+      return[k,v]
+    })
+    return TechUtils.createEffectsTable(costListArr, 'COST')
+  },
+
+  /**
+   * 
    * @param {[effKey, effValue][]} effectsListArr 
    * @returns 
    */
-  createUserTechEffectsTable(effectsListArr, costListArr = null) {
+  createUserTechEffectsTable(effectsListArr) {
     effectsListArr = effectsListArr
       .filter( e => {
         return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
@@ -1768,8 +1814,7 @@ const User = {
     // t = [].concat(t.main, t.additional)
 
     return (
-      (costListArr ? TechUtils.createEffectsTable(costListArr, 'COST') : '')
-      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
+      TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.IDEOLOGIES.includes(e[0])), 'Идеология')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).includes(e[0])), 'Специализированные бонусы')
@@ -2362,13 +2407,13 @@ const playerPost = {
   },
   populateWindow(text) {
     // console.time('playerPost parse')
-    const player = this.detectPlayer(text)
-    this.remindSpecialEffects(player)
+    const playerName = this.detectPlayer(text)
+    this.remindSpecialEffects(playerName)
     this.parse(text)
     setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
     setTimeout(() => {
       // console.time('playerPost countTechStudyResult')
-      this.countTechStudyResult()
+      this.countTechStudyResult(playerName)
   }, 100)
 
   }, 
@@ -2393,7 +2438,7 @@ const playerPost = {
       getEl('el_special_tech_eff_reminder').innerHTML = 'нет'
       return
     }
-    const userEff = User.countAllUserEffects(User.getSavedUserData(playerName))
+    const userEff = User.getUserEffects(playerName)
     const remindTechs = Object.entries(userEff).filter(([key, _])=>{
       return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)
     }).map( ([key, value])=> key+': '+value )
@@ -2492,7 +2537,7 @@ const playerPost = {
     alert('copied')
   },
 
-  countTechStudyResult() {
+  countTechStudyResult(playerName = null) {
     const pos = playerPost.fieldPositionsInTable
 
     getEl('el_selected_tech_list').hidden = true
@@ -2575,8 +2620,9 @@ const playerPost = {
     // getEl('el_selected_tech_list').children[0].tBodies[1].rows[0].children[pos.delta-1].innerText = summaryDelta
     const result = User.countSummaryCostAndEffect(techList)
 
-    getEl('el_tech_result_list').innerHTML = 
-      User.createUserTechEffectsTable(Object.entries(result.effect), result.cost)
+    getEl('el_tech_result_list').innerHTML =
+      User.createTechCostTable(result.cost, User.getUserEffects(playerName)) +
+      User.createUserTechEffectsTable(Object.entries(result.effect))
 
     const byType = {
       [VARS.NODE_T.TECH]: [],
@@ -2659,7 +2705,7 @@ class TTechObject {
   fill
 }
 
-
+// просто копируй ключевое слово вперёд нужного списка, если нужно его включить
 var KEYWORDS = /** @type {const} */ ({
   ITS_SPECIAL: 'особое',
   ALL_RIGHT: 'особое:$1',
@@ -2713,6 +2759,7 @@ var KEYWORDS = /** @type {const} */ ({
     "Гиперплазма",
   ],
   RESEARCH_KEYWORD: 'Исследования',
+  TECH_KW: 'Технология',
   IGNORE_CRITFAIL_KW: 'Игнорирование критпровала',
   RESERVE_KW: 'Резерв',
   TECH_EFFECTS: [
@@ -2773,8 +2820,6 @@ var KEYWORDS = /** @type {const} */ ({
   ONLY_ONCE_KW: 'разово',
   SINGLE_TIME_EFFECTS: [
     "\\?",
-    // FIXME removeme
-    // 'Временно',
     'Великий человек',
     'выдаётся при высадке',
     'выдаётся на старте',
@@ -2819,6 +2864,7 @@ var KEYWORDS = /** @type {const} */ ({
     "гигер",
     "нет FTL",
     "ужас",
+    "массовое",
     "ракеты",
     "ЭМИ",
     "ББ",
@@ -2857,7 +2903,7 @@ const parseNode = {
         .replace(/^(\d+) этапа$/i, 'Этапы:$1')
         .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
         .replace(/^(\d+) слот(а|ов)$/i, 'Слоты:$1')
-        .replace(/^тех. (.+)$/i, 'Технология:$1')
+        .replace(/^тех. (.+)$/i, KEYWORDS.TECH_KW+':$1')
         .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((\\d+)\\)$`), '$1:$2')
@@ -2884,9 +2930,6 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.COLONY_PARAMS.join('|')}) ([+-]\\d+)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
         .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
-        // FIXME removeme
-        // // временный бонус
-        // .replace(/^на (\d+) хода?/i, 'Временно:$1')
         .replace(new RegExp(`^${KEYWORDS.ONLY_ONCE_KW} (.*)`, 'i'), `${KEYWORDS.ONLY_ONCE_KW}:$1`)
         // вещества
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
@@ -3248,7 +3291,7 @@ const TurnPlanner = {
   },
   onSetUser() {
     const data = Object.entries(
-      User.countAllUserEffects(User.getSavedUserData(this.activePlayer))
+      User.getUserEffects(this.activePlayer)
     )
     parseDoc.drawTech(this.activePlayer, techData.currentTreeName)
     getEl('el_tp_resources').innerHTML = User.createUserTechEffectsTable(data)
