@@ -61,8 +61,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1210.8332853228762" y="44.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="209.705078125" x="25.0224609375" xml:space="preserve" y="6.948242187500028">Милитаризация орбиты
-Сложность: 1, тех. Освоение орбиты
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="174.701171875" x="42.5244140625" xml:space="preserve" y="-0.4023437499999716">Милитаризация орбиты
+Сложность: 1, тех. Первичная 
+орбитальная группировка
 Эффект: Создание флотов +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="ellipse"/>
         </y:ShapeNode>
@@ -141,9 +142,8 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1210.8332853228762" y="320.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="185.248046875" x="37.2509765625" xml:space="preserve" y="-0.40234375">Оптимизация верфей
-Сложность: 2, тех. Орбитальное
-производство
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.751953125" x="14.4990234375" xml:space="preserve" y="6.9482421875">Оптимизация верфей
+Сложность: 2, тех. Пусковые технологии
 Эффект: Создание флотов +4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -191,7 +191,7 @@
     <node id="n13">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="1056.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="1148.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="164.83984375" x="47.455078125" xml:space="preserve" y="6.9482421875">Сверхсветовая координация
@@ -273,8 +273,9 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1210.8332853228762" y="596.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="145.673828125" x="57.0380859375" xml:space="preserve" y="6.9482421875">Базы в глубоком космосе
-Сложность: 3
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="154.15234375" x="52.798828125" xml:space="preserve" y="-0.40234375">Базы в глубоком космосе
+Сложность: 3, тех. Теория 
+досветовой колонизации
 Эффект: Общество +3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -391,8 +392,8 @@
           <y:Geometry height="62.00000000000006" width="259.75" x="1210.8332853228762" y="872.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="253.146484375" x="3.3017578125" xml:space="preserve" y="-0.40234375">Межзвёздные операции
-Сложность: 4, тех. Межзвёздная власть
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="264.876953125" x="-2.5634765625" xml:space="preserve" y="-0.40234375">Межзвёздные операции
+Сложность: 4, тех. Индустриализация космоса
 Эффект: Создание космических баз +8, вне 
 родной системы<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -586,8 +587,8 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
           <y:Geometry height="62.00000000000006" width="259.75" x="924.5601010057467" y="320.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="182.083984375" x="38.8330078125" xml:space="preserve" y="6.9482421875">Электромагнитное орудие
-Сложность: 2, редк. металлы(1)
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="192.126953125" x="33.8115234375" xml:space="preserve" y="6.9482421875">Электромагнитное орудие
+Сложность: 2, редкие металлы(1)
 Эффект: Атака 5<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="fatarrow"/>
         </y:ShapeNode>
@@ -957,7 +958,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
     <node id="n74">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="928.0369166886171" y="1148.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="928.036916688617" y="1240.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="179.44140625" x="40.154296875" xml:space="preserve" y="-0.40234375">Служба координации огня
@@ -1084,8 +1085,9 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="688.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="180.40234375" x="39.673828125" xml:space="preserve" y="6.9482421875">Применение антиматерии
-Сложность: 4, тех. Физика бран
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="194.904296875" x="32.4228515625" xml:space="preserve" y="-0.40234375">Применение антиматерии
+Сложность: 4, 
+тех. Физика элементарных частиц
 Эффект: Атака +3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -1204,9 +1206,9 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
           <y:Geometry height="62.00000000000006" width="259.75" x="928.0369166886171" y="227.99999999999994"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="136.83203125" x="61.458984375" xml:space="preserve" y="6.948242187500057">Инфразвуковые орудия
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="191.921875" x="33.9140625" xml:space="preserve" y="6.948242187500057">Инфразвуковые орудия
 Сложность: 2
-Эффект: Атака 3, ужас<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: Атака 1, ужас, массовое<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="trapezoid"/>
         </y:ShapeNode>
       </data>
@@ -1271,9 +1273,9 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="963.9999999999999"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="152.9921875" x="53.37890625" xml:space="preserve" y="-0.4023437499998863">Оружие на "новой физике"
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="154.076171875" x="52.8369140625" xml:space="preserve" y="-0.4023437499998863">Оружие на "новой физике"
 Сложность: 5, тех. 
-Антиэтропийные свойства
+Физика гиперпространства
 Эффект: Атака +4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -1353,10 +1355,10 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
     <node id="n103">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="343.75" y="1240.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="343.75" y="1148.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="96.58984375" x="81.580078125" xml:space="preserve" y="6.9482421875">Пустотный щит
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="101.9921875" x="78.87890625" xml:space="preserve" y="6.9482421875">Щит искривления
 Сложность: 5
 Эффект: Щит 10<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="fatarrow"/>
@@ -1380,7 +1382,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
     <node id="n105">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="1148.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="1056.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="251.048828125" x="4.3505859375" xml:space="preserve" y="6.9482421875">Военная гравитоника
@@ -1393,7 +1395,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
     <node id="n106">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="928.0369166886171" y="1240.0"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="928.0369166886171" y="1148.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="176.107421875" x="41.8212890625" xml:space="preserve" y="6.9482421875">Сингулярная шрапнель
@@ -1434,19 +1436,6 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
     <node id="n109">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="348.5369166886171" y="1148.0"/>
-          <y:Fill color="#FF9966" transparent="false"/>
-          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="176.306640625" x="41.7216796875" xml:space="preserve" y="6.9482421875">Левитационные ранцы
-Сложность: 5
-Эффект: Скорость +3, Полёт 2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="trapezoid"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n110">
-      <data key="d6">
-        <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-235.3982323275868" y="780.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
@@ -1458,7 +1447,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n111">
+    <node id="n110">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="928.0369166886171" y="688.0"/>
@@ -1471,7 +1460,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n112">
+    <node id="n111">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="595.9999999999999"/>
@@ -1484,21 +1473,20 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n113">
+    <node id="n112">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="343.75" y="1424.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="183.912109375" x="37.9189453125" xml:space="preserve" y="-0.40234375">Система "Винегрет"
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="183.912109375" x="37.9189453125" xml:space="preserve" y="6.9482421875">Система "Винегрет"
 Сложность: 7, тех. Гиперплазма
-Эффект: Атака 18, :по всему 
-что есть на орбите<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: Атака 18, массовое<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n114">
+    <node id="n113">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="54.0" y="1056.0"/>
@@ -1512,7 +1500,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n115">
+    <node id="n114">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-235.04646465517357" y="1148.0"/>
@@ -1526,7 +1514,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n116">
+    <node id="n115">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-235.3982323275868" y="319.99999999999994"/>
@@ -1540,7 +1528,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n117">
+    <node id="n116">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1500.5832853228762" y="44.0"/>
@@ -1554,7 +1542,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n118">
+    <node id="n117">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="1240.0"/>
@@ -1567,7 +1555,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n119">
+    <node id="n118">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="1424.0"/>
@@ -1581,7 +1569,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n120">
+    <node id="n119">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="343.75" y="1332.0"/>
@@ -1595,7 +1583,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n121">
+    <node id="n120">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="1332.0"/>
@@ -1608,7 +1596,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n122">
+    <node id="n121">
       <data key="d5" xml:space="preserve"><![CDATA[Именно то, что вы подумали.
 Вес "Бога войны- ок. 1.5 миллионов тонн при высоте 700 м, 
 внутренние силовые поля поддерживают целостность корпуса
@@ -1626,7 +1614,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n123">
+    <node id="n122">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-235.0464646551735" y="1424.0"/>
@@ -1640,7 +1628,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n124">
+    <node id="n123">
       <data key="d5" xml:space="preserve"><![CDATA["Залог победы – неожиданность и скорость. В любви это так же верно, как в бою."
 
 — Андре Моруа]]></data>
@@ -1657,7 +1645,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n125">
+    <node id="n124">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="348.53691668861717" y="688.0"/>
@@ -1670,21 +1658,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n126">
-      <data key="d5" xml:space="preserve"><![CDATA[Тонкая плёнка наномашин, охватывающих всё тело - и щит, и меч, и передвижной суперкомпьютер.]]></data>
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="348.5369166886171" y="871.9999999999999"/>
-          <y:Fill color="#FF9966" transparent="false"/>
-          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="200.248046875" x="29.7509765625" xml:space="preserve" y="6.9482421875">Наноброня
-Сложность: 3
-Эффект: Защита +2, Адаптация +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="fatarrow"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n127">
+    <node id="n125">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-235.3982323275868" y="44.0"/>
@@ -1698,7 +1672,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n128">
+    <node id="n126">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="54.0" y="227.99999999999994"/>
@@ -1711,7 +1685,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n129">
+    <node id="n127">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="348.5369166886171" y="320.0"/>
@@ -1964,7 +1938,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e24" source="n15" target="n125">
+    <edge id="e24" source="n15" target="n124">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2094,7 +2068,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e37" source="n21" target="n110">
+    <edge id="e37" source="n21" target="n109">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2234,7 +2208,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e51" source="n125" target="n42">
+    <edge id="e51" source="n124" target="n42">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2414,7 +2388,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e69" source="n97" target="n13">
+    <edge id="e69" source="n12" target="n97">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2424,7 +2398,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e70" source="n12" target="n97">
+    <edge id="e70" source="n25" target="n89">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2434,7 +2408,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e71" source="n25" target="n89">
+    <edge id="e71" source="n105" target="n103">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2444,7 +2418,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e72" source="n13" target="n105">
+    <edge id="e72" source="n105" target="n106">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2454,7 +2428,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e73" source="n105" target="n103">
+    <edge id="e73" source="n31" target="n107">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2464,7 +2438,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e74" source="n105" target="n106">
+    <edge id="e74" source="n107" target="n108">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2474,7 +2448,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e75" source="n31" target="n107">
+    <edge id="e75" source="n25" target="n31">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2484,7 +2458,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e76" source="n107" target="n108">
+    <edge id="e76" source="n68" target="n111">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2494,7 +2468,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e77" source="n25" target="n31">
+    <edge id="e77" source="n111" target="n83">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2504,7 +2478,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e78" source="n68" target="n112">
+    <edge id="e78" source="n111" target="n110">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2514,7 +2488,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e79" source="n112" target="n83">
+    <edge id="e79" source="n30" target="n100">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2524,7 +2498,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e80" source="n112" target="n111">
+    <edge id="e80" source="n107" target="n112">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2534,7 +2508,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e81" source="n30" target="n100">
+    <edge id="e81" source="n97" target="n96">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2544,7 +2518,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e82" source="n107" target="n113">
+    <edge id="e82" source="n94" target="n113">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2554,7 +2528,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e83" source="n97" target="n96">
+    <edge id="e83" source="n113" target="n25">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2564,7 +2538,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e84" source="n94" target="n114">
+    <edge id="e84" source="n113" target="n114">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2574,7 +2548,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e85" source="n114" target="n25">
+    <edge id="e85" source="n100" target="n101">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2584,7 +2558,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e86" source="n114" target="n109">
+    <edge id="e86" source="n101" target="n99">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2594,7 +2568,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e87" source="n114" target="n115">
+    <edge id="e87" source="n101" target="n102">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2604,7 +2578,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e88" source="n100" target="n101">
+    <edge id="e88" source="n100" target="n40">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2614,7 +2588,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e89" source="n101" target="n99">
+    <edge id="e89" source="n117" target="n104">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2624,7 +2598,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e90" source="n101" target="n102">
+    <edge id="e90" source="n117" target="n119">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2634,7 +2608,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e91" source="n100" target="n40">
+    <edge id="e91" source="n117" target="n120">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2644,7 +2618,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e92" source="n105" target="n118">
+    <edge id="e92" source="n120" target="n118">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2654,7 +2628,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e93" source="n118" target="n104">
+    <edge id="e93" source="n3" target="n116">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2664,7 +2638,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e94" source="n118" target="n120">
+    <edge id="e94" source="n120" target="n22">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2674,7 +2648,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e95" source="n118" target="n121">
+    <edge id="e95" source="n120" target="n112">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2684,7 +2658,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e96" source="n121" target="n119">
+    <edge id="e96" source="n12" target="n121">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2694,7 +2668,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e97" source="n3" target="n117">
+    <edge id="e97" source="n107" target="n122">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2704,7 +2678,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e98" source="n121" target="n22">
+    <edge id="e98" source="n2" target="n70">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2714,7 +2688,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e99" source="n121" target="n113">
+    <edge id="e99" source="n29" target="n123">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2724,7 +2698,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e100" source="n12" target="n122">
+    <edge id="e100" source="n1" target="n125">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2734,7 +2708,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e101" source="n107" target="n123">
+    <edge id="e101" source="n2" target="n77">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2744,7 +2718,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e102" source="n2" target="n70">
+    <edge id="e102" source="n0" target="n126">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2754,7 +2728,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e103" source="n29" target="n124">
+    <edge id="e103" source="n126" target="n8">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2764,7 +2738,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e104" source="n73" target="n126">
+    <edge id="e104" source="n126" target="n115">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2774,7 +2748,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e105" source="n1" target="n127">
+    <edge id="e105" source="n87" target="n60">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2784,7 +2758,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e106" source="n2" target="n77">
+    <edge id="e106" source="n7" target="n127">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2794,7 +2768,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e107" source="n0" target="n128">
+    <edge id="e107" source="n0" target="n5">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2804,7 +2778,8 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e108" source="n128" target="n8">
+    <edge id="e108" source="n97" target="n105">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2814,7 +2789,8 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e109" source="n128" target="n116">
+    <edge id="e109" source="n13" target="n117">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2824,27 +2800,8 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e110" source="n87" target="n60">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e111" source="n7" target="n129">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e112" source="n0" target="n5">
+    <edge id="e110" source="n105" target="n13">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
