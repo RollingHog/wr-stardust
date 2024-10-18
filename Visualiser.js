@@ -1513,7 +1513,7 @@ const TechUtils = {
   },
 }
 
-const User = {
+const User = /** @type {const} */({
 
   activePlayer: null,
 
@@ -1670,7 +1670,7 @@ const User = {
   /**
    * @param {string[]} techList list of tech names
    * @param {TGoogleDocUserObj | undefined} userDataObj 
-   * @returns {{cost: [effKey, effValue][], effect: [effKey, effValue][]}}
+   * @returns {{cost: [string, effValue][], effect: [string, effValue][]}}
    */
   countSummaryCostAndEffect(techList, userDataObj = null) {
     let techListFiltered = techList
@@ -1911,7 +1911,7 @@ const User = {
 
     HTMLUtils.openModal('report', playerName)
   },
-}
+})
 
 async function parseTechIframe(tree_name) {
 
@@ -2439,10 +2439,14 @@ const playerPost = {
       return
     }
     const userEff = User.getUserEffects(playerName)
+
     const remindTechs = Object.entries(userEff).filter(([key, _])=>{
       return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)
     }).map( ([key, value])=> key+': '+value )
-    getEl('el_special_tech_eff_reminder').innerHTML = remindTechs.join(', ')
+
+    const currGreatPplCost = Math.ceil(User.getSavedUserData(playerName).greatPeople.length /2)
+    
+    getEl('el_special_tech_eff_reminder').innerHTML = `цена Великого человека: ${currGreatPplCost}; ` + remindTechs.join(', ')
   },
 
   parse(text) {
@@ -2745,7 +2749,6 @@ var KEYWORDS = /** @type {const} */ ({
     // 1 ряд
     "Добыча",
     "Редкие металлы",
-    "Редк. металлы",
     "Трансураны",
     // 2 ряд
     "Наноматериалы",
