@@ -3,7 +3,7 @@
 getEl qs
 log warn
 FILL_2_TREE_TYPE PLAYERS_DATA_KEY
-capitalizeFirstLetter
+capitalizeFirstLetter rgbToHex
 getDictKey
 makeElDraggable
 hotkeysLib
@@ -2344,18 +2344,42 @@ class TGoogleDocUserObj {
 const playerPost = {
   open() {
     const p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
-    playerPost.populateWindow(p)
+    playerPost.process(p)
     HTMLUtils.openModal('selected_tech')
   },
   prompt() {
     let p = prompt('player post here')
     if(!p) return
-    playerPost.populateWindow(p)
+    playerPost.process(p)
     HTMLUtils.openModal('selected_tech')
   },
   close() {
     HTMLUtils.closeModal('selected_tech')
   },
+
+  process(text) {
+    // console.time('playerPost parse')
+    const playerName = this.detectPlayer(text)
+    this.remindSpecialEffects(playerName)
+    this.parse(text)
+    setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
+    setTimeout(() => {
+      // console.time('playerPost countTechStudyResult')
+      this.countTechStudyResult(playerName)
+      setTimeout( _ => this.selectTreeByTableCellColor(), 400)
+    }, 70)
+  },
+  
+  selectTreeByTableCellColor() {
+    const colorArr = qs('#el_selected_tech_list table td').style.backgroundColor
+      .split('(')[1]
+      .slice(0, -1)
+      .split(',')
+      .map(e => +e)
+    const treeName = FILL_2_TREE_TYPE[rgbToHex(...colorArr).toUpperCase()]
+    if (treeName) drawTree(treeName)
+  },
+
   extractRolls(text) {
     // L means "location in array returned by regexp"
     const L = {
@@ -2405,18 +2429,6 @@ const playerPost = {
     //   }))
     return res
   },
-  populateWindow(text) {
-    // console.time('playerPost parse')
-    const playerName = this.detectPlayer(text)
-    this.remindSpecialEffects(playerName)
-    this.parse(text)
-    setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
-    setTimeout(() => {
-      // console.time('playerPost countTechStudyResult')
-      this.countTechStudyResult(playerName)
-  }, 100)
-
-  }, 
 
   detectPlayer(text) {
     const firstWord = text.slice(0, Math.min(text.indexOf(' '), text.indexOf('\n'), text.indexOf(':')))

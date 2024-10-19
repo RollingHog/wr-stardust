@@ -2,7 +2,7 @@
   log warn warnNoTrace 
   getEl qs
   locationSearchToArray FILL_2_TREE_TYPE PLAYERS_DATA_KEY
-  capitalizeFirstLetter
+  capitalizeFirstLetter rgbToHex
   getDictKey
   makeElDraggable
   hotkeysLib
@@ -53,6 +53,17 @@ function locationSearchToArray(query) {
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+// https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
 
 var PLAYERS_DATA_KEY = /** @type {const} */ ('DATA__PLAYERS_DATA')
 
