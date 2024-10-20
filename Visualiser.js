@@ -20,7 +20,7 @@ countPlanetRawMisery
 */
 
 /**
- * @typedef {(typeof KEYWORDS.ADDITIONAL_COLONY_PARAMS[number] | typeof KEYWORDS.COLONY_PARAMS[number] | typeof KEYWORDS.PLANET_PARAMS[number])} effKey
+ * @typedef {string} effKey
  * @typedef {(string | number)} effValue
  */
 
@@ -985,10 +985,13 @@ const Analysis = {
       .filter(e => (VARS.WAR_MODULES_ARR.includes(e.type)))
   },
 
+  /**
+   * @param {{name: any, value: any}} techObjsObj 
+   */
   allEffectsVerbose(techObjsObj) {
     return Object.values(techObjsObj)
-    .reduce( (acc, e) => {
-      for(let i of e.effect) {
+    .reduce( (acc, techObj) => {
+      for(let i of techObj.effect) {
         const k = i[0]
         if(!acc[k])
           acc[k] = {
@@ -1000,7 +1003,7 @@ const Analysis = {
           acc[k].count+=1
           acc[k].sum+=+i[1]
 
-          acc[k].list.push(`${e.name}(${+i[1]})`)
+          acc[k].list.push(`${techObj.name}(${+i[1]})`)
       }
 
       return acc
@@ -1095,12 +1098,21 @@ const Analysis = {
       if(!playerName) return
       const userDataObj = User.getSavedUserData(playerName)
       const namesList = [].concat(
+        userDataObj.astroProjs,
         userDataObj.buildings,
-        userDataObj.orbital,
         userDataObj.localProjs,
+        userDataObj.orbital,
         Object.values(userDataObj.techTable).flat(),
       )
-      const result = Analysis.allEffectsVerbose(namesList.map(e => inverted.alltech[e]).filter(e => e))
+      // TODO fixme as in SummarycostAndEffect
+      const techObjsList = Object.assign({}, 
+        namesList.map(e => inverted.alltech[e]).filter(e => e),
+        { "Начальные кубы": { effect: [
+
+        ]} }
+      )
+
+      const result = Analysis.allEffectsVerbose(techObjsList)
       Analysis.reportTable(result, `<a class="fake_link" 
         onclick="getEl('${playerName}').checked=false; getEl('${playerName}').click();">Сводный отчет: ${playerName}</a>`
       )
@@ -1285,7 +1297,7 @@ const Analysis = {
 
       for (let username in User.getAllUsersData()) {
         const userData = User.getSavedUserData(username)
-        const userEff = User.countAllUserEffects(userData)
+        const userEff = User.countUserEffects(userData)
         const misery = countPlanetRawMisery(userData)
         arr.push([username, misery])
         
@@ -1670,21 +1682,30 @@ const User = /** @type {const} */({
   /**
    * @param {string[]} techList list of tech names
    * @param {TGoogleDocUserObj | undefined} userDataObj 
+   * @param {boolean} isVerbose DOESNT WORK if record where effects came from
    * @returns {{cost: [string, effValue][], effect: [string, effValue][]}}
    */
-  countSummaryCostAndEffect(techList, userDataObj = null) {
+  countSummaryCostAndEffect(techList, userDataObj = null, isVerbose = false) {
     let techListFiltered = techList
       .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
       .filter( e => inverted.alltech[e])
 
+    /**
+     * @type {[effKey, number | string]}
+     */
     let effectsData = [].concat.apply([], techListFiltered.map( e => inverted.alltech[e].effect))
     let costData = TechUtils.countCosts(techListFiltered)
 
     const isSpecial = (str) => [KEYWORDS.ITS_SPECIAL, KEYWORDS.ONLY_ONCE_KW].includes(str)
 
     if(userDataObj) {
-      effectsData = effectsData.concat(userDataObj.startingFeature
+      if(userDataObj.colonyParams['Начальные кубы'])
+        effectsData = effectsData.concat(
+          userDataObj.colonyParams['Начальные кубы'].split('/')
+            .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
+        )
+      if(userDataObj.startingFeature) effectsData = effectsData.concat(userDataObj.startingFeature
         .map( i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
       )
       if(userDataObj.uniqueResources) effectsData = effectsData.concat(userDataObj.uniqueResources
@@ -1725,32 +1746,23 @@ const User = /** @type {const} */({
 
   /**
    * @param {TGoogleDocUserObj} userDataObj 
+   * @param {boolean} isVerbose DOESNT WORK if record where effects came from
    * @returns {Object.<string, effValue>}
    */
-  countAllUserEffects(userDataObj) {
+  countUserEffects(userDataObj, isVerbose = false) {
     if(!userDataObj) return null
-
-    let startParams = userDataObj.colonyParams['Начальные кубы'].split('/')
-      .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
-    startParams = Object.fromEntries(startParams)
 
     let data = 
       // local: 
       // global: 
       this.countSummaryCostAndEffect([].concat(
+        userDataObj.astroProjs,
         userDataObj.buildings,
         userDataObj.orbital,
         userDataObj.localProjs,
         Object.values(userDataObj.techTable).flat(),
-      ), userDataObj).effect
+      ), userDataObj, isVerbose).effect
     // }
-
-    for(let i in startParams) {
-      if(data[i])
-        data[i] += +startParams[i]
-      else
-        data[i] = +startParams[i]
-    }
 
     return data
   },
@@ -1762,7 +1774,7 @@ const User = /** @type {const} */({
    */
   getUserEffects(playerName) {
     if(!playerName) return null
-    return  this.countAllUserEffects(this.getSavedUserData(playerName))
+    return  this.countUserEffects(this.getSavedUserData(playerName))
   },
 
   /**
@@ -1813,6 +1825,8 @@ const User = /** @type {const} */({
       }) 
     // t = [].concat(t.main, t.additional)
 
+    const militaryBonusesFn = ([key, _]) => key.startsWith(KEYWORDS.CREATION_KEYWORD)
+
     return (
       TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
@@ -1821,7 +1835,7 @@ const User = /** @type {const} */({
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD) ||  e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)), 'Исследования')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.MATERIALS.includes(e[0])), 'Ресурсы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])), 'Дополнительные параметры')
-      + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.CREATION_KEYWORD)), 'Военные бонусы')
+      + TechUtils.createEffectsTable(effectsListArr.filter(militaryBonusesFn, 'Военные бонусы'))
       + TechUtils.createEffectsTable(effectsListArr.filter(e => !KEYWORDS.COLONY_PARAMS.includes(e[0])
         && !e[0].startsWith(':')
         && !KEYWORDS.TECH_EFFECTS.includes(e[0])
@@ -1871,7 +1885,7 @@ const User = /** @type {const} */({
 
   drawUserStat(playerName) {
     const userData = User.getSavedUserData(playerName)
-    const effectsDataObj = User.countAllUserEffects(userData)
+    const effectsDataObj = User.countUserEffects(userData)
     const effectsDataArr = Object.entries(effectsDataObj)
       .filter( e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
 
@@ -2329,6 +2343,8 @@ class TGoogleDocUserObj {
   /** @type {Object<string, number>} */
   materials = {}
   /** @type {string[]} */
+  astroProjs = []
+  /** @type {string[]} */
   buildings = []
   /** @type {string[]} */
   orbital = []
@@ -2371,13 +2387,15 @@ const playerPost = {
   },
   
   selectTreeByTableCellColor() {
-    const colorArr = qs('#el_selected_tech_list table td').style.backgroundColor
-      .split('(')[1]
-      .slice(0, -1)
-      .split(',')
-      .map(e => +e)
-    const treeName = FILL_2_TREE_TYPE[rgbToHex(...colorArr).toUpperCase()]
-    if (treeName) drawTree(treeName)
+    try {
+      const colorArr = qs('#el_selected_tech_list table td').style.backgroundColor
+        .split('(')[1]
+        .slice(0, -1)
+        .split(',')
+        .map(e => +e)
+      const treeName = FILL_2_TREE_TYPE[rgbToHex(...colorArr).toUpperCase()]
+      if (treeName) drawTree(treeName)
+    } catch(err) {}
   },
 
   extractRolls(text) {
@@ -2453,10 +2471,10 @@ const playerPost = {
     const userEff = User.getUserEffects(playerName)
 
     const remindTechs = Object.entries(userEff).filter(([key, _])=>{
-      return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)
+      return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW) || key === KEYWORDS.RESERVE_KW
     }).map( ([key, value])=> key+': '+value )
 
-    const currGreatPplCost = Math.ceil(User.getSavedUserData(playerName).greatPeople.length /2)
+    const currGreatPplCost = Math.ceil(User.getSavedUserData(playerName).greatPeople.length / 2)
     
     getEl('el_special_tech_eff_reminder').innerHTML = `цена Великого человека: ${currGreatPplCost}; ` + remindTechs.join(', ')
   },
@@ -2725,6 +2743,7 @@ class TTechObject {
 var KEYWORDS = /** @type {const} */ ({
   ITS_SPECIAL: 'особое',
   ALL_RIGHT: 'особое:$1',
+  // alter with caution, used in decoding of "Начальные параметры"
   COLONY_PARAMS: [
     'Наука'
     , 'Производство'
