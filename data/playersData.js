@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-10-20T01:33:00.753Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-10-29T23:07:29.588Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "playerColor": "#00FFFF",
@@ -177,7 +177,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "secondaryColonies": [],
     "materials": {
-      "Добыча": 3,
+      "Сталь": 3,
       "Редкие металлы": 0,
       "Наноматериалы": 0,
       "Стазокерамика": 0,
@@ -382,7 +382,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "secondaryColonies": [],
     "materials": {
-      "Добыча": 2,
+      "Сталь": 2,
       "Редкие металлы": 1,
       "Наноматериалы": 0,
       "Стазокерамика": 0,
@@ -581,7 +581,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "secondaryColonies": [],
     "materials": {
-      "Добыча": 3,
+      "Сталь": 3,
       "Редкие металлы": 1,
       "Наноматериалы": 0,
       "Стазокерамика": 0,
@@ -881,7 +881,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "secondaryColonies": [],
     "materials": {
-      "Добыча": 2,
+      "Сталь": 2,
       "Редкие металлы": 1,
       "Наноматериалы": 1,
       "Стазокерамика": 0,
@@ -893,7 +893,7 @@ var DATA__PLAYERS_DATA = {
     },
     "uniqueResources": [
       [
-        "Добыча",
+        "Сталь",
         "+1"
       ],
       [
@@ -913,7 +913,7 @@ var DATA__PLAYERS_DATA = {
         "1"
       ],
       [
-        "Добыча",
+        "Сталь",
         "-1"
       ],
       [
@@ -1105,7 +1105,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "secondaryColonies": [],
     "materials": {
-      "Добыча": 3,
+      "Сталь": 3,
       "Редкие металлы": 1,
       "Наноматериалы": 0,
       "Стазокерамика": 0,
@@ -1325,7 +1325,7 @@ var DATA__PLAYERS_DATA = {
       }
     ],
     "materials": {
-      "Добыча": 3,
+      "Сталь": 3,
       "Редкие металлы": 1,
       "Наноматериалы": 0,
       "Стазокерамика": 0,
@@ -1494,7 +1494,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "secondaryColonies": [],
     "materials": {
-      "Добыча": 0,
+      "Сталь": 0,
       "Редкие металлы": 0,
       "Наноматериалы": 0,
       "Стазокерамика": 0,
@@ -1506,7 +1506,7 @@ var DATA__PLAYERS_DATA = {
     },
     "uniqueResources": [
       [
-        "Добыча",
+        "Сталь",
         "-1"
       ],
       [
