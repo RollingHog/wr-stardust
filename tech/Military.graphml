@@ -961,7 +961,7 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
           <y:Geometry height="62.00000000000006" width="259.75" x="928.036916688617" y="1240.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="179.44140625" x="40.154296875" xml:space="preserve" y="-0.40234375">Служба координации огня
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="179.44140625" x="40.154296875000114" xml:space="preserve" y="-0.40234375">Служба координации огня
 Сложность: 5, экзотматерия (1)
 Эффект: Атака флотов +1,
 в системе<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -1695,6 +1695,19 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
 Сложность: 2
 Эффект: Щит 4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="fatarrow"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n128">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="352.01373237148755" y="872.0"/>
+          <y:Fill color="#FF9966" transparent="false"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="192.80078125" x="33.474609375" xml:space="preserve" y="6.9482421875">Ремонтный наноулей
+Сложность: 4, наноматериалы (1)
+Эффект: Регенерация +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="trapezoid2"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -2779,7 +2792,6 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
       </data>
     </edge>
     <edge id="e108" source="n97" target="n105">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2790,7 +2802,6 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
       </data>
     </edge>
     <edge id="e109" source="n13" target="n117">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2801,6 +2812,16 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
       </data>
     </edge>
     <edge id="e110" source="n105" target="n13">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e111" source="n73" target="n128">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>

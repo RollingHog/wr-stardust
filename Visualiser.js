@@ -2208,7 +2208,7 @@ const parseDoc = {
       .map(e2=>({name:e2[0].innerText, lvl: +e2[1].innerText, effect: e2[2].innerText.replace(/^.*-/,'').trim()}))
       .filter(e => e.lvl > 0)
     greatPeople.forEach( e => {
-        e.effect = e.effect.replace('Х',e.lvl)
+        e.effect = e.effect.replace('Х/2', Math.floor(e.lvl/2)).replace('Х', e.lvl)
         e.effect = parseNode.effects(e.effect,{treeName: null, name: playerName + ' великие люди'})
       })
 
