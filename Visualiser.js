@@ -1793,6 +1793,13 @@ const User = /** @type {const} */({
 
         return [resK, v]
       }
+      if(KEYWORDS.RESOURCES_COST_KW == k) {
+        const aval = userEff['Сталь']
+        const resK = k+` (есть ${aval})` +
+          (aval < v ? ' (МАЛО)' : '')
+
+        return [resK, v]
+      }
       return[k,v]
     })
     return TechUtils.createEffectsTable(costListArr, 'COST')
@@ -2764,6 +2771,7 @@ var KEYWORDS = /** @type {const} */ ({
     "Экзоты",
     "Аномалия",
   ],
+  RESOURCES_COST_KW: 'ресурсы',
   SPECIAL_TECH_COST: [
     "затраты",
     "специалисты",
