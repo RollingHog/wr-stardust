@@ -1,3 +1,4 @@
+/// <reference path="./common.js"/>
 /* global
   getEl  
 */

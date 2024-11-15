@@ -2,6 +2,7 @@ const VERSION = '0.0.1'
 console.log(VERSION)
 
 // common.js
+/// <reference path="../common.js"/>
 /* global
 getEl log locationSearchToArray
 */

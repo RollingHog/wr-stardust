@@ -1,4 +1,5 @@
 // common.js
+/// <reference path="../common.js"/>
 /* global
 getEl log 
 makeElDraggable

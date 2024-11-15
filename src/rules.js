@@ -1,6 +1,7 @@
 // game logic functions common for some of the pages
 
 // common.js
+/// <reference path="./common.js"/>
 /* global
 log warn
 */

@@ -1,4 +1,5 @@
 // common.js
+/// <reference path="./src/common.js"/>
 /* global
 getEl qs
 log warn
@@ -10,22 +11,24 @@ hotkeysLib
 */
 
 // draw.js
+/// <reference path="./src/draw.js"/>
 /* global
   draw
 */
 
 //rules.js
+/// <reference path="./src/rules.js"/>
 /* global
 countPlanetRawMisery
 */
 
-/**
- * @typedef {string} effKey
- * @typedef {(string | number)} effValue
- */
-
 const VERSION = '1.2.0'
 console.log(VERSION)
+
+// /**
+// //  * @typedef {(string | number)} effValue
+// */
+// * @typedef {string} effKey THIS SHIT IS BROKEN AF AND IT BREAKS AUTO-TYPING IN VS CODE NO IDEA WHY DONT USE WITH EFFVALUE
 
 const range = (cnt) => '0'.repeat(cnt)
 
@@ -820,7 +823,7 @@ const Analysis = {
     // useful when transitions happen
     for(let username of User.listUsers()) {
       const data = User.getSavedUserData(username)
-      const objNames = [].concat(data.localProjs, data.buildings, data.orbital)
+      const objNames = [].concat(data.localProjs, data.buildings, data.orbital, data.astroProjs)
         .flat()
         .map(name => name.replace(/ ?\([^)]+\)/, ''))
         .filter(name => !name.startsWith(':'))
@@ -1211,11 +1214,13 @@ const Analysis = {
           'Кол-во':  e[1].buildings.length 
               + e[1].orbital.length 
               + e[1].localProjs.length 
+              + e[1].astroProjs.length 
               + Object.values(e[1].techTable).flat().length,
           'Цена': [].concat(
             e[1].buildings, 
             e[1].orbital,
             e[1].localProjs,
+            e[1].astroProjs,
             Object.values(e[1].techTable).flat(),
           )
           .map( e2 => inverted.alltech[e2] ? inverted.alltech[e2].cost[0][1] : null)
@@ -1587,28 +1592,28 @@ const User = /** @type {const} */({
     let list = tech_list
     const bad = {
       enemy: list
-        .filter( e => e.search(/\(.*чужое/) != -1)
-        .map(e => e.replace(/ \([^)]+\)/,'')),
+        .filter(e => e.search(/\(.*чужое/) != -1)
+        .map(e => e.replace(/ \([^)]+\)/, '')),
       broken: list
-        .filter( e => e.search(/\(.*сломано/) != -1)
-        .map(e => e.replace(/ \([^)]+\)/,'')),
+        .filter(e => e.search(/\(.*сломано/) != -1)
+        .map(e => e.replace(/ \([^)]+\)/, '')),
       inactive: list
-        .filter( e => e.search(/\(.*неактивно/) != -1)
-        .map(e => e.replace(/ \([^)]+\)/,'')),
+        .filter(e => e.search(/\(.*неактивно/) != -1)
+        .map(e => e.replace(/ \([^)]+\)/, '')),
     }
-    list = list.map(e => e.replace(/ \([^)]+\)/,''))
+    list = list.map(e => e.replace(/ \([^)]+\)/, ''))
 
     for (let i of targets) {
       const name = tech[treeName][i.id].name
       const pos_tech = list.indexOf(name)
       if (pos_tech != -1) {
-        if(bad.enemy.includes(name)) {
+        if (bad.enemy.includes(name)) {
           i.setAttribute('fill', 'red')
           continue
-        } else if(bad.broken.includes(name)) {
+        } else if (bad.broken.includes(name)) {
           i.setAttribute('fill', 'salmon')
           continue
-        } else if(bad.inactive.includes(name)) {
+        } else if (bad.inactive.includes(name)) {
           i.setAttribute('fill', 'gray')
         }
         res.push(i.id)
@@ -1654,7 +1659,7 @@ const User = /** @type {const} */({
   getFlatUserTech(username) {
     if(techData.cache.usersFlatTech[username]) return techData.cache.usersFlatTech[username]
     const data = User.getSavedUserData(username)
-    let projList = [].concat(data.buildings, data.orbital, data.localProjs)
+    let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
     const result = Object.values(data.techTable).concat(projList).flat()
     techData.cache.usersFlatTech[username] = result
     return result
@@ -1682,7 +1687,7 @@ const User = /** @type {const} */({
   /**
    * @param {string[]} techList list of tech names
    * @param {TGoogleDocUserObj | undefined} userDataObj 
-   * @param {boolean} isVerbose DOESNT WORK if record where effects came from
+   * @param {boolean} isVerbose TODO DOESNT WORK NOW if record where effects came from
    * @returns {{cost: [string, effValue][], effect: [string, effValue][]}}
    */
   countSummaryCostAndEffect(techList, userDataObj = null, isVerbose = false) {
@@ -1784,30 +1789,30 @@ const User = /** @type {const} */({
    * @returns 
    */
   createTechCostTable(costListArr, userEff) {
-    if(!costListArr) return ''
-    costListArr = costListArr.map(([k,v])=>{
-      if(KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(k))) {
+    if (!costListArr) return ''
+    costListArr = costListArr.map(([k, v]) => {
+      if (KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(k))) {
         const aval = userEff[capitalizeFirstLetter(k)]
-        const resK = k+` (есть ${aval})` +
+        const resK = k + ` (есть ${aval})` +
           (aval < v ? ' (МАЛО)' : '')
 
         return [resK, v]
       }
-      if(KEYWORDS.RESOURCES_COST_KW == k) {
+      if (KEYWORDS.RESOURCES_COST_KW == k) {
         const aval = userEff['Сталь']
-        const resK = k+` (есть ${aval})` +
+        const resK = k + ` (есть ${aval})` +
           (aval < v ? ' (МАЛО)' : '')
 
         return [resK, v]
       }
-      return[k,v]
+      return [k, v]
     })
     return TechUtils.createEffectsTable(costListArr, 'COST')
   },
 
   /**
    * 
-   * @param {[effKey, effValue][]} effectsListArr 
+   * @param {[string, effValue][]} effectsListArr 
    * @returns 
    */
   createUserTechEffectsTable(effectsListArr) {
@@ -1852,7 +1857,7 @@ const User = /** @type {const} */({
         && !KEYWORDS.MATERIALS.includes(e[0])
         && !KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])
         && !e[0].startsWith(KEYWORDS.CREATION_KEYWORD)
-        && !KEYWORDS.MILITARY_PARAMS.includes(e[0])
+        // && !KEYWORDS.MILITARY_PARAMS.includes(e[0])
       ), 'Неотфильтрованные техи')
     )
   },
@@ -2276,7 +2281,7 @@ const parseDoc = {
     if(!this.lastResult) return
     const data = this.lastResult[playerName]
 
-    let projList = [].concat(data.buildings, data.orbital, data.localProjs)
+    let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
     User.highlightStudiedTech(treeName, data.techTable[treeName].concat(projList))
     User.highlightAvaltech(treeName, data.techTable[treeName].concat(projList))
 
@@ -2291,7 +2296,7 @@ const parseDoc = {
   drawAndSaveTechs(playerName, data) {
     for(let i of TREELIST) {
       drawTree(i)
-      let projList = [].concat(data.buildings, data.orbital, data.localProjs)
+      let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
       User.highlightStudiedTech(i, data.techTable[i].concat(projList))
       User.highlightAvaltech(i, data.techTable[i].concat(projList))
       savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
@@ -2422,7 +2427,7 @@ const playerPost = {
         const isExp = s.search(/опыт /i)
         if(isExp === 0) {
           console.log('ОПЫТ detected:', s, s.search(/опыт/i))
-          return null
+          return {}
         }
         return {
           text: s
@@ -2495,7 +2500,8 @@ const playerPost = {
         critfails: 0,
         wins: 0,
         critwins: 0,
-        delta: 0
+        delta: 0,
+        critdelta: 0
       }
       for(let j of i.rolls.split(' + ')) {
         rolls.sum += 1
@@ -2507,6 +2513,7 @@ const playerPost = {
         if(+j>4) rolls.wins += 1
       }
       rolls.delta = rolls.critwins * 2 + rolls.wins
+      rolls.critdelta = rolls.critwins - rolls.critfails
       i.rolls = rolls
     }
 
@@ -2516,6 +2523,7 @@ const playerPost = {
       wins: null,
       critwins: null,
       delta: null,
+      critdelta: null,
     },
     index: e.index,
     rawRolls: null }))
@@ -2525,7 +2533,7 @@ const playerPost = {
 
     getEl('el_selected_tech_list').innerHTML = `<table>
     <thead>
-      <th>${['Технология', 'Цена', "КПровалы", "Успехи", "КУспехи", "Брош.", "Дельта"].join('</th><th>')}</th>
+      <th>${['Технология', 'Цена', "КПров", "Усп", "КУсп", "Брош.", "Дельт", "КДлт"].join('</th><th>')}</th>
       <th 
         onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
       <button>+</button>
@@ -2533,7 +2541,7 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, e.treshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, e.treshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta, e.rolls.critdelta].join('</td><td>') + '</td>' + 
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
@@ -2565,6 +2573,7 @@ const playerPost = {
     critwins: 4,
     sum: 5,
     delta: 6,
+    critdelta: 7,
   },
 
   formBattleRolls() {
@@ -2589,10 +2598,11 @@ const playerPost = {
         let result = null
 
         e.style.backgroundColor = ''
-        e.children[pos.name].style.backgroundColor = ''
-        e.children[pos.critfails].style.backgroundColor = ''
-        e.children[pos.critwins].style.backgroundColor = ''
-        e.children[pos.delta].style.backgroundColor = ''
+        // e.children[pos.name].style.backgroundColor = ''
+        // e.children[pos.critfails].style.backgroundColor = ''
+        // e.children[pos.critwins].style.backgroundColor = ''
+        // e.children[pos.delta].style.backgroundColor = ''
+        // e.children[pos.critdelta].style.backgroundColor = ''
         e.children[pos.name].title = ''
 
         // // collapse critfails/critwins
@@ -2617,6 +2627,13 @@ const playerPost = {
 
         if (+e.children[pos.critwins].innerText > 0 && !isReserve) {
           e.children[pos.critwins].style.backgroundColor = 'lawngreen'
+        }
+
+        const critdelta = +e.children[pos.critdelta].innerText
+        if(critdelta>0) {
+          e.children[pos.critdelta].style.backgroundColor = 'lawngreen'
+        } else if(critdelta<0) {
+          e.children[pos.critdelta].style.backgroundColor = 'tomato'
         }
 
         const sum = +e.children[pos.wins].innerText 
@@ -3353,7 +3370,7 @@ const TurnPlanner = {
       .filter( techName => inverted.alltech[techName] 
         && (VARS.NON_WAR_NODE_TYPES_ARR.includes(inverted.alltech[techName].type))
       )
-    return User.listAvalTech(techData.currentTreeName2, User.getFlatUserTech(this.activePlayer))
+    return User.listAvalTech(techData.currentTreeName, User.getFlatUserTech(this.activePlayer))
       .filter(techObj => !exclude.includes(techObj.name))
       .sort( (a,b) => a.treeName > b.treeName ? 1 : -1)
   },
