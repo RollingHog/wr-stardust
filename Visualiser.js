@@ -1798,13 +1798,6 @@ const User = /** @type {const} */({
 
         return [resK, v]
       }
-      if (userEff && KEYWORDS.RESOURCES_COST_KW == k) {
-        const aval = userEff['Сталь']
-        const resK = k + ` (есть ${aval})` +
-          (aval < v ? ' (МАЛО)' : '')
-
-        return [resK, v]
-      }
       return [k, v]
     })
     return TechUtils.createEffectsTable(costListArr, 'COST')
@@ -2600,6 +2593,20 @@ const playerPost = {
   countTechStudyResult(playerName = playerPost.playerName) {
     const pos = playerPost.fieldPositionsInTable
 
+    const isSpecialCost = (resourceName) => 
+      KEYWORDS.SPECIAL_TECH_COST.includes(resourceName) 
+      || KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(resourceName))
+      // TODO
+      // || TechUtils.get(resourceName.replace(':', ''))
+
+    const userEffects = User.getUserEffects(playerName)
+
+    const currRes = Object.assign({}, userEffects)
+    for(let i of Object.keys(currRes)) {
+      if(!isSpecialCost(i))
+        delete currRes[i]
+    }
+
     getEl('el_selected_tech_list').hidden = true
     let techList = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e => {
@@ -2656,13 +2663,29 @@ const playerPost = {
           e.children[pos.name].style.backgroundColor = TechUtils.get(techText).fill
 
           const specCost = TechUtils.get(techText).cost
-            .filter(([k2, _v]) => KEYWORDS.SPECIAL_TECH_COST.includes(k2) 
-              || KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(k2)))
+            .filter(([k2, _v]) => isSpecialCost(k2))
           if(specCost.length) {
+            log(techText , specCost)
             // e.children[pos.price].innerText = 
             //   +e.children[pos.price].innerText + specCost.reduce((acc, [_k,v])=> acc += +v, 0)
             e.children[pos.price].title = specCost.map(([k,v])=>`${k} ${+v}; `)
             e.children[pos.price].style.backgroundColor =  'aquamarine'
+            for(let [name, val] of specCost) {
+              name = capitalizeFirstLetter(name)
+              if(currRes[name]) {
+                if(currRes[name] - val < 0) {
+                  e.children[pos.price].title += `ДЕФИЦИТ ${name}: ${val - currRes[name]}; `
+                  currRes[name] = 0
+                  e.children[pos.price].style.backgroundColor =  'tomato'
+                } else {
+                  currRes[name] -= val
+                }
+              } else {
+                e.children[pos.price].title += `НЕДОСТУПНЫЙ РЕСУРС ${name}; `
+                e.children[pos.price].style.backgroundColor =  'tomato'
+              }
+            }
+
           }
           if (!e.children[pos.price].innerText.startsWith('+')) {
             e.children[pos.price].innerText = TechUtils.get(techText).cost[0][1]
@@ -2696,7 +2719,7 @@ const playerPost = {
     const result = User.countSummaryCostAndEffect(techList)
 
     getEl('el_tech_result_list').innerHTML =
-      User.createTechCostTable(result.cost, User.getUserEffects(playerName)) +
+      User.createTechCostTable(result.cost, userEffects) +
       User.createUserTechEffectsTable(Object.entries(result.effect))
 
     const byType = {
@@ -2805,11 +2828,9 @@ var KEYWORDS = /** @type {const} */ ({
     "Экзоты",
     "Аномалия",
   ],
-  RESOURCES_COST_KW: 'ресурсы',
   SPECIAL_TECH_COST: [
     "затраты",
     "специалисты",
-    "ресурсы",
   ],
   PLANET_PARAMS: [
     "Вода",
