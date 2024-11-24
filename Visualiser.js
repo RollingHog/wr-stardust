@@ -1798,7 +1798,7 @@ const User = /** @type {const} */({
 
         return [resK, v]
       }
-      if (KEYWORDS.RESOURCES_COST_KW == k) {
+      if (userEff && KEYWORDS.RESOURCES_COST_KW == k) {
         const aval = userEff['Сталь']
         const resK = k + ` (есть ${aval})` +
           (aval < v ? ' (МАЛО)' : '')
@@ -2370,6 +2370,8 @@ class TGoogleDocUserObj {
 
 // eslint-disable-next-line no-unused-vars
 const playerPost = {
+  playerName: null, 
+
   open() {
     const p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
     playerPost.process(p)
@@ -2387,13 +2389,13 @@ const playerPost = {
 
   process(text) {
     // console.time('playerPost parse')
-    const playerName = this.detectPlayer(text)
-    this.remindSpecialEffects(playerName)
+    this.playerName = this.detectPlayer(text)
+    this.remindSpecialEffects(this.playerName)
     this.parse(text)
     setTimeout(_ => HTMLUtils.addTableSorting('#el_selected_tech_list table'), 50)
     setTimeout(() => {
       // console.time('playerPost countTechStudyResult')
-      this.countTechStudyResult(playerName)
+      this.countTechStudyResult(this.playerName)
       setTimeout( _ => this.selectTreeByTableCellColor(), 400)
     }, 70)
   },
@@ -2422,13 +2424,21 @@ const playerPost = {
     const res = [...text.matchAll(/([^\nd]*)\d+d(\d{1,2}0): \((\d+(?: \+ \d+){0,20})\) = \d+([^\n]*)/g)]
       .map( e => {
         const s = (e[L.before].length ? e[L.before] : e[L.after]).trim()
-        const treshold = [...(e[L.before] + e[L.after]).matchAll(/Сложность:? ?(\d+)/gi)]
+        const treshold = [...(e[L.before] + e[L.after]).matchAll(/(?:Сложность|Цена):? ?(\+?\d+)/gi)]
 
         const isExp = s.search(/опыт /i)
         if(isExp === 0) {
           console.log('ОПЫТ detected:', s, s.search(/опыт/i))
           return {}
         }
+        let resTreshold = null
+        if (treshold.length) {
+          resTreshold = +treshold[0][1]
+          if (treshold[0][1].startsWith('+')) {
+            resTreshold = treshold[0][1]
+          }
+        }
+
         return {
           text: s
             .replace(/\([^)]+\)/g,'')
@@ -2444,7 +2454,7 @@ const playerPost = {
             .trim(), 
           rolls: e[L.rolls], 
           rawRolls: e[L.rolls],
-          treshold: treshold.length ? +treshold[0][1] : null,
+          treshold: resTreshold,
           edges: +e[L.edges], 
           index: e.index, 
         }
@@ -2565,7 +2575,7 @@ const playerPost = {
     Чтобы "Цена" не перезаписывалась - добавь в начало '+'`
   },
 
-  fieldPositionsInTable: {
+  fieldPositionsInTable: /** @type {const} */({
     name: 0,
     price: 1,
     critfails: 2,
@@ -2574,7 +2584,7 @@ const playerPost = {
     sum: 5,
     delta: 6,
     critdelta: 7,
-  },
+  }),
 
   formBattleRolls() {
     const pos = playerPost.fieldPositionsInTable
@@ -2587,7 +2597,7 @@ const playerPost = {
     alert('copied')
   },
 
-  countTechStudyResult(playerName = null) {
+  countTechStudyResult(playerName = playerPost.playerName) {
     const pos = playerPost.fieldPositionsInTable
 
     getEl('el_selected_tech_list').hidden = true
@@ -2597,12 +2607,13 @@ const playerPost = {
 
         let result = null
 
+        // in case we are reparsing
         e.style.backgroundColor = ''
         // e.children[pos.name].style.backgroundColor = ''
         // e.children[pos.critfails].style.backgroundColor = ''
         // e.children[pos.critwins].style.backgroundColor = ''
-        // e.children[pos.delta].style.backgroundColor = ''
-        // e.children[pos.critdelta].style.backgroundColor = ''
+        e.children[pos.delta].style.backgroundColor = ''
+        e.children[pos.critdelta].style.backgroundColor = ''
         e.children[pos.name].title = ''
 
         // // collapse critfails/critwins
@@ -2644,13 +2655,19 @@ const playerPost = {
 
           e.children[pos.name].style.backgroundColor = TechUtils.get(techText).fill
 
+          const specCost = TechUtils.get(techText).cost
+            .filter(([k2, _v]) => KEYWORDS.SPECIAL_TECH_COST.includes(k2) 
+              || KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(k2)))
+          if(specCost.length) {
+            // e.children[pos.price].innerText = 
+            //   +e.children[pos.price].innerText + specCost.reduce((acc, [_k,v])=> acc += +v, 0)
+            e.children[pos.price].title = specCost.map(([k,v])=>`${k} ${+v}; `)
+            e.children[pos.price].style.backgroundColor =  'aquamarine'
+          }
           if (!e.children[pos.price].innerText.startsWith('+')) {
             e.children[pos.price].innerText = TechUtils.get(techText).cost[0][1]
-            const specCost = TechUtils.get(techText).cost
-              .filter(e2 => KEYWORDS.SPECIAL_TECH_COST.includes(e2[0]))
-            if(specCost.length) {
-              e.children[pos.price].innerText =  +e.children[pos.price].innerText + +specCost[0][1]
-            }
+          } else {
+            e.children[pos.price].title = 'Обычная цена: ' + TechUtils.get(techText).cost[0][1] + '; ' + e.children[pos.price].title
           }
 
           result = techText
