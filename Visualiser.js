@@ -1091,35 +1091,36 @@ const Analysis = {
       Analysis.reportTable(result)
     },
 
-    эффекты_игрока_подробно(reportArgs) {
-      let playerName
-      if(reportArgs && reportArgs.playerName) {
-        playerName = reportArgs.playerName
-      } else {
-        playerName = prompt('player name')
-      }
-      if(!playerName) return
-      const userDataObj = User.getSavedUserData(playerName)
-      const namesList = [].concat(
-        userDataObj.astroProjs,
-        userDataObj.buildings,
-        userDataObj.localProjs,
-        userDataObj.orbital,
-        Object.values(userDataObj.techTable).flat(),
-      )
-      // TODO fixme as in SummarycostAndEffect
-      const techObjsList = Object.assign({}, 
-        namesList.map(e => inverted.alltech[e]).filter(e => e),
-        { "Начальные кубы": { effect: [
+    // TODO fix
+    // эффекты_игрока_подробно(reportArgs) {
+    //   let playerName
+    //   if(reportArgs && reportArgs.playerName) {
+    //     playerName = reportArgs.playerName
+    //   } else {
+    //     playerName = prompt('player name')
+    //   }
+    //   if(!playerName) return
+    //   const userDataObj = User.getSavedUserData(playerName)
+    //   const namesList = [].concat(
+    //     userDataObj.astroProjs,
+    //     userDataObj.buildings,
+    //     userDataObj.localProjs,
+    //     userDataObj.orbital,
+    //     Object.values(userDataObj.techTable).flat(),
+    //   )
+    //   // TODO fixme as in SummarycostAndEffect
+    //   const techObjsList = Object.assign({}, 
+    //     namesList.map(e => inverted.alltech[e]).filter(e => e),
+    //     { "Начальные кубы": { effect: [
 
-        ]} }
-      )
+    //     ]} }
+    //   )
 
-      const result = Analysis.allEffectsVerbose(techObjsList)
-      Analysis.reportTable(result, `<a class="fake_link" 
-        onclick="getEl('${playerName}').checked=false; getEl('${playerName}').click();">Сводный отчет: ${playerName}</a>`
-      )
-    },
+    //   const result = Analysis.allEffectsVerbose(techObjsList)
+    //   Analysis.reportTable(result, `<a class="fake_link" 
+    //     onclick="getEl('${playerName}').checked=false; getEl('${playerName}').click();">Сводный отчет: ${playerName}</a>`
+    //   )
+    // },
 
     эффекты_на_ТУ() {
       let TL = prompt(`TL? 1-${techData.MAX_TECH_LVL}/+`)
@@ -1923,9 +1924,9 @@ const User = /** @type {const} */({
       <a target=_blank 
         href="./ColonyVisual.html?user=${playerName}">Внешний вид колонии</a>
       <br>
-      <a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
-        class="fake_link">Эффекты игрока подробно</a>
       ` + this.createUserTechEffectsTable(effectsDataArr)
+      // <a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
+      //   class="fake_link">Эффекты игрока подробно</a>
         + this.createColonyDescription(playerName)
 
     HTMLUtils.openModal('report', playerName)
