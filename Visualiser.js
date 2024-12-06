@@ -2728,6 +2728,7 @@ const playerPost = {
       [VARS.NODE_T.BUILDING]: [],
       [VARS.NODE_T.ORBITAL]: [],
       [VARS.NODE_T.PROJECT]: [],
+      [VARS.NODE_T.ASTROPROJECT]: [],
     }
 
     techList.forEach(e => {
@@ -2740,6 +2741,7 @@ const playerPost = {
       ['Здания', byType[VARS.NODE_T.BUILDING]],
       ['Орбитальные здания', byType[VARS.NODE_T.ORBITAL]],
       ['Проекты', byType[VARS.NODE_T.PROJECT]],
+      ['Астропроекты', byType[VARS.NODE_T.ASTROPROJECT]],
     ].map(e => {
       if(!e[1].length) return ''
       let tableStr = Object.entries(e[1]
