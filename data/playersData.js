@@ -1,4 +1,4 @@
-var DATA__PLAYERS_TIMESTAMP = '2024-12-08T02:14:52.796Z'
+var DATA__PLAYERS_TIMESTAMP = '2024-12-08T02:57:04.692Z'
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "playerColor": "#FF8C00",
@@ -84,6 +84,7 @@ var DATA__PLAYERS_DATA = {
       "Примечания": null
     },
     "starSystemParams": {
+      "name": "Баш",
       "x": 28,
       "y": 39,
       "Тип, масса и возраст звезды": "",
@@ -339,6 +340,7 @@ var DATA__PLAYERS_DATA = {
       "Примечания": 0
     },
     "starSystemParams": {
+      "name": "Сметана",
       "x": 21,
       "y": 13,
       "Тип, масса и возраст звезды": "",
@@ -519,6 +521,7 @@ var DATA__PLAYERS_DATA = {
       "Примечания": 0
     },
     "starSystemParams": {
+      "name": "Энигма",
       "x": 29,
       "y": 14,
       "Тип, масса и возраст звезды": "",
@@ -767,6 +770,7 @@ var DATA__PLAYERS_DATA = {
       "Примечания": null
     },
     "starSystemParams": {
+      "name": "Доплер 17",
       "x": 36,
       "y": 5,
       "Тип, масса и возраст звезды": "",
@@ -1039,6 +1043,7 @@ var DATA__PLAYERS_DATA = {
       "Примечания": null
     },
     "starSystemParams": {
+      "name": "Диалектика",
       "x": 15,
       "y": 28,
       "Тип, масса и возраст звезды": "1.1/, Теория",
@@ -1105,7 +1110,7 @@ var DATA__PLAYERS_DATA = {
     ],
     "prepaired": [
       "Производство (6)",
-      "Клонирование Людоящеров (2)"
+      " Клонирование Людоящеров (2)"
     ],
     "greatPeople": [
       {
@@ -1299,6 +1304,7 @@ var DATA__PLAYERS_DATA = {
       "Примечания": null
     },
     "starSystemParams": {
+      "name": "Хайбразил",
       "x": 12,
       "y": 39,
       "Тип, масса и возраст звезды": "G, 0.95, 2.6",
@@ -1504,6 +1510,7 @@ var DATA__PLAYERS_DATA = {
       "Примечания": null
     },
     "starSystemParams": {
+      "name": "Хайбразил",
       "x": 36,
       "y": 13,
       "Тип, масса и возраст звезды": "G/1.0/2.5 ",

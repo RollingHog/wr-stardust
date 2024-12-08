@@ -2045,21 +2045,25 @@ const parseDoc = {
       planet: null,
     }
     for(let i in arr) {
-      let e = arr[i]
-      if(e.tagName == 'H1') {
+      let el = arr[i]
+      // its user
+      if(el.tagName == 'H1') {
         if(last.user) {
           // res[last.planet] = interm.user
           usersData[last.user] = interm.user
         }
-        last.user = e.innerText
+        last.user = el.innerText
         interm.user = {}
         continue
       }
-      if(e.tagName.match(/H\d/)) {
-        last.H = e.innerText
+      if(el.tagName == 'H2' && el.innerText !== 'Данные экспедиции' && el.innerText !== 'Чертежи') {
+        interm.user.systemName = el.innerText
+      }
+      if(el.tagName.match(/H\d/)) {
+        last.H = el.innerText
         continue
       }
-      interm.user[last.H] = e.el
+      interm.user[last.H] = el.el
     }
     usersData[last.user] = interm.user
     this.lastNodes = usersData
@@ -2186,9 +2190,14 @@ const parseDoc = {
         .filter(e => e)
     )
 
+    // planet / system
+    const systemNameData = obj.systemName.replace(/(Планета | ?звезда )/gi, '').trim().split(',')
+
     let starSystemParams = Array.from(obj['Характеристики звездной системы'].children[0].rows)
       .map(e => Array.from(e.children).map(e2 => e2.innerText))
-    starSystemParams = { 
+    starSystemParams = {
+      name: systemNameData[1], 
+      planetName: systemNameData[0],
       x: +starSystemParams[1][0],
       y: +starSystemParams[1][1],
       // Тип, масса и возраст звезды
