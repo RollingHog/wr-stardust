@@ -49,10 +49,14 @@ const E = /** @type {const} */({
     large: 5,
     huge: 6,
   },
+  /**
+   * incoming URL keys
+   */
   keys: {
     density: 'density',
     rest: 'rest',
     user: 'user',
+    systemName: 'systemName',
   },
 })
 
@@ -161,6 +165,7 @@ function debug(data, str=null) {
 
 // eslint-disable-next-line no-unused-vars
 class TSSGPlanet {
+  name = null
   type = E.type.asteroid
   size = E.size.medium
   satellites = 0
@@ -236,21 +241,28 @@ const StarSystemGenerator = {
   },
 
   /**
-   * @returns {{system: TSSGPlanet[], restCubes: Number[], density: Number, user: string}}
+   * @returns {{system: TSSGPlanet[], restCubes: Number[], density: Number, user: string, systemName: string}}
    */
   decompress(query) {
     let obj = locationSearchToArray(query)
     let restCubes = obj.filter(e => e[0] === E.keys.rest)
     if(restCubes.length) restCubes = restCubes[0][1]
     obj = obj.filter(e => e[0] !== E.keys.rest)
+
     let density = obj.filter(e => e[0] === E.keys.density)
     if(density.length) density = density[0][1]
     else density = null
     obj = obj.filter(e => e[0] !== E.keys.density)
+
     let user = obj.filter(e => e[0] === E.keys.user)
     if(user.length) user = decodeURIComponent(user[0][1])
     else user = null
     obj = obj.filter(e => e[0] !== E.keys.user)
+
+    let systemName = obj.filter(e => e[0] === E.keys.systemName)
+    if(systemName.length) systemName = decodeURIComponent(systemName[0][1])
+    else systemName = null
+    obj = obj.filter(e => e[0] !== E.keys.systemName)
     
     let arr = []
     for(let i of obj) {
@@ -275,7 +287,7 @@ const StarSystemGenerator = {
       }
     }
 
-    return {system: arr, restCubes, density, user}
+    return {system: arr, restCubes, density, user, systemName}
   },
 
   generate(randomD6Arr, density, userPlanet) {
@@ -446,7 +458,7 @@ const StarSystemGenerator = {
    * @param {TSSGPlanet[]} system 
    * @param {string} playerName 
    */
-  draw(system, playerName = null) {
+  draw(system, playerName = null, systemName = null) {
     const canvasEl = getEl('el_canvas')
     canvasEl.innerHTML = ''
     if (playerName) {
@@ -454,8 +466,10 @@ const StarSystemGenerator = {
       padding: 16px;
       color: white;
       text-align: center;
-  ">${playerName.toUpperCase()}</div>`
+  ">${playerName.toUpperCase()}<br>Система ${systemName}</div>`
     }
+    const planetsData = DATA__PLANETS_DATA[playerName] ? DATA__PLANETS_DATA[playerName][systemName] : {}
+
     for(let i = 1; i<system.length; i++) {
       const k = system[i]
       if(!k) continue
@@ -494,7 +508,20 @@ const StarSystemGenerator = {
       if(!k.capital) {
         alienity = this.countPlanetAlienity(i, k)
       }
-      el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}<br>
+      let planetNames = ''
+      if(planetsData[i]) {
+        planetNames = `<br>${planetsData[i].name}`
+        if(planetsData[i].moons) planetNames += '<br><br>Луны:'
+        else planetsData[i].moons = []
+        for(let sat=0; sat<k.satellites; sat++) {
+          if(planetsData[i].moons[sat]) {
+            planetNames += '<br>' + planetsData[i].moons[sat]
+          } else {
+            planetNames += `<br> <span style='color: grey'>${planetsData[i].name} ${sat+1}</span>`
+          }
+        }
+      }
+      el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}${planetNames}<br>
       <img src='assets/planets/${type}.png' style="width:${size}%" 
         alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
         title="${k.type} ${k.size}(${E.size2num[k.size]}) ${k.giantType ? k.giantType : ''}"
@@ -527,12 +554,13 @@ const StarSystemGenerator = {
   if(location.hash) {
     log('loading from hash...')
     const ddata = StarSystemGenerator.decompress(location.hash)
+    log({ddata})
     const userPlanet = ddata.system.filter(e => e.capital)[0]
     log('density', ddata.density)
     getEl('el_sp_location').value = ddata.system.indexOf(userPlanet)
     getEl('el_sp_size').value = userPlanet.size
     getEl('el_density').value = ddata.density
-    StarSystemGenerator.draw(ddata.system, ddata.user)
+    StarSystemGenerator.draw(ddata.system, ddata.user, ddata.systemName)
     getEl('el_sys_str').innerText = StarSystemGenerator.compress(ddata.system, ddata.density, ddata.restCubes.split(''))
   }
 })()

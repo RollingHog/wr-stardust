@@ -1919,7 +1919,7 @@ const User = /** @type {const} */({
     getEl('el_reports_list').innerHTML = `<br>
       <strong>Сводный отчет: ${playerName}</strong><br>
       <a target=_blank 
-        href="./StarSystem.html#${userData.starSystemParams.generatorCode}&user=${playerName}">Звездная система</a>
+        href="./StarSystem.html#${userData.starSystemParams.generatorCode}&user=${playerName}&systemName=${userData.starSystemParams.name}">Звездная система</a>
       <br>
       <a target=_blank 
         href="./ColonyVisual.html?user=${playerName}">Внешний вид колонии</a>
@@ -2342,6 +2342,8 @@ class TGoogleDocUserObj {
     'Тип планеты': 0,
   }
   starSystemParams = {
+    name: '',
+    planetName: '',
     'x': 0,
     'y': 0,
     'Плотность звёздной системы': '',
