@@ -2501,7 +2501,7 @@ const playerPost = {
       return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW) || key === KEYWORDS.RESERVE_KW
     }).map( ([key, value])=> key+': '+value )
 
-    const currGreatPplCost = Math.floor(User.getSavedUserData(playerName).greatPeople.length / 2)
+    const currGreatPplCost = Math.max(Math.floor(User.getSavedUserData(playerName).greatPeople.length / 2), 1)
     
     getEl('el_special_tech_eff_reminder').innerHTML = `${playerName}: цена Великого человека: ${currGreatPplCost}; ` + remindTechs.join(', ')
   },
