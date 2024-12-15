@@ -189,14 +189,16 @@
       </data>
     </node>
     <node id="n13">
+      <data key="d5" xml:space="preserve"><![CDATA[С силой, равной Стоимость*2.63, и в рамках здравого смысла, Сферы Дайсона могут стрелять в свою и соседние системы. На разнос планеты их не хватит (е17/е32), но на стерилизацию - вполне.]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="638.2869166886171" y="1148.0"/>
           <y:Fill color="#FF9966" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="164.83984375" x="47.455078125" xml:space="preserve" y="6.9482421875">Сверхсветовая координация
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="187.9140625" x="35.91796875" xml:space="preserve" y="-0.40234375">Сверхсветовая координация
 Сложность: 5, тех. Ансибль
-Эффект: Скорость +4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: 
+:Орудия Дайсона могут стрелять<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -2822,7 +2824,6 @@ FTL-переходы в и из системы<y:LabelModel><y:SmartNodeLabelMod
       </data>
     </edge>
     <edge id="e111" source="n73" target="n128">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
