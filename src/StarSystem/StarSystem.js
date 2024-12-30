@@ -1,9 +1,10 @@
 // common.js
 /// <reference path="../common.js"/>
 /* global
-getEl log locationSearchToArray
+getEl log warn locationSearchToArray
 getDictKey
 PLAYERS_DATA_KEY
+DATA__PLANETS_DATA
 */
 
 // rules.js
@@ -17,7 +18,7 @@ const RAW_EXAMPLE = `20d6: (3 + 4 + 5 + 6 + 3 + 2 + 5 + 3 + 3 + 5 + 5 + 5 + 2 + 
   20d6: (5 + 1 + 4 + 3 + 3 + 6 + 1 + 2 + 6 + 2 + 3 + 4 + 1 + 5 + 6 + 1 + 3 + 3 + 5 + 4) = 68
   20d6: (2 + 5 + 3 + 2 + 2 + 4 + 3 + 4 + 2 + 5 + 1 + 5 + 1 + 6 + 2 + 2 + 1 + 6 + 5 + 1) = 62`
 
-const EARTH_EXAMPLE = `99d6: ( 4 + 6 + 5 + 1 + 1 ) = 0`
+// const EARTH_EXAMPLE = `99d6: ( 4 + 6 + 5 + 1 + 1 ) = 0`
 
 const E = /** @type {const} */({
   giant: {
@@ -468,7 +469,8 @@ const StarSystemGenerator = {
       text-align: center;
   ">${playerName.toUpperCase()}<br>Система ${systemName}</div>`
     }
-    const planetsData = DATA__PLANETS_DATA[playerName] ? DATA__PLANETS_DATA[playerName][systemName] : {}
+    const planetsData = (DATA__PLANETS_DATA[playerName] ? DATA__PLANETS_DATA[playerName][systemName] : {})
+       || {}
 
     for(let i = 1; i<system.length; i++) {
       const k = system[i]
@@ -511,7 +513,13 @@ const StarSystemGenerator = {
       let planetNames = ''
       if(planetsData[i]) {
         planetNames = `<br>${planetsData[i].name}`
-        if(planetsData[i].moons) planetNames += '<br><br>Луны:'
+        if(planetsData[i].moons) {
+          if(k.satellites > 0) {
+            planetNames += '<br><br>Луны:'
+          } else {
+            warn(`Уберите moons в planetsData у планеты ${i} / ${planetsData[i].name}`)
+          }
+        }
         else planetsData[i].moons = []
         for(let sat=0; sat<k.satellites; sat++) {
           if(planetsData[i].moons[sat]) {

@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="src/common.css">
 </head>
 <body>
+  <div id="el_error" hidden 
+    onclick="this.hidden = true"
+    style="position: fixed; right: 5px; top: 5px; background-color: yellow; padding: 6px; z-index: 6;" >
+    Warnings detected
+    <br>
+    <span id="el_error_inner"></span>
+  </div>
   <button id="home_btn" onclick="location.href='index.html'">HOME</button>
   <div id="el_GUI" onkeydown=" event.key === 'Enter' ? el_ss_start.click() : null ">
     Click this to copy & generate:

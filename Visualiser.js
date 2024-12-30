@@ -1691,7 +1691,7 @@ const User = /** @type {const} */({
    * @param {boolean} isVerbose TODO DOESNT WORK NOW if record where effects came from
    * @returns {{cost: [string, effValue][], effect: [string, effValue][]}}
    */
-  countSummaryCostAndEffect(techList, userDataObj = null, isVerbose = false) {
+  countSummaryCostAndEffect(techList, userDataObj = null) {
     let techListFiltered = techList
       .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
@@ -2532,16 +2532,19 @@ const playerPost = {
       i.rolls = rolls
     }
 
-    let bonusThings = [...text.matchAll(/\+\+([^+]+)\+\+/g)].map( e => ({ text: e[1], rolls: {
-      sum: null,
-      critfails: null,
-      wins: null,
-      critwins: null,
-      delta: null,
-      critdelta: null,
-    },
-    index: e.index,
-    rawRolls: null }))
+    let bonusThings = [...text.matchAll(/\+\+([^+]+)\+\+/g)].map(e => ({
+      text: e[1],
+      rolls: {
+        sum: null,
+        critfails: null,
+        wins: e[1].startsWith('-') ? -1 : null,
+        critwins: null,
+        delta: null,
+        critdelta: null,
+      },
+      index: e.index,
+      rawRolls: null
+    }))
     requests = requests.concat(bonusThings)
       .sort( (a,b) => a.index - b.index)
     const rollsTotal = requests.reduce( (sum, e) => sum + +e.rolls.sum,0)
@@ -2564,7 +2567,7 @@ const playerPost = {
     <tr>
       <td colspan=2>ВСЕГО</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)}</td>
-      <td>${requests.reduce( (sum, e) => sum + +e.rolls.wins,0)}</td>
+      <td>${requests.reduce( (sum, e) => sum + Math.max(+e.rolls.wins,0),0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)}</td>
       <td>${rollsTotal}</td>
       <td></td>
@@ -2572,7 +2575,7 @@ const playerPost = {
     <tr>
       <td colspan=2>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
       <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
-      <td>${(requests.reduce( (sum, e) => sum + +e.rolls.wins,0)/rollsTotal/0.6*100-100).toFixed(0)}%</td>
+      <td>${(requests.reduce( (sum, e) => sum + Math.max(+e.rolls.wins,0), 0)/rollsTotal/0.6*100-100).toFixed(0)}%</td>
       <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
     </tr>
     
@@ -2732,6 +2735,8 @@ const playerPost = {
 
     getEl('el_tech_result_list').innerHTML =
       User.createTechCostTable(result.cost, userEffects) +
+      // TODO add additional projects with leading minus to see critfail effects
+      // TechUtils.createEffectsTable(costListArr, 'COST') +
       User.createUserTechEffectsTable(Object.entries(result.effect))
 
     const byType = {
