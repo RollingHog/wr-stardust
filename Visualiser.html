@@ -75,6 +75,18 @@
     cursor: pointer;
     text-decoration: underline;
   }
+
+  /* скрыть избыточную информацию в анализе userpost */
+  /* #el_selected_tech_list table tr th:nth-child(3),
+  #el_selected_tech_list table tr th:nth-child(4),
+  #el_selected_tech_list table tr th:nth-child(5), */
+  #el_selected_tech_list table tbody tr td:nth-child(3),
+  #el_selected_tech_list table tbody tr td:nth-child(4),
+  #el_selected_tech_list table tbody tr td:nth-child(5)
+  {
+    background-color: grey;
+    visibility: hidden;
+  }
 </style>
 <style id="style__text_title">
   /* text:has(title) {

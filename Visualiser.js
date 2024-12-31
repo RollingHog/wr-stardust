@@ -2501,7 +2501,7 @@ const playerPost = {
       return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW) || key === KEYWORDS.RESERVE_KW
     }).map( ([key, value])=> key+': '+value )
 
-    const currGreatPplCost = Math.max(Math.floor(User.getSavedUserData(playerName).greatPeople.length / 2), 1)
+    const currGreatPplCost = Math.max(Math.floor(User.getSavedUserData(playerName).greatPeople.length / 2), 2)
     
     getEl('el_special_tech_eff_reminder').innerHTML = `${playerName}: цена Великого человека: ${currGreatPplCost}; ` + remindTechs.join(', ')
   },
@@ -2563,23 +2563,24 @@ const playerPost = {
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
-    </tbody><tbody>
+    </tbody><thead>
     <tr>
-      <td colspan=2>ВСЕГО</td>
+      <td>ВСЕГО</td>
+      <td>${requests.reduce( (sum, e) => sum + +(e.treshold || 0),0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)}</td>
       <td>${requests.reduce( (sum, e) => sum + Math.max(+e.rolls.wins,0),0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)}</td>
       <td>${rollsTotal}</td>
-      <td></td>
     </tr>
     <tr>
-      <td colspan=2>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
+      <td>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
+      <td></td>
       <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
       <td>${(requests.reduce( (sum, e) => sum + Math.max(+e.rolls.wins,0), 0)/rollsTotal/0.6*100-100).toFixed(0)}%</td>
       <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
     </tr>
     
-    </tbody></table>
+    </thead></table>
     Чтобы "Цена" не перезаписывалась - добавь в начало '+'`
   },
 
