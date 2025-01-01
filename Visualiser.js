@@ -2549,7 +2549,8 @@ const playerPost = {
       .sort( (a,b) => a.index - b.index)
     const rollsTotal = requests.reduce( (sum, e) => sum + +e.rolls.sum,0)
 
-    getEl('el_selected_tech_list').innerHTML = `<table>
+    // Array.from(document.querySelectorAll('#el_selected_tech_list tbody tr:not([style="background-color: goldenrod;"]) td:nth-child(2)')).map(e => +e.textContent).reduce((partialSum, a) => partialSum + a, 0)
+    getEl('el_selected_tech_list').innerHTML = `<table class=hide-interm-columns>
     <thead>
       <th>${['Технология', 'Цена', "КПров", "Усп", "КУсп", "Брош.", "Дельт", "КДлт"].join('</th><th>')}</th>
       <th 
@@ -2563,7 +2564,7 @@ const playerPost = {
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
-    </tbody><thead>
+    </tbody><tbody>
     <tr>
       <td>ВСЕГО</td>
       <td>${requests.reduce( (sum, e) => sum + +(e.treshold || 0),0)}</td>
@@ -2580,7 +2581,7 @@ const playerPost = {
       <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
     </tr>
     
-    </thead></table>
+    </tbody></table>
     Чтобы "Цена" не перезаписывалась - добавь в начало '+'`
   },
 

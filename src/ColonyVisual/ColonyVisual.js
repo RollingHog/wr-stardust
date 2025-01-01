@@ -50,13 +50,21 @@ function createImage(playerName) {
   }
 }
 
-
+/**
+ * @param {string} name 
+ * @param {*} lvl 
+ * @param {*} cnt 
+ * @param {*} length 
+ */
 function showBuilding(name, lvl, cnt, length) {
   const el = document.createElement('div')
   el.className = 'building'
   el.style.zIndex = length - lvl
   el.style.bottom = `${2 + lvl * lvlPadding}vh`
   el.style.left = `${pageW/2 + (-lvl/2 + cnt)*cntPadding}px`
+  if(name.replace(/, /g,')(').includes('(сломано)')) { 
+    el.style.background = 'linear-gradient(rgba(250,128,114, 0.7), red)'
+  }
   const imgName = name
     .toLowerCase()
     .replace(/\([^)]+\)/g,'')
