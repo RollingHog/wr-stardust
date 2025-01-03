@@ -309,7 +309,7 @@
       <button onclick="Analysis.drawReportsList()" hotkey="R">Reports</button>
       <button onclick="savingOps.saveAllTechAsPng()" title="Save all tech trees as png" hotkey="M">Dump</button>
       <!-- <br>
-      <button onclick="parseDoc.GDocToJS()" title="">GDoc to JS(ON)</button> -->
+      <button onclick="parseGDoc.GDocToJS()" title="">GDoc to JS(ON)</button> -->
       <!-- <button onclick="savingOps.openAsPng()" title="Open current tree as png in new tab">Png</button> -->
       <section id=players_selection style="background-color: white;">
         <br>
@@ -329,8 +329,8 @@
           <input type="checkbox" id="el_playerQuiet" title="do not show player data on click">Quiet
         </label>
         <br>
-        <button onclick="parseDoc.file(event)" style="padding: 12px;" hotkey="P">Parse clipboard</button>
-        <button onclick="parseDoc.redoLast()" style="padding: 12px;">Redo last parse</button>
+        <button onclick="parseGDoc.file(event)" style="padding: 12px;" hotkey="P">Parse clipboard</button>
+        <button onclick="parseGDoc.redoLast()" style="padding: 12px;">Redo last parse</button>
       </section>
     </div>
     <section  style="position: fixed; left: 8px; top: 8px;" hidden>

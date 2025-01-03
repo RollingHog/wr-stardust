@@ -307,7 +307,7 @@ async function Init() {
       elPlayersData.onload = resolve
       elPlayersData.src = elPlayersData.getAttribute('src2')
     })
-    parseDoc.lastResult = User.getAllUsersData()
+    parseGDoc.lastResult = User.getAllUsersData()
     
     console.timeEnd('player data ')
     // log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
@@ -352,7 +352,7 @@ async function Init() {
         ? e.onclick = function() { 
           if(e.children[0].checked) {
             let playerName = e.innerText.trim()
-            parseDoc.drawTech(playerName, techData.currentTreeName)
+            parseGDoc.drawTech(playerName, techData.currentTreeName)
             if(!VARS.isInit && !getEl('el_playerQuiet').checked) {
               User.drawUserStat(playerName)
             }
@@ -1537,7 +1537,7 @@ const User = /** @type {const} */({
 
   drawActiveUser(treeName) {
     if(!this.activePlayer) return
-    parseDoc.drawTech(this.activePlayer, treeName)
+    parseGDoc.drawTech(this.activePlayer, treeName)
   },
 
   /**
@@ -2008,7 +2008,7 @@ async function parseTechIframe(tree_name) {
   draw.tech = tech
 }
 
-const parseDoc = {
+const parseGDoc = {
   lastRaw: null,
   lastNodes: null,
   lastResult: null,
@@ -2068,14 +2068,13 @@ const parseDoc = {
     usersData[last.user] = interm.user
     this.lastNodes = usersData
 
-    const templateName = '[Персонаж]'
     for(let username in usersData) {
-      if(username == templateName) {
-        log('template name, skip:', templateName)
+      if(username === '[Персонаж]' || username === '[Разведанные миры]') {
+        log('special name, skip:', username)
         continue
       }
 
-      usersRes[username] = parseDoc.playerHTML(username, usersData[username])
+      usersRes[username] = parseGDoc.playerHTML(username, usersData[username])
 
       if (!getEl(username) || !getEl(username).checked) {
         log(username, 'not marked to draw, skipping')
@@ -2096,7 +2095,7 @@ const parseDoc = {
     // eslint-disable-next-line no-constant-condition
     if (rawClipboardObj.types.includes(MIME_HTML)) {
       raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
-      this.lastResult = await parseDoc.HTML(raw)
+      this.lastResult = await parseGDoc.HTML(raw)
     } else {
       raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
       warn("can't parse plaintext: deprecated and removed")
@@ -2104,12 +2103,12 @@ const parseDoc = {
     }
     this.lastRaw = raw
     if(getEl('el_doPlayersData').checked) {
-      parseDoc.GDocToJS()
+      parseGDoc.GDocToJS()
     }
   },
 
   async redoLast() {
-    this.lastResult = await parseDoc.HTML(this.lastRaw) 
+    this.lastResult = await parseGDoc.HTML(this.lastRaw) 
   },
 
   playerHTML(playerName, obj) {
@@ -2438,9 +2437,10 @@ const playerPost = {
         }
         let resTreshold = null
         if (treshold.length) {
-          resTreshold = +treshold[0][1]
           if (treshold[0][1].startsWith('+')) {
             resTreshold = treshold[0][1]
+          } else {
+            resTreshold = '+' + treshold[0][1]
           }
         }
 
@@ -2575,10 +2575,11 @@ const playerPost = {
     </tr>
     <tr>
       <td>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
-      <td></td>
+      <td contenteditable=false><button onclick="qs('#el_selected_tech_list table').className=''" title='Expand hidden columns'>E</button></td>
       <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
       <td>${(requests.reduce( (sum, e) => sum + Math.max(+e.rolls.wins,0), 0)/rollsTotal/0.6*100-100).toFixed(0)}%</td>
       <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
+      <td></td>
     </tr>
     
     </tbody></table>
@@ -3413,7 +3414,7 @@ const TurnPlanner = {
     const data = Object.entries(
       User.getUserEffects(this.activePlayer)
     )
-    parseDoc.drawTech(this.activePlayer, techData.currentTreeName)
+    parseGDoc.drawTech(this.activePlayer, techData.currentTreeName)
     getEl('el_tp_resources').innerHTML = User.createUserTechEffectsTable(data)
     // getEl('el_tp_tech').innerHTML = 
     this.fillTechsDatalist()
