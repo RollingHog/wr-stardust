@@ -622,7 +622,7 @@ const Analysis = {
           // // eslint-disable-next-line no-empty
           // else if(['Технология', "Слоты"].includes(k[0])) {}
           else if(
-            k[1] == 'суперпроект'
+            k[1] == 'чудо'
             // || j.lvl >= techData.MAX_TECH_LVL-1
           ) {
             tcost = 0
@@ -2923,7 +2923,7 @@ var KEYWORDS = /** @type {const} */ ({
   REWARD_KEYWORD: 'приз',
   TECH_COST_MODS: [
     'базовое',
-    'суперпроект',
+    'чудо',
     'почва',
     'первый контакт',
     'черная дыра',
