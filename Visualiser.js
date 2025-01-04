@@ -556,7 +556,6 @@ const Analysis = {
   onInit() {
     // extracted from Init
     Analysis.reportBadY()
-    // TODO disable when not in transition
     Analysis.reportBadUserData()
     Analysis.insertTechLevels()
     Analysis.countTechSubtreesBorders()
@@ -572,10 +571,15 @@ const Analysis = {
     
     setTimeout( _ => {
       // all output to clear timestamps
-      // TODO disabled
       // console.log(listParam('costClear'))
       // console.log(listAllWithoutMilitary())
       Analysis.totalTechCount()
+      // record subtrees
+      Object.keys(inverted.alltech).forEach(
+        key => {
+          inverted.alltech[key].subtree = 
+            capitalizeFirstLetter(Analysis.getSubtreeName(TechUtils.byName(key)))
+        })
     }, 20)
 
     HTMLUtils.checkForOpenedWindows()
@@ -677,6 +681,7 @@ const Analysis = {
             ) {
               teff += +k[1]/1.6
             }
+            // TODO reconsider cost based on material series
             else if(KEYWORDS.MATERIALS.includes(k[0])) {
               const ind = KEYWORDS.MATERIALS.indexOf(k[0])
               if(ind < 6) {
@@ -906,10 +911,10 @@ const Analysis = {
       const techNames = User.getFlatUserTech(user)
       res[user] = {}
       for(let i of techNames) {
-        let name = this.getSubtreeName(TechUtils.byName(i))
-        if(!name) continue
-        if(!res[user][name]) res[user][name] = 0
-        res[user][name] += 1
+        let subtreeName = TechUtils.byName(i).subtree
+        if(!subtreeName) continue
+        if(!res[user][subtreeName]) res[user][subtreeName] = 0
+        res[user][subtreeName] += 1
       }
     }
     return res
@@ -2750,9 +2755,9 @@ const playerPost = {
       [VARS.NODE_T.ASTROPROJECT]: [],
     }
 
-    techList.forEach(e => {
-      if (VARS.NON_WAR_NODE_TYPES_ARR.includes(TechUtils.get(e).type))
-        byType[TechUtils.get(e).type].push(e)
+    techList.forEach(techName => {
+      if (VARS.NON_WAR_NODE_TYPES_ARR.includes(TechUtils.get(techName).type))
+        byType[TechUtils.get(techName).type].push(techName)
     })
 
     getEl('el_tech_by_type_list').innerHTML = [
@@ -2761,39 +2766,40 @@ const playerPost = {
       ['Орбитальные здания', byType[VARS.NODE_T.ORBITAL]],
       ['Проекты', byType[VARS.NODE_T.PROJECT]],
       ['Астропроекты', byType[VARS.NODE_T.ASTROPROJECT]],
-    ].map(e => {
-      if(!e[1].length) return ''
-      let tableStr = Object.entries(e[1]
-        .reduce((acc, e2) => {
-          const field = TechUtils.get(e2).fill 
-          if(acc[field] instanceof Array) {
-            acc[field].push(e2)
-          } else {
-            acc[field] = [e2]
-          }
-          return acc
-        }, {}))
-        .sort( (a,b) => 
-          TREELIST.indexOf(VARS.fill2TreeType[a[0]]) 
-          - TREELIST.indexOf(VARS.fill2TreeType[b[0]]) 
-        )
-
-      if(['Технологии'].includes(e[0])) {
+    ].map(([columnName, namesList]) => {
+      if(!namesList.length) return ''
+      let tableStr
+      if(columnName === 'Технологии') {
+        //sort and display by tree type
+        tableStr = Object.entries(namesList
+          .reduce((acc, name) => {
+            const field = TechUtils.get(name).fill 
+            if(acc[field] instanceof Array) {
+              acc[field].push(name)
+            } else {
+              acc[field] = [name]
+            }
+            return acc
+          }, {}))
+          .sort( (a,b) => 
+            TREELIST.indexOf(VARS.fill2TreeType[a[0]]) 
+            - TREELIST.indexOf(VARS.fill2TreeType[b[0]]) 
+          )
         tableStr = tableStr.map( e2 => 
-            `
-            <span style="background-color:${e2[0]}">
-              ${VARS.fill2TreeType[e2[0]]}
-            </span>
-            <span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
-            >${e2[1].join(', ')}, </span>
-            <br>`).join('')
+          `
+          <span style="background-color:${e2[0]}">
+            ${VARS.fill2TreeType[e2[0]]}
+          </span>
+          <span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
+          >${e2[1].join(', ')}, </span>
+          <br>`).join('')
       } else {
         tableStr = `
         <span onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor='darkgrey'"
-        >${tableStr.map(e2 => e2[1]).join(', ')}, </span>`
+        >${namesList.join(', ')}, </span>`
       }
 
-      return `<strong>${e[0]}</strong>
+      return `<strong>${columnName}</strong>
       <div>
         ${tableStr}
       </div>`
@@ -2808,6 +2814,7 @@ class TTechObject {
   id = ''
   type
   treeName = ''
+  subtree = ''
   borderColor
   name
   lvl = 0
@@ -2865,16 +2872,17 @@ var KEYWORDS = /** @type {const} */ ({
     // 1 ряд
     "Сталь",
     "Нефть",
+    // 2 ряд
     "Редкие металлы",
     "Трансураны",
-    // 2 ряд
+    // 3 ряд
     "Наноматериалы",
     "Антиматерия",
-    // 3 ряд
+    // 4 ряд
     "Стазокерамика",
     "Экзотическая материя",
     "Экзотматерия",
-    // 4 ряд
+    // 5 ряд
     "Нейтроний",
     "Гиперплазма",
   ],
@@ -2939,9 +2947,10 @@ var KEYWORDS = /** @type {const} */ ({
     'вне родной системы',
   ],
   ONLY_ONCE_KW: 'разово',
+  ONE_USE_KW: 'одноразовый',
   SINGLE_TIME_EFFECTS: [
     "\\?",
-    'Великий человек',
+    'одноразовый',
     'выдаётся при высадке',
     'выдаётся на старте',
     'позволяет перебросить куб на Ресурсы \\(только вверх\\)',
