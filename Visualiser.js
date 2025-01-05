@@ -67,7 +67,8 @@ const VARS = /** @type {const} */({
     MODULE_SPACE: 'trapezoid2',
     MODULE_BOTH: 'fatarrow',
   },
-  NODETYPE_2_NAME: {},
+  // filled later
+  NODE_TYPE_2_NAME: {},
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
   TREELIST_EN2RU: {},
@@ -166,7 +167,7 @@ const VARS = /** @type {const} */({
 
 ; (() => {
   VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
-  VARS.NODETYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
+  VARS.NODE_TYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
   VARS.defaultProjectsList = {
     "Планетарная разведка": {
       "id": "n123001",
@@ -657,7 +658,7 @@ const Analysis = {
         }
         
         //hulls regulated manually
-        if(!['octagon'].includes(j.type) && j.effect[0][1] !== 'наземная база') {
+        if(![VARS.NODE_T.HULL].includes(j.type) && j.effect[0][1] !== 'наземная база') {
           for(let k of j.effect) {
             if(k[0]==KEYWORDS.ANY_PARAM_KEYWORD) {
               if(mult <= 2) teff += +k[1]
@@ -1157,7 +1158,7 @@ const Analysis = {
     список_корпусов() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
-          .filter(e => e.type == 'octagon')
+          .filter(e => e.type == VARS.NODE_T.HULL)
           .map(e => [e.name, {
             "Тип": e.effect[0][1], 
             "Цена": +e.cost[0][1], 
@@ -1169,11 +1170,22 @@ const Analysis = {
 
     список_модулей() {
       Analysis.reportTable(Object.fromEntries(
-          Analysis.listModuleObjs()
-          .map(e => [e.name, {
-            Цена: e.cost[0][1],
-            "Свойства": Analysis.formatReportEffects(e.effect),
-          }])
+        Analysis.listModuleObjs()
+          .map(obj => {
+            let slots = ''
+            // TODO FIXME
+            const eff = obj.effect.filter(eff => eff[0] === 'Слоты')
+            const cost = obj.cost.filter(eff => eff[0] === 'Слоты')
+            if(eff.length) slots = eff[0][1]
+            if(cost.length) slots = cost[0][1]
+
+            return [obj.name, {
+              Цена: obj.cost[0][1],
+              Слоты: slots,
+              Тип: VARS.NODE_TYPE_2_NAME[obj.type].replace('MODULE_', '').toLowerCase(),
+              "Свойства": Analysis.formatReportEffects(obj.effect),
+            }]
+          })
       ))
     },
 
@@ -1299,6 +1311,7 @@ const Analysis = {
       Analysis.reportTable(Object.fromEntries(res))
     },
 
+  // TODO FIXME log(Object.entries(User.getAllUsersData()).map(([name, data])=>`${name}: ##${data.additionalParams.осуждение}d10##`).join('\n'))
     планетарная_чуждость_и_погода() {
       /**
        * @type {[string, ReturnType<typeof countPlanetRawMisery>][]}
@@ -1402,6 +1415,24 @@ const Analysis = {
       >
         ##2d5## ##2d100##
       </pre>`) 
+    },
+
+    выделить_близкие_звезды() {
+      var locXY = prompt('Location? X Y with space between')
+      var json = JSON.parse(prompt('stars.json here'))
+      var m = Object.entries(json)
+
+      function hexMapDist(coordStr1, coordStr2) {
+        const [x1,y1] = coordStr1.split(' ')
+        const [x2,y2] = coordStr2.split(' ')
+        return Math.sqrt(Math.abs(+x1-+x2)**2+Math.abs(+y1-+y2)**2)
+      }
+
+      log(m
+        .filter(([key,_]) => hexMapDist(locXY, key) < 5)
+        .filter(([key, _])=>key !== locXY)
+        .map(([k,v])=>[k, v.StarsL.map(({mass, spectral_type}) => ({mass, spectral_type}))])
+      )
     }
   }
 }
