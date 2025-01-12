@@ -47,6 +47,7 @@ const VARS = /** @type {const} */({
   IS_LOCAL: window.location.protocol === 'file:',
   DISABLE_PARSE_IMMUNITY: false,
   PLAYERS_TIMESTAMP_KEY: 'DATA__PLAYERS_TIMESTAMP',
+  PLAYERS_TURN_KEY: 'DATA__PLAYERS_TURN',
   PLAYERS_DATA_KEY,
   TREELIST_RU2EN: {
     "Война": "Military",
@@ -2347,6 +2348,7 @@ const parseGDoc = {
       return
     }
     savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_TIMESTAMP_KEY} = '${(new Date()).toJSON()}'`
+    +`\nvar ${VARS.PLAYERS_TURN_KEY} = ${window[VARS.PLAYERS_TURN_KEY]}` 
     +`\nvar ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2)
       .replace(/[“”]/g,'\\"')
       .replace(/\\"\\"/g,'\\"')

@@ -1,4 +1,5 @@
-var DATA__PLAYERS_TIMESTAMP = '2025-01-04T03:02:36.744Z'
+var DATA__PLAYERS_TIMESTAMP = '2025-01-12T01:52:04.606Z'
+var DATA__PLAYERS_TURN = 9
 var DATA__PLAYERS_DATA = {
   "Беглецы": {
     "playerColor": "#FF8C00",
@@ -404,6 +405,16 @@ var DATA__PLAYERS_DATA = {
           [
             "особое",
             "+5 к политическим взаимодействиям"
+          ]
+        ]
+      },
+      {
+        "name": "Астронавигатор Дженни",
+        "lvl": 1,
+        "effect": [
+          [
+            "Наука",
+            "+1"
           ]
         ]
       }
