@@ -41,7 +41,9 @@ const TREELIST = [
   'Unique',
 ]
 
-// constants
+/**
+ * constants; empty ones usually filled later
+ */
 const VARS = /** @type {const} */({
   isInit: false,
   IS_LOCAL: window.location.protocol === 'file:',
@@ -72,6 +74,7 @@ const VARS = /** @type {const} */({
   NODE_TYPE_2_NAME: {},
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
+  // filled later
   TREELIST_EN2RU: {},
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
@@ -146,6 +149,9 @@ const VARS = /** @type {const} */({
       ["особое","высокая гравитация"],
     ],
   },
+  /**
+   * bonuses for hull types
+   */
   hulls: {
     "пехота": ``,
     "танки": `Защита +2, Скорость +1`,
@@ -169,34 +175,55 @@ const VARS = /** @type {const} */({
 ; (() => {
   VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
   VARS.NODE_TYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
+
+  const defaultProjTemplate = {
+    "type": 'parallelogram2',
+    // "borderColor": "#000000",
+    "fill": "lightgrey",
+    "req": [],
+    "next": [],
+    "fullText": "",
+  }
+
   VARS.defaultProjectsList = {
     "Планетарная разведка": {
-      "id": "n123001",
-      "type": 'parallelogram2',
       "treeName": "Industry",
-      "borderColor": "#0000FF",
-      "fill": "#CC99FF",
-      "name": "Планетарная разведка",
       "cost": [["Наука","1"]],
       "effect": [["особое","разведка планеты"]],
-      "req": [],
-      "next": [],
-      "fullText": "",
+      ...defaultProjTemplate,
     },
     "Резерв": {
-      "id": "n123002",
-      "type": 'parallelogram2',
       "treeName": "Industry",
-      "borderColor": "#000000",
-      "fill": "#CC99FF",
-      "name": "Резерв",
       "cost": [["Любой","1"]],
-      "effect": [["особое","резервирование кубов"]],
-      "req": [],
-      "next": [],
-      "fullText": "",
-    }
+      "effect": [["разово", "резервирование X кубов"]],
+      ...defaultProjTemplate,
+    },
+    "Снятие стресса общества": {
+      "treeName": "Sociology",
+      "cost": [["Общество","1"]],
+      "effect": [["разово", "-Х Стресса Общества"]],
+      ...defaultProjTemplate,
+    },
+    "Снятие стресса производства": {
+      "treeName": "Industry",
+      "cost": [["Производство","1"]],
+      "effect": [["разово", "-Х Стресса Производства"]],
+      ...defaultProjTemplate,
+    },
+    "Повышение Доверия": {
+      "treeName": "Sociology",
+      "cost": [["Общество","2"]],
+      "effect": [["разово", "+Х/2 Доверия"]],
+      ...defaultProjTemplate,
+    },
   }
+
+  let cnt = 0
+  for(let name in VARS.defaultProjectsList) {
+    VARS.defaultProjectsList[name].id = `n333${(++cnt).toString().padStart(3, '0')}`
+    VARS.defaultProjectsList[name].name = name
+  }
+
   NodeList.prototype.forEach = Array.prototype.forEach
   HTMLCollection.prototype.forEach = Array.prototype.forEach
   HTMLCollection.prototype.filter = Array.prototype.filter
@@ -380,6 +407,7 @@ async function Init() {
 
       console.time('analysis    ')
       Analysis.onInit()
+      HTMLUtils.checkForOpenedWindows()
       console.timeEnd('analysis    ')
 
       console.timeEnd('full load   ')
@@ -531,8 +559,11 @@ const HTMLUtils = {
         }
       },
       'unitcreator': _ => setTimeout(UnitCreator.open),
-      [TurnPlanner.NAME]: _ => setTimeout(TurnPlanner.open),
-      // TODO add processing from localstorage
+      [TurnPlanner.NAME]: subname => {
+        if(subname) User.activePlayer = subname
+        setTimeout(TurnPlanner.open)
+      },
+      // MAYBE add processing from localstorage
       'selected_tech': _ => setTimeout(playerPost.open)
     }
 
@@ -570,22 +601,21 @@ const Analysis = {
     log('countTechPrices disabled')
     // Analysis.countTechPrices()
 
-    
-    setTimeout( _ => {
-      // all output to clear timestamps
-      // console.log(listParam('costClear'))
-      // console.log(listAllWithoutMilitary())
-      Analysis.totalTechCount()
+    setTimeout(_ => {
       // record subtrees
       Object.keys(inverted.alltech).forEach(
         key => {
           inverted.alltech[key].subtree = 
             capitalizeFirstLetter(Analysis.getSubtreeName(TechUtils.byName(key)))
         })
+    })
+
+    setTimeout( _ => {
+      // all output to clear timestamps
+      // console.log(listParam('costClear'))
+      // console.log(listAllWithoutMilitary())
+      Analysis.totalTechCount()
     }, 20)
-
-    HTMLUtils.checkForOpenedWindows()
-
   },
 
   insertTechLevels() {
@@ -1542,7 +1572,8 @@ const TechUtils = {
   },
 
   countCosts(techNames) {
-    let t = [].concat.apply([], techNames.map( e => inverted.alltech[e].cost))  
+    let t = [].concat.apply([], techNames
+      .map( e => inverted.alltech[e]?.cost || VARS.defaultProjectsList[e]?.cost))  
     let res = {}
 
     for(let i of t) {
@@ -1722,6 +1753,7 @@ const User = /** @type {const} */({
       })
   },
 
+  // TODO применять defaultProjectsList в эффектах
   /**
    * @param {string[]} techList list of tech names
    * @param {TGoogleDocUserObj | undefined} userDataObj 
@@ -1732,12 +1764,15 @@ const User = /** @type {const} */({
     let techListFiltered = techList
       .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
       .map( e => e.replace(/\([^)]+\)/,'').trim())
-      .filter( e => inverted.alltech[e])
+      .filter( techName => inverted.alltech[techName] || VARS.defaultProjectsList[techName])
 
     /**
      * @type {[effKey, number | string]}
      */
-    let effectsData = [].concat.apply([], techListFiltered.map( e => inverted.alltech[e].effect))
+    let effectsData = [].concat.apply(
+      [], 
+      techListFiltered.map( name => inverted.alltech[name]?.effect || VARS.defaultProjectsList[name]?.effect)
+    )
     let costData = TechUtils.countCosts(techListFiltered)
 
     const isSpecial = (str) => [KEYWORDS.ITS_SPECIAL, KEYWORDS.ONLY_ONCE_KW].includes(str)
@@ -1811,7 +1846,6 @@ const User = /** @type {const} */({
   },
 
   /**
-   * 
    * @param {*} playerName 
    * @returns {Object.<string, effValue>}
    */
@@ -1828,16 +1862,20 @@ const User = /** @type {const} */({
    */
   createTechCostTable(costListArr, userEff) {
     if (!costListArr) return ''
-    costListArr = costListArr.map(([k, v]) => {
-      if (KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(k))) {
-        const aval = userEff[capitalizeFirstLetter(k)]
-        const resK = k + ` (есть ${aval})` +
-          (aval < v ? ' (МАЛО)' : '')
 
-        return [resK, v]
-      }
-      return [k, v]
-    })
+    if(userEff) {
+      costListArr = costListArr.map(([k, v]) => {
+        if (KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(k))) {
+          const aval = userEff[capitalizeFirstLetter(k)]
+          const resK = k + ` (есть ${aval})` +
+            (aval < v ? ' (МАЛО)' : '')
+  
+          return [resK, v]
+        }
+        return [k, v]
+      })
+    }
+
     return TechUtils.createEffectsTable(costListArr, 'COST')
   },
 
@@ -1868,7 +1906,9 @@ const User = /** @type {const} */({
       }) 
     // t = [].concat(t.main, t.additional)
 
-    const militaryBonusesFn = ([key, _]) => key.startsWith(KEYWORDS.CREATION_KEYWORD)
+    const militaryBonusesFn = ([key, _]) => key.startsWith(KEYWORDS.CREATION_KEYWORD) 
+      || KEYWORDS.MILITARY_PARAMS.some( paramName => key.startsWith(paramName))
+      || KEYWORDS.MILITARY_PARAMS_ADDITIONAL.some( paramName => key.startsWith(paramName))
 
     return (
       TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
@@ -1878,16 +1918,16 @@ const User = /** @type {const} */({
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD) ||  e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)), 'Исследования')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.MATERIALS.includes(e[0])), 'Ресурсы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])), 'Дополнительные параметры')
-      + TechUtils.createEffectsTable(effectsListArr.filter(militaryBonusesFn, 'Военные бонусы'))
+      + TechUtils.createEffectsTable(effectsListArr.filter(militaryBonusesFn), 'Военные бонусы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => !KEYWORDS.COLONY_PARAMS.includes(e[0])
         && !e[0].startsWith(':')
         && !KEYWORDS.TECH_EFFECTS.includes(e[0])
         && !e[0].startsWith(KEYWORDS.RESERVE_KW)
         && !KEYWORDS.IDEOLOGIES.includes(e[0])
-        && !e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD ||  e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW))
+        && !e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD) && !e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)
         && !KEYWORDS.MATERIALS.includes(e[0])
         && !KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])
-        && !e[0].startsWith(KEYWORDS.CREATION_KEYWORD)
+        && !militaryBonusesFn(e)
         // && !KEYWORDS.MILITARY_PARAMS.includes(e[0])
       ), 'Неотфильтрованные техи')
     )
@@ -2303,7 +2343,6 @@ const parseGDoc = {
       ),
       orbital: splitFilter(obj.Здания.children[0].rows[4].children[1].innerText),
       astroProjs: splitFilter(obj.Здания.children[0].rows[5].children[1].innerText),
-      // TODO
       prepaired,
       greatPeople,
       secondaryColonies,
@@ -2530,7 +2569,8 @@ const playerPost = {
 
   remindSpecialEffects(playerName) {
     if(!playerName) {
-      getEl('el_special_tech_eff_reminder').innerHTML = 'нет'
+      // Напоминание об эффектах
+      getEl('el_special_tech_eff_reminder').innerHTML = 'нет (не установлен игрок)'
       return
     }
     const userEff = User.getUserEffects(playerName)
@@ -2789,10 +2829,13 @@ const playerPost = {
     }
 
     techList.forEach(techName => {
-      if (VARS.NON_WAR_NODE_TYPES_ARR.includes(TechUtils.get(techName).type))
+      if (VARS.NON_WAR_NODE_TYPES_ARR.includes(TechUtils.get(techName).type)
+         && !Object.keys(VARS.defaultProjectsList).includes(techName)
+      )
         byType[TechUtils.get(techName).type].push(techName)
     })
 
+    // Раскладка по типам
     getEl('el_tech_by_type_list').innerHTML = [
       ['Технологии', byType[VARS.NODE_T.TECH]],
       ['Здания', byType[VARS.NODE_T.BUILDING]],
@@ -3439,34 +3482,45 @@ const TurnPlanner = {
     // getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map(e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
     // this.fillModulesList()
     getEl('el_tp_player').innerHTML = User.listUsers().map( e => `<option value="${e}">${e}</option>`)
-    if(User.activePlayer) {
-      getEl('el_tp_player').value = User.activePlayer
-    } else {
-      getEl('el_tp_player').selectedIndex = -1
-      getEl('el_tp_techs_search').disabled = true
-    }
     getEl('el_tp_player').onchange = evt => {
       TurnPlanner.activePlayer = evt.target.options[evt.target.selectedIndex].value
       TurnPlanner.onSetUser()
     }
-    this.active = true
-    HTMLUtils.openModal(this.NAME)
+
+    if(User.activePlayer) {
+      getEl('el_tp_player').value = User.activePlayer
+      this.activePlayer = User.activePlayer
+      TurnPlanner.onSetUser()
+    } else {
+      getEl('el_tp_player').selectedIndex = -1
+      getEl('el_tp_techs_search').disabled = true
+    }
+
+    HTMLUtils.openModal(TurnPlanner.NAME, this.activePlayer)
+    TurnPlanner.active = true
+
+    // so it can calculate subtrees on startup
+    setTimeout(() => TurnPlanner.fillTechsDatalist())
   },
+
   onSetUser() {
     const data = Object.entries(
       User.getUserEffects(this.activePlayer)
-    )
+    ).filter( e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
+
     parseGDoc.drawTech(this.activePlayer, techData.currentTreeName)
     getEl('el_tp_resources').innerHTML = User.createUserTechEffectsTable(data)
     // getEl('el_tp_tech').innerHTML = 
-    this.fillTechsDatalist()
+    TurnPlanner.fillTechsDatalist()
     getEl('el_tp_techs_search').disabled = false
     getEl('el_tp_techs_search').onchange = _ => {
       // if(!e.isTrusted) return 
       this.addTech(getEl('el_tp_techs_search').value)
       getEl('el_tp_techs_search').value = ''
     }
+    HTMLUtils.registerModalPath(TurnPlanner.NAME, this.activePlayer)
   },
+
   getFilteredAvalTechList() {
     const exclude = this.selectedTechs
       .concat(User.getFlatUserTech(this.activePlayer))
@@ -3477,14 +3531,16 @@ const TurnPlanner = {
       .filter(techObj => !exclude.includes(techObj.name))
       .sort( (a,b) => a.treeName > b.treeName ? 1 : -1)
   },
+
   fillTechsDatalist() {
     getEl('el_tp_techs_datalist').innerHTML = this.getFilteredAvalTechList()
     .map( 
       /**
-       * @param {TTechObject} e 
+       * @param {TTechObject} obj 
        */
-      (e) => `<option value="${e.name}">[${VARS.TREELIST_EN2RU[e.treeName]}] ${e.effect.map(e2 => e2.join(': ')).join('; ')}</option>`)
+      (obj) => `<option value="${obj.name}">[${VARS.TREELIST_EN2RU[obj.treeName]} ${obj.subtree}] ${obj.effect.map(e2 => e2.join(': ')).join('; ')}</option>`)
   },
+
   addTech(techName) {
     if(!this.getFilteredAvalTechList().map(e => e.name).includes(techName)) return false
     getEl('el_tp_tech').innerText += `${techName} (${Analysis.getSubtreeName(TechUtils.byName(techName))})\n`
@@ -3494,16 +3550,19 @@ const TurnPlanner = {
     this.highlightSelected()
     return true
   },
+
   highlightSelected() {
     for(let i of TurnPlanner.selectedTechs) {
       if(inverted.alltech[i].treeName !== techData.currentTreeName) continue
       getEl(inverted.alltech[i].id).style.fill = 'orange'
     }
   },
+
   countSelectedCost() {
     // TODO wrong wrong wrong, techs can be studied by multiple params!
     log(TechUtils.countCosts(this.selectedTechs))
   },
+
   close() {
     this.active = false
     drawTree(techData.currentTreeName)
@@ -3523,9 +3582,6 @@ const savingOps = {
         savingOps.saveSvgAsPng(svg, `${i.innerText}.png`)
       }
     }
-  },
-  openAsPng() {
-    // TODO
   },
   // eslint-disable-next-line no-unused-vars
   saveSVG(filename) {
