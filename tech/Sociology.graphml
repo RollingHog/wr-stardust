@@ -510,7 +510,7 @@
           <y:Geometry height="62.0" width="259.75" x="51.134030035745354" y="313.0000000000001"/>
           <y:Fill color="#CC99FF" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="209.025390625" x="25.3623046875" xml:space="preserve" y="6.9482421875">Целевой отбор
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="238.685546875" x="10.5322265625" xml:space="preserve" y="6.9482421875">Целевой отбор
 Сложность: 1, :не более 4 Великих людей
 Эффект: разово +1 великий человек<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -1208,6 +1208,8 @@
       </data>
     </node>
     <node id="n91">
+      <data key="d5" xml:space="preserve"><![CDATA["Почётная обязанности армии-помогать народу, почётная обязанность народа-делать всё для блага армии. 
+Армия и народ колонии едины. Только служба гарантирует гр[ОБРЫВ НА ЛИНИИ]]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="334.0" y="681.0000000000001"/>

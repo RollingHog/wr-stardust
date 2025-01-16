@@ -201,13 +201,13 @@ const VARS = /** @type {const} */({
     "Снятие стресса общества": {
       "treeName": "Sociology",
       "cost": [["Общество","1"]],
-      "effect": [["разово", "-Х Стресса Общества"]],
+      "effect": [["разово", "-Х*2 Стресса Общества"]],
       ...defaultProjTemplate,
     },
     "Снятие стресса производства": {
       "treeName": "Industry",
       "cost": [["Производство","1"]],
-      "effect": [["разово", "-Х Стресса Производства"]],
+      "effect": [["разово", "-Х*2 Стресса Производства"]],
       ...defaultProjTemplate,
     },
     "Повышение Доверия": {
@@ -713,14 +713,8 @@ const Analysis = {
             ) {
               teff += +k[1]/1.6
             }
-            // TODO reconsider cost based on material series
             else if(KEYWORDS.MATERIALS.includes(k[0])) {
-              const ind = KEYWORDS.MATERIALS.indexOf(k[0])
-              if(ind < 6) {
-                teff += +k[1]*ind/2.5
-              } else {
-                teff += +k[1]*ind/1.5
-              }
+              teff += +k[1]*TechUtils.getMaterialSeries(k[0])
             }
             else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {
               // TODO do better later
@@ -1597,6 +1591,13 @@ const TechUtils = {
     )
     savingOps.saveFile(`tech_${Date.now()}.json`, JSON.stringify(list, 0, 2))
   },
+
+  /**
+   * Номер ряда для ресурса
+   */
+  getMaterialSeries(materialName) {
+    return Math.floor(KEYWORDS.MATERIALS.indexOf(materialName) / 2 + 1)
+  }
 }
 
 const User = /** @type {const} */({
@@ -2527,7 +2528,7 @@ const playerPost = {
             .replace(/^\d[).] ?/gi,'')
             // TODO scream test: was used to remove numeration? do not remove at least for two active turns
             // .replace(/^[^а-яёa-z0-9]+/gi,'')
-            // TODO add reminder NOT to include these symbols in tech names
+            // TODO add reminder NOT to include symbols below in tech names
             .split(',')[0]
             .split('.')[0]
             .split(' – ')[0]
@@ -2698,9 +2699,9 @@ const playerPost = {
     const userEffects = User.getUserEffects(playerName)
 
     const currRes = Object.assign({}, userEffects)
-    for(let i of Object.keys(currRes)) {
-      if(!isSpecialCost(i))
-        delete currRes[i]
+    for(let resourceName of Object.keys(currRes)) {
+      if(!isSpecialCost(resourceName))
+        delete currRes[resourceName]
     }
 
     getEl('el_selected_tech_list').hidden = true
@@ -2758,15 +2759,14 @@ const playerPost = {
 
           e.children[pos.name].style.backgroundColor = TechUtils.get(techText).fill
 
-          const specCost = TechUtils.get(techText).cost
+          const materialsCost = TechUtils.get(techText).cost
             .filter(([k2, _v]) => isSpecialCost(k2))
-          if(specCost.length) {
-            log(techText , specCost)
+          if(materialsCost.length) {
             // e.children[pos.price].innerText = 
             //   +e.children[pos.price].innerText + specCost.reduce((acc, [_k,v])=> acc += +v, 0)
-            e.children[pos.price].title = specCost.map(([k,v])=>`${k} ${+v}; `)
+            e.children[pos.price].title = materialsCost.map(([k,v])=>`${k} ${+v}; `)
             e.children[pos.price].style.backgroundColor =  'aquamarine'
-            for(let [name, val] of specCost) {
+            for(let [name, val] of materialsCost) {
               name = capitalizeFirstLetter(name)
               if(currRes[name]) {
                 if(currRes[name] - val < 0) {
@@ -2812,13 +2812,17 @@ const playerPost = {
       .filter(e => e)
     
     // getEl('el_selected_tech_list').children[0].tBodies[1].rows[0].children[pos.delta-1].innerText = summaryDelta
-    const result = User.countSummaryCostAndEffect(techList)
+    const studyResult = User.countSummaryCostAndEffect(techList)
+
+    // можно добавить как "разово"
+    // почти наверняка ресурсы выше вычитаются неправильно
+    // const unusedMaterials = Object.keys(currRes)
+    //   .reduce((acc, i) => acc + TechUtils.getMaterialSeries(i)*currRes[i], 0)
 
     getEl('el_tech_result_list').innerHTML =
-      User.createTechCostTable(result.cost, userEffects) +
-      // TODO add additional projects with leading minus to see critfail effects
+      User.createTechCostTable(studyResult.cost, userEffects) +
       // TechUtils.createEffectsTable(costListArr, 'COST') +
-      User.createUserTechEffectsTable(Object.entries(result.effect))
+      User.createUserTechEffectsTable(Object.entries(studyResult.effect))  
 
     const byType = {
       [VARS.NODE_T.TECH]: [],
