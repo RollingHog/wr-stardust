@@ -532,6 +532,8 @@ const Analysis = {
     // extracted from Init
     Analysis.reportBadY()
     Analysis.reportBadUserData()
+    Analysis.reportBadSymbolsInTechName()
+
     Analysis.insertTechLevels()
     Analysis.countTechSubtreesBorders()
 
@@ -810,6 +812,19 @@ const Analysis = {
       // TODO check if correct block
     }
   },
+
+  reportBadSymbolsInTechName() {
+    // see playerPost.extractRolls
+    const prohibitetStrs = [',', '.', ' - ']
+    for(let name of Object.keys(inverted.alltech)) {
+      for(let badToken of prohibitetStrs) {
+        if(name.includes(badToken)) {
+          warn(`tech "${name}", bad token in name: "${badToken}"`)
+        }
+      }
+    }
+  },
+
   countTechSubtreesBorders() {
     techData.subtreeBorders = Object.fromEntries(
       Object.entries(techData.badCells)
@@ -1278,7 +1293,6 @@ const Analysis = {
       Analysis.reportTable(Object.fromEntries(res))
     },
 
-  // TODO FIXME log(Object.entries(User.getAllUsersData()).map(([name, data])=>`${name}: ##${data.additionalParams.осуждение}d10##`).join('\n'))
     планетарная_чуждость_и_погода() {
       /**
        * @type {[string, ReturnType<typeof countPlanetRawMisery>][]}
@@ -1305,6 +1319,7 @@ const Analysis = {
         }
       }
       
+      // TODO FIXME log(Object.entries(User.getAllUsersData()).map(([name, data])=>`${name}: ##${data.additionalParams.осуждение}d10##`).join('\n'))
       Analysis.reportTable(Object.fromEntries(arr),
         '<div onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor=\'darkgrey\'"'
         + 'title="click to copy"><pre>'
@@ -1339,50 +1354,50 @@ const Analysis = {
       )
     },
 
-    тип_критпровала_по_таблицам() {
-      const field = {
-        1: 'Социальный',
-        2: 'Экологический',
-        3: 'Научный',
-        4: 'Технический',
-        5: 'Военный',
-      }
-      const exactEvent = {
-        1: 'Инопланетное вторжение',
-        9: 'Астрономическое событие',
-        19: 'Научное событие',
-        29: 'Природное происшествие',
-        39: 'Культурный феномен / Социальное изменение',
-        49: 'Геологическая аномалия',
-        59: 'Политическое движение',
-        69: 'Преступление',
-        79: 'Болезнь',
-        89: 'Опыт лидеру',
-        99: 'Инопланетный артефакт',
-        100: 'Контакт',
-      }
-      const t = prompt('Кубы?')
-      // getEl('el_reports_list').innerHTML = 
-      const result = t.split('\n').map(s => {
-        s = s.replace(/\dd5/, 'D5').replace(/\dd100/, 'D100')
-        const s1 = s.split('D5:')
-        const s2 = s1[1].split('D100:')
-        return [
-          s1[0].trim(),
-          s2[0].trim().replace(/\) =.+$/, '').match(/\d+/g),
-          s2[1].trim().replace(/\) =.+$/, '').match(/\d+/g),
-        ]
-      })
-        .map(arr => [
-          arr[0],
-          arr[1].map(e => field[+e]).join('+'),
-          arr[2].map(e => getDictKey(exactEvent, +e)).join('+'),
-        ])
-      Analysis.reportTable(result, `<pre onclick="navigator.clipboard.writeText(this.innerText)"
-      >
-        ##2d5## ##2d100##
-      </pre>`) 
-    },
+    // тип_критпровала_по_таблицам() {
+    //   const field = {
+    //     1: 'Социальный',
+    //     2: 'Экологический',
+    //     3: 'Научный',
+    //     4: 'Технический',
+    //     5: 'Военный',
+    //   }
+    //   const exactEvent = {
+    //     1: 'Инопланетное вторжение',
+    //     9: 'Астрономическое событие',
+    //     19: 'Научное событие',
+    //     29: 'Природное происшествие',
+    //     39: 'Культурный феномен / Социальное изменение',
+    //     49: 'Геологическая аномалия',
+    //     59: 'Политическое движение',
+    //     69: 'Преступление',
+    //     79: 'Болезнь',
+    //     89: 'Опыт лидеру',
+    //     99: 'Инопланетный артефакт',
+    //     100: 'Контакт',
+    //   }
+    //   const t = prompt('Кубы?')
+    //   // getEl('el_reports_list').innerHTML = 
+    //   const result = t.split('\n').map(s => {
+    //     s = s.replace(/\dd5/, 'D5').replace(/\dd100/, 'D100')
+    //     const s1 = s.split('D5:')
+    //     const s2 = s1[1].split('D100:')
+    //     return [
+    //       s1[0].trim(),
+    //       s2[0].trim().replace(/\) =.+$/, '').match(/\d+/g),
+    //       s2[1].trim().replace(/\) =.+$/, '').match(/\d+/g),
+    //     ]
+    //   })
+    //     .map(arr => [
+    //       arr[0],
+    //       arr[1].map(e => field[+e]).join('+'),
+    //       arr[2].map(e => getDictKey(exactEvent, +e)).join('+'),
+    //     ])
+    //   Analysis.reportTable(result, `<pre onclick="navigator.clipboard.writeText(this.innerText)"
+    //   >
+    //     ##2d5## ##2d100##
+    //   </pre>`) 
+    // },
 
     выделить_близкие_звезды() {
       var locXY = prompt('Location? X Y with space between')
@@ -2470,7 +2485,7 @@ const playerPost = {
             .replace(/^\d[).] ?/gi,'')
             // TODO scream test: was used to remove numeration? do not remove at least for two active turns
             // .replace(/^[^а-яёa-z0-9]+/gi,'')
-            // TODO add reminder NOT to include symbols below in tech names
+            // reportBadSymbolsInTechName()
             .split(',')[0]
             .split('.')[0]
             .split(' – ')[0]
@@ -2701,6 +2716,7 @@ const playerPost = {
 
           e.children[pos.name].style.backgroundColor = TechUtils.get(techText).fill
 
+          // special cost
           const materialsCost = TechUtils.get(techText).cost
             .filter(([k2, _v]) => isSpecialCost(k2))
           if(materialsCost.length) {
@@ -2902,6 +2918,7 @@ var KEYWORDS = /** @type {const} */ ({
     "Антиматерия",
     // 4 ряд
     "Стазокерамика",
+    // TODO whoopsie, breaks material series detection
     "Экзотическая материя",
     "Экзотматерия",
     // 5 ряд
