@@ -19,7 +19,7 @@ hotkeysLib
 //rules.js
 /// <reference path="./src/rules.js"/>
 /* global
-countPlanetRawMisery
+rules countPlanetRawMisery
 */
 
 const VERSION = '1.2.0'
@@ -59,6 +59,8 @@ const VARS = /** @type {const} */({
     "Наука": "Science",
     "Уникальные": "Unique",
   },
+  // filled later
+  TREELIST_EN2RU: {},
   NODE_T: {
     TECH: 'rectangle',
     BUILDING: 'parallelogram',
@@ -74,81 +76,13 @@ const VARS = /** @type {const} */({
   NODE_TYPE_2_NAME: {},
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
-  // filled later
-  TREELIST_EN2RU: {},
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
     font-family: Helvetica;
     // font-size: 12;
   } </style>`,
-  DIFFICULTY_MULTS: [
-    0,
-    // #1
-    1,
-    // 1.2,
-    1,
-    // #3
-    1,
-    // 2.2,
-    2,
-    // #5
-    2,
-    // 3.2,
-    // 3.5,
-    3, 3,
-    // #8
-    4,
-    // 4.3,
-    // 4.7,
-    4, 4,
-    // #11
-    5,
-    // 5.3,
-    // 5.7,
-    5, 5,
-    // #14
-    6,
-    // 6.3,
-    // 6.6,
-    6, 6,
-  ],
-  effectsOfPlanetSize: {
-    // Газовый гигант с колонизируемым спутником
-    1: [
-      ["Пуски", 2],
-      ["Отказ", 2],
-      ["особое","радиация"],
-      ["особое","микрометеориты"],
-      ["особое","низкая гравитация"],
-    ],
-    // Малая планета (напр. Меркурий)
-    2: [
-      ["Пуски", 2],
-      ["Отказ", 2],
-      ["особое","радиация"],
-      ["особое","микрометеориты"],
-      ["особое","низкая гравитация"],
-    ],
-    // Планета вдвое меньше Земли (напр. Марс)
-    3: [
-      ["Пуски", 1],
-    ],
-    // Планета, похожая на Землю
-    4: [],
-    // Большая каменная планета
-    5: [
-      ["Пуски", -1],
-    ],
-    // Планета вдвое больше Земли
-    6: 
-    [
-      ["Строительство", -1],
-      ["Пуски", -1],
-      ['Исследования (ветка "Физика пространства")', 1],
-      ["Трансураны", 1],
-      ["особое","высокая гравитация"],
-    ],
-  },
+  DIFFICULTY_MULTS: rules.DIFFICULTY_MULTS,
+  effectsOfPlanetSize: rules.effectsOfPlanetSize,
   /**
    * bonuses for hull types
    */
@@ -157,6 +91,7 @@ const VARS = /** @type {const} */({
     "танки": `Защита +2, Скорость +1`,
     "титан": `Защита +3, Щит +1, ужас`,
     "нанорой": `Регенерация 5, нано, ужас`,
+    //катер - без ftl?
     "звездолёт": ``,
     "хабитат": `Слоупок 1`,
     "наземная база": `неподвижна`,
@@ -177,6 +112,7 @@ const VARS = /** @type {const} */({
   VARS.NODE_TYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
 
   const defaultProjTemplate = {
+    // subtree
     "type": 'parallelogram2',
     // "borderColor": "#000000",
     "fill": "lightgrey",
@@ -198,19 +134,25 @@ const VARS = /** @type {const} */({
       "effect": [["разово", "резервирование X кубов"]],
       ...defaultProjTemplate,
     },
-    "Снятие стресса общества": {
-      "treeName": "Sociology",
-      "cost": [["Общество","1"]],
-      "effect": [["разово", "-Х*2 Стресса Общества"]],
+    "Снятие стресса Наука": {
+      "treeName": "Science",
+      "cost": [["Наука","1"]],
+      "effect": [["разово", "-Х*2 Стресса Науки"]],
       ...defaultProjTemplate,
-    },
-    "Снятие стресса производства": {
+    }, 
+    "Снятие стресса Производство": {
       "treeName": "Industry",
       "cost": [["Производство","1"]],
       "effect": [["разово", "-Х*2 Стресса Производства"]],
       ...defaultProjTemplate,
     },
-    "Повышение Доверия": {
+    "Снятие стресса Общество": {
+      "treeName": "Sociology",
+      "cost": [["Общество","1"]],
+      "effect": [["разово", "-Х*2 Стресса Общества"]],
+      ...defaultProjTemplate,
+    },
+    "Создание доверия": {
       "treeName": "Sociology",
       "cost": [["Общество","2"]],
       "effect": [["разово", "+Х/2 Доверия"]],
