@@ -535,7 +535,7 @@ const StarSystemGenerator = {
         title="${k.type} ${k.size}(${E.size2num[k.size]}) ${k.giantType ? k.giantType : ''}"
       ><br>
       Size ${k.type === E.type.asteroid ? 1 : E.size2num[k.size]}
-      <br>${!k.capital ? `Al-ty ${alienity}` : 'Capital'}
+      <br>${!k.capital ? `Al-ty ${alienity}` : 'Столица'}
       <br>${k.satellites > 0 
         ? k.satellites < 4 
           ? '&#9790;'.repeat(k.satellites) 

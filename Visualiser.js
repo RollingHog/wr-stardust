@@ -916,10 +916,15 @@ const Analysis = {
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = ''
     
-    for (let i of Object.keys(Analysis.Reports)) {
+    for (let name of Object.keys(Analysis.Reports)) {
+      if(name.startsWith('_')) {
+        getEl('el_reports_list').innerHTML += `<br><b>${name.replace(/_/g,' ')}</b>`
+        continue
+      }
+
       getEl('el_reports_list').innerHTML += `<li 
-      onclick="Analysis.openReport('${i}')">
-      ${i.replace(/_/g,' ')}</li>`
+      onclick="Analysis.openReport('${name}')">
+      ${name.replace(/_/g,' ')}</li>`
     }
   },
 
@@ -1001,6 +1006,7 @@ const Analysis = {
     }, {})
   },
 
+  // leading underscore makes it non-clickable head of section
   Reports: {
     кнопочки() {
       Analysis.reportTable({'только проекты': `<button onclick="Object.values(tech[techData.currentTreeName]).filter(e=>e.type!=='hexagon').forEach(e=>getEl(e.id).setAttribute('fill','white'))">do</button>`})
@@ -1136,6 +1142,8 @@ const Analysis = {
 
       Analysis.reportTable(obj)
     },
+
+    _Списки_объектов_() {},
   
     список_корпусов() {
       Analysis.reportTable(Object.fromEntries(
@@ -1206,6 +1214,8 @@ const Analysis = {
       )
     },
 
+    _Оценка_игроков_ () {},
+
     // чтобы прикинуть сколько давать вкатившимся после начала игры
     суммарная_стоимость_проектов_игроков() {
       const result = Object.fromEntries(
@@ -1251,46 +1261,6 @@ const Analysis = {
         ])
       )
       Analysis.reportTable(result)
-    },
-
-    // drawGraph() {
-
-    // },
-
-    countTechByCostParamType() {
-      const sum = {}
-      Object.values(inverted.alltech).forEach( e => {
-        let paramType = VARS.colorToParameterType[e.borderColor]
-        if(!sum[paramType]) {
-          sum[paramType] = 1
-        } else {
-          sum[paramType] += 1
-        }
-      })
-      Analysis.reportTable(sum)
-    },
-
-    технологии_с_комментариями() {
-      Analysis.reportTable(
-        Object.fromEntries(Object.values(inverted.alltech)
-          .filter(e => e.title)
-          .map(e => [e.name, e.title])
-        )
-      )
-    },
-
-    технологии_дающие_материалы() {
-      const res = Object.values(inverted.alltech)
-        .filter(e => e.effect.some(eff => KEYWORDS.MATERIALS.includes(eff[0])))
-        .map(({ lvl, name, effect }) => ([name, {
-          lvl, effect:
-            effect
-              .filter(eff => KEYWORDS.MATERIALS.includes(eff[0]))
-              .map(e => e[0])
-              .flat()
-              .join(', ')
-        }]))
-      Analysis.reportTable(Object.fromEntries(res))
     },
 
     планетарная_чуждость_и_погода() {
@@ -1352,6 +1322,48 @@ const Analysis = {
         mostUsed.map(([k, v]) => k + ': ' + v)
           .join('<br>')
       )
+    },
+
+    // drawGraph() {
+
+    // },
+
+    _Прочее_ () {},
+
+    countTechByCostParamType() {
+      const sum = {}
+      Object.values(inverted.alltech).forEach( e => {
+        let paramType = VARS.colorToParameterType[e.borderColor]
+        if(!sum[paramType]) {
+          sum[paramType] = 1
+        } else {
+          sum[paramType] += 1
+        }
+      })
+      Analysis.reportTable(sum)
+    },
+
+    технологии_с_комментариями() {
+      Analysis.reportTable(
+        Object.fromEntries(Object.values(inverted.alltech)
+          .filter(e => e.title)
+          .map(e => [e.name, e.title])
+        )
+      )
+    },
+
+    технологии_дающие_материалы() {
+      const res = Object.values(inverted.alltech)
+        .filter(e => e.effect.some(eff => KEYWORDS.MATERIALS.includes(eff[0])))
+        .map(({ lvl, name, effect }) => ([name, {
+          lvl, effect:
+            effect
+              .filter(eff => KEYWORDS.MATERIALS.includes(eff[0]))
+              .map(e => e[0])
+              .flat()
+              .join(', ')
+        }]))
+      Analysis.reportTable(Object.fromEntries(res))
     },
 
     // тип_критпровала_по_таблицам() {

@@ -63,6 +63,8 @@ var draw = {
     )
   },
 
+  // https://stackoverflow.com/questions/6995797/html5-canvas-pie-chart
+
   SVG: {
     Prlg: function ({ id, x, y, h, w, borderColor, fill, title }) {
       const d = draw.POLYGON_DELTA
