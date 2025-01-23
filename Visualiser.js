@@ -894,7 +894,7 @@ const Analysis = {
       const techNames = User.getFlatUserTech(user)
       res[user] = {}
       for(let i of techNames) {
-        let subtreeName = TechUtils.byName(i).subtree
+        let subtreeName = TechUtils.byName(i)?.subtree
         if(!subtreeName) continue
         if(!res[user][subtreeName]) res[user][subtreeName] = 0
         res[user][subtreeName] += 1
