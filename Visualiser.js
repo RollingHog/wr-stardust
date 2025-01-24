@@ -41,9 +41,7 @@ const TREELIST = [
   'Unique',
 ]
 
-/**
- * constants; empty ones usually filled later
- */
+/** constants; empty ones usually filled later */
 const VARS = /** @type {const} */({
   isInit: false,
   IS_LOCAL: window.location.protocol === 'file:',
@@ -59,7 +57,7 @@ const VARS = /** @type {const} */({
     "Наука": "Science",
     "Уникальные": "Unique",
   },
-  // filled later
+  /** filled later */
   TREELIST_EN2RU: {},
   NODE_T: {
     TECH: 'rectangle',
@@ -72,7 +70,7 @@ const VARS = /** @type {const} */({
     MODULE_SPACE: 'trapezoid2',
     MODULE_BOTH: 'fatarrow',
   },
-  // filled later
+  /** filled later */
   NODE_TYPE_2_NAME: {},
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
@@ -103,6 +101,7 @@ const VARS = /** @type {const} */({
     '#0000FF': 'Наука',
     '#000000': "Свободный",
   },
+  /** filled later */
   defaultProjectsList: {},
   fill2TreeType: FILL_2_TREE_TYPE,
 })
@@ -178,8 +177,10 @@ const tech = {}
 const techData = {
   MAX_TECH_LVL: 16,
   graphmls: {},
+  /** @type {Record<string, TTechObject[]>} set on startup */
   badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
   levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
+  /** @type {Record<string, TTechObject[]>} set on startup */
   subtreeBorders: Object.fromEntries(TREELIST.map(e => [e,[]])),
   badTechCount: 0,
   badTechList: {
@@ -830,7 +831,7 @@ const Analysis = {
       Object.entries(techData.badCells)
         .map(e => [e[0], e[1]
           .filter(e2 => e2.fullText.length > 2)
-          .map(({ fullText, x, w }) => ({ fullText: fullText.toLowerCase(), x1: x, x2: x + w }))
+          .map(({ fullText, x, w, fill }) => ({ fullText: fullText.toLowerCase(), x1: x, x2: x + w, fill }))
         ]))
   },
   /**
@@ -888,6 +889,9 @@ const Analysis = {
     }
   },
 
+  /**
+   * @returns {Record<string, Record<string, number>>}
+   */
   countTechBalanceBySubtree() {
     const res = {}
     for(let user of User.listUsers()) {
@@ -1238,7 +1242,14 @@ const Analysis = {
           .reduce((acc, i)=>acc + +i,0)
         }])
       )
-      Analysis.reportTable(result)
+      Analysis.reportTable(result, draw.createCаnvasHTML({size: 300, title: 'Цены'}))
+      setTimeout(() => {
+        const data = Object.entries(result)
+          .map(([name, val]) => ([
+            name, val['Цена'], User.getSavedUserData(name).playerColor
+          ]))
+        draw.pieChart(data)
+      })
     },
 
     основные_параметры_игроков() {
@@ -1260,7 +1271,14 @@ const Analysis = {
           )
         ])
       )
-      Analysis.reportTable(result)
+      Analysis.reportTable(result, draw.createCаnvasHTML({size: 300, title: 'Итого'}))
+      setTimeout(() => {
+        const data = Object.entries(result)
+          .map(([name, val]) => ([
+            name, val['Итого'], User.getSavedUserData(name).playerColor
+          ]))
+        draw.pieChart(data)
+      })
     },
 
     планетарная_чуждость_и_погода() {
@@ -1933,6 +1951,25 @@ const User = /** @type {const} */({
       }
       res += '<br><br>'
     }
+
+    setTimeout(()=> {
+      const balanceData = Analysis.countTechBalanceBySubtree()[playerName]
+      let chartData = []
+      
+      for(let treeName in techData.subtreeBorders) {
+        const subtreeList = techData.subtreeBorders[treeName]
+        const x = [treeName, 0, subtreeList[0].fill]
+        for(let subtreeObj of subtreeList) {
+          x[1] += +balanceData[capitalizeFirstLetter(subtreeObj.fullText)] || 0
+        }
+        chartData.push(x)
+      }
+      draw.pieChart(chartData)
+    }, 10)
+
+    res += '<br><b>СООТНОШЕНИЕ ТЕХНОЛОГИЙ</b><br>'
+    res += draw.createCаnvasHTML({size: 400, title: `${playerName}`})
+
     return res
   },
 

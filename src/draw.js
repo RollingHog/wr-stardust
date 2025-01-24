@@ -63,7 +63,123 @@ var draw = {
     )
   },
 
-  // https://stackoverflow.com/questions/6995797/html5-canvas-pie-chart
+  /**
+   * @param {*} params 
+   * @returns 
+   */
+  createCаnvasHTML({size = 200, title='', newElId = 'canvas'}) {
+    return `<canvas id="${newElId}" width="${size*1.5}" height="${size}" title="${title}" style="padding: 6px;"></canvas>`
+  },
+
+  /**
+   * @param {Array<[string, string, string?]>} nameValueColorBlocks - pairs of name, value and its desired color
+   * @param {HTMLElement} canvasEl
+   */
+  pieChart(nameValueColorBlocks, canvasElId = 'canvas') {
+    // thx https://stackoverflow.com/questions/6995797/html5-canvas-pie-chart
+
+    /**@type {HTMLCanvasElement} */
+    var canvas = document.getElementById(canvasElId)
+    var ctx = canvas.getContext("2d")
+    // used to be 0
+    var lastend = -Math.PI / 2
+    var data = [60, 210, 90]
+    var myTotal = 0
+    var myColors = ['#afcc4c', '#95b524', '#c1dd54']
+    var labels = ['A', 'B', 'C']
+
+    if(nameValueColorBlocks) {
+      labels = []
+      data = []
+      myColors = []
+      // sort from little to big
+      nameValueColorBlocks = nameValueColorBlocks.sort((b,a)=>(a[1] - b[1]))
+      for(let subarr of nameValueColorBlocks) {
+        labels.push(subarr[0])
+        data.push(subarr[1])
+        myColors.push(subarr[2])
+      }
+    }
+
+    for (var e = 0; e < data.length; e++) {
+      myTotal += data[e]
+    }
+
+    // set background color
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    // make the chart 10 px smaller to fit on canvas
+    /** offset */
+    var off = 10
+    var w = (canvas.width - off) / 2
+    var h = (canvas.height - off) / 2
+    for (var i = 0; i < data.length; i++) {
+      ctx.fillStyle = myColors[i]
+      ctx.strokeStyle = 'white'
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ctx.moveTo(w, h)
+      var len = (data[i] / myTotal) * 2 * Math.PI
+      var r = h - off / 2
+      ctx.arc(w, h, r, lastend, lastend + len, false)
+      ctx.lineTo(w, h)
+      ctx.fill()
+      ctx.stroke()
+
+      // text part
+      // ctx.textAlign = "center";
+      ctx.fillStyle = 'black'
+      ctx.strokeStyle = 'black'
+      ctx.font = "14px Arial"
+      ctx.textAlign = "center"
+      ctx.textBaseline = "middle"
+      // middle angle, radians
+      var mid = lastend + len / 2
+      const textD = r / 1.3
+      const textX = w + Math.cos(mid) * (textD)
+      const textY = h + Math.sin(mid) * (textD)
+
+      // TODO not in mood to do this properly 
+      // https://stackoverflow.com/questions/3167928/drawing-rotated-text-on-a-html5-canvas
+      
+      // ctx.save()
+      // ctx.translate(textX, textY)
+      // ctx.rotate(mid)
+
+      ctx.fillText(
+        labels[i], 
+        textX, textY
+      )
+
+      // ctx.restore()
+      
+      // text part end
+
+      lastend += Math.PI * 2 * (data[i] / myTotal)
+    }
+
+    //set title if present
+    if(canvas.title) {
+      ctx.lineWidth = 1
+      
+      ctx.strokeStyle = 'black'
+      ctx.font = "20px serif"
+      ctx.textAlign = "left"
+      ctx.textBaseline = "middle"
+
+      let { width } = ctx.measureText(canvas.title)
+      ctx.fillStyle = 'white'
+      ctx.strokeRect(10-1, 1, width+2, 20)
+      ctx.fillRect(10-1, 1, width+2, 20)
+      ctx.fillStyle = 'black'
+  
+      ctx.fillText(
+        canvas.title, 
+        10, 11
+      )
+    }
+  },
 
   SVG: {
     Prlg: function ({ id, x, y, h, w, borderColor, fill, title }) {
