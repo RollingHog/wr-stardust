@@ -82,7 +82,7 @@ var draw = {
     var canvas = document.getElementById(canvasElId)
     var ctx = canvas.getContext("2d")
     // used to be 0
-    var lastend = -Math.PI / 2
+    var lastEnd = -Math.PI / 2
     var data = [60, 210, 90]
     var myTotal = 0
     var myColors = ['#afcc4c', '#95b524', '#c1dd54']
@@ -94,10 +94,10 @@ var draw = {
       myColors = []
       // sort from little to big
       nameValueColorBlocks = nameValueColorBlocks.sort((b,a)=>(a[1] - b[1]))
-      for(let subarr of nameValueColorBlocks) {
-        labels.push(subarr[0])
-        data.push(subarr[1])
-        myColors.push(subarr[2])
+      for(let subArr of nameValueColorBlocks) {
+        labels.push(subArr[0])
+        data.push(subArr[1])
+        myColors.push(subArr[2])
       }
     }
 
@@ -122,7 +122,7 @@ var draw = {
       ctx.moveTo(w, h)
       var len = (data[i] / myTotal) * 2 * Math.PI
       var r = h - off / 2
-      ctx.arc(w, h, r, lastend, lastend + len, false)
+      ctx.arc(w, h, r, lastEnd, lastEnd + len, false)
       ctx.lineTo(w, h)
       ctx.fill()
       ctx.stroke()
@@ -135,7 +135,7 @@ var draw = {
       ctx.textAlign = "center"
       ctx.textBaseline = "middle"
       // middle angle, radians
-      var mid = lastend + len / 2
+      var mid = lastEnd + len / 2
       const textD = r / 1.3
       const textX = w + Math.cos(mid) * (textD)
       const textY = h + Math.sin(mid) * (textD)
@@ -156,7 +156,7 @@ var draw = {
       
       // text part end
 
-      lastend += Math.PI * 2 * (data[i] / myTotal)
+      lastEnd += Math.PI * 2 * (data[i] / myTotal)
     }
 
     //set title if present
@@ -336,7 +336,7 @@ var draw = {
         else {
           el.innerHTML += `<tspan id="${id}_t${i}" dx='0' dy="1.2em" 
           class="">${arr[i]}</tspan>`
-          // it breaks dnload  for some reason
+          // it breaks download  for some reason
           // class="${arr[i].replace(/(^.+:|\+\d)/g,'').replace(/[\d)(,.ё_)]/g,'').trim().replace(/ /g,'_')}"
           curr = getEl(id + '_t' + i)
           curr_dx = -(getEl(id + '_t' + (i - 1)).getBBox().width / 2)

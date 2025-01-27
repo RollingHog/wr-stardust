@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-var DATA__TECH_TRESHOLDS = {
+var DATA__TECH_THRESHOLDS = {
   // just in case
   meta: {},
   data: {

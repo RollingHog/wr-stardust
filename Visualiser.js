@@ -28,7 +28,7 @@ console.log(VERSION)
 // /**
 // //  * @typedef {(string | number)} effValue
 // */
-// * @typedef {string} effKey THIS SHIT IS BROKEN AF AND IT BREAKS AUTO-TYPING IN VS CODE NO IDEA WHY DONT USE WITH EFFVALUE
+// * @typedef {string} effKey THIS SHIT IS BROKEN AF AND IT BREAKS AUTO-TYPING IN VS CODE NO IDEA WHY DON'T USE WITH EFFVALUE
 
 const range = (cnt) => '0'.repeat(cnt)
 
@@ -816,9 +816,9 @@ const Analysis = {
 
   reportBadSymbolsInTechName() {
     // see playerPost.extractRolls
-    const prohibitetStrs = [',', '.', ' - ']
+    const prohibitedStrings = [',', '.', ' - ']
     for(let name of Object.keys(inverted.alltech)) {
-      for(let badToken of prohibitetStrs) {
+      for(let badToken of prohibitedStrings) {
         if(name.includes(badToken)) {
           warn(`tech "${name}", bad token in name: "${badToken}"`)
         }
@@ -863,7 +863,7 @@ const Analysis = {
 
   // counting win possibility for debils
 // eslint-disable-next-line no-unused-vars
-  countSuccessPossibility(treshold, nOfCubes) {
+  countSuccessPossibility(threshold, nOfCubes) {
     const n = 250000
     let wins = 0
     for (let i = 0; i < n; i++) {
@@ -871,7 +871,7 @@ const Analysis = {
       for (let j = 0; j < nOfCubes; j++) {
         goodCubes += +(Math.random() * 10).toFixed(0) % 10 > 3 ? 1 : 0
       }
-      if (goodCubes >= treshold) wins += 1
+      if (goodCubes >= threshold) wins += 1
     }
     return +(wins / n).toFixed(3)
   },
@@ -1745,7 +1745,7 @@ const User = /** @type {const} */({
   /**
    * @param {string[]} techList list of tech names
    * @param {TGoogleDocUserObj | undefined} userDataObj 
-   * @param {boolean} isVerbose TODO DOESNT WORK NOW if record where effects came from
+   * @param {boolean} isVerbose TODO DOESN'T WORK NOW if record where effects came from
    * @returns {{cost: [string, effValue][], effect: [string, effValue][]}}
    */
   countSummaryCostAndEffect(techList, userDataObj = null) {
@@ -1922,9 +1922,9 @@ const User = /** @type {const} */({
   },
 
   createColonyDescription(playerName) {
-    if(!window['DATA__TECH_TRESHOLDS']) return ''
-    const techTresholds = window['DATA__TECH_TRESHOLDS'].data
-    const planetDescriptions = window['DATA__TECH_TRESHOLDS'].planetDescriptions
+    if(!window['DATA__TECH_THRESHOLDS']) return ''
+    const techThresholds = window['DATA__TECH_THRESHOLDS'].data
+    const planetDescriptions = window['DATA__TECH_THRESHOLDS'].planetDescriptions
 
     let res = '<br><b>ПЛАНЕТА</b><br>'
 
@@ -1933,10 +1933,10 @@ const User = /** @type {const} */({
     res += VARS.effectsOfPlanetSize[planetParams["Тип планеты"]].map(e => e.join(' ')).join('<br>')
 
     res += '<br><b>ТЕХНОЛОГИИ</b><br>'
-    for(let tree in techTresholds) {
-      for(let subtree in techTresholds[tree]) {
+    for(let tree in techThresholds) {
+      for(let subtree in techThresholds[tree]) {
         let lastProperStr = null
-        for(let conditionBlock of techTresholds[tree][subtree]) {
+        for(let conditionBlock of techThresholds[tree][subtree]) {
           if(subtree !== 'other') {
             if(
               conditionBlock[0] !== "BASE"
@@ -2512,19 +2512,19 @@ const playerPost = {
     const res = [...text.matchAll(/([^\nd]*)\d+d(\d{1,2}0): \((\d+(?: \+ \d+){0,20})\) = \d+([^\n]*)/g)]
       .map( e => {
         const s = (e[L.before].length ? e[L.before] : e[L.after]).trim()
-        const treshold = [...(e[L.before] + e[L.after]).matchAll(/(?:Сложность|Цена):? ?(\+?\d+)/gi)]
+        const threshold = [...(e[L.before] + e[L.after]).matchAll(/(?:Сложность|Цена):? ?(\+?\d+)/gi)]
 
         const isExp = s.search(/опыт /i)
         if(isExp === 0) {
           console.log('ОПЫТ detected:', s, s.search(/опыт/i))
           return {}
         }
-        let resTreshold = null
-        if (treshold.length) {
-          if (treshold[0][1].startsWith('+')) {
-            resTreshold = treshold[0][1]
+        let resThreshold = null
+        if (threshold.length) {
+          if (threshold[0][1].startsWith('+')) {
+            resThreshold = threshold[0][1]
           } else {
-            resTreshold = '+' + treshold[0][1]
+            resThreshold = '+' + threshold[0][1]
           }
         }
 
@@ -2543,7 +2543,7 @@ const playerPost = {
             .trim(), 
           rolls: e[L.rolls], 
           rawRolls: e[L.rolls],
-          treshold: resTreshold,
+          threshold: resThreshold,
           edges: +e[L.edges], 
           index: e.index, 
         }
@@ -2551,10 +2551,10 @@ const playerPost = {
       .filter( e => e)
 
     // const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
-    //   .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], treshold: +e[3], index: e.index, rawRolls: e[2] }))
-    //   .map(({text, rolls, rawRolls, treshold, index} ) => ( {
+    //   .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], threshold: +e[3], index: e.index, rawRolls: e[2] }))
+    //   .map(({text, rolls, rawRolls, threshold, index} ) => ( {
     //      text: text.replace(/\([^)]+\)/g,'').replace(/^[^а-яёa-z]+/gi,''), 
-    //      rolls, rawRolls, treshold, index 
+    //      rolls, rawRolls, threshold, index 
     //   }))
     return res
   },
@@ -2645,14 +2645,14 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, e.treshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta, e.rolls.critdelta].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, e.threshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta, e.rolls.critdelta].join('</td><td>') + '</td>' + 
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
     .join('</tr><tr>')}
     </tr>
     </tbody><tbody>
     <tr>
       <td>ВСЕГО</td>
-      <td>${requests.reduce( (sum, e) => sum + +(e.treshold || 0),0)}</td>
+      <td>${requests.reduce( (sum, e) => sum + +(e.threshold || 0),0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)}</td>
       <td>${requests.reduce( (sum, e) => sum + Math.max(+e.rolls.wins,0),0)}</td>
       <td>${requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)}</td>
@@ -3652,13 +3652,13 @@ const savingOps = {
     var ctx = canvas.getContext("2d")
     ctx.clearRect(0, 0, bbox.width, bbox.height)
     var data = (new XMLSerializer()).serializeToString(copy)
-    var DOMURL = window.URL || window.webkitURL || window
+    var DOMUrl = window.URL || window.webkitURL || window
     var img = new Image()
     var svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" })
-    var url = DOMURL.createObjectURL(svgBlob)
+    var url = DOMUrl.createObjectURL(svgBlob)
     img.onload = function () {
       ctx.drawImage(img, 0, 0)
-      DOMURL.revokeObjectURL(url)
+      DOMUrl.revokeObjectURL(url)
       if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
         var blob = canvas.msToBlob()
         navigator.msSaveOrOpenBlob(blob, fileName)
