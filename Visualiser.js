@@ -1477,7 +1477,7 @@ const Analysis = {
 
     // formListForComparison
     скачать_список_технологий() {
-      savingOps.saveFile(`tech_${Date.now()}.json`, JSON.stringify(inverted.alltech, 0, 2))
+      savingOps.saveFile(`tech_${window[VARS.PLAYERS_TIMESTAMP_KEY]}.json`, JSON.stringify(inverted.alltech, 0, 2))
     },
   }
 }
