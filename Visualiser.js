@@ -1445,7 +1445,40 @@ const Analysis = {
         .filter(([key, _])=>key !== locXY)
         .map(([k,v])=>[k, v.StarsL.map(({mass, spectral_type}) => ({mass, spectral_type}))])
       )
-    }
+    },
+
+    async генератор_патчноута() {
+      alert('check that you have old, stringified inverted.alltech JSON in clipboard')
+      const oldJSONStr = await navigator.clipboard.readText()
+      /**
+       * @type {Record<string, TTechObject>}
+       */
+      const oldTech = JSON.parse(oldJSONStr.replace(/(^`|`$)/, ''))
+      const delta = {
+        added: [],
+        changed: [],
+        removed: [],
+      }
+
+      for(let techName of Object.keys(inverted.alltech)) {
+        if(!oldTech[techName]) {
+          delta.added.push(techName)
+          continue
+        }
+
+        if(oldTech[techName].fullText !== inverted.alltech[techName].fullText) {
+          delta.changed.push(techName)
+        }
+      }
+
+      //TODO
+      console.log(delta)
+    },
+
+    // formListForComparison
+    скачать_список_технологий() {
+      savingOps.saveFile(`tech_${Date.now()}.json`, JSON.stringify(inverted.alltech, 0, 2))
+    },
   }
 }
 
@@ -1573,9 +1606,28 @@ const TechUtils = {
   },
 
   formListForComparison() {
-    const list = Object.values(inverted.alltech).map(
-      ({cost, effect, name, type, treeName})=>({cost, effect, name, type, treeName})
-    )
+    const list = Object.values(inverted.alltech)
+    // .map(
+    //   ({cost, effect, name, type, treeName})=>({cost, effect, name, type, treeName})
+    // )
+    /* 
+     "id": "n0",
+    "type": "rectangle",
+    "treeName": "Science",
+    "borderColor": "#0000FF",
+    "name": "Телепортация",
+    "cost": [],
+    "effect": [],
+    "req": [],
+    "next": [],
+    "fullText": "Телепортация\nСложность: 6\nЭффект: :телепортация",
+    "title": null,
+    "x": 334.33,
+    "y": 1359,
+    "fill": "#99CCFF",
+    "lvl": 15,
+    "subtree": "Физика пространства"
+    */
     savingOps.saveFile(`tech_${Date.now()}.json`, JSON.stringify(list, 0, 2))
   },
 
