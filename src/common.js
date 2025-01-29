@@ -76,7 +76,7 @@ var FILL_2_TREE_TYPE = {
 }
 
 /**
- * dictObj is list of upper tresholds
+ * dictObj is list of upper thresholds
  * @param {Object<string, any>} dictObj 
  * @param {number} rollNum 
  */

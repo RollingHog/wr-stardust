@@ -150,10 +150,10 @@ function countPlanetRawMisery(userObj) {
     }
   }
 
-  // const unfamTreshold = 2
-  // if(sumMisery.unfamiliar >= unfamTreshold) {
-  //   sumMisery.alien += Math.floor(sumMisery.unfamiliar/unfamTreshold)
-  //   sumMisery.unfamiliar = sumMisery.unfamiliar % (unfamTreshold)
+  // const unfamThreshold = 2
+  // if(sumMisery.unfamiliar >= unfamThreshold) {
+  //   sumMisery.alien += Math.floor(sumMisery.unfamiliar/unfamThreshold)
+  //   sumMisery.unfamiliar = sumMisery.unfamiliar % (unfamThreshold)
   // }
   sumMisery.actionsList = sumMisery.actionsList.join('; ')
   // sumMisery.weather = Math.ceil(sumMisery.alien * 2) + sumMisery.unfamiliar
