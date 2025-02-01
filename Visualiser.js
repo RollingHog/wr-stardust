@@ -1471,6 +1471,20 @@ const Analysis = {
         }
       }
 
+      for(let techName in oldTech) {
+        if(!inverted.alltech[techName]) {
+          delta.removed.push(techName)
+        }
+      }
+
+      for(let i of delta.added) {
+        console.log(inverted.alltech[i])
+      }
+
+      for(let i of delta.removed) {
+        console.log(oldTech[i])
+      }
+
       //TODO
       console.log(delta)
     },
@@ -2635,8 +2649,10 @@ const playerPost = {
     const userEff = User.getUserEffects(playerName)
 
     const remindTechs = Object.entries(userEff).filter(([key, _])=>{
-      return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW) || key === KEYWORDS.RESERVE_KW
-    }).map( ([key, value])=> key+': '+value )
+      return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW) 
+        || key === KEYWORDS.RESERVE_KW
+        || key.endsWith(KEYWORDS.IGNORE_CONDEMN_KW)
+    }).map( ([key, value])=> value ? key+': '+value : key )
 
     const currGreatPplCost = Math.max(Math.floor(User.getSavedUserData(playerName).greatPeople.length / 2), 2)
     
@@ -3029,6 +3045,7 @@ var KEYWORDS = /** @type {const} */ ({
   RESEARCH_KEYWORD: 'Исследования',
   TECH_KW: 'Технология',
   IGNORE_CRITFAIL_KW: 'Игнорирование критпровала',
+  IGNORE_CONDEMN_KW: 'не приносит осуждения',
   RESERVE_KW: 'Резерв',
   TECH_EFFECTS: [
     // индустрия
