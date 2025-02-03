@@ -462,15 +462,20 @@ const StarSystemGenerator = {
   draw(system, playerName = null, systemName = null) {
     const canvasEl = getEl('el_canvas')
     canvasEl.innerHTML = ''
+
+    const planetsData = (DATA__PLANETS_DATA[playerName] ? DATA__PLANETS_DATA[playerName][systemName] : {})
+      || {}
+
     if (playerName) {
+      const starsStr = planetsData.stars && planetsData.stars.length == 2 
+        ? `<span style='float: left'>< Звезда ${planetsData.stars[0]}</span><span style='float: right'>Звезда ${planetsData.stars[1]} ></span>`
+        : ''
       canvasEl.innerHTML = `<div style="
       padding: 16px;
       color: white;
       text-align: center;
-  ">${playerName.toUpperCase()}<br>Система ${systemName}</div>`
+  ">${starsStr}${playerName.toUpperCase()}<br>Система ${systemName}</div>`
     }
-    const planetsData = (DATA__PLANETS_DATA[playerName] ? DATA__PLANETS_DATA[playerName][systemName] : {})
-       || {}
 
     for(let i = 1; i<system.length; i++) {
       const k = system[i]
