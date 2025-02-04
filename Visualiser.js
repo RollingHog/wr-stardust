@@ -106,69 +106,69 @@ const VARS = /** @type {const} */({
   fill2TreeType: FILL_2_TREE_TYPE,
 })
 
-; (() => {
-  VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
-  VARS.NODE_TYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
+  ; (() => {
+    VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
+    VARS.NODE_TYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
 
-  const defaultProjTemplate = {
-    // subtree
-    "type": 'parallelogram2',
-    // "borderColor": "#000000",
-    "fill": "lightgrey",
-    "req": [],
-    "next": [],
-    "fullText": "",
-  }
+    const defaultProjTemplate = {
+      // subtree
+      "type": 'parallelogram2',
+      // "borderColor": "#000000",
+      "fill": "lightgrey",
+      "req": [],
+      "next": [],
+      "fullText": "",
+    }
 
-  VARS.defaultProjectsList = {
-    "Планетарная разведка": {
-      "treeName": "Industry",
-      "cost": [["Наука","1"]],
-      "effect": [["особое","разведка планеты"]],
-      ...defaultProjTemplate,
-    },
-    "Резерв": {
-      "treeName": "Industry",
-      "cost": [["Любой","1"]],
-      "effect": [["разово", "резервирование X кубов"]],
-      ...defaultProjTemplate,
-    },
-    "Снятие стресса Наука": {
-      "treeName": "Science",
-      "cost": [["Наука","1"]],
-      "effect": [["разово", "-Х*2 Стресса Науки"]],
-      ...defaultProjTemplate,
-    }, 
-    "Снятие стресса Производство": {
-      "treeName": "Industry",
-      "cost": [["Производство","1"]],
-      "effect": [["разово", "-Х*2 Стресса Производства"]],
-      ...defaultProjTemplate,
-    },
-    "Снятие стресса Общество": {
-      "treeName": "Sociology",
-      "cost": [["Общество","1"]],
-      "effect": [["разово", "-Х*2 Стресса Общества"]],
-      ...defaultProjTemplate,
-    },
-    "Создание доверия": {
-      "treeName": "Sociology",
-      "cost": [["Общество","2"]],
-      "effect": [["разово", "+Х/2 Доверия"]],
-      ...defaultProjTemplate,
-    },
-  }
+    VARS.defaultProjectsList = {
+      "Планетарная разведка": {
+        "treeName": "Industry",
+        "cost": [["Наука", "1"]],
+        "effect": [["особое", "разведка планеты"]],
+        ...defaultProjTemplate,
+      },
+      "Резерв": {
+        "treeName": "Industry",
+        "cost": [["Любой", "1"]],
+        "effect": [["разово", "резервирование X кубов"]],
+        ...defaultProjTemplate,
+      },
+      "Снятие стресса Наука": {
+        "treeName": "Science",
+        "cost": [["Наука", "1"]],
+        "effect": [["разово", "-Х*2 Стресса Науки"]],
+        ...defaultProjTemplate,
+      },
+      "Снятие стресса Производство": {
+        "treeName": "Industry",
+        "cost": [["Производство", "1"]],
+        "effect": [["разово", "-Х*2 Стресса Производства"]],
+        ...defaultProjTemplate,
+      },
+      "Снятие стресса Общество": {
+        "treeName": "Sociology",
+        "cost": [["Общество", "1"]],
+        "effect": [["разово", "-Х*2 Стресса Общества"]],
+        ...defaultProjTemplate,
+      },
+      "Создание доверия": {
+        "treeName": "Sociology",
+        "cost": [["Общество", "2"]],
+        "effect": [["разово", "+Х/2 Доверия"]],
+        ...defaultProjTemplate,
+      },
+    }
 
-  let cnt = 0
-  for(let name in VARS.defaultProjectsList) {
-    VARS.defaultProjectsList[name].id = `n333${(++cnt).toString().padStart(3, '0')}`
-    VARS.defaultProjectsList[name].name = name
-  }
+    let cnt = 0
+    for (let name in VARS.defaultProjectsList) {
+      VARS.defaultProjectsList[name].id = `n333${(++cnt).toString().padStart(3, '0')}`
+      VARS.defaultProjectsList[name].name = name
+    }
 
-  NodeList.prototype.forEach = Array.prototype.forEach
-  HTMLCollection.prototype.forEach = Array.prototype.forEach
-  HTMLCollection.prototype.filter = Array.prototype.filter
-})()
+    NodeList.prototype.forEach = Array.prototype.forEach
+    HTMLCollection.prototype.forEach = Array.prototype.forEach
+    HTMLCollection.prototype.filter = Array.prototype.filter
+  })()
 
 /**
  * @type {Object<string,Object<string,TTechObject>>}
@@ -178,10 +178,10 @@ const techData = {
   MAX_TECH_LVL: 16,
   graphmls: {},
   /** @type {Record<string, TTechObject[]>} set on startup */
-  badCells: Object.fromEntries(TREELIST.map(e=>[e,[]])),
-  levels: Object.fromEntries(TREELIST.map(e => [e,[]])),
+  badCells: Object.fromEntries(TREELIST.map(e => [e, []])),
+  levels: Object.fromEntries(TREELIST.map(e => [e, []])),
   /** @type {Record<string, TTechObject[]>} set on startup */
-  subtreeBorders: Object.fromEntries(TREELIST.map(e => [e,[]])),
+  subtreeBorders: Object.fromEntries(TREELIST.map(e => [e, []])),
   badTechCount: 0,
   badTechList: {
     cost: [],
@@ -189,7 +189,7 @@ const techData = {
   },
   currentTreeName: null,
   cache: {
-    trees: Object.fromEntries(TREELIST.map(e=>[e,{html: null, viewBox: null}])),
+    trees: Object.fromEntries(TREELIST.map(e => [e, { html: null, viewBox: null }])),
     usersFlatTech: {},
   }
 }
@@ -215,25 +215,25 @@ async function Init() {
 
   console.time('load iframes')
   const iframes = Array.from(document.querySelectorAll('iframe[src2]'))
-  if(isLocalFile) {
-      await Promise.all(iframes.map(i => {
-        const src2 = i.getAttribute('src2')
-        if(src2.startsWith('tech') && !TREELIST.includes(src2.match(/tech\/(\w+).graphml/)[1])) {
-          return true
-        }
-        return new Promise((resolve) => {
-          i.onload = resolve
-          i.src = src2
-        })
+  if (isLocalFile) {
+    await Promise.all(iframes.map(i => {
+      const src2 = i.getAttribute('src2')
+      if (src2.startsWith('tech') && !TREELIST.includes(src2.match(/tech\/(\w+).graphml/)[1])) {
+        return true
       }
-      ))
+      return new Promise((resolve) => {
+        i.onload = resolve
+        i.src = src2
+      })
+    }
+    ))
   } else {
     getEl('post_text_iframe').src = getEl('post_text_iframe').getAttribute('src2')
   }
-  
+
   for (let i of TREELIST) {
     const src = `tech/${i}.graphml`
-    if(isLocalFile) {
+    if (isLocalFile) {
       try {
         const el = document.querySelector(`[src="${src}"]`)
         techData.graphmls[i] = parser.parseFromString(
@@ -241,7 +241,7 @@ async function Init() {
             .replace(/&lt;/g, '<')
             .replace(/&gt;/g, '>')
           , 'text/xml')
-      } catch(e) {
+      } catch (e) {
         alert('shit happened, see dev console')
         warn(`cannot read local files, run
         chrome with --allow-file-access-from-files
@@ -253,13 +253,13 @@ async function Init() {
       }
     } else {
       // non-local, try to fetch data
-      const xmlText = await fetch(src).then(e=>e.text())
+      const xmlText = await fetch(src).then(e => e.text())
       techData.graphmls[i] = parser.parseFromString(xmlText, 'text/xml')
     }
   }
   console.timeEnd('load iframes')
 
-  for(let i of document.querySelectorAll('#tech_tree_buttons button')) {
+  for (let i of document.querySelectorAll('#tech_tree_buttons button')) {
     i.id = `btn_${i.innerText}`
     i.disabled = true
   }
@@ -270,17 +270,17 @@ async function Init() {
   getEl('el_loading').hidden = true
   console.timeEnd('initial draw')
 
-  setTimeout(async function init2 () {
+  setTimeout(async function init2() {
 
     console.time('player data ')
-      
+
     const elPlayersData = getEl('el_data_players')
     await new Promise((resolve) => {
       elPlayersData.onload = resolve
       elPlayersData.src = elPlayersData.getAttribute('src2')
     })
     parseGDoc.lastResult = User.getAllUsersData()
-    
+
     console.timeEnd('player data ')
     // log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
 
@@ -293,69 +293,69 @@ async function Init() {
       .filter(e => e != VARS.TREELIST_NOMIL[3])
       .map(e => parseTechIframe(e))
     )
-    .then(async _ => {
-      console.timeEnd('other parse ')
-      console.time('other draw  ')
-      for (let i of TREELIST) {
-        drawTree(i)
-      }
-      drawTree(VARS.TREELIST_NOMIL[3])
-      console.timeEnd('other draw  ')
-
-      inverted.alltech = Object.fromEntries(
-        [...Object.values(tech)]
-          .map(e => Object.values(e))
-          .flat()
-          .map(e => [e.name, e])
-      )
-
-      console.time('node stat   ')
-      for (let treeName of TREELIST) {
-        for (let j in tech[treeName]) {
-          let [cost, effects] = parseNode.costAndEffects(tech[treeName][j])
-          tech[treeName][j].cost = cost
-          tech[treeName][j].effect = effects
-          doNodeStat(treeName, tech[treeName][j])
+      .then(async _ => {
+        console.timeEnd('other parse ')
+        console.time('other draw  ')
+        for (let i of TREELIST) {
+          drawTree(i)
         }
-      }
-      console.timeEnd('node stat   ')
+        drawTree(VARS.TREELIST_NOMIL[3])
+        console.timeEnd('other draw  ')
 
-      getEl('players_selection').children.forEach(e=> (e.tagName=='LABEL')
-        ? e.onclick = function() { 
-          if(e.children[0].checked) {
-            let playerName = e.innerText.trim()
-            parseGDoc.drawTech(playerName, techData.currentTreeName)
-            if(!VARS.isInit && !getEl('el_playerQuiet').checked) {
-              User.drawUserStat(playerName)
+        inverted.alltech = Object.fromEntries(
+          [...Object.values(tech)]
+            .map(e => Object.values(e))
+            .flat()
+            .map(e => [e.name, e])
+        )
+
+        console.time('node stat   ')
+        for (let treeName of TREELIST) {
+          for (let j in tech[treeName]) {
+            let [cost, effects] = parseNode.costAndEffects(tech[treeName][j])
+            tech[treeName][j].cost = cost
+            tech[treeName][j].effect = effects
+            doNodeStat(treeName, tech[treeName][j])
+          }
+        }
+        console.timeEnd('node stat   ')
+
+        getEl('players_selection').children.forEach(e => (e.tagName == 'LABEL')
+          ? e.onclick = function () {
+            if (e.children[0].checked) {
+              let playerName = e.innerText.trim()
+              parseGDoc.drawTech(playerName, techData.currentTreeName)
+              if (!VARS.isInit && !getEl('el_playerQuiet').checked) {
+                User.drawUserStat(playerName)
+              }
+            } else {
+              User.activePlayer = null
+              drawTree(techData.currentTreeName)
+              getEl('el_reports_wrapper').hidden = true
+              HTMLUtils.closeModal('report')
             }
-          } else {
-            User.activePlayer = null
-            drawTree(techData.currentTreeName)
-            getEl('el_reports_wrapper').hidden = true
-            HTMLUtils.closeModal('report')
+            if (!VARS.isInit) {
+              // isInit means 99% auto-click
+              navigator.clipboard.writeText(e.innerText)
+            }
           }
-          if(!VARS.isInit) {
-            // isInit means 99% auto-click
-            navigator.clipboard.writeText(e.innerText)
-          }
-        }
-        : null
-      )
+          : null
+        )
 
-      makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
-      makeElDraggable('el_reports_wrapper', 'el_reports_header')
-      makeElDraggable('el_help', 'el_help_header')
-      makeElDraggable('el_unitcreator_wrapper', 'el_unitcreator_header')
-      makeElDraggable('el_turnplanner_wrapper', 'el_tp_header')
+        makeElDraggable('el_selected_tech_wrapper', 'el_selected_tech_header')
+        makeElDraggable('el_reports_wrapper', 'el_reports_header')
+        makeElDraggable('el_help', 'el_help_header')
+        makeElDraggable('el_unitcreator_wrapper', 'el_unitcreator_header')
+        makeElDraggable('el_turnplanner_wrapper', 'el_tp_header')
 
-      console.time('analysis    ')
-      Analysis.onInit()
-      HTMLUtils.checkForOpenedWindows()
-      console.timeEnd('analysis    ')
+        console.time('analysis    ')
+        Analysis.onInit()
+        HTMLUtils.checkForOpenedWindows()
+        console.timeEnd('analysis    ')
 
-      console.timeEnd('full load   ')
-      setTimeout( _=> VARS.isInit = false, 200)
-    })
+        console.timeEnd('full load   ')
+        setTimeout(_ => VARS.isInit = false, 200)
+      })
   }, 0)
 }
 
@@ -366,13 +366,13 @@ const HTMLUtils = {
 
     hotkeysLib.init({
       'Escape': _ => {
-        if(searchEnabled) {
+        if (searchEnabled) {
           setTimeout(_ => searchEnabled = false, 50)
         }
         else {
           let tgt = document.querySelector('.modal[style*="z-index: 1"]:not([hidden]) button.btn_close')
-          if(!tgt) tgt = document.querySelector('.modal:not([hidden]) button.btn_close')
-          if(!tgt) return
+          if (!tgt) tgt = document.querySelector('.modal:not([hidden]) button.btn_close')
+          if (!tgt) return
           tgt.click()
           this.focusModal(document.querySelector('.modal:not([hidden])'))
           // this.hideAllModals()
@@ -424,23 +424,23 @@ const HTMLUtils = {
     const tgt = Array.from(document.querySelectorAll('.modal'))
       .map(e => e.id)
       .filter(e => e.includes(name))[0]
-    if(!tgt) return
+    if (!tgt) return
     getEl(tgt).hidden = false
     this.registerModalPath(name, subName)
     this.focusModal(getEl(tgt))
   },
 
   focusModal(el) {
-    if(!el) return
-    for(let i of document.querySelectorAll('.modal:not([hidden])')) {
+    if (!el) return
+    for (let i of document.querySelectorAll('.modal:not([hidden])')) {
       i.style.zIndex = 0
     }
     el.style.zIndex = 1
   },
 
   registerModalPath(name, subName) {
-    if(VARS.IS_LOCAL) {
-      if(!name) {
+    if (VARS.IS_LOCAL) {
+      if (!name) {
         location.hash = ''
         return
       }
@@ -460,18 +460,18 @@ const HTMLUtils = {
 
   collapseModals() {
     let tgts = Array.from(document.querySelectorAll('.modal:not([hidden])')).map(e => e.id)
-    if(!tgts.length) return
-    if(this.collapsedModalsList.length) tgts = tgts.concat(this.collapsedModalsList)
+    if (!tgts.length) return
+    if (this.collapsedModalsList.length) tgts = tgts.concat(this.collapsedModalsList)
     this.collapsedModalsList = tgts
-    for(let i of this.collapsedModalsList) {
+    for (let i of this.collapsedModalsList) {
       getEl(i).hidden = true
     }
     getEl('btn_expand_modals').hidden = false
   },
 
   expandModals() {
-    if(!this.collapsedModalsList.length) return
-    for(let i of this.collapsedModalsList) {
+    if (!this.collapsedModalsList.length) return
+    for (let i of this.collapsedModalsList) {
       getEl(i).hidden = false
     }
     this.collapsedModalsList = []
@@ -480,38 +480,38 @@ const HTMLUtils = {
 
   closeModal(name) {
     const tgt = Array.from(document.querySelectorAll('.modal:not([hidden])')).map(e => e.id).filter(e => e.includes(name))[0]
-    if(!tgt) return
+    if (!tgt) return
     getEl(tgt).hidden = true
     this.unregisterModalPath(name)
   },
 
   checkForOpenedWindows() {
-    if(location.hash.length <= 1) return
+    if (location.hash.length <= 1) return
 
     const path = decodeURIComponent(location.hash).split('#')
-      .filter( e => e)
-      .map(e =>e.split('__'))
+      .filter(e => e)
+      .map(e => e.split('__'))
 
     location.hash = ''
 
     const modals = {
       'report': i1 => {
         Analysis.drawReportsList()
-        if(i1) {
+        if (i1) {
           Analysis.openReport(i1)
         }
       },
       'unitcreator': _ => setTimeout(UnitCreator.open),
       [TurnPlanner.NAME]: subname => {
-        if(subname) User.activePlayer = subname
+        if (subname) User.activePlayer = subname
         setTimeout(TurnPlanner.open)
       },
       // MAYBE add processing from localstorage
       'selected_tech': _ => setTimeout(playerPost.open)
     }
 
-    for(let i of path) {
-      if(modals[i[0]]) {
+    for (let i of path) {
+      if (modals[i[0]]) {
         modals[i[0]](i[1])
       } else {
         warn('Unknown modal: ', i[0])
@@ -520,11 +520,11 @@ const HTMLUtils = {
   },
 
   hideAllModals() {
-    for(let i of document.querySelectorAll('.modal:not([hidden])')) {
+    for (let i of document.querySelectorAll('.modal:not([hidden])')) {
       i.hidden = true
     }
     location.hash = ''
-  }, 
+  },
 }
 
 const Analysis = {
@@ -539,10 +539,10 @@ const Analysis = {
     Analysis.countTechSubtreesBorders()
 
     // console.log(listParam('cost', false))
-    if(techData.badTechCount) console.log('unrecognized tech:', techData.badTechCount)
-    
+    if (techData.badTechCount) console.log('unrecognized tech:', techData.badTechCount)
+
     Analysis.searchBadTechRefs()
-    
+
     log('countTechPrices disabled')
     // Analysis.countTechPrices()
 
@@ -550,12 +550,12 @@ const Analysis = {
       // record subtrees
       Object.keys(inverted.alltech).forEach(
         key => {
-          inverted.alltech[key].subtree = 
+          inverted.alltech[key].subtree =
             capitalizeFirstLetter(Analysis.getSubtreeName(TechUtils.byName(key)))
         })
     })
 
-    setTimeout( _ => {
+    setTimeout(_ => {
       // all output to clear timestamps
       // console.log(listParam('costClear'))
       // console.log(listAllWithoutMilitary())
@@ -566,7 +566,7 @@ const Analysis = {
   insertTechLevels() {
     for (let treeName of TREELIST) {
       for (let j in tech[treeName]) {
-        tech[treeName][j].lvl = +techData.levels[treeName].indexOf(tech[treeName][j].y.toString())+1
+        tech[treeName][j].lvl = +techData.levels[treeName].indexOf(tech[treeName][j].y.toString()) + 1
       }
     }
   },
@@ -575,7 +575,7 @@ const Analysis = {
     let cnt = 0
     for (let i of Object.keys(tech)) {
       // console.group(i)
-      for(let j of Object.values(tech[i])) {
+      for (let j of Object.values(tech[i])) {
         const lvl = j.lvl
         const mult = VARS.DIFFICULTY_MULTS[lvl]
         let tcost = 0
@@ -584,25 +584,25 @@ const Analysis = {
 
         // TODO
         // inverted.alltech[j.name].effect[0][1] = +inverted.alltech[j.name].effect[0][1]*+j.lvl
-        
-        for(let k of j.cost) {
-          if(KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
+
+        for (let k of j.cost) {
+          if (KEYWORDS.COLONY_PARAMS.includes(k[0])) tcost += +k[1]
           // else if(k[0] == KEYWORDS.ANY_PARAM_KEYWORD) tcost += +k[1]
           // // eslint-disable-next-line no-empty
           // else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {}
-          else if(k[0]=='Этапы') tcost *= 2
-          else if(k[1]==KEYWORDS.REWARD_KEYWORD) {
+          else if (k[0] == 'Этапы') tcost *= 2
+          else if (k[1] == KEYWORDS.REWARD_KEYWORD) {
             // TODO rework maybe
-            tcost = tcost*1.6
+            tcost = tcost * 1.6
             break
           }
           // else if(KEYWORDS.SPECIAL_TECH_COST.includes(k[0])) tcost += +k[1]
-          else if(KEYWORDS.MATERIALS.map(e=>e.toLowerCase()).includes(k[0])) {
-            tcost += +k[1]*0.5
+          else if (KEYWORDS.MATERIALS.map(e => e.toLowerCase()).includes(k[0])) {
+            tcost += +k[1] * 0.5
           }
           // // eslint-disable-next-line no-empty
           // else if(['Технология', "Слоты"].includes(k[0])) {}
-          else if(
+          else if (
             k[1] == 'чудо'
             // || j.lvl >= techData.MAX_TECH_LVL-1
           ) {
@@ -618,79 +618,79 @@ const Analysis = {
 
         tcost = +tcost.toFixed(2)
 
-        const itIsMilitaryModule = ['octagon','trapezoid','trapezoid2','fatarrow'].includes(j.type) 
+        const itIsMilitaryModule = ['octagon', 'trapezoid', 'trapezoid2', 'fatarrow'].includes(j.type)
           || ['космическая база', 'наземная база'].includes(j.effect[0][1])
 
         // tcost<10 in case is's some superstructure
-        if(Math.abs(tcost-mult)>0.5 && tcost>0 && tcost<10 
+        if (Math.abs(tcost - mult) > 0.5 && tcost > 0 && tcost < 10
           // do-not-touch-military-costs-dammit
           && !itIsMilitaryModule
-          && !j.cost[j.cost.length-1][1] === KEYWORDS.REWARD_KEYWORD
+          && !j.cost[j.cost.length - 1][1] === KEYWORDS.REWARD_KEYWORD
         ) {
           log(i, `\n${j.name}\n`, `cost looks bad: ${tcost}->${mult}`, j)
           techData.badTechList.cost.push([j.name, mult])
           cnt++
           continue
         }
-        
+
         //hulls regulated manually
-        if(![VARS.NODE_T.HULL].includes(j.type) && j.effect[0][1] !== 'наземная база') {
-          for(let k of j.effect) {
-            if(k[0]==KEYWORDS.ANY_PARAM_KEYWORD) {
-              if(mult <= 2) teff += +k[1]
-              else teff += +k[1]*2
+        if (![VARS.NODE_T.HULL].includes(j.type) && j.effect[0][1] !== 'наземная база') {
+          for (let k of j.effect) {
+            if (k[0] == KEYWORDS.ANY_PARAM_KEYWORD) {
+              if (mult <= 2) teff += +k[1]
+              else teff += +k[1] * 2
             }
-            else if(KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
-            else if(k[0]=='Сверхадаптация' || k[0] == KEYWORDS.RESERVE_KW || k[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW + ' (')) {
-              teff += +k[1]*2
-            } 
-            else if(
+            else if (KEYWORDS.COLONY_PARAMS.includes(k[0])) teff += +k[1]
+            else if (k[0] == 'Сверхадаптация' || k[0] == KEYWORDS.RESERVE_KW || k[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW + ' (')) {
+              teff += +k[1] * 2
+            }
+            else if (
               KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0].toLowerCase())
               || KEYWORDS.TECH_EFFECTS.includes(k[0])
               || k[0].startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
             ) {
-              teff += +k[1]/2
-            } else if(
-              k[0].startsWith(KEYWORDS.CREATION_KEYWORD) 
+              teff += +k[1] / 2
+            } else if (
+              k[0].startsWith(KEYWORDS.CREATION_KEYWORD)
               || k[0].startsWith(KEYWORDS.UNIT_POINTS_KEYWORD)
               || KEYWORDS.IDEOLOGIES.includes(k[0])
               || k[0].startsWith('Ремонт')
             ) {
-              teff += +k[1]/1.6
+              teff += +k[1] / 1.6
             }
-            else if(KEYWORDS.MATERIALS.includes(k[0])) {
-              teff += +k[1]*TechUtils.getMaterialSeries(k[0])
+            else if (KEYWORDS.MATERIALS.includes(k[0])) {
+              teff += +k[1] * TechUtils.getMaterialSeries(k[0])
             }
-            else if(KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {
+            else if (KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(k[0])) {
               // TODO do better later
-              teff += +k[1]*0.6
+              teff += +k[1] * 0.6
             }
             // eslint-disable-next-line no-empty
-            else if(KEYWORDS.UNIT_TYPES.includes(k[0])) {}
+            else if (KEYWORDS.UNIT_TYPES.includes(k[0])) { }
             // hacky but at least somehow checks efficency
-            else if(VARS.WAR_MODULES_ARR.includes(j.type) && KEYWORDS.UNIT_SLOTS_KEYWORD === k[0]) {
+            else if (VARS.WAR_MODULES_ARR.includes(j.type) && KEYWORDS.UNIT_SLOTS_KEYWORD === k[0]) {
               teff -= +k[1] * 1.5
             }
-            else if(KEYWORDS.MILITARY_PARAMS.includes(k[0])) {
-              if(j.type !== VARS.NODE_T.TECH) {
-                teff += +k[1]/2.5
+            else if (KEYWORDS.MILITARY_PARAMS.includes(k[0])) {
+              if (j.type !== VARS.NODE_T.TECH) {
+                teff += +k[1] / 2.5
               } else {
                 teff += +k[1]
               }
             }
-            else if(KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k[0])) teff += +k[1]/2
-            else if(KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1]*1.3
-            else if(KEYWORDS.DAMAGE_TYPES.includes(k[1])) teff += 0.5
+            else if (KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k[0])) teff += +k[1] / 2
+            else if (KEYWORDS.MODULE_NUM_PROPS.includes(k[0])) teff += +k[1] * 1.3
+            else if (KEYWORDS.DAMAGE_TYPES.includes(k[1])) teff += 0.5
             // TODO разово
-            else if(k[0] == KEYWORDS.ITS_SPECIAL) {
+            else if (k[0] == KEYWORDS.ITS_SPECIAL) {
               continue
             }
-            else if(k[0] == KEYWORDS.UNIT_SLOTS_KEYWORD 
+            else if (k[0] == KEYWORDS.UNIT_SLOTS_KEYWORD
               || k[0] == KEYWORDS.UNIT_TYPES_KEYWORD
               || k[0].startsWith('Великий человек')
               || KEYWORDS.MILITARY_PARAMS.some(e => k[0].startsWith(e))
               || KEYWORDS.MILITARY_PARAMS_ADDITIONAL.some(e => k[0].startsWith(e))
-              ) {
+            ) {
               continue
             } else {
               log('unrecognized effect', j.name, k)
@@ -700,73 +700,73 @@ const Analysis = {
           }
         }
 
-        if(fail || tcost == 0 || teff == 0) {
+        if (fail || tcost == 0 || teff == 0) {
           // unrecognized effects
           continue
         }
 
-        let d = (+tcost/+teff).toFixed(1)
+        let d = (+tcost / +teff).toFixed(1)
         // TODO should it be like this for itIsMilitaryModule?
-        const delta = +(+tcost - +teff + (tcost > 1.1 && !itIsMilitaryModule ? -1*0 : 0)).toFixed(2)
+        const delta = +(+tcost - +teff + (tcost > 1.1 && !itIsMilitaryModule ? -1 * 0 : 0)).toFixed(2)
 
-        if(d && mult && j.lvl !== techData.MAX_TECH_LVL) {
-          if(delta < -0.6 || delta > 1) {
+        if (d && mult && j.lvl !== techData.MAX_TECH_LVL) {
+          if (delta < -0.6 || delta > 1) {
             cnt++
-            log(i, 'lvl', j.lvl,`\n${j.name}\n`,  j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1?'ДОРОГО':"ДЕШЕВО")
+            log(i, 'lvl', j.lvl, `\n${j.name}\n`, j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1 ? 'ДОРОГО' : "ДЕШЕВО")
             techData.badTechList.effect.push([j.name, delta])
           }
         }
       }
       // console.groupEnd()
     }
-    if(cnt) log('Bad prices:', cnt)
+    if (cnt) log('Bad prices:', cnt)
   },
   fixBadCosts() {
     const iframes = Array.from(document.querySelectorAll('iframe.tech'))
-    const files = Object.fromEntries(iframes.map(e=>[e.src.split('/').pop().split('.')[0],e.contentWindow.document.body.firstChild.innerText]))
+    const files = Object.fromEntries(iframes.map(e => [e.src.split('/').pop().split('.')[0], e.contentWindow.document.body.firstChild.innerText]))
     const changedFiles = Object.fromEntries(Object.keys(files).map(e => [e, false]))
 
     // cost
-    if(techData.badTechList.cost.length === 0) {
+    if (techData.badTechList.cost.length === 0) {
       log('no costs to fix')
     } else {
       log(`fixBadCosts, fixing ${techData.badTechList.cost.length} bad costs`)
     }
-    for(let i of techData.badTechList.cost) {
+    for (let i of techData.badTechList.cost) {
       const treeName = inverted.alltech[i[0]].treeName
-      files[treeName] = files[treeName].replace(new RegExp(`(${i[0]}\nСложность: )\\d+`, 'i'),`$1${i[1]}`)
+      files[treeName] = files[treeName].replace(new RegExp(`(${i[0]}\nСложность: )\\d+`, 'i'), `$1${i[1]}`)
       changedFiles[treeName] = true
     }
 
     // effect
-    if(techData.badTechList.effect.length === 0) {
+    if (techData.badTechList.effect.length === 0) {
       log('no effects to fix')
     } else {
       log(`fixBadCosts, fixing ${techData.badTechList.effect.length} bad effects`)
     }
-    for(let i of techData.badTechList.effect) {
-      const tTech = inverted.alltech[i[0]] 
+    for (let i of techData.badTechList.effect) {
+      const tTech = inverted.alltech[i[0]]
       const treeName = tTech.treeName
-      let [fullEff, beforeEff, effName, effValue, afterEff] = 
-        [].concat(...files[treeName].matchAll(new RegExp(`(${i[0]}\nСложность:[^\n]*\nЭффект: )([^\\d\\-\\+]*[+-]?)(\\d+)([^<]*)`, 'ig'),`$1${i[1]}`))
-      if(!fullEff) {
-        log('fixBadCosts cant parse effect', i[0]) 
+      let [fullEff, beforeEff, effName, effValue, afterEff] =
+        [].concat(...files[treeName].matchAll(new RegExp(`(${i[0]}\nСложность:[^\n]*\nЭффект: )([^\\d\\-\\+]*[+-]?)(\\d+)([^<]*)`, 'ig'), `$1${i[1]}`))
+      if (!fullEff) {
+        log('fixBadCosts cant parse effect', i[0])
         continue
       }
-      const effCleanName = effName.replace(/[+-]/,'').trim()
+      const effCleanName = effName.replace(/[+-]/, '').trim()
       effValue = +effValue
       let correctionDelta = i[1]
       // probably free cubes
       if (effName.length < 2) correctionDelta = correctionDelta / 2
-      else if( KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(effCleanName)
-              || KEYWORDS.TECH_EFFECTS.includes(effCleanName)
-              || effCleanName.startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
+      else if (KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(effCleanName)
+        || KEYWORDS.TECH_EFFECTS.includes(effCleanName)
+        || effCleanName.startsWith(KEYWORDS.RESEARCH_KEYWORD + ' (')
       ) correctionDelta = correctionDelta * 2
-      
+
       const tgtValue = +(effValue + correctionDelta).toFixed(0)
       // log(correctionDelta, tgtValue, {fullEff, beforeEff, effCleanName, effValue, afterEff})
-      if(tgtValue < 1) {
-        log(i[0], 'correctionDelta ducked up') 
+      if (tgtValue < 1) {
+        log(i[0], 'correctionDelta ducked up')
         continue
       }
       const resultStr = `${beforeEff}${effName}${tgtValue}${afterEff}`
@@ -775,37 +775,37 @@ const Analysis = {
       changedFiles[treeName] = true
     }
 
-    for(let i in files) {
-      if(!changedFiles[i]) continue
+    for (let i in files) {
+      if (!changedFiles[i]) continue
       savingOps.saveFile(`${i}.graphml`, files[i])
     }
   },
   reportBadY() {
     // collapse stat bad Y's
     for (let i of Object.keys(stat)) {
-      const keys =  Object.keys(stat[i])
+      const keys = Object.keys(stat[i])
       for (let j in keys) {
-        if(!techData.levels[i].includes(keys[j])) techData.levels[i].push(keys[j])
-        if(!keys[j-1]) continue
-        const delta = keys[j] - keys[j-1]
-        if(delta>0 && delta<10) {
-          warn('bad y:', i, keys[j-1], keys[j])
+        if (!techData.levels[i].includes(keys[j])) techData.levels[i].push(keys[j])
+        if (!keys[j - 1]) continue
+        const delta = keys[j] - keys[j - 1]
+        if (delta > 0 && delta < 10) {
+          warn('bad y:', i, keys[j - 1], keys[j])
         }
       }
     }
-    Object.keys(techData.levels).map(i => techData.levels[i].sort((a,b)=>a<b))
+    Object.keys(techData.levels).map(i => techData.levels[i].sort((a, b) => a < b))
   },
   reportBadUserData() {
     // useful when transitions happen
-    for(let username of User.listUsers()) {
+    for (let username of User.listUsers()) {
       const data = User.getSavedUserData(username)
       const objNames = [].concat(data.localProjs, data.buildings, data.orbital, data.astroProjs)
         .flat()
         .map(name => name.replace(/ ?\([^)]+\)/, ''))
         .filter(name => !name.startsWith(':'))
-      for(let name of objNames) {
+      for (let name of objNames) {
         const tek = TechUtils.byName(name)
-        if(!tek) {
+        if (!tek) {
           warn(`player ${username} bad object name`, name)
           continue
         }
@@ -817,9 +817,9 @@ const Analysis = {
   reportBadSymbolsInTechName() {
     // see playerPost.extractRolls
     const prohibitedStrings = [',', '.', ' - ']
-    for(let name of Object.keys(inverted.alltech)) {
-      for(let badToken of prohibitedStrings) {
-        if(name.includes(badToken)) {
+    for (let name of Object.keys(inverted.alltech)) {
+      for (let badToken of prohibitedStrings) {
+        if (name.includes(badToken)) {
           warn(`tech "${name}", bad token in name: "${badToken}"`)
         }
       }
@@ -838,10 +838,10 @@ const Analysis = {
    * @param {TTechObject} techObj 
    */
   getSubtreeName(techObj) {
-    if(!techObj || !techObj.nodeCenter) return null
-    for(let i of techData.subtreeBorders[techObj.treeName]) {
-      if(techObj.nodeCenter.x > i.x1 && techObj.nodeCenter.x < i.x2)
-      return i.fullText
+    if (!techObj || !techObj.nodeCenter) return null
+    for (let i of techData.subtreeBorders[techObj.treeName]) {
+      if (techObj.nodeCenter.x > i.x1 && techObj.nodeCenter.x < i.x2)
+        return i.fullText
     }
   },
   searchBadTechRefs() {
@@ -856,13 +856,13 @@ const Analysis = {
     }
   },
   totalTechCount() {
-    let sum=0
-    for(let i of Object.keys(tech)) sum+=(Object.keys(tech[i]).length)
+    let sum = 0
+    for (let i of Object.keys(tech)) sum += (Object.keys(tech[i]).length)
     log('Total tech count', sum)
   },
 
   // counting win possibility for debils
-// eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   countSuccessPossibility(threshold, nOfCubes) {
     const n = 250000
     let wins = 0
@@ -884,7 +884,7 @@ const Analysis = {
         j++
         p = Analysis.countSuccessPossibility(i, j)
       }
-      console.log(i, j-1, Analysis.countSuccessPossibility(i, j-1))
+      console.log(i, j - 1, Analysis.countSuccessPossibility(i, j - 1))
       console.log(i, j, p)
     }
   },
@@ -894,13 +894,13 @@ const Analysis = {
    */
   countTechBalanceBySubtree() {
     const res = {}
-    for(let user of User.listUsers()) {
+    for (let user of User.listUsers()) {
       const techNames = User.getFlatUserTech(user)
       res[user] = {}
-      for(let i of techNames) {
+      for (let i of techNames) {
         let subtreeName = TechUtils.byName(i)?.subtree
-        if(!subtreeName) continue
-        if(!res[user][subtreeName]) res[user][subtreeName] = 0
+        if (!subtreeName) continue
+        if (!res[user][subtreeName]) res[user][subtreeName] = 0
         res[user][subtreeName] += 1
       }
     }
@@ -910,7 +910,7 @@ const Analysis = {
   filterObjectByDict(obj, dict) {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => dict.includes(key)))
   },
-  
+
   excludeByDict(obj, dict) {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => !dict.includes(key)))
   },
@@ -919,23 +919,23 @@ const Analysis = {
     HTMLUtils.openModal('report')
     getEl('el_reports_home').hidden = true
     getEl('el_reports_list').innerHTML = ''
-    
+
     for (let name of Object.keys(Analysis.Reports)) {
-      if(name.startsWith('_')) {
-        getEl('el_reports_list').innerHTML += `<br><b>${name.replace(/_/g,' ')}</b>`
+      if (name.startsWith('_')) {
+        getEl('el_reports_list').innerHTML += `<br><b>${name.replace(/_/g, ' ')}</b>`
         continue
       }
 
       getEl('el_reports_list').innerHTML += `<li 
       onclick="Analysis.openReport('${name}')">
-      ${name.replace(/_/g,' ')}</li>`
+      ${name.replace(/_/g, ' ')}</li>`
     }
   },
 
   openReport(reportName, reportArgs = null) {
     HTMLUtils.registerModalPath('report', reportName)
     getEl('el_reports_home').hidden = false
-    if(Analysis.Reports[reportName])
+    if (Analysis.Reports[reportName])
       Analysis.Reports[reportName](reportArgs)
     else {
       // probably its user report
@@ -946,9 +946,9 @@ const Analysis = {
   closeReports() {
     HTMLUtils.closeModal('report')
   },
-  
+
   reportTable(obj, HTMLbefore = '<span></span>') {
-    if(!Object.keys(obj).length) return
+    if (!Object.keys(obj).length) return
 
     getEl('el_reports_list').innerHTML = HTMLbefore + '<table><thead></thead><tbody></tbody></table>'
     const tbody = qs('#el_reports_list table').tBodies[0]
@@ -957,17 +957,17 @@ const Analysis = {
     const isObj = typeof entries[0][1] == 'object'
     let res = ''
 
-    qs('#el_reports_list table').tHead.innerHTML = 
+    qs('#el_reports_list table').tHead.innerHTML =
       `<tr><th>(index)</th><th>${isObj ? Object.keys(entries[0][1]).join('</th><th>') : 'value'}</th></tr>`
 
-    for(let i of entries) {
+    for (let i of entries) {
       res += `<tr><td>${i[0]}</td><td>${isObj ? Object.values(i[1]).join('</td><td>') : i[1]}</td></tr>`
     }
 
     tbody.innerHTML = res
 
     HTMLUtils.addTableSorting('#el_reports_list table')
-    setTimeout(_=>{ 
+    setTimeout(_ => {
       qs('#el_reports_list table').tHead.children[0].children[1].click()
       qs('#el_reports_list table').tHead.children[0].children[1].click()
     }, 0)
@@ -990,33 +990,33 @@ const Analysis = {
    */
   allEffectsVerbose(techObjsObj) {
     return Object.values(techObjsObj)
-    .reduce( (acc, techObj) => {
-      for(let i of techObj.effect) {
-        const k = i[0]
-        if(!acc[k])
-          acc[k] = {
-            count: 0,
-            sum: 0,
-            list: [],
-          }
+      .reduce((acc, techObj) => {
+        for (let i of techObj.effect) {
+          const k = i[0]
+          if (!acc[k])
+            acc[k] = {
+              count: 0,
+              sum: 0,
+              list: [],
+            }
 
-          acc[k].count+=1
-          acc[k].sum+=+i[1]
+          acc[k].count += 1
+          acc[k].sum += +i[1]
 
           acc[k].list.push(`${techObj.name}(${+i[1]})`)
-      }
+        }
 
-      return acc
-    }, {})
+        return acc
+      }, {})
   },
 
   // leading underscore makes it non-clickable head of section
   Reports: {
     кнопочки() {
-      Analysis.reportTable({'только проекты': `<button onclick="Object.values(tech[techData.currentTreeName]).filter(e=>e.type!=='hexagon').forEach(e=>getEl(e.id).setAttribute('fill','white'))">do</button>`})
+      Analysis.reportTable({ 'только проекты': `<button onclick="Object.values(tech[techData.currentTreeName]).filter(e=>e.type!=='hexagon').forEach(e=>getEl(e.id).setAttribute('fill','white'))">do</button>` })
     },
 
-   эффекты_тех() {
+    эффекты_тех() {
       let filter = [].concat(
         KEYWORDS.COLONY_PARAMS,
         KEYWORDS.ADDITIONAL_COLONY_PARAMS,
@@ -1030,22 +1030,22 @@ const Analysis = {
         ["Слоты", "Тип юнита", "Тип урона", "особое"],
       )
       let result = Object.values(inverted.alltech)
-        .reduce( (acc, e) => {
-          for(let i of e.effect) {
+        .reduce((acc, e) => {
+          for (let i of e.effect) {
             const k = i[0]
-            if(filter.includes(k)) continue
+            if (filter.includes(k)) continue
 
-            if(!acc[k])
+            if (!acc[k])
               acc[k] = {
                 count: 0,
                 sum: 0,
                 list: [],
               }
 
-              acc[k].count+=1
-              acc[k].sum+=+i[1]
+            acc[k].count += 1
+            acc[k].sum += +i[1]
 
-              acc[k].list.push(e.name)
+            acc[k].list.push(e.name)
           }
 
           return acc
@@ -1055,36 +1055,36 @@ const Analysis = {
 
     особые_эффекты() {
       const result = Object.values(inverted.alltech)
-        .reduce( (acc, e) => {
-          for(let i of e.effect) {
-            if(i[0] == KEYWORDS.ITS_SPECIAL) {
-              acc[i[1]] = acc[i[1]] ? acc[i[1]]+1 : 1
+        .reduce((acc, e) => {
+          for (let i of e.effect) {
+            if (i[0] == KEYWORDS.ITS_SPECIAL) {
+              acc[i[1]] = acc[i[1]] ? acc[i[1]] + 1 : 1
             }
           }
           return acc
         }, {})
       Analysis.reportTable(result)
     },
-  
+
     вообще_все_эффекты() {
       const result = Object.values(inverted.alltech)
-        .reduce( (acc, e) => {
-          for(let i of e.effect) {
+        .reduce((acc, e) => {
+          for (let i of e.effect) {
             const k = i[0]
-            if(!acc[k])
+            if (!acc[k])
               acc[k] = {
                 count: 0,
                 sum: 0,
               }
-              acc[k].count+=1
-              acc[k].sum+=+i[1]
+            acc[k].count += 1
+            acc[k].sum += +i[1]
           }
           return acc
         }, {})
-        Analysis.reportTable(result)
+      Analysis.reportTable(result)
     },
 
-    вообще_все_эффекты_подробно(){
+    вообще_все_эффекты_подробно() {
       const result = Analysis.allEffectsVerbose(inverted.alltech)
       Analysis.reportTable(result)
     },
@@ -1122,24 +1122,24 @@ const Analysis = {
 
     эффекты_на_ТУ() {
       let TL = prompt(`TL? 1-${techData.MAX_TECH_LVL}/+`)
-      if(!TL) return
-      if(TL == '+') TL = techData.MAX_TECH_LVL
+      if (!TL) return
+      if (TL == '+') TL = techData.MAX_TECH_LVL
       TL = +TL
       const techs = Object.values(inverted.alltech)
-        .filter(e => e.lvl <= TL )
-        .map( e => e.name )
+        .filter(e => e.lvl <= TL)
+        .map(e => e.name)
 
       const result = Object.entries(User.countSummaryCostAndEffect(techs).effect)
-        .filter( e => [].concat(
+        .filter(e => [].concat(
           KEYWORDS.COLONY_PARAMS,
           // KEYWORDS.MATERIALS,
           KEYWORDS.TECH_EFFECTS,
           [KEYWORDS.RESERVE_KW],
         ).includes(e[0]))
 
-      result.push( ['ВСЕГО', result
-        .filter( e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
-        .reduce( (s,e)=> s + +e[1], 0 )
+      result.push(['ВСЕГО', result
+        .filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
+        .reduce((s, e) => s + +e[1], 0)
       ])
 
       const obj = Object.fromEntries(result)
@@ -1147,15 +1147,15 @@ const Analysis = {
       Analysis.reportTable(obj)
     },
 
-    _Списки_объектов_() {},
-  
+    _Списки_объектов_() { },
+
     список_корпусов() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
           .filter(e => e.type == VARS.NODE_T.HULL)
           .map(e => [e.name, {
-            "Тип": e.effect[0][1], 
-            "Цена": +e.cost[0][1], 
+            "Тип": e.effect[0][1],
+            "Цена": +e.cost[0][1],
             "Слоты": +e.effect[1][1],
             "Свойства": Analysis.formatReportEffects(e.effect.slice(2)),
           }])
@@ -1170,8 +1170,8 @@ const Analysis = {
             // TODO FIXME
             const eff = obj.effect.filter(eff => eff[0] === 'Слоты')
             const cost = obj.cost.filter(eff => eff[0] === 'Слоты')
-            if(eff.length) slots = eff[0][1]
-            if(cost.length) slots = cost[0][1]
+            if (eff.length) slots = eff[0][1]
+            if (cost.length) slots = cost[0][1]
 
             return [obj.name, {
               Цена: obj.cost[0][1],
@@ -1208,41 +1208,41 @@ const Analysis = {
     список_технологий_по_типу() {
       Analysis.reportTable(
         Object.values(inverted.alltech)
-          .reduce( (acc, e) => {
-            if(!acc[e.type])
-              acc[e.type]=1
+          .reduce((acc, e) => {
+            if (!acc[e.type])
+              acc[e.type] = 1
             else
-              acc[e.type]+=1
+              acc[e.type] += 1
             return acc
           }, {})
       )
     },
 
-    _Оценка_игроков_ () {},
+    _Оценка_игроков_() { },
 
     // чтобы прикинуть сколько давать вкатившимся после начала игры
     суммарная_стоимость_проектов_игроков() {
       const result = Object.fromEntries(
         Object.entries(User.getAllUsersData())
-        .map(e => [e[0], {
-          'Кол-во':  e[1].buildings.length 
-              + e[1].orbital.length 
-              + e[1].localProjs.length 
-              + e[1].astroProjs.length 
+          .map(e => [e[0], {
+            'Кол-во': e[1].buildings.length
+              + e[1].orbital.length
+              + e[1].localProjs.length
+              + e[1].astroProjs.length
               + Object.values(e[1].techTable).flat().length,
-          'Цена': [].concat(
-            e[1].buildings, 
-            e[1].orbital,
-            e[1].localProjs,
-            e[1].astroProjs,
-            Object.values(e[1].techTable).flat(),
-          )
-          .map( e2 => inverted.alltech[e2] ? inverted.alltech[e2].cost[0][1] : null)
-          .filter( e2 => e2 )
-          .reduce((acc, i)=>acc + +i,0)
-        }])
+            'Цена': [].concat(
+              e[1].buildings,
+              e[1].orbital,
+              e[1].localProjs,
+              e[1].astroProjs,
+              Object.values(e[1].techTable).flat(),
+            )
+              .map(e2 => inverted.alltech[e2] ? inverted.alltech[e2].cost[0][1] : null)
+              .filter(e2 => e2)
+              .reduce((acc, i) => acc + +i, 0)
+          }])
       )
-      Analysis.reportTable(result, draw.createCаnvasHTML({size: 300, title: 'Цены'}))
+      Analysis.reportTable(result, draw.createCаnvasHTML({ size: 300, title: 'Цены' }))
       setTimeout(() => {
         const data = Object.entries(result)
           .map(([name, val]) => ([
@@ -1255,23 +1255,23 @@ const Analysis = {
     основные_параметры_игроков() {
       const result = Object.fromEntries(
         Object.entries(User.getAllUsersData())
-        .map( e => [ e[0], 
+          .map(e => [e[0],
           Object.fromEntries(
             [].concat(
               [[
                 'Итого',
                 Object.values(e[1].colonyParams)
-                .map(e2 => +e2)
-                .filter( e2 => !isNaN(e2))
-                .reduce((acc, e2) => acc+e2, 0)
+                  .map(e2 => +e2)
+                  .filter(e2 => !isNaN(e2))
+                  .reduce((acc, e2) => acc + e2, 0)
               ]],
               Object.entries(e[1].colonyParams)
-                .filter( e2 => !isNaN(+e2[1]))
+                .filter(e2 => !isNaN(+e2[1]))
             )
           )
-        ])
+          ])
       )
-      Analysis.reportTable(result, draw.createCаnvasHTML({size: 300, title: 'Итого'}))
+      Analysis.reportTable(result, draw.createCаnvasHTML({ size: 300, title: 'Итого' }))
       setTimeout(() => {
         const data = Object.entries(result)
           .map(([name, val]) => ([
@@ -1293,20 +1293,20 @@ const Analysis = {
         const userEff = User.countUserEffects(userData)
         const misery = countPlanetRawMisery(userData)
         arr.push([username, misery])
-        
-        antiHostility[username] = 
+
+        antiHostility[username] =
           (userEff.Сверхадаптация || 0) * 2 +
           (userEff.Адаптация || 0) +
           Math.floor((userEff["Защита колонии"] || 0) / 2)
 
-        if(
+        if (
           userData.additionalParams['чуждая среда'] != misery.alien ||
           userData.additionalParams['непривычная среда'] != misery.unfamiliar
         ) {
           warn(`User ${username}: misery should be a${misery.alien}u${misery.unfamiliar}`)
         }
       }
-      
+
       // TODO FIXME log(Object.entries(User.getAllUsersData()).map(([name, data])=>`${name}: ##${data.additionalParams.осуждение}d10##`).join('\n'))
       Analysis.reportTable(Object.fromEntries(arr),
         '<div onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor=\'darkgrey\'"'
@@ -1336,7 +1336,7 @@ const Analysis = {
 
       Analysis.reportTable(
         Object.fromEntries(t),
-        '<strong>Сумма по первым стобцам</strong><br>' + 
+        '<strong>Сумма по первым стобцам</strong><br>' +
         mostUsed.map(([k, v]) => k + ': ' + v)
           .join('<br>')
       )
@@ -1346,13 +1346,13 @@ const Analysis = {
 
     // },
 
-    _Прочее_ () {},
+    _Прочее_() { },
 
     countTechByCostParamType() {
       const sum = {}
-      Object.values(inverted.alltech).forEach( e => {
+      Object.values(inverted.alltech).forEach(e => {
         let paramType = VARS.colorToParameterType[e.borderColor]
-        if(!sum[paramType]) {
+        if (!sum[paramType]) {
           sum[paramType] = 1
         } else {
           sum[paramType] += 1
@@ -1435,15 +1435,15 @@ const Analysis = {
       var m = Object.entries(json)
 
       function hexMapDist(coordStr1, coordStr2) {
-        const [x1,y1] = coordStr1.split(' ')
-        const [x2,y2] = coordStr2.split(' ')
-        return Math.sqrt(Math.abs(+x1-+x2)**2+Math.abs(+y1-+y2)**2)
+        const [x1, y1] = coordStr1.split(' ')
+        const [x2, y2] = coordStr2.split(' ')
+        return Math.sqrt(Math.abs(+x1 - +x2) ** 2 + Math.abs(+y1 - +y2) ** 2)
       }
 
       log(m
-        .filter(([key,_]) => hexMapDist(locXY, key) < 5)
-        .filter(([key, _])=>key !== locXY)
-        .map(([k,v])=>[k, v.StarsL.map(({mass, spectral_type}) => ({mass, spectral_type}))])
+        .filter(([key, _]) => hexMapDist(locXY, key) < 5)
+        .filter(([key, _]) => key !== locXY)
+        .map(([k, v]) => [k, v.StarsL.map(({ mass, spectral_type }) => ({ mass, spectral_type }))])
       )
     },
 
@@ -1460,28 +1460,28 @@ const Analysis = {
         removed: [],
       }
 
-      for(let techName of Object.keys(inverted.alltech)) {
-        if(!oldTech[techName]) {
+      for (let techName of Object.keys(inverted.alltech)) {
+        if (!oldTech[techName]) {
           delta.added.push(techName)
           continue
         }
 
-        if(oldTech[techName].fullText !== inverted.alltech[techName].fullText) {
+        if (oldTech[techName].fullText !== inverted.alltech[techName].fullText) {
           delta.changed.push(techName)
         }
       }
 
-      for(let techName in oldTech) {
-        if(!inverted.alltech[techName]) {
+      for (let techName in oldTech) {
+        if (!inverted.alltech[techName]) {
           delta.removed.push(techName)
         }
       }
 
-      for(let i of delta.added) {
+      for (let i of delta.added) {
         console.log(inverted.alltech[i])
       }
 
-      for(let i of delta.removed) {
+      for (let i of delta.removed) {
         console.log(oldTech[i])
       }
 
@@ -1499,35 +1499,35 @@ const Analysis = {
 const TreeView = {
   tspanHighlightOnClick() {
     for (const i of document.querySelectorAll('tspan')) {
-      i.addEventListener('click', function(e) {
+      i.addEventListener('click', function (e) {
         getEl('highlight_css').innerHTML = `.${e.target.className.baseVal} { fill: orange }`
       })
     }
   },
 
   copyFirstTechLineOnClick() {
-    for(let i of document.querySelectorAll('text')) {
+    for (let i of document.querySelectorAll('text')) {
       let el = i.children[0]
-      el ? el.addEventListener('click', function() {
+      el ? el.addEventListener('click', function () {
         navigator.clipboard.writeText(getEl(el.id).textContent)
       }) : 0
     }
   },
 
   addTurnPlannerThings() {
-    if(!TurnPlanner.active) return
-    for(let i of svg.children) {
-      if(!i.id) continue
+    if (!TurnPlanner.active) return
+    for (let i of svg.children) {
+      if (!i.id) continue
       const id = i.id.split('_')[0]
       i.addEventListener('click', function (evt) {
-        if(!TurnPlanner.addTech(tech[techData.currentTreeName][id].name)) return
+        if (!TurnPlanner.addTech(tech[techData.currentTreeName][id].name)) return
         getEl(id).style.fill = 'orange'
         evt.stopPropagation()
       })
     }
     TurnPlanner.highlightSelected()
   },
-  
+
   getMinMax(arr, attr) {
     const t = arr.map(e => e[attr])
     return [Math.min.apply(null, t), Math.max.apply(null, t)]
@@ -1538,16 +1538,16 @@ function drawTree(tree_name) {
   if (!tech[tree_name] || Object.keys(tech[tree_name]).length == 0) {
     parseTechIframe(tree_name)
   }
-  
+
   if (techData.cache.trees[tree_name].html) {
     svg.innerHTML = techData.cache.trees[tree_name].html
     svg.setAttribute("viewBox", techData.cache.trees[tree_name].viewBox)
-    setTimeout(TreeView.tspanHighlightOnClick,1)
-    setTimeout(TreeView.copyFirstTechLineOnClick,1)
-    setTimeout(TreeView.addTurnPlannerThings,1)
+    setTimeout(TreeView.tspanHighlightOnClick, 1)
+    setTimeout(TreeView.copyFirstTechLineOnClick, 1)
+    setTimeout(TreeView.addTurnPlannerThings, 1)
     techData.currentTreeName = tree_name
     User.drawActiveUser(tree_name)
-    getEl('btn_'+tree_name).disabled = false
+    getEl('btn_' + tree_name).disabled = false
     return
   }
 
@@ -1575,23 +1575,23 @@ function drawTree(tree_name) {
 
   techData.currentTreeName = tree_name
   User.drawActiveUser(tree_name)
-  getEl('btn_'+tree_name).disabled = false
+  getEl('btn_' + tree_name).disabled = false
 }
 
 const TechUtils = {
   createEffectsTable(effectsListArr, tableName = '') {
-    if(effectsListArr.length == 0 ) return ''
+    if (effectsListArr.length == 0) return ''
     return '<br><table><tbody><tr>' +
-    (tableName ? `<tr><td colspan=2 align=center style="background: lightgrey">${tableName}</td></tr>` : '')  +
-    effectsListArr.map(e => 
-      `<td ${e[1] === 0 ? 'colspan=2' : ''}>${e[0]}</td>` +
-      (e[1] === 0 ? '' : `<td>${`${+e[1]>=0?'&nbsp;':''}${e[1]}`}`)
-    ).join('</tr><tr>') +
-    '</tr></tbody></table>'
+      (tableName ? `<tr><td colspan=2 align=center style="background: lightgrey">${tableName}</td></tr>` : '') +
+      effectsListArr.map(e =>
+        `<td ${e[1] === 0 ? 'colspan=2' : ''}>${e[0]}</td>` +
+        (e[1] === 0 ? '' : `<td>${`${+e[1] >= 0 ? '&nbsp;' : ''}${e[1]}`}`)
+      ).join('</tr><tr>') +
+      '</tr></tbody></table>'
   },
 
   byName(techName) {
-    const cleanName = techName.replace(/ \([^)]+\)/,'') 
+    const cleanName = techName.replace(/ \([^)]+\)/, '')
     return inverted.alltech[cleanName] || VARS.defaultProjectsList[cleanName] || null
   },
 
@@ -1601,16 +1601,16 @@ const TechUtils = {
 
   countCosts(techNames) {
     let t = [].concat.apply([], techNames
-      .map( e => inverted.alltech[e]?.cost || VARS.defaultProjectsList[e]?.cost))  
+      .map(e => inverted.alltech[e]?.cost || VARS.defaultProjectsList[e]?.cost))
     let res = {}
 
-    for(let i of t) {
-      if(i[0] === KEYWORDS.ITS_SPECIAL || i[0].startsWith(KEYWORDS.TECH_KW)) {
+    for (let i of t) {
+      if (i[0] === KEYWORDS.ITS_SPECIAL || i[0].startsWith(KEYWORDS.TECH_KW)) {
         i[0] = ':' + i[1]
         i[1] = null
       }
 
-      if(!res[i[0]]) 
+      if (!res[i[0]])
         res[i[0]] = +i[1]
       else
         res[i[0]] += +i[1]
@@ -1658,7 +1658,7 @@ const User = /** @type {const} */({
   activePlayer: null,
 
   drawActiveUser(treeName) {
-    if(!this.activePlayer) return
+    if (!this.activePlayer) return
     parseGDoc.drawTech(this.activePlayer, treeName)
   },
 
@@ -1693,7 +1693,7 @@ const User = /** @type {const} */({
   formUsersCheckboxes() {
     // only after user data aquired
     let ts = ''
-    for(let i of User.listUsers()) {
+    for (let i of User.listUsers()) {
       const bgColor = User.getSavedUserData(i).playerColor
       ts += `<label><input type="checkbox" id="${i}">${i}</label>&nbsp;<span style="background-color: ${bgColor}">&emsp;</span><br>`
     }
@@ -1758,29 +1758,29 @@ const User = /** @type {const} */({
    */
   listAvalTech(treeName, techList) {
     return techList
-      .map( e => e.search('(чужое)') == -1 ? e : '')
-      .map( e => e.replace(/\([^)]+\)/,'').trim())
-      .filter( e => e )
+      .map(e => e.search('(чужое)') == -1 ? e : '')
+      .map(e => e.replace(/\([^)]+\)/, '').trim())
+      .filter(e => e)
       .map(
         /**
          * @param {TTechObject} e 
          */
         (e) => {
-        const t = inverted.alltech[e]
-        if(!t) return null
-        if(treeName && t.treeName !== treeName) return null
-        // if(t.req.length == 0) return t.id
-        return t.next.map( e2 => tech[t.treeName][e2])
-      })
+          const t = inverted.alltech[e]
+          if (!t) return null
+          if (treeName && t.treeName !== treeName) return null
+          // if(t.req.length == 0) return t.id
+          return t.next.map(e2 => tech[t.treeName][e2])
+        })
       .flat()
-      .filter( e => e )
+      .filter(e => e)
   },
 
   /**
    * @returns {string[]}
    */
   getFlatUserTech(username) {
-    if(techData.cache.usersFlatTech[username]) return techData.cache.usersFlatTech[username]
+    if (techData.cache.usersFlatTech[username]) return techData.cache.usersFlatTech[username]
     const data = User.getSavedUserData(username)
     let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
     const result = Object.values(data.techTable).concat(projList).flat()
@@ -1799,10 +1799,10 @@ const User = /** @type {const} */({
    */
   highlightAvaltech(treeName, techList) {
     User.listAvalTech(treeName, techList)
-      .map( e => e.id)
-      .forEach( i => {
-        if(getEl(i) && getEl(i).getAttribute('fill') == 'lightgrey') {
-          getEl(i).setAttribute('fill','lightyellow')
+      .map(e => e.id)
+      .forEach(i => {
+        if (getEl(i) && getEl(i).getAttribute('fill') == 'lightgrey') {
+          getEl(i).setAttribute('fill', 'lightyellow')
         }
       })
   },
@@ -1816,62 +1816,62 @@ const User = /** @type {const} */({
    */
   countSummaryCostAndEffect(techList, userDataObj = null) {
     let techListFiltered = techList
-      .map( e => e.search('(сломано|неактивно)') == -1 ? e : '')
-      .map( e => e.replace(/\([^)]+\)/,'').trim())
-      .filter( techName => inverted.alltech[techName] || VARS.defaultProjectsList[techName])
+      .map(e => e.search('(сломано|неактивно)') == -1 ? e : '')
+      .map(e => e.replace(/\([^)]+\)/, '').trim())
+      .filter(techName => inverted.alltech[techName] || VARS.defaultProjectsList[techName])
 
     /**
      * @type {[effKey, number | string]}
      */
     let effectsData = [].concat.apply(
-      [], 
-      techListFiltered.map( name => inverted.alltech[name]?.effect || VARS.defaultProjectsList[name]?.effect)
+      [],
+      techListFiltered.map(name => inverted.alltech[name]?.effect || VARS.defaultProjectsList[name]?.effect)
     )
     let costData = TechUtils.countCosts(techListFiltered)
 
     const isSpecial = (str) => [KEYWORDS.ITS_SPECIAL, KEYWORDS.ONLY_ONCE_KW].includes(str)
 
-    if(userDataObj) {
-      if(userDataObj.colonyParams['Начальные кубы'])
+    if (userDataObj) {
+      if (userDataObj.colonyParams['Начальные кубы'])
         effectsData = effectsData.concat(
           userDataObj.colonyParams['Начальные кубы'].split('/')
             .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
         )
-      if(userDataObj.startingFeature) effectsData = effectsData.concat(userDataObj.startingFeature
-        .map( i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
+      if (userDataObj.startingFeature) effectsData = effectsData.concat(userDataObj.startingFeature
+        .map(i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
       )
-      if(userDataObj.uniqueResources) effectsData = effectsData.concat(userDataObj.uniqueResources
-        .map( i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
+      if (userDataObj.uniqueResources) effectsData = effectsData.concat(userDataObj.uniqueResources
+        .map(i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
       )
-      if(userDataObj.planetParams) effectsData = effectsData.concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
-      if(userDataObj.greatPeople) effectsData = effectsData.concat(userDataObj.greatPeople
-        .map( i => i.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
+      if (userDataObj.planetParams) effectsData = effectsData.concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
+      if (userDataObj.greatPeople) effectsData = effectsData.concat(userDataObj.greatPeople
+        .map(i => i.effect.map(j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
         .flat()
       )
-      if(userDataObj.secondaryColonies) effectsData = effectsData.concat(userDataObj.secondaryColonies
-        .map( colony => colony.effect.map( j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
+      if (userDataObj.secondaryColonies) effectsData = effectsData.concat(userDataObj.secondaryColonies
+        .map(colony => colony.effect.map(j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
         .flat()
       )
     }
 
-    const addIfOnce = (str) => KEYWORDS.ONLY_ONCE_KW === str ? `${KEYWORDS.ONLY_ONCE_KW}: `: '' 
+    const addIfOnce = (str) => KEYWORDS.ONLY_ONCE_KW === str ? `${KEYWORDS.ONLY_ONCE_KW}: ` : ''
 
     const effect = {}
-    for(let i of effectsData) {
-      if(isSpecial(i[0])) {
+    for (let i of effectsData) {
+      if (isSpecial(i[0])) {
         i[0] = ':' + addIfOnce(i[0]) + i[1]
         i[1] = null
       }
 
-      if(!effect[i[0]]) 
+      if (!effect[i[0]])
         effect[i[0]] = +i[1]
       else
         effect[i[0]] += +i[1]
     }
 
     const cost = costData
-      .filter( e => !KEYWORDS.COLONY_PARAMS.includes(e[0]))
-      .filter( e => KEYWORDS.ANY_PARAM_KEYWORD !== e[0])
+      .filter(e => !KEYWORDS.COLONY_PARAMS.includes(e[0]))
+      .filter(e => KEYWORDS.ANY_PARAM_KEYWORD !== e[0])
 
     return { cost, effect }
   },
@@ -1882,9 +1882,9 @@ const User = /** @type {const} */({
    * @returns {Object.<string, effValue>}
    */
   countUserEffects(userDataObj, isVerbose = false) {
-    if(!userDataObj) return null
+    if (!userDataObj) return null
 
-    let data = 
+    let data =
       // local: 
       // global: 
       this.countSummaryCostAndEffect([].concat(
@@ -1904,8 +1904,8 @@ const User = /** @type {const} */({
    * @returns {Object.<string, effValue>}
    */
   getUserEffects(playerName) {
-    if(!playerName) return null
-    return  this.countUserEffects(this.getSavedUserData(playerName))
+    if (!playerName) return null
+    return this.countUserEffects(this.getSavedUserData(playerName))
   },
 
   /**
@@ -1917,13 +1917,13 @@ const User = /** @type {const} */({
   createTechCostTable(costListArr, userEff) {
     if (!costListArr) return ''
 
-    if(userEff) {
+    if (userEff) {
       costListArr = costListArr.map(([k, v]) => {
         if (KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(k))) {
           const aval = userEff[capitalizeFirstLetter(k)]
           const resK = k + ` (есть ${aval})` +
             (aval < v ? ' (МАЛО)' : '')
-  
+
           return [resK, v]
         }
         return [k, v]
@@ -1940,36 +1940,36 @@ const User = /** @type {const} */({
    */
   createUserTechEffectsTable(effectsListArr) {
     effectsListArr = effectsListArr
-      .filter( e => {
+      .filter(e => {
         return !KEYWORDS.SINGLE_TIME_EFFECTS.includes(e[0])
-        && KEYWORDS.SINGLE_TIME_EFFECTS.filter(e2 => e[0].endsWith(e2)).length == 0
-        && KEYWORDS.MODULE_PROPS.filter(e2 => e[0].endsWith(e2)).length == 0
-        && !KEYWORDS.PLANET_PARAMS.includes(e[0])
-        && e[0] !== KEYWORDS.UNIT_TYPES_KEYWORD
-        && e[0] !== KEYWORDS.UNIT_SLOTS_KEYWORD
-        && !e[0].startsWith(':?')
+          && KEYWORDS.SINGLE_TIME_EFFECTS.filter(e2 => e[0].endsWith(e2)).length == 0
+          && KEYWORDS.MODULE_PROPS.filter(e2 => e[0].endsWith(e2)).length == 0
+          && !KEYWORDS.PLANET_PARAMS.includes(e[0])
+          && e[0] !== KEYWORDS.UNIT_TYPES_KEYWORD
+          && e[0] !== KEYWORDS.UNIT_SLOTS_KEYWORD
+          && !e[0].startsWith(':?')
       })
       .sort()
-      .sort( (a,b) => {
-        if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
-        if(!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
-        if(KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) {
+      .sort((a, b) => {
+        if (KEYWORDS.COLONY_PARAMS.includes(a[0]) && !KEYWORDS.COLONY_PARAMS.includes(b[0])) return -1
+        if (!KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) return 1
+        if (KEYWORDS.COLONY_PARAMS.includes(a[0]) && KEYWORDS.COLONY_PARAMS.includes(b[0])) {
           return KEYWORDS.COLONY_PARAMS.indexOf(a[0]) - KEYWORDS.COLONY_PARAMS.indexOf(b[0])
         }
-        return 0  
-      }) 
+        return 0
+      })
     // t = [].concat(t.main, t.additional)
 
-    const militaryBonusesFn = ([key, _]) => key.startsWith(KEYWORDS.CREATION_KEYWORD) 
-      || KEYWORDS.MILITARY_PARAMS.some( paramName => key.startsWith(paramName))
-      || KEYWORDS.MILITARY_PARAMS_ADDITIONAL.some( paramName => key.startsWith(paramName))
+    const militaryBonusesFn = ([key, _]) => key.startsWith(KEYWORDS.CREATION_KEYWORD)
+      || KEYWORDS.MILITARY_PARAMS.some(paramName => key.startsWith(paramName))
+      || KEYWORDS.MILITARY_PARAMS_ADDITIONAL.some(paramName => key.startsWith(paramName))
 
     return (
-      TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры') 
+      TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.IDEOLOGIES.includes(e[0])), 'Идеология')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).includes(e[0])), 'Специализированные бонусы')
-      + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD) ||  e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)), 'Исследования')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD) || e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)), 'Исследования')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.MATERIALS.includes(e[0])), 'Ресурсы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])), 'Дополнительные параметры')
       + TechUtils.createEffectsTable(effectsListArr.filter(militaryBonusesFn), 'Военные бонусы')
@@ -1988,7 +1988,7 @@ const User = /** @type {const} */({
   },
 
   createColonyDescription(playerName) {
-    if(!window['DATA__TECH_THRESHOLDS']) return ''
+    if (!window['DATA__TECH_THRESHOLDS']) return ''
     const techThresholds = window['DATA__TECH_THRESHOLDS'].data
     const planetDescriptions = window['DATA__TECH_THRESHOLDS'].planetDescriptions
 
@@ -1999,33 +1999,33 @@ const User = /** @type {const} */({
     res += VARS.effectsOfPlanetSize[planetParams["Тип планеты"]].map(e => e.join(' ')).join('<br>')
 
     res += '<br><b>ТЕХНОЛОГИИ</b><br>'
-    for(let tree in techThresholds) {
-      for(let subtree in techThresholds[tree]) {
+    for (let tree in techThresholds) {
+      for (let subtree in techThresholds[tree]) {
         let lastProperStr = null
-        for(let conditionBlock of techThresholds[tree][subtree]) {
-          if(subtree !== 'other') {
-            if(
+        for (let conditionBlock of techThresholds[tree][subtree]) {
+          if (subtree !== 'other') {
+            if (
               conditionBlock[0] !== "BASE"
               && !this.checkIfUserHasTech(playerName, conditionBlock[0])
             ) break
             lastProperStr = conditionBlock[1]
           } else {
-            if(this.checkIfUserHasTech(playerName, conditionBlock[0])) res += `${conditionBlock[1]}. `
+            if (this.checkIfUserHasTech(playerName, conditionBlock[0])) res += `${conditionBlock[1]}. `
           }
         }
-        if(lastProperStr) res += `${lastProperStr}. `
+        if (lastProperStr) res += `${lastProperStr}. `
       }
       res += '<br><br>'
     }
 
-    setTimeout(()=> {
+    setTimeout(() => {
       const balanceData = Analysis.countTechBalanceBySubtree()[playerName]
       let chartData = []
-      
-      for(let treeName in techData.subtreeBorders) {
+
+      for (let treeName in techData.subtreeBorders) {
         const subtreeList = techData.subtreeBorders[treeName]
         const x = [treeName, 0, subtreeList[0].fill]
-        for(let subtreeObj of subtreeList) {
+        for (let subtreeObj of subtreeList) {
           x[1] += +balanceData[capitalizeFirstLetter(subtreeObj.fullText)] || 0
         }
         chartData.push(x)
@@ -2034,7 +2034,7 @@ const User = /** @type {const} */({
     }, 10)
 
     res += '<br><b>СООТНОШЕНИЕ ТЕХНОЛОГИЙ</b><br>'
-    res += draw.createCаnvasHTML({size: 400, title: `${playerName}`})
+    res += draw.createCаnvasHTML({ size: 400, title: `${playerName}` })
 
     return res
   },
@@ -2043,25 +2043,25 @@ const User = /** @type {const} */({
     const userData = User.getSavedUserData(playerName)
     const effectsDataObj = User.countUserEffects(userData)
     const effectsDataArr = Object.entries(effectsDataObj)
-      .filter( e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
+      .filter(e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
 
     const mainParamsSum = effectsDataArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
-        .reduce( (acc, el) => acc += +el[1], 0)
+      .reduce((acc, el) => acc += +el[1], 0)
 
     log(playerName, mainParamsSum, "Эффективная Рождаемость:",
       (+effectsDataObj.Рождаемость || 0)
       - +(userData.additionalParams['чуждая среда'] || 0)
-      - ( (+(userData.additionalParams['непривычная среда'] || 0) > 0) ? 1 : 0)
-      + +(effectsDataObj.Сверхадаптация || 0) 
+      - ((+(userData.additionalParams['непривычная среда'] || 0) > 0) ? 1 : 0)
+      + +(effectsDataObj.Сверхадаптация || 0)
       + (+effectsDataObj.Метеозащита || 0))
 
     // checking if params in doc are bad
     effectsDataArr
-      .forEach( eff => {
-        if( KEYWORDS.COLONY_PARAMS.includes(eff[0]) && +userData.colonyParams[eff[0]] !== +eff[1]) {
+      .forEach(eff => {
+        if (KEYWORDS.COLONY_PARAMS.includes(eff[0]) && +userData.colonyParams[eff[0]] !== +eff[1]) {
           warn(`${eff[0]} ${userData.colonyParams[eff[0]]} should be ${eff[1]}`)
         }
-        if( KEYWORDS.MATERIALS.includes(eff[0]) && +userData.materials[eff[0]] !== +eff[1]) {
+        if (KEYWORDS.MATERIALS.includes(eff[0]) && +userData.materials[eff[0]] !== +eff[1]) {
           warn(`${eff[0]} ${userData.materials[eff[0]]} should be ${eff[1]}`)
         }
       })
@@ -2077,7 +2077,7 @@ const User = /** @type {const} */({
       ` + this.createUserTechEffectsTable(effectsDataArr)
       // <a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
       //   class="fake_link">Эффекты игрока подробно</a>
-        + this.createColonyDescription(playerName)
+      + this.createColonyDescription(playerName)
 
     HTMLUtils.openModal('report', playerName)
   },
@@ -2116,7 +2116,7 @@ async function parseTechIframe(tree_name) {
   for (let i of techData.graphmls[tree_name].getElementsByTagName('y:ShapeNode')) {
     try {
       const t = parseNode.node(tree_name, i)
-      if(!t) {
+      if (!t) {
         // possibly empty cell
         continue
       }
@@ -2143,7 +2143,7 @@ async function parseTechIframe(tree_name) {
       tech[tree_name][source].next.push(target)
     } catch (e) {
       // just ignore it
-      if(tree_name === 'Unique') {
+      if (tree_name === 'Unique') {
         log('"Unique" parse err')
         continue
       }
@@ -2164,17 +2164,17 @@ const parseGDoc = {
   lastResult: null,
   async HTML(rawHTML) {
     var arr
-    if(!rawHTML) {
+    if (!rawHTML) {
       warn('parseDoc: empty HTML')
       return
     }
     const html = Array.from((new DOMParser).parseFromString(rawHTML, 'text/html').body.childNodes[0].children)
     arr = html
       .filter(e => e.tagName !== 'BR')
-      .map(({ tagName, innerText, children }) => 
+      .map(({ tagName, innerText, children }) =>
         ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
 
-    if(arr.length < 3) {
+    if (arr.length < 3) {
       log("pretty sure it's not a proper google doc")
       return this.lastResult
     }
@@ -2194,11 +2194,11 @@ const parseGDoc = {
       user: null,
       planet: null,
     }
-    for(let i in arr) {
+    for (let i in arr) {
       let el = arr[i]
       // its user
-      if(el.tagName == 'H1') {
-        if(last.user) {
+      if (el.tagName == 'H1') {
+        if (last.user) {
           // res[last.planet] = interm.user
           usersData[last.user] = interm.user
         }
@@ -2206,10 +2206,10 @@ const parseGDoc = {
         interm.user = {}
         continue
       }
-      if(el.tagName == 'H2' && el.innerText !== 'Данные экспедиции' && el.innerText !== 'Чертежи') {
+      if (el.tagName == 'H2' && el.innerText !== 'Данные экспедиции' && el.innerText !== 'Чертежи') {
         interm.user.systemName = el.innerText
       }
-      if(el.tagName.match(/H\d/)) {
+      if (el.tagName.match(/H\d/)) {
         last.H = el.innerText
         continue
       }
@@ -2218,8 +2218,8 @@ const parseGDoc = {
     usersData[last.user] = interm.user
     this.lastNodes = usersData
 
-    for(let username in usersData) {
-      if(username === '[Персонаж]' || username === '[Разведанные миры]') {
+    for (let username in usersData) {
+      if (username === '[Персонаж]' || username === '[Разведанные миры]') {
         log('special name, skip:', username)
         continue
       }
@@ -2236,12 +2236,12 @@ const parseGDoc = {
 
     return usersRes
   },
-  
+
   async file() {
     let raw
     const MIME_HTML = 'text/html'
     const rawClipboardObj = (await navigator.clipboard.read())[0]
-  
+
     // eslint-disable-next-line no-constant-condition
     if (rawClipboardObj.types.includes(MIME_HTML)) {
       raw = await rawClipboardObj.getType(MIME_HTML).then(e => e.text())
@@ -2252,13 +2252,13 @@ const parseGDoc = {
       // this.lastResult = parseDoc.text(raw)
     }
     this.lastRaw = raw
-    if(getEl('el_doPlayersData').checked) {
+    if (getEl('el_doPlayersData').checked) {
       parseGDoc.GDocToJS()
     }
   },
 
   async redoLast() {
-    this.lastResult = await parseGDoc.HTML(this.lastRaw) 
+    this.lastResult = await parseGDoc.HTML(this.lastRaw)
   },
 
   playerHTML(playerName, obj) {
@@ -2269,11 +2269,11 @@ const parseGDoc = {
     const splitFilter = (str, treeRuName) => {
       let res = str.split(',').map(e => e.trim()).filter(e => e)
 
-      if(treeRuName !== 'Уникальные') {
-        res = res.filter( thingName => {
+      if (treeRuName !== 'Уникальные') {
+        res = res.filter(thingName => {
           const name = thingName.replace(/\([^)]+\)/, '').trim()
           const isKnown = name in inverted.alltech || name in VARS.defaultProjectsList || name.startsWith(':')
-          if(!isKnown) {
+          if (!isKnown) {
             warn('unknown thing', playerName, thingName)
           }
           return isKnown
@@ -2287,12 +2287,12 @@ const parseGDoc = {
      * @param {HTMLTableElement} el 
      * @returns 
      */
-    const tech5TableToObj = el =>  
+    const tech5TableToObj = el =>
       Object.fromEntries(
         Array.from(el.rows)
-        .map(e=>[VARS.TREELIST_RU2EN[e.children[0].innerText], 
+          .map(e => [VARS.TREELIST_RU2EN[e.children[0].innerText],
           splitFilter(e.children[1].innerText, e.children[0].innerText)]
-        )
+          )
       )
 
     let colonyParams = Array.from(obj.Параметры.children[0].rows)
@@ -2304,15 +2304,15 @@ const parseGDoc = {
 
     let additionalParamsRaw = Array.from(obj['Дополнительные параметры'].children[0].rows)
       .map(e => Array.from(e.children))
-    let ak = [].concat(additionalParamsRaw[0],additionalParamsRaw[2],additionalParamsRaw[4])
-      .map(e=>e.innerText.trim().toLowerCase().replace('неприв. среда', 'непривычная среда'))
-    let av = [].concat(additionalParamsRaw[1],additionalParamsRaw[3],additionalParamsRaw[5])
-      .map(e=>e.innerText.trim())
+    let ak = [].concat(additionalParamsRaw[0], additionalParamsRaw[2], additionalParamsRaw[4])
+      .map(e => e.innerText.trim().toLowerCase().replace('неприв. среда', 'непривычная среда'))
+    let av = [].concat(additionalParamsRaw[1], additionalParamsRaw[3], additionalParamsRaw[5])
+      .map(e => e.innerText.trim())
     let additionalParams = {}
-    while(ak.length) {
+    while (ak.length) {
       let nextK = ak.pop()
       let nextV = av.pop()
-      if(!nextK) continue
+      if (!nextK) continue
       additionalParams[nextK] = nextV
     }
 
@@ -2333,9 +2333,9 @@ const parseGDoc = {
 
     const planetParams = Object.fromEntries(
       Array.from(obj['Характеристики планеты'].children[0].rows)
-        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]*\)/g,'').replace(/\+\d+/g,'').trim()))
-        .reduce( (acc, e) => acc = acc.concat(e), [])
-        .map( (e,i,arr) => i%2 ? [arr[i-1], +arr[i]] : null)
+        .map(e => Array.from(e.children).map(e2 => e2.innerText.replace(/\([^)]*\)/g, '').replace(/\+\d+/g, '').trim()))
+        .reduce((acc, e) => acc = acc.concat(e), [])
+        .map((e, i, arr) => i % 2 ? [arr[i - 1], +arr[i]] : null)
         .filter(e => e)
     )
 
@@ -2345,53 +2345,53 @@ const parseGDoc = {
     let starSystemParams = Array.from(obj['Характеристики звездной системы'].children[0].rows)
       .map(e => Array.from(e.children).map(e2 => e2.innerText))
     starSystemParams = {
-      name: systemNameData[1], 
+      name: systemNameData[1],
       planetName: systemNameData[0],
       x: +starSystemParams[1][0],
       y: +starSystemParams[1][1],
       // Тип, масса и возраст звезды
       [starSystemParams[2][0]]: starSystemParams[2][1],
       // Плотность звёздной системы
-      [starSystemParams[3][0]]: +starSystemParams[3][1].replace(/\([^)]+\)/g,'').trim(),
+      [starSystemParams[3][0]]: +starSystemParams[3][1].replace(/\([^)]+\)/g, '').trim(),
       generatorCode: starSystemParams[4][1]
     }
 
     const startingFeature = parseNode.effects(
       obj['Данные экспедиции'].children[0].rows[2].children[1].innerText
-        .replace(/^[^-]+- ?/,'')
-        .replace(/\([^)]+\)/g,''),
-      {treeName: null, name: null}
+        .replace(/^[^-]+- ?/, '')
+        .replace(/\([^)]+\)/g, ''),
+      { treeName: null, name: null }
     )
 
     const playerColor = obj['Данные экспедиции'].children[0].rows[0].children[5].innerText
 
     let greatPeople = Array.from(obj['Великие люди'].children[0].rows)
-    greatPeople.splice(0,1)
+    greatPeople.splice(0, 1)
     greatPeople = greatPeople
-      .map(e=>Array.from(e.children))
-      .map(e2=>({name:e2[0].innerText, lvl: +e2[1].innerText, effect: e2[2].innerText.replace(/^.*-/,'').trim()}))
+      .map(e => Array.from(e.children))
+      .map(e2 => ({ name: e2[0].innerText, lvl: +e2[1].innerText, effect: e2[2].innerText.replace(/^.*-/, '').trim() }))
       .filter(e => e.lvl > 0)
-    greatPeople.forEach( e => {
-        e.effect = e.effect.replace('Х/2', Math.floor(e.lvl/2)).replace('Х', e.lvl)
-        e.effect = parseNode.effects(e.effect,{treeName: null, name: playerName + ' великие люди'})
-      })
+    greatPeople.forEach(e => {
+      e.effect = e.effect.replace('Х/2', Math.floor(e.lvl / 2)).replace('Х', e.lvl)
+      e.effect = parseNode.effects(e.effect, { treeName: null, name: playerName + ' великие люди' })
+    })
 
     let secondaryColonies = !obj['Вторичные колонии'] ? [] : Array.from(obj['Вторичные колонии'].querySelectorAll('tbody tr'))
       .map(row => Array.from(row.children).map(el => el.innerText))
-    secondaryColonies.splice(0,1)
+    secondaryColonies.splice(0, 1)
     secondaryColonies = secondaryColonies.map(row => ({
-      lvl: row[1], 
-      speciality: row[2], 
-      effect: parseNode.effects(row[3], {treeName: null, name: playerName + ' вторичные колонии'})
+      lvl: row[1],
+      speciality: row[2],
+      effect: parseNode.effects(row[3], { treeName: null, name: playerName + ' вторичные колонии' })
     }))
 
     let uniqueResources = Array.from(obj['Уникальные ресурсы'].children[0].rows)
-    uniqueResources.splice(0,1)
-    if(uniqueResources.length == 1 && uniqueResources[0].innerText == '') uniqueResources = null
+    uniqueResources.splice(0, 1)
+    if (uniqueResources.length == 1 && uniqueResources[0].innerText == '') uniqueResources = null
     else {
       uniqueResources = parseNode.effects(
-        uniqueResources.map( e => e.children[2].innerText).join(','),
-        {treeName: null, name: playerName + ' уникальные ресурсы'}
+        uniqueResources.map(e => e.children[2].innerText).join(','),
+        { treeName: null, name: playerName + ' уникальные ресурсы' }
       )
     }
 
@@ -2429,7 +2429,7 @@ const parseGDoc = {
   },
 
   drawTech(playerName, treeName) {
-    if(!this.lastResult) return
+    if (!this.lastResult) return
     const data = this.lastResult[playerName]
 
     let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
@@ -2445,7 +2445,7 @@ const parseGDoc = {
    * @param {TGoogleDocUserObj} data 
    */
   drawAndSaveTechs(playerName, data) {
-    for(let i of TREELIST) {
+    for (let i of TREELIST) {
       drawTree(i)
       let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
       User.highlightStudiedTech(i, data.techTable[i].concat(projList))
@@ -2455,15 +2455,15 @@ const parseGDoc = {
   },
 
   GDocToJS() {
-    if(!this.lastResult) {
+    if (!this.lastResult) {
       log('nothing to save')
       return
     }
     savingOps.saveFile('playersData.js', `var ${VARS.PLAYERS_TIMESTAMP_KEY} = '${(new Date()).toJSON()}'`
-    +`\nvar ${VARS.PLAYERS_TURN_KEY} = ${window[VARS.PLAYERS_TURN_KEY]}` 
-    +`\nvar ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2)
-      .replace(/[“”]/g,'\\"')
-      .replace(/\\"\\"/g,'\\"')
+      + `\nvar ${VARS.PLAYERS_TURN_KEY} = ${window[VARS.PLAYERS_TURN_KEY]}`
+      + `\nvar ${VARS.PLAYERS_DATA_KEY} = ` + JSON.stringify(this.lastResult, null, 2)
+        .replace(/[“”]/g, '\\"')
+        .replace(/\\"\\"/g, '\\"')
     )
   },
 }
@@ -2524,7 +2524,7 @@ class TGoogleDocUserObj {
 
 // eslint-disable-next-line no-unused-vars
 const playerPost = {
-  playerName: null, 
+  playerName: null,
 
   open() {
     const p = getEl('post_text_iframe').contentWindow.document.body.firstChild.innerHTML
@@ -2533,7 +2533,7 @@ const playerPost = {
   },
   prompt() {
     let p = prompt('player post here')
-    if(!p) return
+    if (!p) return
     playerPost.process(p)
     HTMLUtils.openModal('selected_tech')
   },
@@ -2550,10 +2550,10 @@ const playerPost = {
     setTimeout(() => {
       // console.time('playerPost countTechStudyResult')
       this.countTechStudyResult(this.playerName)
-      setTimeout( _ => this.selectTreeByTableCellColor(), 400)
+      setTimeout(_ => this.selectTreeByTableCellColor(), 400)
     }, 70)
   },
-  
+
   selectTreeByTableCellColor() {
     try {
       const colorArr = qs('#el_selected_tech_list table td').style.backgroundColor
@@ -2563,7 +2563,7 @@ const playerPost = {
         .map(e => +e)
       const treeName = FILL_2_TREE_TYPE[rgbToHex(...colorArr).toUpperCase()]
       if (treeName) drawTree(treeName)
-    } catch(err) {}
+    } catch (err) { }
   },
 
   extractRolls(text) {
@@ -2576,12 +2576,12 @@ const playerPost = {
       after: 3,
     }
     const res = [...text.matchAll(/([^\nd]*)\d+d(\d{1,2}0): \((\d+(?: \+ \d+){0,20})\) = \d+([^\n]*)/g)]
-      .map( e => {
+      .map(e => {
         const s = (e[L.before].length ? e[L.before] : e[L.after]).trim()
         const threshold = [...(e[L.before] + e[L.after]).matchAll(/(?:Сложность|Цена):? ?(\+?\d+)/gi)]
 
         const isExp = s.search(/опыт /i)
-        if(isExp === 0) {
+        if (isExp === 0) {
           console.log('ОПЫТ detected:', s, s.search(/опыт/i))
           return {}
         }
@@ -2596,25 +2596,25 @@ const playerPost = {
 
         return {
           text: s
-            .replace(/\([^)]+\)/g,'')
-            .replace(/^\d[).] ?/gi,'')
+            .replace(/\([^)]+\)/g, '')
+            .replace(/^\d[).] ?/gi, '')
             // TODO scream test: was used to remove numeration? do not remove at least for two active turns
             // .replace(/^[^а-яёa-z0-9]+/gi,'')
             // reportBadSymbolsInTechName()
             .split(',')[0]
             .split('.')[0]
             .split(' – ')[0]
-            .replace(/,? ?Сложность:? ?\d+/gi,'')
-            .replace(/[- :]+$/g,'')
-            .trim(), 
-          rolls: e[L.rolls], 
+            .replace(/,? ?Сложность:? ?\d+/gi, '')
+            .replace(/[- :]+$/g, '')
+            .trim(),
+          rolls: e[L.rolls],
           rawRolls: e[L.rolls],
           threshold: resThreshold,
-          edges: +e[L.edges], 
-          index: e.index, 
+          edges: +e[L.edges],
+          index: e.index,
         }
       })
-      .filter( e => e)
+      .filter(e => e)
 
     // const res = [...text.matchAll(/([^\n]*)\d+d10: \((\d+(?: \+ \d+){0,20})\)(?:[^\n]*Сложность:? ?(\d+))?/g)]
     //   .map(e => ({ text: (e[1].length ? e[1] : '').trim(), rolls: e[2], threshold: +e[3], index: e.index, rawRolls: e[2] }))
@@ -2628,11 +2628,11 @@ const playerPost = {
   detectPlayer(text) {
     const firstWord = text.slice(0, Math.min(text.indexOf(' '), text.indexOf('\n'), text.indexOf(':')))
     const playerName = User.listUsers().filter(playerName => playerName.startsWith(firstWord))[0]
-    if(!playerName) return 
+    if (!playerName) return
 
-    for(let i of getEl('players_selection').querySelectorAll('label')) {
-      if(i.innerText.startsWith(firstWord) ) {
-        if(!i.querySelector('input[type="checkbox"]').checked) {
+    for (let i of getEl('players_selection').querySelectorAll('label')) {
+      if (i.innerText.startsWith(firstWord)) {
+        if (!i.querySelector('input[type="checkbox"]').checked) {
           i.click()
         }
         return i.innerText
@@ -2641,28 +2641,28 @@ const playerPost = {
   },
 
   remindSpecialEffects(playerName) {
-    if(!playerName) {
+    if (!playerName) {
       // Напоминание об эффектах
       getEl('el_special_tech_eff_reminder').innerHTML = 'нет (не установлен игрок)'
       return
     }
     const userEff = User.getUserEffects(playerName)
 
-    const remindTechs = Object.entries(userEff).filter(([key, _])=>{
-      return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW) 
+    const remindTechs = Object.entries(userEff).filter(([key, _]) => {
+      return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)
         || key === KEYWORDS.RESERVE_KW
         || key.endsWith(KEYWORDS.IGNORE_CONDEMN_KW)
-    }).map( ([key, value])=> value ? key+': '+value : key )
+    }).map(([key, value]) => value ? key + ': ' + value : key)
 
     const currGreatPplCost = Math.max(Math.floor(User.getSavedUserData(playerName).greatPeople.length / 2), 2)
-    
+
     getEl('el_special_tech_eff_reminder').innerHTML = `${playerName}: цена Великого человека: ${currGreatPplCost}; ` + remindTechs.join(', ')
   },
 
   parse(text) {
     let requests = this.extractRolls(text)
 
-    for(let i of requests) {
+    for (let i of requests) {
       let rolls = {
         sum: 0,
         critfails: 0,
@@ -2671,14 +2671,14 @@ const playerPost = {
         delta: 0,
         critdelta: 0
       }
-      for(let j of i.rolls.split(' + ')) {
+      for (let j of i.rolls.split(' + ')) {
         rolls.sum += 1
-        if(j == '1') rolls.critfails += 1
-        if(j == '10') {
+        if (j == '1') rolls.critfails += 1
+        if (j == '10') {
           rolls.critwins += 1
           continue
         }
-        if(+j>4) rolls.wins += 1
+        if (+j > 4) rolls.wins += 1
       }
       rolls.delta = rolls.critwins * 2 + rolls.wins
       rolls.critdelta = rolls.critwins - rolls.critfails
@@ -2699,8 +2699,8 @@ const playerPost = {
       rawRolls: null
     }))
     requests = requests.concat(bonusThings)
-      .sort( (a,b) => a.index - b.index)
-    const rollsTotal = requests.reduce( (sum, e) => sum + +e.rolls.sum,0)
+      .sort((a, b) => a.index - b.index)
+    const rollsTotal = requests.reduce((sum, e) => sum + +e.rolls.sum, 0)
 
     // Array.from(document.querySelectorAll('#el_selected_tech_list tbody tr:not([style="background-color: goldenrod;"]) td:nth-child(2)')).map(e => +e.textContent).reduce((partialSum, a) => partialSum + a, 0)
     getEl('el_selected_tech_list').innerHTML = `<table class=hide-interm-columns>
@@ -2713,25 +2713,25 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, e.threshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta, e.rolls.critdelta].join('</td><td>') + '</td>' + 
+    ${requests.map(e => '<td>' + [e.text, e.threshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta, e.rolls.critdelta].join('</td><td>') + '</td>' +
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
-    .join('</tr><tr>')}
+        .join('</tr><tr>')}
     </tr>
     </tbody><tbody>
     <tr>
       <td>ВСЕГО</td>
-      <td>${requests.reduce( (sum, e) => sum + +(e.threshold || 0),0)}</td>
-      <td>${requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)}</td>
-      <td>${requests.reduce( (sum, e) => sum + Math.max(+e.rolls.wins,0),0)}</td>
-      <td>${requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)}</td>
+      <td>${requests.reduce((sum, e) => sum + +(e.threshold || 0), 0)}</td>
+      <td>${requests.reduce((sum, e) => sum + +e.rolls.critfails, 0)}</td>
+      <td>${requests.reduce((sum, e) => sum + Math.max(+e.rolls.wins, 0), 0)}</td>
+      <td>${requests.reduce((sum, e) => sum + +e.rolls.critwins, 0)}</td>
       <td>${rollsTotal}</td>
     </tr>
     <tr>
       <td>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
       <td contenteditable=false><button onclick="qs('#el_selected_tech_list table').className=''" title='Expand hidden columns'>E</button></td>
-      <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critfails,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
-      <td>${(requests.reduce( (sum, e) => sum + Math.max(+e.rolls.wins,0), 0)/rollsTotal/0.6*100-100).toFixed(0)}%</td>
-      <td>${(requests.reduce( (sum, e) => sum + +e.rolls.critwins,0)/rollsTotal/0.1*100-100).toFixed(0)}%</td>
+      <td>${(requests.reduce((sum, e) => sum + +e.rolls.critfails, 0) / rollsTotal / 0.1 * 100 - 100).toFixed(0)}%</td>
+      <td>${(requests.reduce((sum, e) => sum + Math.max(+e.rolls.wins, 0), 0) / rollsTotal / 0.6 * 100 - 100).toFixed(0)}%</td>
+      <td>${(requests.reduce((sum, e) => sum + +e.rolls.critwins, 0) / rollsTotal / 0.1 * 100 - 100).toFixed(0)}%</td>
       <td></td>
     </tr>
     
@@ -2755,7 +2755,7 @@ const playerPost = {
     let result = Array.from(getEl('el_selected_tech_list').children[0].tBodies[0].rows)
       .map(e => {
         return e.children[pos.name].innerText + ': ' +
-           (+e.children[pos.wins].innerText + +e.children[pos.critwins].innerText)
+          (+e.children[pos.wins].innerText + +e.children[pos.critwins].innerText)
       }).join('\n')
     navigator.clipboard.writeText(result)
     alert('copied')
@@ -2764,17 +2764,17 @@ const playerPost = {
   countTechStudyResult(playerName = playerPost.playerName) {
     const pos = playerPost.fieldPositionsInTable
 
-    const isSpecialCost = (resourceName) => 
-      KEYWORDS.SPECIAL_TECH_COST.includes(resourceName) 
+    const isSpecialCost = (resourceName) =>
+      KEYWORDS.SPECIAL_TECH_COST.includes(resourceName)
       || KEYWORDS.MATERIALS.includes(capitalizeFirstLetter(resourceName))
-      // TODO
-      // || TechUtils.get(resourceName.replace(':', ''))
+    // TODO
+    // || TechUtils.get(resourceName.replace(':', ''))
 
     const userEffects = User.getUserEffects(playerName)
 
     const currRes = Object.assign({}, userEffects)
-    for(let resourceName of Object.keys(currRes)) {
-      if(!isSpecialCost(resourceName))
+    for (let resourceName of Object.keys(currRes)) {
+      if (!isSpecialCost(resourceName))
         delete currRes[resourceName]
     }
 
@@ -2819,14 +2819,14 @@ const playerPost = {
         }
 
         const critdelta = +e.children[pos.critdelta].innerText
-        if(critdelta>0) {
+        if (critdelta > 0) {
           e.children[pos.critdelta].style.backgroundColor = 'lawngreen'
-        } else if(critdelta<0) {
+        } else if (critdelta < 0) {
           e.children[pos.critdelta].style.backgroundColor = 'tomato'
         }
 
-        const sum = +e.children[pos.wins].innerText 
-          + +e.children[pos.critwins].innerText * 2 
+        const sum = +e.children[pos.wins].innerText
+          + +e.children[pos.critwins].innerText * 2
           - +e.children[pos.critfails].innerText
 
         if (TechUtils.get(techText)) {
@@ -2836,24 +2836,24 @@ const playerPost = {
           // special cost
           const materialsCost = TechUtils.get(techText).cost
             .filter(([k2, _v]) => isSpecialCost(k2))
-          if(materialsCost.length) {
+          if (materialsCost.length) {
             // e.children[pos.price].innerText = 
             //   +e.children[pos.price].innerText + specCost.reduce((acc, [_k,v])=> acc += +v, 0)
-            e.children[pos.price].title = materialsCost.map(([k,v])=>`${k} ${+v}; `)
-            e.children[pos.price].style.backgroundColor =  'aquamarine'
-            for(let [name, val] of materialsCost) {
+            e.children[pos.price].title = materialsCost.map(([k, v]) => `${k} ${+v}; `)
+            e.children[pos.price].style.backgroundColor = 'aquamarine'
+            for (let [name, val] of materialsCost) {
               name = capitalizeFirstLetter(name)
-              if(currRes[name]) {
-                if(currRes[name] - val < 0) {
+              if (currRes[name]) {
+                if (currRes[name] - val < 0) {
                   e.children[pos.price].title += `ДЕФИЦИТ ${name}: ${val - currRes[name]}; `
                   currRes[name] = 0
-                  e.children[pos.price].style.backgroundColor =  'tomato'
+                  e.children[pos.price].style.backgroundColor = 'tomato'
                 } else {
                   currRes[name] -= val
                 }
               } else {
                 e.children[pos.price].title += `НЕДОСТУПНЫЙ РЕСУРС ${name}; `
-                e.children[pos.price].style.backgroundColor =  'tomato'
+                e.children[pos.price].style.backgroundColor = 'tomato'
               }
             }
 
@@ -2879,13 +2879,13 @@ const playerPost = {
           result = null
         }
         e.children[pos.delta].innerText = sum - +e.children[pos.price].innerText
-        if(+e.children[pos.delta].innerText > 1) {
+        if (+e.children[pos.delta].innerText > 1) {
           e.children[pos.delta].style.backgroundColor = 'aquamarine'
         }
         return result
       })
       .filter(e => e)
-    
+
     // getEl('el_selected_tech_list').children[0].tBodies[1].rows[0].children[pos.delta-1].innerText = summaryDelta
     const studyResult = User.countSummaryCostAndEffect(techList)
 
@@ -2897,7 +2897,7 @@ const playerPost = {
     getEl('el_tech_result_list').innerHTML =
       User.createTechCostTable(studyResult.cost, userEffects) +
       // TechUtils.createEffectsTable(costListArr, 'COST') +
-      User.createUserTechEffectsTable(Object.entries(studyResult.effect))  
+      User.createUserTechEffectsTable(Object.entries(studyResult.effect))
 
     const byType = {
       [VARS.NODE_T.TECH]: [],
@@ -2909,7 +2909,7 @@ const playerPost = {
 
     techList.forEach(techName => {
       if (VARS.NON_WAR_NODE_TYPES_ARR.includes(TechUtils.get(techName).type)
-         && !Object.keys(VARS.defaultProjectsList).includes(techName)
+        && !Object.keys(VARS.defaultProjectsList).includes(techName)
       )
         byType[TechUtils.get(techName).type].push(techName)
     })
@@ -2922,25 +2922,25 @@ const playerPost = {
       ['Проекты', byType[VARS.NODE_T.PROJECT]],
       ['Астропроекты', byType[VARS.NODE_T.ASTROPROJECT]],
     ].map(([columnName, namesList]) => {
-      if(!namesList.length) return ''
+      if (!namesList.length) return ''
       let tableStr
-      if(columnName === 'Технологии') {
+      if (columnName === 'Технологии') {
         //sort and display by tree type
         tableStr = Object.entries(namesList
           .reduce((acc, name) => {
-            const field = TechUtils.get(name).fill 
-            if(acc[field] instanceof Array) {
+            const field = TechUtils.get(name).fill
+            if (acc[field] instanceof Array) {
               acc[field].push(name)
             } else {
               acc[field] = [name]
             }
             return acc
           }, {}))
-          .sort( (a,b) => 
-            TREELIST.indexOf(VARS.fill2TreeType[a[0]]) 
-            - TREELIST.indexOf(VARS.fill2TreeType[b[0]]) 
+          .sort((a, b) =>
+            TREELIST.indexOf(VARS.fill2TreeType[a[0]])
+            - TREELIST.indexOf(VARS.fill2TreeType[b[0]])
           )
-        tableStr = tableStr.map( e2 => 
+        tableStr = tableStr.map(e2 =>
           `
           <span style="background-color:${e2[0]}">
             ${VARS.fill2TreeType[e2[0]]}
@@ -2999,7 +2999,7 @@ var KEYWORDS = /** @type {const} */ ({
     , 'Свободный'
   ],
   ANY_PARAM_KEYWORD: 'Свободный',
-  ADDITIONAL_COLONY_PARAMS:[
+  ADDITIONAL_COLONY_PARAMS: [
     "осуждение",
     "волнения",
     "непривычная среда",
@@ -3177,12 +3177,12 @@ const parseNode = {
     return [cost, effect]
   },
 
-  cost(costRaw, {treeName, name}, studyCubesType) {
+  cost(costRaw, { treeName, name }, studyCubesType) {
     const cost = costRaw
       .split(',')
       .map(e => e
         .trim()
-        .replace(/:/g, VARS.DISABLE_PARSE_IMMUNITY ? '' : KEYWORDS.ITS_SPECIAL+':')
+        .replace(/:/g, VARS.DISABLE_PARSE_IMMUNITY ? '' : KEYWORDS.ITS_SPECIAL + ':')
         .replace(/ {2,}/g, ' ')
         .replace(new RegExp(`^(${KEYWORDS.REWARD_KEYWORD})$`), KEYWORDS.ALL_RIGHT)
         .replace(new RegExp(`^(${KEYWORDS.TECH_COST_MODS.join('|')})$`), KEYWORDS.ALL_RIGHT)
@@ -3190,7 +3190,7 @@ const parseNode = {
         .replace(/^(\d+) этапа$/i, 'Этапы:$1')
         .replace(/^любая тех. (.+)$/i, 'Любая технология:$1')
         .replace(/^(\d+) слот(а|ов)$/i, 'Слоты:$1')
-        .replace(/^тех. (.+)$/i, KEYWORDS.TECH_KW+':$1')
+        .replace(/^тех. (.+)$/i, KEYWORDS.TECH_KW + ':$1')
         .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((\\d+)\\)$`), '$1:$2')
@@ -3205,8 +3205,8 @@ const parseNode = {
     return cost
   },
 
-  effects(effectRaw, {treeName, name} = {treeName: null, name: null}) {
-    if(!effectRaw.length) return []
+  effects(effectRaw, { treeName, name } = { treeName: null, name: null }) {
+    if (!effectRaw.length) return []
 
     const effect = effectRaw
       .split(',')
@@ -3232,7 +3232,7 @@ const parseNode = {
         // игнорирование критпровала, всегда +1
         .replace(new RegExp(`^(${KEYWORDS.IGNORE_CRITFAIL_KW} \\([^\\)]+\\))$`), '$1:+1')
         // армии и звездолёты
-        .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), KEYWORDS.UNIT_TYPES_KEYWORD+':$1')
+        .replace(new RegExp(`^(${KEYWORDS.UNIT_TYPES.join('|')})$`), KEYWORDS.UNIT_TYPES_KEYWORD + ':$1')
         // .replace(/(армия|$/, 'Тип отряда:$1')
         .replace(/(\d+) слот(?:а|ов)?$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + ':$1')
         // .replace(/(\d+) слота? (МО|ПКО)$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + '($2):$1')
@@ -3281,8 +3281,8 @@ const parseNode = {
 
     const descrDataEl = i.parentElement.parentElement.querySelector('data[key="d5"]')
     let title = null
-    if(descrDataEl) {
-      title = descrDataEl.innerHTML.replace(/(<!\[CDATA\[|\]\]>)/g,'')
+    if (descrDataEl) {
+      title = descrDataEl.innerHTML.replace(/(<!\[CDATA\[|\]\]>)/g, '')
     }
 
     const nlabel = i.getElementsByTagName('y:NodeLabel')[0]
@@ -3323,9 +3323,9 @@ const parseNode = {
       t.badCell = true
       t.fontSize = nlabel.getAttribute('fontSize')
 
-      if(t.fullText.length <= 2) {
+      if (t.fullText.length <= 2) {
         // its number, lessen width
-        t.w = t.w/1.4
+        t.w = t.w / 1.4
         t.x = +t.x + +t.w - 5
       }
       t.nodeCenter = {
@@ -3375,22 +3375,22 @@ function doNodeStat(filename, t) {
       costClear is param-tech-only cost
     */
     stat[filename][t.y] = {
-      Общество: 0, Производство: 0, Наука: 0, Свободный: 0, 
-      cost: 0, costClear: 0, sum: 0 
+      Общество: 0, Производство: 0, Наука: 0, Свободный: 0,
+      cost: 0, costClear: 0, sum: 0
     }
   }
 
   for (let effect of effects) {
 
-    if(!KEYWORDS.COLONY_PARAMS.includes(effect[0])) continue
+    if (!KEYWORDS.COLONY_PARAMS.includes(effect[0])) continue
 
     stat[filename][t.y][effect[0]] += +effect[1]
 
     stat[filename][t.y].sum += +effect[1]
   }
 
-  if(!KEYWORDS.COLONY_PARAMS.includes(effects[0][0])) return
-  
+  if (!KEYWORDS.COLONY_PARAMS.includes(effects[0][0])) return
+
   let cost_facto = +cost[0][1]
   if (cost[1] && cost[1][0] == 'Этапы')
     cost_facto *= +cost[1][1]
@@ -3495,13 +3495,13 @@ class TUnit {
 
 const UnitCreator = {
   open() {
-    getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map( e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
+    getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map(e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
     this.fillModulesList()
     HTMLUtils.openModal('unitcreator')
   },
   fillModulesList() {
     getEl('el_uc_modules_datalist').innerHTML = Analysis.listModuleObjs()
-      .map( e => `<option value="${e.name}">${e.effect}</option>`)
+      .map(e => `<option value="${e.name}">${e.effect}</option>`)
     getEl('el_uc_modules_search').onchange = e => {
       // if(!e.isTrusted) return 
       log(e)
@@ -3511,41 +3511,41 @@ const UnitCreator = {
   },
   createUnit(hullName, modulesList = [], startParams = []) {
     const hullEffect = parseNode.effects(VARS.hulls[hullName])
-    
+
     const sum = User.countSummaryCostAndEffect(modulesList, { startingFeature: hullEffect }).effect
-    KEYWORDS.MILITARY_PARAMS.forEach(e => !sum[e] ? sum[e] = 0 : null )
+    KEYWORDS.MILITARY_PARAMS.forEach(e => !sum[e] ? sum[e] = 0 : null)
     return sum
   },
   createUnitTable(effectsObj) {
     log(effectsObj)
     const str = '<table>'
-        + '<tbody><tr>' +
-        KEYWORDS.MILITARY_PARAMS.map(e => 
-          `<td>${e}</td>` +
-          `<td>${effectsObj[e]}`
-        ).join('</tr><tr>') +
-        '</tr></tbody></table>'
+      + '<tbody><tr>' +
+      KEYWORDS.MILITARY_PARAMS.map(e =>
+        `<td>${e}</td>` +
+        `<td>${effectsObj[e]}`
+      ).join('</tr><tr>') +
+      '</tr></tbody></table>'
 
       + '<table><tbody><tr>' +
       [].concat(KEYWORDS.MILITARY_PARAMS_ADDITIONAL, KEYWORDS.MODULE_NUM_PROPS)
-        .filter( e => effectsObj[e])
-        .map(e => 
+        .filter(e => effectsObj[e])
+        .map(e =>
           `<td>${e}</td>` +
           `<td>${effectsObj[e]}`
         ).join('</tr><tr>') +
-        '</tr></tbody></table>'
+      '</tr></tbody></table>'
 
       + '<table><tbody><tr>' +
       [].concat(KEYWORDS.DAMAGE_TYPES, KEYWORDS.MODULE_PROPS)
-        .filter( e => e in effectsObj || `:${e}` in effectsObj)
+        .filter(e => e in effectsObj || `:${e}` in effectsObj)
         .join(', ') +
-        '</tr></tbody></table>'
-    
+      '</tr></tbody></table>'
+
     return str
   },
   processInput() {
     const hull = getEl('el_uc_hull').value
-    const modules = getEl('el_uc_modules').value.split('\n').filter(e=>e && inverted.alltech[e])
+    const modules = getEl('el_uc_modules').value.split('\n').filter(e => e && inverted.alltech[e])
     const unit = this.createUnit(hull, modules)
     getEl('el_uc_unit').innerHTML = this.createUnitTable(unit)
   },
@@ -3557,18 +3557,18 @@ const UnitCreator = {
 const TurnPlanner = {
   NAME: 'turnplanner',
   active: false,
-  activePlayer:  'Беглецы',
+  activePlayer: 'Беглецы',
   selectedTechs: [],
   open() {
     // getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map(e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
     // this.fillModulesList()
-    getEl('el_tp_player').innerHTML = User.listUsers().map( e => `<option value="${e}">${e}</option>`)
+    getEl('el_tp_player').innerHTML = User.listUsers().map(e => `<option value="${e}">${e}</option>`)
     getEl('el_tp_player').onchange = evt => {
       TurnPlanner.activePlayer = evt.target.options[evt.target.selectedIndex].value
       TurnPlanner.onSetUser()
     }
 
-    if(User.activePlayer) {
+    if (User.activePlayer) {
       getEl('el_tp_player').value = User.activePlayer
       this.activePlayer = User.activePlayer
       TurnPlanner.onSetUser()
@@ -3587,7 +3587,7 @@ const TurnPlanner = {
   onSetUser() {
     const data = Object.entries(
       User.getUserEffects(this.activePlayer)
-    ).filter( e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
+    ).filter(e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
 
     parseGDoc.drawTech(this.activePlayer, techData.currentTreeName)
     getEl('el_tp_resources').innerHTML = User.createUserTechEffectsTable(data)
@@ -3605,36 +3605,36 @@ const TurnPlanner = {
   getFilteredAvalTechList() {
     const exclude = this.selectedTechs
       .concat(User.getFlatUserTech(this.activePlayer))
-      .filter( techName => inverted.alltech[techName] 
+      .filter(techName => inverted.alltech[techName]
         && (VARS.NON_WAR_NODE_TYPES_ARR.includes(inverted.alltech[techName].type))
       )
     return User.listAvalTech(techData.currentTreeName, User.getFlatUserTech(this.activePlayer))
       .filter(techObj => !exclude.includes(techObj.name))
-      .sort( (a,b) => a.treeName > b.treeName ? 1 : -1)
+      .sort((a, b) => a.treeName > b.treeName ? 1 : -1)
   },
 
   fillTechsDatalist() {
     getEl('el_tp_techs_datalist').innerHTML = this.getFilteredAvalTechList()
-    .map( 
-      /**
-       * @param {TTechObject} obj 
-       */
-      (obj) => `<option value="${obj.name}">[${VARS.TREELIST_EN2RU[obj.treeName]} ${obj.subtree}] ${obj.effect.map(e2 => e2.join(': ')).join('; ')}</option>`)
+      .map(
+        /**
+         * @param {TTechObject} obj 
+         */
+        (obj) => `<option value="${obj.name}">[${VARS.TREELIST_EN2RU[obj.treeName]} ${obj.subtree}] ${obj.effect.map(e2 => e2.join(': ')).join('; ')}</option>`)
   },
 
   addTech(techName) {
-    if(!this.getFilteredAvalTechList().map(e => e.name).includes(techName)) return false
+    if (!this.getFilteredAvalTechList().map(e => e.name).includes(techName)) return false
     getEl('el_tp_tech').innerText += `${techName} (${Analysis.getSubtreeName(TechUtils.byName(techName))})\n`
     this.selectedTechs.push(techName)
-    if(!inverted.alltech[techName]) return false
+    if (!inverted.alltech[techName]) return false
     this.fillTechsDatalist()
     this.highlightSelected()
     return true
   },
 
   highlightSelected() {
-    for(let i of TurnPlanner.selectedTechs) {
-      if(inverted.alltech[i].treeName !== techData.currentTreeName) continue
+    for (let i of TurnPlanner.selectedTechs) {
+      if (inverted.alltech[i].treeName !== techData.currentTreeName) continue
       getEl(inverted.alltech[i].id).style.fill = 'orange'
     }
   },
@@ -3657,7 +3657,7 @@ const savingOps = {
       i.click()
       const playerName = (document.querySelector('#players_selection input:checked') || {}).id
 
-      if(playerName) {
+      if (playerName) {
         savingOps.saveSvgAsPng(svg, `${playerName} ${i.innerText}.png`)
       } else {
         savingOps.saveSvgAsPng(svg, `${i.innerText}.png`)
@@ -3697,7 +3697,7 @@ const savingOps = {
       }
     }
   },
-  
+
   triggerDownload(imgURI, fileName) {
     var evt = new MouseEvent("click", {
       view: window,
@@ -3710,7 +3710,7 @@ const savingOps = {
     a.setAttribute("target", '_blank')
     a.dispatchEvent(evt)
   },
-  
+
   saveSvgAsPng(svg, fileName) {
     var copy = svg.cloneNode(true)
     savingOps.copyStylesInline(copy, svg)
@@ -3738,10 +3738,10 @@ const savingOps = {
           .replace("image/png", "image/octet-stream")
         savingOps.triggerDownload(imgURI, fileName)
       }
-      
+
       try {
         document.removeChild(canvas)
-      } catch (error) {}
+      } catch (error) { }
     }
     img.src = url
   },
