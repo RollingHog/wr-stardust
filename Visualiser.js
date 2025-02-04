@@ -1448,17 +1448,25 @@ const Analysis = {
     },
 
     async генератор_патчноута() {
-      alert('check that you have old, stringified inverted.alltech JSON in clipboard')
       const oldJSONStr = await navigator.clipboard.readText()
       /**
        * @type {Record<string, TTechObject>}
        */
-      const oldTech = JSON.parse(oldJSONStr.replace(/(^`|`$)/, ''))
+      let oldTech = {}
+      try {
+        oldTech = JSON.parse(oldJSONStr.replace(/(^`|`$)/, ''))
+      } catch (error) {
+        alert('you need to have old, stringified inverted.alltech JSON in clipboard')
+        return  
+      }
+
       const delta = {
         added: [],
         changed: [],
         removed: [],
       }
+
+      // analysis
 
       for (let techName of Object.keys(inverted.alltech)) {
         if (!oldTech[techName]) {
@@ -1477,13 +1485,84 @@ const Analysis = {
         }
       }
 
-      for (let i of delta.added) {
-        console.log(inverted.alltech[i])
+      // output
+
+      function stringDiff(s1, s2, prefix) {
+        // https://stackoverflow.com/questions/8024102/compare-strings-and-get-end-difference
+        var  string1 = new Array(),
+          string2 = new Array(),
+          result = new Array(),
+          longString;
+        let hasDiff = false
+
+        if(!s1 || !s2) return
+
+        string1 = s1.split(" ");
+        string2 = s2.split(" ");
+
+        if (s1.length > s2.length) {
+          longString = string1;
+        } else {
+          longString = string2;
+        }
+
+        for (x = 0; x < longString.length; x++) {
+          if (string1[x] != string2[x]) {
+            hasDiff = true
+            if(string2[x]) {
+              // TODO join spans if(result[result.length - 1].startsWith('<span')) {
+              result.push(`<span class='${prefix}-text'>${string2[x]}</span>`);
+            } else {
+              result.push(undefined)
+            }
+          } else {
+            result.push(string2[x])
+          }
+        }
+
+        if(!hasDiff) return ''
+
+        return result.filter(e => e).join(' ');
       }
 
-      for (let i of delta.removed) {
-        console.log(oldTech[i])
+
+      for (let name of delta.added) {
+        console.log(inverted.alltech[name])
       }
+
+      for (let name of delta.removed) {
+        console.log(oldTech[name])
+      }
+
+      let str = `<style>
+        .removed-text {
+          background: lightcoral;
+        }
+        
+        .added-text {
+          background: lightgreen;
+        }
+      </style>`
+      for (let name of Object.values(delta.changed)) {
+        log(name)
+          fullOld = oldTech[name].fullText.replace(/\n/g, ' ').replace(/^.*(?=Сложность:)/, '').split('Эффект: ')
+          fullNew = inverted.alltech[name].fullText.replace(/\n/g, ' ').replace(/^.*(?=Сложность:)/, '').split('Эффект: ')
+        const oldStr = 
+          stringDiff(fullNew[0], fullOld[0], 'removed') 
+          + '<br>'
+          + stringDiff(fullOld[0], fullNew[0], 'added')
+
+        const newStr = stringDiff(fullNew[1], fullOld[1], 'removed')
+          + '<br>'
+          + stringDiff(fullOld[1], fullNew[1], 'added')
+
+        str += name + '<br>' 
+          + (oldStr.length > 4 ? oldStr + '<br>' : '') 
+          + (newStr.length > 4 ? newStr + '<br>' : '') 
+          + '<br>'
+      }
+
+      getEl('el_reports_list').innerHTML = str
 
       //TODO
       console.log(delta)
