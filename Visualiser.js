@@ -2122,6 +2122,13 @@ async function parseTechIframe(tree_name) {
       }
 
       if (t.badCell) {
+        const num = parseInt(t.fullText, 10)
+        if( num  && num >= 1 && num <= techData.MAX_TECH_LVL) {
+          const kardLvl = num <= 9 
+            ? 0.1 * num + 0.2 
+            : 1.1 + (num-9) * 0.2
+          t.title = `Кардышев ${kardLvl.toFixed(1)} (E${((kardLvl+0.7)*10).toFixed(0)})`
+        }
         techData.badCells[tree_name].push(t)
         continue
       }
