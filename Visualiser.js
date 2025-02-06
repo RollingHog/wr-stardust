@@ -1492,26 +1492,26 @@ const Analysis = {
         var  string1 = new Array(),
           string2 = new Array(),
           result = new Array(),
-          longString;
+          longString
         let hasDiff = false
 
         if(!s1 || !s2) return
 
-        string1 = s1.split(" ");
-        string2 = s2.split(" ");
+        string1 = s1.split(",")
+        string2 = s2.split(",")
 
         if (s1.length > s2.length) {
-          longString = string1;
+          longString = string1
         } else {
-          longString = string2;
+          longString = string2
         }
 
-        for (x = 0; x < longString.length; x++) {
+        for (let x = 0; x < longString.length; x++) {
           if (string1[x] != string2[x]) {
             hasDiff = true
             if(string2[x]) {
               // TODO join spans if(result[result.length - 1].startsWith('<span')) {
-              result.push(`<span class='${prefix}-text'>${string2[x]}</span>`);
+              result.push(`<span class='${prefix}-text'>${string2[x]}</span>`)
             } else {
               result.push(undefined)
             }
@@ -1522,7 +1522,7 @@ const Analysis = {
 
         if(!hasDiff) return ''
 
-        return result.filter(e => e).join(' ');
+        return result.filter(e => e).join(', ')
       }
 
 
@@ -1534,6 +1534,9 @@ const Analysis = {
         console.log(oldTech[name])
       }
 
+      const addedStr = delta.added.map(name => inverted.alltech[name].fullText.replace(/\n/g, ' ')).join('<br>')
+      const removedStr = delta.removed.map(name => oldTech[name].fullText.replace(/\n/g, ' ')).join('<br>')
+
       let str = `<style>
         .removed-text {
           background: lightcoral;
@@ -1542,24 +1545,35 @@ const Analysis = {
         .added-text {
           background: lightgreen;
         }
-      </style>`
+
+        #el_reports_list {
+          font-size: small;
+        }
+
+        #el_reports_list div {
+          width: 48%;
+          display: inline-block;
+        }
+      </style>
+      <b>Добавлены:</b><br> ${addedStr}<br>
+      <b>Удалены:</b><br> ${removedStr}<br>
+      <br><b>Изменены:</b><br>`
       for (let name of Object.values(delta.changed)) {
-        log(name)
-          fullOld = oldTech[name].fullText.replace(/\n/g, ' ').replace(/^.*(?=Сложность:)/, '').split('Эффект: ')
-          fullNew = inverted.alltech[name].fullText.replace(/\n/g, ' ').replace(/^.*(?=Сложность:)/, '').split('Эффект: ')
+        const fullOld = oldTech[name].fullText.replace(/\n/g, ' ').replace(/^.*(?=Сложность:)/, '').split('Эффект: ')
+        const fullNew = inverted.alltech[name].fullText.replace(/\n/g, ' ').replace(/^.*(?=Сложность:)/, '').split('Эффект: ')
         const oldStr = 
           stringDiff(fullNew[0], fullOld[0], 'removed') 
           + '<br>'
           + stringDiff(fullOld[0], fullNew[0], 'added')
 
-        const newStr = stringDiff(fullNew[1], fullOld[1], 'removed')
+        const newStr = 'Эффект: ' + stringDiff(fullNew[1], fullOld[1], 'removed')
           + '<br>'
-          + stringDiff(fullOld[1], fullNew[1], 'added')
+          + 'Эффект: ' + stringDiff(fullOld[1], fullNew[1], 'added')
 
-        str += name + '<br>' 
-          + (oldStr.length > 4 ? oldStr + '<br>' : '') 
-          + (newStr.length > 4 ? newStr + '<br>' : '') 
-          + '<br>'
+        str += '<div>' + name + '<br>' 
+          + (oldStr.length > 20 ? oldStr + '<br>' : '') 
+          + (newStr.length > 20 ? newStr + '<br>' : '') 
+          + '<br></div>'
       }
 
       getEl('el_reports_list').innerHTML = str
@@ -1570,7 +1584,10 @@ const Analysis = {
 
     // formListForComparison
     скачать_список_технологий() {
-      savingOps.saveFile(`tech_${window[VARS.PLAYERS_TIMESTAMP_KEY]}.json`, JSON.stringify(inverted.alltech, 0, 2))
+      if(confirm('Скачать?')) {
+        savingOps.saveFile(`tech_${window[VARS.PLAYERS_TIMESTAMP_KEY]}.json`, JSON.stringify(inverted.alltech, 0, 2))
+      }
+      Analysis.drawReportsList()
     },
   }
 }
@@ -2046,7 +2063,7 @@ const User = /** @type {const} */({
     return (
       TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0])), 'Параметры')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(':')), 'Особые эффекты')
-      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.IDEOLOGIES.includes(e[0])), 'Идеология')
+      + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.IDEOLOGIES.includes(e[0]) || e[0].startsWith(KEYWORDS.IGNORE_CONDEMN_KW)), 'Идеология')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).includes(e[0])), 'Специализированные бонусы')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD) || e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)), 'Исследования')
       + TechUtils.createEffectsTable(effectsListArr.filter(e => KEYWORDS.MATERIALS.includes(e[0])), 'Ресурсы')
@@ -2056,7 +2073,7 @@ const User = /** @type {const} */({
         && !e[0].startsWith(':')
         && !KEYWORDS.TECH_EFFECTS.includes(e[0])
         && !e[0].startsWith(KEYWORDS.RESERVE_KW)
-        && !KEYWORDS.IDEOLOGIES.includes(e[0])
+        && !KEYWORDS.IDEOLOGIES.includes(e[0]) && !e[0].startsWith(KEYWORDS.IGNORE_CONDEMN_KW)
         && !e[0].startsWith(KEYWORDS.RESEARCH_KEYWORD) && !e[0].startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)
         && !KEYWORDS.MATERIALS.includes(e[0])
         && !KEYWORDS.ADDITIONAL_COLONY_PARAMS.includes(e[0])
@@ -2737,6 +2754,7 @@ const playerPost = {
     const remindTechs = Object.entries(userEff).filter(([key, _]) => {
       return key.startsWith(KEYWORDS.IGNORE_CRITFAIL_KW)
         || key === KEYWORDS.RESERVE_KW
+        || key.endsWith(KEYWORDS.NO_CONDEMN_KW)
         || key.endsWith(KEYWORDS.IGNORE_CONDEMN_KW)
     }).map(([key, value]) => value ? key + ': ' + value : key)
 
@@ -3131,7 +3149,8 @@ var KEYWORDS = /** @type {const} */ ({
   RESEARCH_KEYWORD: 'Исследования',
   TECH_KW: 'Технология',
   IGNORE_CRITFAIL_KW: 'Игнорирование критпровала',
-  IGNORE_CONDEMN_KW: 'не приносит осуждения',
+  IGNORE_CONDEMN_KW: 'Игнорирование осуждения',
+  NO_CONDEMN_KW: 'не приносит осуждения',
   RESERVE_KW: 'Резерв',
   TECH_EFFECTS: [
     // индустрия
@@ -3279,6 +3298,7 @@ const parseNode = {
         .replace(/^тех. (.+)$/i, KEYWORDS.TECH_KW + ':$1')
         .replace(new RegExp(`^(${KEYWORDS.SPECIAL_TECH_COST.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.IDEOLOGIES.join('|').toLowerCase()}) ?\\((.+)\\)$`), '$1:$2')
         .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|').toLowerCase()}) ?\\((\\d+)\\)$`), '$1:$2')
         .split(':')
       )
@@ -3315,6 +3335,8 @@ const parseNode = {
         // Плюсы к научным веткам
         .replace(/^Вет(?:ка|вь) "?([^"]+)"? ([+-]?\d+)/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$1"):$2')
         .replace(/^\+?(\d+) (?:куб(?:а|ов)? )?к вет(?:ке|ви) "([^"]+)"/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$2"):$1')
+        // игнорирование осуждения принесенного за ход
+        .replace(new RegExp(`^(${KEYWORDS.IGNORE_CONDEMN_KW} \\([^\\)]+\\)) ([+-]?\\d+)$`), '$1:$2')
         // игнорирование критпровала, всегда +1
         .replace(new RegExp(`^(${KEYWORDS.IGNORE_CRITFAIL_KW} \\([^\\)]+\\))$`), '$1:+1')
         // армии и звездолёты
@@ -3329,7 +3351,7 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
         .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?([\\d.]+)$`), '$1:$2')
-        .replace(/^Создание (армий|флотов|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, KEYWORDS.CREATION_KEYWORD + ' $1:$2')
+        .replace(/^Создание (армий|флотов|модулей|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, KEYWORDS.CREATION_KEYWORD + ' $1:$2')
         // типы урона, эффекты оружия
         .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), KEYWORDS.ALL_RIGHT)
         .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), KEYWORDS.ALL_RIGHT)
