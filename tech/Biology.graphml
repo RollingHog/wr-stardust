@@ -369,7 +369,7 @@
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="200.6875" x="29.53125" xml:space="preserve" y="-0.40234375">Биокатер
-Сложность: 2
+Сложность: 2, осуждение(1)
 Эффект: звездолёт, 2 слота, гигер,
 Ремонт +1, нет FTL<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="octagon"/>
@@ -522,20 +522,6 @@
     <node id="n38">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="911.0"/>
-          <y:Fill color="#CCFFCC" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="159.818359375" x="49.9658203125" xml:space="preserve" y="-0.40234375">Лестница Дедала
-Сложность: 5, чудо
-Эффект: +1 свободный куб,
-Ветка "Генетика" +7<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="parallelogram"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n39">
-      <data key="d6">
-        <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="451.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
@@ -546,7 +532,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n40">
+    <node id="n39">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="359.0"/>
@@ -559,7 +545,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n41">
+    <node id="n40">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="727.0"/>
@@ -572,7 +558,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n42">
+    <node id="n41">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="635.0"/>
@@ -585,7 +571,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n43">
+    <node id="n42">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="792.5115921585648" y="359.0"/>
@@ -599,7 +585,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n44">
+    <node id="n43">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1366.796368634259" y="635.0"/>
@@ -613,7 +599,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n45">
+    <node id="n44">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="794.25" y="175.0"/>
@@ -626,7 +612,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n46">
+    <node id="n45">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-76.91666666666663" y="359.0"/>
@@ -639,7 +625,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n47">
+    <node id="n46">
       <data key="d5" xml:space="preserve"><![CDATA[Станция выглядит как огромный решётчатый треугольник с тремя шарами гравитационных манипуляторов по углам и блоком управления в центре. 
 Она даже способна на межпланетные и межзвёздные перелёты, правда только с использованием буксиров.
 Пожирая до десяти тонн антиматерии в час, она перенаправляет потоки магмы в мантии планеты, а при необходимости даже разгоняет или замедляет ядро, 
@@ -661,7 +647,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n48">
+    <node id="n47">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1187.0"/>
@@ -674,7 +660,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n49">
+    <node id="n48">
       <data key="d4" xml:space="preserve"/>
       <data key="d5" xml:space="preserve"><![CDATA[За этими скромными машинами, сопровождающими каждый колониальный корабль, скрывается титанический объём труда и воистину устращающая вычислительная и технологическая мощь.
 После развёртывания на вновь колонизированной планете они определяют и модифицируютусловия окружающей среды так, чтобы они соответствовали земным. Слишком высокая температура? 
@@ -694,7 +680,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n50">
+    <node id="n49">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1003.0"/>
@@ -707,7 +693,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n51">
+    <node id="n50">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1370.2731843171296" y="175.0"/>
@@ -721,7 +707,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n52">
+    <node id="n51">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.0" width="259.75" x="504.5" y="635.0"/>
@@ -734,7 +720,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n53">
+    <node id="n52">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="83.0"/>
@@ -747,7 +733,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n54">
+    <node id="n53">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="83.00000000000003"/>
@@ -758,7 +744,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n55">
+    <node id="n54">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="175.00000000000003"/>
@@ -769,7 +755,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n56">
+    <node id="n55">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="267.0"/>
@@ -780,7 +766,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n57">
+    <node id="n56">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="359.0"/>
@@ -791,7 +777,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n58">
+    <node id="n57">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="451.0"/>
@@ -802,7 +788,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n59">
+    <node id="n58">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="543.0"/>
@@ -813,7 +799,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n60">
+    <node id="n59">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="635.0"/>
@@ -824,7 +810,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n61">
+    <node id="n60">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="727.0"/>
@@ -835,7 +821,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n62">
+    <node id="n61">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="819.0"/>
@@ -846,7 +832,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n63">
+    <node id="n62">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="911.0"/>
@@ -857,7 +843,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n64">
+    <node id="n63">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1003.0"/>
@@ -868,7 +854,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n65">
+    <node id="n64">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1095.0"/>
@@ -879,7 +865,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n66">
+    <node id="n65">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1187.0"/>
@@ -890,7 +876,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n67">
+    <node id="n66">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1279.0"/>
@@ -901,7 +887,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n68">
+    <node id="n67">
       <data key="d5" xml:space="preserve"><![CDATA[Просто химические метки и обмен данными с помощью органов ЭМ-ретранлсяции за ушами. Ничего такого, ага-ага.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -915,7 +901,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n69">
+    <node id="n68">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="819.0"/>
@@ -928,7 +914,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n70">
+    <node id="n69">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="911.0"/>
@@ -941,7 +927,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n71">
+    <node id="n70">
       <data key="d5" xml:space="preserve"><![CDATA[Эти громадные биостанции действительно напоминают лотос - исключительно по прихоти главного дизайнера проекта. 
 Органично совмещая в себе биологические, технологические и прочие компоненты, эти питаемые термоядерными реакторами и светом самой Галактики цветы
 медленно дрейфуют в межзвёздной пустоте к одним им ведомым целям.]]></data>
@@ -958,7 +944,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n72">
+    <node id="n71">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="507.97681568287044" y="1187.0"/>
@@ -971,7 +957,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n73">
+    <node id="n72">
       <data key="d5" xml:space="preserve"><![CDATA[Можно строить наземные и орбитальные здания за Общество.
 При этом они получают свойство "гигер"]]></data>
       <data key="d6">
@@ -986,7 +972,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n74">
+    <node id="n73">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="543.0"/>
@@ -999,7 +985,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n75">
+    <node id="n74">
       <data key="d5" xml:space="preserve"><![CDATA[В каком-то смысле являясь более мощной версией HAARP, этот внушительных размеров комплекс  излучателей, метеорадаров и миномётных систем обеспечивает в покрываемой области приемлимое количество осадков и скорость ветра.
 
 Внимание - пригоден для борьбы с непривычной средой, но не чуждой! Кислотные облака и ветер под сто метров в секунду таким образом разогнать не получится.]]></data>
@@ -1015,7 +1001,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n76">
+    <node id="n75">
       <data key="d5" xml:space="preserve"><![CDATA["Вам здесь не рады"]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1030,7 +1016,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n77">
+    <node id="n76">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1370.2731843171296" y="83.0"/>
@@ -1044,7 +1030,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n78">
+    <node id="n77">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1371.0"/>
@@ -1055,7 +1041,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n79">
+    <node id="n78">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1463.0"/>
@@ -1066,7 +1052,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n80">
+    <node id="n79">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="451.0"/>
@@ -1080,7 +1066,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n81">
+    <node id="n80">
       <data key="d5" xml:space="preserve"><![CDATA["Пока вы ютитесь в своих стальных скорлупках - мы парим меж звёзд".
 
 
@@ -1097,7 +1083,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n82">
+    <node id="n81">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1187.0"/>
@@ -1111,7 +1097,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n83">
+    <node id="n82">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1366.7963686342591" y="267.0"/>
@@ -1124,7 +1110,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n84">
+    <node id="n83">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="542.9999999999999"/>
@@ -1137,7 +1123,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n85">
+    <node id="n84">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.9583333333332" y="911.0"/>
@@ -1151,21 +1137,21 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n86">
+    <node id="n85">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="818.9999999999999"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="169.31640625" x="45.216796875" xml:space="preserve" y="-0.40234375">Живые танки
-Сложность: 4
-Эффект: танки, 3 слота, био, 
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.466796875" x="35.1416015625" xml:space="preserve" y="-0.40234375">Живые танки
+Сложность: 4, наноматериалы(1)
+Эффект: танки, 3 слота, нано, 
 гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="octagon"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n87">
+    <node id="n86">
       <data key="d5" xml:space="preserve"><![CDATA["Формой и разумом они подобны людям, тело же их крылато и пылает звёздным огнём; 
 и горе, о горе несчастному, осмелившемуся вызвать их гнев!" 
 
@@ -1183,7 +1169,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n88">
+    <node id="n87">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1463.0"/>
@@ -1197,7 +1183,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n89">
+    <node id="n88">
       <data key="d5" xml:space="preserve"><![CDATA[“Митохондрии”, качающие энергию из эффектов гиперпространства]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1211,7 +1197,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n90">
+    <node id="n89">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1371.0"/>
@@ -1224,21 +1210,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n91">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1366.7963686342591" y="726.9999999999999"/>
-          <y:Fill color="#CCFFCC" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="184.275390625" x="37.7373046875" xml:space="preserve" y="-0.40234375">Боевые ксеноморфы
-Сложность: 4
-Эффект: Атака +2, Скорость +2,
-био, ужас, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="trapezoid"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n92">
+    <node id="n90">
       <data key="d5" xml:space="preserve"><![CDATA[Мерзко. Дешево. Эффективно. Для ксенофилов бесплатный подъем боевого духа в подарок.]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1253,7 +1225,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n93">
+    <node id="n91">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1187.0"/>
@@ -1267,7 +1239,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n94">
+    <node id="n92">
       <data key="d5" xml:space="preserve"><![CDATA[ХССССССССССССССССССС!]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1282,7 +1254,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n95">
+    <node id="n93">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="790.7731843171294" y="1463.0"/>
@@ -1296,7 +1268,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n96">
+    <node id="n94">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1003.0"/>
@@ -1309,7 +1281,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n97">
+    <node id="n95">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1187.0"/>
@@ -1322,7 +1294,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n98">
+    <node id="n96">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000002" y="1003.0"/>
@@ -1336,7 +1308,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n99">
+    <node id="n97">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000003" y="1187.0"/>
@@ -1350,7 +1322,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n100">
+    <node id="n98">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="819.0"/>
@@ -1363,7 +1335,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n101">
+    <node id="n99">
       <data key="d5" xml:space="preserve"><![CDATA[Пластик, полимеры, любые продукты органической химии - один засев этими существами, 
 и метановая планета под ними превращается в огромный квазиживой завод.]]></data>
       <data key="d6">
@@ -1379,7 +1351,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n102">
+    <node id="n100">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1003.0"/>
@@ -1392,7 +1364,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n103">
+    <node id="n101">
       <data key="d5" xml:space="preserve"><![CDATA[Оранжереи размером с континент, 
 плавающие в атмосфере газовых гигантов]]></data>
       <data key="d6">
@@ -1408,7 +1380,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n104">
+    <node id="n102">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1371.0"/>
@@ -1422,7 +1394,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n105">
+    <node id="n103">
       <data key="d5" xml:space="preserve"><![CDATA[https://kardashev.fandom.com/wiki/Stellification]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1437,7 +1409,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n106">
+    <node id="n104">
       <data key="d5" xml:space="preserve"><![CDATA["Признавайтесь, кто тёр волшебную лампу?"
 - с испытаний "Укротителя звёзд"]]></data>
       <data key="d6">
@@ -1453,21 +1425,21 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n107">
+    <node id="n105">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="207.0625" x="26.34375" xml:space="preserve" y="-0.40234375">Корабль-матка
-Сложность: 8
+Сложность: 8, осуждение(3)
 Эффект: звездолёт, 8 слотов, гигер,
 Регенерация +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="octagon"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n108">
+    <node id="n106">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1279.0"/>
@@ -1481,21 +1453,21 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n109">
+    <node id="n107">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="819.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="200.6875" x="29.53125" xml:space="preserve" y="-0.40234375">Биокорабль
-Сложность: 4
+Сложность: 4, осуждение(2)
 Эффект: звездолёт, 4 слота, гигер,
 Ремонт +2, нет FTL<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="octagon"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n110">
+    <node id="n108">
       <data key="d5" xml:space="preserve"><![CDATA[Жахнуть пару ледяных комет, связать воду в верхней мантии, наморозить ледяные шапки, 
 устроить астропромышленный элекролиз...
 Для серьёзных дядек со вторым Кардышевым это не такая уж большая проблема.
@@ -1513,7 +1485,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n111">
+    <node id="n109">
       <data key="d5" xml:space="preserve"><![CDATA[Жилые массивы и вертикальные модульные теплицы]]></data>
       <data key="d6">
         <y:ShapeNode>
@@ -1528,7 +1500,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n112">
+    <node id="n110">
       <data key="d5" xml:space="preserve"><![CDATA[Планета-сад, планета-рай, где деревья сами кладут плоды в протянутую руку,
 животные услужливы и игривы,
 а опасность для человека практически немыслима.
@@ -1546,7 +1518,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n113">
+    <node id="n111">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1095.0"/>
@@ -1556,6 +1528,38 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
 Сложность: 5
 Эффект: Наука +2,
 Скорость FTL +6, ГМО +3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n112">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="1370.2731843171296" y="910.9999999999999"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.466796875" x="35.1416015625" xml:space="preserve" y="-0.40234375">Боевые ксеноморфы
+Сложность: 4, наноматериалы(1)
+Эффект: Атака +6, Скорость +3,
+нано, ужас, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="trapezoid"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n113">
+      <data key="d5" xml:space="preserve"><![CDATA[Можно производить биоаналоги любых доступных модулей
+как проекты ветки Генетики; сложность растет на 2, 
+модуль получает свойство "гигер"
+]]></data>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="726.9999999999999"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
+          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="206.921875" x="26.4140625" xml:space="preserve" y="-0.40234375">Живая технология
+Сложность: 3, осуждение(2), гмо(4)
+Эффект: :производство модулей за 
+Общество; дает цена +2 и "гигер"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -1620,7 +1624,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e6" source="n6" target="n40">
+    <edge id="e6" source="n6" target="n39">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1710,7 +1714,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e15" source="n70" target="n27">
+    <edge id="e15" source="n69" target="n27">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1740,7 +1744,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e18" source="n42" target="n41">
+    <edge id="e18" source="n41" target="n40">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1760,7 +1764,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e20" source="n40" target="n39">
+    <edge id="e20" source="n39" target="n38">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1850,7 +1854,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e29" source="n11" target="n44">
+    <edge id="e29" source="n11" target="n43">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1870,7 +1874,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e31" source="n4" target="n45">
+    <edge id="e31" source="n4" target="n44">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1880,7 +1884,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e32" source="n8" target="n43">
+    <edge id="e32" source="n8" target="n42">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1890,7 +1894,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e33" source="n7" target="n43">
+    <edge id="e33" source="n7" target="n42">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1900,7 +1904,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e34" source="n6" target="n46">
+    <edge id="e34" source="n6" target="n45">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1910,7 +1914,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e35" source="n25" target="n47">
+    <edge id="e35" source="n25" target="n46">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1920,7 +1924,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e36" source="n50" target="n49">
+    <edge id="e36" source="n49" target="n48">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1930,7 +1934,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e37" source="n14" target="n52">
+    <edge id="e37" source="n14" target="n51">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1940,7 +1944,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e38" source="n7" target="n68">
+    <edge id="e38" source="n7" target="n67">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1950,7 +1954,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e39" source="n70" target="n50">
+    <edge id="e39" source="n69" target="n49">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1960,7 +1964,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e40" source="n28" target="n72">
+    <edge id="e40" source="n28" target="n71">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1970,7 +1974,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e41" source="n16" target="n69">
+    <edge id="e41" source="n16" target="n68">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1980,7 +1984,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e42" source="n69" target="n70">
+    <edge id="e42" source="n68" target="n69">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2040,7 +2044,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e48" source="n40" target="n12">
+    <edge id="e48" source="n39" target="n12">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2050,7 +2054,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e49" source="n10" target="n73">
+    <edge id="e49" source="n10" target="n72">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2070,7 +2074,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e51" source="n42" target="n16">
+    <edge id="e51" source="n41" target="n16">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2090,7 +2094,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e53" source="n12" target="n74">
+    <edge id="e53" source="n12" target="n73">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2100,7 +2104,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e54" source="n74" target="n42">
+    <edge id="e54" source="n73" target="n41">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2110,7 +2114,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e55" source="n74" target="n75">
+    <edge id="e55" source="n73" target="n74">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2120,7 +2124,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e56" source="n69" target="n76">
+    <edge id="e56" source="n68" target="n75">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2130,7 +2134,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e57" source="n3" target="n83">
+    <edge id="e57" source="n3" target="n82">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2140,7 +2144,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e58" source="n22" target="n38">
+    <edge id="e58" source="n17" target="n79">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2150,7 +2154,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e59" source="n17" target="n80">
+    <edge id="e59" source="n29" target="n81">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2160,7 +2164,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e60" source="n29" target="n82">
+    <edge id="e60" source="n49" target="n29">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2170,7 +2174,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e61" source="n50" target="n29">
+    <edge id="e61" source="n12" target="n83">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2180,7 +2184,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e62" source="n12" target="n84">
+    <edge id="e62" source="n68" target="n84">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2190,7 +2194,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e63" source="n69" target="n85">
+    <edge id="e63" source="n16" target="n85">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2200,7 +2204,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e64" source="n16" target="n86">
+    <edge id="e64" source="n89" target="n80">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2210,7 +2214,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e65" source="n90" target="n81">
+    <edge id="e65" source="n86" target="n89">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2220,7 +2224,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e66" source="n87" target="n90">
+    <edge id="e66" source="n88" target="n86">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2230,7 +2234,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e67" source="n89" target="n87">
+    <edge id="e67" source="n47" target="n86">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2240,7 +2244,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e68" source="n48" target="n87">
+    <edge id="e68" source="n88" target="n70">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2250,7 +2254,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e69" source="n89" target="n71">
+    <edge id="e69" source="n89" target="n90">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2260,7 +2264,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e70" source="n90" target="n92">
+    <edge id="e70" source="n24" target="n91">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2270,7 +2274,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e71" source="n24" target="n93">
+    <edge id="e71" source="n89" target="n93">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2280,7 +2284,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e72" source="n90" target="n95">
+    <edge id="e72" source="n23" target="n94">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2290,7 +2294,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e73" source="n23" target="n96">
+    <edge id="e73" source="n29" target="n95">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2300,7 +2304,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e74" source="n29" target="n97">
+    <edge id="e74" source="n95" target="n25">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2310,7 +2314,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e75" source="n97" target="n25">
+    <edge id="e75" source="n95" target="n92">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2320,7 +2324,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e76" source="n97" target="n94">
+    <edge id="e76" source="n30" target="n96">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2330,7 +2334,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e77" source="n30" target="n98">
+    <edge id="e77" source="n24" target="n97">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2340,7 +2344,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e78" source="n24" target="n99">
+    <edge id="e78" source="n71" target="n99">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2350,7 +2354,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e79" source="n72" target="n101">
+    <edge id="e79" source="n2" target="n76">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2360,7 +2364,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e80" source="n2" target="n77">
+    <edge id="e80" source="n71" target="n88">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2370,7 +2374,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e81" source="n72" target="n89">
+    <edge id="e81" source="n24" target="n47">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2380,7 +2384,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e82" source="n24" target="n48">
+    <edge id="e82" source="n27" target="n101">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2390,7 +2394,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e83" source="n27" target="n103">
+    <edge id="e83" source="n68" target="n98">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2400,7 +2404,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e84" source="n69" target="n100">
+    <edge id="e84" source="n25" target="n102">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2410,7 +2414,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e85" source="n25" target="n104">
+    <edge id="e85" source="n102" target="n87">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2420,7 +2424,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e86" source="n104" target="n88">
+    <edge id="e86" source="n102" target="n103">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2430,7 +2434,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e87" source="n104" target="n105">
+    <edge id="e87" source="n102" target="n104">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2440,7 +2444,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e88" source="n104" target="n106">
+    <edge id="e88" source="n89" target="n105">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2450,7 +2454,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e89" source="n90" target="n107">
+    <edge id="e89" source="n47" target="n106">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2460,7 +2464,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e90" source="n48" target="n108">
+    <edge id="e90" source="n15" target="n107">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2470,7 +2474,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e91" source="n15" target="n109">
+    <edge id="e91" source="n25" target="n108">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2480,7 +2484,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e92" source="n25" target="n110">
+    <edge id="e92" source="n3" target="n50">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2490,7 +2494,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e93" source="n3" target="n51">
+    <edge id="e93" source="n41" target="n109">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2500,7 +2504,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e94" source="n13" target="n91">
+    <edge id="e94" source="n49" target="n110">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2510,7 +2514,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e95" source="n42" target="n111">
+    <edge id="e95" source="n84" target="n110">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2520,7 +2524,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e96" source="n50" target="n112">
+    <edge id="e96" source="n23" target="n100">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2530,7 +2534,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e97" source="n85" target="n112">
+    <edge id="e97" source="n100" target="n24">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2540,7 +2544,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e98" source="n23" target="n102">
+    <edge id="e98" source="n100" target="n111">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2550,7 +2554,8 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e99" source="n102" target="n24">
+    <edge id="e99" source="n22" target="n112">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2560,7 +2565,8 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e100" source="n102" target="n113">
+    <edge id="e100" source="n13" target="n113">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
