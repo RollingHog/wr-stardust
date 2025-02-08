@@ -3,8 +3,9 @@
 /* global
 getEl qs
 log warn
-FILL_2_TREE_TYPE PLAYERS_DATA_KEY
-DATA__OLD_TECH
+TREELIST
+FILL_2_TREE_TYPE TREE_TYPE_2_FILL PLAYERS_DATA_KEY
+DATA__OLD_TECH DATA__OLD_TECH_TIME
 capitalizeFirstLetter rgbToHex
 getDictKey
 makeElDraggable
@@ -32,15 +33,6 @@ console.log(VERSION)
 // * @typedef {string} effKey THIS SHIT IS BROKEN AF AND IT BREAKS AUTO-TYPING IN VS CODE NO IDEA WHY DON'T USE WITH EFFVALUE
 
 const range = (cnt) => '0'.repeat(cnt)
-
-const TREELIST = [
-  "Military",
-  "Sociology",
-  "Biology",
-  "Industry",
-  "Science",
-  'Unique',
-]
 
 /** constants; empty ones usually filled later */
 const VARS = /** @type {const} */({
@@ -311,14 +303,19 @@ async function Init() {
         )
 
         console.time('node stat   ')
-        for (let treeName of TREELIST) {
-          for (let j in tech[treeName]) {
-            let [cost, effects] = parseNode.costAndEffects(tech[treeName][j])
-            tech[treeName][j].cost = cost
-            tech[treeName][j].effect = effects
-            doNodeStat(treeName, tech[treeName][j])
+        try {
+          for (let treeName of TREELIST) {
+            for (let j in tech[treeName]) {
+              let [cost, effects] = parseNode.costAndEffects(tech[treeName][j])
+              tech[treeName][j].cost = cost
+              tech[treeName][j].effect = effects
+              doNodeStat(treeName, tech[treeName][j])
+            }
           }
-        }
+        } catch (err) {
+          warn('node stat failed', err)
+        } 
+
         console.timeEnd('node stat   ')
 
         getEl('players_selection').children.forEach(e => (e.tagName == 'LABEL')
@@ -1545,17 +1542,9 @@ const Analysis = {
         return result.filter(e => e).join(', ')
       }
 
-
-      for (let name of delta.added) {
-        console.log(inverted.alltech[name])
-      }
-
-      for (let name of delta.removed) {
-        console.log(oldTech[name])
-      }
-
-      const addedStr = delta.added.map(name => inverted.alltech[name].fullText.replace(/\n/g, ' ')).join('<br>')
-      const removedStr = delta.removed.map(name => oldTech[name].fullText.replace(/\n/g, ' ')).join('<br>')
+      const colorWrap = (str, fill) => `<span style="background: ${fill}">${str.replace(/\n/g, ' ')}</span>`
+      const addedStr = delta.added.map(name => colorWrap(inverted.alltech[name].fullText, inverted.alltech[name].fill)).join('<br>')
+      const removedStr = delta.removed.map(name => colorWrap(oldTech[name].fullText, TREE_TYPE_2_FILL[oldTech[name].treeName])).join('<br>')
 
       let str = `<style>
         .removed-text {
@@ -1567,7 +1556,7 @@ const Analysis = {
         }
 
         #el_reports_list {
-          font-size: small;
+          font-size: 15px;
         }
 
         #el_reports_list div {
@@ -1575,6 +1564,7 @@ const Analysis = {
           display: inline-block;
         }
       </style>
+      <b>Дата старого файла:</b> ${DATA__OLD_TECH_TIME.split('T')[0]}<br>
       <b>Добавлены:</b><br> ${addedStr}<br>
       <b>Удалены:</b><br> ${removedStr}<br>
       <br><b>Изменены:</b><br>`
@@ -1590,7 +1580,7 @@ const Analysis = {
           + '<br>'
           + 'Эффект: ' + stringDiff(fullOld[1], fullNew[1], 'added')
 
-        str += '<div class=border>' + name + '<br>' 
+        str += '<div class=border>' + colorWrap(name, inverted.alltech[name].fill) + '<br>' 
           + (oldStr.length > 20 ? oldStr + '<br>' : '') 
           + (newStr.length > 20 ? newStr + '<br>' : '') 
           + '<br></div>'

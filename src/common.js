@@ -1,7 +1,9 @@
 /* exported
   log warn warnNoTrace 
   getEl qs
-  locationSearchToArray FILL_2_TREE_TYPE PLAYERS_DATA_KEY
+  locationSearchToArray 
+  TREELIST
+  FILL_2_TREE_TYPE TREE_TYPE_2_FILL PLAYERS_DATA_KEY
   capitalizeFirstLetter rgbToHex
   getDictKey
   makeElDraggable
@@ -64,8 +66,24 @@ function rgbToHex(r, g, b) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+function invertDict(json){
+  var ret = {}
+  for(var key in json){
+    ret[json[key]] = key
+  }
+  return ret
+}
 
 var PLAYERS_DATA_KEY = /** @type {const} */ ('DATA__PLAYERS_DATA')
+
+const TREELIST = /** @type {const} */([
+  "Military",
+  "Sociology",
+  "Biology",
+  "Industry",
+  "Science",
+  'Unique',
+])
 
 var FILL_2_TREE_TYPE = {
   "#FF9966": "Military",
@@ -74,6 +92,9 @@ var FILL_2_TREE_TYPE = {
   "#99CCFF": "Science",
   "#CC99FF": "Sociology",
 }
+
+/** @type {typeof TREELIST[number]} */
+var TREE_TYPE_2_FILL = invertDict(FILL_2_TREE_TYPE)
 
 /**
  * dictObj is list of upper thresholds
