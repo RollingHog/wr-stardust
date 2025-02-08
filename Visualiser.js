@@ -4,6 +4,7 @@
 getEl qs
 log warn
 FILL_2_TREE_TYPE PLAYERS_DATA_KEY
+DATA__OLD_TECH
 capitalizeFirstLetter rgbToHex
 getDictKey
 makeElDraggable
@@ -347,6 +348,17 @@ async function Init() {
         makeElDraggable('el_help', 'el_help_header')
         makeElDraggable('el_unitcreator_wrapper', 'el_unitcreator_header')
         makeElDraggable('el_turnplanner_wrapper', 'el_tp_header')
+
+        setTimeout(async () => {
+          // console.time('old tech load ')
+          const elOldTechData = getEl('el_data_oldtech')
+          await new Promise((resolve) => {
+            elOldTechData.onload = resolve
+            elOldTechData.src = elOldTechData.getAttribute('src2')
+          })
+          parseGDoc.lastResult = User.getAllUsersData()
+          // console.timeEnd('old tech load ')
+        }, 0)
 
         console.time('analysis    ')
         Analysis.onInit()
@@ -1448,16 +1460,19 @@ const Analysis = {
     },
 
     async генератор_патчноута() {
-      const oldJSONStr = await navigator.clipboard.readText()
+      const isFilePresent = typeof DATA__OLD_TECH !== 'undefined'
       /**
        * @type {Record<string, TTechObject>}
        */
-      let oldTech = {}
-      try {
-        oldTech = JSON.parse(oldJSONStr.replace(/(^`|`$)/, ''))
-      } catch (error) {
-        alert('you need to have old, stringified inverted.alltech JSON in clipboard')
-        return  
+      let oldTech = isFilePresent ? Object.fromEntries(DATA__OLD_TECH.map(obj => [obj.name, obj])) : {}
+      if(!isFilePresent) {
+        const oldJSONStr = await navigator.clipboard.readText()
+        try {
+          oldTech = JSON.parse(oldJSONStr.replace(/(^`|`$)/, ''))
+        } catch (error) {
+          alert('you need to have old, stringified inverted.alltech JSON in clipboard')
+          return  
+        }
       }
 
       const delta = {
@@ -1570,22 +1585,22 @@ const Analysis = {
           + '<br>'
           + 'Эффект: ' + stringDiff(fullOld[1], fullNew[1], 'added')
 
-        str += '<div>' + name + '<br>' 
+        str += '<div class=border>' + name + '<br>' 
           + (oldStr.length > 20 ? oldStr + '<br>' : '') 
           + (newStr.length > 20 ? newStr + '<br>' : '') 
           + '<br></div>'
       }
 
       getEl('el_reports_list').innerHTML = str
-
-      //TODO
-      console.log(delta)
     },
 
     // formListForComparison
     скачать_список_технологий() {
       if(confirm('Скачать?')) {
-        savingOps.saveFile(`tech_${window[VARS.PLAYERS_TIMESTAMP_KEY]}.json`, JSON.stringify(inverted.alltech, 0, 2))
+        savingOps.saveFile(`oldTechData.js`, 
+          `var DATA__OLD_TECH_TIME='${window[VARS.PLAYERS_TIMESTAMP_KEY]}'\n`
+          + `var DATA__OLD_TECH=${TechUtils.formTechListForPatchNote()}` 
+        )
       }
       Analysis.drawReportsList()
     },
@@ -1715,11 +1730,13 @@ const TechUtils = {
     return Object.entries(res)
   },
 
-  formListForComparison() {
+  formTechListForPatchNote() {
     const list = Object.values(inverted.alltech)
-    // .map(
-    //   ({cost, effect, name, type, treeName})=>({cost, effect, name, type, treeName})
-    // )
+    .map(
+      ({id, type, treeName, borderColor, fullText, name, req, next, title, x, y, lvl, subtree }) => 
+      ({id, type, treeName, borderColor, fullText, name, req, next, title, x, y, lvl, subtree })
+    )
+    return JSON.stringify(list, 0, 2)
     /* 
      "id": "n0",
     "type": "rectangle",
@@ -1730,7 +1747,7 @@ const TechUtils = {
     "effect": [],
     "req": [],
     "next": [],
-    "fullText": "Телепортация\nСложность: 6\nЭффект: :телепортация",
+    // "fullText": "Телепортация\nСложность: 6\nЭффект: :телепортация",
     "title": null,
     "x": 334.33,
     "y": 1359,
@@ -1738,7 +1755,6 @@ const TechUtils = {
     "lvl": 15,
     "subtree": "Физика пространства"
     */
-    savingOps.saveFile(`tech_${Date.now()}.json`, JSON.stringify(list, 0, 2))
   },
 
   /**
