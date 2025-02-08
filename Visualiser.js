@@ -354,9 +354,9 @@ async function Init() {
           const elOldTechData = getEl('el_data_oldtech')
           await new Promise((resolve) => {
             elOldTechData.onload = resolve
+            elOldTechData.onerror = resolve
             elOldTechData.src = elOldTechData.getAttribute('src2')
           })
-          parseGDoc.lastResult = User.getAllUsersData()
           // console.timeEnd('old tech load ')
         }, 0)
 
@@ -1502,6 +1502,11 @@ const Analysis = {
 
       // output
 
+      /**
+       * @param {string} s1 
+       * @param {string} s2 
+       * @param {string} prefix 
+       */
       function stringDiff(s1, s2, prefix) {
         // https://stackoverflow.com/questions/8024102/compare-strings-and-get-end-difference
         var  string1 = new Array(),
@@ -1512,8 +1517,8 @@ const Analysis = {
 
         if(!s1 || !s2) return
 
-        string1 = s1.split(",")
-        string2 = s2.split(",")
+        string1 = s1.split(",").map(str => str.trim())
+        string2 = s2.split(",").map(str => str.trim())
 
         if (s1.length > s2.length) {
           longString = string1
