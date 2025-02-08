@@ -3362,7 +3362,7 @@ const parseNode = {
         .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
         .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?([\\d.]+)$`), '$1:$2')
-        .replace(/^Создание (армий|флотов|модулей|(?:наземных|космических) баз|хабитатов) \+?(\d+)/, KEYWORDS.CREATION_KEYWORD + ' $1:$2')
+        .replace(/^Создание (армий|флотов|модулей|гигеров|(?:наземных|космических) баз|хабитатов) \+?(\d+)$/, KEYWORDS.CREATION_KEYWORD + ' $1:$2')
         // типы урона, эффекты оружия
         .replace(new RegExp(`^(${KEYWORDS.DAMAGE_TYPES.join('|')})$`), KEYWORDS.ALL_RIGHT)
         .replace(new RegExp(`^(${KEYWORDS.MODULE_PROPS.join('|')})$`), KEYWORDS.ALL_RIGHT)
