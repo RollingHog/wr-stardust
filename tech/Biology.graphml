@@ -43,10 +43,10 @@
     <node id="n2">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="83.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="83.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="210.935546875" x="24.4072265625" xml:space="preserve" y="6.948242187500028">Секвенирование ДНК
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="210.935546875" x="24.4072265625" xml:space="preserve" y="6.9482421875">Секвенирование ДНК
 Сложность: 1, :Общество не менее 2
 Эффект: Генные модификации +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -56,10 +56,10 @@
     <node id="n3">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="175.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="175.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.948242187500028">Генная терапия
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.9482421875">Генная терапия
 Сложность: 1
 Эффект: Общество +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram2"/>
@@ -69,10 +69,10 @@
     <node id="n4">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.25" y="83.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.25" y="83.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="205.99609375" x="26.876953125" xml:space="preserve" y="6.948242187500028">Генное планирование
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="205.99609375" x="26.876953125" xml:space="preserve" y="6.9482421875">Генное планирование
 Сложность: 1, осуждение (1)
 Эффект: +1 свободный куб, ГМО +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -82,10 +82,10 @@
     <node id="n5">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="175.0"/>
+          <y:Geometry height="62.0" width="259.75" x="504.5" y="175.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="151.322265625" x="54.2138671875" xml:space="preserve" y="-0.4023437499999716">Оценка биосферы
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="151.322265625" x="54.2138671875" xml:space="preserve" y="-0.40234375">Оценка биосферы
 Сложность: 1, образцы (1)
 Эффект: Взаимодействие
 с местной биосферой +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -96,7 +96,7 @@
     <node id="n6">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666669" y="267.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666669" y="267.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="197.986328125" x="30.8818359375" xml:space="preserve" y="6.9482421875">Инопланетное сельское хозяйство
@@ -109,7 +109,7 @@
     <node id="n7">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="267.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="267.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="199.275390625" x="30.2373046875" xml:space="preserve" y="-0.40234375">Генная модификация населения
@@ -125,7 +125,7 @@
 – Кавита Такур, "Сутра Исхода"]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="267.0"/>
+          <y:Geometry height="62.0" width="259.75" x="504.5" y="267.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="211.2578125" x="24.24609375" xml:space="preserve" y="-0.40234375">Оценка свойств местных организмов
@@ -139,7 +139,7 @@
     <node id="n9">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="790.7731843171296" y="451.0"/>
+          <y:Geometry height="62.0" width="259.75" x="790.7731843171296" y="451.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="214.01171875" x="22.869140625" xml:space="preserve" y="6.9482421875">Адаптация земных микроорганизмов
@@ -152,7 +152,7 @@
     <node id="n10">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="359.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="359.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="106.73828125" x="76.505859375" xml:space="preserve" y="6.9482421875">Новые организмы
@@ -165,7 +165,7 @@
     <node id="n11">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="543.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="543.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.80859375" x="47.970703125" xml:space="preserve" y="6.9482421875">Направленная эволюция
@@ -178,12 +178,12 @@
     <node id="n12">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="451.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="543.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="109.251953125" x="75.2490234375" xml:space="preserve" y="6.9482421875">Экзопочвоведение
-Сложность: 2
-Эффект: Наука +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Сложность: 3
+Эффект: Наука +3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -191,7 +191,7 @@
     <node id="n13">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="635.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="635.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="155.55859375" x="52.095703125" xml:space="preserve" y="6.9482421875">Искусственные помощники
@@ -204,7 +204,7 @@
     <node id="n14">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="543.0"/>
+          <y:Geometry height="62.0" width="259.75" x="504.5" y="543.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="214.01171875" x="22.869140625" xml:space="preserve" y="-0.40234375">Адаптация земных растений
@@ -218,7 +218,7 @@
     <node id="n15">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="727.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="727.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="255.173828125" x="2.2880859375" xml:space="preserve" y="-0.40234375">Тотальная перестройка генома
@@ -232,7 +232,7 @@
     <node id="n16">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="727.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="727.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="180.267578125" x="39.7412109375" xml:space="preserve" y="6.9482421875">Биологические наноматериалы
@@ -245,7 +245,7 @@
     <node id="n17">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="359.0"/>
+          <y:Geometry height="62.0" width="259.75" x="504.5" y="359.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="151.322265625" x="54.2138671875" xml:space="preserve" y="-0.40234375">Ксенопитомник
@@ -259,7 +259,7 @@
     <node id="n18">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="451.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="451.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.751953125" x="14.4990234375" xml:space="preserve" y="6.9482421875">Теория экстремофилии
@@ -272,7 +272,7 @@
     <node id="n19">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="790.7731843171296" y="543.0"/>
+          <y:Geometry height="62.0" width="259.75" x="790.7731843171296" y="543.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.80859375" x="47.970703125" xml:space="preserve" y="-0.40234375">Пантропия
@@ -286,7 +286,7 @@
     <node id="n20">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="790.7731843171296" y="635.0"/>
+          <y:Geometry height="62.0" width="259.75" x="790.7731843171296" y="635.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="216.466796875" x="21.6416015625" xml:space="preserve" y="6.9482421875">Сверхчеловеческая адаптация
@@ -299,7 +299,7 @@
     <node id="n21">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="790.7731843171296" y="727.0"/>
+          <y:Geometry height="62.0" width="259.75" x="790.7731843171296" y="727.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="216.466796875" x="21.6416015625" xml:space="preserve" y="6.9482421875">Пустотная адаптация
@@ -312,7 +312,7 @@
     <node id="n22">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="819.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="819.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="180.28515625" x="39.732421875" xml:space="preserve" y="6.9482421875">Морфологическая свобода
@@ -325,7 +325,7 @@
     <node id="n23">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="911.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="911.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="156.25" x="51.75" xml:space="preserve" y="6.9482421875">Когнитивная свобода
@@ -338,7 +338,7 @@
     <node id="n24">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1095.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="246.75390625" x="6.498046875" xml:space="preserve" y="-0.40234375">Постчеловеческие нейронные организации
@@ -352,7 +352,7 @@
     <node id="n25">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1279.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="1279.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="251.048828125" x="4.3505859375" xml:space="preserve" y="6.9482421875">Скульпторы миров
@@ -365,7 +365,7 @@
     <node id="n26">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.0579607928235" y="543.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.0579607928235" y="543.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="200.6875" x="29.53125" xml:space="preserve" y="-0.40234375">Биокатер
@@ -379,7 +379,7 @@
     <node id="n27">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="507.97681568287044" y="1003.0"/>
+          <y:Geometry height="62.0" width="259.75" x="507.97681568287044" y="1003.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.09765625" x="59.326171875" xml:space="preserve" y="6.9482421875">Анализ экзотов
@@ -392,7 +392,7 @@
     <node id="n28">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="507.97681568287044" y="1095.0"/>
+          <y:Geometry height="62.0" width="259.75" x="507.97681568287044" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="165.7890625" x="46.98046875" xml:space="preserve" y="-0.40234375">Использование экзотов
@@ -406,7 +406,7 @@
     <node id="n29">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1095.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="176.201171875" x="41.7744140625" xml:space="preserve" y="-0.40234375">Бесконечная экспансия
@@ -420,11 +420,11 @@
     <node id="n30">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000002" y="911.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.2500000000002" y="911.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="162.455078125" x="48.6474609375" xml:space="preserve" y="6.9482421875">Орбитальный сад
-Сложность: 4
+Сложность: 4, :повторяемо
 Эффект: +2 свободных куба<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="ellipse"/>
         </y:ShapeNode>
@@ -433,7 +433,7 @@
     <node id="n31">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="792.5115921585649" y="267.0"/>
+          <y:Geometry height="62.0" width="259.75" x="792.5115921585649" y="267.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.9482421875">Генная клиника
@@ -446,10 +446,10 @@
     <node id="n32">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="832.2963686342591" x="794.25" y="-9.000000000000057"/>
+          <y:Geometry height="62.0" width="832.2963686342591" x="794.25" y="-9.000000000000057"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="138.595703125" x="346.85033275462956" xml:space="preserve" y="13.073730468750028">ГЕНЕТИКА<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="138.595703125" x="346.85033275462956" xml:space="preserve" y="13.07373046875">ГЕНЕТИКА<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -457,10 +457,10 @@
     <node id="n33">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="836.7315176504628" x="-72.48151765046282" y="-9.000000000000057"/>
+          <y:Geometry height="62.0" width="836.7315176504628" x="-72.48151765046282" y="-9.000000000000057"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="218.5634765625" x="309.0840205439814" xml:space="preserve" y="13.073730468750028">ЭКЗОБИОЛОГИЯ<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="26" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="35.8525390625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="218.5634765625" x="309.0840205439814" xml:space="preserve" y="13.07373046875">ЭКЗОБИОЛОГИЯ<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -468,10 +468,10 @@
     <node id="n34">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="175.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="175.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="149.892578125" x="54.9287109375" xml:space="preserve" y="-0.4023437499999716">Станции наблюдения
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="149.892578125" x="54.9287109375" xml:space="preserve" y="-0.40234375">Станции наблюдения
 Сложность: 1
 Эффект: Взаимодействие
 с местной биосферой +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -482,10 +482,10 @@
     <node id="n35">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.10005192675" y="83.0"/>
+          <y:Geometry height="62.0" width="259.75" x="504.10005192675" y="83.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.53125" x="35.109375" xml:space="preserve" y="6.948242187500028">Добыча образцов местной жизни
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.53125" x="35.109375" xml:space="preserve" y="6.9482421875">Добыча образцов местной жизни
 Сложность: 1, :местная жизнь
 Эффект: Образцы +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram2"/>
@@ -495,7 +495,7 @@
     <node id="n36">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.0" width="259.75" x="-75.95833333333326" y="267.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="267.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="133.03515625" x="63.357421875" xml:space="preserve" y="-0.40234375">Институт экзобиологии
@@ -509,7 +509,7 @@
     <node id="n37">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000001" y="819.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.2500000000001" y="819.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.9482421875">Вакуумные растения
@@ -522,7 +522,7 @@
     <node id="n38">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="451.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="451.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="152.248046875" x="53.7509765625" xml:space="preserve" y="6.9482421875">Ферма биополимеров
@@ -535,7 +535,7 @@
     <node id="n39">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="359.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="359.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="168.712890625" x="45.5185546875" xml:space="preserve" y="6.9482421875">Выращивание биополимеров
@@ -548,7 +548,7 @@
     <node id="n40">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="727.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="727.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.9482421875">Орбитальные парники
@@ -561,7 +561,7 @@
     <node id="n41">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="635.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="635.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.9482421875">Аэропоника
@@ -574,7 +574,7 @@
     <node id="n42">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="792.5115921585648" y="359.0"/>
+          <y:Geometry height="62.0" width="259.75" x="792.5115921585648" y="359.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="222.6953125" x="18.52734375" xml:space="preserve" y="6.9482421875">Ксеносимбиоз
@@ -587,7 +587,7 @@
     <node id="n43">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1366.796368634259" y="635.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1366.796368634259" y="635.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="240.783203125" x="9.4833984375" xml:space="preserve" y="-0.40234375">Возвышение неразумных
@@ -601,10 +601,10 @@
     <node id="n44">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.25" y="175.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.25" y="175.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="258.537109375" x="0.6064453125" xml:space="preserve" y="6.948242187500028">Генетическая аристократия
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="258.537109375" x="0.6064453125" xml:space="preserve" y="6.9482421875">Генетическая аристократия
 Сложность: 1, осуждение (1)
 Эффект: разово +1 великий человек, ГМО +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -614,7 +614,7 @@
     <node id="n45">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-76.91666666666663" y="359.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="359.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="147.98828125" x="55.880859375" xml:space="preserve" y="6.9482421875">Ксенофермы
@@ -635,7 +635,7 @@
 К сведению: энергоёмкость около 1е30, зарядка от сферы Дайсона - полчаса. Должна была бы тащить на себе несколько гигатонн антиматерии.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1371.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="140.330078125" x="59.7099609375" xml:space="preserve" y="-0.40234375">Станция геоглиптики
@@ -649,7 +649,7 @@
     <node id="n47">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1187.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="226.310546875" x="16.7197265625" xml:space="preserve" y="6.9482421875">Автоэволюция
@@ -669,7 +669,7 @@
 ]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1095.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="217.732421875" x="21.0087890625" xml:space="preserve" y="6.9482421875">Стандартный преобразователь
@@ -682,7 +682,7 @@
     <node id="n49">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1003.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="1003.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="163.3515625" x="48.19921875" xml:space="preserve" y="6.9482421875">Строительство биосферы
@@ -695,10 +695,10 @@
     <node id="n50">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1370.2731843171296" y="175.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1370.2731843171296" y="175.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="105.501953125" x="77.1240234375" xml:space="preserve" y="-0.4023437499999716">Банк генов
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="105.501953125" x="77.1240234375" xml:space="preserve" y="-0.40234375">Банк генов
 Сложность: 1
 Эффект: +2 куба
 к ветке "Генетика"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -722,10 +722,10 @@
     <node id="n52">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="83.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="83.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="182.9453125" x="38.40234375" xml:space="preserve" y="6.948242187500028">Базовое жильё
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="182.9453125" x="38.40234375" xml:space="preserve" y="6.9482421875">Базовое жильё
 Сложность: 1, базовое
 Эффект: выдаётся при высадке<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
@@ -735,10 +735,10 @@
     <node id="n53">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="83.00000000000003"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="83.00000000000003"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.4023437499999716">1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -746,10 +746,10 @@
     <node id="n54">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="175.00000000000003"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="175.00000000000003"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.4023437499999716">2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -757,7 +757,7 @@
     <node id="n55">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="267.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="267.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -768,7 +768,7 @@
     <node id="n56">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="359.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="359.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -779,7 +779,7 @@
     <node id="n57">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="451.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="451.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">5<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -790,7 +790,7 @@
     <node id="n58">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="543.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="543.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">6<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -801,7 +801,7 @@
     <node id="n59">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="635.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="635.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">7<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -812,7 +812,7 @@
     <node id="n60">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="727.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="727.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">8<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -823,7 +823,7 @@
     <node id="n61">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="819.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="819.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.6953125" x="17.846966377149613" xml:space="preserve" y="-0.40234375">9<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -834,7 +834,7 @@
     <node id="n62">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="911.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="911.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="57.390625" x="4.499310127149613" xml:space="preserve" y="-0.40234375">10<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -845,7 +845,7 @@
     <node id="n63">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1003.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="1003.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="57.390625" x="4.499310127149613" xml:space="preserve" y="-0.40234375">11<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -856,7 +856,7 @@
     <node id="n64">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1095.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="57.390625" x="4.499310127149613" xml:space="preserve" y="-0.40234375">12<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -867,7 +867,7 @@
     <node id="n65">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1187.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="57.390625" x="4.499310127149613" xml:space="preserve" y="-0.40234375">13<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -878,7 +878,7 @@
     <node id="n66">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1279.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="1279.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="57.390625" x="4.499310127149613" xml:space="preserve" y="-0.40234375">14<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -890,7 +890,7 @@
       <data key="d5" xml:space="preserve"><![CDATA[Просто химические метки и обмен данными с помощью органов ЭМ-ретранлсяции за ушами. Ничего такого, ага-ага.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1361.581145109953" y="359.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1361.581145109953" y="359.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="205.09375" x="27.328125" xml:space="preserve" y="6.9482421875">Роение
@@ -903,7 +903,7 @@
     <node id="n68">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="819.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="819.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="162.068359375" x="48.8408203125" xml:space="preserve" y="6.9482421875">Конструирование экосистем
@@ -916,7 +916,7 @@
     <node id="n69">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="911.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="911.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.861328125" x="64.4443359375" xml:space="preserve" y="6.9482421875">Неорганическая жизнь
@@ -932,7 +932,7 @@
 медленно дрейфуют в межзвёздной пустоте к одним им ведомым целям.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000002" y="1371.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.2500000000002" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="246.42578125" x="6.662109375" xml:space="preserve" y="-0.40234375">Звёздный лотос
@@ -946,7 +946,7 @@
     <node id="n71">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="507.97681568287044" y="1187.0"/>
+          <y:Geometry height="62.0" width="259.75" x="507.97681568287044" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="226.310546875" x="16.7197265625" xml:space="preserve" y="6.9482421875">Конструирование экзотов
@@ -961,7 +961,7 @@
 При этом они получают свойство "гигер"]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.0579607928235" y="451.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.0579607928235" y="451.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="274.978515625" x="-7.6142578125" xml:space="preserve" y="6.9482421875">Живорастущие дома
@@ -972,39 +972,10 @@
       </data>
     </node>
     <node id="n73">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="543.0"/>
-          <y:Fill color="#CCFFCC" transparent="false"/>
-          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.892578125" x="14.4287109375" xml:space="preserve" y="6.9482421875">Прикладная метеорология
-Сложность: 3
-Эффект: Общество +2, Метеозащита +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="rectangle"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n74">
-      <data key="d5" xml:space="preserve"><![CDATA[В каком-то смысле являясь более мощной версией HAARP, этот внушительных размеров комплекс  излучателей, метеорадаров и миномётных систем обеспечивает в покрываемой области приемлимое количество осадков и скорость ветра.
-
-Внимание - пригоден для борьбы с непривычной средой, но не чуждой! Кислотные облака и ветер под сто метров в секунду таким образом разогнать не получится.]]></data>
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="635.0"/>
-          <y:Fill color="#CCFFCC" transparent="false"/>
-          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="148.94921875" x="55.400390625" xml:space="preserve" y="6.9482421875">Станция контроля погоды
-Сложность: 3
-Эффект: Метеозащита 1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
-          <y:Shape type="parallelogram"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n75">
       <data key="d5" xml:space="preserve"><![CDATA["Вам здесь не рады"]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.49999999999994" y="911.0"/>
+          <y:Geometry height="62.0" width="259.75" x="504.49999999999994" y="911.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="217.427734375" x="21.161132812500057" xml:space="preserve" y="-0.40234375">Мир смерти
@@ -1015,13 +986,13 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n76">
+    <node id="n74">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1370.2731843171296" y="83.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1370.2731843171296" y="83.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="131.6171875" x="64.06640625" xml:space="preserve" y="-0.4023437499999716">Биологическое оружие
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="131.6171875" x="64.06640625" xml:space="preserve" y="-0.40234375">Биологическое оружие
 Сложность: 2
 Эффект: Атака 2, 
 био<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -1029,10 +1000,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n77">
+    <node id="n75">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1371.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="57.390625" x="4.499310127149613" xml:space="preserve" y="-0.40234375">15<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -1040,10 +1011,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n78">
+    <node id="n76">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="66.38924525429923" x="-175.8243942705028" y="1463.0"/>
+          <y:Geometry height="62.0" width="66.38924525429923" x="-175.8243942705028" y="1463.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="48" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="57.390625" x="4.499310127149613" xml:space="preserve" y="-0.40234375">16<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -1051,10 +1022,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n79">
+    <node id="n77">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="451.0"/>
+          <y:Geometry height="62.0" width="259.75" x="504.5" y="451.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="215.2890625" x="22.23046875" xml:space="preserve" y="-0.40234375">Ксенокавалерия
@@ -1065,14 +1036,14 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n80">
+    <node id="n78">
       <data key="d5" xml:space="preserve"><![CDATA["Пока вы ютитесь в своих стальных скорлупках - мы парим меж звёзд".
 
 
 "А, да. ГЕНОПУРИСТЫ СОСАААААТЬ!"]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1463.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="1463.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="124.984375" x="67.3828125" xml:space="preserve" y="6.9482421875">Человек Абсолютный
@@ -1082,10 +1053,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n81">
+    <node id="n79">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1187.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="175.2578125" x="42.24609375" xml:space="preserve" y="-0.40234375">Посев рудных бактерий
@@ -1096,10 +1067,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n82">
+    <node id="n80">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1366.7963686342591" y="267.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1366.7963686342591" y="267.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="183.09765625" x="38.326171875" xml:space="preserve" y="6.9482421875">Адаптация к местным условиям
@@ -1109,10 +1080,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n83">
+    <node id="n81">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="542.9999999999999"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="634.9999999999999"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="214.01171875" x="22.869140625" xml:space="preserve" y="6.9482421875">Силикатные бактерии
@@ -1122,10 +1093,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n84">
+    <node id="n82">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.9583333333332" y="911.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="911.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="247.3984375" x="6.17578125" xml:space="preserve" y="-0.40234375">Земная биосфера
@@ -1136,10 +1107,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n85">
+    <node id="n83">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="818.9999999999999"/>
+          <y:Geometry height="62.0" width="259.75" x="504.5" y="818.9999999999999"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.466796875" x="35.1416015625" xml:space="preserve" y="-0.40234375">Живые танки
@@ -1150,14 +1121,14 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n86">
+    <node id="n84">
       <data key="d5" xml:space="preserve"><![CDATA["Формой и разумом они подобны людям, тело же их крылато и пылает звёздным огнём; 
 и горе, о горе несчастному, осмелившемуся вызвать их гнев!" 
 
 – "Легенды и сказания племён NK218", стр. 53]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1279.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="1279.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="160.052734375" x="49.8486328125" xml:space="preserve" y="-0.40234375">Человек Пылающий
@@ -1168,10 +1139,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n87">
+    <node id="n85">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1463.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="1463.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="167.986328125" x="45.8818359375" xml:space="preserve" y="-0.40234375">Установка Сизиф
@@ -1182,11 +1153,11 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n88">
+    <node id="n86">
       <data key="d5" xml:space="preserve"><![CDATA[“Митохондрии”, качающие энергию из эффектов гиперпространства]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000002" y="1279.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.2500000000002" y="1279.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="211.966796875" x="23.8916015625" xml:space="preserve" y="6.9482421875">Реакторные митохондрии
@@ -1196,10 +1167,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n89">
+    <node id="n87">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1371.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="170.98046875" x="44.384765625" xml:space="preserve" y="6.9482421875">Живые гипердвигатели
@@ -1209,11 +1180,11 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n90">
+    <node id="n88">
       <data key="d5" xml:space="preserve"><![CDATA[Мерзко. Дешево. Эффективно. Для ксенофилов бесплатный подъем боевого духа в подарок.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1463.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.908369417982" y="1463.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="254.69921875" x="2.525390625" xml:space="preserve" y="-0.40234375">Живые корабли
@@ -1224,10 +1195,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n91">
+    <node id="n89">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1187.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.908369417982" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.970703125" x="34.8896484375" xml:space="preserve" y="-0.40234375">Коммуна Мичурина
@@ -1238,11 +1209,11 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n92">
+    <node id="n90">
       <data key="d5" xml:space="preserve"><![CDATA[ХССССССССССССССССССС!]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="1279.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="1279.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.466796875" x="35.1416015625" xml:space="preserve" y="-0.40234375">Ксенотитан
@@ -1253,10 +1224,10 @@
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n93">
+    <node id="n91">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="790.7731843171294" y="1463.0"/>
+          <y:Geometry height="62.0" width="259.75" x="790.7731843171294" y="1463.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="150.560546875" x="54.5947265625" xml:space="preserve" y="-0.40234375">Органический FTL-привод
@@ -1267,10 +1238,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n94">
+    <node id="n92">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1003.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.908369417982" y="1003.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="181.861328125" x="38.9443359375" xml:space="preserve" y="6.9482421875">Нейропластичность
@@ -1280,10 +1251,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n95">
+    <node id="n93">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1187.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="156.21484375" x="51.767578125" xml:space="preserve" y="6.9482421875">Биология суперорганизмов
@@ -1293,10 +1264,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n96">
+    <node id="n94">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000002" y="1003.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.2500000000002" y="1003.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="181.052734375" x="39.3486328125" xml:space="preserve" y="-0.40234375">Капиллярные башни
@@ -1307,10 +1278,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n97">
+    <node id="n95">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000003" y="1187.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.2500000000003" y="1187.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="226.134765625" x="16.8076171875" xml:space="preserve" y="-0.40234375">Термитник
@@ -1321,10 +1292,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n98">
+    <node id="n96">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.95833333333326" y="819.0"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="819.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="124.92578125" x="67.412109375" xml:space="preserve" y="6.9482421875">Вычислительный мох
@@ -1334,12 +1305,12 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n99">
+    <node id="n97">
       <data key="d5" xml:space="preserve"><![CDATA[Пластик, полимеры, любые продукты органической химии - один засев этими существами, 
 и метановая планета под ними превращается в огромный квазиживой завод.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="507.97681568287044" y="1279.0"/>
+          <y:Geometry height="62.0" width="259.75" x="507.97681568287044" y="1279.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="152.248046875" x="53.7509765625" xml:space="preserve" y="-0.40234375">Метановые организмы
@@ -1350,10 +1321,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n100">
+    <node id="n98">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1080.5231843171296" y="1003.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1080.5231843171296" y="1003.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="215.7578125" x="21.99609375" xml:space="preserve" y="6.9482421875">Интуитивное понимание гиперфизики
@@ -1363,12 +1334,12 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n101">
+    <node id="n99">
       <data key="d5" xml:space="preserve"><![CDATA[Оранжереи размером с континент, 
 плавающие в атмосфере газовых гигантов]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="794.2500000000005" y="1095.0"/>
+          <y:Geometry height="62.0" width="259.75" x="794.2500000000005" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="194.39453125" x="32.677734375" xml:space="preserve" y="-0.40234375">Засев газовых гигантов
@@ -1379,10 +1350,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n102">
+    <node id="n100">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1371.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="255.419921875" x="2.1650390625" xml:space="preserve" y="-0.40234375">Творцы миров
@@ -1393,11 +1364,11 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n103">
+    <node id="n101">
       <data key="d5" xml:space="preserve"><![CDATA[https://kardashev.fandom.com/wiki/Stellification]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="213.79166666666674" y="1463.0"/>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666674" y="1463.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="210.806640625" x="24.4716796875" xml:space="preserve" y="-0.40234375">Сотворение звёзд
@@ -1408,12 +1379,12 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n104">
+    <node id="n102">
       <data key="d5" xml:space="preserve"><![CDATA["Признавайтесь, кто тёр волшебную лампу?"
 - с испытаний "Укротителя звёзд"]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="507.97681568287044" y="1463.0"/>
+          <y:Geometry height="62.0" width="259.75" x="507.97681568287044" y="1463.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="171.05078125" x="44.349609375" xml:space="preserve" y="-0.40234375">Укротитель звёзд
@@ -1424,10 +1395,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n105">
+    <node id="n103">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1371.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.908369417982" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="207.0625" x="26.34375" xml:space="preserve" y="-0.40234375">Корабль-матка
@@ -1438,10 +1409,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n106">
+    <node id="n104">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1279.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.908369417982" y="1279.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="129.373046875" x="65.1884765625" xml:space="preserve" y="-0.40234375">Биотерминатор
@@ -1452,10 +1423,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n107">
+    <node id="n105">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="819.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.908369417982" y="819.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="200.6875" x="29.53125" xml:space="preserve" y="-0.40234375">Биокорабль
@@ -1466,14 +1437,14 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n108">
+    <node id="n106">
       <data key="d5" xml:space="preserve"><![CDATA[Жахнуть пару ледяных комет, связать воду в верхней мантии, наморозить ледяные шапки, 
 устроить астропромышленный элекролиз...
 Для серьёзных дядек со вторым Кардышевым это не такая уж большая проблема.
 И нет, эта трехкилометровая штука не похожа на земной нимбулайзер.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="507.97681568287044" y="1371.0"/>
+          <y:Geometry height="62.0" width="259.75" x="507.97681568287044" y="1371.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="159.876953125" x="49.9365234375" xml:space="preserve" y="-0.40234375">Планетарный нимбулайзер
@@ -1484,11 +1455,11 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n109">
+    <node id="n107">
       <data key="d5" xml:space="preserve"><![CDATA[Жилые массивы и вертикальные модульные теплицы]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="504.5" y="726.9999999999999"/>
+          <y:Geometry height="62.0" width="259.75" x="504.5" y="726.9999999999999"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="134.107421875" x="62.8212890625" xml:space="preserve" y="-0.40234375">Жилой модуль
@@ -1499,28 +1470,28 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n110">
+    <node id="n108">
       <data key="d5" xml:space="preserve"><![CDATA[Планета-сад, планета-рай, где деревья сами кладут плоды в протянутую руку,
 животные услужливы и игривы,
 а опасность для человека практически немыслима.
 Только что не молочные реки с кисельными берегами.]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="-75.9583333333332" y="1002.9999999999999"/>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="1002.9999999999999"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="179.921875" x="39.9140625" xml:space="preserve" y="-0.4023437499998863">Биосфера Эдема
-Сложность: 5, тех. Нанороботы
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="165.7890625" x="46.98046875" xml:space="preserve" y="-0.4023437499998863">Биосфера Эдема
+Сложность: 5, хром(4)
 Эффект: +2 свободных куба,
 :райский мир<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n111">
+    <node id="n109">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="1095.0"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.908369417982" y="1095.0"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#00FF00" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="146.880859375" x="56.4345703125" xml:space="preserve" y="-0.40234375">Естественная навигация
@@ -1531,10 +1502,10 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n112">
+    <node id="n110">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1370.2731843171296" y="910.9999999999999"/>
+          <y:Geometry height="62.0" width="259.75" x="1370.2731843171296" y="910.9999999999999"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="189.466796875" x="35.1416015625" xml:space="preserve" y="-0.40234375">Боевые ксеноморфы
@@ -1545,14 +1516,14 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:ShapeNode>
       </data>
     </node>
-    <node id="n113">
+    <node id="n111">
       <data key="d5" xml:space="preserve"><![CDATA[Можно производить биоаналоги любых доступных модулей
 как проекты ветки Генетики; сложность растет на 2, 
 модуль получает свойство "гигер"
 ]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="1365.908369417982" y="726.9999999999999"/>
+          <y:Geometry height="62.0" width="259.75" x="1365.908369417982" y="726.9999999999999"/>
           <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="244.9609375" x="7.39453125" xml:space="preserve" y="-0.40234375">Живая технология
@@ -1560,6 +1531,35 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
 Эффект: :производство модулей за
 Общество/Генетику; дает цена +2 и "гигер"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n112">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.0" width="259.75" x="213.79166666666669" y="451.0"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
+          <y:BorderStyle color="#0000FF" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.892578125" x="14.4287109375" xml:space="preserve" y="6.9482421875">Прикладная метеорология
+Сложность: 2
+Эффект: Общество +1, Метеозащита +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n113">
+      <data key="d5" xml:space="preserve"><![CDATA[В каком-то смысле являясь более мощной версией HAARP, этот внушительных размеров комплекс  излучателей, метеорадаров и миномётных систем обеспечивает в покрываемой области приемлимое количество осадков и скорость ветра.
+
+Внимание - пригоден для борьбы с непривычной средой, но не чуждой! Кислотные облака и ветер под сто метров в секунду таким образом разогнать не получится.]]></data>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.0" width="259.75" x="-75.0" y="543.0000000000001"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="148.94921875" x="55.400390625" xml:space="preserve" y="6.9482421875">Станция контроля погоды
+Сложность: 2
+Эффект: Метеозащита 1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -2043,7 +2043,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e48" source="n39" target="n12">
+    <edge id="e48" source="n10" target="n72">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2053,7 +2053,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e49" source="n10" target="n72">
+    <edge id="e49" source="n2" target="n4">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2063,7 +2063,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e50" source="n2" target="n4">
+    <edge id="e50" source="n41" target="n16">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2073,7 +2073,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e51" source="n41" target="n16">
+    <edge id="e51" source="n10" target="n9">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2083,7 +2083,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e52" source="n10" target="n9">
+    <edge id="e52" source="n68" target="n73">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2093,7 +2093,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e53" source="n12" target="n73">
+    <edge id="e53" source="n3" target="n80">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2103,7 +2103,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e54" source="n73" target="n41">
+    <edge id="e54" source="n17" target="n77">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2113,7 +2113,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e55" source="n73" target="n74">
+    <edge id="e55" source="n29" target="n79">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2123,7 +2123,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e56" source="n68" target="n75">
+    <edge id="e56" source="n49" target="n29">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2133,7 +2133,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e57" source="n3" target="n82">
+    <edge id="e57" source="n12" target="n81">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2143,7 +2143,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e58" source="n17" target="n79">
+    <edge id="e58" source="n68" target="n82">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2153,7 +2153,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e59" source="n29" target="n81">
+    <edge id="e59" source="n16" target="n83">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2163,7 +2163,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e60" source="n49" target="n29">
+    <edge id="e60" source="n87" target="n78">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2173,7 +2173,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e61" source="n12" target="n83">
+    <edge id="e61" source="n84" target="n87">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2183,7 +2183,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e62" source="n68" target="n84">
+    <edge id="e62" source="n86" target="n84">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2193,7 +2193,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e63" source="n16" target="n85">
+    <edge id="e63" source="n47" target="n84">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2203,7 +2203,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e64" source="n89" target="n80">
+    <edge id="e64" source="n86" target="n70">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2213,7 +2213,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e65" source="n86" target="n89">
+    <edge id="e65" source="n87" target="n88">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2223,7 +2223,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e66" source="n88" target="n86">
+    <edge id="e66" source="n24" target="n89">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2233,7 +2233,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e67" source="n47" target="n86">
+    <edge id="e67" source="n87" target="n91">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2243,7 +2243,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e68" source="n88" target="n70">
+    <edge id="e68" source="n23" target="n92">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2253,7 +2253,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e69" source="n89" target="n90">
+    <edge id="e69" source="n29" target="n93">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2263,7 +2263,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e70" source="n24" target="n91">
+    <edge id="e70" source="n93" target="n25">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2273,7 +2273,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e71" source="n89" target="n93">
+    <edge id="e71" source="n93" target="n90">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2283,7 +2283,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e72" source="n23" target="n94">
+    <edge id="e72" source="n24" target="n95">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2293,7 +2293,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e73" source="n29" target="n95">
+    <edge id="e73" source="n71" target="n97">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2303,7 +2303,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e74" source="n95" target="n25">
+    <edge id="e74" source="n2" target="n74">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2313,7 +2313,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e75" source="n95" target="n92">
+    <edge id="e75" source="n71" target="n86">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2323,7 +2323,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e76" source="n30" target="n96">
+    <edge id="e76" source="n24" target="n47">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2333,7 +2333,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e77" source="n24" target="n97">
+    <edge id="e77" source="n27" target="n99">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2343,7 +2343,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e78" source="n71" target="n99">
+    <edge id="e78" source="n68" target="n96">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2353,7 +2353,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e79" source="n2" target="n76">
+    <edge id="e79" source="n25" target="n100">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2363,7 +2363,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e80" source="n71" target="n88">
+    <edge id="e80" source="n100" target="n85">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2373,7 +2373,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e81" source="n24" target="n47">
+    <edge id="e81" source="n100" target="n101">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2383,7 +2383,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e82" source="n27" target="n101">
+    <edge id="e82" source="n100" target="n102">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2393,7 +2393,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e83" source="n68" target="n98">
+    <edge id="e83" source="n87" target="n103">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2403,7 +2403,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e84" source="n25" target="n102">
+    <edge id="e84" source="n47" target="n104">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2413,7 +2413,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e85" source="n102" target="n87">
+    <edge id="e85" source="n15" target="n105">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2423,7 +2423,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e86" source="n102" target="n103">
+    <edge id="e86" source="n25" target="n106">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2433,7 +2433,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e87" source="n102" target="n104">
+    <edge id="e87" source="n3" target="n50">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2443,7 +2443,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e88" source="n89" target="n105">
+    <edge id="e88" source="n41" target="n107">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2453,7 +2453,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e89" source="n47" target="n106">
+    <edge id="e89" source="n49" target="n108">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2463,7 +2463,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e90" source="n15" target="n107">
+    <edge id="e90" source="n82" target="n108">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2473,7 +2473,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e91" source="n25" target="n108">
+    <edge id="e91" source="n23" target="n98">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2483,7 +2483,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e92" source="n3" target="n50">
+    <edge id="e92" source="n98" target="n24">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2493,7 +2493,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e93" source="n41" target="n109">
+    <edge id="e93" source="n98" target="n109">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2503,7 +2503,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e94" source="n49" target="n110">
+    <edge id="e94" source="n22" target="n110">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2513,7 +2513,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e95" source="n84" target="n110">
+    <edge id="e95" source="n13" target="n111">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2523,7 +2523,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e96" source="n23" target="n100">
+    <edge id="e96" source="n112" target="n113">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2533,7 +2533,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e97" source="n100" target="n24">
+    <edge id="e97" source="n12" target="n41">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2543,7 +2543,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e98" source="n100" target="n111">
+    <edge id="e98" source="n39" target="n112">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2553,7 +2553,7 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e99" source="n22" target="n112">
+    <edge id="e99" source="n112" target="n12">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2563,7 +2563,8 @@ FTL, гигер<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelMod
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e100" source="n13" target="n113">
+    <edge id="e100" source="n98" target="n94">
+      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>

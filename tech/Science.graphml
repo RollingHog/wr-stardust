@@ -211,7 +211,7 @@
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="184.05859375" x="37.845703125" xml:space="preserve" y="6.948242187500057">Клиника имплантов
-Сложность: 2, осуждение(2)
+Сложность: 2, осуждение(1)
 Эффект: Общество +2, Хром +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
@@ -500,7 +500,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.744140625" x="19.5029296875" xml:space="preserve" y="-0.40234375">Экранирование имплантов
 Сложность: 3, осуждение(3)
 Эффект: Сверхадаптация +1, :защита
-от ЭМ-излучения и радиации, Хром +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+от ЭМ-излучения и радиации, Хром +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -525,7 +525,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="187.181640625" x="36.2841796875" xml:space="preserve" y="6.948242187500057">Подкожные скафандры
-Сложность: 2, осуждение(2)
+Сложность: 2, осуждение(1)
 Эффект: Адаптация +2, Хром +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram2"/>
         </y:ShapeNode>
@@ -618,9 +618,9 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
           <y:Geometry height="62.00000000000006" width="259.75" x="918.2190026222316" y="621.4324263674615"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="162.455078125" x="48.647460937499886" xml:space="preserve" y="6.9482421875">Экзокортекс
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="215.740234375" x="22.004882812499886" xml:space="preserve" y="6.9482421875">Экзокортекс
 Сложность: 3, приз
-Эффект: +2 свободных куба<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: +2 свободных куба, Хром +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
@@ -1073,9 +1073,9 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="621.4324263674615"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="192.80078125" x="33.474609375" xml:space="preserve" y="6.9482421875">Нанороботы
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="205.533203125" x="27.1083984375" xml:space="preserve" y="6.9482421875">Нанороботы
 Сложность: 3, наноматериалы (1)
-Эффект: Производство +3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: Производство +3, Хром +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -1089,7 +1089,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="216.56640625" x="21.591796874999886" xml:space="preserve" y="-0.40234375">Когнитивные расширители
 Сложность: 3, осуждение (3)
 Эффект: Игнорирование критпровала
-(Компьютеры), Хром +2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+(Компьютеры), Хром +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
         </y:ShapeNode>
       </data>
@@ -1255,9 +1255,9 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
           <y:Geometry height="62.00000000000006" width="259.75" x="1204.492186939361" y="253.43242636746146"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="3.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="152.248046875" x="53.7509765625" xml:space="preserve" y="6.948242187500057">Импланты
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="205.533203125" x="27.1083984375" xml:space="preserve" y="6.948242187500057">Импланты
 Сложность: 1
-Эффект: Производство +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+Эффект: Производство +1, Хром +1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -1650,7 +1650,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
       <data key="d5" xml:space="preserve"><![CDATA["На данный момент движение по ул. Козлова одностороннее. На проспекте Земли на движение к центру выделено две встречных полосы..."]]></data>
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="62.00000000000006" width="259.75" x="914.7421869393611" y="805.4324263674614"/>
+          <y:Geometry height="62.00000000000006" width="259.75" x="914.7421869393611" y="897.4324263674612"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="130.7734375" x="64.48828125" xml:space="preserve" y="6.9482421875">Умный город
@@ -1725,9 +1725,23 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
           <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="179.634765625" x="40.0576171875" xml:space="preserve" y="-0.40234375">Цех тонкой сборки
 Сложность: 4, чудо,
-наноматериалы (1), хром (3)
+наноматериалы (1), хром (4)
 Эффект: Создание модулей +8<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="parallelogram"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n129">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="62.00000000000006" width="259.75" x="914.7421869393611" y="805.4324263674615"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
+          <y:BorderStyle color="#FF0000" raised="false" type="line" width="3.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="210.115234375" x="24.8173828125" xml:space="preserve" y="-0.40234375">Бытовой нанорой
+Сложность: 4, наноматериалы (1)
+Эффект: нанорой, 0 слотов, Атака 1,
++1 свободный куб<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="octagon"/>
         </y:ShapeNode>
       </data>
     </node>
@@ -2803,7 +2817,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e107" source="n2" target="n123">
+    <edge id="e107" source="n74" target="n124">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2813,7 +2827,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e108" source="n74" target="n124">
+    <edge id="e108" source="n66" target="n103">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2823,7 +2837,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e109" source="n66" target="n103">
+    <edge id="e109" source="n102" target="n125">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2833,7 +2847,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e110" source="n102" target="n125">
+    <edge id="e110" source="n59" target="n125">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2843,7 +2857,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e111" source="n59" target="n125">
+    <edge id="e111" source="n44" target="n1">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2853,7 +2867,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e112" source="n44" target="n1">
+    <edge id="e112" source="n9" target="n4">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2863,7 +2877,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e113" source="n9" target="n4">
+    <edge id="e113" source="n4" target="n44">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2873,7 +2887,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e114" source="n4" target="n44">
+    <edge id="e114" source="n44" target="n126">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2883,7 +2897,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e115" source="n44" target="n126">
+    <edge id="e115" source="n126" target="n5">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2893,7 +2907,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e116" source="n126" target="n5">
+    <edge id="e116" source="n126" target="n116">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2903,7 +2917,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e117" source="n126" target="n116">
+    <edge id="e117" source="n81" target="n127">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2913,7 +2927,7 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e118" source="n81" target="n127">
+    <edge id="e118" source="n81" target="n128">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2923,7 +2937,29 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e119" source="n81" target="n128">
+    <edge id="e119" source="n78" target="n123">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e120" source="n2" target="n129">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e121" source="n77" target="n129">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
