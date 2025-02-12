@@ -17,6 +17,8 @@ table {
   top: 8px;
   right: 8px;
   z-index: 5;
+  background: lightgray; 
+  padding: 4px 8px;
 }
 
 .border {

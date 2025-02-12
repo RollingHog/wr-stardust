@@ -1542,17 +1542,19 @@ const Analysis = {
         return result.filter(e => e).join(', ')
       }
 
+      const removedColor = 'lightcoral'
+      const addedColor = 'lightgreen'
       const colorWrap = (str, fill) => `<span style="background: ${fill}">${str.replace(/\n/g, ' ')}</span>`
       const addedStr = delta.added.map(name => colorWrap(inverted.alltech[name].fullText, inverted.alltech[name].fill)).join('<br>')
       const removedStr = delta.removed.map(name => colorWrap(oldTech[name].fullText, TREE_TYPE_2_FILL[oldTech[name].treeName])).join('<br>')
 
       let str = `<style>
         .removed-text {
-          background: lightcoral;
+          background: ${removedColor};
         }
         
         .added-text {
-          background: lightgreen;
+          background: ${addedColor};
         }
 
         #el_reports_list {
@@ -1571,18 +1573,24 @@ const Analysis = {
       for (let name of Object.values(delta.changed)) {
         const fullOld = oldTech[name].fullText.replace(/\n/g, ' ').replace(/^.*(?=Сложность:)/, '').split('Эффект: ')
         const fullNew = inverted.alltech[name].fullText.replace(/\n/g, ' ').replace(/^.*(?=Сложность:)/, '').split('Эффект: ')
-        const oldStr = 
+
+        const lvlStr = oldTech[name].lvl !== inverted.alltech[name].lvl
+          ? `Уровень: ${colorWrap(oldTech[name].lvl.toString(10), removedColor)}<br>Уровень: ${colorWrap(inverted.alltech[name].lvl.toString(10), addedColor)}`
+          : ''
+
+        const costStr = 
           stringDiff(fullNew[0], fullOld[0], 'removed') 
           + '<br>'
           + stringDiff(fullOld[0], fullNew[0], 'added')
 
-        const newStr = 'Эффект: ' + stringDiff(fullNew[1], fullOld[1], 'removed')
+        const effectStr = 'Эффект: ' + stringDiff(fullNew[1], fullOld[1], 'removed')
           + '<br>'
           + 'Эффект: ' + stringDiff(fullOld[1], fullNew[1], 'added')
 
         str += '<div class=border>' + colorWrap(name, inverted.alltech[name].fill) + '<br>' 
-          + (oldStr.length > 20 ? oldStr + '<br>' : '') 
-          + (newStr.length > 20 ? newStr + '<br>' : '') 
+          + (lvlStr.length > 0 ? lvlStr + '<br>' : '') 
+          + (costStr.length > 20 ? costStr + '<br>' : '') 
+          + (effectStr.length > 20 ? effectStr + '<br>' : '') 
           + '<br></div>'
       }
 
