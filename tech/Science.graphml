@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
-  <!--Created by yEd 3.22-->
+  <!--Created by yEd 3.24-->
   <key attr.name="Description" attr.type="string" for="graph" id="d0"/>
   <key for="port" id="d1" yfiles.type="portgraphics"/>
   <key for="port" id="d2" yfiles.type="portgeometry"/>
@@ -231,6 +231,9 @@
       </data>
     </node>
     <node id="n16">
+      <data key="d5" xml:space="preserve"><![CDATA[В теории струн и связанных с ней теориях (например, теориях супергравитации) брана — 
+это физический объект, который обобщает понятие нульмерной точечной частицы, 
+одномерной струны или двумерной мембраны на объекты более высоких размерностей.]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="62.00000000000006" width="259.75" x="43.575520272694604" y="621.4324263674615"/>
@@ -2938,7 +2941,6 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
       </data>
     </edge>
     <edge id="e119" source="n78" target="n123">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2949,7 +2951,6 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
       </data>
     </edge>
     <edge id="e120" source="n2" target="n129">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -2960,7 +2961,6 @@ https://www.popularmechanics.com/space/deep-space/a42874313/black-holes-aliens-q
       </data>
     </edge>
     <edge id="e121" source="n77" target="n129">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
