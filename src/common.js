@@ -91,6 +91,7 @@ var FILL_2_TREE_TYPE = {
   "#FFCC00": "Industry",
   "#99CCFF": "Science",
   "#CC99FF": "Sociology",
+  "#FFFFFF": "Unique",
 }
 
 /** @type {typeof TREELIST[number]} */
