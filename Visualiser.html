@@ -77,15 +77,19 @@
   }
 
   /* скрыть избыточную информацию в анализе userpost */
-  #el_selected_tech_list table.hide-interm-columns thead tr th:nth-child(3),
   #el_selected_tech_list table.hide-interm-columns thead tr th:nth-child(4),
   #el_selected_tech_list table.hide-interm-columns thead tr th:nth-child(5),
-  #el_selected_tech_list table.hide-interm-columns tbody tr td:nth-child(3),
+  #el_selected_tech_list table.hide-interm-columns thead tr th:nth-child(6),
   #el_selected_tech_list table.hide-interm-columns tbody tr td:nth-child(4),
-  #el_selected_tech_list table.hide-interm-columns tbody tr td:nth-child(5)
+  #el_selected_tech_list table.hide-interm-columns tbody tr td:nth-child(5),
+  #el_selected_tech_list table.hide-interm-columns tbody tr td:nth-child(6)
   {
     display: none;
     visibility: hidden;
+  }
+
+  #el_selected_tech_list table.hide-interm-columns tbody tr td:nth-child(1) {
+    background-color: white;
   }
 </style>
 <style id="style__text_title">

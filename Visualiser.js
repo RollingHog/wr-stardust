@@ -1765,6 +1765,23 @@ const TechUtils = {
    */
   getMaterialSeries(materialName) {
     return Math.floor(KEYWORDS.MATERIALS.indexOf(materialName) / 2 + 1)
+  },
+
+  // TODO
+  /**
+   * @param {*} rawExpr 
+   * @param {*} effect 
+   * @param {*} userDataObj 
+   */
+  parseExpression(rawExpr = '[2 + Общество/5 - 1]', effectsObj, userDataObj) {
+    let expr = rawExpr
+      .replace(/[[\]]/g,'')
+      .split('+')
+      .map(s => ('+' + s.trim()).split('-'))
+      .flat()
+
+    let result = 0
+    return expr
   }
 }
 
@@ -1972,16 +1989,27 @@ const User = /** @type {const} */({
     const addIfOnce = (str) => KEYWORDS.ONLY_ONCE_KW === str ? `${KEYWORDS.ONLY_ONCE_KW}: ` : ''
 
     const effect = {}
-    for (let i of effectsData) {
-      if (isSpecial(i[0])) {
-        i[0] = ':' + addIfOnce(i[0]) + i[1]
-        i[1] = null
+    const specEffectsList = []
+    for (let [k, v] of effectsData) {
+      if (isSpecial(k)) {
+        k = ':' + addIfOnce(k) + v
+        v = null
       }
 
-      if (!effect[i[0]])
-        effect[i[0]] = +i[1]
+      if(typeof v === 'string' && v.includes('[')) {
+        specEffectsList.push([k, v])
+        continue
+      }
+
+      if (!effect[k])
+        effect[k] = +v
       else
-        effect[i[0]] += +i[1]
+        effect[k] += +v
+    }
+
+    // TODO
+    for(let [k, v] of specEffectsList) {
+      TechUtils.parseExpression(v, effect, userDataObj)
     }
 
     const cost = costData
@@ -2808,7 +2836,7 @@ const playerPost = {
       i.rolls = rolls
     }
 
-    let bonusThings = [...text.matchAll(/\+\+([^+]+)\+\+/g)].map(e => ({
+    let bonusThings = [...text.matchAll(/\+\+([^+]+)\+\+/g), ...text.matchAll(/\n(===)+/g)].map(e => ({
       text: e[1],
       rolls: {
         sum: null,
@@ -2828,7 +2856,7 @@ const playerPost = {
     // Array.from(document.querySelectorAll('#el_selected_tech_list tbody tr:not([style="background-color: goldenrod;"]) td:nth-child(2)')).map(e => +e.textContent).reduce((partialSum, a) => partialSum + a, 0)
     getEl('el_selected_tech_list').innerHTML = `<table class=hide-interm-columns>
     <thead>
-      <th>${['Технология', 'Цена', "КПров", "Усп", "КУсп", "Брош.", "Дельт", "КДлт"].join('</th><th>')}</th>
+      <th>${['Субд', 'Технология', 'Цена', "КПров", "Усп", "КУсп", "Брош.", "Дельт", "КДлт"].join('</th><th>')}</th>
       <th 
         onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
       <button>+</button>
@@ -2836,12 +2864,13 @@ const playerPost = {
     </thead>
     <tbody>
     <tr>
-    ${requests.map(e => '<td>' + [e.text, e.threshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta, e.rolls.critdelta].join('</td><td>') + '</td>' +
+    ${requests.map(e => '<td>' + ['', e.text, e.threshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta, e.rolls.critdelta].join('</td><td>') + '</td>' +
       '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
         .join('</tr><tr>')}
     </tr>
     </tbody><tbody>
     <tr>
+      <td></td>
       <td>ВСЕГО</td>
       <td>${requests.reduce((sum, e) => sum + +(e.threshold || 0), 0)}</td>
       <td>${requests.reduce((sum, e) => sum + +e.rolls.critfails, 0)}</td>
@@ -2850,6 +2879,7 @@ const playerPost = {
       <td>${rollsTotal}</td>
     </tr>
     <tr>
+      <td></td>
       <td>СТЕПЕНЬ ОТКАЗА ТЕОРВЕРА</td>
       <td contenteditable=false><button onclick="qs('#el_selected_tech_list table').className=''" title='Expand hidden columns'>E</button></td>
       <td>${(requests.reduce((sum, e) => sum + +e.rolls.critfails, 0) / rollsTotal / 0.1 * 100 - 100).toFixed(0)}%</td>
@@ -2863,14 +2893,15 @@ const playerPost = {
   },
 
   fieldPositionsInTable: /** @type {const} */({
-    name: 0,
-    price: 1,
-    critfails: 2,
-    wins: 3,
-    critwins: 4,
-    sum: 5,
-    delta: 6,
-    critdelta: 7,
+    subtree: 0,
+    name: 1,
+    price: 2,
+    critfails: 3,
+    wins: 4,
+    critwins: 5,
+    sum: 6,
+    delta: 7,
+    critdelta: 8,
   }),
 
   formBattleRolls() {
@@ -2952,12 +2983,20 @@ const playerPost = {
           + +e.children[pos.critwins].innerText * 2
           - +e.children[pos.critfails].innerText
 
-        if (TechUtils.get(techText)) {
+        const tTech = TechUtils.get(techText)
 
-          e.children[pos.name].style.backgroundColor = TechUtils.get(techText).fill
+        if (tTech) {
+
+          e.children[pos.name].style.backgroundColor = tTech.fill
+          
+          if(tTech.subtree) {
+            e.children[pos.subtree].innerText = tTech.subtree.slice(0, 3)
+            e.children[pos.subtree].title = tTech.subtree
+            e.children[pos.subtree].style.backgroundColor = tTech.fill
+          }
 
           // special cost
-          const materialsCost = TechUtils.get(techText).cost
+          const materialsCost = tTech.cost
             .filter(([k2, _v]) => isSpecialCost(k2))
           if (materialsCost.length) {
             // e.children[pos.price].innerText = 
@@ -2982,9 +3021,9 @@ const playerPost = {
 
           }
           if (!e.children[pos.price].innerText.startsWith('+')) {
-            e.children[pos.price].innerText = TechUtils.get(techText).cost[0][1]
+            e.children[pos.price].innerText = tTech.cost[0][1]
           } else {
-            e.children[pos.price].title = 'Обычная цена: ' + TechUtils.get(techText).cost[0][1] + '; ' + e.children[pos.price].title
+            e.children[pos.price].title = 'Обычная цена: ' + tTech.cost[0][1] + '; ' + e.children[pos.price].title
           }
 
           result = techText
@@ -3333,29 +3372,31 @@ const parseNode = {
   effects(effectRaw, { treeName, name } = { treeName: null, name: null }) {
     if (!effectRaw.length) return []
 
+    const digitRE = '([+-]?(\\d+|\\[[^\\]]+\\]))'
+
     const effect = effectRaw
       .split(',')
       .map(e => e
         .trim()
         .replace(/:/g, VARS.DISABLE_PARSE_IMMUNITY ? '' : KEYWORDS.ITS_SPECIAL + ':')
         .replace(/ {2,}/g, ' ')
-        .replace(new RegExp(`^(${KEYWORDS.COLONY_PARAMS.join('|')}) ([+-]\\d+)$`), '$1:$2')
-        .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.COLONY_PARAMS.join('|')}) ${digitRE}$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.ADDITIONAL_COLONY_PARAMS.join('|')}) ${digitRE}$`), '$1:$2')
         .replace(/^\+?(\d+) свободн(ый|ых) куба?$/i, 'Свободный:$1')
         .replace(new RegExp(`^${KEYWORDS.ONLY_ONCE_KW} (.*)`, 'i'), `${KEYWORDS.ONLY_ONCE_KW}:$1`)
         // вещества
-        .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MATERIALS.join('|')}) ${digitRE}$`), '$1:$2')
         // параметры планеты
-        .replace(new RegExp(`^(${KEYWORDS.PLANET_PARAMS.join('|')}) [+-]?(\\d+)`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.PLANET_PARAMS.join('|')}) ${digitRE}`), '$1:$2')
         // Эффекты и бонусы:
-        .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.TECH_EFFECTS.concat([KEYWORDS.RESERVE_KW]).join('|')}) ${digitRE}$`), '$1:$2')
         // идеологии
-        .replace(new RegExp(`^(${KEYWORDS.IDEOLOGIES.join('|')}) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.IDEOLOGIES.join('|')}) ${digitRE}$`), '$1:$2')
         // Плюсы к научным веткам
         .replace(/^Вет(?:ка|вь) "?([^"]+)"? ([+-]?\d+)/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$1"):$2')
         .replace(/^\+?(\d+) (?:куб(?:а|ов)? )?к вет(?:ке|ви) "([^"]+)"/i, KEYWORDS.RESEARCH_KEYWORD + ' (ветка "$2"):$1')
         // игнорирование осуждения принесенного за ход
-        .replace(new RegExp(`^(${KEYWORDS.IGNORE_CONDEMN_KW} \\([^\\)]+\\)) ([+-]?\\d+)$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.IGNORE_CONDEMN_KW} \\([^\\)]+\\)) ${digitRE}$`), '$1:$2')
         // игнорирование критпровала, всегда +1
         .replace(new RegExp(`^(${KEYWORDS.IGNORE_CRITFAIL_KW} \\([^\\)]+\\))$`), '$1:+1')
         // армии и звездолёты
@@ -3364,10 +3405,10 @@ const parseNode = {
         .replace(/(\d+) слот(?:а|ов)?$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + ':$1')
         // .replace(/(\d+) слота? (МО|ПКО)$/i, KEYWORDS.UNIT_SLOTS_KEYWORD + '($2):$1')
         // модули и оружие, глобальные военные эффекты
-        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ([+-]?\\d+)$`), '$1:$2')
-        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) ([+-]?\\d+)$`), '$1:$2')
-        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
-        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ([+-]?\\d+)$`), '$1 $2:$3')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) ${digitRE}$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) ${digitRE}$`), '$1:$2')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS.join('|')}) (армий|флотов) ${digitRE}$`), '$1 $2:$3')
+        .replace(new RegExp(`^(${KEYWORDS.MILITARY_PARAMS_ADDITIONAL.join('|')}) (армий|флотов) ${digitRE}$`), '$1 $2:$3')
         .replace(/^\+?(\d+) очк(?:о|а|ов)? распределения (армиям|флотам)? ?/, 'Очки распределения $2:$1')
         .replace(new RegExp(`^(${KEYWORDS.MODULE_NUM_PROPS.join('|')}) \\+?([\\d.]+)$`), '$1:$2')
         .replace(/^Создание (армий|флотов|модулей|гигеров|(?:наземных|космических) баз|хабитатов) \+?(\d+)$/, KEYWORDS.CREATION_KEYWORD + ' $1:$2')
