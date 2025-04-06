@@ -1022,7 +1022,17 @@ const Analysis = {
   // leading underscore makes it non-clickable head of section
   Reports: {
     кнопочки() {
-      Analysis.reportTable({ 'только проекты': `<button onclick="Object.values(tech[techData.currentTreeName]).filter(e=>e.type!=='hexagon').forEach(e=>getEl(e.id).setAttribute('fill','white'))">do</button>` })
+      Analysis.reportTable({
+         'только проекты': `<button onclick=
+          "Object.values(tech[techData.currentTreeName]).filter(e=>e.type!=='hexagon').forEach(e=>getEl(e.id).setAttribute('fill','white'))"
+          >do</button>`,
+          'подсветить tech thresholds': `<button onclick=
+          "Object.values(window['DATA__TECH_THRESHOLDS'].data[techData.currentTreeName])
+            .flat().map(([k,v])=> ([TechUtils.get(k)?.id,v]))
+            .filter(([k,v])=>k)
+            .forEach(([id,v])=>{getEl(id).setAttribute('fill','lawngreen'); })"
+          >do</button>`,
+        })
     },
 
     эффекты_тех() {
@@ -1785,6 +1795,60 @@ const TechUtils = {
   }
 }
 
+const Colony =  /** @type {const} */({
+  createColonyDescription(playerName) {
+    if (!window['DATA__TECH_THRESHOLDS']) return ''
+    const techThresholds = window['DATA__TECH_THRESHOLDS'].data
+    // const planetDescriptions = window['DATA__TECH_THRESHOLDS'].planetDescriptions
+
+    let res = '<br><b>ПЛАНЕТА</b><br>'
+
+    const { planetParams } = User.getSavedUserData(playerName)
+
+    res += VARS.effectsOfPlanetSize[planetParams["Тип планеты"]].map(e => e.join(' ')).join('<br>')
+
+    res += '<br><b>ТЕХНОЛОГИИ</b><br>'
+    for (let tree in techThresholds) {
+      for (let subtree in techThresholds[tree]) {
+        let lastProperStr = null
+        for (let conditionBlock of techThresholds[tree][subtree]) {
+          if (subtree !== 'other') {
+            if (
+              conditionBlock[0] !== "BASE"
+              && !User.checkIfUserHasTech(playerName, conditionBlock[0])
+            ) break
+            lastProperStr = conditionBlock[1]
+          } else {
+            if (User.checkIfUserHasTech(playerName, conditionBlock[0])) res += `${conditionBlock[1]}. `
+          }
+        }
+        if (lastProperStr) res += `${lastProperStr}. `
+      }
+      res += '<br><br>'
+    }
+
+    setTimeout(() => {
+      const balanceData = Analysis.countTechBalanceBySubtree()[playerName]
+      let chartData = []
+
+      for (let treeName in techData.subtreeBorders) {
+        const subtreeList = techData.subtreeBorders[treeName]
+        const x = [treeName, 0, subtreeList[0].fill]
+        for (let subtreeObj of subtreeList) {
+          x[1] += +balanceData[capitalizeFirstLetter(subtreeObj.fullText)] || 0
+        }
+        chartData.push(x)
+      }
+      draw.pieChart(chartData)
+    }, 10)
+
+    res += '<br><b>СООТНОШЕНИЕ ТЕХНОЛОГИЙ</b><br>'
+    res += draw.createCаnvasHTML({ size: 400, title: `${playerName}` })
+
+    return res
+  },
+})
+
 const User = /** @type {const} */({
 
   activePlayer: null,
@@ -2130,57 +2194,7 @@ const User = /** @type {const} */({
     )
   },
 
-  createColonyDescription(playerName) {
-    if (!window['DATA__TECH_THRESHOLDS']) return ''
-    const techThresholds = window['DATA__TECH_THRESHOLDS'].data
-    const planetDescriptions = window['DATA__TECH_THRESHOLDS'].planetDescriptions
-
-    let res = '<br><b>ПЛАНЕТА</b><br>'
-
-    const { planetParams } = this.getSavedUserData(playerName)
-
-    res += VARS.effectsOfPlanetSize[planetParams["Тип планеты"]].map(e => e.join(' ')).join('<br>')
-
-    res += '<br><b>ТЕХНОЛОГИИ</b><br>'
-    for (let tree in techThresholds) {
-      for (let subtree in techThresholds[tree]) {
-        let lastProperStr = null
-        for (let conditionBlock of techThresholds[tree][subtree]) {
-          if (subtree !== 'other') {
-            if (
-              conditionBlock[0] !== "BASE"
-              && !this.checkIfUserHasTech(playerName, conditionBlock[0])
-            ) break
-            lastProperStr = conditionBlock[1]
-          } else {
-            if (this.checkIfUserHasTech(playerName, conditionBlock[0])) res += `${conditionBlock[1]}. `
-          }
-        }
-        if (lastProperStr) res += `${lastProperStr}. `
-      }
-      res += '<br><br>'
-    }
-
-    setTimeout(() => {
-      const balanceData = Analysis.countTechBalanceBySubtree()[playerName]
-      let chartData = []
-
-      for (let treeName in techData.subtreeBorders) {
-        const subtreeList = techData.subtreeBorders[treeName]
-        const x = [treeName, 0, subtreeList[0].fill]
-        for (let subtreeObj of subtreeList) {
-          x[1] += +balanceData[capitalizeFirstLetter(subtreeObj.fullText)] || 0
-        }
-        chartData.push(x)
-      }
-      draw.pieChart(chartData)
-    }, 10)
-
-    res += '<br><b>СООТНОШЕНИЕ ТЕХНОЛОГИЙ</b><br>'
-    res += draw.createCаnvasHTML({ size: 400, title: `${playerName}` })
-
-    return res
-  },
+  
 
   drawUserStat(playerName) {
     const userData = User.getSavedUserData(playerName)
@@ -2220,7 +2234,7 @@ const User = /** @type {const} */({
       ` + this.createUserTechEffectsTable(effectsDataArr)
       // <a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
       //   class="fake_link">Эффекты игрока подробно</a>
-      + this.createColonyDescription(playerName)
+      + Colony.createColonyDescription(playerName)
 
     HTMLUtils.openModal('report', playerName)
   },
