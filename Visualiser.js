@@ -547,7 +547,7 @@ const Analysis = {
     Analysis.insertTechLevels()
     Analysis.countTechSubtreesBorders()
 
-    // console.log(listParam('cost', false))
+    // console.log(TechUtils.listParam('cost', false))
     if (techData.badTechCount) console.log('unrecognized tech:', techData.badTechCount)
 
     Analysis.searchBadTechRefs()
@@ -566,8 +566,8 @@ const Analysis = {
 
     setTimeout(_ => {
       // all output to clear timestamps
-      // console.log(listParam('costClear'))
-      // console.log(listAllWithoutMilitary())
+      // console.log(TechUtils.listParam('costClear'))
+      // console.log(TechUtils.listAllWithoutMilitary())
       Analysis.totalTechCount()
     }, 20)
   },
@@ -807,7 +807,7 @@ const Analysis = {
   reportBadUserData() {
     // useful when transitions happen
     for (let username of User.listUsers()) {
-      const data = User.getSavedUserData(username)
+      const data = UserUtils.getSavedUserData(username)
       const objNames = [].concat(data.localProjs, data.buildings, data.orbital, data.astroProjs)
         .flat()
         .map(name => name.replace(/ ?\([^)]+\)/, ''))
@@ -996,25 +996,29 @@ const Analysis = {
 
   /**
    * @param {{name: any, value: any}} techObjsObj 
+   * @returns {{Object<string, {count: number, list: string, sum: number}>}}
    */
   allEffectsVerbose(techObjsObj) {
     return Object.values(techObjsObj)
       .reduce((acc, techObj) => {
-        for (let i of techObj.effect) {
-          const k = i[0]
+        for (let [key, v] of techObj.effect) {
+          const k = key
           if (!acc[k])
             acc[k] = {
               count: 0,
               sum: 0,
-              list: [],
+              list: '',
             }
 
-          acc[k].count += 1
-          acc[k].sum += +i[1]
-
-          acc[k].list.push(`${techObj.name}(${+i[1]})`)
+          if (!TechUtils.isSpecial(k) && !isNaN(+v)) {
+            acc[k].count += 1
+            acc[k].sum += +v
+            acc[k].list += `${techObj.name}(${+v}), `
+          } else {
+            acc[k].count += 1
+            acc[k].list += `${techObj.name}("${v}"), `
+          }
         }
-
         return acc
       }, {})
   },
@@ -1109,35 +1113,40 @@ const Analysis = {
     },
 
     // TODO fix
-    // эффекты_игрока_подробно(reportArgs) {
-    //   let playerName
-    //   if(reportArgs && reportArgs.playerName) {
-    //     playerName = reportArgs.playerName
-    //   } else {
-    //     playerName = prompt('player name')
-    //   }
-    //   if(!playerName) return
-    //   const userDataObj = User.getSavedUserData(playerName)
-    //   const namesList = [].concat(
-    //     userDataObj.astroProjs,
-    //     userDataObj.buildings,
-    //     userDataObj.localProjs,
-    //     userDataObj.orbital,
-    //     Object.values(userDataObj.techTable).flat(),
-    //   )
-    //   // TODO fixme as in SummarycostAndEffect
-    //   const techObjsList = Object.assign({}, 
-    //     namesList.map(e => inverted.alltech[e]).filter(e => e),
-    //     { "Начальные кубы": { effect: [
+    эффекты_игрока_подробно(reportArgs) {
+      let playerName
+      if(reportArgs && reportArgs.playerName) {
+        playerName = reportArgs.playerName
+      } else {
+        playerName = prompt('player name')
+      }
+      if(!playerName) return
+      const userDataObj = UserUtils.getSavedUserData(playerName)
+      const namesList = [].concat(
+        userDataObj.astroProjs,
+        userDataObj.buildings,
+        userDataObj.localProjs,
+        userDataObj.orbital,
+        Object.values(userDataObj.techTable).flat(),
+      )
 
-    //     ]} }
-    //   )
+      const extractedObj = User.extractEffectsFromUserObj(userDataObj)
+      for(let i in extractedObj) {
+        extractedObj[i] = {
+          name: i,
+          effect: extractedObj[i]
+        }
+      }
+      const techObjsList = Object.assign({}, 
+        namesList.map(e => inverted.alltech[e]).filter(e => e),
+        extractedObj
+      )
 
-    //   const result = Analysis.allEffectsVerbose(techObjsList)
-    //   Analysis.reportTable(result, `<a class="fake_link" 
-    //     onclick="getEl('${playerName}').checked=false; getEl('${playerName}').click();">Сводный отчет: ${playerName}</a>`
-    //   )
-    // },
+      const result = Analysis.allEffectsVerbose(techObjsList)
+      Analysis.reportTable(result, `<a class="fake_link" 
+        onclick="getEl('${playerName}').checked=false; getEl('${playerName}').click();">Сводный отчет: ${playerName}</a>`
+      )
+    },
 
     эффекты_на_ТУ() {
       let TL = prompt(`TL? 1-${techData.MAX_TECH_LVL}/+`)
@@ -1265,7 +1274,7 @@ const Analysis = {
       setTimeout(() => {
         const data = Object.entries(result)
           .map(([name, val]) => ([
-            name, val['Цена'], User.getSavedUserData(name).playerColor
+            name, val['Цена'], UserUtils.getSavedUserData(name).playerColor
           ]))
         draw.pieChart(data)
       })
@@ -1294,7 +1303,7 @@ const Analysis = {
       setTimeout(() => {
         const data = Object.entries(result)
           .map(([name, val]) => ([
-            name, val['Итого'], User.getSavedUserData(name).playerColor
+            name, val['Итого'], UserUtils.getSavedUserData(name).playerColor
           ]))
         draw.pieChart(data)
       })
@@ -1308,7 +1317,7 @@ const Analysis = {
       const antiHostility = {}
 
       for (let username in User.getAllUsersData()) {
-        const userData = User.getSavedUserData(username)
+        const userData = UserUtils.getSavedUserData(username)
         const userEff = User.countUserEffects(userData)
         const misery = countPlanetRawMisery(userData)
         arr.push([username, misery])
@@ -1723,6 +1732,10 @@ const TechUtils = {
     return this.byName(techName)
   },
 
+  /** check if string key contains SPECIAL words meaning its not number field and you shouldn't process it so */
+  isSpecial: (str) => 
+    [KEYWORDS.ITS_SPECIAL, KEYWORDS.ONLY_ONCE_KW].includes(str),
+
   countCosts(techNames) {
     let t = [].concat.apply([], techNames
       .map(e => inverted.alltech[e]?.cost || VARS.defaultProjectsList[e]?.cost))
@@ -1792,7 +1805,45 @@ const TechUtils = {
 
     let result = 0
     return expr
-  }
+  },
+
+  listParam(param = 'costClear', fuckMilitary = true) {
+    //delete stat['Military']
+    const t = extractParam(param, fuckMilitary)
+    let res = param + '\n'
+    for (let i in t) {
+      res += i + '\t'
+    }
+    res = res.slice(0, -1)
+    res += '\n'
+    // eslint-disable-next-line no-unused-vars
+    for (let i in range(techData.MAX_TECH_LVL)) {
+      for (let j in t) {
+        res += (t[j].shift() || 0) + '\t'
+      }
+      res = res.slice(0, -1)
+      res += '\n'
+    }
+    return res
+  },
+
+  listAllWithoutMilitary() {
+    //delete stat['Military']
+  
+    let list = {}
+    let res = []
+  
+    for (let i of KEYWORDS.COLONY_PARAMS) {
+      list[i] = TechUtils.listParam(i).split('\n')
+      for (let j in list[i]) {
+        if (typeof res[j] == "undefined")
+          res[j] = list[i][j] + '\t'
+        else
+          res[j] += list[i][j] + '\t'
+      }
+    }
+    return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
+  },
 }
 
 const Colony =  /** @type {const} */({
@@ -1803,7 +1854,7 @@ const Colony =  /** @type {const} */({
 
     let res = '<br><b>ПЛАНЕТА</b><br>'
 
-    const { planetParams } = User.getSavedUserData(playerName)
+    const { planetParams } = UserUtils.getSavedUserData(playerName)
 
     res += VARS.effectsOfPlanetSize[planetParams["Тип планеты"]].map(e => e.join(' ')).join('<br>')
 
@@ -1849,6 +1900,17 @@ const Colony =  /** @type {const} */({
   },
 })
 
+// semi-static methods
+const UserUtils = /** @type {const} */({
+  /**
+   * @param {string} playerName 
+   * @returns {TGoogleDocUserObj}
+   */
+  getSavedUserData(playerName) {
+    return window[VARS.PLAYERS_DATA_KEY][playerName]
+  },
+})
+
 const User = /** @type {const} */({
 
   activePlayer: null,
@@ -1856,14 +1918,6 @@ const User = /** @type {const} */({
   drawActiveUser(treeName) {
     if (!this.activePlayer) return
     parseGDoc.drawTech(this.activePlayer, treeName)
-  },
-
-  /**
-   * @param {string} playerName 
-   * @returns {TGoogleDocUserObj}
-   */
-  getSavedUserData(playerName) {
-    return window[VARS.PLAYERS_DATA_KEY][playerName]
   },
 
   /**
@@ -1890,7 +1944,7 @@ const User = /** @type {const} */({
     // only after user data aquired
     let ts = ''
     for (let i of User.listUsers()) {
-      const bgColor = User.getSavedUserData(i).playerColor
+      const bgColor = UserUtils.getSavedUserData(i).playerColor
       ts += `<label><input type="checkbox" id="${i}">${i}</label>&nbsp;<span style="background-color: ${bgColor}">&emsp;</span><br>`
     }
     getEl('players_selection').innerHTML = ts
@@ -1977,7 +2031,7 @@ const User = /** @type {const} */({
    */
   getFlatUserTech(username) {
     if (techData.cache.usersFlatTech[username]) return techData.cache.usersFlatTech[username]
-    const data = User.getSavedUserData(username)
+    const data = UserUtils.getSavedUserData(username)
     let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
     const result = Object.values(data.techTable).concat(projList).flat()
     techData.cache.usersFlatTech[username] = result
@@ -2003,6 +2057,35 @@ const User = /** @type {const} */({
       })
   },
 
+  /**
+   * @param {TGoogleDocUserObj | undefined} userDataObj 
+   */
+  extractEffectsFromUserObj(userDataObj) {
+    let result = {}
+
+    if (userDataObj.colonyParams['Начальные кубы'])
+      result['Начальные кубы'] = [].concat(
+        userDataObj.colonyParams['Начальные кубы'].split('/')
+          .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
+      )
+    if (userDataObj.startingFeature) result.startingFeature = [].concat(userDataObj.startingFeature
+      .map(i => TechUtils.isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
+    )
+    if (userDataObj.uniqueResources) result.uniqueResources = [].concat(userDataObj.uniqueResources
+      .map(i => TechUtils.isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
+    )
+    if (userDataObj.planetParams) result.planetParams = [].concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
+    if (userDataObj.greatPeople) result.greatPeople = [].concat(userDataObj.greatPeople
+      .map(i => i.effect.map(j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
+      .flat()
+    )
+    if (userDataObj.secondaryColonies) result.secondaryColonies = [].concat(userDataObj.secondaryColonies
+      .map(colony => colony.effect.map(j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
+      .flat()
+    )
+    return result
+  },
+
   // TODO применять defaultProjectsList в эффектах
   /**
    * @param {string[]} techList list of tech names
@@ -2025,28 +2108,10 @@ const User = /** @type {const} */({
     )
     let costData = TechUtils.countCosts(techListFiltered)
 
-    const isSpecial = (str) => [KEYWORDS.ITS_SPECIAL, KEYWORDS.ONLY_ONCE_KW].includes(str)
 
     if (userDataObj) {
-      if (userDataObj.colonyParams['Начальные кубы'])
-        effectsData = effectsData.concat(
-          userDataObj.colonyParams['Начальные кубы'].split('/')
-            .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
-        )
-      if (userDataObj.startingFeature) effectsData = effectsData.concat(userDataObj.startingFeature
-        .map(i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
-      )
-      if (userDataObj.uniqueResources) effectsData = effectsData.concat(userDataObj.uniqueResources
-        .map(i => isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
-      )
-      if (userDataObj.planetParams) effectsData = effectsData.concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
-      if (userDataObj.greatPeople) effectsData = effectsData.concat(userDataObj.greatPeople
-        .map(i => i.effect.map(j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
-        .flat()
-      )
-      if (userDataObj.secondaryColonies) effectsData = effectsData.concat(userDataObj.secondaryColonies
-        .map(colony => colony.effect.map(j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
-        .flat()
+      effectsData = effectsData.concat(
+        Object.values(this.extractEffectsFromUserObj(userDataObj)).flat()
       )
     }
 
@@ -2055,7 +2120,7 @@ const User = /** @type {const} */({
     const effect = {}
     const specEffectsList = []
     for (let [k, v] of effectsData) {
-      if (isSpecial(k)) {
+      if (TechUtils.isSpecial(k)) {
         k = ':' + addIfOnce(k) + v
         v = null
       }
@@ -2112,13 +2177,13 @@ const User = /** @type {const} */({
    */
   getUserEffects(playerName) {
     if (!playerName) return null
-    return this.countUserEffects(this.getSavedUserData(playerName))
+    return this.countUserEffects(UserUtils.getSavedUserData(playerName))
   },
 
   /**
    * 
    * @param {*} costListArr 
-   * @param {ReturnType<typeof User.getUserEffects>} userEff 
+   * @param {Object <string, string>} userEff 
    * @returns 
    */
   createTechCostTable(costListArr, userEff) {
@@ -2141,7 +2206,6 @@ const User = /** @type {const} */({
   },
 
   /**
-   * 
    * @param {[string, effValue][]} effectsListArr 
    * @returns 
    */
@@ -2194,10 +2258,8 @@ const User = /** @type {const} */({
     )
   },
 
-  
-
   drawUserStat(playerName) {
-    const userData = User.getSavedUserData(playerName)
+    const userData = UserUtils.getSavedUserData(playerName)
     const effectsDataObj = User.countUserEffects(userData)
     const effectsDataArr = Object.entries(effectsDataObj)
       .filter(e => !e[0].startsWith(`:${KEYWORDS.ONLY_ONCE_KW}`))
@@ -2231,9 +2293,11 @@ const User = /** @type {const} */({
       <a target=_blank 
         href="./ColonyVisual.html?user=${playerName}">Внешний вид колонии</a>
       <br>
-      ` + this.createUserTechEffectsTable(effectsDataArr)
-      // <a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
-      //   class="fake_link">Эффекты игрока подробно</a>
+      `      
+      + `<a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
+      class="fake_link">Эффекты игрока подробно</a>` 
+      + this.createUserTechEffectsTable(effectsDataArr)
+
       + Colony.createColonyDescription(playerName)
 
     HTMLUtils.openModal('report', playerName)
@@ -2524,7 +2588,7 @@ const parseGDoc = {
       obj['Данные экспедиции'].children[0].rows[2].children[1].innerText
         .replace(/^[^-]+- ?/, '')
         .replace(/\([^)]+\)/g, ''),
-      { treeName: null, name: null }
+      { treeName: null, name: 'Данные экспедиции' }
     )
 
     const playerColor = obj['Данные экспедиции'].children[0].rows[0].children[5].innerText
@@ -2537,7 +2601,8 @@ const parseGDoc = {
       .filter(e => e.lvl > 0)
     greatPeople.forEach(e => {
       e.effect = e.effect.replace('Х/2', Math.floor(e.lvl / 2)).replace('Х', e.lvl)
-      e.effect = parseNode.effects(e.effect, { treeName: null, name: playerName + ' великие люди' })
+      // FIXME TODO
+      e.effect = parseNode.effects(e.effect, { treeName: null, name: playerName + ': великие люди' })
     })
 
     let secondaryColonies = !obj['Вторичные колонии'] ? [] : Array.from(obj['Вторичные колонии'].querySelectorAll('tbody tr'))
@@ -2545,7 +2610,7 @@ const parseGDoc = {
     secondaryColonies.splice(0, 1)
     secondaryColonies = secondaryColonies.map(row => ({
       lvl: row[1],
-      speciality: row[2],
+      specialty: row[2],
       effect: parseNode.effects(row[3], { treeName: null, name: playerName + ' вторичные колонии' })
     }))
 
@@ -2680,7 +2745,7 @@ class TGoogleDocUserObj {
   orbital = []
   prepaired = []
   greatPeople = []
-  /** @type { {lvl: string; speciality: string; effect: any[]}[] }  */
+  /** @type { {lvl: string; specialty: string; effect: any[]}[] }  */
   secondaryColonies = []
   uniqueResources = []
   localProjs = []
@@ -2819,7 +2884,10 @@ const playerPost = {
         || key.endsWith(KEYWORDS.IGNORE_CONDEMN_KW)
     }).map(([key, value]) => value ? key + ': ' + value : key)
 
-    const currGreatPplCost = Math.max(Math.floor(User.getSavedUserData(playerName).greatPeople.length / 2), 2)
+    const currGreatPplCost = Math.max(
+      Math.floor(UserUtils.getSavedUserData(playerName).greatPeople.length / 2)
+      , 2
+    )
 
     getEl('el_special_tech_eff_reminder').innerHTML = `${playerName}: цена Великого человека: ${currGreatPplCost}; ` + remindTechs.join(', ')
   },
@@ -3389,6 +3457,7 @@ const parseNode = {
     const digitRE = '([+-]?(\\d+|\\[[^\\]]+\\]))'
 
     const effect = effectRaw
+      // .trim()
       .split(',')
       .map(e => e
         .trim()
@@ -3596,44 +3665,6 @@ function extractParam(param, fuckMilitary = true) {
     }
   }
   return list
-}
-
-function listParam(param = 'costClear', fuckMilitary = true) {
-  //delete stat['Military']
-  const t = extractParam(param, fuckMilitary)
-  let res = param + '\n'
-  for (let i in t) {
-    res += i + '\t'
-  }
-  res = res.slice(0, -1)
-  res += '\n'
-  // eslint-disable-next-line no-unused-vars
-  for (let i in range(techData.MAX_TECH_LVL)) {
-    for (let j in t) {
-      res += (t[j].shift() || 0) + '\t'
-    }
-    res = res.slice(0, -1)
-    res += '\n'
-  }
-  return res
-}
-
-function listAllWithoutMilitary() {
-  //delete stat['Military']
-
-  let list = {}
-  let res = []
-
-  for (let i of KEYWORDS.COLONY_PARAMS) {
-    list[i] = listParam(i).split('\n')
-    for (let j in list[i]) {
-      if (typeof res[j] == "undefined")
-        res[j] = list[i][j] + '\t'
-      else
-        res[j] += list[i][j] + '\t'
-    }
-  }
-  return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
 }
 
 // eslint-disable-next-line no-unused-vars
