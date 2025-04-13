@@ -1714,10 +1714,10 @@ function drawTree(tree_name) {
 const TechUtils = {
   createEffectsTable(effectsListArr, tableName = '') {
     if (effectsListArr.length == 0) return ''
-    return '<br><table><tbody><tr>' +
+    return `<br><table data-tablename="${tableName}"><tbody><tr>` +
       (tableName ? `<tr><td colspan=2 align=center style="background: lightgrey">${tableName}</td></tr>` : '') +
       effectsListArr.map(e =>
-        `<td ${e[1] === 0 ? 'colspan=2' : ''}>${e[0]}</td>` +
+        `<td ${e[1] === 0 ? 'colspan=2' : ''} data-effect="${e[0]}">${e[0]}</td>` +
         (e[1] === 0 ? '' : `<td>${`${+e[1] >= 0 ? '&nbsp;' : ''}${e[1]}`}`)
       ).join('</tr><tr>') +
       '</tr></tbody></table>'
