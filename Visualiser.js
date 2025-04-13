@@ -3360,6 +3360,17 @@ var KEYWORDS = /** @type {const} */ ({
   TECH_EFFECT_MODS: [
     'наземное',
   ],
+  UNIT: {
+    price: 'Цена',
+    initialParams: 'Исходные А/З/С',
+    experience: 'Опыт',
+    home: 'Родина',
+    location: 'Локация',
+    hp: 'Здоровье',
+    shield: 'Щит',
+    modules: 'Модули',
+    specials: 'Особенности',
+  },
   MILITARY_PARAMS: [
     "Атака",
     "Защита",
@@ -3672,37 +3683,54 @@ class TUnit {
   name = ''
   hull = ''
   price = 0
-  expirience = 0
+  experience = 0
   home = ''
+  location = ''
 
   initialParams = []
   attack = 0
-  defence = 0
+  defense = 0
   speed = 0
 
-  HP = 0
+  hp = 0
   shield = 0
   modules = []
+  specials = []
 
-  parse(text) {
+  static parse(text) {
+    // TODO Локация Уровень 
     const arr = text.replace(/\n/g, ' - ').split(' - ').map(e => e.trim())
     var result = {
       hull: arr[0],
-      name: arr[1],
-      price: +arr[2].replace(/Цена/i, ''),
-      expirience: +arr[3].replace(/Опыт/i, ''),
-      home: arr[4].replace(/Родина/i, ''),
-      initialParams: arr[5],
-      HP: arr[6].replace(/Здоровье/i, ''),
-      shield: arr[7].replace(/Щит/i, ''),
-      modules: arr[9],
+      name: arr[1] || '',
+      price: +arr.find(el => el.startsWith('Цена')).replace('Цена', ''),
+      initialParams: arr.find(el => el.startsWith('Исходные А/З/С')),
+      experience: +arr.find(el => el.startsWith('Опыт')).replace(/Опыт/i, ''),
+      home: arr.find(el => el.startsWith('Родина')).replace(/Родина/i, ''),
+      hp: arr.find(el => el.startsWith('Здоровье')).replace(/Здоровье/i, ''),
+      shield: arr.find(el => el.startsWith('Щит')).replace('Щит ', ''),
+      modules: arr.find(el => el.startsWith('Модули')).replace(/Модули:/i, '') || '',
+      specials: arr.find(el => el.startsWith('Особенности:'))?.replace(/Особенности:/i, '') || '',
     }
     console.log(result)
     return result
   }
 
-  stringify() {
-
+  /**
+   * @param {TUnit} unit 
+   * @param {*} userObj - to count possible global effects
+   */
+  static stringify(unit, userObj = {}) {
+    //TODO
+    return `${unit.hull} - ${unit.name} - 
+${KEYWORDS.UNIT.price} ${unit.price} - ${KEYWORDS.UNIT.home} ${unit.home} - Локация ${unit.location || unit.home} -
+Уровень 0 - Опыт ${unit.experience} - Слоты 1
+Суммарные А/З/С Атака 1. Защита 2. Скорость 1
+Исходные А/З/С 1/2/4
+Здоровье ${unit.hp}/4 - Щит ${unit.shield}/0
+Модули: ${unit.modules.join(', ')}
+Особенности: ${unit.specials.join(', ')}
+`
   }
 }
 
