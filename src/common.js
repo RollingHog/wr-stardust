@@ -3,6 +3,7 @@
   getEl qs
   locationSearchToArray 
   TREELIST
+  NODE_TYPE NODET_2_RU
   FILL_2_TREE_TYPE TREE_TYPE_2_FILL PLAYERS_DATA_KEY
   capitalizeFirstLetter rgbToHex
   getDictKey
@@ -53,17 +54,17 @@ function locationSearchToArray(query) {
 }
 
 function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 function componentToHex(c) {
-  var hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
+  var hex = c.toString(16)
+  return hex.length == 1 ? "0" + hex : hex
 }
 
 function rgbToHex(r, g, b) {
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
 }
 
 function invertDict(json){
@@ -92,6 +93,26 @@ var FILL_2_TREE_TYPE = {
   "#99CCFF": "Science",
   "#CC99FF": "Sociology",
   "#FFFFFF": "Unique",
+}
+
+var NODE_TYPE = {
+  TECH: 'rectangle',
+  BUILDING: 'parallelogram',
+  PROJECT: 'parallelogram2',
+  ORBITAL: 'ellipse',
+  ASTROPROJECT: 'hexagon',
+  HULL: 'octagon',
+  MODULE_GROUND: 'trapezoid',
+  MODULE_SPACE: 'trapezoid2',
+  MODULE_BOTH: 'fatarrow',
+}
+
+var NODET_2_RU = {
+[NODE_TYPE.TECH]:'Технологии',
+[NODE_TYPE.BUILDING]:'Здания',
+[NODE_TYPE.ORBITAL]:'Орбитальные здания',
+[NODE_TYPE.PROJECT]:'Проекты',
+[NODE_TYPE.ASTROPROJECT]:'Астропроекты',
 }
 
 /** @type {typeof TREELIST[number]} */

@@ -3,6 +3,7 @@
 /* global
 getEl qs
 log warn
+NODE_TYPE NODET_2_RU
 TREELIST
 FILL_2_TREE_TYPE TREE_TYPE_2_FILL PLAYERS_DATA_KEY
 DATA__OLD_TECH DATA__OLD_TECH_TIME
@@ -52,18 +53,7 @@ const VARS = /** @type {const} */({
   },
   /** filled later */
   TREELIST_EN2RU: {},
-  NODE_T: {
-    TECH: 'rectangle',
-    BUILDING: 'parallelogram',
-    PROJECT: 'parallelogram2',
-    ORBITAL: 'ellipse',
-    ASTROPROJECT: 'hexagon',
-    HULL: 'octagon',
-    MODULE_GROUND: 'trapezoid',
-    MODULE_SPACE: 'trapezoid2',
-    MODULE_BOTH: 'fatarrow',
-  },
-  /** filled later */
+  /** english tech type names, filled later */
   NODE_TYPE_2_NAME: {},
   WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
@@ -101,7 +91,7 @@ const VARS = /** @type {const} */({
 
   ; (() => {
     VARS.TREELIST_EN2RU = Object.fromEntries(Object.entries(VARS.TREELIST_RU2EN).map(e => e.reverse()))
-    VARS.NODE_TYPE_2_NAME = Object.fromEntries(Object.entries(VARS.NODE_T).map(e => e.reverse()))
+    VARS.NODE_TYPE_2_NAME = Object.fromEntries(Object.entries(NODE_TYPE).map(e => e.reverse()))
 
     const defaultProjTemplate = {
       // subtree
@@ -643,7 +633,7 @@ const Analysis = {
         }
 
         //hulls regulated manually
-        if (![VARS.NODE_T.HULL].includes(j.type) && j.effect[0][1] !== 'наземная база') {
+        if (![NODE_TYPE.HULL].includes(j.type) && j.effect[0][1] !== 'наземная база') {
           for (let k of j.effect) {
             if (k[0] == KEYWORDS.ANY_PARAM_KEYWORD) {
               if (mult <= 2) teff += +k[1]
@@ -681,7 +671,7 @@ const Analysis = {
               teff -= +k[1] * 1.5
             }
             else if (KEYWORDS.MILITARY_PARAMS.includes(k[0])) {
-              if (j.type !== VARS.NODE_T.TECH) {
+              if (j.type !== NODE_TYPE.TECH) {
                 teff += +k[1] / 2.5
               } else {
                 teff += +k[1]
@@ -1180,7 +1170,7 @@ const Analysis = {
     список_корпусов() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
-          .filter(e => e.type == VARS.NODE_T.HULL)
+          .filter(e => e.type == NODE_TYPE.HULL)
           .map(e => [e.name, {
             "Тип": e.effect[0][1],
             "Цена": +e.cost[0][1],
@@ -1225,7 +1215,7 @@ const Analysis = {
     список_проектов() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
-          .filter(e => (e.type == VARS.NODE_T.ASTROPROJECT || e.type == VARS.NODE_T.ASTROPROJECT))
+          .filter(e => (e.type == NODE_TYPE.ASTROPROJECT || e.type == NODE_TYPE.ASTROPROJECT))
           .map(e => [e.name, {
             Цена: e.cost[0][1],
             "Свойства": Analysis.formatReportEffects(e.effect),
@@ -1790,21 +1780,125 @@ const TechUtils = {
     return Math.floor(KEYWORDS.MATERIALS.indexOf(materialName) / 2 + 1)
   },
 
-  // TODO
+  // а ведь еще юнитов учесть желательно и газовые гиганты
   /**
    * @param {*} rawExpr 
    * @param {*} effect 
-   * @param {*} userDataObj 
+   * @param {TGoogleDocUserObj} userDataObj 
+   * @returns {number | null}
+   * @example '[Орбитальные здания (шт.)/2 + 1 - Технологии ветки "Добыча"]'
+   * @example '[Орбитальные здания - 1]'
+   * названия категорий берутсяя из NODET_2_RU
    */
-  parseExpression(rawExpr = '[2 + Общество/5 - 1]', effectsObj, userDataObj) {
-    let expr = rawExpr
+  parseExpression(rawExpr, userDataObj) {
+    /** @type {string[]} */
+    let nodes = rawExpr
       .replace(/[[\]]/g,'')
-      .split('+')
-      .map(s => ('+' + s.trim()).split('-'))
-      .flat()
+      .replace(/ \(шт.?\)/g,'')
+      .replace(/\s?([+-])\s?/g,'$1')
+      .match(/(^[^+-]+|[+-][^+-]+)/g)
 
     let result = 0
-    return expr
+
+    // log(nodes)
+
+    for(let str of nodes) {
+      str = str.trim()
+      const sign = str.startsWith('-') 
+        ? -1
+        : 1
+
+      str = str.replace(/^[+-]/,'')
+
+      const mults = str.match(/[*/]\d/g) || []
+      let mult = 1
+      
+      if(mults.length > 0) {
+        if(mults.length > 1) {
+          warn('parseExpression multipliers WTF', {nodes, str, mults})
+          return null
+        }
+        
+        if(mults[0]) {
+          str = str.replace(mults[0], '')
+          if(mults[0].startsWith('*')) {
+            mult = +mults[0].slice(1)
+          } else {
+            mult = 1/+mults[0].slice(1)
+          }
+          // log({mult})
+        }
+      }
+
+      const int = Number(str)
+      if(!isNaN(int)) {
+        //FIXME clear logs
+        // log({int})
+        result += sign*int*mult
+        continue
+      }
+
+      let subtree = ''
+      if(str.includes(' ветви ')) {
+        const subtreeRegexp = / вет[вк]и "?([^"]+)"?$/
+        subtree = str.match(subtreeRegexp)[1]
+        // log({subtree})
+        str = str.replace(subtreeRegexp, '')
+      }
+
+      let tgtNodeType = null
+      for(let nodeT in NODET_2_RU) {
+        if(NODET_2_RU[nodeT] === str) {
+          tgtNodeType = nodeT
+          break
+        }
+      }
+
+      if(!tgtNodeType) {
+        warn('tgtNodeType', {nodes, str})
+        return null
+      }
+
+      /** @type {string} */
+      let tgtArr = []
+      switch(tgtNodeType) {
+        case NODE_TYPE.TECH:
+          tgtArr = Object.values(userDataObj.techTable).flat()
+          break
+        case NODE_TYPE.BUILDING:
+          tgtArr = userDataObj.buildings
+          break
+        case NODE_TYPE.ORBITAL:
+          tgtArr = userDataObj.orbital
+          break
+        case NODE_TYPE.PROJECT:
+          tgtArr = userDataObj.localProjs
+          break
+        case NODE_TYPE.ASTROPROJECT:
+          tgtArr = userDataObj.astroProjs
+          break
+      }
+
+      // log({tgtArr})
+
+      if(subtree) {
+        tgtArr = tgtArr.filter( objName => 
+          (
+            inverted.alltech[objName].subtree 
+            || capitalizeFirstLetter(Analysis.getSubtreeName(TechUtils.byName(objName)))
+          )
+          === subtree
+        )
+      }
+      
+      // log({tgtArr})
+
+      let interm = sign * tgtArr.length * mult
+      if(mult < 1) interm = +interm.toFixed(0)
+      result += interm
+    }
+
+    return result
   },
 
   listParam(param = 'costClear', fuckMilitary = true) {
@@ -2136,9 +2230,10 @@ const User = /** @type {const} */({
         effect[k] += +v
     }
 
-    // TODO
     for(let [k, v] of specEffectsList) {
-      TechUtils.parseExpression(v, effect, userDataObj)
+      const res = TechUtils.parseExpression(v, userDataObj) || 0
+      effect[k] += res
+      log('expression effect: ', k, res)
     }
 
     const cost = costData
@@ -3147,11 +3242,11 @@ const playerPost = {
       User.createUserTechEffectsTable(Object.entries(studyResult.effect))
 
     const byType = {
-      [VARS.NODE_T.TECH]: [],
-      [VARS.NODE_T.BUILDING]: [],
-      [VARS.NODE_T.ORBITAL]: [],
-      [VARS.NODE_T.PROJECT]: [],
-      [VARS.NODE_T.ASTROPROJECT]: [],
+      [NODE_TYPE.TECH]: [],
+      [NODE_TYPE.BUILDING]: [],
+      [NODE_TYPE.ORBITAL]: [],
+      [NODE_TYPE.PROJECT]: [],
+      [NODE_TYPE.ASTROPROJECT]: [],
     }
 
     techList.forEach(techName => {
@@ -3163,11 +3258,11 @@ const playerPost = {
 
     // Раскладка по типам
     getEl('el_tech_by_type_list').innerHTML = [
-      ['Технологии', byType[VARS.NODE_T.TECH]],
-      ['Здания', byType[VARS.NODE_T.BUILDING]],
-      ['Орбитальные здания', byType[VARS.NODE_T.ORBITAL]],
-      ['Проекты', byType[VARS.NODE_T.PROJECT]],
-      ['Астропроекты', byType[VARS.NODE_T.ASTROPROJECT]],
+      ['Технологии', byType[NODE_TYPE.TECH]],
+      ['Здания', byType[NODE_TYPE.BUILDING]],
+      ['Орбитальные здания', byType[NODE_TYPE.ORBITAL]],
+      ['Проекты', byType[NODE_TYPE.PROJECT]],
+      ['Астропроекты', byType[NODE_TYPE.ASTROPROJECT]],
     ].map(([columnName, namesList]) => {
       if (!namesList.length) return ''
       let tableStr
@@ -3721,7 +3816,7 @@ class TUnit {
 
   /**
    * @param {TUnit} unit 
-   * @param {*} userObj - to count possible global effects
+   * @param {TGoogleDocUserObj} userObj - to count possible global effects
    */
   static stringify(unit, userObj = {}) {
     //TODO
