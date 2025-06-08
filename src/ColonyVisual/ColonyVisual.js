@@ -82,7 +82,7 @@ function showOrbital(name, lvl, cnt, length) {
   el.style.zIndex = length - lvl
   el.style.top = `${2 + lvl * lvlPadding}vh`
   el.style.left = `${pageW/4.5 + (-lvl/2 + cnt)*cntPadding}px`
-  const isNativeOrbital = !name.includes("(орб")
+  const isNativeOrbital = !name.includes('(орб')
   const imgName = isNativeOrbital 
     ? name
       .toLowerCase()

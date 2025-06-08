@@ -24,7 +24,7 @@ function warnNoTrace(...args) {
 // some wierd SO magic
 // https://stackoverflow.com/questions/63859312/how-to-properly-override-console-warn-in-javascript
 function warn(...args) {
-  let err = new Error("trace")
+  let err = new Error('trace')
   var stack = err.stack
   if (stack) {
     stack = stack.split('\n').slice(2, 3).join('\n').trim().replace('at ', '')
@@ -60,11 +60,11 @@ function capitalizeFirstLetter(string) {
 // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 function componentToHex(c) {
   var hex = c.toString(16)
-  return hex.length == 1 ? "0" + hex : hex
+  return hex.length == 1 ? '0' + hex : hex
 }
 
 function rgbToHex(r, g, b) {
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
+  return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b)
 }
 
 function invertDict(json){
@@ -135,8 +135,8 @@ function makeElDraggable(elID, headerID) {
     pos3 = e.clientX
     pos4 = e.clientY
     // set the element's new position:
-    el.style.top = (el.offsetTop - pos2) + "px"
-    el.style.left = (el.offsetLeft - pos1) + "px"
+    el.style.top = (el.offsetTop - pos2) + 'px'
+    el.style.left = (el.offsetLeft - pos1) + 'px'
   }
 
   function closeDragElement() {

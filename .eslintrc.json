@@ -19,6 +19,7 @@
       "ignoreComments": true,
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true 
-    }]
+    }],
+    "quotes": ["warn", "single"]
   }
 }

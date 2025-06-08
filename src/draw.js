@@ -8,7 +8,7 @@
 */
 
 var draw = {
-  SVG_NS: "http://www.w3.org/2000/svg",
+  SVG_NS: 'http://www.w3.org/2000/svg',
   POLYGON_DELTA: 20,
   tech: null,
   Node: function (treeName, t) {
@@ -80,7 +80,7 @@ var draw = {
 
     /**@type {HTMLCanvasElement} */
     var canvas = document.getElementById(canvasElId)
-    var ctx = canvas.getContext("2d")
+    var ctx = canvas.getContext('2d')
     // used to be 0
     var lastEnd = -Math.PI / 2
     var data = [60, 210, 90]
@@ -106,7 +106,7 @@ var draw = {
     }
 
     // set background color
-    ctx.fillStyle = "white"
+    ctx.fillStyle = 'white'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     // make the chart 10 px smaller to fit on canvas
@@ -131,9 +131,9 @@ var draw = {
       // ctx.textAlign = "center";
       ctx.fillStyle = 'black'
       ctx.strokeStyle = 'black'
-      ctx.font = "14px Arial"
-      ctx.textAlign = "center"
-      ctx.textBaseline = "middle"
+      ctx.font = '14px Arial'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
       // middle angle, radians
       var mid = lastEnd + len / 2
       const textD = r / 1.3
@@ -164,9 +164,9 @@ var draw = {
       ctx.lineWidth = 1
       
       ctx.strokeStyle = 'black'
-      ctx.font = "20px serif"
-      ctx.textAlign = "left"
-      ctx.textBaseline = "middle"
+      ctx.font = '20px serif'
+      ctx.textAlign = 'left'
+      ctx.textBaseline = 'middle'
 
       let { width } = ctx.measureText(canvas.title)
       ctx.fillStyle = 'white'
@@ -303,7 +303,7 @@ var draw = {
       line.setAttribute('y1', y1)
       line.setAttribute('x2', x2)
       line.setAttribute('y2', y2)
-      line.setAttribute("stroke", "black")
+      line.setAttribute('stroke', 'black')
       line.setAttributeNS(null, 'stroke-width', 2)
 
       getEl('svg').insertBefore(line, getEl('svg').firstChild)
@@ -326,7 +326,7 @@ var draw = {
         curr_dx = 0,
         curr_w = 0
       // let acc = ''
-      const isFirefox = navigator.userAgent.indexOf("Firefox") !== -1
+      const isFirefox = navigator.userAgent.indexOf('Firefox') !== -1
       for (let i in arr) {
         if (i == 0) {
           let dy = arr.length == 3 ? '-0.6' : '-1.4'

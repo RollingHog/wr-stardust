@@ -6,7 +6,6 @@ log warn
 PLAYERS_DATA_KEY
 DATA__OLD_TECH DATA__OLD_TECH_TIME
 capitalizeFirstLetter rgbToHex
-getDictKey
 makeElDraggable
 hotkeysLib
 */
@@ -44,12 +43,12 @@ const VARS = /** @type {const} */({
   PLAYERS_TURN_KEY: 'DATA__PLAYERS_TURN',
   PLAYERS_DATA_KEY,
   TREELIST_RU2EN: {
-    "Война": "Military",
-    "Социология": "Sociology",
-    "Биология": "Biology",
-    "Индустрия": "Industry",
-    "Наука": "Science",
-    "Уникальные": "Unique",
+    'Война': 'Military',
+    'Социология': 'Sociology',
+    'Биология': 'Biology',
+    'Индустрия': 'Industry',
+    'Наука': 'Science',
+    'Уникальные': 'Unique',
   },
   /** filled later */
   TREELIST_EN2RU: {},
@@ -68,21 +67,21 @@ const VARS = /** @type {const} */({
    * bonuses for hull types
    */
   hulls: {
-    "пехота": ``,
-    "танки": `Защита +2, Скорость +1`,
-    "титан": `Защита +3, Щит +1, ужас`,
-    "нанорой": `Регенерация 5, нано, ужас`,
+    'пехота': '',
+    'танки': 'Защита +2, Скорость +1',
+    'титан': 'Защита +3, Щит +1, ужас',
+    'нанорой': 'Регенерация 5, нано, ужас',
     //катер - без ftl?
-    "звездолёт": ``,
-    "хабитат": `Слоупок 1`,
-    "наземная база": `неподвижна`,
-    "космическая база": `неподвижна`,
+    'звездолёт': '',
+    'хабитат': 'Слоупок 1',
+    'наземная база': 'неподвижна',
+    'космическая база': 'неподвижна',
   },
   colorToParameterType: {
     '#FF0000': 'Производство',
     '#00FF00': 'Общество',
     '#0000FF': 'Наука',
-    '#000000': "Свободный",
+    '#000000': 'Свободный',
   },
   /** filled later */
   defaultProjectsList: {},
@@ -95,49 +94,49 @@ const VARS = /** @type {const} */({
 
     const defaultProjTemplate = {
       // subtree
-      "type": 'parallelogram2',
+      'type': 'parallelogram2',
       // "borderColor": "#000000",
-      "fill": "lightgrey",
-      "req": [],
-      "next": [],
-      "fullText": "",
+      'fill': 'lightgrey',
+      'req': [],
+      'next': [],
+      'fullText': '',
     }
 
     VARS.defaultProjectsList = {
-      "Планетарная разведка": {
-        "treeName": "Industry",
-        "cost": [["Наука", "1"]],
-        "effect": [["особое", "разведка планеты"]],
+      'Планетарная разведка': {
+        'treeName': 'Industry',
+        'cost': [['Наука', '1']],
+        'effect': [['особое', 'разведка планеты']],
         ...defaultProjTemplate,
       },
-      "Резерв": {
-        "treeName": "Industry",
-        "cost": [["Любой", "1"]],
-        "effect": [["разово", "резервирование X кубов"]],
+      'Резерв': {
+        'treeName': 'Industry',
+        'cost': [['Любой', '1']],
+        'effect': [['разово', 'резервирование X кубов']],
         ...defaultProjTemplate,
       },
-      "Снятие стресса Наука": {
-        "treeName": "Science",
-        "cost": [["Наука", "1"]],
-        "effect": [["разово", "-Х*2 Стресса Науки"]],
+      'Снятие стресса Наука': {
+        'treeName': 'Science',
+        'cost': [['Наука', '1']],
+        'effect': [['разово', '-Х*2 Стресса Науки']],
         ...defaultProjTemplate,
       },
-      "Снятие стресса Производство": {
-        "treeName": "Industry",
-        "cost": [["Производство", "1"]],
-        "effect": [["разово", "-Х*2 Стресса Производства"]],
+      'Снятие стресса Производство': {
+        'treeName': 'Industry',
+        'cost': [['Производство', '1']],
+        'effect': [['разово', '-Х*2 Стресса Производства']],
         ...defaultProjTemplate,
       },
-      "Снятие стресса Общество": {
-        "treeName": "Sociology",
-        "cost": [["Общество", "1"]],
-        "effect": [["разово", "-Х*2 Стресса Общества"]],
+      'Снятие стресса Общество': {
+        'treeName': 'Sociology',
+        'cost': [['Общество', '1']],
+        'effect': [['разово', '-Х*2 Стресса Общества']],
         ...defaultProjTemplate,
       },
-      "Создание доверия": {
-        "treeName": "Sociology",
-        "cost": [["Общество", "2"]],
-        "effect": [["разово", "+Х/2 Доверия"]],
+      'Создание доверия': {
+        'treeName': 'Sociology',
+        'cost': [['Общество', '2']],
+        'effect': [['разово', '+Х/2 Доверия']],
         ...defaultProjTemplate,
       },
     }
@@ -396,7 +395,7 @@ const HTMLUtils = {
 
     const comparer = (idx, asc) => (a, b) =>
       ((v1, v2) =>
-        v1 !== "" && v2 !== "" && !isNaN(v1) && !isNaN(v2)
+        v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)
           ? v1 - v2
           : v1.toString().localeCompare(v2))(
             getCellValue(asc ? a : b, idx),
@@ -405,7 +404,7 @@ const HTMLUtils = {
 
     Array.from(document.querySelector(tableQuery).tHead.rows[0].cells).forEach(
       (th) =>
-        th.addEventListener("click", function () {
+        th.addEventListener('click', function () {
           const table = document.querySelector(tableQuery)
           Array.from(table.tBodies[0].children)
             .sort(
@@ -711,7 +710,7 @@ const Analysis = {
         if (d && mult && j.lvl !== techData.MAX_TECH_LVL) {
           if (delta < -0.6 || delta > 1) {
             cnt++
-            log(i, 'lvl', j.lvl, `\n${j.name}\n`, j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1 ? 'ДОРОГО' : "ДЕШЕВО")
+            log(i, 'lvl', j.lvl, `\n${j.name}\n`, j.effect[0][0], j.effect[0][1], `delta:${delta}`, delta > 1 ? 'ДОРОГО' : 'ДЕШЕВО')
             techData.badTechList.effect.push([j.name, delta])
           }
         }
@@ -1040,7 +1039,7 @@ const Analysis = {
         KEYWORDS.UNIT_TYPES,
         KEYWORDS.MILITARY_PARAMS,
         KEYWORDS.MILITARY_PARAMS_ADDITIONAL,
-        ["Слоты", "Тип юнита", "Тип урона", "особое"],
+        ['Слоты', 'Тип юнита', 'Тип урона', 'особое'],
       )
       let result = Object.values(inverted.alltech)
         .reduce((acc, e) => {
@@ -1172,10 +1171,10 @@ const Analysis = {
         Object.values(inverted.alltech)
           .filter(e => e.type == NODE_TYPE.HULL)
           .map(e => [e.name, {
-            "Тип": e.effect[0][1],
-            "Цена": +e.cost[0][1],
-            "Слоты": +e.effect[1][1],
-            "Свойства": Analysis.formatReportEffects(e.effect.slice(2)),
+            'Тип': e.effect[0][1],
+            'Цена': +e.cost[0][1],
+            'Слоты': +e.effect[1][1],
+            'Свойства': Analysis.formatReportEffects(e.effect.slice(2)),
           }])
       ))
     },
@@ -1195,7 +1194,7 @@ const Analysis = {
               Цена: obj.cost[0][1],
               Слоты: slots,
               Тип: VARS.NODE_TYPE_2_NAME[obj.type].replace('MODULE_', '').toLowerCase(),
-              "Свойства": Analysis.formatReportEffects(obj.effect),
+              'Свойства': Analysis.formatReportEffects(obj.effect),
             }]
           })
       ))
@@ -1204,10 +1203,10 @@ const Analysis = {
     список_зданий() {
       Analysis.reportTable(Object.fromEntries(
         Object.values(inverted.alltech)
-          .filter(e => (e.type == "parallelogram"))
+          .filter(e => (e.type == 'parallelogram'))
           .map(e => [e.name, {
             Цена: e.cost[0][1],
-            "Свойства": Analysis.formatReportEffects(e.effect),
+            'Свойства': Analysis.formatReportEffects(e.effect),
           }])
       ))
     },
@@ -1218,7 +1217,7 @@ const Analysis = {
           .filter(e => (e.type == NODE_TYPE.ASTROPROJECT || e.type == NODE_TYPE.ASTROPROJECT))
           .map(e => [e.name, {
             Цена: e.cost[0][1],
-            "Свойства": Analysis.formatReportEffects(e.effect),
+            'Свойства': Analysis.formatReportEffects(e.effect),
           }])
       ))
     },
@@ -1315,7 +1314,7 @@ const Analysis = {
         antiHostility[username] =
           (userEff.Сверхадаптация || 0) * 2 +
           (userEff.Адаптация || 0) +
-          Math.floor((userEff["Защита колонии"] || 0) / 2)
+          Math.floor((userEff['Защита колонии'] || 0) / 2)
 
         if (
           userData.additionalParams['чуждая среда'] != misery.alien ||
@@ -1532,8 +1531,8 @@ const Analysis = {
 
         if(!s1 || !s2) return
 
-        string1 = s1.split(",").map(str => str.trim())
-        string2 = s2.split(",").map(str => str.trim())
+        string1 = s1.split(',').map(str => str.trim())
+        string2 = s2.split(',').map(str => str.trim())
 
         if (s1.length > s2.length) {
           longString = string1
@@ -1618,7 +1617,7 @@ const Analysis = {
     // formListForComparison
     скачать_список_технологий() {
       if(confirm('Скачать?')) {
-        savingOps.saveFile(`oldTechData.js`, 
+        savingOps.saveFile('oldTechData.js', 
           `var DATA__OLD_TECH_TIME='${window[VARS.PLAYERS_TIMESTAMP_KEY]}'\n`
           + `var DATA__OLD_TECH=${TechUtils.formTechListForPatchNote()}` 
         )
@@ -1673,7 +1672,7 @@ function drawTree(tree_name) {
 
   if (techData.cache.trees[tree_name].html) {
     svg.innerHTML = techData.cache.trees[tree_name].html
-    svg.setAttribute("viewBox", techData.cache.trees[tree_name].viewBox)
+    svg.setAttribute('viewBox', techData.cache.trees[tree_name].viewBox)
     setTimeout(TreeView.tspanHighlightOnClick, 1)
     setTimeout(TreeView.copyFirstTechLineOnClick, 1)
     setTimeout(TreeView.addTurnPlannerThings, 1)
@@ -1700,7 +1699,7 @@ function drawTree(tree_name) {
     + ' ' + (y[0] - PAD_MIN)
     + ' ' + (x[1] + 300 - x[0])
     + ' ' + (y[1] + 100 - y[0])
-  svg.setAttribute("viewBox", viewBox)
+  svg.setAttribute('viewBox', viewBox)
 
   techData.cache.trees[tree_name].html = svg.innerHTML
   techData.cache.trees[tree_name].viewBox = viewBox
@@ -1971,7 +1970,7 @@ const TechUtils = {
     for (let i of KEYWORDS.COLONY_PARAMS) {
       list[i] = TechUtils.listParam(i).split('\n')
       for (let j in list[i]) {
-        if (typeof res[j] == "undefined")
+        if (typeof res[j] == 'undefined')
           res[j] = list[i][j] + '\t'
         else
           res[j] += list[i][j] + '\t'
@@ -1991,7 +1990,7 @@ const Colony =  /** @type {const} */({
 
     const { planetParams } = UserUtils.getSavedUserData(playerName)
 
-    res += VARS.effectsOfPlanetSize[planetParams["Тип планеты"]].map(e => e.join(' ')).join('<br>')
+    res += VARS.effectsOfPlanetSize[planetParams['Тип планеты']].map(e => e.join(' ')).join('<br>')
 
     res += '<br><b>ТЕХНОЛОГИИ</b><br>'
     for (let tree in techThresholds) {
@@ -2000,7 +1999,7 @@ const Colony =  /** @type {const} */({
         for (let conditionBlock of techThresholds[tree][subtree]) {
           if (subtree !== 'other') {
             if (
-              conditionBlock[0] !== "BASE"
+              conditionBlock[0] !== 'BASE'
               && !User.checkIfUserHasTech(playerName, conditionBlock[0])
             ) break
             lastProperStr = conditionBlock[1]
@@ -2209,7 +2208,7 @@ const User = /** @type {const} */({
     if (userDataObj.uniqueResources) result.uniqueResources = [].concat(userDataObj.uniqueResources
       .map(i => TechUtils.isSpecial(i[0]) ? [':' + i[1], null] : [i[0], +i[1]])
     )
-    if (userDataObj.planetParams) result.planetParams = [].concat(VARS.effectsOfPlanetSize[userDataObj.planetParams["Тип планеты"]])
+    if (userDataObj.planetParams) result.planetParams = [].concat(VARS.effectsOfPlanetSize[userDataObj.planetParams['Тип планеты']])
     if (userDataObj.greatPeople) result.greatPeople = [].concat(userDataObj.greatPeople
       .map(i => i.effect.map(j => j[0] === KEYWORDS.ITS_SPECIAL ? [':' + j[1], null] : [j[0], +j[1]]))
       .flat()
@@ -2403,7 +2402,7 @@ const User = /** @type {const} */({
     const mainParamsSum = effectsDataArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
       .reduce((acc, el) => acc += +el[1], 0)
 
-    log(playerName, mainParamsSum, "Эффективная Рождаемость:",
+    log(playerName, mainParamsSum, 'Эффективная Рождаемость:',
       (+effectsDataObj.Рождаемость || 0)
       - +(userData.additionalParams['чуждая среда'] || 0)
       - ((+(userData.additionalParams['непривычная среда'] || 0) > 0) ? 1 : 0)
@@ -2460,7 +2459,7 @@ async function parseTechIframe(tree_name) {
   // Object.values(tech.Biology).map(e => e.x)
   // svg.setAttribute("viewBox", "-250 -250 500 750")
 
-  Object.defineProperty(tech[tree_name], "props", {
+  Object.defineProperty(tech[tree_name], 'props', {
     value: {
       BOUNDS,
       FILL_COLOR
@@ -2539,7 +2538,7 @@ const parseGDoc = {
         ({ tagName, innerText: innerText.trim(), el: children[0].parentElement }))
 
     if (arr.length < 3) {
-      log("pretty sure it's not a proper google doc")
+      log('pretty sure it\'s not a proper google doc')
       return this.lastResult
     }
 
@@ -2612,7 +2611,7 @@ const parseGDoc = {
       this.lastResult = await parseGDoc.HTML(raw)
     } else {
       raw = await rawClipboardObj.getType('text/plain').then(e => e.text())
-      warn("can't parse plaintext: deprecated and removed")
+      warn('can\'t parse plaintext: deprecated and removed')
       // this.lastResult = parseDoc.text(raw)
     }
     this.lastRaw = raw
@@ -3077,7 +3076,7 @@ const playerPost = {
     // Array.from(document.querySelectorAll('#el_selected_tech_list tbody tr:not([style="background-color: goldenrod;"]) td:nth-child(2)')).map(e => +e.textContent).reduce((partialSum, a) => partialSum + a, 0)
     getEl('el_selected_tech_list').innerHTML = `<table class=hide-interm-columns>
     <thead>
-      <th>${['Субд', 'Технология', 'Цена', "КПров", "Усп", "КУсп", "Брош.", "Дельт", "КДлт"].join('</th><th>')}</th>
+      <th>${['Субд', 'Технология', 'Цена', 'КПров', 'Усп', 'КУсп', 'Брош.', 'Дельт', 'КДлт'].join('</th><th>')}</th>
       <th 
         onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
       <button>+</button>
@@ -3183,7 +3182,7 @@ const playerPost = {
          */
         const techText = e.children[pos.name].innerText.trim()
 
-        const isReserve = techText.startsWith("Резерв")
+        const isReserve = techText.startsWith('Резерв')
 
         if (+e.children[pos.critfails].innerText > 0 && !isReserve) {
           e.children[pos.critfails].style.backgroundColor = 'tomato'
@@ -3383,47 +3382,47 @@ var KEYWORDS = /** @type {const} */ ({
   ],
   ANY_PARAM_KEYWORD: 'Свободный',
   ADDITIONAL_COLONY_PARAMS: [
-    "осуждение",
-    "волнения",
-    "непривычная среда",
-    "чуждая среда",
+    'осуждение',
+    'волнения',
+    'непривычная среда',
+    'чуждая среда',
     'защита колонии',
     'щит планеты',
     'снабж. отряды',
     //особые
-    "Образцы",
-    "Экзоты",
-    "Аномалия",
+    'Образцы',
+    'Экзоты',
+    'Аномалия',
   ],
   SPECIAL_TECH_COST: [
-    "затраты",
-    "специалисты",
+    'затраты',
+    'специалисты',
   ],
   PLANET_PARAMS: [
-    "Вода",
-    "Гористость",
-    "Ресурсы",
-    "Отказ",
+    'Вода',
+    'Гористость',
+    'Ресурсы',
+    'Отказ',
   ],
   // TECH_PROPS: [],
   MATERIALS: [
     // 1 ряд
-    "Сталь",
-    "Нефть",
+    'Сталь',
+    'Нефть',
     // 2 ряд
-    "Редкие металлы",
-    "Трансураны",
+    'Редкие металлы',
+    'Трансураны',
     // 3 ряд
-    "Наноматериалы",
-    "Антиматерия",
+    'Наноматериалы',
+    'Антиматерия',
     // 4 ряд
-    "Стазокерамика",
+    'Стазокерамика',
     // TODO whoopsie, breaks material series detection
-    "Экзотическая материя",
-    "Экзотматерия",
+    'Экзотическая материя',
+    'Экзотматерия',
     // 5 ряд
-    "Нейтроний",
-    "Гиперплазма",
+    'Нейтроний',
+    'Гиперплазма',
   ],
   RESEARCH_KEYWORD: 'Исследования',
   TECH_KW: 'Технология',
@@ -3433,40 +3432,40 @@ var KEYWORDS = /** @type {const} */ ({
   RESERVE_KW: 'Резерв',
   TECH_EFFECTS: [
     // индустрия
-    "Планетарная разведка",
-    "Солнце",
-    "Строительство",
-    "Пуски",
-    "Орбита",
-    "Астроинженерия",
+    'Планетарная разведка',
+    'Солнце',
+    'Строительство',
+    'Пуски',
+    'Орбита',
+    'Астроинженерия',
     // биология и терраформинг
-    "Метеозащита",
-    "Терраформинг",
-    "Генные модификации",
-    "Адаптация",
-    "Сверхадаптация",
-    "Взаимодействие с местной биосферой",
+    'Метеозащита',
+    'Терраформинг',
+    'Генные модификации',
+    'Адаптация',
+    'Сверхадаптация',
+    'Взаимодействие с местной биосферой',
     // социальные
-    "Дипломатия",
-    "Шпионаж",
-    "Контршпионаж",
-    "Пропаганда",
-    "Полиция",
-    "Устранение последствий",
-    "Осуждение",
-    "Доверие",
+    'Дипломатия',
+    'Шпионаж',
+    'Контршпионаж',
+    'Пропаганда',
+    'Полиция',
+    'Устранение последствий',
+    'Осуждение',
+    'Доверие',
     // военные
-    "Конверсия",
-    "Ремонт",
-    "Ремонт (?:армий|флотов)",
-    "Бомбардировка",
+    'Конверсия',
+    'Ремонт',
+    'Ремонт (?:армий|флотов)',
+    'Бомбардировка',
     'Скорость FTL',
   ],
   IDEOLOGIES: [
     // идеологии/zeals
-    "ГМО",
-    "Хром",
-    "Чистота",
+    'ГМО',
+    'Хром',
+    'Чистота',
   ],
   // приз за цепочку технологий, может нарушать правила стоимости
   REWARD_KEYWORD: 'приз',
@@ -3490,7 +3489,7 @@ var KEYWORDS = /** @type {const} */ ({
   ONLY_ONCE_KW: 'разово',
   ONE_USE_KW: 'одноразовый',
   SINGLE_TIME_EFFECTS: [
-    "\\?",
+    '\\?',
     'одноразовый',
     'выдаётся при высадке',
     'выдаётся на старте',
@@ -3511,13 +3510,13 @@ var KEYWORDS = /** @type {const} */ ({
     specials: 'Особенности',
   },
   MILITARY_PARAMS: [
-    "Атака",
-    "Защита",
-    "Скорость",
+    'Атака',
+    'Защита',
+    'Скорость',
   ],
   MILITARY_PARAMS_ADDITIONAL: [
-    "Уклонение",
-    "Щит",
+    'Уклонение',
+    'Щит',
   ],
   UNIT_SLOTS_KEYWORD: 'Слоты',
   UNIT_TYPES_KEYWORD: 'Тип юнита',
@@ -3525,35 +3524,35 @@ var KEYWORDS = /** @type {const} */ ({
   UNIT_POINTS_KEYWORD: 'Очки распределения',
   UNIT_TYPES: Object.keys(VARS.hulls),
   DAMAGE_TYPES: [
-    "био",
-    "рад",
-    "нано",
-    "странглет",
+    'био',
+    'рад',
+    'нано',
+    'странглет',
   ],
   MODULE_NUM_PROPS: [
-    "Полёт",
+    'Полёт',
     'Защита колонии',
     'Щит планеты',
     'Мины',
     'Гарантированная защита',
     'Двигатель',
-    "Регенерация",
-    "Любимец",
+    'Регенерация',
+    'Любимец',
   ],
   MODULE_PROPS: [
-    "ДУ",
-    "роботы",
-    "гигер",
-    "нет FTL",
-    "ужас",
-    "массовое",
-    "ракеты",
-    "ЭМИ",
-    "ББ",
+    'ДУ',
+    'роботы',
+    'гигер',
+    'нет FTL',
+    'ужас',
+    'массовое',
+    'ракеты',
+    'ЭМИ',
+    'ББ',
     //!!!
-    "осадное",
-    "экранирование",
-    "FTL",
+    'осадное',
+    'экранирование',
+    'FTL',
     'пред-FTL',
     'автономность',
     'ПКО',
@@ -4050,7 +4049,7 @@ const savingOps = {
   },
   saveFile(filename, data) {
     var file = new Blob([data], { type: 'text' })
-    var a = document.createElement("a"),
+    var a = document.createElement('a'),
       url = URL.createObjectURL(file)
     a.href = url
     a.download = filename
@@ -4063,7 +4062,7 @@ const savingOps = {
   },
   //heya SO https://stackoverflow.com/questions/3975499/convert-svg-to-image-jpeg-png-etc-in-the-browser
   copyStylesInline(destinationNode, sourceNode) {
-    var containerElements = ["svg", "g"]
+    var containerElements = ['svg', 'g']
     for (var cd = 0; cd < destinationNode.childNodes.length; cd++) {
       var child = destinationNode.childNodes[cd]
       if (containerElements.indexOf(child.tagName) != -1) {
@@ -4071,7 +4070,7 @@ const savingOps = {
         continue
       }
       var style = sourceNode.childNodes[cd].currentStyle || window.getComputedStyle(sourceNode.childNodes[cd])
-      if (style == "undefined" || style == null) continue
+      if (style == 'undefined' || style == null) continue
       for (var st = 0; st < style.length; st++) {
         child.style.setProperty(style[st], style.getPropertyValue(style[st]))
       }
@@ -4079,43 +4078,43 @@ const savingOps = {
   },
 
   triggerDownload(imgURI, fileName) {
-    var evt = new MouseEvent("click", {
+    var evt = new MouseEvent('click', {
       view: window,
       bubbles: false,
       cancelable: true
     })
-    var a = document.createElement("a")
-    a.setAttribute("download", fileName)
-    a.setAttribute("href", imgURI)
-    a.setAttribute("target", '_blank')
+    var a = document.createElement('a')
+    a.setAttribute('download', fileName)
+    a.setAttribute('href', imgURI)
+    a.setAttribute('target', '_blank')
     a.dispatchEvent(evt)
   },
 
   saveSvgAsPng(svg, fileName) {
     var copy = svg.cloneNode(true)
     savingOps.copyStylesInline(copy, svg)
-    var canvas = document.createElement("canvas")
+    var canvas = document.createElement('canvas')
     var bbox = svg.getBBox()
     canvas.width = bbox.width
     canvas.height = bbox.height
-    var ctx = canvas.getContext("2d")
+    var ctx = canvas.getContext('2d')
     ctx.clearRect(0, 0, bbox.width, bbox.height)
     var data = (new XMLSerializer()).serializeToString(copy)
     var DOMUrl = window.URL || window.webkitURL || window
     var img = new Image()
-    var svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" })
+    var svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' })
     var url = DOMUrl.createObjectURL(svgBlob)
     img.onload = function () {
       ctx.drawImage(img, 0, 0)
       DOMUrl.revokeObjectURL(url)
-      if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+      if (typeof navigator !== 'undefined' && navigator.msSaveOrOpenBlob) {
         var blob = canvas.msToBlob()
         navigator.msSaveOrOpenBlob(blob, fileName)
       }
       else {
         var imgURI = canvas
-          .toDataURL("image/png")
-          .replace("image/png", "image/octet-stream")
+          .toDataURL('image/png')
+          .replace('image/png', 'image/octet-stream')
         savingOps.triggerDownload(imgURI, fileName)
       }
 
