@@ -534,7 +534,12 @@ const StarSystemGenerator = {
           }
         }
       }
-      el.innerHTML = `${i}${k.capital ? '&#9733;' : ''}${!k.capital && k.user ? '&#9632;' : ''}${planetNames}<br>
+      const userMarker = k.capital 
+        ? '&#9733;' 
+        : k.user 
+          ? '&#9632;' 
+          : ''
+      el.innerHTML = `${i}${userMarker}${planetNames}<br>
       <img src='assets/planets/${type}.png' style="width:${size}%" 
         alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
         title="${k.type} ${k.size}(${E.size2num[k.size]}) ${k.giantType ? k.giantType : ''}"
