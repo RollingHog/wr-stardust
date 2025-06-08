@@ -3,9 +3,7 @@
 /* global
 getEl qs
 log warn
-NODE_TYPE NODET_2_RU
-TREELIST
-FILL_2_TREE_TYPE TREE_TYPE_2_FILL PLAYERS_DATA_KEY
+PLAYERS_DATA_KEY
 DATA__OLD_TECH DATA__OLD_TECH_TIME
 capitalizeFirstLetter rgbToHex
 getDictKey
@@ -22,6 +20,8 @@ hotkeysLib
 //rules.js
 /// <reference path="./src/rules.js"/>
 /* global
+TREELIST FILL_2_TREE_TYPE
+NODE_TYPE NODET_2_RU TREE_TYPE_2_FILL
 rules countPlanetRawMisery
 */
 
@@ -1466,13 +1466,22 @@ const Analysis = {
     },
 
     async генератор_патчноута() {
+      if(VARS.isInit) {
+        setTimeout(Analysis.Reports.генератор_патчноута, 100)
+        return
+      }
       const isFilePresent = typeof DATA__OLD_TECH !== 'undefined'
       /**
        * @type {Record<string, TTechObject>}
        */
       let oldTech = isFilePresent ? Object.fromEntries(DATA__OLD_TECH.map(obj => [obj.name, obj])) : {}
       if(!isFilePresent) {
-        const oldJSONStr = await navigator.clipboard.readText()
+        let oldJSONStr
+        try {
+          oldJSONStr = await navigator.clipboard.readText()
+        } catch (error) {
+          return
+        }
         try {
           oldTech = JSON.parse(oldJSONStr.replace(/(^`|`$)/, ''))
         } catch (error) {
@@ -1783,14 +1792,17 @@ const TechUtils = {
   // а ведь еще юнитов учесть желательно и газовые гиганты
   /**
    * @param {*} rawExpr 
-   * @param {*} effect 
+   * @param {*} effects 
    * @param {TGoogleDocUserObj} userDataObj 
+   * @param {Record<str, any>} effects we use already calculated simple effects here
    * @returns {number | null}
    * @example '[Орбитальные здания (шт.)/2 + 1 - Технологии ветки "Добыча"]'
    * @example '[Орбитальные здания - 1]'
-   * названия категорий берутсяя из NODET_2_RU
+   * @example '[Чистота]'
+   * названия категорий берутся из NODET_2_RU
+   * keywords: formulae variable
    */
-  parseExpression(rawExpr, userDataObj) {
+  parseExpression(rawExpr, userDataObj, effects) {
     /** @type {string[]} */
     let nodes = rawExpr
       .replace(/[[\]]/g,'')
@@ -1800,7 +1812,10 @@ const TechUtils = {
 
     let result = 0
 
-    // log(nodes)
+    const paramLists = [
+      KEYWORDS.IDEOLOGIES,
+      KEYWORDS.MATERIALS,
+    ]
 
     for(let str of nodes) {
       str = str.trim()
@@ -1815,7 +1830,7 @@ const TechUtils = {
       
       if(mults.length > 0) {
         if(mults.length > 1) {
-          warn('parseExpression multipliers WTF', {nodes, str, mults})
+          warn('parseExpression multipliers WTF', {nodes, str: str, mults})
           return null
         }
         
@@ -1853,11 +1868,27 @@ const TechUtils = {
           break
         }
       }
+      
+      const PARAM_TYPE = 'param'
+      if(!tgtNodeType) {
+        for(let paramList of paramLists) {
+          for(let paramName of paramList) {
+            if(paramName === str) {
+              tgtNodeType = PARAM_TYPE
+              break
+            }
+          }
+          if(tgtNodeType) break
+        }
+      }
 
       if(!tgtNodeType) {
-        warn('tgtNodeType', {nodes, str})
+        warn('unknown tgtNodeType:',str, {nodes})
         return null
       }
+
+      /** what is value of tgt param/size of tgt array */
+      let tgtValue = 0
 
       /** @type {string} */
       let tgtArr = []
@@ -1876,15 +1907,23 @@ const TechUtils = {
           break
         case NODE_TYPE.ASTROPROJECT:
           tgtArr = userDataObj.astroProjs
+          break        
+        case PARAM_TYPE:
+          // TODO
+          tgtValue = effects[str]
+          if(!tgtValue) warn('not allowed as param in expression:', str)
           break
       }
 
       // log({tgtArr})
 
-      if(subtree) {
+      if(subtree && !tgtValue) {
         tgtArr = tgtArr.filter( objName => 
           (
-            inverted.alltech[objName].subtree 
+            (
+              inverted.alltech[objName] &&
+              inverted.alltech[objName].subtree 
+            )
             || capitalizeFirstLetter(Analysis.getSubtreeName(TechUtils.byName(objName)))
           )
           === subtree
@@ -1893,7 +1932,9 @@ const TechUtils = {
       
       // log({tgtArr})
 
-      let interm = sign * tgtArr.length * mult
+      if(!tgtValue) tgtValue = tgtArr.length
+
+      let interm = sign * tgtValue * mult
       if(mult < 1) interm = +interm.toFixed(0)
       result += interm
     }
@@ -2231,7 +2272,7 @@ const User = /** @type {const} */({
     }
 
     for(let [k, v] of specEffectsList) {
-      const res = TechUtils.parseExpression(v, userDataObj) || 0
+      const res = TechUtils.parseExpression(v, userDataObj, effect) || 0
       effect[k] += res
       log('expression effect: ', k, res)
     }

@@ -3,13 +3,56 @@
 // common.js
 /// <reference path="./common.js"/>
 /* global
-log warn
+log warn invertDict
 */
 
 /* exported
+TREELIST FILL_2_TREE_TYPE
+NODE_TYPE NODET_2_RU TREE_TYPE_2_FILL
 rules
 countPlanetRawMisery 
 */
+
+const TREELIST = /** @type {const} */([
+  "Military",
+  "Sociology",
+  "Biology",
+  "Industry",
+  "Science",
+  'Unique',
+])
+
+var FILL_2_TREE_TYPE = {
+  "#FF9966": "Military",
+  "#CCFFCC": "Biology",
+  "#FFCC00": "Industry",
+  "#99CCFF": "Science",
+  "#CC99FF": "Sociology",
+  "#FFFFFF": "Unique",
+}
+
+var NODE_TYPE = {
+  TECH: 'rectangle',
+  BUILDING: 'parallelogram',
+  PROJECT: 'parallelogram2',
+  ORBITAL: 'ellipse',
+  ASTROPROJECT: 'hexagon',
+  HULL: 'octagon',
+  MODULE_GROUND: 'trapezoid',
+  MODULE_SPACE: 'trapezoid2',
+  MODULE_BOTH: 'fatarrow',
+}
+
+var NODET_2_RU = /** @type {const} */({
+[NODE_TYPE.TECH]:'Технологии',
+[NODE_TYPE.BUILDING]:'Здания',
+[NODE_TYPE.ORBITAL]:'Орбитальные здания',
+[NODE_TYPE.PROJECT]:'Проекты',
+[NODE_TYPE.ASTROPROJECT]:'Астропроекты',
+})
+
+/** @type {typeof TREELIST[number]} */
+var TREE_TYPE_2_FILL = invertDict(FILL_2_TREE_TYPE)
 
 var rules = {
   effectsOfPlanetSize: {
