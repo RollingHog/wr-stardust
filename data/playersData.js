@@ -1487,7 +1487,7 @@ var DATA__PLAYERS_DATA = {
       "Примечания": null
     },
     "starSystemParams": {
-      "name": "Хайбразил",
+      "name": "???",
       "planetName": "Волт",
       "x": 12,
       "y": 39,
