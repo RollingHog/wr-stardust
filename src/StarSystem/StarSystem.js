@@ -539,7 +539,15 @@ const StarSystemGenerator = {
         : k.user 
           ? '&#9632;' 
           : ''
-      el.innerHTML = `${i}${userMarker}${planetNames}<br>
+
+      const popupData = userMarker 
+      ? k.capital
+        ? 'Первичная колония' 
+        : 'Вторичная колония' 
+      : ''
+      el.innerHTML = `<span title="${popupData}">
+        ${i}${userMarker}${planetNames}
+      </span><br>
       <img src='assets/planets/${type}.png' style="width:${size}%" 
         alt="${k.type} ${k.size} ${k.giantType ? k.giantType : ''}"
         title="${k.type} ${k.size}(${E.size2num[k.size]}) ${k.giantType ? k.giantType : ''}"
