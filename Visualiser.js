@@ -959,7 +959,7 @@ const Analysis = {
       `<tr><th>(index)</th><th>${isObj ? Object.keys(entries[0][1]).join('</th><th>') : 'value'}</th></tr>`
 
     for (let i of entries) {
-      res += `<tr><td>${i[0]}</td><td>${isObj ? Object.values(i[1]).join('</td><td>') : i[1]}</td></tr>`
+      res += `<tr><td data-value='${i[0]}'>${i[0]}</td><td>${isObj ? Object.values(i[1]).join('</td><td>') : i[1]}</td></tr>`
     }
 
     tbody.innerHTML = res
@@ -1357,7 +1357,7 @@ const Analysis = {
         mostUsed.map(([k, v]) => k + ': ' + v)
           .join('<br>')
       )
-    },
+    },    
 
     // drawGraph() {
 
@@ -1376,6 +1376,38 @@ const Analysis = {
         }
       })
       Analysis.reportTable(sum)
+    },
+
+    идеологии_по_поддревам() {
+      const result = {};
+
+      for (const key in inverted.alltech) {
+        const item = inverted.alltech[key];
+        const { subtree, effect } = item;
+
+        // Если subtree ещё нет в result, создаём его с пустым объектом ideology
+        if (!result[subtree]) {
+          result[subtree] = {
+
+          };
+
+          // Инициализируем все поля из KEYWORDS.IDEOLOGIES нулём
+          for (const ideologyKey of KEYWORDS.IDEOLOGIES) {
+            result[subtree][ideologyKey] = 0;
+          }
+        }
+
+        // Обрабатываем эффекты
+        if (Array.isArray(effect)) {
+          for (const [ideology, value] of effect) {
+            if (KEYWORDS.IDEOLOGIES.includes(ideology)) {
+              result[subtree][ideology] += +value;
+            }
+          }
+        }
+      }
+
+      Analysis.reportTable(result)
     },
 
     технологии_с_комментариями() {
