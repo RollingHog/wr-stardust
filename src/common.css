@@ -24,3 +24,11 @@ table {
 .border {
   border: 1px solid grey;
 }
+
+// TODO rules.css
+[data-value="Наземный бой"],[data-value="Вооружение и защита"],[data-value="Война в космосе"]{ background-color: '#FF9966' };
+[data-value="Генетика"],[data-value="Экзобиология"]{ background-color: '#CCFFCC' };
+[data-value="Добыча"],[data-value="Производство"],[data-value="Космос"]{ background-color: '#FFCC00' };
+[data-value="Физика пространства"],[data-value="Компьютеры"],[data-value="Импланты"]{ background-color: '#99CCFF' };
+[data-value="Государство"],[data-value="Социология"],[data-value=""]{ background-color: '#CC99FF' };
+[data-value="Уникальные технологии"]{ background-color: '#FFFFFF' };
