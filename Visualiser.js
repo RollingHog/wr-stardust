@@ -307,10 +307,10 @@ async function Init() {
 
         console.timeEnd('node stat   ')
 
-        getEl('players_selection').children.forEach(e => (e.tagName == 'LABEL')
-          ? e.onclick = function () {
-            if (e.children[0].checked) {
-              let playerName = e.innerText.trim()
+        getEl('players_selection').children.forEach(el => (el.tagName == 'LABEL')
+          ? el.onclick = function () {
+            if (el.children[0].checked) {
+              let playerName = el.innerText.trim()
               parseGDoc.drawTech(playerName, techData.currentTreeName)
               if (!VARS.isInit && !getEl('el_playerQuiet').checked) {
                 User.drawUserStat(playerName)
@@ -323,7 +323,7 @@ async function Init() {
             }
             if (!VARS.isInit) {
               // isInit means 99% auto-click
-              navigator.clipboard.writeText(e.innerText)
+              navigator.clipboard.writeText(el.innerText)
             }
           }
           : null
@@ -2111,7 +2111,7 @@ const User = /** @type {const} */({
     let ts = ''
     for (let i of User.listUsers()) {
       const bgColor = UserUtils.getSavedUserData(i).playerColor
-      ts += `<label><input type="checkbox" id="${i}">${i}</label>&nbsp;<span style="background-color: ${bgColor}">&emsp;</span><br>`
+      ts += `<label><input type="radio" name="player-radio" id="${i}">${i}</label>&nbsp;<span style="background-color: ${bgColor}">&emsp;</span><br>`
     }
     getEl('players_selection').innerHTML = ts
   },
