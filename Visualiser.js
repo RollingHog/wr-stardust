@@ -1379,21 +1379,21 @@ const Analysis = {
     },
 
     идеологии_по_поддревам() {
-      const result = {};
+      const result = {}
 
       for (const key in inverted.alltech) {
-        const item = inverted.alltech[key];
-        const { subtree, effect } = item;
+        const item = inverted.alltech[key]
+        const { subtree, effect } = item
 
         // Если subtree ещё нет в result, создаём его с пустым объектом ideology
         if (!result[subtree]) {
           result[subtree] = {
 
-          };
+          }
 
           // Инициализируем все поля из KEYWORDS.IDEOLOGIES нулём
           for (const ideologyKey of KEYWORDS.IDEOLOGIES) {
-            result[subtree][ideologyKey] = 0;
+            result[subtree][ideologyKey] = 0
           }
         }
 
@@ -1401,7 +1401,7 @@ const Analysis = {
         if (Array.isArray(effect)) {
           for (const [ideology, value] of effect) {
             if (KEYWORDS.IDEOLOGIES.includes(ideology)) {
-              result[subtree][ideology] += +value;
+              result[subtree][ideology] += +value
             }
           }
         }
@@ -1492,7 +1492,12 @@ const Analysis = {
       log(m
         .filter(([key, _]) => hexMapDist(locXY, key) < 5)
         .filter(([key, _]) => key !== locXY)
-        .map(([k, v]) => [k, v.StarsL.map(({ mass, spectral_type }) => ({ mass, spectral_type }))])
+        .map(
+          ([k, v]) => [
+            k, 
+            JSON.stringify(v.StarsL.map(({ mass, spectral_type }) => ({ mass, type: spectral_type })))
+          ].join('; ')
+        ).join('\n')
       )
     },
 
