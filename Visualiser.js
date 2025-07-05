@@ -266,7 +266,7 @@ async function Init() {
     console.timeEnd('player data ')
     // log('User data version:', window[VARS.PLAYERS_TIMESTAMP_KEY])
 
-    User.formUsersCheckboxes()
+    User.formUsersRadios()
 
     HTMLUtils.initHotkeysLib()
 
@@ -2111,7 +2111,7 @@ const User = /** @type {const} */({
     return Object.keys(window[VARS.PLAYERS_DATA_KEY]).filter(name => !name.startsWith('-'))
   },
 
-  formUsersCheckboxes() {
+  formUsersRadios() {
     // only after user data aquired
     let ts = ''
     for (let i of User.listUsers()) {
@@ -3036,7 +3036,7 @@ const playerPost = {
 
     for (let i of getEl('players_selection').querySelectorAll('label')) {
       if (i.innerText.startsWith(firstWord)) {
-        if (!i.querySelector('input[type="checkbox"]').checked) {
+        if (!i.querySelector('#players_selection input').checked) {
           i.click()
         }
         return i.innerText

@@ -159,7 +159,7 @@ const hotkeysLib = {
   },
 
   processHotkeyAttribute() {
-    for(let i of document.querySelectorAll('button[hotkey]')) {
+    for(let i of document.querySelectorAll('button[hotkey],input')) {
       const hk = i.getAttribute('hotkey')
       i.title += '\nHotkey: Alt+' + hk
       this.hotkeyElsList[`Alt ${hk}`] = i

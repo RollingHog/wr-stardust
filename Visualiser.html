@@ -329,8 +329,15 @@
           <input type="checkbox" id="el_doPlayersData" checked>create playersData
         </label>
         <label style="background: white; user-select: none;">
-          <input type="checkbox" id="el_playerQuiet" title="do not show player data on click">Quiet
+          <input type="checkbox" id="el_playerQuiet" title="do not show player data on click" hotkey="Q">Quiet
         </label>
+        <button style="padding: 0px 4px;" id="el_unselect_player"  hotkey="A"
+          onclick="
+            User.activePlayer = null
+            drawTree(techData.currentTreeName)
+            try {qs('#players_selection input:checked').checked = false;} catch(e){}
+            HTMLUtils.closeModal('report')"
+        >ALL</button>
         <br>
         <button onclick="parseGDoc.file(event)" style="padding: 12px;" hotkey="P">Parse clipboard</button>
         <button onclick="parseGDoc.redoLast()" style="padding: 12px;">Redo last parse</button>
