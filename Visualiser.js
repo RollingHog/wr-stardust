@@ -4041,10 +4041,76 @@ const TurnPlanner = {
   addTech(techName) {
     if (!this.getFilteredAvalTechList().map(e => e.name).includes(techName)) return false
     getEl('el_tp_tech').innerText += `${techName} (${Analysis.getSubtreeName(TechUtils.byName(techName))})\n`
+    /*
+    td[contenteditable="true"] {
+      cursor: pointer;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <table id="projects-table2">
+    <thead>
+      <tr>
+        <th colspan="2">Название проекта</th>
+        <th>Н</th>
+        <th>П</th>
+        <th>О</th>
+        <th>С</th>
+        <th>Доп. ресурс 2</th>
+        <th>Тип бонуса</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2" colspan=2>Теха</td>
+        <td rowspan="2">1</td>
+        <td rowspan="2">1</td>
+        <td rowspan="2">1</td>
+        <td rowspan="2">1</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td rowspan="2">Цена</td>
+        <td rowspan="2">0</td>
+        <td rowspan="2" colspan="3"></td>
+        <td rowspan="2"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+    */
     this.selectedTechs.push(techName)
     if (!inverted.alltech[techName]) return false
     this.fillTechsDatalist()
     this.highlightSelected()
+    return true
+  },
+
+  changeTableResources(paramObj) {
+    const tblName = 'el_tp_resources'
+
+    for (let name in paramObj) {
+      const v = paramObj[name]
+
+      const el = qs(`#${tblName} [data-effect="${name}"]`).nextElementSibling
+      const newValue = el.innerText.slice(0, 1) + (+el.innerText + +v).toString(10)
+      if(newValue < 0) {
+        return false
+      }
+      el.innerText = newValue
+    }
     return true
   },
 
