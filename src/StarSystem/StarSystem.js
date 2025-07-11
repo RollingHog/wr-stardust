@@ -429,9 +429,9 @@ const StarSystemGenerator = {
       }
     }
 
-    // FIXME
+    // TODO FIXME
     const newAlienityData = countPlanetRawMisery(userObj)
-    log(JSON.stringify(newAlienityData))
+    // log(JSON.stringify(newAlienityData))
 
     newAlienityData.alien += 1
 
@@ -567,6 +567,7 @@ const StarSystemGenerator = {
 }
 
 ;(function  main() {
+  console.time('startup')
   getEl('el_sp_location').innerHTML = Object.keys(' '.repeat(11).split(''))
     .map( e => `<option value="${+e+1}">${+e+1}</option>`)
   getEl('el_sp_location').value = 8
@@ -576,7 +577,7 @@ const StarSystemGenerator = {
     getEl('el_sp_size').value = E.size.medium
   }, 0)
   // FIXME remove
-  StarSystemGenerator.startRaw()
+  // StarSystemGenerator.startRaw()
   if(location.hash) {
     log('loading from hash...')
     const ddata = StarSystemGenerator.decompress(location.hash)
@@ -589,4 +590,5 @@ const StarSystemGenerator = {
     StarSystemGenerator.draw(ddata.system, ddata.user, ddata.systemName)
     getEl('el_sys_str').innerText = StarSystemGenerator.compress(ddata.system, ddata.density, ddata.restCubes.split(''))
   }
+  console.timeEnd('startup')
 })()

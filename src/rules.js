@@ -49,6 +49,7 @@ var NODET_2_RU = /** @type {const} */({
 [NODE_TYPE.ORBITAL]:'Орбитальные здания',
 [NODE_TYPE.PROJECT]:'Проекты',
 [NODE_TYPE.ASTROPROJECT]:'Астропроекты',
+[NODE_TYPE.HULL]:'Юниты',
 })
 
 /** @type {typeof TREELIST[number]} */

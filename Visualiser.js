@@ -54,7 +54,7 @@ const VARS = /** @type {const} */({
   TREELIST_EN2RU: {},
   /** english tech type names, filled later */
   NODE_TYPE_2_NAME: {},
-  WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow'],
+  WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow', 'octagon'],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
@@ -3318,19 +3318,28 @@ const playerPost = {
       // TechUtils.createEffectsTable(costListArr, 'COST') +
       User.createUserTechEffectsTable(Object.entries(studyResult.effect))
 
+    const TYPE_MODULE = 'MODULE'
     const byType = {
       [NODE_TYPE.TECH]: [],
       [NODE_TYPE.BUILDING]: [],
       [NODE_TYPE.ORBITAL]: [],
       [NODE_TYPE.PROJECT]: [],
       [NODE_TYPE.ASTROPROJECT]: [],
+      [NODE_TYPE.HULL]: [],
+      [TYPE_MODULE]: [],
     }
 
     techList.forEach(techName => {
-      if (VARS.NON_WAR_NODE_TYPES_ARR.includes(TechUtils.get(techName).type)
-        && !Object.keys(VARS.defaultProjectsList).includes(techName)
-      )
+      if(Object.keys(VARS.defaultProjectsList).includes(techName)) return
+      if (
+        VARS.NON_WAR_NODE_TYPES_ARR.concat(NODE_TYPE.HULL).includes(TechUtils.get(techName).type)
+      ) {
         byType[TechUtils.get(techName).type].push(techName)
+      } else if(VARS.WAR_MODULES_ARR.includes(TechUtils.get(techName).type)) {
+        byType[TYPE_MODULE].push(techName)
+      } else {
+        warn('wtf is:', techName)
+      }
     })
 
     // Раскладка по типам
@@ -3340,6 +3349,8 @@ const playerPost = {
       ['Орбитальные здания', byType[NODE_TYPE.ORBITAL]],
       ['Проекты', byType[NODE_TYPE.PROJECT]],
       ['Астропроекты', byType[NODE_TYPE.ASTROPROJECT]],
+      ['Юниты', byType[NODE_TYPE.HULL]],
+      ['Модули', byType[TYPE_MODULE]],
     ].map(([columnName, namesList]) => {
       if (!namesList.length) return ''
       let tableStr
