@@ -1839,6 +1839,8 @@ const TechUtils = {
    * keywords: formulae variable
    */
   parseExpression(rawExpr, userDataObj, effects) {
+    if(!userDataObj) return 0
+
     /** @type {string[]} */
     let nodes = rawExpr
       .replace(/[[\]]/g,'')
@@ -2854,7 +2856,8 @@ const parseGDoc = {
       let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
       User.highlightStudiedTech(i, data.techTable[i].concat(projList))
       User.highlightAvaltech(i, data.techTable[i].concat(projList))
-      savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
+      // TODO fix
+      // savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
     }
   },
 
