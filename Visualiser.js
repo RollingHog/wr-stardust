@@ -2795,13 +2795,22 @@ const parseGDoc = {
     uniqueResources.splice(0, 1)
     if (uniqueResources.length == 1 && uniqueResources[0].innerText == '') uniqueResources = null
     else {
+      uniqueResources = uniqueResources.map( el => ({
+        lvl: +el.children[1].innerText,
+        effects: el.children[2].innerText,
+      }))
+      .filter(e => e.lvl > 0)
       uniqueResources = parseNode.effects(
-        uniqueResources.map(e => e.children[2].innerText).join(','),
+        uniqueResources.map(e => e.effects        
+          .replace(/Х\/2(?=[^а-я]|$)/, Math.floor(e.lvl / 2))
+          .replace(/2\*?Х(?=[^а-я]|$)/, e.lvl * 2)
+          .replace(/Х(?=[^а-я]|$)/, e.lvl)
+        ).join(','),
         { treeName: null, name: playerName + ' уникальные ресурсы' }
       )
     }
 
-    const prepaired = obj.Здания.children[0].rows[0].children[1].innerText
+    const prepared = obj.Здания.children[0].rows[0].children[1].innerText
       .trim()
       .split(',')
       .filter(e => e)
@@ -2822,7 +2831,7 @@ const parseGDoc = {
       ),
       orbital: splitFilter(obj.Здания.children[0].rows[4].children[1].innerText),
       astroProjs: splitFilter(obj.Здания.children[0].rows[5].children[1].innerText),
-      prepaired,
+      prepared,
       greatPeople,
       secondaryColonies,
       materials,
@@ -2921,7 +2930,7 @@ class TGoogleDocUserObj {
   buildings = []
   /** @type {string[]} */
   orbital = []
-  prepaired = []
+  prepared = []
   greatPeople = []
   /** @type { {lvl: string; specialty: string; effect: any[]}[] }  */
   secondaryColonies = []
@@ -3447,7 +3456,7 @@ var KEYWORDS = /** @type {const} */ ({
   ],
   SPECIAL_TECH_COST: [
     'затраты',
-    'специалисты',
+    // 'специалисты',
   ],
   PLANET_PARAMS: [
     'Вода',
