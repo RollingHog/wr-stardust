@@ -665,7 +665,7 @@ const Analysis = {
             }
             // eslint-disable-next-line no-empty
             else if (KEYWORDS.UNIT_TYPES.includes(k[0])) { }
-            // hacky but at least somehow checks efficency
+            // hacky but at least somehow checks efficiency
             else if (VARS.WAR_MODULES_ARR.includes(j.type) && KEYWORDS.UNIT_SLOTS_KEYWORD === k[0]) {
               teff -= +k[1] * 1.5
             }
@@ -1353,7 +1353,7 @@ const Analysis = {
 
       Analysis.reportTable(
         Object.fromEntries(t),
-        '<strong>Сумма по первым стобцам</strong><br>' +
+        '<strong>Сумма по первым столбцам</strong><br>' +
         mostUsed.map(([k, v]) => k + ': ' + v)
           .join('<br>')
       )
@@ -2220,7 +2220,7 @@ const User = /** @type {const} */({
    * @param {*} techList 
    * @param {*} projList 
    */
-  highlightAvaltech(treeName, techList) {
+  highlightAvalTech(treeName, techList) {
     User.listAvalTech(treeName, techList)
       .map(e => e.id)
       .forEach(i => {
@@ -2853,7 +2853,7 @@ const parseGDoc = {
 
     let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
     User.highlightStudiedTech(treeName, data.techTable[treeName].concat(projList))
-    User.highlightAvaltech(treeName, data.techTable[treeName].concat(projList))
+    User.highlightAvalTech(treeName, data.techTable[treeName].concat(projList))
 
     User.activePlayer = playerName
   },
@@ -2868,7 +2868,7 @@ const parseGDoc = {
       drawTree(i)
       let projList = [].concat(data.buildings, data.orbital, data.localProjs, data.astroProjs)
       User.highlightStudiedTech(i, data.techTable[i].concat(projList))
-      User.highlightAvaltech(i, data.techTable[i].concat(projList))
+      User.highlightAvalTech(i, data.techTable[i].concat(projList))
       // TODO fix
       // savingOps.saveSvgAsPng(svg, `${playerName} ${i}.png`)
     }
@@ -3750,8 +3750,8 @@ const parseNode = {
       title = descrDataEl.innerHTML.replace(/(<!\[CDATA\[|\]\]>)/g, '')
     }
 
-    const nlabel = i.getElementsByTagName('y:NodeLabel')[0]
-    const fullText = nlabel.innerHTML
+    const nLabel = i.getElementsByTagName('y:NodeLabel')[0]
+    const fullText = nLabel.innerHTML
       .split('<')[0]
       // .replace(/<.+$/g,'')
       .trimRight()
@@ -3784,9 +3784,9 @@ const parseNode = {
     }
 
     // this is not tech node
-    if (nlabel.getAttribute('fontSize') != 12) {
+    if (nLabel.getAttribute('fontSize') != 12) {
       t.badCell = true
-      t.fontSize = nlabel.getAttribute('fontSize')
+      t.fontSize = nLabel.getAttribute('fontSize')
 
       if (t.fullText.length <= 2) {
         // its number, lessen width
@@ -3835,7 +3835,7 @@ function doNodeStat(filename, t) {
 
   if (!stat[filename][t.y]) {
     /*
-      sum is sum of all param cubes avaliable,
+      sum is sum of all param cubes available,
       cost is full cost of level, 
       costClear is param-tech-only cost
     */
@@ -4191,7 +4191,7 @@ const savingOps = {
       window.URL.revokeObjectURL(url)
     }, 0)
   },
-  //heya SO https://stackoverflow.com/questions/3975499/convert-svg-to-image-jpeg-png-etc-in-the-browser
+  //thx SO https://stackoverflow.com/questions/3975499/convert-svg-to-image-jpeg-png-etc-in-the-browser
   copyStylesInline(destinationNode, sourceNode) {
     var containerElements = ['svg', 'g']
     for (var cd = 0; cd < destinationNode.childNodes.length; cd++) {
