@@ -2312,7 +2312,7 @@ const User = /** @type {const} */({
     for(let [k, v] of specEffectsList) {
       const res = TechUtils.parseExpression(v, userDataObj, effect) || 0
       effect[k] += res
-      log('expression effect: ', k, res)
+      // log('expression effect: ', k, res)
     }
 
     const cost = costData
@@ -2441,12 +2441,14 @@ const User = /** @type {const} */({
     const mainParamsSum = effectsDataArr.filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]))
       .reduce((acc, el) => acc += +el[1], 0)
 
-    log(playerName, mainParamsSum, 'Эффективная Рождаемость:',
+    const effFertility = Math.min(
       (+effectsDataObj.Рождаемость || 0)
-      - +(userData.additionalParams['чуждая среда'] || 0)
-      - ((+(userData.additionalParams['непривычная среда'] || 0) > 0) ? 1 : 0)
-      + +(effectsDataObj.Сверхадаптация || 0)
-      + (+effectsDataObj.Метеозащита || 0))
+        - +(userData.additionalParams['чуждая среда'] || 0)
+        - ((+(userData.additionalParams['непривычная среда'] || 0) > 0) ? 1 : 0)
+        + +(effectsDataObj.Сверхадаптация || 0)
+        + (+effectsDataObj.Метеозащита || 0)
+      , 10
+    )
 
     // checking if params in doc are bad
     effectsDataArr
@@ -2469,7 +2471,9 @@ const User = /** @type {const} */({
       <br>
       `      
       + `<a onclick="Analysis.openReport('эффекты_игрока_подробно', {playerName: '${playerName}'})"
-      class="fake_link">Эффекты игрока подробно</a>` 
+      class="fake_link">Эффекты игрока подробно</a><br>
+      <br>
+      Коэффициент Рождаемости: ${effFertility}<br>` 
       + this.createUserTechEffectsTable(effectsDataArr)
 
       + Colony.createColonyDescription(playerName)
@@ -3453,6 +3457,7 @@ var KEYWORDS = /** @type {const} */ ({
     'Образцы',
     'Экзоты',
     'Аномалия',
+    'Рождаемость',
   ],
   SPECIAL_TECH_COST: [
     'затраты',
