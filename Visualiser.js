@@ -1751,9 +1751,11 @@ const TechUtils = {
     if (effectsListArr.length == 0) return ''
     return `<br><table data-tablename="${tableName}"><tbody><tr>` +
       (tableName ? `<tr><td colspan=2 align=center style="background: lightgrey">${tableName}</td></tr>` : '') +
-      effectsListArr.map(e =>
-        `<td ${e[1] === 0 ? 'colspan=2' : ''} data-effect="${e[0]}">${e[0]}</td>` +
+      effectsListArr.map(e => {
+        if(isNaN(e[1])) console.warn('createEffectsTable: NaN effect', e)
+        return `<td ${e[1] === 0 ? 'colspan=2' : ''} data-effect="${e[0]}">${e[0]}</td>` +
         (e[1] === 0 ? '' : `<td>${`${+e[1] >= 0 ? '&nbsp;' : ''}${e[1]}`}`)
+      }
       ).join('</tr><tr>') +
       '</tr></tbody></table>'
   },
@@ -2303,6 +2305,10 @@ const User = /** @type {const} */({
         continue
       }
 
+      if(isNaN(+v)) {
+        console.warn('countSummaryCostAndEffect wtf', k, v)
+      }
+      
       if (!effect[k])
         effect[k] = +v
       else
@@ -2311,7 +2317,10 @@ const User = /** @type {const} */({
 
     for(let [k, v] of specEffectsList) {
       const res = TechUtils.parseExpression(v, userDataObj, effect) || 0
-      effect[k] += res
+      if (!effect[k])
+        effect[k] = +res
+      else
+        effect[k] += +res
       // log('expression effect: ', k, res)
     }
 
