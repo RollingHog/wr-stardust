@@ -11,6 +11,25 @@ const shipBlock = {
   right: getEl('tr_field').children[2],
 }
 
+const unitsList = [
+  '-1!',
+  '-2%',
+  '-2',
+  '-2=',
+  '-3!',
+  '-3%',
+  '-3',
+  '-4%',
+  '-5!',
+  '-6!',
+  '1',
+  '2%',
+  '2',
+  '3',
+  '4%',
+  '_',
+]
+
 const UNIT_FIELD = 'unit_field'
 
 function onShipEdit(evt) {
