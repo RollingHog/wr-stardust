@@ -1039,7 +1039,11 @@ const Analysis = {
         KEYWORDS.UNIT_TYPES,
         KEYWORDS.MILITARY_PARAMS,
         KEYWORDS.MILITARY_PARAMS_ADDITIONAL,
-        ['Слоты', 'Тип юнита', 'Тип урона', 'особое'],
+        [
+          KEYWORDS.UNIT_SLOTS_KEYWORD, 
+          KEYWORDS.UNIT_TYPES_KEYWORD, 
+          'Тип урона', KEYWORDS.ITS_SPECIAL
+        ],
       )
       let result = Object.values(inverted.alltech)
         .reduce((acc, e) => {
@@ -1329,8 +1333,8 @@ const Analysis = {
         '<div onclick="navigator.clipboard.writeText(this.textContent); this.style.backgroundColor=\'darkgrey\'"'
         + 'title="click to copy"><pre>'
         + arr.map(el => {
-          const totalHostlility = el[1].alien * 2 + el[1].unfamiliar - antiHostility[el[0]]
-          return `${el[0].padEnd(13, ' ')}: Враждебность среды: ##${totalHostlility}d10##`
+          const totalHostility = el[1].alien * 2 + el[1].unfamiliar - antiHostility[el[0]]
+          return `${el[0].padEnd(13, ' ')}: Враждебность среды: ##${totalHostility}d10##`
         }).join('\n') + '</pre></div>'
       )
     },
@@ -2019,6 +2023,13 @@ const TechUtils = {
     }
     return res.map(e => e.slice(0, -1)).join('\n').replace('Общество	Производство	Наука	Свободный', 'Общество				Производство				Наука				Свободный')
   },
+
+  /** usually its war things, like Attack/Defense/HP, which has no global economic effect */
+  isLocalEffect(effName) {
+    return KEYWORDS.MILITARY_PARAMS.includes(effName)
+      || KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(effName)
+      || effName === KEYWORDS.UNIT_SLOTS_KEYWORD
+  },
 }
 
 const Colony =  /** @type {const} */({
@@ -2116,7 +2127,7 @@ const User = /** @type {const} */({
   },
 
   formUsersRadios() {
-    // only after user data aquired
+    // only after user data acquired
     let ts = ''
     for (let i of User.listUsers()) {
       const bgColor = UserUtils.getSavedUserData(i).playerColor
@@ -2265,10 +2276,10 @@ const User = /** @type {const} */({
   /**
    * @param {string[]} techList list of tech names
    * @param {TGoogleDocUserObj | undefined} userDataObj 
-   * @param {boolean} isVerbose TODO DOESN'T WORK NOW if record where effects came from
+   * @param {{ techStudy: boolean; onlyWar: boolean; }} options
    * @returns {{cost: [string, effValue][], effect: [string, effValue][]}}
    */
-  countSummaryCostAndEffect(techList, userDataObj = null) {
+  countSummaryCostAndEffect(techList, userDataObj = null, options = {}) {
     let techListFiltered = techList
       .map(e => e.search('(сломано|неактивно)') == -1 ? e : '')
       .map(e => e.replace(/\([^)]+\)/, '').trim())
@@ -2279,7 +2290,26 @@ const User = /** @type {const} */({
      */
     let effectsData = [].concat.apply(
       [],
-      techListFiltered.map(name => inverted.alltech[name]?.effect || VARS.defaultProjectsList[name]?.effect)
+      techListFiltered.map(name => {
+        const obj = inverted.alltech[name] || VARS.defaultProjectsList[name]
+        
+        if (!options.techStudy) return obj?.effect
+
+        if(options.onlyWar) alert('wont work ha ha FIX ME')
+
+        if(![
+          NODE_TYPE.HULL, 
+          NODE_TYPE.MODULE_GROUND,
+          NODE_TYPE.MODULE_SPACE,
+          NODE_TYPE.MODULE_BOTH,
+        ].includes(obj.type)) return obj?.effect
+
+        if(obj.type === NODE_TYPE.HULL) {
+          return obj?.effect.filter(([effName, _]) => !TechUtils.isLocalEffect(effName))
+        } else {
+          return []
+        }
+      })
     )
     let costData = TechUtils.countCosts(techListFiltered)
 
@@ -2333,10 +2363,10 @@ const User = /** @type {const} */({
 
   /**
    * @param {TGoogleDocUserObj} userDataObj 
-   * @param {boolean} isVerbose DOESNT WORK if record where effects came from
+   * @param {{}} options
    * @returns {Object.<string, effValue>}
    */
-  countUserEffects(userDataObj, isVerbose = false) {
+  countUserEffects(userDataObj, options = {}) {
     if (!userDataObj) return null
 
     let data =
@@ -2348,7 +2378,7 @@ const User = /** @type {const} */({
         userDataObj.orbital,
         userDataObj.localProjs,
         Object.values(userDataObj.techTable).flat(),
-      ), userDataObj, isVerbose).effect
+      ), userDataObj, options).effect
     // }
 
     return data
@@ -3197,6 +3227,17 @@ const playerPost = {
     alert('copied')
   },
 
+  lastTechList: [],
+
+  techStudyVerbose() {
+      const result = Analysis.allEffectsVerbose(
+        this.lastTechList
+          .map( name => inverted.alltech[name] || VARS.defaultProjectsList[name])
+      )
+      Analysis.reportTable(result)
+      HTMLUtils.openModal('report')
+  },
+
   countTechStudyResult(playerName = playerPost.playerName) {
     const pos = playerPost.fieldPositionsInTable
 
@@ -3331,7 +3372,9 @@ const playerPost = {
       .filter(e => e)
 
     // getEl('el_selected_tech_list').children[0].tBodies[1].rows[0].children[pos.delta-1].innerText = summaryDelta
-    const studyResult = User.countSummaryCostAndEffect(techList)
+    const studyResult = User.countSummaryCostAndEffect(techList, null, {techStudy: true})
+
+    this.lastTechList = techList
 
     // можно добавить как "разово"
     // почти наверняка ресурсы выше вычитаются неправильно
@@ -3965,8 +4008,13 @@ const UnitCreator = {
   createUnit(hullName, modulesList = [], startParams = []) {
     const hullEffect = parseNode.effects(VARS.hulls[hullName])
 
-    const sum = User.countSummaryCostAndEffect(modulesList, { startingFeature: hullEffect }).effect
-    KEYWORDS.MILITARY_PARAMS.forEach(e => !sum[e] ? sum[e] = 0 : null)
+    // FIXME wont work at all
+    const sum = User.countSummaryCostAndEffect(
+      modulesList, 
+      { startingFeature: hullEffect }, 
+      { onlyWar: true }
+    ).effect
+    // KEYWORDS.MILITARY_PARAMS.forEach(e => !sum[e] ? sum[e] = 0 : null)
     return sum
   },
   createUnitTable(effectsObj) {

@@ -31,7 +31,7 @@ var FILL_2_TREE_TYPE = {
   '#FFFFFF': 'Unique',
 }
 
-var NODE_TYPE = {
+var NODE_TYPE = /** @type {const} */({
   TECH: 'rectangle',
   BUILDING: 'parallelogram',
   PROJECT: 'parallelogram2',
@@ -41,7 +41,7 @@ var NODE_TYPE = {
   MODULE_GROUND: 'trapezoid',
   MODULE_SPACE: 'trapezoid2',
   MODULE_BOTH: 'fatarrow',
-}
+})
 
 var NODET_2_RU = /** @type {const} */({
 [NODE_TYPE.TECH]:'Технологии',
