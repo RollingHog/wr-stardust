@@ -2249,7 +2249,7 @@ const User = /** @type {const} */({
   extractEffectsFromUserObj(userDataObj) {
     let result = {}
 
-    if (userDataObj.colonyParams['Начальные кубы'])
+    if (userDataObj.colonyParams && userDataObj.colonyParams['Начальные кубы'])
       result['Начальные кубы'] = [].concat(
         userDataObj.colonyParams['Начальные кубы'].split('/')
           .map((e, i) => [KEYWORDS.COLONY_PARAMS[i], +e])
@@ -3992,7 +3992,7 @@ ${KEYWORDS.UNIT.price} ${unit.price} - ${KEYWORDS.UNIT.home} ${unit.home} - Ло
 const UnitCreator = {
   open() {
     getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map(e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
-    this.fillModulesList()
+    UnitCreator.fillModulesList()
     HTMLUtils.openModal('unitcreator')
   },
   fillModulesList() {
