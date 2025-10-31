@@ -4011,6 +4011,10 @@ const UnitCreator = {
     HTMLUtils.openModal('unitcreator')
   },
 
+  filterWarEffs: ([k, _]) => 
+      KEYWORDS.MILITARY_PARAMS.includes(k) 
+      || KEYWORDS.MILITARY_PARAMS_ADDITIONAL.includes(k),
+
   fillHullsList() {
     const playerAval = () => {
       if (!User.activePlayer) return () => true
@@ -4035,14 +4039,21 @@ const UnitCreator = {
 
     // place VARS.hulls
 
+    let globalEff = {}
+    if (User.activePlayer) {
+      globalEff = User.getUserEffects(User.activePlayer)
+      getEl('uc_global_eff').innerHTML = User.createUserTechEffectsTable(
+        Object.entries(globalEff).filter(this.filterWarEffs)
+      )
+    }
+
     getEl('el_uc_hull').innerHTML = hulls.map(({ name, effect }) => `<option value="${name}">${name} - ${effect}</option>`)
     getEl('el_uc_hull').onchange = () => {
       // TechUtils.byName(getEl('el_uc_hull').value).type
-      if (User.activePlayer) {
-        let eff = User.getUserEffects(User.activePlayer)
+
+      if (globalEff) {
         // TODO
-        log(eff)
-        getEl('el_uc_points').textContent = 4 + (+eff['Очки распределения'] || 0) 
+        getEl('el_uc_points').textContent = 4 + (+globalEff['Очки распределения'] || 0)
       }
     }
     getEl('el_uc_hull').onchange()
@@ -4064,16 +4075,15 @@ const UnitCreator = {
     const hullTech = TechUtils.byName(hullName)
     // parseNode.effects(VARS.hulls[hullName])
 
-    let eff = {}
+    let globalEff = []
     if (User.activePlayer) {
-      eff = User.getUserEffects(User.activePlayer)
-      // TODO
-      log(eff)
+      globalEff = Object.entries(
+        User.getUserEffects(User.activePlayer)).filter(this.filterWarEffs)
     }
 
     const sum = User.countSummaryCostAndEffect(
       modulesList, 
-      { startingFeature: hullTech.effect }, 
+      { startingFeature: hullTech.effect.concat(globalEff) }, 
       { onlyWar: true }
     )
 
@@ -4114,33 +4124,6 @@ const UnitCreator = {
     }
   },
 
-  createUnitTable(effectsObj) {
-    log(effectsObj)
-    const str = '<table>'
-      + '<tbody><tr>' +
-      KEYWORDS.MILITARY_PARAMS.map(e =>
-        `<td>${e}</td>` +
-        `<td>${effectsObj[e]}`
-      ).join('</tr><tr>') +
-      '</tr></tbody></table>'
-
-      + '<table><tbody><tr>' +
-      [].concat(KEYWORDS.MILITARY_PARAMS_ADDITIONAL, KEYWORDS.MODULE_NUM_PROPS)
-        .filter(e => effectsObj[e])
-        .map(e =>
-          `<td>${e}</td>` +
-          `<td>${effectsObj[e]}`
-        ).join('</tr><tr>') +
-      '</tr></tbody></table>'
-
-      + '<table><tbody><tr>' +
-      [].concat(KEYWORDS.DAMAGE_TYPES, KEYWORDS.MODULE_PROPS)
-        .filter(e => e in effectsObj || `:${e}` in effectsObj)
-        .join(', ') +
-      '</tr></tbody></table>'
-
-    return str
-  },
   processInput() {
     const hull = getEl('el_uc_hull').value
     const modules = getEl('el_uc_modules').value.split('\n').filter(e => e && inverted.alltech[e])
