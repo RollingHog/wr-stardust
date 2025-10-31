@@ -91,6 +91,10 @@
   #el_selected_tech_list table.hide-interm-columns tbody tr td:nth-child(1) {
     background-color: white;
   }
+
+  #el_uc_unit:active {
+    background-color: lightgreen;
+  }
 </style>
 <style id="style__text_title">
   /* text:has(title) {
@@ -256,11 +260,15 @@
     </div>
     <div id="el_uc_body" class="body">
       <div id="el_uc_input">
-        Тип корпуса: <select id="el_uc_hull"></select>
-        <br>
+        Тип корпуса: <select id="el_uc_hull" style="max-width: 80%; margin-bottom: 8px;"></select>
         <br>
         <input id="el_uc_modules_search" list="el_uc_modules_datalist" placeholder="Поиск модуля">
-        <datalist id="el_uc_modules_datalist"></datalist>  
+        <datalist id="el_uc_modules_datalist"></datalist>
+        Очки распределения: <span id="el_uc_points">4</span>
+        <br>
+        Атака <input id="uc_atk" type="number" value="1" style="max-width: 40px; margin-top: 8px;">
+        Защита <input id="uc_def" type="number" value="1" style="max-width: 40px;">
+        Скорость <input id="uc_spd" type="number" value="1" style="max-width: 40px;">
         <br>
         <br>
         <textarea id="el_uc_modules" placeholder="Модули" style="height: 8em; width: 80%;" title="не знаешь что делаешь - не трогай"></textarea>
@@ -269,7 +277,7 @@
       <button onclick="UnitCreator.processInput()">Process</button>
       <br>
       <br>
-      <div id="el_uc_unit">
+      <div id="el_uc_unit" onclick = "navigator.clipboard.writeText(this.innerText.trim())">
 
       </div>
     </div>

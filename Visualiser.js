@@ -54,7 +54,11 @@ const VARS = /** @type {const} */({
   TREELIST_EN2RU: {},
   /** english tech type names, filled later */
   NODE_TYPE_2_NAME: {},
-  WAR_MODULES_ARR: ['trapezoid', 'trapezoid2', 'fatarrow', 'octagon'],
+  WAR_MODULES_ARR: [
+    NODE_TYPE.MODULE_GROUND, 
+    NODE_TYPE.MODULE_SPACE, 
+    NODE_TYPE.MODULE_BOTH
+  ],
   NON_WAR_NODE_TYPES_ARR: ['rectangle', 'parallelogram', 'parallelogram2', 'ellipse', 'hexagon'],
   TREELIST_NOMIL: TREELIST.filter(e => e != 'Military'),
   SVG_DEFAULT: `<style> text {
@@ -2358,7 +2362,10 @@ const User = /** @type {const} */({
       .filter(e => !KEYWORDS.COLONY_PARAMS.includes(e[0]))
       .filter(e => KEYWORDS.ANY_PARAM_KEYWORD !== e[0])
 
-    return { cost, effect }
+    const paramsCost = costData
+      .filter(e => KEYWORDS.COLONY_PARAMS.includes(e[0]) || KEYWORDS.ANY_PARAM_KEYWORD === e[0])
+
+    return { cost, effect, paramsCost  }
   },
 
   /**
@@ -3403,7 +3410,7 @@ const playerPost = {
         VARS.NON_WAR_NODE_TYPES_ARR.concat(NODE_TYPE.HULL).includes(TechUtils.get(techName).type)
       ) {
         byType[TechUtils.get(techName).type].push(techName)
-      } else if(VARS.WAR_MODULES_ARR.includes(TechUtils.get(techName).type)) {
+      } else if(VARS.WAR_MODULES_ARR.concat([NODE_TYPE.HULL]).includes(TechUtils.get(techName).type)) {
         byType[TYPE_MODULE].push(techName)
       } else {
         warn('wtf is:', techName)
@@ -3937,18 +3944,26 @@ function extractParam(param, fuckMilitary = true) {
 class TUnit {
   name = ''
   hull = ''
+  slots = 0
   price = 0
   experience = 0
   home = ''
   location = ''
 
-  initialParams = []
+  initialParams = {
+    attack: 0,
+    defense: 0,
+    speed: 0,
+  }
+
   attack = 0
   defense = 0
   speed = 0
 
   hp = 0
+  maxHp = 0
   shield = 0
+  maxShield = 0
   modules = []
   specials = []
 
@@ -3958,16 +3973,17 @@ class TUnit {
     var result = {
       hull: arr[0],
       name: arr[1] || '',
+      slots: -1,
       price: +arr.find(el => el.startsWith('Цена')).replace('Цена', ''),
       initialParams: arr.find(el => el.startsWith('Исходные А/З/С')),
       experience: +arr.find(el => el.startsWith('Опыт')).replace(/Опыт/i, ''),
       home: arr.find(el => el.startsWith('Родина')).replace(/Родина/i, ''),
+      location: arr.find(el => el.startsWith('Локация')).replace(/Локация/i, ''),
       hp: arr.find(el => el.startsWith('Здоровье')).replace(/Здоровье/i, ''),
       shield: arr.find(el => el.startsWith('Щит')).replace('Щит ', ''),
       modules: arr.find(el => el.startsWith('Модули')).replace(/Модули:/i, '') || '',
       specials: arr.find(el => el.startsWith('Особенности:'))?.replace(/Особенности:/i, '') || '',
     }
-    console.log(result)
     return result
   }
 
@@ -3976,47 +3992,128 @@ class TUnit {
    * @param {TGoogleDocUserObj} userObj - to count possible global effects
    */
   static stringify(unit, userObj = {}) {
-    //TODO
-    return `${unit.hull} - ${unit.name} - 
+    return `${unit.hull} - ${unit.name || '[NAME]'} - 
 ${KEYWORDS.UNIT.price} ${unit.price} - ${KEYWORDS.UNIT.home} ${unit.home} - Локация ${unit.location || unit.home} -
-Уровень 0 - Опыт ${unit.experience} - Слоты 1
-Суммарные А/З/С Атака 1. Защита 2. Скорость 1
-Исходные А/З/С 1/2/4
-Здоровье ${unit.hp}/4 - Щит ${unit.shield}/0
-Модули: ${unit.modules.join(', ')}
-Особенности: ${unit.specials.join(', ')}
+Уровень 0 - Опыт ${unit.experience} - Слоты ${unit.slots}
+Суммарные А/З/С ${unit.attack}/${unit.defense}/${unit.speed}
+Исходные А/З/С ${unit.initialParams.attack}/${unit.initialParams.defense}/${unit.initialParams.speed}
+Здоровье ${unit.hp}/${unit.maxHp} - Щит ${unit.shield}/${unit.maxShield}
+Модули: ${unit.modules?.join(', ')}
+Особенности: ${unit.specials?.join(', ')}
 `
   }
 }
 
 const UnitCreator = {
   open() {
-    getEl('el_uc_hull').innerHTML = Object.keys(VARS.hulls).map(e => `<option value="${e}">${e} - ${VARS.hulls[e]}</option>`)
+    UnitCreator.fillHullsList()
     UnitCreator.fillModulesList()
     HTMLUtils.openModal('unitcreator')
   },
+
+  fillHullsList() {
+    const playerAval = () => {
+      if (!User.activePlayer) return () => true
+      const ownedTech = User.listAvalTech(null, User.getFlatUserTech(User.activePlayer)).map(t => t.name)
+      return (e) => {
+        return ownedTech.includes(e.name)
+      }
+    }
+
+    const hulls = Object.values(inverted.alltech)
+      .filter(e => (e.type === NODE_TYPE.HULL))
+      .filter(playerAval())
+      .sort((a, b) => {
+        // alphabet sorting
+        return a.name > b.name ? 1 : -1
+      })
+      // .sort((a, b) => a.effect[0][1] - b.effect[0][1])
+      .map(({ name, effect }) => ({
+        name,
+        effect: effect.map(e => e.join(' ')).join('; ')
+      }))
+
+    // place VARS.hulls
+
+    getEl('el_uc_hull').innerHTML = hulls.map(({ name, effect }) => `<option value="${name}">${name} - ${effect}</option>`)
+    getEl('el_uc_hull').onchange = () => {
+      // TechUtils.byName(getEl('el_uc_hull').value).type
+      if (User.activePlayer) {
+        let eff = User.getUserEffects(User.activePlayer)
+        // TODO
+        log(eff)
+        getEl('el_uc_points').textContent = 4 + (+eff['Очки распределения'] || 0) 
+      }
+    }
+    getEl('el_uc_hull').onchange()
+  },
+
   fillModulesList() {
     getEl('el_uc_modules_datalist').innerHTML = Analysis.listModuleObjs()
       .map(e => `<option value="${e.name}">${e.effect}</option>`)
     getEl('el_uc_modules_search').onchange = e => {
-      // if(!e.isTrusted) return 
-      log(e)
       getEl('el_uc_modules').value += getEl('el_uc_modules_search').value + '\n'
       getEl('el_uc_modules_search').value = ''
     }
   },
-  createUnit(hullName, modulesList = [], startParams = []) {
-    const hullEffect = parseNode.effects(VARS.hulls[hullName])
 
-    // FIXME wont work at all
+  /**
+   * @returns {TUnit}
+   */
+  createUnit(hullName, modulesList = []) {
+    const hullTech = TechUtils.byName(hullName)
+    // parseNode.effects(VARS.hulls[hullName])
+
+    let eff = {}
+    if (User.activePlayer) {
+      eff = User.getUserEffects(User.activePlayer)
+      // TODO
+      log(eff)
+    }
+
     const sum = User.countSummaryCostAndEffect(
       modulesList, 
-      { startingFeature: hullEffect }, 
+      { startingFeature: hullTech.effect }, 
       { onlyWar: true }
-    ).effect
-    // KEYWORDS.MILITARY_PARAMS.forEach(e => !sum[e] ? sum[e] = 0 : null)
-    return sum
+    )
+
+    const maxHp = +hullTech.cost[0][1] * 2
+
+    const initialParams = {
+      attack: +getEl('uc_atk').value,
+      defense: +getEl('uc_def').value,
+      speed: +getEl('uc_spd').value,
+    }
+
+    if(+getEl('uc_atk').value + +getEl('uc_def').value + getEl('uc_spd').value !== +getEl('el_uc_points').value) {
+      warn('Очки распределения не сходятся')
+    }
+
+    return {
+      name: '',
+      hull: hullName,
+      slots: hullTech.effect[1][1],
+      price: hullTech.cost[0][1],
+      experience: 0,
+      home: '',
+      location: '',
+
+      initialParams,
+
+      attack: initialParams.attack + (sum.effect['Атака'] || 0),
+      defense: initialParams.defense + (sum.effect['Защита'] || 0),
+      speed: initialParams.speed + (sum.effect['Скорость'] || 0),
+
+      hp: maxHp,
+      maxHp,
+      shield: 0,
+      maxShield: 0,
+
+      modules: modulesList,
+      specials: [],
+    }
   },
+
   createUnitTable(effectsObj) {
     log(effectsObj)
     const str = '<table>'
@@ -4048,7 +4145,7 @@ const UnitCreator = {
     const hull = getEl('el_uc_hull').value
     const modules = getEl('el_uc_modules').value.split('\n').filter(e => e && inverted.alltech[e])
     const unit = this.createUnit(hull, modules)
-    getEl('el_uc_unit').innerHTML = this.createUnitTable(unit)
+    getEl('el_uc_unit').innerText = TUnit.stringify(unit)
   },
   close() {
     HTMLUtils.closeModal('unitcreator')
