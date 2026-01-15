@@ -119,19 +119,19 @@ const VARS = /** @type {const} */({
         'effect': [['разово', 'резервирование X кубов']],
         ...defaultProjTemplate,
       },
-      'Снятие стресса Наука': {
+      'Снижение стресса Науки': {
         'treeName': 'Science',
         'cost': [['Наука', '1']],
         'effect': [['разово', '-Х*2 Стресса Науки']],
         ...defaultProjTemplate,
       },
-      'Снятие стресса Производство': {
+      'Снижение стресса Производства': {
         'treeName': 'Industry',
         'cost': [['Производство', '1']],
         'effect': [['разово', '-Х*2 Стресса Производства']],
         ...defaultProjTemplate,
       },
-      'Снятие стресса Общество': {
+      'Снижение стресса Общества': {
         'treeName': 'Sociology',
         'cost': [['Общество', '1']],
         'effect': [['разово', '-Х*2 Стресса Общества']],
@@ -3180,11 +3180,12 @@ const playerPost = {
         onclick="this.parentNode.parentNode.parentNode.tBodies[0].appendChild(this.parentNode.parentNode.parentNode.tBodies[0].rows[0].cloneNode(true))">
       <button>+</button>
       </th>
+      <th>&nbsp;&nbsp;&nbsp;&nbsp;Примечания&nbsp;&nbsp;&nbsp;&nbsp;</th>
     </thead>
     <tbody>
     <tr>
     ${requests.map(e => '<td>' + ['', e.text, e.threshold, e.rolls.critfails, e.rolls.wins, e.rolls.critwins, e.rolls.sum, e.rolls.delta, e.rolls.critdelta].join('</td><td>') + '</td>' +
-      '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td>')
+      '<td><button onclick=this.parentNode.parentNode.remove()>X</button></td><td></td>')
         .join('</tr><tr>')}
     </tr>
     </tbody><tbody>
@@ -3325,6 +3326,14 @@ const playerPost = {
             e.children[pos.subtree].style.backgroundColor = tTech.fill
           }
 
+          const ignoreCrit = 
+            techText.startsWith('Ремонт')
+            || VARS.WAR_MODULES_ARR.includes(tTech.type)
+          if(critdelta !== 0 && ignoreCrit) {
+            e.children[pos.critdelta].style.backgroundColor = 'darkgrey'
+            e.children[pos.critdelta].title = 'При снятии стресса, ремонте, производстве модулей криты не учитываются'
+          }
+
           // special cost
           const materialsCost = tTech.cost
             .filter(([k2, _v]) => isSpecialCost(k2))
@@ -3358,7 +3367,7 @@ const playerPost = {
 
           result = techText
         } else {
-          console.log('Не найдено', techText)
+          // console.log('Не найдено', techText)
           e.children[pos.name].style.backgroundColor = 'cyan'
           e.children[pos.name].title = 'Название технологии не найдено'
           result = null
@@ -3472,6 +3481,7 @@ const playerPost = {
 // eslint-disable-next-line no-unused-vars
 class TTechObject {
   id = ''
+  /** @type {typeof NODE_TYPE[keyof NODE_TYPE]} */
   type
   treeName = ''
   subtree = ''
