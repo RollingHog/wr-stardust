@@ -3316,6 +3316,16 @@ const playerPost = {
 
         const tTech = TechUtils.get(techText)
 
+        const ignoreCrit =
+          techText.startsWith('Ремонт')
+          || VARS.WAR_MODULES_ARR.includes(tTech?.type)
+          || VARS.defaultProjectsList[techText]
+
+        if (critdelta !== 0 && ignoreCrit) {
+          e.children[pos.critdelta].style.backgroundColor = 'darkgrey'
+          e.children[pos.critdelta].title = 'При снятии стресса, ремонте, производстве модулей криты не учитываются'
+        }
+
         if (tTech) {
 
           e.children[pos.name].style.backgroundColor = tTech.fill
@@ -3324,14 +3334,6 @@ const playerPost = {
             e.children[pos.subtree].innerText = tTech.subtree.slice(0, 3)
             e.children[pos.subtree].title = tTech.subtree
             e.children[pos.subtree].style.backgroundColor = tTech.fill
-          }
-
-          const ignoreCrit = 
-            techText.startsWith('Ремонт')
-            || VARS.WAR_MODULES_ARR.includes(tTech.type)
-          if(critdelta !== 0 && ignoreCrit) {
-            e.children[pos.critdelta].style.backgroundColor = 'darkgrey'
-            e.children[pos.critdelta].title = 'При снятии стресса, ремонте, производстве модулей криты не учитываются'
           }
 
           // special cost
