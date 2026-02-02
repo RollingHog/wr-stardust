@@ -2161,7 +2161,7 @@ const User = /** @type {const} */({
         .filter(e => e.search(/\(.*сломано/) != -1)
         .map(e => e.replace(/ \([^)]+\)/, '')),
       inactive: list
-        .filter(e => e.search(/\(.*неактивно/) != -1)
+        .filter(e => e.search(/\(.*(неактивно|недоступно)/) != -1)
         .map(e => e.replace(/ \([^)]+\)/, '')),
     }
     list = list.map(e => e.replace(/ \([^)]+\)/, ''))
@@ -2285,7 +2285,7 @@ const User = /** @type {const} */({
    */
   countSummaryCostAndEffect(techList, userDataObj = null, options = {}) {
     let techListFiltered = techList
-      .map(e => e.search('(сломано|неактивно)') == -1 ? e : '')
+      .map(e => e.search('(сломано|неактивно|недоступно)') == -1 ? e : '')
       .map(e => e.replace(/\([^)]+\)/, '').trim())
       .filter(techName => inverted.alltech[techName] || VARS.defaultProjectsList[techName])
 
@@ -3122,7 +3122,7 @@ const playerPost = {
     }).map(([key, value]) => value ? key + ': ' + value : key)
 
     const currGreatPplCost = Math.max(
-      Math.floor(UserUtils.getSavedUserData(playerName).greatPeople.length / 2)
+      Math.ceil(UserUtils.getSavedUserData(playerName).greatPeople.length / 2)
       , 2
     )
 
